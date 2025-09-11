@@ -43,7 +43,7 @@ const traits = createDefaultUserTraits(identification)
         - `sks`: An optional value indicating whether or not the user is a Skills collaborator.
         - `wpm`: An optional value indicating whether or not the user is a Performance collaborator.
         - `pbd`: An optional value indicating whether or not the user is a Pingboard collaborator.
-        - `cmp`: An optional value indication whether or not the user is a Compensation collaborator.
+        - `cmp`: An optional value indicating whether or not the user is a Compensation collaborator.
     - `planCode`: An optional object including `string` values indicating the user plan code for specific product:
         - `wov`: An optional value indicating the user plan code for Officevibe.
         - `lms`: An optional value indicating the user plan code for LMS.

@@ -30,7 +30,7 @@ export function IdentifyPage() {
             sks: false,
             wpm: true,
             pbd: false,
-            cmp: true
+            cmp: false
         },
         isReportingManager: true,
         isTeamManager: false,
