@@ -1,5 +1,11 @@
 # @workleap/logrocket
 
+## 1.2.7
+
+### Patch Changes
+
+- [#83](https://github.com/workleap/wl-telemetry/pull/83) [`a7f57fd`](https://github.com/workleap/wl-telemetry/commit/a7f57fd389584438d61456e3ff62c6fc43edabeb) Thanks [@victortrinh2](https://github.com/victortrinh2)! - Add Compensation to LogRocketIdentification and adapt createDefaultUserTraits
+
 ## 1.2.6
 
 ### Patch Changes
