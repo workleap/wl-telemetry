@@ -35,7 +35,7 @@ const traits = createDefaultUserTraits(identification)
         - `sks`: An optional value indicating whether or not the user is a Skills executive.
         - `wpm`: An optional value indicating whether or not the user is a Performance executive.
         - `pbd`: An optional value indicating whether or not the user is a Pingboard executive.
-        - `cmp`: An optional value indication whether or not the user is a Compensation executive.
+        - `cmp`: An optional value indicating whether or not the user is a Compensation executive.
     - `isCollaborator`: An optional object including `boolean` values indicating whether or not the user is a collaborator for specific product:
         - `wov`: An optional value indicating whether or not the user is an Officevibe collaborator.
         - `lms`: An optional value indicating whether or not the user is an LMS collaborator.
