@@ -52,15 +52,18 @@ test("optional user traits with values provided are returned", ({ expect }) => {
         isOrganizationCreator: false,
         isAdmin: false,
         isExecutive: {
-            wov: true
+            wov: true,
+            cmp: true
         },
         isCollaborator: {
-            wov: true
+            wov: true,
+            cmp: true
         },
         isReportingManager: false,
         isTeamManager: false,
         planCode: {
-            wov: "123"
+            wov: "123",
+            cmp: "123"
         }
     };
 
@@ -74,6 +77,10 @@ test("optional user traits with values provided are returned", ({ expect }) => {
     expect(result["Is Team Manager"]).toEqual(identification.isTeamManager);
     expect(result["Is Reporting Manager"]).toEqual(identification.isReportingManager);
     expect(result["Plan Code - Officevibe"]).toEqual(identification.planCode.wov);
+
+    expect(result["Is Executive - Compensation"]).toEqual(identification.isExecutive.cmp);
+    expect(result["Is Collaborator - Compensation"]).toEqual(identification.isCollaborator.cmp);
+    expect(result["Plan Code - Compensation"]).toEqual(identification.planCode.cmp);
 
     expect(Object.keys(result)).not.toContain(["Is Executive - LMS", "Is Executive - Onboarding", "Is Executive - Skills", "Is Executive - Performance", "Is Executive - Pingboard"]);
     expect(Object.keys(result)).not.toContain(["Is Collaborator - LMS", "Is Collaborator - Onboarding", "Is Collaborator - Skills", "Is Collaborator - Performance", "Is Collaborator - Pingboard"]);
