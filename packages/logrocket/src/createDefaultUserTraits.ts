@@ -18,6 +18,7 @@ export interface LogRocketIdentification {
         sks?: boolean;
         wpm?: boolean;
         pbd?: boolean;
+        cmp?: boolean;
     };
     isCollaborator?: {
         wov?: boolean;
@@ -26,6 +27,7 @@ export interface LogRocketIdentification {
         sks?: boolean;
         wpm?: boolean;
         pbd?: boolean;
+        cmp?: boolean;
     };
     isReportingManager?: boolean;
     isTeamManager?: boolean;
@@ -36,6 +38,7 @@ export interface LogRocketIdentification {
         sks?: string;
         wpm?: string;
         pbd?: string;
+        cmp?: string;
     };
 }
 
@@ -103,7 +106,8 @@ export function createDefaultUserTraits(identification: LogRocketIdentification)
         isExecutive?.onb ||
         isExecutive?.sks ||
         isExecutive?.wpm ||
-        isExecutive?.pbd
+        isExecutive?.pbd ||
+        isExecutive?.cmp
     );
 
     const isCollaboratorInAnyProduct = Boolean(
@@ -112,7 +116,8 @@ export function createDefaultUserTraits(identification: LogRocketIdentification)
         isCollaborator?.onb ||
         isCollaborator?.sks ||
         isCollaborator?.wpm ||
-        isCollaborator?.pbd
+        isCollaborator?.pbd ||
+        isCollaborator?.cmp
     );
 
     const telemetryContext = getTelemetryContext();
@@ -133,6 +138,7 @@ export function createDefaultUserTraits(identification: LogRocketIdentification)
         ...(isDefined(isExecutive?.sks) && { "Is Executive - Skills": isExecutive.sks }),
         ...(isDefined(isExecutive?.wpm) && { "Is Executive - Performance": isExecutive.wpm }),
         ...(isDefined(isExecutive?.pbd) && { "Is Executive - Pingboard": isExecutive.pbd }),
+        ...(isDefined(isExecutive?.cmp) && { "Is Executive - Compensation": isExecutive.cmp }),
         ...(isCollaboratorInAnyProduct && { "Is Collaborator": isCollaboratorInAnyProduct }),
         ...(isDefined(isCollaborator?.wov) && { "Is Collaborator - Officevibe": isCollaborator.wov }),
         ...(isDefined(isCollaborator?.lms) && { "Is Collaborator - LMS": isCollaborator.lms }),
@@ -140,6 +146,7 @@ export function createDefaultUserTraits(identification: LogRocketIdentification)
         ...(isDefined(isCollaborator?.sks) && { "Is Collaborator - Skills": isCollaborator.sks }),
         ...(isDefined(isCollaborator?.wpm) && { "Is Collaborator - Performance": isCollaborator.wpm }),
         ...(isDefined(isCollaborator?.pbd) && { "Is Collaborator - Pingboard": isCollaborator.pbd }),
+        ...(isDefined(isCollaborator?.cmp) && { "Is Collaborator - Compensation": isCollaborator.cmp }),
         ...(isDefined(isReportingManager) && { "Is Reporting Manager": isReportingManager }),
         ...(isDefined(isTeamManager) && { "Is Team Manager": isTeamManager }),
         ...(isDefined(planCode?.wov) && { "Plan Code - Officevibe": planCode.wov }),
@@ -147,6 +154,7 @@ export function createDefaultUserTraits(identification: LogRocketIdentification)
         ...(isDefined(planCode?.onb) && { "Plan Code - Onboarding": planCode.onb }),
         ...(isDefined(planCode?.sks) && { "Plan Code - Skills": planCode.sks }),
         ...(isDefined(planCode?.wpm) && { "Plan Code - Performance": planCode.wpm }),
-        ...(isDefined(planCode?.pbd) && { "Plan Code - Pingboard": planCode.pbd })
+        ...(isDefined(planCode?.pbd) && { "Plan Code - Pingboard": planCode.pbd }),
+        ...(isDefined(planCode?.cmp) && { "Plan Code - Compensation": planCode.cmp })
     } satisfies LogRocketUserTraits;
 }

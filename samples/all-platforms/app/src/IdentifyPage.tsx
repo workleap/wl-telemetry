@@ -20,7 +20,8 @@ export function IdentifyPage() {
             onb: false,
             sks: true,
             wpm: true,
-            pbd: false
+            pbd: false,
+            cmp: false
         },
         isCollaborator: {
             wov: true,
@@ -28,7 +29,8 @@ export function IdentifyPage() {
             onb: false,
             sks: false,
             wpm: true,
-            pbd: false
+            pbd: false,
+            cmp: true
         },
         isReportingManager: true,
         isTeamManager: false,
@@ -38,7 +40,8 @@ export function IdentifyPage() {
             onb: "123",
             sks: "123",
             wpm: "123",
-            pbd: "123"
+            pbd: "123",
+            cmp: "123"
         }
     });
 
