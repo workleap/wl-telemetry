@@ -1,6 +1,5 @@
+import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { NoopLogger } from "@workleap/logging";
-import { BootstrappingStore, TelemetryContext } from "@workleap/telemetry";
-import { __clearBootstrappingStore, __clearTelemetryContext, __setBootstrappingStore } from "@workleap/telemetry/internal";
 import { afterEach, test, vi } from "vitest";
 import { MixpanelContextVariableName } from "../../src/js/context.ts";
 import { initializeMixpanel, IsInitializedVariableName, MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";

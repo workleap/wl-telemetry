@@ -1,7 +1,6 @@
 import { HoneycombWebSDK } from "@honeycombio/opentelemetry-web";
+import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { NoopLogger } from "@workleap/logging";
-import { BootstrappingStore, TelemetryContext } from "@workleap/telemetry";
-import { __clearBootstrappingStore, __clearTelemetryContext, __setBootstrappingStore, __setTelemetryContext } from "@workleap/telemetry/internal";
 import { afterEach, test, vi } from "vitest";
 import { FetchRequestPipeline } from "../../src/js/FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "../../src/js/GlobalAttributeSpanProcessor.ts";

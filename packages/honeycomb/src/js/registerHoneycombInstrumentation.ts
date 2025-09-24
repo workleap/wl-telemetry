@@ -6,8 +6,8 @@ import type { FetchInstrumentationConfig, FetchRequestHookFunction as OpenTeleme
 import type { UserInteractionInstrumentationConfig } from "@opentelemetry/instrumentation-user-interaction";
 import type { XMLHttpRequestInstrumentationConfig } from "@opentelemetry/instrumentation-xml-http-request";
 import type { PropagateTraceHeaderCorsUrls, SpanProcessor } from "@opentelemetry/sdk-trace-web";
+import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
-import { BootstrappingStore, TelemetryContext } from "@workleap/telemetry";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 import { FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";

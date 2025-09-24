@@ -1,6 +1,7 @@
 import { isString } from "./assertions.ts";
 
 export const XmlHttpVerbProperty = "__wl_verb__";
+
 // Patching: https://github.com/open-telemetry/opentelemetry-js/blob/main/experimental/packages/otlp-exporter-base/src/transport/xhr-transport.ts
 //
 // Explanations:

@@ -1,5 +1,5 @@
+import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
-import { BootstrappingStore, TelemetryContext } from "@workleap/telemetry";
 import LogRocket from "logrocket";
 import LogrocketFuzzySanitizer from "logrocket-fuzzy-search-sanitizer";
 import { applyTransformers, type LogRocketSdkOptionsTransformer } from "./applyTransformers.ts";

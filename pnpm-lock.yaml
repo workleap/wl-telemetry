@@ -91,6 +91,49 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.5.2)(happy-dom@18.0.1)(jiti@2.6.0)(tsx@4.20.5)(yaml@2.8.1)
 
+  packages/core:
+    dependencies:
+      '@workleap/logging':
+        specifier: ^1.3.0
+        version: 1.3.0
+      js-cookie:
+        specifier: ^3.0.5
+        version: 3.0.5
+      uuid:
+        specifier: ^13.0.0
+        version: 13.0.0
+    devDependencies:
+      '@rsbuild/core':
+        specifier: 1.5.11
+        version: 1.5.11
+      '@rslib/core':
+        specifier: 0.13.3
+        version: 0.13.3(typescript@5.9.2)
+      '@types/js-cookie':
+        specifier: 3.0.6
+        version: 3.0.6
+      '@workleap/eslint-plugin':
+        specifier: 3.5.0
+        version: 3.5.0(@types/estree@1.0.8)(@typescript-eslint/parser@8.44.1(eslint@8.57.1)(typescript@5.9.2))(eslint@8.57.1)(typescript@5.9.2)(vitest@3.2.4(@types/node@24.5.2)(tsx@4.20.5))
+      '@workleap/rslib-configs':
+        specifier: 1.1.0
+        version: 1.1.0(@rsbuild/core@1.5.11)(@rslib/core@0.13.3(typescript@5.9.2))(typescript@5.9.2)
+      '@workleap/typescript-configs':
+        specifier: 3.0.4
+        version: 3.0.4(typescript@5.9.2)
+      eslint:
+        specifier: 8.57.1
+        version: 8.57.1
+      happy-dom:
+        specifier: 18.0.1
+        version: 18.0.1
+      typescript:
+        specifier: 5.9.2
+        version: 5.9.2
+      vitest:
+        specifier: 3.2.4
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.5.2)(happy-dom@18.0.1)(jiti@2.6.0)(tsx@4.20.5)(yaml@2.8.1)
+
   packages/honeycomb:
     dependencies:
       '@honeycombio/opentelemetry-web':
@@ -120,12 +163,12 @@ importers:
       '@opentelemetry/sdk-trace-web':
         specifier: ^2.1.0
         version: 2.1.0(@opentelemetry/api@1.9.0)
+      '@workleap-telemetry/core':
+        specifier: workspace:*
+        version: link:../core
       '@workleap/logging':
         specifier: ^1.3.0
         version: 1.3.0
-      '@workleap/telemetry':
-        specifier: workspace:*
-        version: link:../telemetry
       react:
         specifier: ^18.0.0 || ^19.0.0
         version: 19.1.1
@@ -172,12 +215,12 @@ importers:
 
   packages/logrocket:
     dependencies:
+      '@workleap-telemetry/core':
+        specifier: workspace:*
+        version: link:../core
       '@workleap/logging':
         specifier: ^1.3.0
         version: 1.3.0
-      '@workleap/telemetry':
-        specifier: workspace:*
-        version: link:../telemetry
       logrocket:
         specifier: ^10.1.0
         version: 10.1.0
@@ -227,12 +270,12 @@ importers:
 
   packages/mixpanel:
     dependencies:
+      '@workleap-telemetry/core':
+        specifier: workspace:*
+        version: link:../core
       '@workleap/logging':
         specifier: ^1.3.0
         version: 1.3.0
-      '@workleap/telemetry':
-        specifier: workspace:*
-        version: link:../telemetry
       react:
         specifier: ^18.0.0 || ^19.0.0
         version: 19.1.0
@@ -1173,12 +1216,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@eslint-community/eslint-utils@4.7.0':
-    resolution: {integrity: sha512-dyybb3AcajC7uha6CvhdVRJqaKyn7w2YKqKyAN37NKYgZT36w+iRb0Dymmc5qEJ549c/S31cMMSFd75bteCpCw==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
 
   '@eslint-community/eslint-utils@4.9.0':
     resolution: {integrity: sha512-ayVFHdtZ+hsq1t2Dy24wCmGXGe4q9Gu3smhLYALJrr473ZH27MsnSL+LKUlimp4BWJqMDMLmPpx/Q9R3OAlL4g==}
@@ -3125,15 +3162,6 @@ packages:
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
-  debug@4.4.1:
-    resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
-    engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
     peerDependenciesMeta:
@@ -6237,11 +6265,6 @@ snapshots:
   '@esbuild/win32-x64@0.25.10':
     optional: true
 
-  '@eslint-community/eslint-utils@4.7.0(eslint@8.57.1)':
-    dependencies:
-      eslint: 8.57.1
-      eslint-visitor-keys: 3.4.3
-
   '@eslint-community/eslint-utils@4.9.0(eslint@8.57.1)':
     dependencies:
       eslint: 8.57.1
@@ -6252,7 +6275,7 @@ snapshots:
   '@eslint/eslintrc@2.1.4':
     dependencies:
       ajv: 6.12.6
-      debug: 4.4.1
+      debug: 4.4.3(supports-color@5.5.0)
       espree: 9.6.1
       globals: 13.24.0
       ignore: 5.3.2
@@ -6306,7 +6329,7 @@ snapshots:
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
-      debug: 4.4.1
+      debug: 4.4.3(supports-color@5.5.0)
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -7768,7 +7791,7 @@ snapshots:
 
   '@types/concat-stream@2.0.3':
     dependencies:
-      '@types/node': 22.18.6
+      '@types/node': 24.5.2
 
   '@types/connect@3.4.38':
     dependencies:
@@ -8580,10 +8603,6 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
-  debug@4.4.1:
-    dependencies:
-      ms: 2.1.3
-
   debug@4.4.3(supports-color@5.5.0):
     dependencies:
       ms: 2.1.3
@@ -9078,7 +9097,7 @@ snapshots:
 
   eslint@8.57.1:
     dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.9.0(eslint@8.57.1)
       '@eslint-community/regexpp': 4.12.1
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.1
@@ -9089,7 +9108,7 @@ snapshots:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.6
-      debug: 4.4.1
+      debug: 4.4.3(supports-color@5.5.0)
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.2

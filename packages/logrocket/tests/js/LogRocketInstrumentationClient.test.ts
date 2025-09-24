@@ -1,4 +1,4 @@
-import { TelemetryContext } from "@workleap/telemetry";
+import { TelemetryContext } from "@workleap-telemetry/core";
 import { describe, test } from "vitest";
 import { LogRocketInstrumentationClient } from "../../src/js/LogRocketInstrumentationClient.ts";
 

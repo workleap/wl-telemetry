@@ -1,8 +1,7 @@
 // These tests cannot be concurrent because of global mocked on LogRocket.
 
+import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { NoopLogger } from "@workleap/logging";
-import { BootstrappingStore, TelemetryContext } from "@workleap/telemetry";
-import { __clearBootstrappingStore, __clearTelemetryContext, __setBootstrappingStore, __setTelemetryContext } from "@workleap/telemetry/internal";
 import { afterEach, test, vi } from "vitest";
 import { createTrackingFunction } from "../../src/js/createTrackingFunction.ts";
 import { initializeMixpanel, MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
