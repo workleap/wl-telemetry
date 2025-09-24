@@ -1,3 +1,7 @@
+// DEPRECATED: Grace period ends on January 1th 2026.
+// Must keep this code until the end of the grace period because host applications using version 2.* of
+// this package would get runtime errors from the Platform Widgets CDN otherwise.
+
 import { getMixpanelContext } from "./context.ts";
 import { getBaseProperties, type MixpanelEventProperties } from "./properties.ts";
 

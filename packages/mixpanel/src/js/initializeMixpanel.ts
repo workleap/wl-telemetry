@@ -1,11 +1,10 @@
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
-import { createBootstrappingStore, createTelemetryContext } from "@workleap/telemetry";
+import { BootstrappingStore, TelemetryContext } from "@workleap/telemetry";
 import { setMixpanelContext } from "./context.ts";
 import { getTrackingEndpoint, type Environment } from "./env.ts";
 import { HasExecutedGuard } from "./HasExecutedGuard.ts";
-import { getSuperProperties, getTelemetryProperties, OtherProperties, setSuperProperties, setSuperProperty } from "./properties.ts";
-
-export const IsInitializedVariableName = "__WLP_MIXPANEL_IS_INITIALIZED__";
+import { MixpanelClient, SuperProperties } from "./MixpanelClient.ts";
+import { getTelemetryProperties, OtherProperties } from "./properties.ts";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
@@ -26,7 +25,7 @@ export interface InitializeMixpanelOptions {
     loggers?: RootLogger[];
 }
 
-function registerLogRocketSessionUrlListener(logger: Logger) {
+function registerLogRocketSessionUrlListener(superProperties: SuperProperties, logger: Logger) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     if (globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__) {
@@ -39,18 +38,100 @@ function registerLogRocketSessionUrlListener(logger: Logger) {
                 .withText(sessionUrl)
                 .debug();
 
-            setSuperProperty(OtherProperties.LogRocketSessionUrl, sessionUrl);
+            superProperties.set(OtherProperties.LogRocketSessionUrl, sessionUrl);
         });
     } else {
         logger.information("[mixpanel] Cannot integrate with LogRocket because \"globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__\" is not available.");
     }
 }
 
-const initializationGuard = new HasExecutedGuard();
+///////////////////////////
+
+// DEPRECATED: Grace period ends on January 1th 2026.
+// Don't forget to remove the tests as well.
+export const IsInitializedVariableName = "__WLP_MIXPANEL_IS_INITIALIZED__";
+
+// DEPRECATED: Grace period ends on January 1th 2026.
+function registerDeprecatedContextAndGlobalVariables(productId: string, endpoint: string, superProperties: Map<string, unknown>, logger: Logger) {
+    setMixpanelContext({
+        productId,
+        endpoint,
+        superProperties: superProperties,
+        logger
+    });
+
+    // Indicates to the host applications that Mixpanel has been initialized.
+    // It's useful in cases where an "add-on", like the platform widgets needs
+    // to know whether or not the host application is using Mixpanel.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    globalThis[IsInitializedVariableName] = true;
+}
+
+///////////////////////////
+
+let registrationGuardInstance: HasExecutedGuard | undefined;
+
+// It's important to use a lazy singleton instead of a singleton to avoid
+// any future probleme related to HMR, tree-shaking, SSR, etc..
+function getRegistrationGuard() {
+    if (!registrationGuardInstance) {
+        registrationGuardInstance = new HasExecutedGuard();
+    }
+
+    return registrationGuardInstance;
+}
 
 // This function should only be used by tests.
-export function __resetInitializationGuard() {
-    initializationGuard.reset();
+export function __resetRegistrationGuard() {
+    if (registrationGuardInstance) {
+        registrationGuardInstance.reset();
+    }
+}
+
+///////////////////////////
+
+export class MixpanelInitializer {
+    initialize(
+        productId: string,
+        envOrTrackingApiBaseUrl: Environment | (string & {}),
+        telemetryContext: TelemetryContext,
+        bootstrappingStore: BootstrappingStore,
+        options: InitializeMixpanelOptions = {}
+    ) {
+        const {
+            trackingEndpoint,
+            verbose = false,
+            loggers = []
+        } = options;
+
+        const logger = createCompositeLogger(verbose, loggers);
+        const endpoint = getTrackingEndpoint(envOrTrackingApiBaseUrl, trackingEndpoint);
+        const superProperties: SuperProperties = new Map<string, unknown>();
+
+        for (const [key, value] of Object.entries(getTelemetryProperties(telemetryContext))) {
+            superProperties.set(key, value);
+        }
+
+        // If LogRocket is already available, register the listener. Otherwise, subscribe to the bootstrapping store
+        // and register the listener once a notification is received that LogRocket is registered.
+        if (bootstrappingStore.state.isLogRocketReady) {
+            registerLogRocketSessionUrlListener(superProperties, logger);
+        } else {
+            bootstrappingStore.subscribe((action, store, unsubscribe) => {
+                if (store.state.isLogRocketReady) {
+                    unsubscribe();
+                    registerLogRocketSessionUrlListener(superProperties, logger);
+                }
+            });
+        }
+
+        registerDeprecatedContextAndGlobalVariables(productId, endpoint, superProperties, logger);
+
+        logger.information("[mixpanel] Mixpanel is initialized.");
+
+        return new MixpanelClient(productId, endpoint, superProperties, logger);
+    }
 }
 
 /**
@@ -61,49 +142,14 @@ export function __resetInitializationGuard() {
  * @returns A function that sends tracking events to the tracking API.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function initializeMixpanel(productId: string, envOrTrackingApiBaseUrl: Environment | (string & {}), options: InitializeMixpanelOptions = {}) {
-    const {
-        trackingEndpoint,
-        verbose = false,
-        loggers = []
-    } = options;
+export function initializeMixpanel(
+    productId: string,
+    envOrTrackingApiBaseUrl: Environment | (string & {}),
+    telemetryContext: TelemetryContext,
+    bootstrappingStore: BootstrappingStore,
+    options?: InitializeMixpanelOptions
+) {
+    getRegistrationGuard().throw("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
 
-    initializationGuard.throw("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
-
-    const logger = createCompositeLogger(verbose, loggers);
-    const endpoint = getTrackingEndpoint(envOrTrackingApiBaseUrl, trackingEndpoint);
-    const telemetryContext = createTelemetryContext(logger);
-
-    setSuperProperties(getTelemetryProperties(telemetryContext));
-
-    const bootstrappingStore = createBootstrappingStore(logger);
-
-    // If LogRocket is already available, register the listener. Otherwise, subscribe to the bootstrapping store
-    // and register the listener once a notification is received that LogRocket is registered.
-    if (bootstrappingStore.state.isLogRocketReady) {
-        registerLogRocketSessionUrlListener(logger);
-    } else {
-        bootstrappingStore.subscribe((action, store, unsubscribe) => {
-            if (store.state.isLogRocketReady) {
-                unsubscribe();
-                registerLogRocketSessionUrlListener(logger);
-            }
-        });
-    }
-
-    setMixpanelContext({
-        productId,
-        endpoint,
-        superProperties: getSuperProperties(),
-        logger
-    });
-
-    // Indicates to the host applications that Mixpanel has been initialized.
-    // It's useful in cases where an "add-on", like the platform widgets needs
-    // to know whether or not the host application is using Mixpanel.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis[IsInitializedVariableName] = true;
-
-    logger.information("[mixpanel] Mixpanel is initialized.");
+    return new MixpanelInitializer().initialize(productId, envOrTrackingApiBaseUrl, telemetryContext, bootstrappingStore, options);
 }

@@ -15,13 +15,21 @@
         "provenance": true,
         "exports": {
             ".": {
-                "types": "./dist/index.d.ts",
-                "import": "./dist/index.js",
-                "default": "./dist/index.js"
+                "types": "./dist/js/index.d.ts",
+                "import": "./dist/js/index.js",
+                "default": "./dist/js/index.js"
+            },
+            "./react": {
+                "types": "./dist/react/index.d.ts",
+                "import": "./dist/react/index.js",
+                "default": "./dist/react/index.js"
             }
         }
     },
-    "exports": "./src/index.ts",
+    "exports": {
+        ".": "./src/js/index.ts",
+        "./react": "./src/react/index.ts"
+    },
     "files": [
         "src",
         "dist",
@@ -35,30 +43,42 @@
         "test": "vitest --config vitest.config.ts --no-watch"
     },
     "peerDependencies": {
-        "@opentelemetry/api": "^1.9.0"
+        "@opentelemetry/api": "^1.9.0",
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0"
+    },
+    "peerDependenciesMeta": {
+        "react": {
+            "optional": true
+        },
+        "react-dom": {
+            "optional": true
+        }
     },
     "dependencies": {
-        "@honeycombio/opentelemetry-web": "^0.21.0",
-        "@opentelemetry/auto-instrumentations-web": "^0.49.0",
-        "@opentelemetry/instrumentation": "^0.203.0",
-        "@opentelemetry/instrumentation-document-load": "^0.48.0",
-        "@opentelemetry/instrumentation-fetch": "^0.203.0",
-        "@opentelemetry/instrumentation-user-interaction": "^0.48.0",
-        "@opentelemetry/instrumentation-xml-http-request": "^0.203.0",
-        "@opentelemetry/sdk-trace-web": "^2.0.1",
-        "@workleap/logging": "^1.2.5",
+        "@honeycombio/opentelemetry-web": "^1.0.2",
+        "@opentelemetry/auto-instrumentations-web": "^0.51.0",
+        "@opentelemetry/instrumentation": "^0.205.0",
+        "@opentelemetry/instrumentation-document-load": "^0.50.0",
+        "@opentelemetry/instrumentation-fetch": "^0.205.0",
+        "@opentelemetry/instrumentation-user-interaction": "^0.50.0",
+        "@opentelemetry/instrumentation-xml-http-request": "^0.205.0",
+        "@opentelemetry/sdk-trace-web": "^2.1.0",
+        "@workleap/logging": "^1.3.0",
         "@workleap/telemetry": "workspace:*"
     },
     "devDependencies": {
-        "@rsbuild/core": "1.4.6",
-        "@rslib/core": "0.10.5",
-        "@typescript-eslint/parser": "8.37.0",
-        "@workleap/eslint-plugin": "3.4.2",
-        "@workleap/rslib-configs": "1.0.6",
+        "@rsbuild/core": "1.5.11",
+        "@rslib/core": "0.13.3",
+        "@types/react": "19.1.12",
+        "@types/react-dom": "19.1.9",
+        "@typescript-eslint/parser": "8.44.1",
+        "@workleap/eslint-plugin": "3.5.0",
+        "@workleap/rslib-configs": "1.1.0",
         "@workleap/typescript-configs": "3.0.4",
         "eslint": "8.57.1",
         "happy-dom": "18.0.1",
-        "typescript": "5.8.3",
+        "typescript": "5.9.2",
         "vitest": "3.2.4"
     },
     "sideEffects": false,

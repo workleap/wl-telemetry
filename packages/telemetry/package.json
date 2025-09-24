@@ -43,20 +43,20 @@
         "test": "vitest --config vitest.config.ts --no-watch"
     },
     "dependencies": {
-        "@workleap/logging": "^1.2.5",
+        "@workleap/logging": "^1.3.0",
         "js-cookie": "^3.0.5",
-        "uuid": "^11.1.0"
+        "uuid": "^13.0.0"
     },
     "devDependencies": {
-        "@rsbuild/core": "1.4.6",
-        "@rslib/core": "0.10.5",
+        "@rsbuild/core": "1.5.11",
+        "@rslib/core": "0.13.3",
         "@types/js-cookie": "3.0.6",
-        "@workleap/eslint-plugin": "3.4.2",
-        "@workleap/rslib-configs": "1.0.6",
+        "@workleap/eslint-plugin": "3.5.0",
+        "@workleap/rslib-configs": "1.1.0",
         "@workleap/typescript-configs": "3.0.4",
         "eslint": "8.57.1",
         "happy-dom": "18.0.1",
-        "typescript": "5.8.3",
+        "typescript": "5.9.2",
         "vitest": "3.2.4"
     },
     "sideEffects": false

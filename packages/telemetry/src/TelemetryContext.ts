@@ -50,32 +50,54 @@ export interface CreateTelemetryContextOptions {
     identityCookieDomain?: string;
 }
 
+// export function createTelemetryContext(logger: Logger, options: CreateTelemetryContextOptions = {}) {
+//     let context = getTelemetryContext();
+
+//     if (!context) {
+//         const {
+//             identityCookieExpiration = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+//             identityCookieDomain = ".workleap.com"
+//         } = options;
+
+//         let deviceId = getDeviceId(logger);
+
+//         if (!deviceId) {
+//             deviceId = uuidv4();
+
+//             setDeviceId(deviceId, identityCookieExpiration, identityCookieDomain, logger);
+//         }
+
+//         const telemetryId = uuidv4();
+
+//         logger.information(`[telemetry] Telemetry id is: ${telemetryId}`);
+//         logger.information(`[telemetry] Device id is: ${deviceId}`);
+
+//         context = new TelemetryContext(telemetryId, deviceId);
+
+//         __setTelemetryContext(context);
+//     }
+
+//     return context;
+// }
+
 export function createTelemetryContext(logger: Logger, options: CreateTelemetryContextOptions = {}) {
-    let context = getTelemetryContext();
+    const {
+        identityCookieExpiration = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+        identityCookieDomain = ".workleap.com"
+    } = options;
 
-    if (!context) {
-        const {
-            identityCookieExpiration = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-            identityCookieDomain = ".workleap.com"
-        } = options;
+    let deviceId = getDeviceId(logger);
 
-        let deviceId = getDeviceId(logger);
+    if (!deviceId) {
+        deviceId = uuidv4();
 
-        if (!deviceId) {
-            deviceId = uuidv4();
-
-            setDeviceId(deviceId, identityCookieExpiration, identityCookieDomain, logger);
-        }
-
-        const telemetryId = uuidv4();
-
-        logger.information(`[telemetry] Telemetry id is: ${telemetryId}`);
-        logger.information(`[telemetry] Device id is: ${deviceId}`);
-
-        context = new TelemetryContext(telemetryId, deviceId);
-
-        __setTelemetryContext(context);
+        setDeviceId(deviceId, identityCookieExpiration, identityCookieDomain, logger);
     }
 
-    return context;
+    const telemetryId = uuidv4();
+
+    logger.information(`[telemetry] Telemetry id is: ${telemetryId}`);
+    logger.information(`[telemetry] Device id is: ${deviceId}`);
+
+    return new TelemetryContext(telemetryId, deviceId);
 }
