@@ -1,9 +1,9 @@
-import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
+import type { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
 import { setMixpanelContext } from "./context.ts";
 import { getTrackingEndpoint, type Environment } from "./env.ts";
 import { HasExecutedGuard } from "./HasExecutedGuard.ts";
-import { MixpanelClient, SuperProperties } from "./MixpanelClient.ts";
+import { MixpanelClient, type SuperProperties } from "./MixpanelClient.ts";
 import { getTelemetryProperties, OtherProperties } from "./properties.ts";
 
 /**

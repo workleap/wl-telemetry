@@ -4,7 +4,7 @@ import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { NoopLogger } from "@workleap/logging";
 import { afterEach, test, vi } from "vitest";
 import { createTrackingFunction } from "../../src/js/createTrackingFunction.ts";
-import { initializeMixpanel, MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
+import { MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
 import { BaseProperties, OtherProperties, TelemetryProperties } from "../../src/js/properties.ts";
 
 const fetchMock = vi.fn();

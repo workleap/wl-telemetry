@@ -1,15 +1,15 @@
 import { type HoneycombOptions, HoneycombWebSDK } from "@honeycombio/opentelemetry-web";
-import { Span } from "@opentelemetry/api";
+import type { Span } from "@opentelemetry/api";
 import { getWebAutoInstrumentations, type InstrumentationConfigMap } from "@opentelemetry/auto-instrumentations-web";
 import type { DocumentLoadInstrumentationConfig } from "@opentelemetry/instrumentation-document-load";
 import type { FetchInstrumentationConfig, FetchRequestHookFunction as OpenTelemetryFetchRequestHookFunction } from "@opentelemetry/instrumentation-fetch";
 import type { UserInteractionInstrumentationConfig } from "@opentelemetry/instrumentation-user-interaction";
 import type { XMLHttpRequestInstrumentationConfig } from "@opentelemetry/instrumentation-xml-http-request";
 import type { PropagateTraceHeaderCorsUrls, SpanProcessor } from "@opentelemetry/sdk-trace-web";
-import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
+import type { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
-import { FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
+import { type FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
 import { HasExecutedGuard } from "./HasExecutedGuard.ts";
 import { HoneycombInstrumentationClient } from "./HoneycombInstrumentationClient.ts";
@@ -216,11 +216,11 @@ function registerDeprecatedGlobalVariables(fetchRequestPipeline: FetchRequestPip
 
     const registerFetchRequestHook = (hook: FetchRequestHookFunction) => {
         fetchRequestPipeline.registerHook(hook);
-    }
+    };
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    globalThis[RegisterDynamicFetchRequestHookFunctionName] = registerFetchRequestHook
+    globalThis[RegisterDynamicFetchRequestHookFunctionName] = registerFetchRequestHook;
 
     // Temporary naming due to a previous error.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -229,7 +229,7 @@ function registerDeprecatedGlobalVariables(fetchRequestPipeline: FetchRequestPip
 
     const registerFetchRequestHookAtStart = (hook: FetchRequestHookFunction) => {
         fetchRequestPipeline.registerHookAtStart(hook);
-    }
+    };
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -274,7 +274,7 @@ export class HoneycombInstrumentationRegistrator {
     constructor(
         globalAttributeSpanProcessor: GlobalAttributeSpanProcessor,
         fetchRequestPipeline: FetchRequestPipeline,
-        createHoneycombSdkInstance: HoneycombSdkFactory,
+        createHoneycombSdkInstance: HoneycombSdkFactory
     ) {
         this.#globalAttributeSpanProcessor = globalAttributeSpanProcessor;
         this.#fetchRequestPipeline = fetchRequestPipeline;
@@ -355,7 +355,7 @@ export function registerHoneycombInstrumentation(
     return new HoneycombInstrumentationRegistrator(
         new GlobalAttributeSpanProcessor(),
         new FetchRequestPipeline(),
-        x => new HoneycombWebSDK(x),
+        x => new HoneycombWebSDK(x)
     ).register(
         namespace,
         serviceName,

@@ -1,4 +1,4 @@
-import { TelemetryContext } from "@workleap-telemetry/core";
+import type { TelemetryContext } from "@workleap-telemetry/core";
 import LogRocket from "logrocket";
 import { isDefined } from "./assertions.ts";
 

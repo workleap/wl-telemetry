@@ -1,4 +1,4 @@
-import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
+import type { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import LogRocket from "logrocket";
 import LogrocketFuzzySanitizer from "logrocket-fuzzy-search-sanitizer";

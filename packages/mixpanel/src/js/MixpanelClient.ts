@@ -1,5 +1,5 @@
-import { Logger } from "@workleap/logging";
-import { CreateTrackingFunctionOptions, TrackingFunction } from "./createTrackingFunction.ts";
+import type { Logger } from "@workleap/logging";
+import type { CreateTrackingFunctionOptions, TrackingFunction } from "./createTrackingFunction.ts";
 import { getBaseProperties } from "./properties.ts";
 
 // Equivalent to: https://docs.mixpanel.com/docs/tracking-methods/sdks/javascript#setting-super-properties.

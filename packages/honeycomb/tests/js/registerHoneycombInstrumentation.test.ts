@@ -7,7 +7,7 @@ import { GlobalAttributeSpanProcessor } from "../../src/js/GlobalAttributeSpanPr
 import {
     DeviceIdAttributeName,
     HoneycombInstrumentationRegistrator,
-    HoneycombSdkFactory,
+    type HoneycombSdkFactory,
     IsRegisteredVariableName,
     RegisterDynamicFetchRequestHookAtStartFunctionName,
     RegisterDynamicFetchRequestHookFunctionName,
@@ -57,7 +57,7 @@ test.concurrent("set the namespace global attribute", ({ expect }) => {
         serviceName: x.serviceName
     });
 
-    const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory)
+    const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
 
     registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
         proxy: "https://my-proxy.com"
@@ -86,7 +86,7 @@ test.concurrent("set the telemetry global attributes", ({ expect }) => {
 
     registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
         proxy: "https://my-proxy.com"
-    })
+    });
 
     expect(globalAttributeSpanProcessor.attributes[TelemetryIdAttributeName]).toBe(telemetryContext.telemetryId);
     expect(globalAttributeSpanProcessor.attributes[DeviceIdAttributeName]).toBe(telemetryContext.deviceId);
