@@ -92,6 +92,12 @@ export function __resetRegistrationGuard() {
 ///////////////////////////
 
 export class MixpanelInitializer {
+    readonly #superProperties: SuperProperties;
+
+    constructor(superProperties: SuperProperties) {
+        this.#superProperties = superProperties;
+    }
+
     initialize(
         productId: string,
         envOrTrackingApiBaseUrl: Environment | (string & {}),
@@ -107,30 +113,29 @@ export class MixpanelInitializer {
 
         const logger = createCompositeLogger(verbose, loggers);
         const endpoint = getTrackingEndpoint(envOrTrackingApiBaseUrl, trackingEndpoint);
-        const superProperties: SuperProperties = new Map<string, unknown>();
 
         for (const [key, value] of Object.entries(getTelemetryProperties(telemetryContext))) {
-            superProperties.set(key, value);
+            this.#superProperties.set(key, value);
         }
 
         // If LogRocket is already available, register the listener. Otherwise, subscribe to the bootstrapping store
         // and register the listener once a notification is received that LogRocket is registered.
         if (bootstrappingStore.state.isLogRocketReady) {
-            registerLogRocketSessionUrlListener(superProperties, logger);
+            registerLogRocketSessionUrlListener(this.#superProperties, logger);
         } else {
             bootstrappingStore.subscribe((action, store, unsubscribe) => {
                 if (store.state.isLogRocketReady) {
                     unsubscribe();
-                    registerLogRocketSessionUrlListener(superProperties, logger);
+                    registerLogRocketSessionUrlListener(this.#superProperties, logger);
                 }
             });
         }
 
-        registerDeprecatedContextAndGlobalVariables(productId, endpoint, superProperties, logger);
+        registerDeprecatedContextAndGlobalVariables(productId, endpoint, this.#superProperties, logger);
 
         logger.information("[mixpanel] Mixpanel is initialized.");
 
-        return new MixpanelClient(productId, endpoint, superProperties, logger);
+        return new MixpanelClient(productId, endpoint, this.#superProperties, logger);
     }
 }
 
@@ -151,5 +156,13 @@ export function initializeMixpanel(
 ) {
     getRegistrationGuard().throw("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
 
-    return new MixpanelInitializer().initialize(productId, envOrTrackingApiBaseUrl, telemetryContext, bootstrappingStore, options);
+    return new MixpanelInitializer(
+        new Map<string, unknown>()
+    ).initialize(
+        productId,
+        envOrTrackingApiBaseUrl,
+        telemetryContext,
+        bootstrappingStore,
+        options
+    );
 }
