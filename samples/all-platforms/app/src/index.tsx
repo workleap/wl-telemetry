@@ -1,8 +1,8 @@
 import { registerCommonRoomInstrumentation } from "@workleap/common-room";
-import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
+import { CommonRoomInstrumentationClientProvider } from "@workleap/common-room/react";
 import { BrowserConsoleLogger, type RootLogger } from "@workleap/logging";
-import { LogRocketLogger, registerLogRocketInstrumentation } from "@workleap/logrocket";
-import { initializeMixpanel } from "@workleap/mixpanel";
+import { LogRocketLogger } from "@workleap/logrocket";
+import { initializeTelemetry, TelemetryClientProvider } from "@workleap/telemetry/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -12,24 +12,30 @@ const loggers: RootLogger[] = [
     new LogRocketLogger()
 ];
 
-registerHoneycombInstrumentation("sample", "all-platforms-sample", [/.+/g], {
-    apiKey: process.env.HONEYCOMB_API_KEY,
+const telemetryClient = initializeTelemetry({
+    logRocket: {
+        appId: process.env.LOGROCKET_APP_ID as string,
+        options: {
+            rootHostname: "workleap.com"
+        }
+    },
+    honeycomb: {
+        namespace: "sample",
+        serviceName: "all-platforms-sample",
+        apiServiceUrls: [/.+/g],
+        options: {
+            apiKey: process.env.HONEYCOMB_API_KEY
+        }
+    },
+    mixpanel: {
+        productId: "wlp",
+        envOrTrackingApiBaseUrl: "https://local.workleap.com:5678/api/shell/navigation/"
+    },
     verbose: true,
     loggers
 });
 
-registerLogRocketInstrumentation(process.env.LOGROCKET_APP_ID as string, {
-    rootHostname: "workleap.com",
-    verbose: true,
-    loggers
-});
-
-initializeMixpanel("wlp", "https://local.workleap.com:5678/api/shell/navigation/", {
-    verbose: true,
-    loggers
-});
-
-registerCommonRoomInstrumentation(process.env.COMMON_ROOM_SITE_ID as string, {
+const commonRoomClient = registerCommonRoomInstrumentation(process.env.COMMON_ROOM_SITE_ID as string, {
     verbose: true,
     loggers
 });
@@ -38,6 +44,10 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <App />
+        <TelemetryClientProvider value={telemetryClient}>
+            <CommonRoomInstrumentationClientProvider value={commonRoomClient}>
+                <App />
+            </CommonRoomInstrumentationClientProvider>
+        </TelemetryClientProvider>
     </StrictMode>
 );

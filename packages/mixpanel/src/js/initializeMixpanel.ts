@@ -1,9 +1,9 @@
 import type { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
 import { setMixpanelContext } from "./context.ts";
-import { getTrackingEndpoint, type Environment } from "./env.ts";
+import { getTrackingEndpoint, type MixpanelEnvironment } from "./env.ts";
 import { HasExecutedGuard } from "./HasExecutedGuard.ts";
-import { MixpanelClient, type SuperProperties } from "./MixpanelClient.ts";
+import { MixpanelClient, type MixpanelSuperProperties } from "./MixpanelClient.ts";
 import { getTelemetryProperties, OtherProperties } from "./properties.ts";
 
 /**
@@ -25,7 +25,7 @@ export interface InitializeMixpanelOptions {
     loggers?: RootLogger[];
 }
 
-function registerLogRocketSessionUrlListener(superProperties: SuperProperties, logger: Logger) {
+function registerLogRocketSessionUrlListener(superProperties: MixpanelSuperProperties, logger: Logger) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     if (globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__) {
@@ -92,15 +92,15 @@ export function __resetRegistrationGuard() {
 ///////////////////////////
 
 export class MixpanelInitializer {
-    readonly #superProperties: SuperProperties;
+    readonly #superProperties: MixpanelSuperProperties;
 
-    constructor(superProperties: SuperProperties) {
+    constructor(superProperties: MixpanelSuperProperties) {
         this.#superProperties = superProperties;
     }
 
     initialize(
         productId: string,
-        envOrTrackingApiBaseUrl: Environment | (string & {}),
+        envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}),
         telemetryContext: TelemetryContext,
         bootstrappingStore: BootstrappingStore,
         options: InitializeMixpanelOptions = {}
@@ -149,7 +149,7 @@ export class MixpanelInitializer {
  */
 export function initializeMixpanel(
     productId: string,
-    envOrTrackingApiBaseUrl: Environment | (string & {}),
+    envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}),
     telemetryContext: TelemetryContext,
     bootstrappingStore: BootstrappingStore,
     options?: InitializeMixpanelOptions

@@ -1,8 +1,8 @@
 const EnvironmentList = ["development", "staging", "production", "local", "msw"] as const;
 
-export type Environment = typeof EnvironmentList[number];
+export type MixpanelEnvironment = typeof EnvironmentList[number];
 
-const NavigationApiBaseUrl: Record<Environment, string> = {
+const NavigationApiBaseUrl: Record<MixpanelEnvironment, string> = {
     "production": "https://api.platform.workleap.com/shell/navigation/",
     "staging": "https://api.platform.workleap-stg.com/shell/navigation/",
     "development": "https://api.platform.workleap-dev.com/shell/navigation/",
@@ -15,11 +15,11 @@ function resolveApiUrl(path: string, baseUrl: string | undefined) : string {
     return `${baseUrl}${baseUrl!.endsWith("/") ? "" : "/"}${path.startsWith("/") ? path.substring(1) : path}`;
 }
 
-export function getTrackingEndpoint(envOrTrackingApiBaseUrl: Environment | (string & {}), trackingEndpoint = "tracking/track"): string {
+export function getTrackingEndpoint(envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}), trackingEndpoint = "tracking/track"): string {
     let baseUrl: string;
 
-    if (EnvironmentList.includes(envOrTrackingApiBaseUrl as Environment)) {
-        baseUrl = NavigationApiBaseUrl[envOrTrackingApiBaseUrl as Environment];
+    if (EnvironmentList.includes(envOrTrackingApiBaseUrl as MixpanelEnvironment)) {
+        baseUrl = NavigationApiBaseUrl[envOrTrackingApiBaseUrl as MixpanelEnvironment];
     } else {
         baseUrl = envOrTrackingApiBaseUrl;
     }

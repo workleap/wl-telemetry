@@ -1,4 +1,4 @@
-import type { Logger } from "@workleap/logging";
+import { NoopLogger, type Logger } from "@workleap/logging";
 import { v4 as uuidv4 } from "uuid";
 import { getDeviceId, setDeviceId } from "./deviceId.ts";
 
@@ -25,12 +25,14 @@ export class TelemetryContext {
 export interface CreateTelemetryContextOptions {
     identityCookieExpiration?: Date;
     identityCookieDomain?: string;
+    logger?: Logger;
 }
 
-export function createTelemetryContext(logger: Logger, options: CreateTelemetryContextOptions = {}) {
+export function createTelemetryContext(options: CreateTelemetryContextOptions = {}) {
     const {
         identityCookieExpiration = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-        identityCookieDomain = ".workleap.com"
+        identityCookieDomain = ".workleap.com",
+        logger = new NoopLogger()
     } = options;
 
     let deviceId = getDeviceId(logger);
@@ -43,8 +45,10 @@ export function createTelemetryContext(logger: Logger, options: CreateTelemetryC
 
     const telemetryId = uuidv4();
 
-    logger.information(`[telemetry] Telemetry id is: ${telemetryId}`);
-    logger.information(`[telemetry] Device id is: ${deviceId}`);
+    if (logger) {
+        logger.information(`[telemetry] Telemetry id is: ${telemetryId}`);
+        logger.information(`[telemetry] Device id is: ${deviceId}`);
+    }
 
     return new TelemetryContext(telemetryId, deviceId);
 }

@@ -1,9 +1,9 @@
 import type { Logger } from "@workleap/logging";
-import type { CreateTrackingFunctionOptions, TrackingFunction } from "./createTrackingFunction.ts";
+import type { CreateMixpanelTrackingFunctionOptions, MixpanelTrackingFunction } from "./createTrackingFunction.ts";
 import { getBaseProperties } from "./properties.ts";
 
 // Equivalent to: https://docs.mixpanel.com/docs/tracking-methods/sdks/javascript#setting-super-properties.
-export type SuperProperties = Map<string, unknown>;
+export type MixpanelSuperProperties = Map<string, unknown>;
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
@@ -11,10 +11,10 @@ export type SuperProperties = Map<string, unknown>;
 export class MixpanelClient {
     readonly #productId: string;
     readonly #endpoint: string;
-    readonly #superProperties: SuperProperties;
+    readonly #superProperties: MixpanelSuperProperties;
     readonly #logger: Logger;
 
-    constructor(productId: string, endpoint: string, superProperties: SuperProperties, logger: Logger) {
+    constructor(productId: string, endpoint: string, superProperties: MixpanelSuperProperties, logger: Logger) {
         this.#productId = productId;
         this.#endpoint = endpoint;
         this.#superProperties = superProperties;
@@ -24,12 +24,12 @@ export class MixpanelClient {
     /**
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
-    createTrackingFunction(options: CreateTrackingFunctionOptions = {}) {
+    createTrackingFunction(options: CreateMixpanelTrackingFunctionOptions = {}) {
         const {
             targetProductId
         } = options;
 
-        const trackFunction: TrackingFunction = async (eventName, properties, _options = {}) => {
+        const trackFunction: MixpanelTrackingFunction = async (eventName, properties, _options = {}) => {
             try {
                 const {
                     keepAlive = false

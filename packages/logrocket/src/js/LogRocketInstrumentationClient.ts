@@ -2,7 +2,7 @@ import type { TelemetryContext } from "@workleap-telemetry/core";
 import LogRocket from "logrocket";
 import { isDefined } from "./assertions.ts";
 
-export type GetSessionUrlListener = (sessionURL: string) => void;
+export type GetLogRocketSessionUrlListener = (sessionURL: string) => void;
 
 export const DeviceIdTrait = "Device Id";
 export const TelemetryIdTrait = "Telemetry Id";
@@ -102,7 +102,7 @@ export class LogRocketInstrumentationClient {
      * on `logrocket`.
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
-    registerGetSessionUrlListener(listener: GetSessionUrlListener) {
+    registerGetSessionUrlListener(listener: GetLogRocketSessionUrlListener) {
         LogRocket.getSessionURL(listener);
     }
 

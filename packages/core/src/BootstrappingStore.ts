@@ -1,4 +1,4 @@
-import type { Logger } from "@workleap/logging";
+import { type Logger, NoopLogger } from "@workleap/logging";
 
 export const BootstrappingStoreVariableName = "__WLP_TELEMETRY_BOOTSTRAPPING_STORE__";
 
@@ -89,7 +89,15 @@ export class BootstrappingStore {
     }
 }
 
-export function createBootstrappingStore(logger: Logger) {
+export interface BootstrappingStoreOptions {
+    logger?: Logger;
+}
+
+export function createBootstrappingStore(options: BootstrappingStoreOptions = {}) {
+    const {
+        logger = new NoopLogger()
+    } = options;
+
     return new BootstrappingStore({
         isLogRocketReady: false,
         isHoneycombReady: false

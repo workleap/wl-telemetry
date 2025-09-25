@@ -3,25 +3,25 @@ import { createBootstrappingStore, createTelemetryContext } from "@workleap-tele
 import { registerHoneycombInstrumentation, type HoneycombInstrumentationClient, type HoneycombSdkOptions, type RegisterHoneycombInstrumentationOptions } from "@workleap/honeycomb";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { registerLogRocketInstrumentation, type LogRocketInstrumentationClient, type RegisterLogRocketInstrumentationOptions } from "@workleap/logrocket";
-import { initializeMixpanel, type Environment, type InitializeMixpanelOptions } from "@workleap/mixpanel";
+import { initializeMixpanel, type MixpanelEnvironment, type InitializeMixpanelOptions } from "@workleap/mixpanel";
 import type { MixpanelClient } from "../../../mixpanel/src/js/MixpanelClient.ts";
 import { TelemetryClient } from "./TelemetryClient.ts";
 
 export interface InitializeTelemetryOptions {
     logRocket?: {
         appId: string;
-        options: Omit<RegisterLogRocketInstrumentationOptions, "verbose" | "loggers">;
+        options?: Omit<RegisterLogRocketInstrumentationOptions, "verbose" | "loggers">;
     };
     honeycomb?: {
         namespace: string;
         serviceName: NonNullable<HoneycombSdkOptions["serviceName"]>;
         apiServiceUrls: PropagateTraceHeaderCorsUrls;
-        options: Omit<RegisterHoneycombInstrumentationOptions, "verbose" | "loggers">;
+        options?: Omit<RegisterHoneycombInstrumentationOptions, "verbose" | "loggers">;
     };
     mixpanel?: {
         productId: string;
-        envOrTrackingApiBaseUrl: Environment | (string & {});
-        options: Omit<InitializeMixpanelOptions, "verbose" | "loggers">;
+        envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {});
+        options?: Omit<InitializeMixpanelOptions, "verbose" | "loggers">;
     };
     /**
      * Whether or not debug information should be logged to the console.

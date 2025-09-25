@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import type { MixpanelClient } from "../js/MixpanelClient.ts";
 
-const MixpanelClientContext = createContext<MixpanelClient | undefined>(undefined);
+export const MixpanelClientContext = createContext<MixpanelClient | undefined>(undefined);
 
 export const MixpanelClientProvider = MixpanelClientContext.Provider;
 
