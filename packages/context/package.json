@@ -1,13 +1,13 @@
 {
-    "name": "@workleap/telemetry",
+    "name": "@workleap/telemetry-context",
     "author": "Workleap",
-    "version": "1.1.6",
-    "description": "A package including telemetry utilities for Workleap web applications.",
+    "version": "0.0.1",
+    "description": "A package including utilities to use Workleap telemetry correlation ids.",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/workleap/wl-telemetry.git",
-        "directory": "packages/telemetry"
+        "directory": "packages/context"
     },
     "type": "module",
     "publishConfig": {
@@ -18,18 +18,10 @@
                 "types": "./dist/index.d.ts",
                 "import": "./dist/index.js",
                 "default": "./dist/index.js"
-            },
-            "./react": {
-                "types": "./dist/react.d.ts",
-                "import": "./dist/react.js",
-                "default": "./dist/react.js"
             }
         }
     },
-    "exports": {
-        ".": "./src/js/index.ts",
-        "./react": "./src/react/index.ts"
-    },
+    "exports": "./src/index.ts",
     "files": [
         "src",
         "dist",
@@ -39,39 +31,26 @@
     "scripts": {
         "build": "rslib build --config ./rslib.build.ts",
         "eslint": "eslint . --max-warnings=-0 --cache --cache-location node_modules/.cache/eslint",
-        "test": "vitest --config vitest.config.ts --no-watch",
-        "typecheck": "tsc"
-    },
-    "peerDependencies": {
-        "react": "^18.0.0 || ^19.0.0",
-        "react-dom": "^18.0.0 || ^19.0.0"
-    },
-    "peerDependenciesMeta": {
-        "react": {
-            "optional": true
-        },
-        "react-dom": {
-            "optional": true
-        }
+        "typecheck": "tsc",
+        "test": "vitest --config vitest.config.ts --no-watch"
     },
     "dependencies": {
-        "@opentelemetry/sdk-trace-web": "^2.1.0",
-        "@workleap/honeycomb": "workspace:*",
-        "@workleap/logrocket": "workspace:*",
         "@workleap/logging": "^1.3.0",
-        "@workleap/mixpanel": "workspace:*",
-        "@workleap-telemetry/core": "workspace:*"
+        "@workleap-telemetry/core": "workspace:*",
+        "js-cookie": "^3.0.5",
+        "uuid": "^13.0.0"
     },
     "devDependencies": {
         "@rsbuild/core": "1.5.11",
         "@rslib/core": "0.13.3",
         "@types/js-cookie": "3.0.6",
-        "@types/react": "19.1.13",
         "@workleap/eslint-plugin": "3.5.0",
         "@workleap/rslib-configs": "1.1.0",
         "@workleap/typescript-configs": "3.0.4",
         "eslint": "8.57.1",
-        "typescript": "5.9.2"
+        "happy-dom": "18.0.1",
+        "typescript": "5.9.2",
+        "vitest": "3.2.4"
     },
     "sideEffects": false
 }

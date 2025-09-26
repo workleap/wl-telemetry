@@ -1,6 +1,6 @@
-import { Attributes, AttributeValue } from "@opentelemetry/api";
-import { FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
-import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
+import type { Attributes, AttributeValue } from "@opentelemetry/api";
+import type { FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
+import type { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}

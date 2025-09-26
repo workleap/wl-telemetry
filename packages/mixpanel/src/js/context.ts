@@ -3,7 +3,7 @@
 // this package would get runtime errors from the Platform Widgets CDN otherwise.
 
 import type { Logger } from "@workleap/logging";
-import { MixpanelSuperProperties } from "./MixpanelClient.ts";
+import type { MixpanelSuperProperties } from "./MixpanelClient.ts";
 
 export const MixpanelContextVariableName = "__WLP_MIXPANEL_CONTEXT__";
 
