@@ -60,6 +60,7 @@
         "@workleap/logrocket": "workspace:*",
         "@workleap/logging": "^1.3.0",
         "@workleap/mixpanel": "workspace:*",
+        "@workleap/telemetry-context": "workspace:*",
         "@workleap-telemetry/core": "workspace:*"
     },
     "devDependencies": {

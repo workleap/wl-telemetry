@@ -368,6 +368,9 @@ importers:
       '@workleap/mixpanel':
         specifier: workspace:*
         version: link:../mixpanel
+      '@workleap/telemetry-context':
+        specifier: workspace:*
+        version: link:../context
       react:
         specifier: ^18.0.0 || ^19.0.0
         version: 19.1.1

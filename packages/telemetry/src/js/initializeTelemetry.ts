@@ -3,9 +3,9 @@ import { registerHoneycombInstrumentation, type HoneycombInstrumentationClient, 
 import type { RootLogger } from "@workleap/logging";
 import { registerLogRocketInstrumentation, type LogRocketInstrumentationClient, type RegisterLogRocketInstrumentationOptions } from "@workleap/logrocket";
 import { initializeMixpanel, type InitializeMixpanelOptions, type MixpanelEnvironment } from "@workleap/mixpanel";
+import { createTelemetryContext } from "@workleap/telemetry-context";
 import type { MixpanelClient } from "../../../mixpanel/src/js/MixpanelClient.ts";
 import { TelemetryClient } from "./TelemetryClient.ts";
-import { createTelemetryContext } from "./createTelemetryContext.ts";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
