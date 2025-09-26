@@ -2,7 +2,7 @@ import { afterEach, test, vi } from "vitest";
 import { __resetRegistrationGuard, registerCommonRoomInstrumentation } from "../../src/js/registerCommonRoomInstrumentation.ts";
 
 afterEach(() => {
-    vi.resetAllMocks();
+    vi.clearAllMocks();
 
     __resetRegistrationGuard();
 });

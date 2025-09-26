@@ -1,5 +1,4 @@
-import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
-import { NoopLogger } from "@workleap/logging";
+import { TelemetryContext } from "@workleap-telemetry/core";
 import LogRocket from "logrocket";
 import { afterEach, test, vi } from "vitest";
 import { DeviceIdTrait, TelemetryIdTrait } from "../../src/js/LogRocketInstrumentationClient.ts";
@@ -18,39 +17,31 @@ vi.mock("logrocket", () => ({
 afterEach(() => {
     vi.clearAllMocks();
 
+    // DEPRECATED: Grace period ends on January 1th 2026.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete globalThis[IsRegisteredVariableName];
 
+    // DEPRECATED: Grace period ends on January 1th 2026.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete globalThis[RegisterGetSessionUrlFunctionName];
 });
 
 test.concurrent("when honeycomb instrumentation has already been registered, throw an error", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
+    registerLogRocketInstrumentation("my-app-id");
 
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
-    registerLogRocketInstrumentation("my-app-id", telemetryContext, bootstrappingStore);
-
-    expect(() => registerLogRocketInstrumentation("my-app-id", telemetryContext, bootstrappingStore)).toThrow("[logrocket] The LogRocket instrumentation has already been registered. Did you call the \"registerLogRocketInstrumentation\" function twice?");
+    expect(() => registerLogRocketInstrumentation("my-app-id")).toThrow("[logrocket] The LogRocket instrumentation has already been registered. Did you call the \"registerLogRocketInstrumentation\" function twice?");
 });
 
-test.concurrent("the session is identified with the telemetry context", ({ expect }) => {
+test.concurrent("when a telemetry context is provided, the session is identified with the telemetry context values", ({ expect }) => {
     const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
 
     const registrator = new LogRocketInstrumentationRegistrator();
 
-    registrator.register("my-app-id", telemetryContext, bootstrappingStore);
+    registrator.register("my-app-id", {
+        telemetryContext
+    });
 
     expect(LogRocket.identify).toHaveBeenCalledWith(telemetryContext.deviceId, {
         [DeviceIdTrait]: telemetryContext.deviceId,
@@ -61,16 +52,9 @@ test.concurrent("the session is identified with the telemetry context", ({ expec
 // DEPRECATED: Grace period ends on January 1th 2026.
 // Cannot be concurrent because it's using "globaThis".
 test("is registered global variable is true", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
     const registrator = new LogRocketInstrumentationRegistrator();
 
-    registrator.register("my-app-id", telemetryContext, bootstrappingStore);
+    registrator.register("my-app-id");
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -80,35 +64,13 @@ test("is registered global variable is true", ({ expect }) => {
 // DEPRECATED: Grace period ends on January 1th 2026.
 // Cannot be concurrent because it's using "globaThis".
 test("register get session url global function is defined", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
     const registrator = new LogRocketInstrumentationRegistrator();
 
-    registrator.register("my-app-id", telemetryContext, bootstrappingStore);
+    registrator.register("my-app-id");
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     expect(typeof globalThis[RegisterGetSessionUrlFunctionName]).toBe("function");
-});
-
-test("logrocket is marked as ready", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
-    const registrator = new LogRocketInstrumentationRegistrator();
-
-    registrator.register("my-app-id", telemetryContext, bootstrappingStore);
-
-    expect(bootstrappingStore.state.isLogRocketReady).toBeTruthy();
 });
 
 

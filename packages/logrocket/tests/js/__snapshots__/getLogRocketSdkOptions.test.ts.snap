@@ -1,0 +1,128 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`when a rootHostname is provided 1`] = `
+{
+  "browser": {
+    "urlSanitizer": [Function],
+  },
+  "console": {
+    "isEnabled": false,
+  },
+  "dom": {
+    "inputSanitizer": true,
+    "textSanitizer": true,
+  },
+  "network": {
+    "requestSanitizer": [Function],
+    "responseSanitizer": [Function],
+  },
+  "rootHostname": "toto",
+  "shouldDebugLog": false,
+}
+`;
+
+exports[`when privateFieldNames are provided 1`] = `
+{
+  "browser": {
+    "urlSanitizer": [Function],
+  },
+  "console": {
+    "isEnabled": false,
+  },
+  "dom": {
+    "inputSanitizer": true,
+    "textSanitizer": true,
+  },
+  "network": {
+    "requestSanitizer": [Function],
+    "responseSanitizer": [Function],
+  },
+  "rootHostname": "workleap.com",
+  "shouldDebugLog": false,
+}
+`;
+
+exports[`when privateQueryParameterNames are provided 1`] = `
+{
+  "browser": {
+    "urlSanitizer": [Function],
+  },
+  "console": {
+    "isEnabled": false,
+  },
+  "dom": {
+    "inputSanitizer": true,
+    "textSanitizer": true,
+  },
+  "network": {
+    "requestSanitizer": [Function],
+    "responseSanitizer": [Function],
+  },
+  "rootHostname": "workleap.com",
+  "shouldDebugLog": false,
+}
+`;
+
+exports[`when verbose is true 1`] = `
+{
+  "browser": {
+    "urlSanitizer": [Function],
+  },
+  "console": {
+    "isEnabled": false,
+  },
+  "dom": {
+    "inputSanitizer": true,
+    "textSanitizer": true,
+  },
+  "network": {
+    "requestSanitizer": [Function],
+    "responseSanitizer": [Function],
+  },
+  "rootHostname": "workleap.com",
+  "shouldDebugLog": true,
+}
+`;
+
+exports[`with a multiple transformers 1`] = `
+{
+  "browser": {
+    "urlSanitizer": [Function],
+  },
+  "console": {
+    "isEnabled": false,
+  },
+  "dom": {
+    "inputSanitizer": true,
+    "textSanitizer": true,
+  },
+  "network": {
+    "requestSanitizer": [Function],
+    "responseSanitizer": [Function],
+  },
+  "rootHostname": "toto",
+  "serverURL": "foo",
+  "shouldDebugLog": false,
+}
+`;
+
+exports[`with a single transformer 1`] = `
+{
+  "browser": {
+    "urlSanitizer": [Function],
+  },
+  "console": {
+    "isEnabled": false,
+  },
+  "dom": {
+    "inputSanitizer": true,
+    "textSanitizer": true,
+  },
+  "network": {
+    "requestSanitizer": [Function],
+    "responseSanitizer": [Function],
+  },
+  "rootHostname": "toto",
+  "shouldDebugLog": false,
+}
+`;

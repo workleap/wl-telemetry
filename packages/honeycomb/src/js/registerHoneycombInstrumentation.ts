@@ -6,12 +6,11 @@ import type { FetchInstrumentationConfig, FetchRequestHookFunction as OpenTeleme
 import type { UserInteractionInstrumentationConfig } from "@opentelemetry/instrumentation-user-interaction";
 import type { XMLHttpRequestInstrumentationConfig } from "@opentelemetry/instrumentation-xml-http-request";
 import type { PropagateTraceHeaderCorsUrls, SpanProcessor } from "@opentelemetry/sdk-trace-web";
-import type { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
-import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
+import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
+import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 import { type FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
-import { HasExecutedGuard } from "./HasExecutedGuard.ts";
 import { HoneycombInstrumentationClient } from "./HoneycombInstrumentationClient.ts";
 import type { HoneycombSdkInstrumentations, HoneycombSdkOptions } from "./honeycombTypes.ts";
 import { NormalizeAttributesSpanProcessor } from "./NormalizeAttributesSpanProcessor.ts";
@@ -55,17 +54,72 @@ const defaultDefineDocumentLoadInstrumentationOptions: DefineDocumentLoadInstrum
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export interface RegisterHoneycombInstrumentationOptions {
+    /**
+     * URL to a proxy to send traces to.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     proxy?: string;
+    /**
+     * Honeycomb Ingest API Key.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     apiKey?: HoneycombSdkOptions["apiKey"];
-    verbose?: boolean;
-    loggers?: RootLogger[];
+    /**
+     * Additional OTel instrumentation instances.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     instrumentations?: HoneycombSdkInstrumentations;
+    /**
+     *
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     spanProcessors?: SpanProcessor[];
+    /**
+     * Disable OTel fetch instrumentation or replace the default options.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     fetchInstrumentation?: false | DefineFetchInstrumentationOptionsFunction;
+    /**
+     * Enable OTel XMLHttpRequest instrumentation.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     xmlHttpRequestInstrumentation?: false | DefineXmlHttpRequestInstrumentationOptionsFunction;
+    /**
+     * Disable OTel document load instrumentation or replace the default options.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     documentLoadInstrumentation?: false | DefineDocumentLoadInstrumentationOptionsFunction;
+    /**
+     * Enable OTel user interaction instrumentation.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     userInteractionInstrumentation?: false | DefineUserInteractionInstrumentationOptionsFunction;
+    /**
+     * A LogRocket instrumentation client instance to include LogRocket values into Honeycomb traces.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    logRocketInstrumentationClient?: LogRocketInstrumentationPartialClient;
+    /**
+     * Context including telemetry correlation ids.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    telemetryContext?: TelemetryContext;
+    /**
+     * Hooks to transform the resulting Honeycomb SDK options.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
     transformers?: HoneycombSdkOptionsTransformer[];
+    /**
+     * Indicates whether or not debug information should be logged to the console.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    verbose?: boolean;
+    /**
+     * The logger instances that will output messages.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    loggers?: RootLogger[];
+
 }
 
 function augmentFetchInstrumentationOptionsWithFetchRequestPipeline(options: FetchInstrumentationConfig, fetchRequestPipeline: FetchRequestPipeline) {
@@ -173,28 +227,6 @@ export function getHoneycombSdkOptions(
 
 ///////////////////////////
 
-function registerLogRocketSessionUrlListener(globalAttributeSpanProcessor: GlobalAttributeSpanProcessor, logger: Logger) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    if (globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__) {
-        // Automatically add the LogRocket session URL to all Honeycomb traces as an attribute.
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__((sessionUrl: string) => {
-            logger
-                .withText("[honeycomb] Received LogRocket session replay URL:")
-                .withText(sessionUrl)
-                .debug();
-
-            globalAttributeSpanProcessor.setAttribute("app.logrocket_session_url", sessionUrl);
-        });
-    } else {
-        logger.information("[honeycomb] Cannot integrate with LogRocket because \"globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__\" is not available.");
-    }
-}
-
-///////////////////////////
-
 // DEPRECATED: Grace period ends on January 1th 2026.
 // Don't forget to remove the tests as well.
 export const IsRegisteredVariableName = "__WLP_HONEYCOMB_INSTRUMENTATION_IS_REGISTERED__";
@@ -285,12 +317,12 @@ export class HoneycombInstrumentationRegistrator {
         namespace: string,
         serviceName: NonNullable<HoneycombSdkOptions["serviceName"]>,
         apiServiceUrls: PropagateTraceHeaderCorsUrls,
-        telemetryContext: TelemetryContext,
-        bootstrappingStore: BootstrappingStore,
         options: RegisterHoneycombInstrumentationOptions = {}
     ) {
         const {
             proxy,
+            telemetryContext,
+            logRocketInstrumentationClient,
             verbose = false,
             loggers = []
         } = options;
@@ -310,26 +342,24 @@ export class HoneycombInstrumentationRegistrator {
         this.#globalAttributeSpanProcessor.setAttribute(ServiceNamespaceAttributeName, namespace);
 
         // Add telemetry correlation ids to traces.
-        this.#globalAttributeSpanProcessor.setAttribute(TelemetryIdAttributeName, telemetryContext.telemetryId);
-        this.#globalAttributeSpanProcessor.setAttribute(DeviceIdAttributeName, telemetryContext.deviceId);
+        if (telemetryContext) {
+            this.#globalAttributeSpanProcessor.setAttribute(TelemetryIdAttributeName, telemetryContext.telemetryId);
+            this.#globalAttributeSpanProcessor.setAttribute(DeviceIdAttributeName, telemetryContext.deviceId);
+        }
 
-        // If LogRocket is already available, register the listener. Otherwise, subscribe to the bootstrapping store
-        // and register the listener once a notification is received that LogRocket is registered.
-        if (bootstrappingStore.state.isLogRocketReady) {
-            registerLogRocketSessionUrlListener(this.#globalAttributeSpanProcessor, logger);
-        } else {
-            bootstrappingStore.subscribe((action, store, unsubscribe) => {
-                if (store.state.isLogRocketReady) {
-                    unsubscribe();
-                    registerLogRocketSessionUrlListener(this.#globalAttributeSpanProcessor, logger);
-                }
+        // Add LogRocket session url to traces.
+        if (logRocketInstrumentationClient) {
+            logRocketInstrumentationClient.registerGetSessionUrlListener((sessionUrl: string) => {
+                logger
+                    .withText("[honeycomb] Received LogRocket session replay URL:")
+                    .withText(sessionUrl)
+                    .debug();
+
+                this.#globalAttributeSpanProcessor.setAttribute("app.logrocket_session_url", sessionUrl);
             });
         }
 
         registerDeprecatedGlobalVariables(this.#fetchRequestPipeline);
-
-        // Let the other telemetry libraries know that Honeycomb instrumentation is ready.
-        bootstrappingStore.dispatch({ type: "honeycomb-ready" });
 
         logger.information("[honeycomb] Honeycomb instrumentation is registered.");
 
@@ -338,16 +368,18 @@ export class HoneycombInstrumentationRegistrator {
 }
 
 /**
+ * Register the Honeycomb instrumentation.
+ * @param namespace Set the "service.namespace" attribute for every trace.
+ * @param serviceName Honeycomb service name.
+ * @param apiServiceUrls Regex matching the hostname of the requests that the instrumentation will add the trace context to the HTTP header.
+ * @param options Honeycomb instrumentation options.
+ * @returns {HoneycombInstrumentationClient} An Honeycomb instrumentation client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function registerHoneycombInstrumentation(
     namespace: string,
     serviceName: NonNullable<HoneycombSdkOptions["serviceName"]>,
     apiServiceUrls: PropagateTraceHeaderCorsUrls,
-    telemetryContext: TelemetryContext,
-    // TODO: Probably replace the store with the actual client instance instead.
-    // and delete permanently the store implementation.
-    bootstrappingStore: BootstrappingStore,
     options?: RegisterHoneycombInstrumentationOptions
 ) {
     getRegistrationGuard().throw("[honeycomb] The Honeycomb instrumentation has already been registered. Did you call the \"registerHoneycombInstrumentation\" function twice?");
@@ -360,8 +392,6 @@ export function registerHoneycombInstrumentation(
         namespace,
         serviceName,
         apiServiceUrls,
-        telemetryContext,
-        bootstrappingStore,
         options
     );
 }

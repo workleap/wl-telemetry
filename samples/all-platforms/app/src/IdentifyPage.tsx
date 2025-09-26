@@ -1,4 +1,4 @@
-import { useCommonInstrumentationClient } from "@workleap/common-room/react";
+import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
 import {
     useHoneycombInstrumentationClient,
     useLogRocketInstrumentationClient,
@@ -66,12 +66,12 @@ export function IdentifyPage() {
     const logRocketClient = useLogRocketInstrumentationClient();
     const honeycombClient = useHoneycombInstrumentationClient();
     const mixpanelClient = useMixpanelClient();
-    const commonRoomClient = useCommonInstrumentationClient();
+    const commonRoomClient = useCommonRoomInstrumentationClient();
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
-        console.log("Form submitted to identify the user into telemetry platforms", form);
+        console.log("Form submitted to identify the user with telemetry platforms", form);
 
         LogRocket.identify(form.userId, {
             ...logRocketClient.createWorkleapPlatformDefaultUserTraits(form),

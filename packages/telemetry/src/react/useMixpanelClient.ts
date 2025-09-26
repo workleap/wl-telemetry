@@ -1,5 +1,9 @@
 import { useTelemetryClient } from "./TelemetryClientContext.ts";
 
+/**
+ * Retrieve the Mixpanel client.
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export function useMixpanelClient() {
     const telemetryClient = useTelemetryClient();
 

@@ -1,8 +1,6 @@
+import { HasExecutedGuard } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { CommonRoomInstrumentationClient } from "./CommonRoomInstrumentationClient.ts";
-import { HasExecutedGuard } from "./HasExecutedGuard.ts";
-
-///////////////////////////
 
 let registrationGuardInstance: HasExecutedGuard | undefined;
 
@@ -57,10 +55,12 @@ export type ReadyFunction = () => void;
 export interface RegisterCommonRoomInstrumentationOptions {
     /**
      * Whether or not debug information should be logged to the console.
+     * @see {@link https://workleap.github.io/wl-telemetry}
      */
     verbose?: boolean;
     /**
      * An array of RootLogger instances.
+     * @see {@link https://workleap.github.io/wl-telemetry}
      */
     loggers?: RootLogger[];
 }
@@ -88,6 +88,9 @@ export class CommonRoomInstrumentationRegistrator {
 
 /**
  * Register instrumentation for the Common Room platform.
+ * @param siteId The Common Room site id.
+ * @param options The Common Room options.
+ * @returns {CommonRoomInstrumentationClient} A Common Room instrumentation client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function registerCommonRoomInstrumentation(siteId: string, options?: RegisterCommonRoomInstrumentationOptions) {

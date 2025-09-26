@@ -43,10 +43,14 @@
         "test": "vitest --config vitest.config.ts --no-watch"
     },
     "peerDependencies": {
+        "@workleap/logrocket": "workspace:*",
         "react": "^18.0.0 || ^19.0.0",
         "react-dom": "^18.0.0 || ^19.0.0"
     },
     "peerDependenciesMeta": {
+        "@workleap/logrocket": {
+            "optional": true
+        },
         "react": {
             "optional": true
         },

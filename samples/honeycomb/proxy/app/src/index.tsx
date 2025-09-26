@@ -8,8 +8,12 @@ const honeycombClient = registerHoneycombInstrumentation(
     "sample",
     "honeycomb-proxy-sample",
     [/http:\/\/localhost:1234\.*/],
-    createTelemetryContext(),
-    createBootstrappingStore(), {
+    createTelemetryContext({
+        verbose: true
+    }),
+    createBootstrappingStore({
+        verbose: true
+    }), {
         proxy: "http://localhost:5678/v1/traces",
         verbose: true
     });

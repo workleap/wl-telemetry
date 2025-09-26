@@ -1,5 +1,9 @@
 import { useTelemetryClient } from "./TelemetryClientContext.ts";
 
+/**
+ * Retrieve the LogRocket instrumentation client.
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export function useLogRocketInstrumentationClient() {
     const telemetryClient = useTelemetryClient();
 

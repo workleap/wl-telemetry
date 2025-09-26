@@ -1,5 +1,5 @@
 import { test } from "vitest";
-import { HasExecutedGuard } from "../../src/js/HasExecutedGuard.ts";
+import { HasExecutedGuard } from "../src/HasExecutedGuard.ts";
 
 test.concurrent("when the \"throw\" function is called once, do nothing", ({ expect }) => {
     const guard = new HasExecutedGuard();

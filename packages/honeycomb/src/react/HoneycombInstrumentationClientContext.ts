@@ -1,10 +1,17 @@
 import { createContext, useContext } from "react";
-import { HoneycombInstrumentationClient } from "../js/HoneycombInstrumentationClient.ts";
+import type { HoneycombInstrumentationClient } from "../js/HoneycombInstrumentationClient.ts";
 
 const HoneycombInstrumentationClientContext = createContext<HoneycombInstrumentationClient | undefined>(undefined);
 
+/**
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export const HoneycombInstrumentationClientProvider = HoneycombInstrumentationClientContext.Provider;
 
+/**
+ * Retrieve the Honeycomb instrumentation client.
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export function useHoneycombInstrumentationClient() {
     const client = useContext(HoneycombInstrumentationClientContext);
 

@@ -88,10 +88,13 @@ export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unkn
 
 ///////////////////////////
 
+/**
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export class LogRocketInstrumentationClient {
-    readonly #telemetryContext: TelemetryContext;
+    readonly #telemetryContext?: TelemetryContext;
 
-    constructor(telemetryContext: TelemetryContext) {
+    constructor(telemetryContext?: TelemetryContext) {
         this.#telemetryContext = telemetryContext;
     }
 
@@ -151,8 +154,8 @@ export class LogRocketInstrumentationClient {
             "Organization Name": organizationName,
             "Is Migrated To Workleap": isMigratedToWorkleap,
             "Is Admin": isAdmin,
-            [DeviceIdTrait]: this.#telemetryContext.deviceId,
-            [TelemetryIdTrait]: this.#telemetryContext.telemetryId,
+            [DeviceIdTrait]: this.#telemetryContext?.deviceId ?? "N/A",
+            [TelemetryIdTrait]: this.#telemetryContext?.telemetryId ?? "N/A",
             ...(isDefined(isOrganizationCreator) && { "Is Organization Creator": isOrganizationCreator }),
             ...(isExecutiveInAnyProduct && { "Is Executive": true }),
             ...(isDefined(isExecutive?.wov) && { "Is Executive - Officevibe": isExecutive.wov }),

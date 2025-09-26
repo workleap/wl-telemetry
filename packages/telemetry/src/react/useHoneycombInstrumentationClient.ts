@@ -1,5 +1,9 @@
 import { useTelemetryClient } from "./TelemetryClientContext.ts";
 
+/**
+ * Retrieve the Honeycomb instrumentation client.
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export function useHoneycombInstrumentationClient() {
     const telemetryClient = useTelemetryClient();
 

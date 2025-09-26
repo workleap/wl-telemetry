@@ -1,3 +1,4 @@
-export { BootstrappingStore, createBootstrappingStore, type BootstrappingAction, type BootstrappingActionType, type BootstrappingState, type BootstrappingStoreListenerFunction } from "./BootstrappingStore.ts";
+export { HasExecutedGuard } from "./HasExecutedGuard.ts";
+export type { LogRocketInstrumentationPartialClient } from "./LogRocketInstrumentationpPartialClient.ts";
 export { createTelemetryContext, TelemetryContext, type CreateTelemetryContextOptions } from "./TelemetryContext.ts";
 

@@ -1,6 +1,5 @@
 import { HoneycombWebSDK } from "@honeycombio/opentelemetry-web";
-import { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
-import { NoopLogger } from "@workleap/logging";
+import { type LogRocketInstrumentationPartialClient, TelemetryContext } from "@workleap-telemetry/core";
 import { afterEach, test, vi } from "vitest";
 import { FetchRequestPipeline } from "../../src/js/FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "../../src/js/GlobalAttributeSpanProcessor.ts";
@@ -11,6 +10,7 @@ import {
     IsRegisteredVariableName,
     RegisterDynamicFetchRequestHookAtStartFunctionName,
     RegisterDynamicFetchRequestHookFunctionName,
+    registerHoneycombInstrumentation,
     ServiceNamespaceAttributeName,
     TelemetryIdAttributeName
 } from "../../src/js/registerHoneycombInstrumentation.ts";
@@ -25,30 +25,50 @@ class DummyHoneycombWebSdk extends HoneycombWebSDK {
     start(): void { }
 }
 
+class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    readonly #listeners: any[] = [];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    registerGetSessionUrlListener(listener: any) {
+        this.#listeners.push(listener);
+    }
+
+    get listenerCount() {
+        return this.#listeners.length;
+    }
+}
+
 afterEach(() => {
     vi.clearAllMocks();
 
+    // DEPRECATED: Grace period ends on January 1th 2026.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete globalThis[IsRegisteredVariableName];
 
+    // DEPRECATED: Grace period ends on January 1th 2026.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete globalThis[RegisterDynamicFetchRequestHookFunctionName];
 
+    // DEPRECATED: Grace period ends on January 1th 2026.
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     delete globalThis[RegisterDynamicFetchRequestHookAtStartFunctionName];
 });
 
+test.concurrent("when honeycomb instrumentation has already been registered, throw an error", ({ expect }) => {
+    registerHoneycombInstrumentation("foo", "bar", ["/bar"], {
+        proxy: "https://my-proxy.com"
+    });
+
+    expect(() => registerHoneycombInstrumentation("foo", "bar", ["/bar"], {
+        proxy: "https://my-proxy.com"
+    })).toThrow("[honeycomb] The Honeycomb instrumentation has already been registered. Did you call the \"registerHoneycombInstrumentation\" function twice?");
+});
+
 test.concurrent("set the namespace global attribute", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
     const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
 
@@ -59,20 +79,15 @@ test.concurrent("set the namespace global attribute", ({ expect }) => {
 
     const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
 
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
+    registrator.register("foo", "bar", ["/bar"], {
         proxy: "https://my-proxy.com"
     });
 
     expect(globalAttributeSpanProcessor.attributes[ServiceNamespaceAttributeName]).toBe("foo");
 });
 
-test.concurrent("set the telemetry global attributes", ({ expect }) => {
+test.concurrent("when a telemetry context is provided, set the telemetry global attributes", ({ expect }) => {
     const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
 
     const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
@@ -84,8 +99,9 @@ test.concurrent("set the telemetry global attributes", ({ expect }) => {
 
     const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
 
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
-        proxy: "https://my-proxy.com"
+    registrator.register("foo", "bar", ["/bar"], {
+        proxy: "https://my-proxy.com",
+        telemetryContext
     });
 
     expect(globalAttributeSpanProcessor.attributes[TelemetryIdAttributeName]).toBe(telemetryContext.telemetryId);
@@ -95,13 +111,6 @@ test.concurrent("set the telemetry global attributes", ({ expect }) => {
 // DEPRECATED: Grace period ends on January 1th 2026.
 // Cannot be concurrent because it's using "globaThis".
 test("is registered global variable is true", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
     const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
 
@@ -112,7 +121,7 @@ test("is registered global variable is true", ({ expect }) => {
 
     const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
 
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
+    registrator.register("foo", "bar", ["/bar"], {
         proxy: "https://my-proxy.com"
     });
 
@@ -122,13 +131,6 @@ test("is registered global variable is true", ({ expect }) => {
 });
 
 test.concurrent("register dynamic fetch request hook function is defined", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
     const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
 
@@ -139,7 +141,7 @@ test.concurrent("register dynamic fetch request hook function is defined", ({ ex
 
     const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
 
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
+    registrator.register("foo", "bar", ["/bar"], {
         proxy: "https://my-proxy.com"
     });
 
@@ -149,13 +151,6 @@ test.concurrent("register dynamic fetch request hook function is defined", ({ ex
 });
 
 test("register dynamic fetch request hook at start function is defined", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
     const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
 
@@ -166,7 +161,7 @@ test("register dynamic fetch request hook at start function is defined", ({ expe
 
     const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
 
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
+    registrator.register("foo", "bar", ["/bar"], {
         proxy: "https://my-proxy.com"
     });
 
@@ -175,15 +170,7 @@ test("register dynamic fetch request hook at start function is defined", ({ expe
     expect(typeof globalThis[RegisterDynamicFetchRequestHookAtStartFunctionName]).toBe("function");
 });
 
-// Cannot be concurrent because it's using "globaThis".
-test("when logrocket is ready, register a listener for logrocket get session url", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: true,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
+test.concurrent("when a logrocket client is provided, register a listener for logrocket get session url", ({ expect }) => {
     const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
 
@@ -192,81 +179,16 @@ test("when logrocket is ready, register a listener for logrocket get session url
         serviceName: x.serviceName
     });
 
-    const registerGetSessionUrlListenerMock = vi.fn();
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__ = registerGetSessionUrlListenerMock;
+    const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
 
     const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
 
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
-        proxy: "https://my-proxy.com"
+    registrator.register("foo", "bar", ["/bar"], {
+        proxy: "https://my-proxy.com",
+        logRocketInstrumentationClient
     });
 
-    expect(registerGetSessionUrlListenerMock).toHaveBeenCalledOnce();
-});
-
-// Cannot be concurrent because it's using "globaThis".
-test("when logrocket is not ready, register a listener for logrocket get session url once logrocket is ready", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
-    const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
-    const fetchRequestPipeline = new FetchRequestPipeline();
-
-    const honeycombSdkFactory: HoneycombSdkFactory = x => new DummyHoneycombWebSdk({
-        endpoint: x.endpoint,
-        serviceName: x.serviceName
-    });
-
-    const registerGetSessionUrlListenerMock = vi.fn();
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__ = registerGetSessionUrlListenerMock;
-
-    const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
-
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
-        proxy: "https://my-proxy.com"
-    });
-
-    expect(registerGetSessionUrlListenerMock).not.toHaveBeenCalled();
-
-    bootstrappingStore.dispatch({ type: "logrocket-ready" });
-
-    expect(registerGetSessionUrlListenerMock).toHaveBeenCalledOnce();
-});
-
-// Cannot be concurrent because it's using "globaThis".
-test("honeycomb is marked as ready", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
-    const globalAttributeSpanProcessor = new DummyGlobalAttributeSpanProcessor();
-    const fetchRequestPipeline = new FetchRequestPipeline();
-
-    const honeycombSdkFactory: HoneycombSdkFactory = x => new DummyHoneycombWebSdk({
-        endpoint: x.endpoint,
-        serviceName: x.serviceName
-    });
-
-    const registrator = new HoneycombInstrumentationRegistrator(globalAttributeSpanProcessor, fetchRequestPipeline, honeycombSdkFactory);
-
-    registrator.register("foo", "bar", ["/bar"], telemetryContext, bootstrappingStore, {
-        proxy: "https://my-proxy.com"
-    });
-
-    expect(bootstrappingStore.state.isHoneycombReady).toBeTruthy();
+    expect(logRocketInstrumentationClient.listenerCount).toBe(1);
 });
 
 

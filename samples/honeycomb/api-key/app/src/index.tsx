@@ -8,8 +8,12 @@ const honeycombClient = registerHoneycombInstrumentation(
     "sample",
     "honeycomb-api-key-sample",
     [/http:\/\/localhost:1234\.*/],
-    createTelemetryContext(),
-    createBootstrappingStore(), {
+    createTelemetryContext({
+        verbose: true
+    }),
+    createBootstrappingStore({
+        verbose: true
+    }), {
         apiKey: process.env.HONEYCOMB_API_KEY,
         verbose: true
     }

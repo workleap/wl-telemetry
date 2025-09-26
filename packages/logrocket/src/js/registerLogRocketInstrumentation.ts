@@ -1,4 +1,4 @@
-import type { BootstrappingStore, TelemetryContext } from "@workleap-telemetry/core";
+import { HasExecutedGuard, type TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import LogRocket from "logrocket";
 import LogrocketFuzzySanitizer from "logrocket-fuzzy-search-sanitizer";
@@ -6,7 +6,6 @@ import { applyTransformers, type LogRocketSdkOptionsTransformer } from "./applyT
 import { createRequestSanitizer } from "./createRequestSanitizer.ts";
 import { createResponseSanitizer } from "./createResponseSanitizer.ts";
 import { createUrlSanitizer } from "./createUrlSanitizer.ts";
-import { HasExecutedGuard } from "./HasExecutedGuard.ts";
 import { DeviceIdTrait, LogRocketInstrumentationClient, TelemetryIdTrait } from "./LogRocketInstrumentationClient.ts";
 import type { LogRocketSdkOptions } from "./logRocketTypes.ts";
 
@@ -38,28 +37,39 @@ const DefaultPrivateQueryParameterNames = [
 export interface RegisterLogRocketInstrumentationOptions {
     /**
      * A root hostname to track sessions across subdomains. Set this option to capture traffic from all subdomains under one session: https://docs.logrocket.com/reference/roothostname.
+     * @see {@link https://workleap.github.io/wl-telemetry}
      */
     rootHostname?: LogRocketSdkOptions["rootHostname"];
     /**
      * Names of additional fields to exclude from session replays. These fields will be removed from network requests, responses using a fuzzy-matching algorithm.
+     * @see {@link https://workleap.github.io/wl-telemetry}
      */
     privateFieldNames?: string[];
     /**
      * Names of additional fields to exclude from session replays. These fields will be removed from query parameters using a fuzzy-matching algorithm.
+     * @see {@link https://workleap.github.io/wl-telemetry}
      */
     privateQueryParameterNames?: string[];
     /**
+     * Context including telemetry correlation ids.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    telemetryContext?: TelemetryContext;
+    /**
+     * Hooks to transform the resulting LogRocket SDK options.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    transformers?: LogRocketSdkOptionsTransformer[];
+    /**
      * Indicates whether or not debug information should be logged to the console.
+     * @see {@link https://workleap.github.io/wl-telemetry}
      */
     verbose?: boolean;
     /**
      * The logger instances that will output messages.
+     * @see {@link https://workleap.github.io/wl-telemetry}
      */
     loggers?: RootLogger[];
-    /**
-     * Hooks to transform the resulting LogRocket SDK options.
-     */
-    transformers?: LogRocketSdkOptionsTransformer[];
 }
 
 // The function return type is mandatory, otherwise we got an error TS4058.
@@ -162,13 +172,10 @@ export function __resetRegistrationGuard() {
 export class LogRocketInstrumentationRegistrator {
     register(
         appId: string,
-        telemetryContext: TelemetryContext,
-        // TODO: Probably replace the store with the actual client instance instead.
-        // and delete permanently the store implementation.
-        bootstrappingStore: BootstrappingStore,
         options: RegisterLogRocketInstrumentationOptions = {}
     ) {
         const {
+            telemetryContext,
             verbose = false,
             loggers = []
         } = options;
@@ -179,12 +186,15 @@ export class LogRocketInstrumentationRegistrator {
         // Session starts anonymously when LogRocket.init() is called.
         LogRocket.init(appId, sdkOptions);
 
-        // LogRocket maintains the same session even if the user starts as anonymous and later becomes identified via LogRocket.identify().
-        // If LogRocket.identify is called multiple times during a recording, you can search for any of the identified users in the session.
-        LogRocket.identify(telemetryContext.deviceId, {
-            [DeviceIdTrait]: telemetryContext.deviceId,
-            [TelemetryIdTrait]: telemetryContext.telemetryId
-        });
+        // Identify the user with the correlation ids.
+        if (telemetryContext) {
+            // LogRocket maintains the same session even if the user starts as anonymous and later becomes identified via LogRocket.identify().
+            // If LogRocket.identify is called multiple times during a recording, you can search for any of the identified users in the session.
+            LogRocket.identify(telemetryContext.deviceId, {
+                [DeviceIdTrait]: telemetryContext.deviceId,
+                [TelemetryIdTrait]: telemetryContext.telemetryId
+            });
+        }
 
         LogRocket.getSessionURL(url => {
             logger
@@ -195,9 +205,6 @@ export class LogRocketInstrumentationRegistrator {
 
         registerDeprecatedGlobalVariables();
 
-        // Let the other telemetry libraries know that LogRocket instrumentation is ready.
-        bootstrappingStore.dispatch({ type: "logrocket-ready" });
-
         logger.information("[logrocket] LogRocket instrumentation is registered.");
 
         return new LogRocketInstrumentationClient(telemetryContext);
@@ -205,17 +212,17 @@ export class LogRocketInstrumentationRegistrator {
 }
 
 /**
+ * Register the LogRocket instrumentation.
+ * @param appId LogRocket application id.
+ * @param options LogRocket instrumentation options.
+ * @returns {LogRocketInstrumentationClient} A LogRocket instrumentation client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function registerLogRocketInstrumentation(
     appId: string,
-    telemetryContext: TelemetryContext,
-    // TODO: Probably replace the store with the actual client instance instead.
-    // and delete permanently the store implementation.
-    bootstrappingStore: BootstrappingStore,
     options?: RegisterLogRocketInstrumentationOptions
 ) {
     getRegistrationGuard().throw("[logrocket] The LogRocket instrumentation has already been registered. Did you call the \"registerLogRocketInstrumentation\" function twice?");
 
-    return new LogRocketInstrumentationRegistrator().register(appId, telemetryContext, bootstrappingStore, options);
+    return new LogRocketInstrumentationRegistrator().register(appId, options);
 }
