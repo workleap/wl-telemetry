@@ -1,23 +1,14 @@
-import { createBootstrappingStore, createTelemetryContext } from "@workleap-telemetry/core";
+import { createTelemetryContext } from "@workleap-telemetry/core";
 import { HoneycombInstrumentationClientProvider, registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-const honeycombClient = registerHoneycombInstrumentation(
-    "sample",
-    "honeycomb-api-key-sample",
-    [/http:\/\/localhost:1234\.*/],
-    createTelemetryContext({
-        verbose: true
-    }),
-    createBootstrappingStore({
-        verbose: true
-    }), {
-        apiKey: process.env.HONEYCOMB_API_KEY,
-        verbose: true
-    }
-);
+const honeycombClient = registerHoneycombInstrumentation("sample", "honeycomb-api-key-sample", [/http:\/\/localhost:1234\.*/], {
+    apiKey: process.env.HONEYCOMB_API_KEY,
+    telemetryContext: createTelemetryContext({ verbose: true }),
+    verbose: true
+});
 
 // Update telemetry global attributes.
 honeycombClient.setGlobalSpanAttributes({
