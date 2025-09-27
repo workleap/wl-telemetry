@@ -1,5 +1,4 @@
-import { HoneycombInstrumentationClientProvider, registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
-import { createTelemetryContext } from "@workleap/telemetry-context";
+import { createTelemetryContext, HoneycombInstrumentationClientProvider, registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";

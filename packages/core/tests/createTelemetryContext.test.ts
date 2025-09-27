@@ -1,5 +1,5 @@
 import { test, vi } from "vitest";
-import { createTelemetryContext, IdentityCookieName } from "../src/createTelemetryContext.ts";
+import { createTelemetryContext, IdentityCookieName } from "../src/TelemetryContext.ts";
 
 test.concurrent("when an identity cookie is available, the device id is retrieved from the cookie", ({ expect }) => {
     const deviceId = "123";

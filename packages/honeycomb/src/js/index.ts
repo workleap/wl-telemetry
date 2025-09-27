@@ -1,3 +1,4 @@
+export { createTelemetryContext, type CreateTelemetryContextOptions, type TelemetryContext } from "@workleap-telemetry/core";
 export type { HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 export { type FetchRequestHookFunction } from "./FetchRequestPipeline.ts";
 export { type HoneycombInstrumentationClient } from "./HoneycombInstrumentationClient.ts";
