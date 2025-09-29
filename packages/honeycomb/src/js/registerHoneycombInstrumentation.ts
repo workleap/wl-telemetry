@@ -207,7 +207,8 @@ export function getHoneycombSdkOptions(
     const sdkOptions = {
         endpoint: proxy,
         apiKey,
-        debug: verbose,
+        // Commented out until the following issue is fixed: https://github.com/honeycombio/honeycomb-opentelemetry-web/issues/612.
+        // debug: verbose,
         localVisualizations: verbose,
         serviceName,
         // Watch out, getWebAutoInstrumentations enables by default all the supported instrumentations.
