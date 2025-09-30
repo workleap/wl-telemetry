@@ -10,7 +10,7 @@ toc:
 # LogRocketInstrumentationClient
 
 !!!warning
-Don't instanciate your own instance of `LogRocketInstrumentationClient`, use the `registerLogRocketInstrumentation` function instead.
+Don't create your own instance of `LogRocketInstrumentationClient`, use the `registerLogRocketInstrumentation` function instead.
 !!!
 
 A lightweight client providing access to LogRocket instrumentation utilities.

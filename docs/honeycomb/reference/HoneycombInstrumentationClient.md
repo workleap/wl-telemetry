@@ -10,7 +10,7 @@ toc:
 # HoneycombInstrumentationClient
 
 !!!warning
-Don't instanciate your own instance of `HoneycombInstrumentationClient`, use the `registerHoneycombInstrumentation` function instead.
+Don't create your own instance of `HoneycombInstrumentationClient`, use the `registerHoneycombInstrumentation` function instead.
 !!!
 
 A lightweight client providing access to Honeycomb instrumentation utilities.

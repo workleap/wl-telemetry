@@ -1,4 +1,5 @@
-import { Logger } from "@workleap/logging";
+import type { Logger } from "@workleap/logging";
+
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */

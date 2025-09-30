@@ -2,7 +2,7 @@
 order: 100
 label: registerCommonRoomInstrumentation
 meta:
-    title: registerCommonRoomInstrumentation - Common
+    title: registerCommonRoomInstrumentation - Common Room
 toc:
     depth: 2-3
 ---
@@ -14,7 +14,7 @@ Initialize [Common Room](https://www.commonroom.io/) instrumentation.
 ## Reference
 
 ```ts
-registerCommonRoomInstrumentation(siteId, options?: { onReady, verbose });
+const client = registerCommonRoomInstrumentation(siteId, options?: { onReady, verbose });
 ```
 
 ### Parameters
@@ -26,7 +26,7 @@ registerCommonRoomInstrumentation(siteId, options?: { onReady, verbose });
 
 ### Returns
 
-Nothing
+A [CommonRoomInstrumentationClient](./CommonRoomInstrumentationClient.md) instance.
 
 ## Usage
 
@@ -35,7 +35,7 @@ Nothing
 ```ts !#3
 import { registerCommonRoomInstrumentation } from "@workleap/common-room";
 
-registerCommonRoomInstrumentation("my-site-id");
+const client = registerCommonRoomInstrumentation("my-site-id");
 ```
 
 ### Verbose mode 
@@ -43,7 +43,7 @@ registerCommonRoomInstrumentation("my-site-id");
 ```ts !#4
 import { registerCommonRoomInstrumentation } from "@workleap/common-room";
 
-registerCommonRoomInstrumentation("my-site-id", {
+const client = registerCommonRoomInstrumentation("my-site-id", {
     verbose: true
 });
 ```
@@ -55,7 +55,7 @@ import { registerCommonRoomInstrumentation } from "@workleap/common-room";
 import { LogRocketLogger } from "@workleap/logrocket";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-registerCommonRoomInstrumentation("my-site-id", {
+const client = registerCommonRoomInstrumentation("my-site-id", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```

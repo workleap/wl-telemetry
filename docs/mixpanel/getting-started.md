@@ -86,7 +86,7 @@ track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
 
 ## Set custom user properties
 
-Most applications need to set custom properties on events about the current user environment. To help with that, [MixpanelClient](./reference/MixpanelClient.md) expose the [setGlobalEventProperties](./reference/MixpanelClient.md#register-global-properties) function.
+Most applications need to set custom properties on events about the current user environment. To help with that, [MixpanelClient](./reference/MixpanelClient.md) expose the [setGlobalEventProperties](./reference/MixpanelClient.md#register-global-properties) method:
 
 Update your application code to include the `setSuperProperties` function:
 
@@ -103,6 +103,8 @@ client.setGlobalEventProperties({
 Now, every event recorded after the execution of `setGlobalEventProperties` will include the custom property `User Id`.
 
 ## Integrate with LogRocket
+
+Starting with version `3.0`, attaching LogRocket session replays to Mixpanel events requires providing a [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) to the registration function:
 
 ```tsx !#7,11
 import { initializeMixpanel, MixpanelClientProvider, createTelemetryContext } from "@workleap/mixpanel/react";

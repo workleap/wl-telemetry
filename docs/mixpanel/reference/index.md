@@ -12,4 +12,4 @@ meta:
 - [useMixpanelClient](./useMixpanelClient.md)
 - [useTrackingFunction](./useTrackingFunction.md)
 - [createTelemetryContext](./createTelemetryContext.md)
-- [createTrackingFunction](./createTrackingFunction.md) - Deprecated
+- [createTrackingFunction](./createTrackingFunction.md) [!badge variant="danger" size="xs" text="deprecated"]

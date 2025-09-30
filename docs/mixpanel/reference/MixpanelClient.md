@@ -10,7 +10,7 @@ toc:
 # MixpanelClient
 
 !!!warning
-Don't instanciate your own instance of `MixpanelClient`, use the `initializeMixpanel` function instead.
+Don't create your own instance of `MixpanelClient`, use the `initializeMixpanel` function instead.
 !!!
 
 A lightweight client providing access to Mixpanel utilities.

@@ -112,7 +112,7 @@ The `registerLogRocketInstrumentation` function automatically adds two attribute
 
 ## Set custom user attributes
 
-Most applications need to set custom attributes on traces about the current user environment. To help with that, [HoneycombInstrumentationClient](./reference/HoneycombInstrumentationClient.md) expose the [setGlobalSpanAttributes](./reference/HoneycombInstrumentationClient.md#register-global-attributes) function.
+Most applications need to set custom attributes on traces about the current user environment. To help with that, [HoneycombInstrumentationClient](./reference/HoneycombInstrumentationClient.md) expose the [setGlobalSpanAttributes](./reference/HoneycombInstrumentationClient.md#register-global-attributes) method:
 
 ```ts !#5-7
 import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
@@ -132,7 +132,7 @@ Now, every trace recorded after the execution of `setGlobalSpanAttributes` will 
 
 ## Integrate with LogRocket
 
-Starting with version `7.0`, attaching LogRocket session replays to Honeycomb traces requires providing a [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) to the registration function.
+Starting with version `7.0`, attaching LogRocket session replays to Honeycomb traces requires providing a [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) to the registration function:
 
 ```tsx !#7,12
 import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";
