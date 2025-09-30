@@ -30,7 +30,7 @@ For debugging, use `console.log` instead, since its output is not captured in Lo
 Register LogRocket instrumentation with a [LogRocketLogger](./reference/LogRocketLogger.md) instance:
 
 ```ts !#5
-import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 
 const client = registerLogRocketInstrumentation("my-app-id", {
@@ -44,7 +44,7 @@ Register Honeycomb instrumentation with a [LogRocketLogger](./reference/LogRocke
 
 ```ts !#7
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
-import { LogRocketLogger } from "@workleap/logrocket";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 
 const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
@@ -59,7 +59,7 @@ Initialize Mixpanel with a [LogRocketLogger](./reference/LogRocketLogger.md) ins
 
 ```ts !#6
 import { initializeMixpanel } from "@workleap/mixpanel";
-import { LogRocketLogger } from "@workleap/logrocket";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 
 const client = initializeMixpanel("wlp", "development", {
@@ -73,7 +73,7 @@ Initialize Mixpanel with a [LogRocketLogger](./reference/LogRocketLogger.md) ins
 
 ```ts !#6
 import { registerCommonRoomInstrumentation } from "@workleap/common-room";
-import { LogRocketLogger } from "@workleap/logrocket";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 
 const client = registerCommonRoomInstrumentation("my-site-id", {
@@ -87,7 +87,7 @@ Initialize Squide firefly with a [LogRocketLogger](./reference/LogRocketLogger.m
 
 ```ts !#6
 import { initializeFirefly } from "@squide/firefly";
-import { LogRocketLogger } from "@workleap/logrocket";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 
 const runtime = initializeFirefly({
@@ -101,7 +101,7 @@ Initialize platform widgets with verbose mode activated and a [LogRocketLogger](
 
 ```ts !#6
 import { initializeWidgets } from "@workleap-widgets/client/react";
-import { LogRocketLogger } from "@workleap/logrocket";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 
 const widgetsRuntime = initializeWidgets("wlp", "development" , {

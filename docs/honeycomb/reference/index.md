@@ -7,4 +7,7 @@ meta:
 # Reference
 
 - [registerHoneycombInstrumentation](./registerHoneycombInstrumentation.md)
-- [setGlobalSpanAttributes](./setGlobalSpanAttributes.md)
+- [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md)
+- [HoneycombInstrumentationClientProvider](./HoneycombInstrumentationClientProvider.md)
+- [useHoneycombInstrumentationClient](./useHoneycombInstrumentationClient.md)
+- [createTelemetryContext](./createTelemetryContext.md)

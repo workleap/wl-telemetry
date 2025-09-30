@@ -9,10 +9,6 @@ toc:
 
 # LogRocketInstrumentationClientProvider
 
-!!!warning
-When using React-specific features of this library, switch every import from import them from `@workleap/logrocket` to `@workleap/logrocket/react`.
-!!!
-
 React provider to share a `LogRocketInstrumentationClient` instance with the application code.
 
 ## Reference
@@ -33,7 +29,7 @@ React provider to share a `LogRocketInstrumentationClient` instance with the app
 
 ```tsx !#10-12
 import { createRoot } from "react-dom/client";
-import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider } from "@workleap/logrocket/react";
 import { App } from "./App.tsx";
 
 const client = registerLogRocketInstrumentation("my-app-id");

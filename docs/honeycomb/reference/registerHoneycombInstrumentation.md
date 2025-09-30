@@ -14,7 +14,7 @@ Initializes an instance of [Honeycomb Web SDK](https://docs.honeycomb.io/send-da
 ## Reference
 
 ```ts
-registerHoneycombInstrumentation(namespace, serviceName, apiServiceUrls: [string | Regex], options?: {})
+const client = registerHoneycombInstrumentation(namespace, serviceName, apiServiceUrls: [string | Regex], options?: {})
 ```
 
 ### Parameters
@@ -26,7 +26,7 @@ registerHoneycombInstrumentation(namespace, serviceName, apiServiceUrls: [string
 
 ### Returns
 
-Nothing
+A `HoneycombInstrumentationClient` instance.
 
 ### Default instrumentation
 
@@ -48,7 +48,7 @@ Specify values for the `apiServiceUrls` argument that matches your application's
 ```ts !#6
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation(
+const client = registerHoneycombInstrumentation(
     "sample",
     "my-app",
     [/https:\/\/workleap.com\/api\.*/], 
@@ -70,7 +70,7 @@ Set the URL to an [OpenTelemetry collector](https://docs.honeycomb.io/send-data/
 ```ts !#4
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy"
 });
 ```
@@ -91,7 +91,7 @@ Set an Honeycomb ingestion [API key](https://docs.honeycomb.io/get-started/confi
 ```ts !#4
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     apiKey: "123"
 });
 ```
@@ -107,7 +107,7 @@ Append the provided [instrumentation](https://opentelemetry.io/docs/languages/js
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 import { LongTaskInstrumentation } from "@opentelemetry/instrumentation-long-task";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     instrumentations: [
         new LongTaskInstrumentation()
@@ -146,7 +146,7 @@ export class CustomSpanProcessor implements SpanProcessor {
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 import { CustomSpanProcessor } from "./CustomSpanProcessor.ts";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     spanProcessors: [
         new CustomSpanProcessor()
@@ -164,7 +164,7 @@ Replace the default [@opentelemetry/instrumentation-fetch](https://github.com/op
 ```ts !#5-10
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     fetchInstrumentation: (defaultOptions) => {
         return {
@@ -180,7 +180,7 @@ To disable [@opentelemetry/instrumentation-fetch](https://github.com/open-teleme
 ```ts !#5
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     fetchInstrumentation: false
 });
@@ -196,7 +196,7 @@ Replace the default [@opentelemetry/instrumentation-document-load](https://githu
 ```ts !#5-10
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     documentLoadInstrumentation: (defaultOptions) => {
         return {
@@ -212,7 +212,7 @@ To disable [@opentelemetry/instrumentation-document-load](https://github.com/ope
 ```ts !#5-10
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     documentLoadInstrumentation: (defaultOptions) => {
         return {
@@ -233,7 +233,7 @@ By default, [@opentelemetry/instrumentation-xml-http-request](https://github.com
 ```ts !#5-10
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     xmlHttpRequestInstrumentation: (defaultOptions) => {
         return {
@@ -249,7 +249,7 @@ Or set the option to `true` to enable [@opentelemetry/instrumentation-xml-http-r
 ```ts !#5
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     xmlHttpRequestInstrumentation: true
 });
@@ -265,7 +265,7 @@ By default, [@opentelemetryinstrumentation-user-interaction](https://github.com/
 ```ts !#5-10
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     userInteractionInstrumentation: (defaultOptions) => {
         return {
@@ -279,11 +279,47 @@ registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
 Or set the option to `true` to enable [@opentelemetryinstrumentation-user-interaction](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-user-interaction) with the default options.
 
 ```ts !#5
-import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
+import { registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     userInteractionInstrumentation: true
+});
+```
+
+### `logRocketInstrumentationClient`
+
+- **Type**: `LogRocketInstrumentationClient`
+- **Default**: `undefined`
+
+A [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) instance to integrate Honeycomb traces with LogRocket session replays. Starting with version `7.0`, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.
+
+```ts !#4,8
+import { registerHoneycombInstrumentation, createTelemetryContext } from "@workleap/honeycomb/react";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+
+const logRocketInstrumentationClient = registerLogRocketInstrumentation("my-app-id");
+
+const honeycombClient = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+    proxy: "https://sample-proxy",
+    logRocketInstrumentationClient
+});
+```
+
+### `telemetryContext`
+
+- **Type**: `TelemetryContext`
+- **Default**: `undefined`
+
+A [TelemetryContext](createTelemetryContext.md#telemetrycontext) instance containing the telemetry colleration ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
+
+```ts !#3,6
+import { registerHoneycombInstrumentation, createTelemetryContext } from "@workleap/honeycomb/react";
+
+const telemetryContext = createTelemetryContext();
+
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+    proxy: "https://sample-proxy"
 });
 ```
 
@@ -297,7 +333,7 @@ If no `loggers` are configured, verbose mode will automatically send logs to the
 ```ts !#5
 import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     verbose: true
 });
@@ -315,7 +351,7 @@ import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 import { LogRocketLogger } from "@workleap/logrocket";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
@@ -348,7 +384,7 @@ const skipOptionsValidationTransformer: HoneycombSdkOptionsTransformer = config 
     return config;
 };
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     transformers: [skipOptionsValidationTransformer]
 });

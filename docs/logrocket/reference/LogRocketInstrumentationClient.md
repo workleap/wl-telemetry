@@ -28,14 +28,14 @@ const client = new LogRocketInstrumentationClient(telemetryContext?);
 ### Methods
 
 - `createWorkleapPlatformDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for the Workleap platform.
-- `registerGetSessionUrlListener(listener)`: Registers a listener that receives the session replay URL as a parameter once it becomes available. Host applications should use `LogRocket.getSessionURL` instead of this method.
+- `registerGetSessionUrlListener(listener)`: Registers a listener that receives the session replay URL as a parameter once it becomes available. Host applications should use [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) instead of this method.
 
 ## Usage
 
 ### Get default user traits for the Workleap platform
 
 ```ts !#6-13
-import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 import LogRocket from "logrocket";
 
 const client = registerLogRocketInstrumentation("my-app-id");
@@ -114,7 +114,7 @@ Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan C
 You can send custom user traits to improve filtering in [LogRocket](https://app.logrocket.com). To do so, merge the default user traits with your additional traits before sending them:
 
 ```ts !#15
-import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 import LogRocket from "logrocket";
 
 const client = registerLogRocketInstrumentation("my-app-id");
@@ -141,7 +141,7 @@ Additional user trait names should align with [Mixpanel](https://mixpanel.com/) 
 ### Register a session URL listener
 
 ```ts !#6-8
-import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 import LogRocket from "logrocket";
 
 const client = registerLogRocketInstrumentation("my-app-id");

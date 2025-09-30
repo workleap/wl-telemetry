@@ -2,7 +2,7 @@
 order: 60
 label: createTelemetryContext
 meta:
-    title: createTelemetryContext - LogRocket
+    title: createTelemetryContext - Honeycomb
 toc:
     depth: 2-3
 ---
@@ -41,7 +41,7 @@ An object containing the telemetry colleration ids. The correlations ids include
 ### Create a telemetry context
 
 ```ts !#3
-import { createTelemetryContext } from "@workleap/logrocket/react";
+import { createTelemetryContext } from "@workleap/honeycomb/react";
 
 const context = createTelemetryContext();
 ```
@@ -49,7 +49,7 @@ const context = createTelemetryContext();
 ### Set a custom cookie expiration
 
 ```ts !#4
-import { createTelemetryContext } from "@workleap/logrocket/react";
+import { createTelemetryContext } from "@workleap/honeycomb/react";
 
 const context = createTelemetryContext({
     identityCookieExpiration: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
@@ -59,7 +59,7 @@ const context = createTelemetryContext({
 ### Set a custom cookie domain
 
 ```ts !#4
-import { createTelemetryContext } from "@workleap/logrocket/react";
+import { createTelemetryContext } from "@workleap/honeycomb/react";
 
 const context = createTelemetryContext({
     identityCookieDomain: ".contso.com";
@@ -69,7 +69,7 @@ const context = createTelemetryContext({
 ### Verbose mode
 
 ```ts !#4
-import { createTelemetryContext } from "@workleap/logrocket/react";
+import { createTelemetryContext } from "@workleap/honeycomb/react";
 
 const context = createTelemetryContext({
     verbose: true
@@ -79,7 +79,7 @@ const context = createTelemetryContext({
 ### Loggers
 
 ```ts !#5
-import { createTelemetryContext, LogRocketLogger } from "@workleap/logrocket/react";
+import { createTelemetryContext, LogRocketLogger } from "@workleap/honeycomb/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
 const context = createTelemetryContext({

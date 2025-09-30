@@ -20,21 +20,24 @@ pnpm add @workleap/honeycomb @opentelemetry/api
 
 Then, update the application bootstrapping code to register Honeycomb instrumentation using the [registerHoneycombInstrumentation](./reference/registerHoneycombInstrumentation.md) function:
 
-```tsx !#6-8 index.tsx
-import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
+```tsx !#6-9,15,17 index.tsx
+import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
-    proxy: "https://sample-proxy"
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+    proxy: "https://sample-proxy",
+    telemetryContext: createTelemetryContext()
 });
 
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <App />
+        <HoneycombInstrumentationClientProvider value={client}>
+            <App />
+        </HoneycombInstrumentationClientProvider>
     </StrictMode>
 );
 ```
@@ -109,21 +112,53 @@ The `registerLogRocketInstrumentation` function automatically adds two attribute
 
 ## Set custom user attributes
 
-Most applications need to set custom attributes on traces about the current user environment. To help with that, `@workleap/honeycomb` expose the [setGlobalSpanAttributes](./reference/setGlobalSpanAttributes.md) function.
+Most applications need to set custom attributes on traces about the current user environment. To help with that, [HoneycombInstrumentationClient] expose the [setGlobalSpanAttributes](./reference/HoneycombInstrumentationClient.md#register-global-attributes) function.
 
-Update your application code to include the `setGlobalSpanAttribute` function:
+```ts !#5-7
+import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
 
-```ts !#3
-import { setGlobalSpanAttributes } from "@workleap/honeycomb";
+const client = useHoneycombInstrumentationClient();
 
-setGlobalSpanAttribute("app.user_id", "123");
+client.setGlobalSpanAttributes({
+    "app.user_id": "123"
+});
 ```
 
-Now, every trace recorded after the execution of `setGlobalSpanAttribute` will include the custom attribute `app.user_id`:
+Now, every trace recorded after the execution of `setGlobalSpanAttributes` will include the custom attribute `app.user_id`:
 
 :::align-image-left
 ![Custom attributes](../static/honeycomb/honeycomb-custom-attributes.png){width=204 height=161}
 :::
+
+## Integrate with LogRocket
+
+Starting with version `7.0`, attaching LogRocket session replays to Honeycomb traces requires providing a [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) to the registration function.
+
+```tsx !#7,12
+import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.tsx";
+
+const logRocketInstrumentationClient = registerLogRocketInstrumentation("app-id");
+
+const honeycombInstrumentationClient = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+    proxy: "https://sample-proxy",
+    telemetryContext: createTelemetryContext(),
+    logRocketInstrumentationClient
+});
+
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
+    <StrictMode>
+        <HoneycombInstrumentationClientProvider value={client}>
+            <App />
+        </HoneycombInstrumentationClientProvider>
+    </StrictMode>
+);
+```
 
 ## Custrom traces
 
@@ -151,7 +186,3 @@ The `registerLogRocketInstrumentation` function automatically adds two user trai
 - `app.device_id`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.
 
 To correlate a session with other telemetry platforms, filter the query with the `app.telemetry_id` or `app.device_id` fields into the "Where" input.
-
-## Migrate
-
-To benefit from the new integrated experience, follow the [migration guide](./updating/migrate-to-v6.0.md) for `v6.0`.

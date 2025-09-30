@@ -9,10 +9,6 @@ toc:
 
 # useLogRocketInstrumentationClient
 
-!!!warning
-When using React-specific features of this library, switch every import from import them from `@workleap/logrocket` to `@workleap/logrocket/react`.
-!!!
-
 Retrieve a `LogRocketInstrumentationClient` instance.
 
 ## Reference

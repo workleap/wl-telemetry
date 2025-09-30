@@ -25,8 +25,8 @@ pnpm add @workleap/logrocket logrocket
 
 Then, register LogRocket instrumentation using the [registerLogRocketInstrumentation](./reference/registerLogRocketInstrumentation.md) function and forward the client using a React context provider:
 
-```tsx !#6-8,14 index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket";
+```tsx !#6-8,14,16 index.tsx
+import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -39,9 +39,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationProvider value={client}>
+        <LogRocketInstrumentationClientProvider value={client}>
             <App />
-        </LogRocketInstrumentationProvider>
+        </LogRocketInstrumentationClientProvider>
     </StrictMode>
 );
 ```
@@ -107,7 +107,7 @@ Most applications need to identify the current user environment. To help with th
 Update your application bootstrapping code to include `createWorkleapPlatformDefaultUserTraits` and `LogRocket.identify`:
 
 ```tsx index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -120,15 +120,15 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationProvider value={client}>
+        <LogRocketInstrumentationClientProvider value={client}>
             <App />
-        </LogRocketInstrumentationProvider>
+        </LogRocketInstrumentationClientProvider>
     </StrictMode>
 );
 ```
 
 ```ts !#6-13,15
-import { useLogRocketInstrumentationClient } from "@workleap/logrocket";
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 import LogRocket from "logrocket";
 
 const client = useLogRocketInstrumentationClient();
@@ -162,7 +162,7 @@ LogRocket.getSessionUrl(url => {
 By default, Workleap's LogRocket configuration does not capture console logs. To send loggers output to LogRocket, use the [LogRocketLogger](./reference/LogRocketLogger.md) class.
 
 ```tsx !#9 index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -177,9 +177,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationProvider value={client}>
+        <LogRocketInstrumentationClientProvider value={client}>
             <App />
-        </LogRocketInstrumentationProvider>
+        </LogRocketInstrumentationClientProvider>
     </StrictMode>
 );
 ```
@@ -191,7 +191,7 @@ Console logs are not captured by default to reduce the risk of exposing Personal
 To troubleshoot an issue in production, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
 ```tsx !#7-8 index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -205,9 +205,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationProvider value={client}>
+        <LogRocketInstrumentationClientProvider value={client}>
             <App />
-        </LogRocketInstrumentationProvider>
+        </LogRocketInstrumentationClientProvider>
     </StrictMode>
 );
 ```
