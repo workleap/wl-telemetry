@@ -14,7 +14,7 @@ Initializes [LogRocket](https://logrocket.com/) instrumentation with Workleap's 
 ## Reference
 
 ```ts
-registerLogRocketInstrumentation(appId, options?: { rootHostname, privateFieldNames, privateQueryParameterNames })
+const client = registerLogRocketInstrumentation(appId, options?: { rootHostname, privateFieldNames, privateQueryParameterNames })
 ```
 
 ### Parameters
@@ -24,7 +24,7 @@ registerLogRocketInstrumentation(appId, options?: { rootHostname, privateFieldNa
 
 ### Returns
 
-Nothing
+A [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
 
 ## Predefined options
 
@@ -40,7 +40,7 @@ A [root hostname](https://docs.logrocket.com/reference/roothostname) to track se
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     rootHostname: "an-host.com"
 });
 ```
@@ -55,7 +55,7 @@ Names of additional fields to exclude from session replays. These fields will be
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     privateFieldNames: ["a-custom-field"]
 });
 ```
@@ -72,12 +72,29 @@ Names of additional fields to exclude from session replays. These fields will be
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     privateQueryParameterNames: ["a-custom-param"]
 });
 ```
 
 To view the default private query parameters, have a look at the [registerLogRocketInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/logrocket/src/registerLogRocketInstrumentation.ts) file on GitHub.
+
+### `telemetryContext`
+
+- **Type**: `TelemetryContext`
+- **Default**: `undefined`
+
+A `TelemetryContext` instance containing the telemetry colleration ids to attach to LogRocket session replays. Starting with version `2.0`, if no telemetry context is provided, the correlation ids will not be attached to LogRocket session replays.
+
+```ts !#3,6
+import { registerLogRocketInstrumentation, createTelemetryContext } from "@workleap/logrocket";
+
+const telemetryContext = createTelemetryContext();
+
+const client = registerLogRocketInstrumentation("my-app-id", {
+    telemetryContext
+});
+```
 
 ### `verbose`
 
@@ -89,7 +106,7 @@ If no `loggers` are configured, verbose mode will automatically send logs to the
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     verbose: true
 });
 ```
@@ -105,7 +122,7 @@ The logger instances that will output messages.
 import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
@@ -139,7 +156,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = config => {
     return config;
 };
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     transformers: [disableConsoleLogging]
 });
 ```

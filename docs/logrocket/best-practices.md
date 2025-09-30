@@ -33,7 +33,7 @@ Register LogRocket instrumentation with a [LogRocketLogger](./reference/LogRocke
 import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket";
 import { LogLevel } from "@workleap/logging";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
@@ -47,7 +47,7 @@ import { registerHoneycombInstrumentation } from "@workleap/honeycomb";
 import { LogRocketLogger } from "@workleap/logrocket";
 import { LogLevel } from "@workleap/logging";
 
-registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });
@@ -62,7 +62,7 @@ import { initializeMixpanel } from "@workleap/mixpanel";
 import { LogRocketLogger } from "@workleap/logrocket";
 import { LogLevel } from "@workleap/logging";
 
-initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("wlp", "development", {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
@@ -76,7 +76,7 @@ import { registerCommonRoomInstrumentation } from "@workleap/common-room";
 import { LogRocketLogger } from "@workleap/logrocket";
 import { LogLevel } from "@workleap/logging";
 
-registerCommonRoomInstrumentation("my-site-id", {
+const client = registerCommonRoomInstrumentation("my-site-id", {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```

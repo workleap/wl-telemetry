@@ -1,5 +1,5 @@
 ---
-order: 80
+order: 50
 label: LogRocketLogger
 meta:
     title: LogRocketLogger - LogRocket

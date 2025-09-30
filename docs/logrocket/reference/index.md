@@ -7,5 +7,8 @@ meta:
 # Reference
 
 - [registerLogRocketInstrumentation](./registerLogRocketInstrumentation.md)
-- [createDefaultUserTraits](./createDefaultUserTraits.md)
+- [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md)
+- [LogRocketInstrumentationClientProvider](./LogRocketInstrumentationClientProvider.md)
+- [useLogRocketInstrumentationClient](./useLogRocketInstrumentationClient.md)
+- [createTelemetryContext](./createTelemetryContext.md)
 - [LogRocketLogger](./LogRocketLogger.md)

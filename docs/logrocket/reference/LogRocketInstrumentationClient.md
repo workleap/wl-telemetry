@@ -1,23 +1,58 @@
 ---
 order: 90
-label: createDefaultUserTraits
+label: LogRocketInstrumentationClient
 meta:
-    title: createDefaultUserTraits - LogRocket
+    title: LogRocketInstrumentationClient - LogRocket
 toc:
     depth: 2-3
 ---
 
-# createDefaultUserTraits
+# LogRocketInstrumentationClient
 
-Creates an object containing the default [user traits](https://docs.logrocket.com/reference/identify#specify-other-user-traits) used to identify a user in a Workleap web application.
+!!!warning
+Don't instanciate your own instance of `LogRocketInstrumentationClient`, use the `registerLogRocketInstrumentation` function instead.
+!!!
+
+A lightweight client providing access to LogRocket instrumentation utilities.
 
 ## Reference
 
 ```ts
-const traits = createDefaultUserTraits(identification)
+const client = new LogRocketInstrumentationClient(telemetryContext?);
 ```
 
 ### Parameters
+
+- `telemetryContext`: An optional `TelemetryContext` instance.
+
+### Methods
+
+- `createWorkleapPlatformDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for the Workleap platform.
+- `registerGetSessionUrlListener(listener)`: Registers a listener that receives the session replay URL as a parameter once it becomes available. Host applications should use `LogRocket.getSessionURL` instead of this method.
+
+## Usage
+
+### Get default user traits for the Workleap platform
+
+```ts !#6-13
+import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import LogRocket from "logrocket";
+
+const client = registerLogRocketInstrumentation("my-app-id");
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
+    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
+    organizationName: "Acme",
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});
+
+Logrocket.identify(traits.userId, traits);
+```
+
+#### Parameters
 
 - `identification`: An object that uniquely identifies the current user and provide additional context about the user environment.
     - `userId`: A value that uniquely identifies the current user.
@@ -53,7 +88,7 @@ const traits = createDefaultUserTraits(identification)
         - `pbd`: An optional value indicating the user plan code for Pingboard.
         - `cmp`: An optional value indicating the user plan code for Compensation.
 
-### Returns
+#### Returns
 
 An object including the default user traits matching the provided identification values:
 
@@ -74,36 +109,18 @@ Is Collaborator | `true` if this user is a collaborator in any product in the cu
 Is Collaborator - Officevibe<br/>Is Collaborator - LMS<br />Is Collaborator - Onboarding<br/>Is Collaborator - Pingboard<br/>Is Collaborator - Skills<br/>Is Collaborator - Performance | `true` if this user is a collaborator in the corresponding product in the current workspace.
 Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan Code - Pingboard<br/>Plan Code - Skills<br/>Plan Code - Performance | <p>Indicates the plan code for the corresponding product in the workspace.</p><p>ex. `wov-essential-monthly-std`</p>
 
-## Usage
-
-### Get default traits
-
-```ts !#4-11
-import { createDefaultUserTraits } from "@workleap/logrocket";
-import LogRocket from "logrocket";
-
-const traits = createDefaultUserTraits({
-    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
-    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
-    organizationName: "Acme",
-    isMigratedToWorkleap: true,
-    isOrganizationCreator: false,
-    isAdmin: false
-});
-
-Logrocket.identify(allTraits.userId, allTraits);
-```
-
 ### Send additional traits
 
 You can send custom user traits to improve filtering in [LogRocket](https://app.logrocket.com). To do so, merge the default user traits with your additional traits before sending them:
 
-```ts !#13
-import { createDefaultUserTraits } from "@workleap/logrocket";
+```ts !#15
+import { registerLogRocketInstrumentation } from "@workleap/logrocket";
 import LogRocket from "logrocket";
 
+const client = registerLogRocketInstrumentation("my-app-id");
+
 const allTraits = {
-    ...createDefaultUserTraits({
+    ...client.createWorkleapPlatformDefaultUserTraits({
         userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
         organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
         organizationName: "Acme",
@@ -121,4 +138,16 @@ Logrocket.identify(allTraits.userId, allTraits);
 Additional user trait names should align with [Mixpanel](https://mixpanel.com/) property conventions. We recommend using human-readable names and appending a `- {ProductName}` suffix for product-specific traits, for example: `Plan Code - Officevibe`.
 !!!
 
+### Register a session URL listener
+
+```ts !#6-8
+import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import LogRocket from "logrocket";
+
+const client = registerLogRocketInstrumentation("my-app-id");
+
+client.registerGetSessionUrlListener(sessionUrl => {
+    console.log(sessionUrl);
+});
+```
 
