@@ -15,7 +15,7 @@ This major version introduces several important changes. `registerLogRocketInstr
 
 ### Removed
 
-- Removed the `createUserTraits` standalone function, use [client.createWorkleapPlatformDefaultUserTraits](../reference/LogRocketInstrumentationClient.md#get-default-user-traits-for-the-workleap-platform) instead.
+- Removed the `createUserTraits` standalone function, use [client.createWorkleapPlatformDefaultUserTraits](../reference/MixpanelClient.md#methods) instead.
 
 ### Deprecated
 
@@ -29,7 +29,7 @@ This major version introduces several important changes. `registerLogRocketInstr
 
 ## New React context
 
-- A new [LogRocketInstrumentationClientProvider](../reference/LogRocketInstrumentationClientProvider.md) React context provider is available to forward the `LogRocketInstrumentatonClient` instance.
+- A new [LogRocketInstrumentationClientProvider](../reference/LogRocketInstrumentationClientProvider.md) React context provider is available to forward a `LogRocketInstrumentatonClient` instance.
 - A new [useLogRocketInstrumentationClient](../reference/useLogRocketInstrumentationClient.md) hook is available to retrieve the provided `LogRocketInstrumentatonClient` instance.
 
 ## Migrate to `2.0`

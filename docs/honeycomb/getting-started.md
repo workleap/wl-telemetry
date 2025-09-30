@@ -112,7 +112,7 @@ The `registerLogRocketInstrumentation` function automatically adds two attribute
 
 ## Set custom user attributes
 
-Most applications need to set custom attributes on traces about the current user environment. To help with that, [HoneycombInstrumentationClient] expose the [setGlobalSpanAttributes](./reference/HoneycombInstrumentationClient.md#register-global-attributes) function.
+Most applications need to set custom attributes on traces about the current user environment. To help with that, [HoneycombInstrumentationClient](./reference/HoneycombInstrumentationClient.md) expose the [setGlobalSpanAttributes](./reference/HoneycombInstrumentationClient.md#register-global-attributes) function.
 
 ```ts !#5-7
 import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
@@ -180,7 +180,7 @@ If you are experiencing issues with this guide:
 
 ## Filter by correlation ids
 
-The `registerLogRocketInstrumentation` function automatically adds two user traits to every session replay to **unify** LogRocket with the **other telemetry platforms**:
+When a [TelemetryContext](./reference/createTelemetryContext.md#telemetrycontext) instance is provided, the `registerLogRocketInstrumentation` function adds two user traits to every session replay to **unify** LogRocket with the **other telemetry platforms**:
 
 - `app.telemetry_id`: Identifies a single application load. It's primarily used to correlate Honeycomb traces with the other telemetry platforms.
 - `app.device_id`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.

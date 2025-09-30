@@ -1,5 +1,5 @@
 ---
-order: 90
+order: 0
 label: createTrackingFunction
 meta:
     title: createTrackingFunction - Mixpanel
@@ -8,6 +8,10 @@ toc:
 ---
 
 # createTrackingFunction
+
+!!!warning
+This standalone is deprecated, use [client.createTrackingFunction](./MixpanelClient.md) instead.
+!!!
 
 Returns a function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
 

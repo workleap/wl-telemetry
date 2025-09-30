@@ -14,7 +14,13 @@ Initialize [Mixpanel](https://mixpanel.com) with Workleap's default settings.
 ## Reference
 
 ```ts
-initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { verbose });
+const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { 
+    trackingEndpoint?,
+    telemetryContext?,
+    logRocketInstrumentationClient?,
+    verbose?,
+    loggers?
+});
 ```
 
 ### Parameters
@@ -23,8 +29,14 @@ initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { verbose });
 - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL.
 - `options`: An optional object literal of options:
     - `trackingEndpoint`: An optional tracking endpoint.
+    - `telemetryContext`: A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry colleration ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
+    - `logRocketInstrumentationClient`: A [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) instance to integrate Honeycomb traces with LogRocket session replays. Starting with version `7.0`, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.
+
+### Returns
+
+A [MixpanelClient](./MixpanelClient.md) instance.
 
 ### Environments
 
@@ -49,35 +61,60 @@ Mixpanel can be initialized for any of the following predefined environments:
 - `msw`
 
 ```ts !#3
-import { initializeMixpanel } from "@workleap/mixpanel";
+import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-initializeMixpanel("wlp", "development");
+const client = initializeMixpanel("wlp", "development");
 ```
 
 ### Initialize with a base url
 
 ```ts !#3
-import { initializeMixpanel } from "@workleap/mixpanel";
+import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-initializeMixpanel("wlp", "https://my-tracking-api");
+const client = initializeMixpanel("wlp", "https://my-tracking-api");
 ```
 
 ### Use a custom tracking endpoint
 
 ```ts !#4
-import { initializeMixpanel } from "@workleap/mixpanel";
+import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-initializeMixpanel("wlp", "https://my-tracking-api", {
+const client = initializeMixpanel("wlp", "development", {
     trackingEndpoint: "custom/tracking/track"
+});
+```
+
+### Initialize with a telemetry context
+
+```ts !#6
+import { initializeMixpanel, createTelemetryContext } from "@workleap/mixpanel/react";
+
+const telemetryContext = createTelemetryContext();
+
+const client = initializeMixpanel("wlp", "development", {
+    telemetryContext
+});
+```
+
+### Integrate with LogRocket
+
+```ts !#4,7
+import { initializeMixpanel } from "@workleap/mixpanel/react";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+
+const logRocketInstrumentationClient = registerLogRocketInstrumentation("my-app-id");
+
+const client = initializeMixpanel("wlp", "development", {
+    logRocketInstrumentationClient
 });
 ```
 
 ### Verbose mode
 
 ```ts !#4
-import { initializeMixpanel } from "@workleap/mixpanel";
+import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("wlp", "development", {
     verbose: true
 });
 ```
@@ -85,11 +122,11 @@ initializeMixpanel("wlp", "development", {
 ### Loggers
 
 ```ts !#6
-import { initializeMixpanel } from "@workleap/mixpanel";
-import { LogRocketLogger } from "@workleap/logrocket";
+import { initializeMixpanel } from "@workleap/mixpanel/react";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("wlp", "development", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```

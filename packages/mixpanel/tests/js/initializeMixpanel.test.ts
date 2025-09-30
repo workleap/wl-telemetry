@@ -34,11 +34,11 @@ test.concurrent("when mixpanel has already been initialized, throw an error", ({
 });
 
 test.concurrent("when a logrocket instrumentation client is provided, register a listener for logrocket get session url", ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
     const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation", {
         logRocketInstrumentationClient
@@ -50,9 +50,9 @@ test.concurrent("when a logrocket instrumentation client is provided, register a
 // DEPRECATED: Grace period ends on January 1th 2026.
 // Cannot be concurrent because it's using "globaThis".
 test("the context global variable is set", ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -64,9 +64,9 @@ test("the context global variable is set", ({ expect }) => {
 // DEPRECATED: Grace period ends on January 1th 2026.
 // Cannot be concurrent because it's using "globaThis".
 test("the initialized global variable is set", ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -78,15 +78,15 @@ test("the initialized global variable is set", ({ expect }) => {
 test.concurrent("when a telemetry context is provided, the telemetry context values are added as super properties", ({ expect }) => {
     const telemetryContext = new TelemetryContext("123", "456");
 
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation", {
         telemetryContext
     });
 
-    expect(superProperties.get(TelemetryProperties.DeviceId)).toBe(telemetryContext.deviceId);
-    expect(superProperties.get(TelemetryProperties.TelemetryId)).toBe(telemetryContext.telemetryId);
+    expect(globalEventProperties.get(TelemetryProperties.DeviceId)).toBe(telemetryContext.deviceId);
+    expect(globalEventProperties.get(TelemetryProperties.TelemetryId)).toBe(telemetryContext.telemetryId);
 });
 

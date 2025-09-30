@@ -190,13 +190,14 @@ Console logs are not captured by default to reduce the risk of exposing Personal
 
 To troubleshoot an issue in production, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#7-8 index.tsx
+```tsx !#8-9 index.tsx
 import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
 const client = registerLogRocketInstrumentation("my-app-id", {
+    telemetryContext: createTelemetryContext()
     verbose: true,
     loggers: [new LogRocketLogger()]
 });
@@ -232,7 +233,7 @@ If you are experiencing issues with this guide:
 
 ## Filter by correlation ids
 
-The `registerLogRocketInstrumentation` function automatically adds two user traits to every session replay to **unify** LogRocket with the **other telemetry platforms**:
+When a [TelemetryContext](./reference/createTelemetryContext.md#telemetrycontext) instance is provided, the `registerLogRocketInstrumentation` function adds two user traits to every session replay to **unify** LogRocket with the **other telemetry platforms**:
 
 - `Telemetry Id`: Identifies a single application load. It's primarily used to correlate with Honeycomb traces.
 - `Device Id`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.

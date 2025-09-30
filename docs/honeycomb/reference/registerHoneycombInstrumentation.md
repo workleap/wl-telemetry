@@ -26,7 +26,7 @@ const client = registerHoneycombInstrumentation(namespace, serviceName, apiServi
 
 ### Returns
 
-A `HoneycombInstrumentationClient` instance.
+A [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md) instance.
 
 ### Default instrumentation
 
@@ -287,6 +287,23 @@ const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
 });
 ```
 
+### `telemetryContext`
+
+- **Type**: `TelemetryContext`
+- **Default**: `undefined`
+
+A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry colleration ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
+
+```ts !#3,6
+import { registerHoneycombInstrumentation, createTelemetryContext } from "@workleap/honeycomb/react";
+
+const telemetryContext = createTelemetryContext();
+
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+    proxy: "https://sample-proxy"
+});
+```
+
 ### `logRocketInstrumentationClient`
 
 - **Type**: `LogRocketInstrumentationClient`
@@ -303,23 +320,6 @@ const logRocketInstrumentationClient = registerLogRocketInstrumentation("my-app-
 const honeycombClient = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     proxy: "https://sample-proxy",
     logRocketInstrumentationClient
-});
-```
-
-### `telemetryContext`
-
-- **Type**: `TelemetryContext`
-- **Default**: `undefined`
-
-A [TelemetryContext](createTelemetryContext.md#telemetrycontext) instance containing the telemetry colleration ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
-
-```ts !#3,6
-import { registerHoneycombInstrumentation, createTelemetryContext } from "@workleap/honeycomb/react";
-
-const telemetryContext = createTelemetryContext();
-
-const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
-    proxy: "https://sample-proxy"
 });
 ```
 

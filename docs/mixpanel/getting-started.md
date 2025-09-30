@@ -18,17 +18,32 @@ This package add basic Mixpanel tracking capabilities to an application. It prov
 First, open a terminal at the root of the application and install the following packages:
 
 ```bash
-pnpm @workleap/mixpanel
+pnpm install @workleap/mixpanel
 ```
 
 ## Initialize Mixpanel
 
 Then, initialize Mixpanel using the [initializeMixpanel](./reference/initializeMixpanel.md) function:
 
-```ts !#3
-import { initializeMixpanel } from "@workleap/mixpanel";
+```tsx !#6-8,14,16
+import { initializeMixpanel, MixpanelClientProvider, createTelemetryContext } from "@workleap/mixpanel/react";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.tsx";
 
-initializeMixpanel("wlp", "development");
+const client = initializeMixpanel("wlp", "development", {
+    telemetryContext: createTelemetryContext()
+});
+
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
+    <StrictMode>
+        <MixpanelClientProvider value={client}>
+            <App />
+        </MixpanelClientProvider>
+    </StrictMode>
+);
 ```
 
 ## Create a track function
@@ -39,16 +54,6 @@ Then create a `track` function using the [useTrackingFunction](./reference//) ho
 import { useTrackingFunction } from "@workleap/mixpanel/react";
 
 const track = useTrackingFunction();
-
-track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
-```
-
-Otherwise use the `createTrackingFunction` directly:
-
-```ts !#3
-import { createTrackingFunction } from "@workleap/mixpanel";
-
-const track = createTrackingFunction();
 
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
@@ -79,21 +84,50 @@ track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
 });
 ```
 
-## Set custom user events
+## Set custom user properties
 
-Most applications need to set custom properties on events about the current user environment. To help with that, `@workleap/mixpanel` expose the [setSuperProperties](./reference/setSuperProperties.md) function.
+Most applications need to set custom properties on events about the current user environment. To help with that, [MixpanelClient](./reference/MixpanelClient.md) expose the [setGlobalEventProperties](./reference/MixpanelClient.md#register-global-properties) function.
 
 Update your application code to include the `setSuperProperties` function:
 
-```ts !#3-5
-import { setSuperProperties } from "@workleap/mixpanel";
+```ts !#5-7
+import { useMixpanelClient } from "@workleap/mixpanel/react";
 
-setSuperProperties({
+const client = useMixpanelClient();
+
+client.setGlobalEventProperties({
     "User Id": "123" 
 })
 ```
 
-Now, every event recorded after the execution of `setSuperProperties` will include the custom property `User Id`.
+Now, every event recorded after the execution of `setGlobalEventProperties` will include the custom property `User Id`.
+
+## Integrate with LogRocket
+
+```tsx !#7,11
+import { initializeMixpanel, MixpanelClientProvider, createTelemetryContext } from "@workleap/mixpanel/react";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.tsx";
+
+const logRocketInstrumentationClient = registerLogRocketInstrumentation("my-app-id");
+
+const mixpanelClient = initializeMixpanel("wlp", "development", {
+    telemetryContext: createTelemetryContext(),
+    logRocketInstrumentationClient
+});
+
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
+    <StrictMode>
+        <MixpanelClientProvider value={mixpanelClient}>
+            <App />
+        </MixpanelClientProvider>
+    </StrictMode>
+);
+```
 
 ## Try it :rocket:
 
@@ -113,16 +147,12 @@ If you are experiencing issues with this guide:
 
 ## Filter by correlation ids
 
-The `initializeMixpanel` function automatically adds two properties to every event to **unify** Mixpanel with the **other telemetry platforms**:
+When a [TelemetryContext](./reference/createTelemetryContext.md#telemetrycontext) instance is provided, the `initializeMixpanel` function adds two properties to every event to **unify** Mixpanel with the **other telemetry platforms**:
 
 - `Telemetry Id`: Identifies a single application load. It's primarily used to correlate with Honeycomb traces.
 - `Device Id`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.
 
 To correlate a session with other telemetry platforms, filter the session list using these user traits.
-
-## Migrate
-
-To benefit from the new integrated experience, follow the [migration guide](./updating/migrate-to-v2.0.md) for `v2.0`.
 
 
 

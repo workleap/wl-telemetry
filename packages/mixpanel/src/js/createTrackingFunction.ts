@@ -52,7 +52,7 @@ export function createTrackingFunction(options: CreateMixpanelTrackingFunctionOp
     const {
         productId,
         endpoint,
-        superProperties,
+        globalEventProperties,
         logger
     } = getMixpanelContext();
 
@@ -66,7 +66,7 @@ export function createTrackingFunction(options: CreateMixpanelTrackingFunctionOp
 
             const allProperties = {
                 ...baseProperties,
-                ...Object.fromEntries(superProperties),
+                ...Object.fromEntries(globalEventProperties),
                 ...properties
             };
 

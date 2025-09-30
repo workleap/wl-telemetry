@@ -1,5 +1,5 @@
 ---
-order: 80
+order: 70
 label: useTrackingFunction
 meta:
     title: useTrackingFunction - Mixpanel

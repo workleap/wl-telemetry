@@ -13,7 +13,7 @@ This major version introduces several important changes. `registerHoneycombInstr
 
 ### Removed
 
-- Removed the `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions, use [client.setGlobalSpanAttribute](../reference/HoneycombInstrumentationClient.md#register-global-attributes) and [client.setGlobalSpanAttributes](../reference/HoneycombInstrumentationClient.md#register-global-attributes) instead.
+- Removed the `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions, use [client.setGlobalSpanAttribute](../reference/MixpanelClient.md#methods) and [client.setGlobalSpanAttributes](../reference/MixpanelClient.md#methods) instead.
 
 ### Deprecated
 
@@ -28,7 +28,7 @@ This major version introduces several important changes. `registerHoneycombInstr
 
 ## New React context
 
-- A new [HoneycombInstrumentationClientProvider](../reference/HoneycombInstrumentationClientProvider.md) React context provider is available to forward the `HoneycombInstrumentationClient` instance.
+- A new [HoneycombInstrumentationClientProvider](../reference/HoneycombInstrumentationClientProvider.md) React context provider is available to forward a `HoneycombInstrumentationClient` instance.
 - A new [useHoneycombInstrumentationClient](../reference/useHoneycombInstrumentationClient.md) hook is available to retrieve the provided `HoneycombInstrumentatonClient` instance.
 
 ## Migrate to `7.0`
@@ -54,7 +54,7 @@ root.render(
 );
 ```
 
-After:
+Now:
 
 ```tsx !#7,11,12,19,21
 import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";

@@ -2,8 +2,7 @@ import type { Logger } from "@workleap/logging";
 import type { CreateMixpanelTrackingFunctionOptions, MixpanelTrackingFunction } from "./createTrackingFunction.ts";
 import { getBaseProperties } from "./properties.ts";
 
-// Equivalent to: https://docs.mixpanel.com/docs/tracking-methods/sdks/javascript#setting-super-properties.
-export type MixpanelSuperProperties = Map<string, unknown>;
+export type MixpanelGlobalEventProperties = Map<string, unknown>;
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
@@ -11,13 +10,13 @@ export type MixpanelSuperProperties = Map<string, unknown>;
 export class MixpanelClient {
     readonly #productId: string;
     readonly #endpoint: string;
-    readonly #superProperties: MixpanelSuperProperties;
+    readonly #globalEventProperties: MixpanelGlobalEventProperties;
     readonly #logger: Logger;
 
-    constructor(productId: string, endpoint: string, superProperties: MixpanelSuperProperties, logger: Logger) {
+    constructor(productId: string, endpoint: string, globalEventProperties: MixpanelGlobalEventProperties, logger: Logger) {
         this.#productId = productId;
         this.#endpoint = endpoint;
-        this.#superProperties = superProperties;
+        this.#globalEventProperties = globalEventProperties;
         this.#logger = logger;
     }
 
@@ -39,7 +38,7 @@ export class MixpanelClient {
 
                 const allProperties = {
                     ...baseProperties,
-                    ...Object.fromEntries(this.#superProperties),
+                    ...Object.fromEntries(this.#globalEventProperties),
                     ...properties
                 };
 
@@ -69,20 +68,18 @@ export class MixpanelClient {
     }
 
     /**
-     * Equivalent to https://docs.mixpanel.com/docs/tracking-methods/sdks/javascript#setting-super-properties.
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
-    setSuperProperty(key: string, value: unknown) {
-        this.#superProperties.set(key, value);
+    setGlobalEventProperty(key: string, value: unknown) {
+        this.#globalEventProperties.set(key, value);
     }
 
     /**
-     * Equivalent to https://docs.mixpanel.com/docs/tracking-methods/sdks/javascript#setting-super-properties.
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
-    setSuperProperties(values: Record<string, unknown>) {
+    setGlobalEventProperties(values: Record<string, unknown>) {
         Object.keys(values).forEach(x => {
-            this.#superProperties.set(x, values[x]);
+            this.#globalEventProperties.set(x, values[x]);
         });
     }
 }

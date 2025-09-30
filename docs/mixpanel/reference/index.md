@@ -7,6 +7,9 @@ meta:
 # Reference
 
 - [initializeMixpanel](./initializeMixpanel.md)
-- [createTrackingFunction](./createTrackingFunction.md)
+- [MixpanelClient](./MixpanelClient.md)
+- [MixpanelClientProvider](./MixpanelClientProvider.md)
+- [useMixpanelClient](./useMixpanelClient.md)
 - [useTrackingFunction](./useTrackingFunction.md)
-- [setSuperProperties](./setSuperProperties.md)
+- [createTelemetryContext](./createTelemetryContext.md)
+- [createTrackingFunction](./createTrackingFunction.md) - Deprecated

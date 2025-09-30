@@ -31,9 +31,9 @@ afterEach(() => {
 });
 
 test("the custom properties are sent", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -54,9 +54,9 @@ test("the custom properties are sent", async ({ expect }) => {
 test("when a telemetry context is provided, the telemetry context values are sent", async ({ expect }) => {
     const telemetryContext = new TelemetryContext("123", "456");
 
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation", {
         telemetryContext
@@ -75,10 +75,10 @@ test("when a telemetry context is provided, the telemetry context values are sen
 });
 
 test("when a logrocket instrumentation client is provided, the logrocket session url is sent", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
     const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation", {
         logRocketInstrumentationClient
@@ -100,9 +100,9 @@ test("when a logrocket instrumentation client is provided, the logrocket session
 });
 
 test("the request body include the event name", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -117,9 +117,9 @@ test("the request body include the event name", async ({ expect }) => {
 });
 
 test("when the keep alive option is provided, the fetch options include the \"keepAlive\" option", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -133,9 +133,9 @@ test("when the keep alive option is provided, the fetch options include the \"ke
 });
 
 test("when a target product id is provided, the request body include the provided id", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -152,9 +152,9 @@ test("when a target product id is provided, the request body include the provide
 });
 
 test("when a target product id is not provided, the request body include the property with a null value", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -169,9 +169,9 @@ test("when a target product id is not provided, the request body include the pro
 });
 
 test("when a base URL is provided, the endpoint include the provided base URL", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -185,9 +185,9 @@ test("when a base URL is provided, the endpoint include the provided base URL", 
 });
 
 test("when the provided base URL end with a slash is provided, the ending slash is escaped", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation/");
 
@@ -200,9 +200,9 @@ test("when the provided base URL end with a slash is provided, the ending slash 
 });
 
 test("when an environment is provided, the resolved endpoint URL match the provided environment", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "development");
 
@@ -216,9 +216,9 @@ test("when an environment is provided, the resolved endpoint URL match the provi
 });
 
 test("when a custom tracking endpoint is provided, use the provided custom endpoint", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation", {
         trackingEndpoint: "custom/tracking/endpoint"
@@ -234,9 +234,9 @@ test("when a custom tracking endpoint is provided, use the provided custom endpo
 });
 
 test("when a custom tracking endpoint starts with slash, remove the leading slash from the provided custom tracking endpoint", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation", {
         trackingEndpoint: "/custom/endpoint"
@@ -252,9 +252,9 @@ test("when a custom tracking endpoint starts with slash, remove the leading slas
 });
 
 test("when no tracking endpoint is provided, use the default \"tracking/track\" endpoint", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "http://api/navigation");
 
@@ -267,9 +267,9 @@ test("when no tracking endpoint is provided, use the default \"tracking/track\" 
 });
 
 test("when a custom tracking endpoint is provided with an environment, use the provided custom endpoint", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "development", {
         trackingEndpoint: "/custom/endpoint"
@@ -285,9 +285,9 @@ test("when a custom tracking endpoint is provided with an environment, use the p
 });
 
 test("when a custom tracking endpoint starts with slash and an environment is provided, remove the custom tracking endpoint leading slash", async ({ expect }) => {
-    const superProperties = new Map<string, unknown>();
+    const globalEventProperties = new Map<string, unknown>();
 
-    const initializer = new MixpanelInitializer(superProperties);
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
     initializer.initialize("wlp", "staging", {
         trackingEndpoint: "/custom/endpoint"

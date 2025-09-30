@@ -2,7 +2,7 @@ import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type Tele
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
 import { setMixpanelContext } from "./context.ts";
 import { getTrackingEndpoint, type MixpanelEnvironment } from "./env.ts";
-import { MixpanelClient, type MixpanelSuperProperties } from "./MixpanelClient.ts";
+import { MixpanelClient, type MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
 import { getTelemetryProperties, OtherProperties } from "./properties.ts";
 
 // DEPRECATED: Grace period ends on January 1th 2026.
@@ -10,11 +10,11 @@ import { getTelemetryProperties, OtherProperties } from "./properties.ts";
 export const IsInitializedVariableName = "__WLP_MIXPANEL_IS_INITIALIZED__";
 
 // DEPRECATED: Grace period ends on January 1th 2026.
-function registerDeprecatedContextAndGlobalVariables(productId: string, endpoint: string, superProperties: Map<string, unknown>, logger: Logger) {
+function registerDeprecatedContextAndGlobalVariables(productId: string, endpoint: string, globalEventProperties: Map<string, unknown>, logger: Logger) {
     setMixpanelContext({
         productId,
         endpoint,
-        superProperties: superProperties,
+        globalEventProperties,
         logger
     });
 
@@ -84,10 +84,10 @@ export interface InitializeMixpanelOptions {
 
 
 export class MixpanelInitializer {
-    readonly #superProperties: MixpanelSuperProperties;
+    readonly #globalEventProperties: MixpanelGlobalEventProperties;
 
-    constructor(superProperties: MixpanelSuperProperties) {
-        this.#superProperties = superProperties;
+    constructor(globalEventProperties: MixpanelGlobalEventProperties) {
+        this.#globalEventProperties = globalEventProperties;
     }
 
     initialize(
@@ -109,7 +109,7 @@ export class MixpanelInitializer {
         // Set the telemetry correlation ids on every Mixpanel event.
         if (telemetryContext) {
             for (const [key, value] of Object.entries(getTelemetryProperties(telemetryContext))) {
-                this.#superProperties.set(key, value);
+                this.#globalEventProperties.set(key, value);
             }
         }
 
@@ -122,15 +122,15 @@ export class MixpanelInitializer {
                     .withText(sessionUrl)
                     .debug();
 
-                this.#superProperties.set(OtherProperties.LogRocketSessionUrl, sessionUrl);
+                this.#globalEventProperties.set(OtherProperties.LogRocketSessionUrl, sessionUrl);
             });
         }
 
-        registerDeprecatedContextAndGlobalVariables(productId, endpoint, this.#superProperties, logger);
+        registerDeprecatedContextAndGlobalVariables(productId, endpoint, this.#globalEventProperties, logger);
 
         logger.information("[mixpanel] Mixpanel is initialized.");
 
-        return new MixpanelClient(productId, endpoint, this.#superProperties, logger);
+        return new MixpanelClient(productId, endpoint, this.#globalEventProperties, logger);
     }
 }
 
