@@ -1,5 +1,5 @@
 ---
-order: 90
+order: 0
 label: Migrate
 meta:
     title: Migrate - Introduction

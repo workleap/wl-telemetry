@@ -80,7 +80,7 @@ Once the LogRocket session URL is retrieved, each event is enriched with an `Log
 
 ### Super properties
 
-You can now use a new function to add [super properties](../reference/setSuperProperties.md), global event properties that are defined once and automatically included with all events:
+You can now use a new function to add super properties, global event properties that are defined once and automatically included with all events:
 
 ```ts
 import { setSuperProperties } from "@workleap/mixpanel";

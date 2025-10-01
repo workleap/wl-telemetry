@@ -7,7 +7,7 @@ meta:
 
 # Migrate to v2.0
 
-This major version introduces two changes: The `registerHoneycombInstrumentation` now returns a [client](../reference/HoneycombInstrumentationClient.md) and the standalone `identify` function has been moved to the client.
+This major version introduces two changes: The `registerHoneycombInstrumentation` now returns a [client](../reference/CommonRoomInstrumentationClient.md) and the standalone `identify` function has been moved to the client.
 
 ## Breaking changes
 

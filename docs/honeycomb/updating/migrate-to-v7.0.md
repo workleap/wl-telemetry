@@ -13,7 +13,7 @@ This major version introduces several important changes. `registerHoneycombInstr
 
 ### Removed
 
-- Removed the `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions, use [client.setGlobalSpanAttribute](../reference/MixpanelClient.md#methods) and [client.setGlobalSpanAttributes](../reference/MixpanelClient.md#methods) instead.
+- Removed the `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions, use [client.setGlobalSpanAttribute](../reference/HoneycombInstrumentationClient.md#methods) and [client.setGlobalSpanAttributes](../reference/HoneycombInstrumentationClient.md#methods) instead.
 
 ### Deprecated
 

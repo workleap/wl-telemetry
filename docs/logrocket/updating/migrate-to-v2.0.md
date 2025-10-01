@@ -15,7 +15,7 @@ This major version introduces several important changes. `registerLogRocketInstr
 
 ### Removed
 
-- Removed the `createUserTraits` standalone function, use [client.createWorkleapPlatformDefaultUserTraits](../reference/MixpanelClient.md#methods) instead.
+- Removed the `createUserTraits` standalone function, use [client.createWorkleapPlatformDefaultUserTraits](../reference/LogRocketInstrumentationClient.md#methods) instead.
 
 ### Deprecated
 
