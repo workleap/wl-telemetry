@@ -132,7 +132,7 @@ Now, every trace recorded after the execution of `setGlobalSpanAttributes` will 
 
 ## Integrate with LogRocket
 
-Starting with version `7.0`, attaching LogRocket session replays to Honeycomb traces requires providing a [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) to the registration function:
+Starting with version `7.0`, attaching LogRocket session replays to Honeycomb traces requires providing a [LogRocketInstrumentationClient](../logrocket/reference/LogRocketInstrumentationClient.md) to the registration function:
 
 ```tsx !#7,12
 import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";

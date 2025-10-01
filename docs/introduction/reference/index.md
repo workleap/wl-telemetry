@@ -1,12 +1,12 @@
 ---
-order: 80
+order: 60
 meta:
     title: Reference - Telemetry
 ---
 
 # Reference
 
-- [initializeTelemetry](./initializedTelemetry.md)
+- [initializeTelemetry](./initializeTelemetry.md)
 - [TelemetryClient](./TelemetryClient.md)
 - [TelemetryClientProvider](./TelemetryClientProvider.md)
 - [useMixpanelClient](./useMixpanelClient.md)

@@ -23,11 +23,11 @@ None
 
 ### Returns
 
-A `MixpanelClient` instance.
+A [MixpanelClient](./MixpanelClient.md) instance.
 
 ## Usage
 
-```tsx !#3
+```ts !#3
 import { useMixpanelClient } from "@workleap/mixpanel/react";
 
 const client = useMixpanelClient();

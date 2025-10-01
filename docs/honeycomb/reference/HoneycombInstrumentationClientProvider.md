@@ -28,8 +28,8 @@ React provider to share a `HoneycombInstrumentationClientProvider` instance with
 ### Provide a client instance
 
 ```tsx !#12-14
-import { createRoot } from "react-dom/client";
 import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider } from "@workleap/honeycomb/react";
+import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
 const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
@@ -47,7 +47,7 @@ root.render(
 
 ### Retrieve a client instance
 
-```tsx !#3
+```ts !#3
 import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
 
 const client = useHoneycombInstrumentationClient();

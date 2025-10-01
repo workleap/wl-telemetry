@@ -28,8 +28,8 @@ React provider to share a `MixpanelClient` instance with the application code.
 ### Provide a client instance
 
 ```tsx !#10-12
-import { createRoot } from "react-dom/client";
 import { initializeMixpanel, MixpanelClientProvider } from "@workleap/mixpanel/react";
+import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
 const client = initializeMixpanel("wlp", "development");
@@ -45,7 +45,7 @@ root.render(
 
 ### Retrieve a client instance
 
-```tsx !#3
+```ts !#3
 import { useMixpanelClient } from "@workleap/mixpanel/react";
 
 const client = initializeMixpanel("wlp", "development");

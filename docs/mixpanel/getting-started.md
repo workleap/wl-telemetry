@@ -18,7 +18,7 @@ This package add basic Mixpanel tracking capabilities to an application. It prov
 First, open a terminal at the root of the application and install the following packages:
 
 ```bash
-pnpm install @workleap/mixpanel
+pnpm add @workleap/mixpanel
 ```
 
 ## Initialize Mixpanel
@@ -104,7 +104,7 @@ Now, every event recorded after the execution of `setGlobalEventProperties` will
 
 ## Integrate with LogRocket
 
-Starting with version `3.0`, attaching LogRocket session replays to Mixpanel events requires providing a [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) to the registration function:
+Starting with version `3.0`, attaching LogRocket session replays to Mixpanel events requires providing a [LogRocketInstrumentationClient](../logrocket/reference/LogRocketInstrumentationClient.md) to the registration function:
 
 ```tsx !#7,11
 import { initializeMixpanel, MixpanelClientProvider, createTelemetryContext } from "@workleap/mixpanel/react";

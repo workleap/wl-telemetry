@@ -23,11 +23,11 @@ None
 
 ### Returns
 
-A `HoneycombInstrumentationClient` instance.
+A [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md) instance.
 
 ## Usage
 
-```tsx !#3
+```ts !#3
 import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
 
 const client = useHoneycombInstrumentationClient();

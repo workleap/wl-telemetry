@@ -23,11 +23,11 @@ None
 
 ### Returns
 
-A `CommonRoomInstrumentationClient` instance.
+A [CommonRoomInstrumentationClient](./CommonRoomInstrumentationClient.md) instance.
 
 ## Usage
 
-```tsx !#3
+```ts !#3
 import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
 
 const client = useCommonRoomInstrumentationClient();

@@ -23,11 +23,11 @@ None
 
 ### Returns
 
-A `LogRocketInstrumentationClient` instance.
+A [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
 
 ## Usage
 
-```tsx !#3
+```ts !#3
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 
 const client = useLogRocketInstrumentationClient();

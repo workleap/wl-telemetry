@@ -28,8 +28,8 @@ React provider to share a `LogRocketInstrumentationClient` instance with the app
 ### Provide a client instance
 
 ```tsx !#10-12
-import { createRoot } from "react-dom/client";
 import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider } from "@workleap/logrocket/react";
+import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
 const client = registerLogRocketInstrumentation("my-app-id");
@@ -45,7 +45,7 @@ root.render(
 
 ### Retrieve a client instance
 
-```tsx !#3
+```ts !#3
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 
 const client = useLogRocketInstrumentationClient();

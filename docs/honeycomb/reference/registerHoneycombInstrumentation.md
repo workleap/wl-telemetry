@@ -309,7 +309,7 @@ const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
 - **Type**: `LogRocketInstrumentationClient`
 - **Default**: `undefined`
 
-A [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/logrocket/reference/logrocketinstrumentationclient) instance to integrate Honeycomb traces with LogRocket session replays. Starting with version `7.0`, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.
+A [LogRocketInstrumentationClient](../../logrocket/reference/LogRocketInstrumentationClient.md) instance to integrate Honeycomb traces with LogRocket session replays. Starting with version `7.0`, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.
 
 ```ts !#4,8
 import { registerHoneycombInstrumentation, createTelemetryContext } from "@workleap/honeycomb/react";

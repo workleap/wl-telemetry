@@ -28,8 +28,8 @@ React provider to share a `CommonRoomInstrumentationClientProvider` instance wit
 ### Provide a client instance
 
 ```tsx !#10,12
-import { createRoot } from "react-dom/client";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationClientProvider } from "@workleap/common-room/react";
+import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
 const client = registerCommonRoomInstrumentation("my-site-id")
@@ -45,7 +45,7 @@ root.render(
 
 ### Retrieve a client instance
 
-```tsx !#3
+```ts !#3
 import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
 
 const client = useCommonRoomInstrumentationClient();
