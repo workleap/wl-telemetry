@@ -13,14 +13,11 @@ This major version introduces two changes: The `registerHoneycombInstrumentation
 
 ### Removed
 
-- Removed the `identify` standalone function, use [client.identify](../reference/CommonRoomInstrumentationClient.md#methods) instead.
+- Removed the `identify` standalone function, use the client [identify](../reference/CommonRoomInstrumentationClient.md#methods) method instead.
 
-## New React context
+### Update the initialization code
 
-- A new [CommonRoomInstrumentationProvider](../reference/CommonRoomInstrumentationProvider.md) React context provider is available to forward a `CommonRoomInstrumentationClient` instance.
-- A new [useCommnRoomInstrumentationClient](../reference/useCommonRoomInstrumentationClient.md) hook is available to retrieve the provided `CommonRoomInstrumentationClient` instance.
-
-## Migrate to `2.0`
+The [registerCommonRoomInstrumentation](../reference/registerCommonRoomInstrumentation.md) function now returns a [client](../reference/CommonRoomInstrumentationClient.md) that must be forwarded using [CommonRoomInstrumentationProvider](../reference/CommonRoomInstrumentationProvider.md).
 
 Before:
 
@@ -61,3 +58,31 @@ root.render(
     </StrictMode>
 );
 ```
+
+### Replace `identify` with the client
+
+The `identify` standalone function is not exported anymore. Use the client [identify](../reference/CommonRoomInstrumentationClient.md#methods) method instead.
+
+Before:
+
+```ts index.ts
+import { identify } from "@workleap/common-room";
+
+identify("johndoe@contoso.com");
+```
+
+Now:
+
+```ts !#3,5 index.ts
+import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
+
+const client = useCommonRoomInstrumentationClient();
+
+useCommonRoomInstrumentationClient.identify("johndoe@contoso.com");
+```
+
+## New React context
+
+- A new [CommonRoomInstrumentationProvider](../reference/CommonRoomInstrumentationProvider.md) React context provider is available to forward a `CommonRoomInstrumentationClient` instance.
+- A new [useCommnRoomInstrumentationClient](../reference/useCommonRoomInstrumentationClient.md) hook is available to retrieve the provided `CommonRoomInstrumentationClient` instance.
+
