@@ -7,13 +7,19 @@ meta:
 
 # Correlation ids
 
-Each library sends the same two correlation id values to its respective platform, using platform-specific naming conventions for the names:
+With the [@worleap/telemetry](https://www.npmjs.com/package/@workleap/telemetry) umbrella package, each telemetry platform automatically receives the same two correlation id values, in its own platform-specific naming conventions:
 
 {.correlation-ids-table}
 | Correlation id | Description | LogRocket | Honeycomb | Mixpanel |
 | --- | --- | --- | --- | --- |
 | Telemetry id | Identifies a single application load. It's primarily used to correlate all telemetry platforms with Honeycomb traces. | `Telemetry Id` | `app.telemetry_id` | `Telemetry Id` |
 | Device id | Identifies the user's device across sessions. | `Device Id` | `app.device_id` | `Device Id` |
+
+A similar result can be achieved with the standalone telemetry library by manually providing the same [TelemetryContext](./reference/TelemetryContext.md) instance to the libraries:
+
+- [@workleap/logrocket](../logrocket/reference/registerLogRocketInstrumentation.md#telemetrycontext)
+- [@workleap/honeycomb](../honeycomb/reference/registerHoneycombInstrumentation.md#telemetrycontext)
+- [@workleap/mixpanel](../mixpanel/reference/initializeMixpanel.md#initialize-with-a-telemetry-context)
 
 ### Troubleshooting example
 
@@ -26,6 +32,7 @@ The following is an example of a troubleshooting workflow using the new telemetr
 !!!warning
 This feature is available only when using the following package versions or higher:
 
+- `@workleap/telemetry` ≥ `2.0.0`
 - `@workleap/logrocket` ≥ `1.0.0`
 - `@workleap/honeycomb` ≥ `6.0.0`
 - `@workleap/mixpanel` ≥ `2.0.0`

@@ -184,7 +184,7 @@ If you are experiencing issues with this guide:
 
 ## Filter by correlation ids
 
-When a [TelemetryContext](./reference/createTelemetryContext.md#telemetrycontext) instance is provided, the `registerLogRocketInstrumentation` function adds two user traits to every session replay to **unify** LogRocket with the **other telemetry platforms**:
+When a [TelemetryContext](../introduction/reference/TelemetryContext.md) instance is provided, the `registerLogRocketInstrumentation` function adds two user traits to every session replay to **unify** LogRocket with the **other telemetry platforms**:
 
 - `app.telemetry_id`: Identifies a single application load. It's primarily used to correlate Honeycomb traces with the other telemetry platforms.
 - `app.device_id`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.

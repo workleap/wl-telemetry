@@ -151,7 +151,7 @@ If you are experiencing issues with this guide:
 
 ## Filter by correlation ids
 
-When a [TelemetryContext](./reference/createTelemetryContext.md#telemetrycontext) instance is provided, the `initializeMixpanel` function adds two properties to every event to **unify** Mixpanel with the **other telemetry platforms**:
+When a [TelemetryContext](../introduction/reference/TelemetryContext.md) instance is provided, the `initializeMixpanel` function adds two properties to every event to **unify** Mixpanel with the **other telemetry platforms**:
 
 - `Telemetry Id`: Identifies a single application load. It's primarily used to correlate with Honeycomb traces.
 - `Device Id`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.

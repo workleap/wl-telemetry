@@ -9,7 +9,7 @@ toc:
 
 # createTelemetryContext
 
-Creates a [TelemetryContext](#telemetrycontext) instance containing the telemetry colleration ids.
+Creates a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance containing the telemetry colleration ids.
 
 ## Reference
 
@@ -27,14 +27,7 @@ const telemetryContext = createTelemetryContext(options?: { identityCookieExpira
 
 ### Returns
 
-A [TelemetryContext](#telemetrycontext) instance.
-
-#### `TelemetryContext`
-
-An object containing the telemetry colleration ids. The correlations ids include:
-
-- `telemetryId`: Identifies a single application load. It's primarily used to correlate with Honeycomb traces.
-- `deviceId`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.
+A [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance.
 
 ## Usage
 

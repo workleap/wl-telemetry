@@ -7,11 +7,16 @@ meta:
 
 # LogRocket session URL
 
-In addition to the correlation ids, if LogRocket instrumentation is initialized, the Honeycomb and Mixpanel libraries will automatically enrich their data with the [LogRocket](https://logrocket.com/) session URL once it's available:
+With the [@worleap/telemetry](https://www.npmjs.com/package/@workleap/telemetry) umbrella package, if LogRocket instrumentation is enabled, the Honeycomb and Mixpanel libraries will automatically attach the [LogRocket](https://logrocket.com/) session URL to their traces/events once it's available:
 
 | Honeycomb | Mixpanel |
 | --- | --- |
 | `app.logrocket_session_url` | `LogRocket Session URL` |
+
+A similar result can be achieved with the standalone telemetry library by manually providing a [LogRocketInstrumentationClient]() instance to the libraries:
+
+- [@workleap/honeycomb](../honeycomb/reference/registerHoneycombInstrumentation.md#logrocketinstrumentationclient)
+- [@workleap/mixpanel](../mixpanel/reference/initializeMixpanel.md#integrate-with-logrocket)
 
 !!!warning
 This feature is available only when using the following package versions or higher:
