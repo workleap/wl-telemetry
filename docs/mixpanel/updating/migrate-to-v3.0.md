@@ -106,7 +106,7 @@ The `createTrackingFunction` standalone function is not exported anymore. Use th
 Before:
 
 ```ts
-import { createTrackingFunction } from "@workleap/mixpanel/react";
+import { createTrackingFunction } from "@workleap/mixpanel";
 
 const track = createTrackingFunction();
 

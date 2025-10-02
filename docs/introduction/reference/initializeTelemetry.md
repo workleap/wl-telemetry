@@ -41,7 +41,7 @@ const client = initializeTelemetry({
     },
     honeycomb: {
         namespace: "sample",
-        serviceName: "all-platforms-sample",
+        serviceName: "my-app-name",
         apiServiceUrls: [/.+/g],
         options: {
             proxy: "https://sample-proxy"
@@ -74,7 +74,7 @@ import { initializeTelemetry } from "@workleap/telemetry/react";
 const client = initializeTelemetry({
     honeycomb: {
         namespace: "sample",
-        serviceName: "all-platforms-sample",
+        serviceName: "my-app-name",
         apiServiceUrls: [/.+/g],
         options: {
             proxy: "https://sample-proxy"
@@ -107,7 +107,7 @@ const client = initializeTelemetry({
     },
     honeycomb: {
         namespace: "sample",
-        serviceName: "all-platforms-sample",
+        serviceName: "my-app-name",
         apiServiceUrls: [/.+/g],
         options: {
             proxy: "https://sample-proxy"
@@ -134,7 +134,7 @@ const client = initializeTelemetry({
     },
     honeycomb: {
         namespace: "sample",
-        serviceName: "all-platforms-sample",
+        serviceName: "my-app-name",
         apiServiceUrls: [/.+/g],
         options: {
             proxy: "https://sample-proxy"
