@@ -1,34 +1,34 @@
 ---
 order: 80
-label: MixpanelClientProvider
+label: MixpanelProvider
 meta:
-    title: MixpanelClientProvider - Mixpanel
+    title: MixpanelProvider - Mixpanel
 toc:
     depth: 2-3
 ---
 
-# MixpanelClientProvider
+# MixpanelProvider
 
 React provider to share a `MixpanelClient` instance with the application code.
 
 ## Reference
 
 ```tsx
-<MixpanelClientProvider value={client}>
+<MixpanelProvider client={client}>
     <App />
-</MixpanelClientProvider>
+</MixpanelProvider>
 ```
 
 ### Properties
 
-- `value`: A [MixpanelClient](./MixpanelClient.md) instance.
+- `client`: A [MixpanelClient](./MixpanelClient.md) instance.
 
 ## Usage
 
 ### Provide a client instance
 
 ```tsx !#10-12
-import { initializeMixpanel, MixpanelClientProvider } from "@workleap/mixpanel/react";
+import { initializeMixpanel, MixpanelProvider } from "@workleap/mixpanel/react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
@@ -37,9 +37,9 @@ const client = initializeMixpanel("wlp", "development");
 const root = createRoot(document.getElementById("root"));
 
 root.render(
-    <MixpanelClientProvider value={client}>
+    <MixpanelProvider client={client}>
         <App />
-    </MixpanelClientProvider>
+    </MixpanelProvider>
 );
 ```
 

@@ -39,7 +39,13 @@ export default {
         {
             // "react" and "react-dom" declares ranges to support React 18 and 19.
             // It's messing up with syncpack.
-            "packages": ["@workleap/mixpanel"],
+            "packages": [
+                "@workleap/telemetry",
+                "@workleap/logrocket",
+                "@workleap/honeycomb",
+                "@workleap/mixpanel",
+                "@workleap/common-room"
+            ],
             "dependencies": ["react", "react-dom"],
             "dependencyTypes": ["peer"],
             "isIgnored": true

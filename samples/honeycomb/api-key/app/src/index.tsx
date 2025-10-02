@@ -1,4 +1,4 @@
-import { createTelemetryContext, HoneycombInstrumentationClientProvider, registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
+import { createTelemetryContext, HoneycombInstrumentationProvider, registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -19,8 +19,8 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <HoneycombInstrumentationClientProvider value={honeycombClient}>
+        <HoneycombInstrumentationProvider client={honeycombClient}>
             <App />
-        </HoneycombInstrumentationClientProvider>
+        </HoneycombInstrumentationProvider>
     </StrictMode>
 );

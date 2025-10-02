@@ -8,6 +8,6 @@ meta:
 
 - [registerHoneycombInstrumentation](./registerHoneycombInstrumentation.md)
 - [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md)
-- [HoneycombInstrumentationClientProvider](./HoneycombInstrumentationClientProvider.md)
+- [HoneycombInstrumentationProvider](./HoneycombInstrumentationProvider.md)
 - [useHoneycombInstrumentationClient](./useHoneycombInstrumentationClient.md)
 - [createTelemetryContext](./createTelemetryContext.md)

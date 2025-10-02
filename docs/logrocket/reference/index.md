@@ -8,7 +8,7 @@ meta:
 
 - [registerLogRocketInstrumentation](./registerLogRocketInstrumentation.md)
 - [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md)
-- [LogRocketInstrumentationClientProvider](./LogRocketInstrumentationClientProvider.md)
+- [LogRocketInstrumentationProvider](./LogRocketInstrumentationProvider.md)
 - [useLogRocketInstrumentationClient](./useLogRocketInstrumentationClient.md)
 - [createTelemetryContext](./createTelemetryContext.md)
 - [LogRocketLogger](./LogRocketLogger.md)

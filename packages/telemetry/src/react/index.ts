@@ -1,5 +1,5 @@
 export * from "../js/index.ts";
-export { TelemetryClientProvider, useTelemetryClient } from "./TelemetryClientContext.ts";
+export { TelemetryProvider, useTelemetryClient } from "./TelemetryContext.tsx";
 export { useHoneycombInstrumentationClient } from "./useHoneycombInstrumentationClient.ts";
 export { useLogRocketInstrumentationClient } from "./useLogRocketInstrumentationClient.ts";
 export { useMixpanelClient } from "./useMixpanelClient.ts";

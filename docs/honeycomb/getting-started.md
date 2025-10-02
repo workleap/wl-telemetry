@@ -4,6 +4,10 @@ order: 100
 
 # Getting started
 
+!!!warning
+Prefer using the [@workleap/telemetry](../introduction/getting-started.md) umbrella package over this standalone library.
+!!!
+
 To monitor **application performance**, Workleap has adopted [Honeycomb](https://www.honeycomb.io/), a tool that helps teams capture and analyze **distributed traces** and metrics to understand and monitor complex systems, application behaviors, and performance. Built on [OpenTelemetry](https://opentelemetry.io/), Honeycomb provides a robust API for frontend telemetry.
 
 While Honeycomb's in-house [HoneycombWebSDK](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/) includes great default instrumentation, this package provides a slightly altered default instrumentation which is adapted for Workleap's applications' requirements. 
@@ -21,7 +25,7 @@ pnpm add @workleap/honeycomb @opentelemetry/api
 Then, update the application bootstrapping code to register Honeycomb instrumentation using the [registerHoneycombInstrumentation](./reference/registerHoneycombInstrumentation.md) function:
 
 ```tsx !#6-9,15,17 index.tsx
-import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";
+import { registerHoneycombInstrumentation, HoneycombInstrumentationProvider, createTelemetryContext } from "@workleap/honeycomb/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -35,9 +39,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <HoneycombInstrumentationClientProvider value={client}>
+        <HoneycombInstrumentationProvider client={client}>
             <App />
-        </HoneycombInstrumentationClientProvider>
+        </HoneycombInstrumentationProvider>
     </StrictMode>
 );
 ```
@@ -135,7 +139,7 @@ Now, every trace recorded after the execution of `setGlobalSpanAttributes` will 
 Starting with version `7.0`, attaching LogRocket session replays to Honeycomb traces requires providing a [LogRocketInstrumentationClient](../logrocket/reference/LogRocketInstrumentationClient.md) to the registration function:
 
 ```tsx !#7,12
-import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";
+import { registerHoneycombInstrumentation, HoneycombInstrumentationProvider, createTelemetryContext } from "@workleap/honeycomb/react";
 import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -153,9 +157,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <HoneycombInstrumentationClientProvider value={client}>
+        <HoneycombInstrumentationProvider client={client}>
             <App />
-        </HoneycombInstrumentationClientProvider>
+        </HoneycombInstrumentationProvider>
     </StrictMode>
 );
 ```

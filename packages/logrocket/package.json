@@ -56,14 +56,14 @@
         }
     },
     "dependencies": {
-        "@workleap/logging": "^1.3.0",
         "@workleap-telemetry/core": "workspace:*",
+        "@workleap/logging": "^1.3.0",
         "logrocket-fuzzy-search-sanitizer": "0.0.2"
     },
     "devDependencies": {
         "@rsbuild/core": "1.5.11",
         "@rslib/core": "0.13.3",
-        "@types/react": "19.1.12",
+        "@types/react": "19.1.13",
         "@workleap/eslint-plugin": "3.5.0",
         "@workleap/rslib-configs": "1.1.0",
         "@workleap/typescript-configs": "3.0.4",

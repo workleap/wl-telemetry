@@ -1,34 +1,34 @@
 ---
 order: 80
-label: TelemetryClientProvider
+label: TelemetryProvider
 meta:
-    title: TelemetryClientProvider
+    title: TelemetryProvider
 toc:
     depth: 2-3
 ---
 
-# TelemetryClientProvider
+# TelemetryProvider
 
 React provider to share a `TelemetryClient` instance with the application code.
 
 ## Reference
 
 ```tsx
-<TelemetryClientProvider value={client}>
+<TelemetryProvider client={client}>
     <App />
-</TelemetryClientProvider>
+</TelemetryProvider>
 ```
 
 ### Properties
 
-- `value`: A [TelemetryClient](./TelemetryClient.md) instance.
+- `client`: A [TelemetryClient](./TelemetryClient.md) instance.
 
 ## Usage
 
 ### Provide a client instance
 
 ```tsx !#26,28
-import { initializeTelemetry, TelemetryClientProvider } from "@workleap/telemetry/react";
+import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
@@ -53,9 +53,9 @@ const client = initializeTelemetry({
 const root = createRoot(document.getElementById("root"));
 
 root.render(
-    <TelemetryClientProvider value={client}>
+    <TelemetryProvider client={client}>
         <App />
-    </TelemetryClientProvider>
+    </TelemetryProvider>
 );
 ```
 

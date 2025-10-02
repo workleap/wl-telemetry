@@ -1,3 +1,3 @@
 export * from "../js/index.ts";
-export { CommonRoomInstrumentationClientProvider, useCommonRoomInstrumentationClient } from "./CommonRoomInstrumentationClientContext.ts";
+export { CommonRoomInstrumentationProvider, useCommonRoomInstrumentationClient } from "./CommonRoomInstrumentationContext.tsx";
 

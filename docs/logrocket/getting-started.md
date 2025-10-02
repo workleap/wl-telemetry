@@ -9,6 +9,10 @@ toc:
 
 # Getting started
 
+!!!warning
+Prefer using the [@workleap/telemetry](../introduction/getting-started.md) umbrella package over this standalone library.
+!!!
+
 To gain full visibility into **frontend behavior** in **production**, Workleap has adopted [LogRocket](https://logrocket.com/), a tool that combines session replay, performance tracking, and error logging to help **understand** and resolve **issues** in **production**.
 
 This package provides default LogRocket instrumentation tailored to Workleap's applications' needs, including the **removal** of **sensitive information** from HTML documents, HTTP requests/responses and URLs.
@@ -26,7 +30,7 @@ pnpm add @workleap/logrocket logrocket
 Then, register LogRocket instrumentation using the [registerLogRocketInstrumentation](./reference/registerLogRocketInstrumentation.md) function and forward the client using a React context provider:
 
 ```tsx !#6-8,14,16 index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, createTelemetryContext } from "@workleap/logrocket/react";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -39,9 +43,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationClientProvider value={client}>
+        <LogRocketInstrumentationProvider client={client}>
             <App />
-        </LogRocketInstrumentationClientProvider>
+        </LogRocketInstrumentationProvider>
     </StrictMode>
 );
 ```
@@ -105,7 +109,7 @@ To learn more about the built-in privacy settings of this instrumentation, refer
 Most applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](./reference/LogRocketInstrumentationClient.md) expose the [createWorkleapPlatformDefaultUserTraits](./reference/LogRocketInstrumentationClient.md#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
 
 ```tsx index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, createTelemetryContext } from "@workleap/logrocket/react";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -118,9 +122,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationClientProvider value={client}>
+        <LogRocketInstrumentationProvider client={client}>
             <App />
-        </LogRocketInstrumentationClientProvider>
+        </LogRocketInstrumentationProvider>
     </StrictMode>
 );
 ```
@@ -160,7 +164,7 @@ LogRocket.getSessionUrl(url => {
 By default, Workleap's LogRocket configuration does not capture console logs. To send loggers output to LogRocket, use the [LogRocketLogger](./reference/LogRocketLogger.md) class.
 
 ```tsx !#9 index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket/react";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket/react";
 import { LogLevel } from "@workleap/logging";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -175,9 +179,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationClientProvider value={client}>
+        <LogRocketInstrumentationProvider client={client}>
             <App />
-        </LogRocketInstrumentationClientProvider>
+        </LogRocketInstrumentationProvider>
     </StrictMode>
 );
 ```
@@ -189,7 +193,7 @@ Console logs are not captured by default to reduce the risk of exposing Personal
 To troubleshoot an issue in production, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
 ```tsx !#8-9 index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket/react";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, LogRocketLogger, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -204,9 +208,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationClientProvider value={client}>
+        <LogRocketInstrumentationProvider client={client}>
             <App />
-        </LogRocketInstrumentationClientProvider>
+        </LogRocketInstrumentationProvider>
     </StrictMode>
 );
 ```

@@ -37,7 +37,7 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <CommonRoomInstrumentationProvider value={client}>
+        <CommonRoomInstrumentationProvider client={client}>
             <App />
         </CommonRoomInstrumentationProvider>
     </StrictMode>

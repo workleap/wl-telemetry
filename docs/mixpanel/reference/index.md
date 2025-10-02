@@ -8,7 +8,7 @@ meta:
 
 - [initializeMixpanel](./initializeMixpanel.md)
 - [MixpanelClient](./MixpanelClient.md)
-- [MixpanelClientProvider](./MixpanelClientProvider.md)
+- [MixpanelProvider](./MixpanelProvider.md)
 - [useMixpanelClient](./useMixpanelClient.md)
 - [useTrackingFunction](./useTrackingFunction.md)
 - [createTelemetryContext](./createTelemetryContext.md)

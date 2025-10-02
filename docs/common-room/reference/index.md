@@ -8,5 +8,5 @@ meta:
 
 - [registerCommonRoomInstrumentation](./registerCommonRoomInstrumentation.md)
 - [CommonRoomInstrumentationClient](./CommonRoomInstrumentationClient.md)
-- [CommonRoomInstrumentationClientProvider](./CommonRoomInstrumentationClientProvider.md)
+- [CommonRoomInstrumentationProvider](./CommonRoomInstrumentationProvider.md)
 - [useCommonRoomInstrumentationClient](useCommonRoomInstrumentationClient.md)

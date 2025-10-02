@@ -1,34 +1,34 @@
 ---
 order: 80
-label: LogRocketInstrumentationClientProvider
+label: LogRocketInstrumentationProvider
 meta:
-    title: LogRocketInstrumentationClientProvider - LogRocket
+    title: LogRocketInstrumentationProvider - LogRocket
 toc:
     depth: 2-3
 ---
 
-# LogRocketInstrumentationClientProvider
+# LogRocketInstrumentationProvider
 
 React provider to share a `LogRocketInstrumentationClient` instance with the application code.
 
 ## Reference
 
 ```tsx
-<LogRocketInstrumentationClientProvider value={client}>
+<LogRocketInstrumentationProvider client={client}>
     <App />
-</LogRocketInstrumentationClientProvider>
+</LogRocketInstrumentationProvider>
 ```
 
 ### Properties
 
-- `value`: A [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
+- `client`: A [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
 
 ## Usage
 
 ### Provide a client instance
 
 ```tsx !#10-12
-import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider } from "@workleap/logrocket/react";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider } from "@workleap/logrocket/react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
@@ -37,9 +37,9 @@ const client = registerLogRocketInstrumentation("my-app-id");
 const root = createRoot(document.getElementById("root"));
 
 root.render(
-    <LogRocketInstrumentationClientProvider value={client}>
+    <LogRocketInstrumentationProvider client={client}>
         <App />
-    </LogRocketInstrumentationClientProvider>
+    </LogRocketInstrumentationProvider>
 );
 ```
 

@@ -28,7 +28,7 @@ This major version introduces several important changes. `initializeMixpanel` no
 
 ## New React context
 
-- A new [MixpanelClientProvider](../reference/MixpanelClientProvider.md) React context provider is available to forward a `MixpanelClient` instance.
+- A new [MixpanelProvider](../reference/MixpanelProvider.md) React context provider is available to forward a `MixpanelClient` instance.
 - A new [useMixpanelClient](../reference/useMixpanelClient.md) hook is available to retrieve the provided `MixpanelClient` instance.
 
 ## Migrate to `3.0`
@@ -55,7 +55,7 @@ root.render(
 Now:
 
 ```tsx !#6-8,14,16
-import { initializeMixpanel, MixpanelClientProvider, createTelemetryContext } from "@workleap/mixpanel/react";
+import { initializeMixpanel, MixpanelProvider, createTelemetryContext } from "@workleap/mixpanel/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -68,9 +68,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <MixpanelClientProvider value={client}>
+        <MixpanelProvider client={client}>
             <App />
-        </MixpanelClientProvider>
+        </MixpanelProvider>
     </StrictMode>
 );
 ```

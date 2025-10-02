@@ -18,9 +18,9 @@
     "dependencies": {
         "@tanstack/react-query": "5.90.1",
         "@workleap/common-room": "workspace:*",
-        "@workleap/telemetry": "workspace:*",
         "@workleap/logging": "1.3.0",
         "@workleap/logrocket": "workspace:*",
+        "@workleap/telemetry": "workspace:*",
         "logrocket": "10.1.0",
         "react": "19.1.1",
         "react-dom": "19.1.1",

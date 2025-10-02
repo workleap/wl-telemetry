@@ -28,7 +28,7 @@ This major version introduces several important changes. `registerHoneycombInstr
 
 ## New React context
 
-- A new [HoneycombInstrumentationClientProvider](../reference/HoneycombInstrumentationClientProvider.md) React context provider is available to forward a `HoneycombInstrumentationClient` instance.
+- A new [HoneycombInstrumentationProvider](../reference/HoneycombInstrumentationProvider.md) React context provider is available to forward a `HoneycombInstrumentationClient` instance.
 - A new [useHoneycombInstrumentationClient](../reference/useHoneycombInstrumentationClient.md) hook is available to retrieve the provided `HoneycombInstrumentatonClient` instance.
 
 ## Migrate to `7.0`
@@ -57,7 +57,7 @@ root.render(
 Now:
 
 ```tsx !#7,11,12,19,21
-import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider, createTelemetryContext } from "@workleap/honeycomb/react";
+import { registerHoneycombInstrumentation, HoneycombInstrumentationProvider, createTelemetryContext } from "@workleap/honeycomb/react";
 import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -75,9 +75,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <HoneycombInstrumentationClientProvider value={client}>
+        <HoneycombInstrumentationProvider client={client}>
             <App />
-        </HoneycombInstrumentationClientProvider>
+        </HoneycombInstrumentationProvider>
     </StrictMode>
 );
 ```

@@ -1,8 +1,7 @@
-import { registerCommonRoomInstrumentation } from "@workleap/common-room";
-import { CommonRoomInstrumentationClientProvider } from "@workleap/common-room/react";
+import { CommonRoomInstrumentationProvider, registerCommonRoomInstrumentation } from "@workleap/common-room/react";
 import { BrowserConsoleLogger, type RootLogger } from "@workleap/logging";
 import { LogRocketLogger } from "@workleap/logrocket";
-import { initializeTelemetry, TelemetryClientProvider } from "@workleap/telemetry/react";
+import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -44,10 +43,10 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <TelemetryClientProvider value={telemetryClient}>
-            <CommonRoomInstrumentationClientProvider value={commonRoomClient}>
+        <TelemetryProvider client={telemetryClient}>
+            <CommonRoomInstrumentationProvider client={commonRoomClient}>
                 <App />
-            </CommonRoomInstrumentationClientProvider>
-        </TelemetryClientProvider>
+            </CommonRoomInstrumentationProvider>
+        </TelemetryProvider>
     </StrictMode>
 );

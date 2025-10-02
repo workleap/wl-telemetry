@@ -42,8 +42,8 @@ pnpm add @workleap/telemetry @workleap/common-room @opentelemetry/api logrocket
 Then, update the application bootstrapping code to initialize the libraries:
 
 ```tsx !#7-23,25,31-32,34-35 index.tsx
-import { initializeTelemetry, TelemetryClientProvider } from "@workleap/telemetry/react";
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationClientProvider } from "@workleap/common-room/react";
+import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
+import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -72,10 +72,10 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <TelemetryClientProvider value={telemetryClient}>
-            <CommonRoomInstrumentationClientProvider value={commonRoomClient}>
+        <TelemetryProvider client={telemetryClient}>
+            <CommonRoomInstrumentationProvider client={commonRoomClient}>
                 <App />
-            </CommonRoomInstrumentationClientProvider>
+            </CommonRoomInstrumentationProvider>
         </TelemetryProvider>
     </StrictMode>
 );
@@ -158,7 +158,7 @@ track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 Use the retrieved `track` function to send a telemetry event:
 
 ```ts !#5
-import { useTrackingFunction } from "@workleap/mixpanel/react";
+import { useTrackingFunction } from "@workleap/telemetry/react";
 
 const track = useTrackingFunction();
 
@@ -174,7 +174,7 @@ For more details, see the Mixpanel client [reference](../mixpanel/reference/Mixp
 Tracking link clicks with Mixpanel requires to keep the page alive while the tracking request is being processed. To do so, set the `keepAlive` option of the `track` function:
 
 ```ts !#6
-import { useTrackingFunction } from "@workleap/mixpanel/react";
+import { useTrackingFunction } from "@workleap/telemetry/react";
 
 const track = useTrackingFunction();
 
@@ -218,10 +218,10 @@ pnpm add @workleap/logging @workleap/logrocket
 Then update the application bootstrapping code to set up the loggers:
 
 ```tsx !#11,29-30,34-35 index.tsx
-import { initializeTelemetry, TelemetryClientProvider } from "@workleap/telemetry/react";
+import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationClientProvider } from "@workleap/common-room/react";
+import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -259,10 +259,10 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <TelemetryClientProvider value={telemetryClient}>
-            <CommonRoomInstrumentationClientProvider value={commonRoomClient}>
+        <TelemetryProvider client={telemetryClient}>
+            <CommonRoomInstrumentationProvider client={commonRoomClient}>
                 <App />
-            </CommonRoomInstrumentationClientProvider>
+            </CommonRoomInstrumentationProvider>
         </TelemetryProvider>
     </StrictMode>
 );
@@ -271,10 +271,10 @@ root.render(
 To troubleshoot production issues, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
 ```tsx !#11,29,34 index.tsx
-import { initializeTelemetry, TelemetryClientProvider } from "@workleap/telemetry/react";
+import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationClientProvider } from "@workleap/common-room/react";
+import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -312,10 +312,10 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <TelemetryClientProvider value={telemetryClient}>
-            <CommonRoomInstrumentationClientProvider value={commonRoomClient}>
+        <TelemetryProvider client={telemetryClient}>
+            <CommonRoomInstrumentationProvider client={commonRoomClient}>
                 <App />
-            </CommonRoomInstrumentationClientProvider>
+            </CommonRoomInstrumentationProvider>
         </TelemetryProvider>
     </StrictMode>
 );

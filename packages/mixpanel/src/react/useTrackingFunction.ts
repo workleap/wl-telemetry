@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 import { createTrackingFunction, type CreateMixpanelTrackingFunctionOptions } from "../js/createTrackingFunction.ts";
-import { MixpanelClientContext } from "./MixpanelClientContext.ts";
+import { MixpanelContext } from "./MixpanelContext.tsx";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
@@ -16,7 +16,7 @@ export function useTrackingFunction(options: UseTrackingFunctionOptions = {}) {
         targetProductId
     } = options;
 
-    const client = useContext(MixpanelClientContext);
+    const client = useContext(MixpanelContext);
 
     return useMemo(() => {
         const trackOptions = {

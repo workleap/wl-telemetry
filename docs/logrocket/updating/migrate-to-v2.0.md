@@ -29,7 +29,7 @@ This major version introduces several important changes. `registerLogRocketInstr
 
 ## New React context
 
-- A new [LogRocketInstrumentationClientProvider](../reference/LogRocketInstrumentationClientProvider.md) React context provider is available to forward a `LogRocketInstrumentatonClient` instance.
+- A new [LogRocketInstrumentationProvider](../reference/LogRocketInstrumentationProvider.md) React context provider is available to forward a `LogRocketInstrumentatonClient` instance.
 - A new [useLogRocketInstrumentationClient](../reference/useLogRocketInstrumentationClient.md) hook is available to retrieve the provided `LogRocketInstrumentatonClient` instance.
 
 ## Migrate to `2.0`
@@ -56,7 +56,7 @@ root.render(
 Now:
 
 ```tsx !#6-8,14,16
-import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, createTelemetryContext } from "@workleap/logrocket/react";
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -69,9 +69,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <LogRocketInstrumentationClientProvider value={client}>
+        <LogRocketInstrumentationProvider client={client}>
             <App />
-        </LogRocketInstrumentationClientProvider>
+        </LogRocketInstrumentationProvider>
     </StrictMode>
 );
 ```

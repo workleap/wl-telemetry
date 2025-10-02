@@ -64,13 +64,13 @@
         "@opentelemetry/instrumentation-user-interaction": "^0.50.0",
         "@opentelemetry/instrumentation-xml-http-request": "^0.205.0",
         "@opentelemetry/sdk-trace-web": "^2.1.0",
-        "@workleap/logging": "^1.3.0",
-        "@workleap-telemetry/core": "workspace:*"
+        "@workleap-telemetry/core": "workspace:*",
+        "@workleap/logging": "^1.3.0"
     },
     "devDependencies": {
         "@rsbuild/core": "1.5.11",
         "@rslib/core": "0.13.3",
-        "@types/react": "19.1.12",
+        "@types/react": "19.1.13",
         "@typescript-eslint/parser": "8.44.1",
         "@workleap/eslint-plugin": "3.5.0",
         "@workleap/rslib-configs": "1.1.0",

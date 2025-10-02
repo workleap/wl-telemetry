@@ -1,4 +1,4 @@
-import { useTelemetryClient } from "./TelemetryClientContext.ts";
+import { useTelemetryClient } from "./TelemetryContext.tsx";
 
 /**
  * Retrieve the Mixpanel client.

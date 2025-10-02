@@ -9,6 +9,10 @@ toc:
 
 # Getting started
 
+!!!warning
+Prefer using the [@workleap/telemetry](../introduction/getting-started.md) umbrella package over this standalone library.
+!!!
+
 To make data-informed decisions, understand user behavior, and measure product impact, Workleap has adopted [Mixpanel](https://mixpanel.com/), an analytics platform that helps **understand how users interact with** a **product**.
 
 This package add basic Mixpanel tracking capabilities to an application. It provides a single `track` function that sends `POST` requests to a dedicated tracking endpoint compliant with the Workleap platform tracking API.
@@ -26,7 +30,7 @@ pnpm add @workleap/mixpanel
 Then, initialize Mixpanel using the [initializeMixpanel](./reference/initializeMixpanel.md) function:
 
 ```tsx !#6-8,14,16
-import { initializeMixpanel, MixpanelClientProvider, createTelemetryContext } from "@workleap/mixpanel/react";
+import { initializeMixpanel, MixpanelProvider, createTelemetryContext } from "@workleap/mixpanel/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -39,9 +43,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <MixpanelClientProvider value={client}>
+        <MixpanelProvider client={client}>
             <App />
-        </MixpanelClientProvider>
+        </MixpanelProvider>
     </StrictMode>
 );
 ```
@@ -105,7 +109,7 @@ Now, every event recorded after the execution of `setGlobalEventProperties` will
 Starting with version `3.0`, attaching LogRocket session replays to Mixpanel events requires providing a [LogRocketInstrumentationClient](../logrocket/reference/LogRocketInstrumentationClient.md) to the registration function:
 
 ```tsx !#7,11
-import { initializeMixpanel, MixpanelClientProvider, createTelemetryContext } from "@workleap/mixpanel/react";
+import { initializeMixpanel, MixpanelProvider, createTelemetryContext } from "@workleap/mixpanel/react";
 import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -122,9 +126,9 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <MixpanelClientProvider value={mixpanelClient}>
+        <MixpanelProvider client={mixpanelClient}>
             <App />
-        </MixpanelClientProvider>
+        </MixpanelProvider>
     </StrictMode>
 );
 ```

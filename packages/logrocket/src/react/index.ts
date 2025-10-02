@@ -1,3 +1,3 @@
 export * from "../js/index.ts";
-export { LogRocketInstrumentationClientProvider, useLogRocketInstrumentationClient } from "./LogRocketInstrumentationClientContext.ts";
+export { LogRocketInstrumentationProvider, useLogRocketInstrumentationClient } from "./LogRocketInstrumentationContext.tsx";
 

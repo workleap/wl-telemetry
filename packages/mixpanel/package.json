@@ -59,8 +59,8 @@
         }
     },
     "dependencies": {
-        "@workleap/logging": "^1.3.0",
-        "@workleap-telemetry/core": "workspace:*"
+        "@workleap-telemetry/core": "workspace:*",
+        "@workleap/logging": "^1.3.0"
     },
     "devDependencies": {
         "@rsbuild/core": "1.5.11",

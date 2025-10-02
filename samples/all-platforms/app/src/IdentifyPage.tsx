@@ -79,7 +79,7 @@ export function IdentifyPage() {
         });
 
         honeycombClient.setGlobalSpanAttribute("app.user", JSON.stringify(form));
-        mixpanelClient.setGlobalProperty("User", JSON.stringify(form));
+        mixpanelClient.setGlobalEventProperty("User", JSON.stringify(form));
         commonRoomClient.identify("pat-2025-08-05-v10@gmail.com");
     };
 

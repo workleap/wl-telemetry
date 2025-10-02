@@ -1,34 +1,34 @@
 ---
 order: 80
-label: HoneycombInstrumentationClientProvider
+label: HoneycombInstrumentationProvider
 meta:
-    title: HoneycombInstrumentationClientProvider - LogRocket
+    title: HoneycombInstrumentationProvider - LogRocket
 toc:
     depth: 2-3
 ---
 
-# HoneycombInstrumentationClientProvider
+# HoneycombInstrumentationProvider
 
-React provider to share a `HoneycombInstrumentationClientProvider` instance with the application code.
+React provider to share a `HoneycombInstrumentationProvider` instance with the application code.
 
 ## Reference
 
 ```tsx
-<HoneycombInstrumentationClientProvider value={client}>
+<HoneycombInstrumentationProvider client={client}>
     <App />
-</HoneycombInstrumentationClientProvider>
+</HoneycombInstrumentationProvider>
 ```
 
 ### Properties
 
-- `value`: A [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md) instance.
+- `client`: A [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md) instance.
 
 ## Usage
 
 ### Provide a client instance
 
 ```tsx !#12-14
-import { registerHoneycombInstrumentation, HoneycombInstrumentationClientProvider } from "@workleap/honeycomb/react";
+import { registerHoneycombInstrumentation, HoneycombInstrumentationProvider } from "@workleap/honeycomb/react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
@@ -39,9 +39,9 @@ const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
 const root = createRoot(document.getElementById("root"));
 
 root.render(
-    <HoneycombInstrumentationClientProvider value={client}>
+    <HoneycombInstrumentationProvider client={client}>
         <App />
-    </HoneycombInstrumentationClientProvider>
+    </HoneycombInstrumentationProvider>
 );
 ```
 

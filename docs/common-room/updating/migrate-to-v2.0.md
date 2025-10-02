@@ -17,7 +17,7 @@ This major version introduces two changes: The `registerHoneycombInstrumentation
 
 ## New React context
 
-- A new [CommonRoomInstrumentationClientProvider](../reference/CommonRoomInstrumentationClientProvider.md) React context provider is available to forward a `CommonRoomInstrumentationClient` instance.
+- A new [CommonRoomInstrumentationProvider](../reference/CommonRoomInstrumentationProvider.md) React context provider is available to forward a `CommonRoomInstrumentationClient` instance.
 - A new [useCommnRoomInstrumentationClient](../reference/useCommonRoomInstrumentationClient.md) hook is available to retrieve the provided `CommonRoomInstrumentationClient` instance.
 
 ## Migrate to `2.0`
@@ -55,7 +55,7 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <CommonRoomInstrumentationProvider value={client}>
+        <CommonRoomInstrumentationProvider client={client}>
             <App />
         </CommonRoomInstrumentationProvider>
     </StrictMode>

@@ -8,7 +8,7 @@ meta:
 
 - [initializeTelemetry](./initializeTelemetry.md)
 - [TelemetryClient](./TelemetryClient.md)
-- [TelemetryClientProvider](./TelemetryClientProvider.md)
+- [TelemetryProvider](./TelemetryProvider.md)
 - [useMixpanelClient](./useMixpanelClient.md)
 - [useLogRocketInstrumentationClient](./useLogRocketInstrumentationClient.md)
 - [useHoneycombInstrumentationClient](./useHoneycombInstrumentationClient.md)
