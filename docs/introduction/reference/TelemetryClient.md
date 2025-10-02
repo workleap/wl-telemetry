@@ -35,14 +35,10 @@ const client = new TelemetryClient(logRocketClient?, honeycombClient?, mixpanelC
 
 ### LogRocket instrumentation client
 
-```ts !#9-11
-import { initializeTelemetry } from "@workleap/telemetry/react";
+```ts !#5-7
+import { useTelemetryClient } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
-    logRocket: {
-        appId: "my-app-id"
-    }
-});
+const client = useTelemetryClient();
 
 client.logRocket.registerGetSessionUrlListener(sessionUrl => {
     console.log(sessionUrl);
@@ -51,19 +47,10 @@ client.logRocket.registerGetSessionUrlListener(sessionUrl => {
 
 ### Honeycomb instrumentation client
 
-```ts !#14-16
-import { initializeTelemetry } from "@workleap/telemetry/react";
+```ts !#5-7
+import { useTelemetryClient } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
-    honeycomb: {
-        namespace: "sample",
-        serviceName: "all-platforms-sample",
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: "https://sample-proxy"
-        }
-    }
-});
+const client = useTelemetryClient();
 
 client.honeycomb.setGlobalSpanAttributes({
     "app.user_id": "123"
@@ -72,15 +59,10 @@ client.honeycomb.setGlobalSpanAttributes({
 
 ### Mixpanel client
 
-```ts !#10-12
-import { initializeTelemetry } from "@workleap/telemetry/react";
+```ts !#5-7
+import { useTelemetryClient } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
-    mixpanel: {
-        productId: "wlp",
-        envOrTrackingApiBaseUrl: "development"
-    }
-});
+const client = useTelemetryClient();
 
 client.mixpanel.setGlobalEventProperties({
     "User Id": "123"

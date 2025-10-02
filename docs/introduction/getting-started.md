@@ -81,49 +81,129 @@ root.render(
 );
 ```
 
-<!-- ```ts
-import { useTrackingFunction } from "@workleap/mixpanel/react";
-
-// If the host application is not a React application, use
-// "createTrackingFunction" instead of the following hook.
-const track = useTrackingFunction();
-``` -->
-
-<!-- !!!tip
-For more information about a specific library, refer to its [getting started](#supported-platforms) guide.
-!!! -->
-
 !!!warning
 For Honeycomb, avoid using `/.+/g`, in production, as it could expose customer data to third parties. Instead, ensure you specify values that accurately matches your application's backend URLs.
 !!!
 
-## Send LogRocket user traits
+## Identify a user for LogRocket
 
-TBD
+To identify the current user environment for LogRocket, [LogRocketInstrumentationClient](../logrocket/reference/LogRocketInstrumentationClient.md) expose the [createWorkleapPlatformDefaultUserTraits](../logrocket/reference/LogRocketInstrumentationClient.md#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap.
+
+```ts !#6-13
+import { useLogRocketInstrumentationClient } from "@workleap/telemetry/react";
+import LogRocket from "logrocket";
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
+    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
+    organizationName: "Acme",
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});
+
+Logrocket.identify(traits.userId, traits);
+```
+
+!!!tip
+For more details, see the LogRocket client [reference](../logrocket/reference/LogRocketInstrumentationClient.md) documentation.
+!!!
 
 ## Get LogRocket session replay URL
 
-TBD
+Every LogRocket session replay is associated with a unique URL. To register a callback receiving the session replay once it's available, use the [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) function: 
+
+```ts !#3-5
+import LogRocket from "logrocket";
+
+LogRocket.getSessionUrl(url => {
+    console.log(url);
+});
+```
 
 ## Set Honeycomb custom user attributes
 
-TBD
+To set custom attributes about the current user environment on all Honeycomb traces, [HoneycombInstrumentationClient](../honeycomb/reference/HoneycombInstrumentationClient.md) expose the [setGlobalSpanAttributes](../honeycomb/reference/HoneycombInstrumentationClient.md#methods) method:
 
-## Track Mixpanel events
+```ts !#5-7
+import { useHoneycombInstrumentationClient } from "@workleap/telemetry/react";
 
-TBD
+const client = useHoneycombInstrumentationClient();
 
-## Track Mixpanel events for another product
+client.setGlobalSpanAttributes({
+    "app.user_id": "123"
+});
+```
 
-TBD
+!!!tip
+For more details, see the Honeycomb client [reference](../honeycomb/reference/HoneycombInstrumentationClient.md) documentation.
+!!!
+
+## Create a Mixpanel track function
+
+To create a tracking function for Mixpanel, use the [useMixpanelTrackingFunction](./reference/useMixpanelTrackingFunction.md) hook:
+
+```ts !#3
+import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
+
+const track = useMixpanelTrackingFunction();
+
+track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
+```
+
+## Track a Mixpanel event
+
+Use the retrieved `track` function to send a telemetry event:
+
+```ts !#5
+import { useTrackingFunction } from "@workleap/mixpanel/react";
+
+const track = useTrackingFunction();
+
+track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
+```
+
+!!!tip
+For more details, see the Mixpanel client [reference](../mixpanel/reference/MixpanelClient.md) documentation.
+!!!
 
 ## Track a link with Mixpanel
 
-TBD
+Tracking link clicks with Mixpanel requires to keep the page alive while the tracking request is being processed. To do so, set the `keepAlive` option of the `track` function:
+
+```ts !#6
+import { useTrackingFunction } from "@workleap/mixpanel/react";
+
+const track = useTrackingFunction();
+
+track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
+    keepAlive: true
+});
+```
+
+!!!tip
+For more details, see the Mixpanel client [reference](../mixpanel/reference/MixpanelClient.md) documentation.
+!!!
 
 ## Set Mixpanel custom user properties 
 
-TBD
+To set custom properties about the current user environment on all events, [MixpanelClient](../mixpanel/reference/MixpanelClient.md) expose the [setGlobalEventProperties](../mixpanel/reference/MixpanelClient.md#methods) method:
+
+```ts !#5-7
+import { useMixpanelClient } from "@workleap/telemetry/react";
+
+const client = useMixpanelClient();
+
+client.setGlobalEventProperties({
+    "User Id": "123" 
+})
+```
+
+!!!tip
+For more details, see the Mixpanel client [reference](../mixpanel/reference/MixpanelClient.md) documentation.
+!!!
 
 ## Set up loggers
 

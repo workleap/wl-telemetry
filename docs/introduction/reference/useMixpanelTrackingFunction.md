@@ -39,7 +39,7 @@ The body size for keepalive requests is [limited to 64 kibibytes](https://develo
 
 ### Track events
 
-```ts !#5
+```ts !#3,5
 import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 
 const track = useMixpanelTrackingFunction();

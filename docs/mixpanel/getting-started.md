@@ -60,7 +60,7 @@ track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 
 ## Track an event
 
-Finally, using the retrieved `track` function, send a telemetry event:
+Finally, using the retrieved `track` function to send a telemetry event:
 
 ```ts !#5
 import { useTrackingFunction } from "@workleap/mixpanel/react";
@@ -86,9 +86,7 @@ track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
 
 ## Set custom user properties
 
-Most applications need to set custom properties on events about the current user environment. To help with that, [MixpanelClient](./reference/MixpanelClient.md) expose the [setGlobalEventProperties](./reference/MixpanelClient.md#register-global-properties) method:
-
-Update your application code to include the `setSuperProperties` function:
+Most applications need to set custom properties about the current user environment on all events. To help with that, [MixpanelClient](./reference/MixpanelClient.md) expose the [setGlobalEventProperties](./reference/MixpanelClient.md#methods) method:
 
 ```ts !#5-7
 import { useMixpanelClient } from "@workleap/mixpanel/react";

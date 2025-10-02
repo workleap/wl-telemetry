@@ -37,12 +37,10 @@ const client = new HoneycombInstrumentationClient(globalAttributeSpanProcessor?,
 
 ### Register global attributes
 
-```ts !#7-9
-import { registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
+```ts !#5-7
+import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
 
-const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
-    proxy: "https://sample-proxy"
-});
+const client = useHoneycombInstrumentationClient();
 
 client.setGlobalSpanAttributes({
     "app.user_id": "123"
@@ -51,12 +49,10 @@ client.setGlobalSpanAttributes({
 
 ### Register a dynamic request hook
 
-```ts !#7-17
-import { registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
+```ts !#5-15
+import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
 
-const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
-    proxy: "https://sample-proxy"
-});
+const client = useHoneycombInstrumentationClient();
 
 client.registerFetchRequestHook((requestSpan, request) => {
     let headers: Headers;
@@ -73,12 +69,10 @@ client.registerFetchRequestHook((requestSpan, request) => {
 
 ### Register a dynamic request hook to be executed first
 
-```ts !#7-17
-import { registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
+```ts !#5-15
+import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
 
-const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
-    proxy: "https://sample-proxy"
-});
+const client = useHoneycombInstrumentationClient();
 
 client.registerFetchRequestHookAtStart((requestSpan, request) => {
     let headers: Headers;
@@ -97,12 +91,10 @@ client.registerFetchRequestHookAtStart((requestSpan, request) => {
 
 A dynamic request hook can stop the execution of subsequent request hooks by returning `true`.
 
-```ts !#17
-import { registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
+```ts !#15
+import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
 
-const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
-    proxy: "https://sample-proxy"
-});
+const client = useHoneycombInstrumentationClient();
 
 client.registerFetchRequestHookAtStart((requestSpan, request) => {
     let headers: Headers;

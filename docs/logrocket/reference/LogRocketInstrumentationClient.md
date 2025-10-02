@@ -35,10 +35,10 @@ const client = new LogRocketInstrumentationClient(telemetryContext?);
 ### Get default user traits for the Workleap platform
 
 ```ts !#6-13
-import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 import LogRocket from "logrocket";
 
-const client = registerLogRocketInstrumentation("my-app-id");
+const client = useLogRocketInstrumentationClient();
 
 const traits = client.createWorkleapPlatformDefaultUserTraits({
     userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
@@ -114,10 +114,10 @@ Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan C
 You can send custom user traits to improve filtering in [LogRocket](https://app.logrocket.com). To do so, merge the default user traits with your additional traits before sending them:
 
 ```ts !#15
-import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 import LogRocket from "logrocket";
 
-const client = registerLogRocketInstrumentation("my-app-id");
+const client = useLogRocketInstrumentationClient();
 
 const allTraits = {
     ...client.createWorkleapPlatformDefaultUserTraits({
@@ -141,10 +141,10 @@ Additional user trait names should align with [Mixpanel](https://mixpanel.com/) 
 ### Register a session URL listener
 
 ```ts !#6-8
-import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 import LogRocket from "logrocket";
 
-const client = registerLogRocketInstrumentation("my-app-id");
+const client = useLogRocketInstrumentationClient();
 
 client.registerGetSessionUrlListener(sessionUrl => {
     console.log(sessionUrl);

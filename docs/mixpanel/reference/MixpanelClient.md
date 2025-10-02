@@ -52,9 +52,9 @@ The body size for keepalive requests is [limited to 64 kibibytes](https://develo
 ### Track events
 
 ```ts !#5,7
-import { initializeMixpanel } from "@workleap/mixpanel/react";
+import { useMixpanelClient } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development");
+const client = useMixpanelClient();
 
 const track = client.createTrackingFunction();
 
@@ -66,9 +66,9 @@ track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 To track an action targeting another product, use the `targetProductId` option:
 
 ```ts !#6
-import { initializeMixpanel } from "@workleap/mixpanel/react";
+import { useMixpanelClient } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development");
+const client = useMixpanelClient();
 
 const track = client.createTrackingFunction({
     targetProductId: "wov"
@@ -82,9 +82,9 @@ track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 To track a link click, use the `keepAlive` option to keep the page alive while the tracking request is being processed:
 
 ```ts !#8
-import { initializeMixpanel } from "@workleap/mixpanel/react";
+import { useMixpanelClient } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development");
+const client = useMixpanelClient();
 
 const track = client.createTrackingFunction();
 
@@ -96,9 +96,9 @@ track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
 ### Register global properties
 
 ```ts !#5-7
-import { initializeMixpanel } from "@workleap/mixpanel/react";
+import { useMixpanelClient } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development");
+const client = useMixpanelClient();
 
 client.setGlobalEventProperties({
     "User Id": "123"

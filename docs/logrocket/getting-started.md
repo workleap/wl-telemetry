@@ -102,9 +102,7 @@ To learn more about the built-in privacy settings of this instrumentation, refer
 
 ## Identify a user
 
-Most applications need to identify the current user environment. To help with that, the LogRocket instrumentation client expose the [createWorkleapPlatformDefaultUserTraits](./reference/LogRocketInstrumentationClient.md#get-default-user-traits-for-the-workleap-platform) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap.
-
-Update your application bootstrapping code to include `createWorkleapPlatformDefaultUserTraits` and `LogRocket.identify`:
+Most applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](./reference/LogRocketInstrumentationClient.md) expose the [createWorkleapPlatformDefaultUserTraits](./reference/LogRocketInstrumentationClient.md#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
 
 ```tsx index.tsx
 import { registerLogRocketInstrumentation, LogRocketInstrumentationClientProvider, createTelemetryContext } from "@workleap/logrocket/react";

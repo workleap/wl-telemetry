@@ -36,9 +36,9 @@ const client = new CommonRoomInstrumentationClient(logger?);
 Once identified, any previous anonymous traces that share the same user id and session id will be linked to the email address. Additionally, any existing data associated with that email address will be attached to the current session.
 
 ```ts !#5
-import { registerCommonRoomInstrumentation } from "@workleap/common-room/react";
+import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
 
-const client = registerCommonRoomInstrumentation("my-site-id");
+const client = useCommonRoomInstrumentationClient();
 
 client.identify("johndoe@contoso.com");
 ```

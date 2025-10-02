@@ -112,7 +112,7 @@ The `registerLogRocketInstrumentation` function automatically adds two attribute
 
 ## Set custom user attributes
 
-Most applications need to set custom attributes on traces about the current user environment. To help with that, [HoneycombInstrumentationClient](./reference/HoneycombInstrumentationClient.md) expose the [setGlobalSpanAttributes](./reference/HoneycombInstrumentationClient.md#register-global-attributes) method:
+Most applications need to set custom attributes about the current user environment on all traces. To help with that, [HoneycombInstrumentationClient](./reference/HoneycombInstrumentationClient.md) expose the [setGlobalSpanAttributes](./reference/HoneycombInstrumentationClient.md#methods) method:
 
 ```ts !#5-7
 import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
