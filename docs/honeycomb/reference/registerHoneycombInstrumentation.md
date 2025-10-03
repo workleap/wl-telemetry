@@ -292,7 +292,7 @@ const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
 - **Type**: `TelemetryContext`
 - **Default**: `undefined`
 
-A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry correlation ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
+A [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance containing the telemetry correlation ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
 
 ```ts !#3,6
 import { registerHoneycombInstrumentation, createTelemetryContext } from "@workleap/honeycomb/react";
