@@ -17,26 +17,28 @@ This integrated experience brings together LogRocket, Honeycomb, and Mixpanel. B
 
 ## Supported platforms
 
-{.supported-platforms-table}
-| Name | Description | NPM | Documentation |
-| --- | --- | --- |
-| ![](../static/logos/logrocket.svg){ class="h-5 w-5 mr-2 -mt-1" }[LogRocket](https://logrocket.com/) | Records frontend sessions and logs to help debug and resolve issues in production and surface critical issues. | [![npm version](https://img.shields.io/npm/v/@workleap/logrocket)](https://www.npmjs.com/package/@workleap/logrocket) | [Getting started](../logrocket/getting-started.md) |
-| ![](../static/logos/honeycomb.svg){ class="h-5 w-5 mr-2 -mt-1" }[Honeycomb](https://www.honeycomb.io/) | Captures and analyzes distributed traces and metrics to understand and monitor complex systems, application behaviors, and performance. | [![npm version](https://img.shields.io/npm/v/@workleap/honeycomb)](https://www.npmjs.com/package/@workleap/honeycomb) | [Getting started](../honeycomb/getting-started.md) |
-| ![](../static/logos/mixpanel.svg){ class="h-5 w-5 mr-2 -mt-1" }[Mixpanel](https://mixpanel.com/) | Tracks user interactions to analyze behavior and measure product impact. | [![npm version](https://img.shields.io/npm/v/@workleap/mixpanel)](https://www.npmjs.com/package/@workleap/mixpanel) | [Getting started](../mixpanel/getting-started.md) |
-| ![](../static/logos/common-room.svg){ class="h-5 w-5 mr-2 -mt-1" }[Common Room](https://www.commonroom.io/) | Connects user activity across platforms to provide insight into community engagement and behavior.<br/><br/>_(Common Room is not part of the integrated experience, as it is a standalone tool used by marketers for a completely different purpose.)_ | [![npm version](https://img.shields.io/npm/v/@workleap/common-room)](https://www.npmjs.com/package/@workleap/common-room) | [Getting started](../common-room/getting-started.md) |
-
-## Umbrella package
-
 !!!tip
-Although Workleap provides a standalone package for each platform, we recommend using the umbrella package [@workleap/telemetry](https://www.npmjs.com/package/@workleap/telemetry) for LogRocket, Honeycomb, and Mixpanel. This simplifies the integration, compared to relying on the individual standalone packages for these.
+Although Workleap provides a standalone package for each platform, we recommend using the [@workleap/telemetry](https://www.npmjs.com/package/@workleap/telemetry) umbrella package for LogRocket, Honeycomb, and Mixpanel. This simplifies the integration, compared to relying on the individual standalone packages for these.
 !!!
+
+{.supported-platforms-table}
+| Name | Description | Documentation |
+| --- | --- | --- |
+| ![](../static/logos/logrocket.svg){ class="h-5 w-5 mr-2 -mt-1" }[LogRocket](https://logrocket.com/) | Records frontend sessions and logs to help debug and resolve issues in production and surface critical issues. | [Learn more](../logrocket/getting-started.md) |
+| ![](../static/logos/honeycomb.svg){ class="h-5 w-5 mr-2 -mt-1" }[Honeycomb](https://www.honeycomb.io/) | Captures and analyzes distributed traces and metrics to understand and monitor complex systems, application behaviors, and performance. | [Learn more](../honeycomb/getting-started.md) |
+| ![](../static/logos/mixpanel.svg){ class="h-5 w-5 mr-2 -mt-1" }[Mixpanel](https://mixpanel.com/) | Tracks user interactions to analyze behavior and measure product impact. | [Learn more](../mixpanel/getting-started.md) |
+| ![](../static/logos/common-room.svg){ class="h-5 w-5 mr-2 -mt-1" }[Common Room](https://www.commonroom.io/) | Connects user activity across platforms to provide insight into community engagement and behavior.<br/><br/>_(Common Room is not part of the integrated experience, as it is a standalone tool used by marketers for a completely different purpose.)_ | [Learn more](../common-room/getting-started.md) |
+
+<!-- ## Umbrella package
+
+Although Workleap provides a standalone package for each platform, we recommend using the [@workleap/telemetry](https://www.npmjs.com/package/@workleap/telemetry) umbrella package for LogRocket, Honeycomb, and Mixpanel. This simplifies the integration, compared to relying on the individual standalone packages for these. -->
 
 ## Setup a project
 
 First, open a terminal at the root of the application and install the telemetry umbrella package:
 
 ```bash
-pnpm add @workleap/telemetry @workleap/common-room @opentelemetry/api logrocket
+pnpm add @workleap/telemetry @workleap/common-room logrocket
 ```
 
 Then, update the application bootstrapping code to initialize the libraries:
