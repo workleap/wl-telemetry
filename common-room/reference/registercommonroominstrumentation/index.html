@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>registerCommonRoomInstrumentation - Common</title>
-    <meta name="title" content="registerCommonRoomInstrumentation - Common">
+    <title>registerCommonRoomInstrumentation - Common Room</title>
+    <meta name="title" content="registerCommonRoomInstrumentation - Common Room">
     <meta name="description" content="Initialize Common Room instrumentation.">
 
     <!-- Canonical -->
@@ -20,24 +20,24 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://workleap.github.io/wl-telemetry/common-room/reference/registercommonroominstrumentation/">
-    <meta property="og:title" content="registerCommonRoomInstrumentation - Common">
+    <meta property="og:title" content="registerCommonRoomInstrumentation - Common Room">
     <meta property="og:description" content="Initialize Common Room instrumentation.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://workleap.github.io/wl-telemetry/common-room/reference/registercommonroominstrumentation/">
-    <meta property="twitter:title" content="registerCommonRoomInstrumentation - Common">
+    <meta property="twitter:title" content="registerCommonRoomInstrumentation - Common Room">
     <meta property="twitter:description" content="Initialize Common Room instrumentation.">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../../static/favicon.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.811458539742" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -346,7 +346,7 @@
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">registerCommonRoomInstrumentation(siteId, options?: { onReady, verbose });</code></pre>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = registerCommonRoomInstrumentation(siteId, options?: { onReady, verbose });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters">
     <h3>
@@ -369,7 +369,7 @@
         <span>Returns</span>
     </h3>
 </doc-anchor-target>
-<p>Nothing</p>
+<p>A <a href="../commonroominstrumentationclient/">CommonRoomInstrumentationClient</a> instance.</p>
 <doc-anchor-target id="usage">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#usage">#</doc-anchor-trigger>
@@ -385,7 +385,7 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { registerCommonRoomInstrumentation } from &quot;@workleap/common-room&quot;;
 
-registerCommonRoomInstrumentation(&quot;my-site-id&quot;);</code></pre>
+const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="verbose-mode">
     <h3>
@@ -396,7 +396,7 @@ registerCommonRoomInstrumentation(&quot;my-site-id&quot;);</code></pre>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerCommonRoomInstrumentation } from &quot;@workleap/common-room&quot;;
 
-registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
+const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
     verbose: true
 });</code></pre>
 </doc-codeblock></div>
@@ -411,7 +411,7 @@ registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
 import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 
-registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
+const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
@@ -440,10 +440,10 @@ registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../common-room/reference/identify/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../common-room/reference/commonroominstrumentationclient/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">identify</span>
+                                                <span class="block mt-1">Common​Room​Instrumentation​Client</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>

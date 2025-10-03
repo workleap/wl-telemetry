@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.811458539742" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -365,10 +365,10 @@
 </doc-anchor-target>
 <p>Register LogRocket instrumentation with a <a href="../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation, LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation, LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 
-registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
@@ -381,10 +381,10 @@ registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
 <p>Register Honeycomb instrumentation with a <a href="../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="7"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
@@ -398,10 +398,10 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <p>Initialize Mixpanel with a <a href="../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 
-initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
@@ -414,10 +414,10 @@ initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
 <p>Initialize Mixpanel with a <a href="../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { registerCommonRoomInstrumentation } from &quot;@workleap/common-room&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 
-registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
+const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
@@ -430,7 +430,7 @@ registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
 <p>Initialize Squide firefly with a <a href="../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeFirefly } from &quot;@squide/firefly&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 
 const runtime = initializeFirefly({
@@ -446,7 +446,7 @@ const runtime = initializeFirefly({
 <p>Initialize platform widgets with verbose mode activated and a <a href="../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeWidgets } from &quot;@workleap-widgets/client/react&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 
 const widgetsRuntime = initializeWidgets(&quot;wlp&quot;, &quot;development&quot; , {

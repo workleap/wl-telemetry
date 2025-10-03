@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Migrate - Introduction</title>
     <meta name="title" content="Migrate - Introduction">
-    <meta name="description" content="To benefit from the new unified and cohesive telemetry setup, an application must use at least the following minimum versions of each library:">
+    <meta name="description" content="To migrate standalone telemetry libraries, follow the migration guide for each library:">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://workleap.github.io/wl-telemetry/introduction/migrate/">
@@ -21,24 +21,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://workleap.github.io/wl-telemetry/introduction/migrate/">
     <meta property="og:title" content="Migrate - Introduction">
-    <meta property="og:description" content="To benefit from the new unified and cohesive telemetry setup, an application must use at least the following minimum versions of each library:">
+    <meta property="og:description" content="To migrate standalone telemetry libraries, follow the migration guide for each library:">
     <meta property="og:image" content="https://workleap.github.io/wl-telemetry/static/logos/logrocket.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://workleap.github.io/wl-telemetry/introduction/migrate/">
     <meta property="twitter:title" content="Migrate - Introduction">
-    <meta property="twitter:description" content="To benefit from the new unified and cohesive telemetry setup, an application must use at least the following minimum versions of each library:">
+    <meta property="twitter:description" content="To migrate standalone telemetry libraries, follow the migration guide for each library:">
     <meta property="twitter:image" content="https://workleap.github.io/wl-telemetry/static/logos/logrocket.svg">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -331,7 +332,13 @@
         <span>Migrate</span>
     </h1>
 </doc-anchor-target>
-<p>To benefit from the new unified and cohesive telemetry setup, an application must use at least the following minimum versions of each library:</p>
+<doc-anchor-target id="standalone-libraries">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#standalone-libraries">#</doc-anchor-trigger>
+        <span>Standalone libraries</span>
+    </h2>
+</doc-anchor-target>
+<p>To migrate standalone telemetry libraries, follow the migration guide for each library:</p>
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -345,21 +352,222 @@
 <tr>
 <td><img src="../../static/logos/logrocket.svg" alt="" class="h-5 w-5 mr-2 -mt-1" /><a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a></td>
 <td>≥ v1.0.0</td>
-<td><a href="../../logrocket/updating/migrate-to-v1.0/">Migrate to v1.0</a></td>
+<td><a href="../../logrocket/updating/migrate-to-v2.0/">Migrate to v2.0</a></td>
 </tr>
 <tr>
 <td><img src="../../static/logos/honeycomb.svg" alt="" class="h-5 w-5 mr-2 -mt-1" /><a href="https://www.honeycomb.io/" class="outbound" target="_blank">Honeycomb</a></td>
 <td>≥ v6.0.0</td>
-<td><a href="../../honeycomb/updating/migrate-to-v6.0/">Migrate to v6.0</a></td>
+<td><a href="../../honeycomb/updating/migrate-to-v7.0/">Migrate to v7.0</a></td>
 </tr>
 <tr>
 <td><img src="../../static/logos/mixpanel.svg" alt="" class="h-5 w-5 mr-2 -mt-1" /><a href="https://mixpanel.com/" class="outbound" target="_blank">Mixpanel</a></td>
 <td>≥ v2.0.0</td>
-<td><a href="../../mixpanel/updating/migrate-to-v2.0/">Migration to v2.0</a></td>
+<td><a href="../../mixpanel/updating/migrate-to-v3.0/">Migration to v3.0</a></td>
 </tr>
 </tbody>
 </table>
 </div>
+<doc-anchor-target id="umbrella-package">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#umbrella-package">#</doc-anchor-trigger>
+        <span>Umbrella package</span>
+    </h2>
+</doc-anchor-target>
+<p>To migrate to the new <a href="https://www.npmjs.com/package/@workleap/telemetry" class="outbound" target="_blank">@workleap/telemetry</a> umbrella package, follow these steps <span class="docs-emoji">&#x1F447;</span></p>
+<doc-anchor-target id="remove-the-standalone-library-packages">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#remove-the-standalone-library-packages">#</doc-anchor-trigger>
+        <span>Remove the standalone library packages</span>
+    </h3>
+</doc-anchor-target>
+<p>Since the <code v-pre>@workleap/telemetry</code> package declares dependencies on the standalone telemetry libraries, host applications no longer need to declare direct dependencies on those packages.</p>
+<p>To get started, open a terminal at the root of your application and install the telemetry umbrella package. (If your application uses other packages for additional functionality, such as <code v-pre>LogRocketLogger</code>, you may still want to keep those installed separately.)</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm remove @workleap/logrocket @workleap/honeycomb @workleap/mixpanel</code></pre>
+</doc-codeblock></div>
+<p>Then, install the <code v-pre>@workleap/telemetry</code> package:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/telemetry logrocket</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="update-the-initialization-code">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#update-the-initialization-code">#</doc-anchor-trigger>
+        <span>Update the initialization code</span>
+    </h3>
+</doc-anchor-target>
+<p>Then, update the initialize code to use the <a href="../reference/initializetelemetry/">initializeTelemetry</a> function instead of standalone registration/initialization functions:</p>
+<p>Before:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">index.tsx</div>
+<pre translate="no" class="language-tsx"><code v-pre class="language-tsx">import { createRoot } from &quot;react-dom/client&quot;;
+import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket&quot;;
+import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
+import { initializeMixpanel } from &quot;@workleap/mixpanel&quot;;
+
+registerLogRocketInstrumentation(&quot;my-app-id&quot;);
+
+registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app-id&quot;, [/.+/g,], {
+    proxy: &quot;https://sample-proxy&quot;,
+});
+
+initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;);
+
+const root = createRoot(document.getElementById(&quot;root&quot;)!);
+
+root.render(
+    &lt;App /&gt;
+);</code></pre>
+</doc-codeblock></div>
+<p>Now:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">index.tsx</div>
+<pre translate="no" class="language-tsx" data-line="4-20,25,27"><code v-pre class="language-tsx">import { createRoot } from &quot;react-dom/client&quot;;
+import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
+
+const client = initializeTelemetry({
+    logRocket: {
+        appId: &quot;my-app-id&quot;
+    },
+    honeycomb: {
+        namespace: &quot;sample&quot;,
+        serviceName: &quot;my-app-name&quot;,
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: &quot;https://sample-proxy&quot;
+        }
+    },
+    mixpanel: {
+        productId: &quot;wlp&quot;,
+        envOrTrackingApiBaseUrl: &quot;development&quot;
+    }
+});
+
+const root = createRoot(document.getElementById(&quot;root&quot;)!);
+
+root.render(
+    &lt;TelemetryProvider client={client}&gt;
+        &lt;App /&gt;
+    &lt;/TelemetryProvider&gt;
+);</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="replace-createusertraits-with-the-client">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#replace-createusertraits-with-the-client">#</doc-anchor-trigger>
+        <span>Replace <code v-pre>createUserTraits</code> with the client</span>
+    </h3>
+</doc-anchor-target>
+<p>The <code v-pre>createUserTraits</code> standalone function is not exported anymore. Use the client <a href="../../logrocket/reference/logrocketinstrumentationclient/#methods">createWorkleapPlatformDefaultUserTraits</a> method instead.</p>
+<p>Before:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { createDefaultUserTraits } from &quot;@workleap/logrocket&quot;;
+import LogRocket from &quot;logrocket&quot;;
+
+const traits = createDefaultUserTraits({
+    userId: &quot;6a5e6b06-0cac-44ee-8d2b-00b9419e7da9&quot;,
+    organizationId: &quot;e6bb30f8-0a00-4928-8943-1630895a3f14&quot;,
+    organizationName: &quot;Acme&quot;,
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});
+
+LogRocket.identify(traits.userId, traits);</code></pre>
+</doc-codeblock></div>
+<p>Now:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="4,6-13"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
+import LogRocket from &quot;logrocket&quot;;
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    userId: &quot;6a5e6b06-0cac-44ee-8d2b-00b9419e7da9&quot;,
+    organizationId: &quot;e6bb30f8-0a00-4928-8943-1630895a3f14&quot;,
+    organizationName: &quot;Acme&quot;,
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});
+
+LogRocket.identify(traits.userId, traits);</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="replace-setglobalspanattribute-and-setglobalspanattributes-with-the-client">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#replace-setglobalspanattribute-and-setglobalspanattributes-with-the-client">#</doc-anchor-trigger>
+        <span>Replace <code v-pre>setGlobalSpanAttribute</code> and <code v-pre>setGlobalSpanAttributes</code> with the client</span>
+    </h3>
+</doc-anchor-target>
+<p>The <code v-pre>setGlobalSpanAttribute</code> and <code v-pre>setGlobalSpanAttributes</code> standalone functions are not exported anymore. Use the client <a href="../../honeycomb/reference/honeycombinstrumentationclient/#methods">setGlobalSpanAttribute</a> and <a href="../../honeycomb/reference/honeycombinstrumentationclient/#methods">setGlobalSpanAttributes</a> methods instead.</p>
+<p>Before:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { setGlobalSpanAttributes } from &quot;@workleap/honeycomb&quot;;
+
+setGlobalSpanAttribute(&quot;app.user_id&quot;, &quot;123&quot;);</code></pre>
+</doc-codeblock></div>
+<p>Now:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3,5,7-9"><code v-pre class="language-typescript">import { useHoneycombInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
+
+const client = useHoneycombInstrumentationClient();
+
+client.setGlobalSpanAttribute(&quot;app.user_id&quot;, &quot;123&quot;);
+
+client.setGlobalSpanAttributes({
+    &quot;app.user_id&quot;: &quot;123&quot;
+})</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="replace-setsuperproperty-and-setsuperproperties-with-the-client">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#replace-setsuperproperty-and-setsuperproperties-with-the-client">#</doc-anchor-trigger>
+        <span>Replace <code v-pre>setSuperProperty</code> and <code v-pre>setSuperProperties</code> with the client</span>
+    </h3>
+</doc-anchor-target>
+<p>The <code v-pre>setSuperProperty</code> and <code v-pre>setSuperProperties</code> standalone functions are not exported anymore. Use the client <a href="../../mixpanel/reference/mixpanelclient/#methods">setGlobalEventProperty</a> and <a href="../../mixpanel/reference/mixpanelclient/#methods">setGlobalEventProperties</a> methods instead.</p>
+<p>Before:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { setSuperProperties } from &quot;@workleap/mixpanel&quot;;
+
+setSuperProperties({
+    &quot;User Id&quot;: &quot;123&quot; 
+});</code></pre>
+</doc-codeblock></div>
+<p>Now:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3,5,7-9"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/telemetry/react&quot;;
+
+const client = useMixpanelClient();
+
+client.setGlobalEventProperty(&quot;User Id&quot;, &quot;123&quot;);
+
+client.setGlobalEventProperties({
+    &quot;User Id&quot;: &quot;123&quot; 
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="replace-createtrackingfunction-with-the-client">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#replace-createtrackingfunction-with-the-client">#</doc-anchor-trigger>
+        <span>Replace <code v-pre>createTrackingFunction</code> with the client</span>
+    </h3>
+</doc-anchor-target>
+<p>The <code v-pre>createTrackingFunction</code> standalone function is not exported anymore. Use the client <a href="../../mixpanel/reference/mixpanelclient/#methods">createTrackingFunction</a> method instead.</p>
+<p>Before:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { createTrackingFunction } from &quot;@workleap/mixpanel&quot;;
+
+const track = createTrackingFunction();
+
+track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
+</doc-codeblock></div>
+<p>Now:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3,5,7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/telemetry/react&quot;;
+
+const client = useMixpanelClient();
+
+const track = client.createTrackingFunction();
+
+track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -375,11 +583,11 @@
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../introduction/getting-started/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../introduction/reference/telemetrycontext/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-base-text-muted">Previous</span>
-                                                <span class="block mt-1">Getting started</span>
+                                                <span class="block mt-1">Telemetry​Context</span>
                                             </span>
                                         </a>
                                     </div>
@@ -452,6 +660,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Migrate", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Migrate", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 2 }</script>
 </body>
 </html>

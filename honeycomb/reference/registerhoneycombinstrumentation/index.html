@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../../static/favicon.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.811458539742" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -346,7 +346,7 @@
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">registerHoneycombInstrumentation(namespace, serviceName, apiServiceUrls: [string | Regex], options?: {})</code></pre>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = registerHoneycombInstrumentation(namespace, serviceName, apiServiceUrls: [string | Regex], options?: {})</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters">
     <h3>
@@ -366,7 +366,7 @@
         <span>Returns</span>
     </h3>
 </doc-anchor-target>
-<p>Nothing</p>
+<p>A <a href="../honeycombinstrumentationclient/">HoneycombInstrumentationClient</a> instance.</p>
 <doc-anchor-target id="default-instrumentation">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#default-instrumentation">#</doc-anchor-trigger>
@@ -405,7 +405,7 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(
+const client = registerHoneycombInstrumentation(
     &quot;sample&quot;,
     &quot;my-app&quot;,
     [/https:\/\/workleap.com\/api\.*/], 
@@ -433,7 +433,7 @@ registerHoneycombInstrumentation(
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;
 });</code></pre>
 </doc-codeblock></div>
@@ -468,7 +468,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     apiKey: &quot;123&quot;
 });</code></pre>
 </doc-codeblock></div>
@@ -487,7 +487,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <pre translate="no" class="language-typescript" data-line="6-8"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 import { LongTaskInstrumentation } from &quot;@opentelemetry/instrumentation-long-task&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     instrumentations: [
         new LongTaskInstrumentation()
@@ -529,7 +529,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <pre translate="no" class="language-typescript" data-line="6-8"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 import { CustomSpanProcessor } from &quot;./CustomSpanProcessor.ts&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     spanProcessors: [
         new CustomSpanProcessor()
@@ -550,7 +550,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     fetchInstrumentation: (defaultOptions) =&gt; {
         return {
@@ -564,7 +564,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     fetchInstrumentation: false
 });</code></pre>
@@ -583,7 +583,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     documentLoadInstrumentation: (defaultOptions) =&gt; {
         return {
@@ -597,7 +597,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     documentLoadInstrumentation: (defaultOptions) =&gt; {
         return {
@@ -621,7 +621,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     xmlHttpRequestInstrumentation: (defaultOptions) =&gt; {
         return {
@@ -635,7 +635,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     xmlHttpRequestInstrumentation: true
 });</code></pre>
@@ -654,7 +654,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     userInteractionInstrumentation: (defaultOptions) =&gt; {
         return {
@@ -666,11 +666,53 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 </doc-codeblock></div>
 <p>Or set the option to <code v-pre>true</code> to enable <a href="https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-user-interaction" class="outbound" target="_blank">@opentelemetryinstrumentation-user-interaction</a> with the default options.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
+<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb/react&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     userInteractionInstrumentation: true
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="telemetrycontext">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#telemetrycontext">#</doc-anchor-trigger>
+        <span><code v-pre>telemetryContext</code></span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>Type</strong>: <code v-pre>TelemetryContext</code></li>
+<li><strong>Default</strong>: <code v-pre>undefined</code></li>
+</ul>
+<p>A <a href="../createtelemetrycontext/#telemetrycontext">TelemetryContext</a> instance containing the telemetry correlation ids to attach to Honeycomb traces. Starting with version <code v-pre>7.0</code>, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3,6"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation, createTelemetryContext } from &quot;@workleap/honeycomb/react&quot;;
+
+const telemetryContext = createTelemetryContext();
+
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+    proxy: &quot;https://sample-proxy&quot;
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="logrocketinstrumentationclient">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#logrocketinstrumentationclient">#</doc-anchor-trigger>
+        <span><code v-pre>logRocketInstrumentationClient</code></span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>Type</strong>: <code v-pre>LogRocketInstrumentationClient</code></li>
+<li><strong>Default</strong>: <code v-pre>undefined</code></li>
+</ul>
+<p>A <a href="../../../logrocket/reference/logrocketinstrumentationclient/">LogRocketInstrumentationClient</a> instance to integrate Honeycomb traces with LogRocket session replays. Starting with version <code v-pre>7.0</code>, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="4,8"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation, createTelemetryContext } from &quot;@workleap/honeycomb/react&quot;;
+import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
+
+const logRocketInstrumentationClient = registerLogRocketInstrumentation(&quot;my-app-id&quot;);
+
+const honeycombClient = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+    proxy: &quot;https://sample-proxy&quot;,
+    logRocketInstrumentationClient
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="verbose">
@@ -687,7 +729,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     verbose: true
 });</code></pre>
@@ -708,7 +750,7 @@ registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,
 import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
@@ -758,7 +800,7 @@ const skipOptionsValidationTransformer: HoneycombSdkOptionsTransformer = config 
     return config;
 };
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
     proxy: &quot;https://sample-proxy&quot;,
     transformers: [skipOptionsValidationTransformer]
 });</code></pre>
@@ -812,10 +854,10 @@ const debugTransformer: HoneycombSdkOptionsTransformer = (config, context) =&gt;
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../honeycomb/reference/setglobalspanattributes/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../honeycomb/reference/honeycombinstrumentationclient/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">set​Global​Span​Attributes</span>
+                                                <span class="block mt-1">Honeycomb​Instrumentation​Client</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>

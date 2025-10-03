@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../../static/favicon.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.811458539742" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -346,7 +346,13 @@
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { verbose });</code></pre>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { 
+    trackingEndpoint?,
+    telemetryContext?,
+    logRocketInstrumentationClient?,
+    verbose?,
+    loggers?
+});</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters">
     <h3>
@@ -360,11 +366,20 @@
 <li><code v-pre>options</code>: An optional object literal of options:
 <ul>
 <li><code v-pre>trackingEndpoint</code>: An optional tracking endpoint.</li>
+<li><code v-pre>telemetryContext</code>: A <a href="../createtelemetrycontext/#telemetrycontext">TelemetryContext</a> instance containing the telemetry correlation ids to attach to Honeycomb traces. Starting with version <code v-pre>7.0</code>, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.</li>
+<li><code v-pre>logRocketInstrumentationClient</code>: A <a href="../../../logrocket/reference/logrocketinstrumentationclient/">LogRocketInstrumentationClient</a> instance to integrate Honeycomb traces with LogRocket session replays. Starting with version <code v-pre>7.0</code>, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.</li>
 <li><code v-pre>verbose</code>: If no <code v-pre>loggers</code> are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
 <li><code v-pre>loggers</code>: An optional array of <code v-pre>RootLogger</code> instances.</li>
 </ul>
 </li>
 </ul>
+<doc-anchor-target id="returns">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#returns">#</doc-anchor-trigger>
+        <span>Returns</span>
+    </h3>
+</doc-anchor-target>
+<p>A <a href="../mixpanelclient/">MixpanelClient</a> instance.</p>
 <doc-anchor-target id="environments">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#environments">#</doc-anchor-trigger>
@@ -400,9 +415,9 @@
 <li><code v-pre>msw</code></li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel&quot;;
+<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;);</code></pre>
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="initialize-with-a-base-url">
     <h3>
@@ -411,9 +426,9 @@ initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;);</code></pre>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel&quot;;
+<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-initializeMixpanel(&quot;wlp&quot;, &quot;https://my-tracking-api&quot;);</code></pre>
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;https://my-tracking-api&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="use-a-custom-tracking-endpoint">
     <h3>
@@ -422,10 +437,41 @@ initializeMixpanel(&quot;wlp&quot;, &quot;https://my-tracking-api&quot;);</code>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-initializeMixpanel(&quot;wlp&quot;, &quot;https://my-tracking-api&quot;, {
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
     trackingEndpoint: &quot;custom/tracking/track&quot;
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="initialize-with-a-telemetry-context">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-with-a-telemetry-context">#</doc-anchor-trigger>
+        <span>Initialize with a telemetry context</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel, createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
+
+const telemetryContext = createTelemetryContext();
+
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+    telemetryContext
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="integrate-with-logrocket">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#integrate-with-logrocket">#</doc-anchor-trigger>
+        <span>Integrate with LogRocket</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="4,7"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
+import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
+
+const logRocketInstrumentationClient = registerLogRocketInstrumentation(&quot;my-app-id&quot;);
+
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+    logRocketInstrumentationClient
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="verbose-mode">
@@ -435,9 +481,9 @@ initializeMixpanel(&quot;wlp&quot;, &quot;https://my-tracking-api&quot;, {
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
     verbose: true
 });</code></pre>
 </doc-codeblock></div>
@@ -448,11 +494,11 @@ initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
+import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 
-initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
@@ -481,10 +527,10 @@ initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../mixpanel/reference/createtrackingfunction/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../mixpanel/reference/mixpanelclient/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">create​Tracking​Function</span>
+                                                <span class="block mt-1">Mixpanel​Client</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>

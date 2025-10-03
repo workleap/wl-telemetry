@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Getting started</title>
     <meta name="title" content="Getting started">
-    <meta name="description" content="To monitor application performance, Workleap has adopted Honeycomb, a tool that helps teams capture and analyze ">
+    <meta name="description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://workleap.github.io/wl-telemetry/honeycomb/getting-started/">
@@ -21,25 +21,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://workleap.github.io/wl-telemetry/honeycomb/getting-started/">
     <meta property="og:title" content="Getting started">
-    <meta property="og:description" content="To monitor application performance, Workleap has adopted Honeycomb, a tool that helps teams capture and analyze ">
+    <meta property="og:description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
     <meta property="og:image" content="https://workleap.github.io/wl-telemetry/static/honeycomb/honeycomb-http-get.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://workleap.github.io/wl-telemetry/honeycomb/getting-started/">
     <meta property="twitter:title" content="Getting started">
-    <meta property="twitter:description" content="To monitor application performance, Workleap has adopted Honeycomb, a tool that helps teams capture and analyze ">
+    <meta property="twitter:description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
     <meta property="twitter:image" content="https://workleap.github.io/wl-telemetry/static/honeycomb/honeycomb-http-get.png">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.811458539742" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -332,6 +332,22 @@
         <span>Getting started</span>
     </h1>
 </doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-warning"></div>
+    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-warning" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
+                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Prefer using the <a href="../../introduction/getting-started/">@workleap/telemetry</a> umbrella package over this standalone library.</p>
+        </div>
+    </div>
+</div>
 <p>To monitor <strong>application performance</strong>, Workleap has adopted <a href="https://www.honeycomb.io/" class="outbound" target="_blank">Honeycomb</a>, a tool that helps teams capture and analyze <strong>distributed traces</strong> and metrics to understand and monitor complex systems, application behaviors, and performance. Built on <a href="https://opentelemetry.io/" class="outbound" target="_blank">OpenTelemetry</a>, Honeycomb provides a robust API for frontend telemetry.</p>
 <p>While Honeycomb&#x27;s in-house <a href="https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/" class="outbound" target="_blank">HoneycombWebSDK</a> includes great default instrumentation, this package provides a slightly altered default instrumentation which is adapted for Workleap&#x27;s applications&#x27; requirements.</p>
 <doc-anchor-target id="install-the-packages">
@@ -353,20 +369,23 @@
 <p>Then, update the application bootstrapping code to register Honeycomb instrumentation using the <a href="../reference/registerhoneycombinstrumentation/">registerHoneycombInstrumentation</a> function:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="6-8"><code v-pre class="language-tsx">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
+<pre translate="no" class="language-tsx" data-line="6-9,15,17"><code v-pre class="language-tsx">import { registerHoneycombInstrumentation, HoneycombInstrumentationProvider, createTelemetryContext } from &quot;@workleap/honeycomb/react&quot;;
 import { StrictMode } from &quot;react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
 
-registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
-    proxy: &quot;https://sample-proxy&quot;
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+    proxy: &quot;https://sample-proxy&quot;,
+    telemetryContext: createTelemetryContext()
 });
 
 const root = createRoot(document.getElementById(&quot;root&quot;)!);
 
 root.render(
     &lt;StrictMode&gt;
-        &lt;App /&gt;
+        &lt;HoneycombInstrumentationProvider client={client}&gt;
+            &lt;App /&gt;
+        &lt;/HoneycombInstrumentationProvider&gt;
     &lt;/StrictMode&gt;
 );</code></pre>
 </doc-codeblock></div>
@@ -507,20 +526,55 @@ root.render(
         <span>Set custom user attributes</span>
     </h2>
 </doc-anchor-target>
-<p>Most applications need to set custom attributes on traces about the current user environment. To help with that, <code v-pre>@workleap/honeycomb</code> expose the <a href="../reference/setglobalspanattributes/">setGlobalSpanAttributes</a> function.</p>
-<p>Update your application code to include the <code v-pre>setGlobalSpanAttribute</code> function:</p>
+<p>Most applications need to set custom attributes about the current user environment on all traces. To help with that, <a href="../reference/honeycombinstrumentationclient/">HoneycombInstrumentationClient</a> expose the <a href="../reference/honeycombinstrumentationclient/#methods">setGlobalSpanAttributes</a> method:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { setGlobalSpanAttributes } from &quot;@workleap/honeycomb&quot;;
+<pre translate="no" class="language-typescript" data-line="5-7"><code v-pre class="language-typescript">import { useHoneycombInstrumentationClient } from &quot;@workleap/honeycomb/react&quot;;
 
-setGlobalSpanAttribute(&quot;app.user_id&quot;, &quot;123&quot;);</code></pre>
+const client = useHoneycombInstrumentationClient();
+
+client.setGlobalSpanAttributes({
+    &quot;app.user_id&quot;: &quot;123&quot;
+});</code></pre>
 </doc-codeblock></div>
-<p>Now, every trace recorded after the execution of <code v-pre>setGlobalSpanAttribute</code> will include the custom attribute <code v-pre>app.user_id</code>:</p>
+<p>Now, every trace recorded after the execution of <code v-pre>setGlobalSpanAttributes</code> will include the custom attribute <code v-pre>app.user_id</code>:</p>
 <div class="align-image-left"><p><figure class="content-center">
     <img src="../../static/honeycomb/honeycomb-custom-attributes.png" alt="Custom attributes" class="rounded-image-rounded border-image-border border-image-border-width" width="204" height="161" />
     <figcaption class="caption">Custom attributes</figcaption>
 </figure>
 </p>
 </div>
+<doc-anchor-target id="integrate-with-logrocket">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#integrate-with-logrocket">#</doc-anchor-trigger>
+        <span>Integrate with LogRocket</span>
+    </h2>
+</doc-anchor-target>
+<p>Starting with version <code v-pre>7.0</code>, attaching LogRocket session replays to Honeycomb traces requires providing a <a href="../../logrocket/reference/logrocketinstrumentationclient/">LogRocketInstrumentationClient</a> to the registration function:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-tsx" data-line="7,12"><code v-pre class="language-tsx">import { registerHoneycombInstrumentation, HoneycombInstrumentationProvider, createTelemetryContext } from &quot;@workleap/honeycomb/react&quot;;
+import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
+import { StrictMode } from &quot;react&quot;;
+import { createRoot } from &quot;react-dom/client&quot;;
+import { App } from &quot;./App.tsx&quot;;
+
+const logRocketInstrumentationClient = registerLogRocketInstrumentation(&quot;app-id&quot;);
+
+const honeycombInstrumentationClient = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+    proxy: &quot;https://sample-proxy&quot;,
+    telemetryContext: createTelemetryContext(),
+    logRocketInstrumentationClient
+});
+
+const root = createRoot(document.getElementById(&quot;root&quot;)!);
+
+root.render(
+    &lt;StrictMode&gt;
+        &lt;HoneycombInstrumentationProvider client={client}&gt;
+            &lt;App /&gt;
+        &lt;/HoneycombInstrumentationProvider&gt;
+    &lt;/StrictMode&gt;
+);</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="custrom-traces">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#custrom-traces">#</doc-anchor-trigger>
@@ -558,19 +612,12 @@ setGlobalSpanAttribute(&quot;app.user_id&quot;, &quot;123&quot;);</code></pre>
         <span>Filter by correlation ids</span>
     </h2>
 </doc-anchor-target>
-<p>The <code v-pre>registerLogRocketInstrumentation</code> function automatically adds two user traits to every session replay to <strong>unify</strong> LogRocket with the <strong>other telemetry platforms</strong>:</p>
+<p>When a <a href="../../introduction/reference/telemetrycontext/">TelemetryContext</a> instance is provided, the <code v-pre>registerLogRocketInstrumentation</code> function adds two user traits to every session replay to <strong>unify</strong> LogRocket with the <strong>other telemetry platforms</strong>:</p>
 <ul>
 <li><code v-pre>app.telemetry_id</code>: Identifies a single application load. It&#x27;s primarily used to correlate Honeycomb traces with the other telemetry platforms.</li>
 <li><code v-pre>app.device_id</code>: Identifies the user&#x27;s device across sessions. This value is extracted from the shared <code v-pre>wl-identity</code> cookie, which is used across Workleap&#x27;s marketing sites and web applications.</li>
 </ul>
 <p>To correlate a session with other telemetry platforms, filter the query with the <code v-pre>app.telemetry_id</code> or <code v-pre>app.device_id</code> fields into the &quot;Where&quot; input.</p>
-<doc-anchor-target id="migrate">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#migrate">#</doc-anchor-trigger>
-        <span>Migrate</span>
-    </h2>
-</doc-anchor-target>
-<p>To benefit from the new integrated experience, follow the <a href="../updating/migrate-to-v6.0/">migration guide</a> for <code v-pre>v6.0</code>.</p>
 
                                 
                                 <!-- Required only on API pages -->

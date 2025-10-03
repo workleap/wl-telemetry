@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../../static/favicon.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.811458539742" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -381,7 +381,7 @@
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 logger.debug(&quot;Hello world!&quot;);</code></pre>
@@ -393,7 +393,7 @@ logger.debug(&quot;Hello world!&quot;);</code></pre>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 logger.information(&quot;Hello world!&quot;);</code></pre>
@@ -405,7 +405,7 @@ logger.information(&quot;Hello world!&quot;);</code></pre>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 logger.warning(&quot;Hello world!&quot;);</code></pre>
@@ -417,7 +417,7 @@ logger.warning(&quot;Hello world!&quot;);</code></pre>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 logger.error(&quot;Hello world!&quot;);</code></pre>
@@ -429,7 +429,7 @@ logger.error(&quot;Hello world!&quot;);</code></pre>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 logger.critical(&quot;Hello world!&quot;);</code></pre>
@@ -442,7 +442,7 @@ logger.critical(&quot;Hello world!&quot;);</code></pre>
 </doc-anchor-target>
 <p>A minimum severity of entries to process can be configured as an option. Messages with a lower severity than the configured level will then be ignored.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger({
     logLevel: LogLevel.error
@@ -510,7 +510,7 @@ logger.debug(&quot;Hello world!&quot;);</code></pre>
 </doc-anchor-target>
 <p>Multiple segments can be chained to create a log entry that combines styled text, errors, and objects. To process all segments and output the log to the console, complete the chain by calling any log method.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 
@@ -528,7 +528,7 @@ logger
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 const scope = logger.startScope(&quot;Module 1 registration&quot;);
@@ -563,7 +563,7 @@ scope.end();</code></pre>
 </doc-anchor-target>
 <p>A scope can be dismissed to prevent it&#x27;s log entries from being outputted to the console.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="19"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="19"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
 const scope = logger.startScope(&quot;Module 1 registration&quot;);
@@ -598,11 +598,11 @@ scope.end({ dismiss: true });</code></pre>
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../logrocket/reference/createdefaultusertraits/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../logrocket/reference/createtelemetrycontext/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-base-text-muted">Previous</span>
-                                                <span class="block mt-1">create​Default​User​Traits</span>
+                                                <span class="block mt-1">create​Telemetry​Context</span>
                                             </span>
                                         </a>
                                     </div>

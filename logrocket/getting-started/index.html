@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.811458539742">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812772139018">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Getting started - LogRocket</title>
     <meta name="title" content="Getting started - LogRocket">
-    <meta name="description" content="To gain full visibility into frontend behavior in production, Workleap has adopted LogRocket, a tool that combines session replay, performance...">
+    <meta name="description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://workleap.github.io/wl-telemetry/logrocket/getting-started/">
@@ -21,25 +21,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://workleap.github.io/wl-telemetry/logrocket/getting-started/">
     <meta property="og:title" content="Getting started - LogRocket">
-    <meta property="og:description" content="To gain full visibility into frontend behavior in production, Workleap has adopted LogRocket, a tool that combines session replay, performance...">
+    <meta property="og:description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
     <meta property="og:image" content="https://workleap.github.io/wl-telemetry/static/logrocket/logrocket-session-replays.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://workleap.github.io/wl-telemetry/logrocket/getting-started/">
     <meta property="twitter:title" content="Getting started - LogRocket">
-    <meta property="twitter:description" content="To gain full visibility into frontend behavior in production, Workleap has adopted LogRocket, a tool that combines session replay, performance...">
+    <meta property="twitter:description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
     <meta property="twitter:image" content="https://workleap.github.io/wl-telemetry/static/logrocket/logrocket-session-replays.png">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.811458539742" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.812772139018" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.811458539742" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.811458539742" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.812772139018" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.812772139018" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -332,6 +332,22 @@
         <span>Getting started</span>
     </h1>
 </doc-anchor-target>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-warning"></div>
+    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-warning" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
+                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Prefer using the <a href="../../introduction/getting-started/">@workleap/telemetry</a> umbrella package over this standalone library.</p>
+        </div>
+    </div>
+</div>
 <p>To gain full visibility into <strong>frontend behavior</strong> in <strong>production</strong>, Workleap has adopted <a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a>, a tool that combines session replay, performance tracking, and error logging to help <strong>understand</strong> and resolve <strong>issues</strong> in <strong>production</strong>.</p>
 <p>This package provides default LogRocket instrumentation tailored to Workleap&#x27;s applications&#x27; needs, including the <strong>removal</strong> of <strong>sensitive information</strong> from HTML documents, HTTP requests/responses and URLs.</p>
 <doc-anchor-target id="install-the-packages">
@@ -350,21 +366,25 @@
         <span>Register instrumentation</span>
     </h2>
 </doc-anchor-target>
-<p>Then, register LogRocket instrumentation using the <a href="../reference/registerlogrocketinstrumentation/">registerLogRocketInstrumentation</a> function:</p>
+<p>Then, register LogRocket instrumentation using the <a href="../reference/registerlogrocketinstrumentation/">registerLogRocketInstrumentation</a> function and forward the client using a React context provider:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="6"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-tsx" data-line="6-8,14,16"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 import { StrictMode } from &quot;react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
 
-registerLogRocketInstrumentation(&quot;my-app-id&quot;);
+const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+    telemetryContext: createTelemetryContext()
+});
 
 const root = createRoot(document.getElementById(&quot;root&quot;)!);
 
 root.render(
     &lt;StrictMode&gt;
-        &lt;App /&gt;
+        &lt;LogRocketInstrumentationProvider client={client}&gt;
+            &lt;App /&gt;
+        &lt;/LogRocketInstrumentationProvider&gt;
     &lt;/StrictMode&gt;
 );</code></pre>
 </doc-codeblock></div>
@@ -469,30 +489,35 @@ root.render(
         <span>Identify a user</span>
     </h2>
 </doc-anchor-target>
-<p>Most applications need to identify the current user environment. To help with that, <code v-pre>@workleap/logrocket</code> exposes the <a href="../reference/createdefaultusertraits/">createDefaultUserTraits</a> function. When used with <a href="https://docs.logrocket.com/reference/identify" class="outbound" target="_blank">LogRocket.identify</a>, it provides all the tools to identify a  user with the key information that we track at Workleap.</p>
-<p>Update your application bootstrapping code to include the <code v-pre>createDefaultUserTraits</code> and <code v-pre>LogRocket.identify</code> functions:</p>
+<p>Most applications need to identify the current user environment. To help with that, <a href="../reference/logrocketinstrumentationclient/">LogRocketInstrumentationClient</a> expose the <a href="../reference/logrocketinstrumentationclient/#methods">createWorkleapPlatformDefaultUserTraits</a> method. When used with <a href="https://docs.logrocket.com/reference/identify" class="outbound" target="_blank">LogRocket.identify</a>, it provides all the tools to identify a  user with the key information that we track at Workleap:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-tsx"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 import { StrictMode } from &quot;react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
 
-registerLogRocketInstrumentation(&quot;my-app-id&quot;);
+const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+    telemetryContext: createTelemetryContext()
+});
 
 const root = createRoot(document.getElementById(&quot;root&quot;)!);
 
 root.render(
     &lt;StrictMode&gt;
-        &lt;App /&gt;
+        &lt;LogRocketInstrumentationProvider client={client}&gt;
+            &lt;App /&gt;
+        &lt;/LogRocketInstrumentationProvider&gt;
     &lt;/StrictMode&gt;
 );</code></pre>
 </doc-codeblock></div>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4-11,13"><code v-pre class="language-typescript">import { createDefaultUserTraits } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-typescript" data-line="6-13,15"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
-const traits = createDefaultUserTraits({
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
     userId: &quot;6a5e6b06-0cac-44ee-8d2b-00b9419e7da9&quot;,
     organizationId: &quot;e6bb30f8-0a00-4928-8943-1630895a3f14&quot;,
     organizationName: &quot;Acme&quot;,
@@ -527,13 +552,14 @@ LogRocket.getSessionUrl(url =&gt; {
 <p>By default, Workleap&#x27;s LogRocket configuration does not capture console logs. To send loggers output to LogRocket, use the <a href="../reference/logrocketlogger/">LogRocketLogger</a> class.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="8"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-tsx" data-line="9"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, LogRocketLogger, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 import { StrictMode } from &quot;react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
 
-registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+    telemetryContext: createTelemetryContext()
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 
@@ -541,7 +567,9 @@ const root = createRoot(document.getElementById(&quot;root&quot;)!);
 
 root.render(
     &lt;StrictMode&gt;
-        &lt;App /&gt;
+        &lt;LogRocketInstrumentationProvider client={client}&gt;
+            &lt;App /&gt;
+        &lt;/LogRocketInstrumentationProvider&gt;
     &lt;/StrictMode&gt;
 );</code></pre>
 </doc-codeblock></div>
@@ -565,12 +593,13 @@ root.render(
 <p>To troubleshoot an issue in production, remove the <code v-pre>LogLevel</code> from the <code v-pre>LogRocketLogger</code> constructor options and set the <code v-pre>verbose</code> option to <code v-pre>true</code>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="7-8"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketLogger } from &quot;@workleap/logrocket&quot;;
+<pre translate="no" class="language-tsx" data-line="8-9"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, LogRocketLogger, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 import { StrictMode } from &quot;react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
 
-registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+    telemetryContext: createTelemetryContext()
     verbose: true,
     loggers: [new LogRocketLogger()]
 });
@@ -579,7 +608,9 @@ const root = createRoot(document.getElementById(&quot;root&quot;)!);
 
 root.render(
     &lt;StrictMode&gt;
-        &lt;App /&gt;
+        &lt;LogRocketInstrumentationProvider client={client}&gt;
+            &lt;App /&gt;
+        &lt;/LogRocketInstrumentationProvider&gt;
     &lt;/StrictMode&gt;
 );</code></pre>
 </doc-codeblock></div>
@@ -614,19 +645,12 @@ root.render(
         <span>Filter by correlation ids</span>
     </h2>
 </doc-anchor-target>
-<p>The <code v-pre>registerLogRocketInstrumentation</code> function automatically adds two user traits to every session replay to <strong>unify</strong> LogRocket with the <strong>other telemetry platforms</strong>:</p>
+<p>When a <a href="../../introduction/reference/telemetrycontext/">TelemetryContext</a> instance is provided, the <code v-pre>registerLogRocketInstrumentation</code> function adds two user traits to every session replay to <strong>unify</strong> LogRocket with the <strong>other telemetry platforms</strong>:</p>
 <ul>
 <li><code v-pre>Telemetry Id</code>: Identifies a single application load. It&#x27;s primarily used to correlate with Honeycomb traces.</li>
 <li><code v-pre>Device Id</code>: Identifies the user&#x27;s device across sessions. This value is extracted from the shared <code v-pre>wl-identity</code> cookie, which is used across Workleap&#x27;s marketing sites and web applications.</li>
 </ul>
 <p>To correlate a session with other telemetry platforms, filter the session list using these user traits.</p>
-<doc-anchor-target id="migrate">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#migrate">#</doc-anchor-trigger>
-        <span>Migrate</span>
-    </h2>
-</doc-anchor-target>
-<p>To migrate from the <code v-pre>@workleap-tracking/logrocket</code> package and benefit from the new integrated experience, follow the <a href="../updating/migrate-to-v1.0/">migration guide</a> for <code v-pre>v1.0</code>.</p>
 
                                 
                                 <!-- Required only on API pages -->
