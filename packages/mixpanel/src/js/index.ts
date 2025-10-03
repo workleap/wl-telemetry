@@ -1,5 +1,7 @@
-export { createTrackingFunction, type CreateTrackingFunctionOptions, type TrackingFunction, type TrackingFunctionOptions } from "./createTrackingFunction.ts";
-export type { Environment } from "./env.ts";
+export { createTelemetryContext, type CreateTelemetryContextOptions, type TelemetryContext } from "@workleap-telemetry/core";
+export { createTrackingFunction, type CreateMixpanelTrackingFunctionOptions, type MixpanelTrackingFunction, type MixpanelTrackingFunctionOptions } from "./createTrackingFunction.ts";
+export type { MixpanelEnvironment } from "./env.ts";
 export { initializeMixpanel, type InitializeMixpanelOptions } from "./initializeMixpanel.ts";
-export { setSuperProperties, setSuperProperty, type MixpanelEventProperties } from "./properties.ts";
+export { MixpanelClient, type MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
+export { type MixpanelEventProperties } from "./properties.ts";
 

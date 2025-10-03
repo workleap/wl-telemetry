@@ -1,10 +1,26 @@
-import { NoopLogger } from "@workleap/logging";
-import { BootstrappingStore, TelemetryContext } from "@workleap/telemetry";
-import { __clearBootstrappingStore, __clearTelemetryContext, __setBootstrappingStore, __setTelemetryContext } from "@workleap/telemetry/internal";
+// These tests cannot be concurrent because of global mocked on LogRocket.
+
+import { type LogRocketInstrumentationPartialClient, TelemetryContext } from "@workleap-telemetry/core";
 import { afterEach, test, vi } from "vitest";
 import { createTrackingFunction } from "../../src/js/createTrackingFunction.ts";
-import { __resetInitializationGuard, initializeMixpanel } from "../../src/js/initializeMixpanel.ts";
-import { __clearSuperProperties, BaseProperties, OtherProperties, TelemetryProperties } from "../../src/js/properties.ts";
+import { MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
+import { BaseProperties, OtherProperties, TelemetryProperties } from "../../src/js/properties.ts";
+
+class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    readonly #listeners: any[] = [];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    registerGetSessionUrlListener(listener: any) {
+        this.#listeners.push(listener);
+    }
+
+    dispatchSessionUrl(sessionUrl: string) {
+        this.#listeners.forEach(x => {
+            x(sessionUrl);
+        });
+    }
+}
 
 const fetchMock = vi.fn();
 
@@ -12,15 +28,14 @@ globalThis.fetch = fetchMock;
 
 afterEach(() => {
     vi.clearAllMocks();
-
-    __resetInitializationGuard();
-    __clearSuperProperties();
-    __clearBootstrappingStore();
-    __clearTelemetryContext();
 });
 
 test("the custom properties are sent", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     const track = createTrackingFunction();
 
@@ -36,12 +51,16 @@ test("the custom properties are sent", async ({ expect }) => {
     expect(body.targetProductIdentifier).toBeNull();
 });
 
-test("the telemetry properties are sent", async ({ expect }) => {
+test("when a telemetry context is provided, the telemetry context values are sent", async ({ expect }) => {
     const telemetryContext = new TelemetryContext("123", "456");
 
-    __setTelemetryContext(telemetryContext);
+    const globalEventProperties = new Map<string, unknown>();
 
-    initializeMixpanel("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation", {
+        telemetryContext
+    });
 
     const track = createTrackingFunction();
 
@@ -55,23 +74,19 @@ test("the telemetry properties are sent", async ({ expect }) => {
     expect(body.properties[TelemetryProperties.TelemetryId]).toBe(telemetryContext.telemetryId);
 });
 
-test("the LogRocket session url is sent", async ({ expect }) => {
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: true,
-        isHoneycombReady: false
-    }, new NoopLogger());
+test("when a logrocket instrumentation client is provided, the logrocket session url is sent", async ({ expect }) => {
+    const globalEventProperties = new Map<string, unknown>();
+    const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
 
-    __setBootstrappingStore(bootstrappingStore);
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation", {
+        logRocketInstrumentationClient
+    });
 
     const sessionUrl = "session-123";
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__ = (listener: (url: string) => void) => {
-        listener(sessionUrl);
-    };
-
-    initializeMixpanel("wlp", "http://api/navigation");
+    logRocketInstrumentationClient.dispatchSessionUrl(sessionUrl);
 
     const track = createTrackingFunction();
 
@@ -85,7 +100,11 @@ test("the LogRocket session url is sent", async ({ expect }) => {
 });
 
 test("the request body include the event name", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     const track = createTrackingFunction();
 
@@ -98,7 +117,11 @@ test("the request body include the event name", async ({ expect }) => {
 });
 
 test("when the keep alive option is provided, the fetch options include the \"keepAlive\" option", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     const track = createTrackingFunction();
 
@@ -110,7 +133,11 @@ test("when the keep alive option is provided, the fetch options include the \"ke
 });
 
 test("when a target product id is provided, the request body include the provided id", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     const track = createTrackingFunction({
         targetProductId: "target-app"
@@ -125,7 +152,11 @@ test("when a target product id is provided, the request body include the provide
 });
 
 test("when a target product id is not provided, the request body include the property with a null value", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     const track = createTrackingFunction();
 
@@ -138,7 +169,11 @@ test("when a target product id is not provided, the request body include the pro
 });
 
 test("when a base URL is provided, the endpoint include the provided base URL", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     const track = createTrackingFunction();
 
@@ -150,7 +185,11 @@ test("when a base URL is provided, the endpoint include the provided base URL", 
 });
 
 test("when the provided base URL end with a slash is provided, the ending slash is escaped", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation/");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation/");
 
     const track = createTrackingFunction();
 
@@ -161,7 +200,11 @@ test("when the provided base URL end with a slash is provided, the ending slash 
 });
 
 test("when an environment is provided, the resolved endpoint URL match the provided environment", async ({ expect }) => {
-    initializeMixpanel("wlp", "development");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "development");
 
     const track = createTrackingFunction();
 
@@ -173,7 +216,11 @@ test("when an environment is provided, the resolved endpoint URL match the provi
 });
 
 test("when a custom tracking endpoint is provided, use the provided custom endpoint", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation", {
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation", {
         trackingEndpoint: "custom/tracking/endpoint"
     });
 
@@ -187,7 +234,11 @@ test("when a custom tracking endpoint is provided, use the provided custom endpo
 });
 
 test("when a custom tracking endpoint starts with slash, remove the leading slash from the provided custom tracking endpoint", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation", {
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation", {
         trackingEndpoint: "/custom/endpoint"
     });
 
@@ -201,7 +252,11 @@ test("when a custom tracking endpoint starts with slash, remove the leading slas
 });
 
 test("when no tracking endpoint is provided, use the default \"tracking/track\" endpoint", async ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     const track = createTrackingFunction();
 
@@ -212,7 +267,11 @@ test("when no tracking endpoint is provided, use the default \"tracking/track\" 
 });
 
 test("when a custom tracking endpoint is provided with an environment, use the provided custom endpoint", async ({ expect }) => {
-    initializeMixpanel("wlp", "development", {
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "development", {
         trackingEndpoint: "/custom/endpoint"
     });
 
@@ -226,7 +285,11 @@ test("when a custom tracking endpoint is provided with an environment, use the p
 });
 
 test("when a custom tracking endpoint starts with slash and an environment is provided, remove the custom tracking endpoint leading slash", async ({ expect }) => {
-    initializeMixpanel("wlp", "staging", {
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "staging", {
         trackingEndpoint: "/custom/endpoint"
     });
 

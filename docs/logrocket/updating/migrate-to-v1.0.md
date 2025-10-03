@@ -33,7 +33,7 @@ Follow this guide to migrate from `@workleap-tracking/logrocket` :point_down:
 ### Changes to `registerLogRocketInstrumentation`
 
 - The `getTrackingIdentifier` function and `trackingIdentifier` option do not exist anymore. A similar identifier is now automatically added as a user trait for every session replay.
-- The `identifyOptions` option has been removed, use [createDefaultUserTraits](../reference/createDefaultUserTraits.md) and the native [LogRocket.identify](https://docs.logrocket.com/reference/identify) function instead.
+- The `identifyOptions` option has been removed, use `createDefaultUserTraits` and the native [LogRocket.identify](https://docs.logrocket.com/reference/identify) function instead.
 - The `onSessionUrlInitialized` option has been removed, use the native [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) function instead.
 - The function arguments changed from `(options: {})` to `(appId, options: {})`.
 
@@ -152,7 +152,7 @@ Follow these steps to migrate an existing application `@workleap-tracking/logroc
 
 - Rename `registerAnonymousLogRocketInstrumentation` to [registerLogRocketInstrumentation](../reference/registerLogRocketInstrumentation.md).
 - Remove all usage of `getTrackingIdentifier`. The new [registerLogRocketInstrumentation](../reference/registerLogRocketInstrumentation.md) function automatically sets the tracking identifier as a correlation id under the `Device Id` name.
-- Remove the `trackingIdentifier` and `identifyOptions` options. To identify a user, use [createDefaultUserTraits](../reference/createDefaultUserTraits.md) in combination to [LogRocket.identify](https://docs.logrocket.com/reference/identify). [View example](../getting-started.md#identify-a-user)
+- Remove the `trackingIdentifier` and `identifyOptions` options. To identify a user, use `createDefaultUserTraits` in combination to [LogRocket.identify](https://docs.logrocket.com/reference/identify). [View example](../getting-started.md#identify-a-user)
 - Replace the `onSessionUrlInitialized` option with the [LogRocket.getSessionUrl](https://docs.logrocket.com/reference/get-session-url) function. [View example](../getting-started.md#get-the-session-url)
 - Rename any instances of `WorkleapLogRocketIdentification` to `LogRocketIdentification`.
 - Rename any instances of `WorkleapUserTraits` to `LogRocketUserTraits`.

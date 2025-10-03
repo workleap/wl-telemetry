@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useTrackingFunction } from "@workleap/mixpanel/react";
+import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 import { fetchJson } from "./api.ts";
 
 interface Movie {
@@ -13,7 +13,7 @@ export function MoviesPage() {
         return fetchJson("http://localhost:1234/api/movies");
     } });
 
-    const track = useTrackingFunction();
+    const track = useMixpanelTrackingFunction();
 
     track("Page View", {
         "Page": "Movies Page"

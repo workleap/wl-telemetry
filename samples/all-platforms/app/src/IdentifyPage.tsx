@@ -1,13 +1,16 @@
-import { identify as identifyCommonRoom } from "@workleap/common-room";
-import { setGlobalSpanAttribute } from "@workleap/honeycomb";
-import { createDefaultUserTraits, type LogRocketIdentification } from "@workleap/logrocket";
-import { setSuperProperty } from "@workleap/mixpanel";
-import { useTrackingFunction } from "@workleap/mixpanel/react";
+import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
+import {
+    useHoneycombInstrumentationClient,
+    useLogRocketInstrumentationClient,
+    useMixpanelClient,
+    useMixpanelTrackingFunction,
+    type LogRocketWorkleapPlatformIdentification
+} from "@workleap/telemetry/react";
 import LogRocket from "logrocket";
-import { type ChangeEvent, type FormEvent, useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 
 export function IdentifyPage() {
-    const [form, setForm] = useState<LogRocketIdentification>({
+    const [form, setForm] = useState<LogRocketWorkleapPlatformIdentification>({
         userId: crypto.randomUUID(),
         organizationId: crypto.randomUUID(),
         organizationName: "Contoso",
@@ -45,7 +48,7 @@ export function IdentifyPage() {
         }
     });
 
-    const track = useTrackingFunction();
+    const track = useMixpanelTrackingFunction();
 
     track("Page View", {
         "Page": "Identify Page"
@@ -60,20 +63,24 @@ export function IdentifyPage() {
         }));
     };
 
+    const logRocketClient = useLogRocketInstrumentationClient();
+    const honeycombClient = useHoneycombInstrumentationClient();
+    const mixpanelClient = useMixpanelClient();
+    const commonRoomClient = useCommonRoomInstrumentationClient();
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
 
-        console.log("Form submitted to identify the user into telemetry platforms", form);
+        console.log("Form submitted to identify the user with telemetry platforms", form);
 
         LogRocket.identify(form.userId, {
-            ...createDefaultUserTraits(form),
+            ...logRocketClient.createWorkleapPlatformDefaultUserTraits(form),
             "Custom Trait": "Toto"
         });
 
-        setGlobalSpanAttribute("app.user", JSON.stringify(form));
-        setSuperProperty("User", JSON.stringify(form));
-
-        identifyCommonRoom("pat-2025-08-05-v10@gmail.com");
+        honeycombClient.setGlobalSpanAttribute("app.user", JSON.stringify(form));
+        mixpanelClient.setGlobalEventProperty("User", JSON.stringify(form));
+        commonRoomClient.identify("pat-2025-08-05-v10@gmail.com");
     };
 
     return (

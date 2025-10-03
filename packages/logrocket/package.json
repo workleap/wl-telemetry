@@ -15,13 +15,21 @@
         "provenance": true,
         "exports": {
             ".": {
-                "types": "./dist/index.d.ts",
-                "import": "./dist/index.js",
-                "default": "./dist/index.js"
+                "types": "./dist/js/index.d.ts",
+                "import": "./dist/js/index.js",
+                "default": "./dist/js/index.js"
+            },
+            "./react": {
+                "types": "./dist/react/index.d.ts",
+                "import": "./dist/react/index.js",
+                "default": "./dist/react/index.js"
             }
         }
     },
-    "exports": "./src/index.ts",
+    "exports": {
+        ".": "./src/js/index.ts",
+        "./react": "./src/react/index.ts"
+    },
     "files": [
         "src",
         "dist",
@@ -35,22 +43,33 @@
         "test": "vitest --config vitest.config.ts --no-watch"
     },
     "peerDependencies": {
-        "logrocket": "^10.1.0"
+        "logrocket": "^10.1.0",
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0"
+    },
+    "peerDependenciesMeta": {
+        "react": {
+            "optional": true
+        },
+        "react-dom": {
+            "optional": true
+        }
     },
     "dependencies": {
-        "@workleap/logging": "^1.2.5",
-        "@workleap/telemetry": "workspace:*",
+        "@workleap-telemetry/core": "workspace:*",
+        "@workleap/logging": "^1.3.0",
         "logrocket-fuzzy-search-sanitizer": "0.0.2"
     },
     "devDependencies": {
-        "@rsbuild/core": "1.4.6",
-        "@rslib/core": "0.10.5",
-        "@workleap/eslint-plugin": "3.4.2",
-        "@workleap/rslib-configs": "1.0.6",
+        "@rsbuild/core": "1.5.13",
+        "@rslib/core": "0.15.0",
+        "@types/react": "19.2.0",
+        "@workleap/eslint-plugin": "3.5.0",
+        "@workleap/rslib-configs": "1.1.0",
         "@workleap/typescript-configs": "3.0.4",
         "eslint": "8.57.1",
-        "happy-dom": "18.0.1",
-        "typescript": "5.8.3",
+        "happy-dom": "19.0.2",
+        "typescript": "5.9.3",
         "vitest": "3.2.4"
     },
     "sideEffects": false

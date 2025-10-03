@@ -1,5 +1,5 @@
 
-import type { TelemetryContext } from "@workleap/telemetry";
+import type { TelemetryContext } from "@workleap-telemetry/core";
 import { browserName, browserVersion, deviceType, osName, referringDomain } from "./utils.ts";
 
 export type MixpanelEventProperties = Record<string, unknown>;
@@ -50,30 +50,3 @@ export function getTelemetryProperties(context: TelemetryContext) {
 export const OtherProperties = {
     LogRocketSessionUrl: "LogRocket Session Url"
 };
-
-//////////////////////
-
-export type SuperProperties = Map<string, unknown>;
-
-// Equivalent to: https://docs.mixpanel.com/docs/tracking-methods/sdks/javascript#setting-super-properties.
-const superProperties: SuperProperties = new Map<string, unknown>();
-
-export function setSuperProperty(key: string, value: unknown) {
-    superProperties.set(key, value);
-}
-
-export function setSuperProperties(values: Record<string, unknown>) {
-    Object.keys(values).forEach(x => {
-        superProperties.set(x, values[x]);
-    });
-}
-
-// Must always return the actual reference to the super properties, not a copy
-// because it will breaks the global context.
-export function getSuperProperties() {
-    return superProperties;
-}
-
-export function __clearSuperProperties() {
-    superProperties.clear();
-}

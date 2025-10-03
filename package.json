@@ -39,17 +39,17 @@
     },
     "devDependencies": {
         "@changesets/changelog-github": "0.5.1",
-        "@changesets/cli": "2.29.5",
-        "@typescript-eslint/parser": "8.37.0",
-        "@workleap/eslint-plugin": "3.4.2",
+        "@changesets/cli": "2.29.7",
+        "@typescript-eslint/parser": "8.45.0",
+        "@workleap/eslint-plugin": "3.5.0",
         "@workleap/typescript-configs": "3.0.4",
         "eslint": "8.57.1",
-        "pkg-pr-new": "0.0.54",
+        "pkg-pr-new": "0.0.60",
         "prettier": "3.6.2",
         "retypeapp": "3.12.0-preview2",
         "syncpack": "13.0.4",
-        "turbo": "2.5.4",
-        "typescript": "5.8.3"
+        "turbo": "2.5.8",
+        "typescript": "5.9.3"
     },
     "engines": {
         "node": ">=22.0.0"

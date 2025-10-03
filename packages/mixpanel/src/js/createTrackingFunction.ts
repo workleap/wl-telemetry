@@ -1,10 +1,14 @@
+// DEPRECATED: Grace period ends on January 1th 2026.
+// Must keep this code until the end of the grace period because host applications using version 2.* of
+// this package would get runtime errors from the Platform Widgets CDN otherwise.
+
 import { getMixpanelContext } from "./context.ts";
 import { getBaseProperties, type MixpanelEventProperties } from "./properties.ts";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export interface CreateTrackingFunctionOptions {
+export interface CreateMixpanelTrackingFunctionOptions {
     /**
      * The product identifier of the target product.
      */
@@ -14,7 +18,7 @@ export interface CreateTrackingFunctionOptions {
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export interface TrackingFunctionOptions {
+export interface MixpanelTrackingFunctionOptions {
     /**
    * Whether to keep the connection alive for the tracking request.
    * It is mostly used for tracking links where the user might navigate away before the request is completed.
@@ -35,12 +39,12 @@ export interface TrackingFunctionOptions {
  * @param options Options for tracking the event.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export type TrackingFunction = (eventName: string, properties: MixpanelEventProperties, options?: TrackingFunctionOptions) => Promise<void>;
+export type MixpanelTrackingFunction = (eventName: string, properties: MixpanelEventProperties, options?: MixpanelTrackingFunctionOptions) => Promise<void>;
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function createTrackingFunction(options: CreateTrackingFunctionOptions = {}) {
+export function createTrackingFunction(options: CreateMixpanelTrackingFunctionOptions = {}) {
     const {
         targetProductId
     } = options;
@@ -48,11 +52,11 @@ export function createTrackingFunction(options: CreateTrackingFunctionOptions = 
     const {
         productId,
         endpoint,
-        superProperties,
+        globalEventProperties,
         logger
     } = getMixpanelContext();
 
-    const trackFunction: TrackingFunction = async (eventName, properties, _options = {}) => {
+    const trackFunction: MixpanelTrackingFunction = async (eventName, properties, _options = {}) => {
         try {
             const {
                 keepAlive = false
@@ -62,7 +66,7 @@ export function createTrackingFunction(options: CreateTrackingFunctionOptions = 
 
             const allProperties = {
                 ...baseProperties,
-                ...Object.fromEntries(superProperties),
+                ...Object.fromEntries(globalEventProperties),
                 ...properties
             };
 

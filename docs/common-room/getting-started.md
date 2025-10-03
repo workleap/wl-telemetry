@@ -25,31 +25,35 @@ pnpm add @workleap/common-room
 
 Then, register Common Room instrumentation using the [registerCommonRoomInstrumentation](./reference/registerCommonRoomInstrumentation.md) function:
 
-```tsx !#6 index.tsx
-import { registerCommonRoomInstrumentation } from "@workleap/common-room";
+```tsx !#6,12,14 index.tsx
+import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-registerCommonRoomInstrumentation("my-site-id");
+const client = registerCommonRoomInstrumentation("my-site-id");
 
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
-        <App />
+        <CommonRoomInstrumentationProvider client={client}>
+            <App />
+        </CommonRoomInstrumentationProvider>
     </StrictMode>
 );
 ```
 
 ## Identify a user
 
-To associate the anonymous activities with an existing user, identify the current user using the [identify](./reference/identify.md) function:
+To associate the anonymous activities with an existing user, the [CommonRoomInstrumentationClient](./reference/CommonRoomInstrumentationClient.md) expose the [identify](./reference/CommonRoomInstrumentationClient.md#methods) method:
 
-```ts !#3
-import { identify } from "@workleap/common-room";
+```ts !#5
+import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
 
-identify("johndoe@contoso.com");
+const client = useCommonRoomInstrumentationClient();
+
+client.identify("johndoe@contoso.com");
 ```
 
 ## Try it :rocket:

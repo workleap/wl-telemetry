@@ -14,7 +14,7 @@ Initializes [LogRocket](https://logrocket.com/) instrumentation with Workleap's 
 ## Reference
 
 ```ts
-registerLogRocketInstrumentation(appId, options?: { rootHostname, privateFieldNames, privateQueryParameterNames })
+const client = registerLogRocketInstrumentation(appId, options?: { rootHostname, privateFieldNames, privateQueryParameterNames })
 ```
 
 ### Parameters
@@ -24,7 +24,7 @@ registerLogRocketInstrumentation(appId, options?: { rootHostname, privateFieldNa
 
 ### Returns
 
-Nothing
+A [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
 
 ## Predefined options
 
@@ -38,9 +38,9 @@ The `registerLogRocketInstrumentation(appId, options?: {})` function also accept
 A [root hostname](https://docs.logrocket.com/reference/roothostname) to track sessions across subdomains.
 
 ```ts !#4
-import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     rootHostname: "an-host.com"
 });
 ```
@@ -53,9 +53,9 @@ registerLogRocketInstrumentation("my-app-id", {
 Names of additional fields to exclude from session replays. These fields will be removed from network requests, responses using a fuzzy-matching algorithm.
 
 ```ts !#4
-import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     privateFieldNames: ["a-custom-field"]
 });
 ```
@@ -70,14 +70,31 @@ To view the default private fields, have a look at the [registerLogRocketInstrum
 Names of additional fields to exclude from session replays. These fields will be removed from query parameters using a fuzzy-matching algorithm.
 
 ```ts !#4
-import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     privateQueryParameterNames: ["a-custom-param"]
 });
 ```
 
 To view the default private query parameters, have a look at the [registerLogRocketInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/logrocket/src/registerLogRocketInstrumentation.ts) file on GitHub.
+
+### `telemetryContext`
+
+- **Type**: `TelemetryContext`
+- **Default**: `undefined`
+
+A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry correlation ids to attach to LogRocket session replays. Starting with version `2.0`, if no telemetry context is provided, the correlation ids will not be attached to LogRocket session replays.
+
+```ts !#3,6
+import { registerLogRocketInstrumentation, createTelemetryContext } from "@workleap/logrocket/react";
+
+const telemetryContext = createTelemetryContext();
+
+const client = registerLogRocketInstrumentation("my-app-id", {
+    telemetryContext
+});
+```
 
 ### `verbose`
 
@@ -87,9 +104,9 @@ To view the default private query parameters, have a look at the [registerLogRoc
 If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
 
 ```ts !#4
-import { registerLogRocketInstrumentation } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     verbose: true
 });
 ```
@@ -102,10 +119,10 @@ registerLogRocketInstrumentation("my-app-id", {
 The logger instances that will output messages.
 
 ```ts !#5
-import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
@@ -130,7 +147,7 @@ transformer(options: LogRocketSdkOptions, context: LogRocketSdkOptionsTransforme
 ```
 
 ```ts !#3-8,11
-import { registerLogRocketInstrumentation, type LogRocketSdkOptionsTransformer } from "@workleap/logrocket";
+import { registerLogRocketInstrumentation, type LogRocketSdkOptionsTransformer } from "@workleap/logrocket/react";
 
 const disableConsoleLogging: LogRocketSdkOptionsTransformer = config => {
     config.console = ...(config.console || {});
@@ -139,7 +156,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = config => {
     return config;
 };
 
-registerLogRocketInstrumentation("my-app-id", {
+const client = registerLogRocketInstrumentation("my-app-id", {
     transformers: [disableConsoleLogging]
 });
 ```
@@ -149,7 +166,7 @@ registerLogRocketInstrumentation("my-app-id", {
 Generic transformers can use the `context` argument to gather additional information about their execution context:
 
 ```ts !#4,8 transformer.js
-import type { LogRocketSdkOptionsTransformer } from "@workleap/logrocket";
+import type { LogRocketSdkOptionsTransformer } from "@workleap/logrocket/react";
 
 const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) => {
     if (!context.verbose) {

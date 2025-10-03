@@ -7,4 +7,6 @@ meta:
 # Reference
 
 - [registerCommonRoomInstrumentation](./registerCommonRoomInstrumentation.md)
-- [identify](./identify.md)
+- [CommonRoomInstrumentationClient](./CommonRoomInstrumentationClient.md)
+- [CommonRoomInstrumentationProvider](./CommonRoomInstrumentationProvider.md)
+- [useCommonRoomInstrumentationClient](useCommonRoomInstrumentationClient.md)

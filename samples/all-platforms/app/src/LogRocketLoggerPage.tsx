@@ -1,6 +1,6 @@
 import { BrowserConsoleLogger, CompositeLogger, type CompositeLoggerScope } from "@workleap/logging";
 import { LogRocketLogger } from "@workleap/logrocket";
-import { useTrackingFunction } from "@workleap/mixpanel/react";
+import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 import { useCallback, useState } from "react";
 
 function getShortId() {
@@ -194,7 +194,7 @@ function ScopeSection() {
 //////////////////////
 
 export function LogRocketLoggerPage() {
-    const track = useTrackingFunction();
+    const track = useMixpanelTrackingFunction();
 
     track("Page View", {
         "Page": "LogRocket Logger"

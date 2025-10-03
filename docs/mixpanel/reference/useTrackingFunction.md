@@ -1,5 +1,5 @@
 ---
-order: 80
+order: 70
 label: useTrackingFunction
 meta:
     title: useTrackingFunction - Mixpanel
@@ -35,15 +35,11 @@ A `TrackingFunction` with the following signature: `(eventName, properties: {}, 
 The body size for keepalive requests is [limited to 64 kibibytes](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#keepalive).
 !!!
 
-### Throws
-
-If the [initializeMixpanel](./initializeMixpanel.md) function hasn't been executed yet and the Mixpanel context is not available, an `Error` is thrown.
-
 ## Usage
 
 ### Track events
 
-```ts !#5
+```ts !#3,5
 import { useTrackingFunction } from "@workleap/mixpanel/react";
 
 const track = useTrackingFunction();

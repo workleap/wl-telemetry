@@ -1,80 +1,92 @@
-import { NoopLogger } from "@workleap/logging";
-import { BootstrappingStore } from "@workleap/telemetry";
-import { __clearBootstrappingStore, __clearTelemetryContext, __setBootstrappingStore } from "@workleap/telemetry/internal";
+import { type LogRocketInstrumentationPartialClient, TelemetryContext } from "@workleap-telemetry/core";
 import { afterEach, test, vi } from "vitest";
 import { MixpanelContextVariableName } from "../../src/js/context.ts";
-import { __resetInitializationGuard, initializeMixpanel, IsInitializedVariableName } from "../../src/js/initializeMixpanel.ts";
-import { __clearSuperProperties } from "../../src/js/properties.ts";
+import { initializeMixpanel, IsInitializedVariableName, MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
+import { TelemetryProperties } from "../../src/js/properties.ts";
+
+class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    readonly #listeners: any[] = [];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    registerGetSessionUrlListener(listener: any) {
+        this.#listeners.push(listener);
+    }
+
+    get listenerCount() {
+        return this.#listeners.length;
+    }
+}
 
 afterEach(() => {
     vi.clearAllMocks();
 
-    __resetInitializationGuard();
-    __clearSuperProperties();
-    __clearBootstrappingStore();
-    __clearTelemetryContext();
+    // DEPRECATED: Grace period ends on January 1th 2026.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    delete globalThis[IsInitializedVariableName];
 });
 
-test("when honeycomb instrumentation has already been registered, throw an error", ({ expect }) => {
+test.concurrent("when mixpanel has already been initialized, throw an error", ({ expect }) => {
     initializeMixpanel("wlp", "http://api/navigation");
 
     expect(() => initializeMixpanel("wlp", "http://api/navigation")).toThrow("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
 });
 
-test("when logrocket is ready, register a listener for logrocket get session url", ({ expect }) => {
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: true,
-        isHoneycombReady: false
-    }, new NoopLogger());
+test.concurrent("when a logrocket instrumentation client is provided, register a listener for logrocket get session url", ({ expect }) => {
+    const globalEventProperties = new Map<string, unknown>();
 
-    __setBootstrappingStore(bootstrappingStore);
+    const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
 
-    const registerGetSessionUrlListenerMock = vi.fn();
+    const initializer = new MixpanelInitializer(globalEventProperties);
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__ = registerGetSessionUrlListenerMock;
+    initializer.initialize("wlp", "http://api/navigation", {
+        logRocketInstrumentationClient
+    });
 
-    initializeMixpanel("wlp", "http://api/navigation");
-
-    expect(registerGetSessionUrlListenerMock).toHaveBeenCalledOnce();
+    expect(logRocketInstrumentationClient.listenerCount).toBe(1);
 });
 
-test("when logrocket is not ready, register a listener for logrocket get session url once logrocket is ready", ({ expect }) => {
-    const bootstrappingStore = new BootstrappingStore({
-        isLogRocketReady: false,
-        isHoneycombReady: false
-    }, new NoopLogger());
-
-    __setBootstrappingStore(bootstrappingStore);
-
-    const registerGetSessionUrlListenerMock = vi.fn();
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis.__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__ = registerGetSessionUrlListenerMock;
-
-    initializeMixpanel("wlp", "http://api/navigation");
-
-    expect(registerGetSessionUrlListenerMock).not.toHaveBeenCalled();
-
-    bootstrappingStore.dispatch({ type: "logrocket-ready" });
-
-    expect(registerGetSessionUrlListenerMock).toHaveBeenCalledOnce();
-});
-
+// DEPRECATED: Grace period ends on January 1th 2026.
+// Cannot be concurrent because it's using "globaThis".
 test("the context global variable is set", ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     expect(globalThis[MixpanelContextVariableName]).toBeDefined();
 });
 
+// DEPRECATED: Grace period ends on January 1th 2026.
+// Cannot be concurrent because it's using "globaThis".
 test("the initialized global variable is set", ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation");
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     expect(globalThis[IsInitializedVariableName]).toBeDefined();
 });
+
+test.concurrent("when a telemetry context is provided, the telemetry context values are added as super properties", ({ expect }) => {
+    const telemetryContext = new TelemetryContext("123", "456");
+
+    const globalEventProperties = new Map<string, unknown>();
+
+    const initializer = new MixpanelInitializer(globalEventProperties);
+
+    initializer.initialize("wlp", "http://api/navigation", {
+        telemetryContext
+    });
+
+    expect(globalEventProperties.get(TelemetryProperties.DeviceId)).toBe(telemetryContext.deviceId);
+    expect(globalEventProperties.get(TelemetryProperties.TelemetryId)).toBe(telemetryContext.telemetryId);
+});
+
