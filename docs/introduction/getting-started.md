@@ -217,7 +217,7 @@ pnpm add @workleap/logging @workleap/logrocket
 
 Then update the application bootstrapping code to set up the loggers:
 
-```tsx !#11,29-30,34-35 index.tsx
+```tsx !#13,31-32,36-37 index.tsx
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
@@ -225,7 +225,9 @@ import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
-import { isDev } from "./isDev.ts";
+
+// Do not do this, it's only for demo purpose.
+const isDev = process.env === "development";
 
 // Only add LogRocket logger if your product is set up with LogRocket.
 const loggers: RootLogger[] = [isDev ? new BrowserConsoleLogger() : new LogRocketLogger({ logLevel: LogLevel.information })];
@@ -270,7 +272,7 @@ root.render(
 
 To troubleshoot production issues, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#11,29,34 index.tsx
+```tsx !#13,31,36 index.tsx
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
@@ -278,7 +280,9 @@ import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
-import { isDev } from "./isDev.ts";
+
+// Do not do this, it's only for demo purpose.
+const isDev = process.env === "development";
 
 // Only add LogRocket logger if your product is set up with LogRocket.
 const loggers: RootLogger[] = [isDev ? new BrowserConsoleLogger() : new LogRocketLogger({ logLevel })];
