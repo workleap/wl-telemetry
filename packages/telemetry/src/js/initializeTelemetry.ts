@@ -3,8 +3,7 @@ import { createTelemetryContext } from "@workleap-telemetry/core";
 import { registerHoneycombInstrumentation, type HoneycombInstrumentationClient, type HoneycombSdkOptions, type RegisterHoneycombInstrumentationOptions } from "@workleap/honeycomb";
 import type { RootLogger } from "@workleap/logging";
 import { registerLogRocketInstrumentation, type LogRocketInstrumentationClient, type RegisterLogRocketInstrumentationOptions } from "@workleap/logrocket";
-import { initializeMixpanel, type InitializeMixpanelOptions, type MixpanelEnvironment } from "@workleap/mixpanel";
-import type { MixpanelClient } from "../../../mixpanel/src/js/MixpanelClient.ts";
+import { initializeMixpanel, type InitializeMixpanelOptions, type MixpanelClient, type MixpanelEnvironment } from "@workleap/mixpanel";
 import { TelemetryClient } from "./TelemetryClient.ts";
 
 /**

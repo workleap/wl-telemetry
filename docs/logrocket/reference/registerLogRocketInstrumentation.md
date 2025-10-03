@@ -84,7 +84,7 @@ To view the default private query parameters, have a look at the [registerLogRoc
 - **Type**: `TelemetryContext`
 - **Default**: `undefined`
 
-A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry colleration ids to attach to LogRocket session replays. Starting with version `2.0`, if no telemetry context is provided, the correlation ids will not be attached to LogRocket session replays.
+A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry correlation ids to attach to LogRocket session replays. Starting with version `2.0`, if no telemetry context is provided, the correlation ids will not be attached to LogRocket session replays.
 
 ```ts !#3,6
 import { registerLogRocketInstrumentation, createTelemetryContext } from "@workleap/logrocket/react";

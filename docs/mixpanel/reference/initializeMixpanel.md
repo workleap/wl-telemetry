@@ -29,7 +29,7 @@ const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: 
 - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL.
 - `options`: An optional object literal of options:
     - `trackingEndpoint`: An optional tracking endpoint.
-    - `telemetryContext`: A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry colleration ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
+    - `telemetryContext`: A [TelemetryContext](./createTelemetryContext.md#telemetrycontext) instance containing the telemetry correlation ids to attach to Honeycomb traces. Starting with version `7.0`, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.
     - `logRocketInstrumentationClient`: A [LogRocketInstrumentationClient](../../logrocket/reference/LogRocketInstrumentationClient.md) instance to integrate Honeycomb traces with LogRocket session replays. Starting with version `7.0`, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.

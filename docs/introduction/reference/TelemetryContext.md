@@ -13,7 +13,7 @@ toc:
 Don't create your own instance of `TelemetryContext`, use a `createTelemetryContext` function instead.
 !!!
 
-An object containing the telemetry colleration ids.
+An object containing the telemetry correlation ids.
 
 ## Reference
 

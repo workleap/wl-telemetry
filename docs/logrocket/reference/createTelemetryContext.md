@@ -9,7 +9,7 @@ toc:
 
 # createTelemetryContext
 
-Creates a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance containing the telemetry colleration ids.
+Creates a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance containing the telemetry correlation ids.
 
 ## Reference
 
