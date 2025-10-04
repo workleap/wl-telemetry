@@ -1,11 +1,13 @@
 ---
 order: 80
 label: Best practices
-toc:
-    depth: 2-3
 ---
 
 # Best practices
+
+## Privacy
+
+Follow [privacy best practices](./privacy.md) to reduce the risk of exposing Personally Identifiable Information (PII) in LogRocket session replays.
 
 ## Log relevant information
 

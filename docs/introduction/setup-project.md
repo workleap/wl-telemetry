@@ -113,7 +113,7 @@ Troubleshoot issues:
 - Open the [DevTools](https://developer.chrome.com/docs/devtools/) console and look for logs starting with `[common-room]`.
 - Refer to the sample on [GitHub](https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms).
 
-### Filter by correlation ids
+### Correlation ids
 
 Two correlation ids are attached to every session replay, event, and trace to **unify** the telemetry platforms. To verify they are attached correctly, try the correlation ids [troubleshooting example]().
 
@@ -123,7 +123,7 @@ If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events wi
 
 ## Setup loggers
 
-Providing loggers to the initialization/registration functions is optional, but recommended to simplify troubleshooting. To set up loggers, follow the [guide](../guides/setup-loggers.md).
+:point_right: Providing loggers to the initialization/registration functions is optional, but recommended to simplify troubleshooting. To set up loggers, follow the [guide](../guides/setup-loggers.md).
 
 
 
