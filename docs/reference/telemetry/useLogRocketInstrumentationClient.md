@@ -1,5 +1,5 @@
 ---
-order: 160
+order: 140
 label: useLogRocketInstrumentationClient
 toc:
     depth: 2-3
@@ -21,7 +21,7 @@ None
 
 ### Returns
 
-A [LogRocketInstrumentationClient](../../logrocket/reference/LogRocketInstrumentationClient.md) instance.
+A [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
 
 ## Usage
 

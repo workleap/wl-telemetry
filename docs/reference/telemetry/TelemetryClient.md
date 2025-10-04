@@ -19,15 +19,15 @@ const client = new TelemetryClient(logRocketClient?, honeycombClient?, mixpanelC
 
 ### Parameters
 
-- `logRocketClient`: An optional [LogRocketInstrumentationClient](../../logrocket/reference/LogRocketInstrumentationClient.md) instance.
-- `honeycombClient`: An optional [HoneycombInstrumentationClient](../../honeycomb/reference/HoneycombInstrumentationClient.md) instance.
-- `mixpanelClient`: An optional [MixpanelClient](../../mixpanel/reference/MixpanelClient.md) instance.
+- `logRocketClient`: An optional [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
+- `honeycombClient`: An optional [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md) instance.
+- `mixpanelClient`: An optional [MixpanelClient](./MixpanelClient.md) instance.
 
 ### Getters
 
-- `logRocketClient`: Return the [LogRocketInstrumentationClient](../../logrocket/reference/LogRocketInstrumentationClient.md) instance.
-- `honeycombClient`: Return the [HoneycombInstrumentationClient](../../honeycomb/reference/HoneycombInstrumentationClient.md) instance.
-- `mixpanelClient`: Return the [MixpanelClient](../../mixpanel/reference/MixpanelClient.md) instance.
+- `logRocketClient`: Return the [LogRocketInstrumentationClient](./LogRocketInstrumentationClient.md) instance.
+- `honeycombClient`: Return the [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md) instance.
+- `mixpanelClient`: Return the [MixpanelClient](./MixpanelClient.md) instance.
 
 ## Usage
 

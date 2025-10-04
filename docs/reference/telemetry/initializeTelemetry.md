@@ -15,6 +15,10 @@ const client = initializeTelemetry(options?: { logRocket?, honeycomb?, mixpanel?
 
 ### Parameters
 
+TBD
+TBD -> Add all options for every library? How to share this with the standalone guides?
+TBD
+
 - `options`: An optional object literal of options:
     - `logRocket`: An optional [LogRocket instrumentation registration options](https://workleap.github.io/wl-telemetry/logrocket/reference/registerlogrocketinstrumentation) object. If provided, LogRocket instrumentation is registered, if omitted, it is skipped.
     - `honeycomb`: An optional [Honeycomb instrumentation registration options](https://workleap.github.io/wl-telemetry/honeycomb/reference/registerhoneycombinstrumentation) object. If provided, Honeycomb instrumentation is registered, if omitted, it is skipped.

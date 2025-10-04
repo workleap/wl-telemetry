@@ -1,5 +1,5 @@
 ---
-order: 140
+order: 110
 label: useMixpanelClient
 toc:
     depth: 2-3
@@ -21,7 +21,7 @@ None
 
 ### Returns
 
-A [MixpanelClient](../../mixpanel/reference/MixpanelClient.md) instance.
+A [MixpanelClient](./MixpanelClient.md) instance.
 
 ## Usage
 

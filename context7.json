@@ -7,5 +7,10 @@
     ],
     "excludeFolders": [
         "docs/updating"
-    ]
+    ],
+     "excludeFiles": [
+        "setup-logrocket-standalone.md",
+        "setup-honeycomb-standalone.md",
+        "setup-mixpanel-standalone.md"
+     ]
 }

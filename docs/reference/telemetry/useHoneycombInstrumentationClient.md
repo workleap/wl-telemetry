@@ -1,5 +1,5 @@
 ---
-order: 150
+order: 120
 label: useHoneycombInstrumentationClient
 toc:
     depth: 2-3
@@ -21,7 +21,7 @@ None
 
 ### Returns
 
-A [HoneycombInstrumentationClient](../../honeycomb/reference/HoneycombInstrumentationClient.md) instance.
+A [HoneycombInstrumentationClient](./HoneycombInstrumentationClient.md) instance.
 
 ## Usage
 

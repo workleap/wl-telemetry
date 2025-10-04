@@ -1,5 +1,5 @@
 ---
-order: 130
+order: 100
 label: useMixpanelTrackingFunction
 toc:
     depth: 2-3
