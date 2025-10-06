@@ -136,7 +136,7 @@ If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events wi
 
 ## Setup loggers
 
-:point_right: Providing loggers to the initialization/registration functions is optional, but recommended to simplify troubleshooting. To set up loggers, follow the [guide](../guides/setup-loggers.md).
+:point_right: Providing loggers to the initialization or registration functions is optionnal, but recommended to simplify troubleshooting. To set up loggers, follow the [guide](../guides/setup-loggers.md).
 
 
 
