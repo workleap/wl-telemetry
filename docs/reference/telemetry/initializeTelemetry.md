@@ -27,14 +27,14 @@ const client = initializeTelemetry(options?: { logRocket?, honeycomb?, mixpanel?
         - `serviceName`: Honeycomb application service name.
         - `apiServiceUrls`: A `RegExp` or `string` that matches the URLs of the application's backend services. If unsure, start with the temporary regex `/.+/g,` to match all URLs.
         - `options`: An optional object literal of options:
-            - `proxy`:
-            - `apiKey`:
-            - `instrumentations`:
-            - `spanProcessors`:
-            - `fetchInstrumentation`:
-            - `documentLoadInstrumentation`:
-            - `xmlHttpRequestInstrumentation`:
-            - `userInteractionInstrumentation`:
+            - `proxy`: Set the URL to an [OpenTelemetry collector](https://docs.honeycomb.io/send-data/opentelemetry/collector/) proxy. Either `proxy` or `apiKey` option must be provided.
+            - `apiKey`: Set an Honeycomb ingestion [API key](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key). Either `proxy` or `apiKey` option must be provided.
+            - `instrumentations`: Append the provided [instrumentation](https://opentelemetry.io/docs/languages/js/instrumentation/) instances to the configuration.
+            - `spanProcessors`: Append the provided [span processor](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#custom-span-processing) instances to the configuration.
+            - `fetchInstrumentation`: Replace the default [@opentelemetry/instrumentation-fetch](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-fetch) options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.
+            - `documentLoadInstrumentation`: Replace the default [@opentelemetry/instrumentation-document-load](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-document-load#document-load-instrumentation-options) options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.
+            - `xmlHttpRequestInstrumentation`: By default, [@opentelemetry/instrumentation-xml-http-request](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-xml-http-request) is disabled. To enable this instrumentation, provide a function that returns an object literal with the desired options. This function will receive an object literal of default options, which you can extend or replace as needed.
+            - `userInteractionInstrumentation`: By default, [@opentelemetryinstrumentation-user-interaction](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-user-interaction) is disabled. To enable this instrumentation, provide a function that returns an object literal with the desired options. This function will receive an object literal of default options, which you can extend or replace as needed.
     - `mixpanel`: An optional Mixpanel initialization options object. If provided, Mixpanel is initialized, if omitted, it is skipped.
         - `productId`: The product id.
         - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL.

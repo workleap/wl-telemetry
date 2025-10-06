@@ -23,7 +23,7 @@ pnpm add @workleap/logrocket logrocket
 
 ## Register instrumentation
 
-Then, register LogRocket instrumentation using the [registerLogRocketInstrumentation](#registerlogrocketinstrumentation) function and forward the client using a React context provider:
+Then, update the application bootstrapping code to register LogRocket instrumentation using the [registerLogRocketInstrumentation](#registerlogrocketinstrumentation) function and forward the client using a React context provider:
 
 ```tsx !#6-8,14,16 index.tsx
 import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
@@ -115,7 +115,7 @@ You can try filtering the session list using different user traits, such as:
 
 If you are experiencing issues with this guide:
 
-- Set the `verbose` predefined option to `true`.
+- Set the [verbose](#verbose-mode) predefined option to `true`.
 - Open the [DevTools](https://developer.chrome.com/docs/devtools/) console and look for logs starting with `[logrocket]`.
 - Refer to the sample on [GitHub](https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms).
 
@@ -187,7 +187,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 
 To view the default private query parameters, have a look at the [registerLogRocketInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/logrocket/src/registerLogRocketInstrumentation.ts) file on GitHub.
 
-#### Provide a telemetry context
+#### Use a telemetry context
 
 ```ts !#3,6
 import { registerLogRocketInstrumentation, createTelemetryContext } from "@workleap/logrocket/react";
@@ -209,7 +209,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 });
 ```
 
-#### Provide loggers
+#### Use loggers
 
 ```ts !#5
 import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket/react";
@@ -220,7 +220,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 });
 ```
 
-#### Transform options
+#### Use transformer functions
 
 The predefined options are useful to quickly customize the default configuration of the [LogRocket SDK](https://docs.logrocket.com/reference/init), but only covers a subset of the options. If you need full control over the configuration, you can provide configuration transformer functions through the `transformers` option of the [registerLogRocketInstrumentation](#registerlogrocketinstrumentation) function. Remember, **no locked in** :heart::v:.
 
