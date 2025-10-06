@@ -25,7 +25,7 @@ Although Workleap provides a standalone package for each platform, **we recommen
 | ![](../static/logos/logrocket.svg){ class="h-5 w-5 mr-2 -mt-1" }[LogRocket](https://logrocket.com/) | Records frontend sessions and logs to help debug and resolve issues in production and surface critical issues. | [Learn more](./learn-logrocket/features.md) |
 | ![](../static/logos/honeycomb.svg){ class="h-5 w-5 mr-2 -mt-1" }[Honeycomb](https://www.honeycomb.io/) | Captures and analyzes distributed traces and metrics to understand and monitor complex systems, application behaviors, and performance. | [Learn more](./learn-honeycomb/features.md) |
 | ![](../static/logos/mixpanel.svg){ class="h-5 w-5 mr-2 -mt-1" }[Mixpanel](https://mixpanel.com/) | Tracks user interactions to analyze behavior and measure product impact. | [Learn more](./learn-mixpanel/features.md) |
-| ![](../static/logos/common-room.svg){ class="h-5 w-5 mr-2 -mt-1" }[Common Room](https://www.commonroom.io/) | Connects user activity across platforms to provide insight into community engagement and behavior.<br/><br/>_(Common Room is not part of the integrated experience, as it is a standalone tool used by marketers for a completely different purpose.)_ | [Getting started](../common-room/getting-started.md) |
+| ![](../static/logos/common-room.svg){ class="h-5 w-5 mr-2 -mt-1" }[Common Room](https://www.commonroom.io/) | Connects user activity across platforms to provide insight into community engagement and behavior.<br/><br/>_(Common Room is not part of the integrated experience, as it is a standalone tool used by marketers for a completely different purpose.)_ | [Getting started](../standalone-libraries/setup-common-room.md) |
 
 ## Setup your project
 

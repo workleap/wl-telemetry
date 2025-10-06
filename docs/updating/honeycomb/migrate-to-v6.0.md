@@ -7,13 +7,13 @@ meta:
 
 # Migrate to v6.0
 
-This new version introduces two correlation ids, `telemetryId` and `deviceId`, to help unify and correlate data across [LogRocket](https://logrocket.com/), [Honeycomb](https://www.honeycomb.io/) and [Mixpanel](https://mixpanel.com/) and a new automatic enrichment of the traces with the LogRocket session url if the [LogRocket instrumentation](../../logrocket/getting-started.md) is registered.
+This new version introduces two correlation ids, `telemetryId` and `deviceId`, to help unify and correlate data across [LogRocket](https://logrocket.com/), [Honeycomb](https://www.honeycomb.io/) and [Mixpanel](https://mixpanel.com/) and a new automatic enrichment of the traces with the LogRocket session url if the LogRocket instrumentation is registered.
 
 ## Improvements
 
 ### Correlation ids
 
-To help unify and correlate data across LogRocket, Honeycomb, and Mixpanel, the [registerHoneycombInstrumentation](../reference/registerHoneycombInstrumentation.md) function now automatically adds two correlation ids as attributes to every trace:
+To help unify and correlate data across LogRocket, Honeycomb, and Mixpanel, the `registerHoneycombInstrumentation` function now automatically adds two correlation ids as attributes to every trace:
 
 - `telemetryId` is an identifier that represents a single application load.
 - `deviceId` is an identifier that represents a single device across multiple loads.

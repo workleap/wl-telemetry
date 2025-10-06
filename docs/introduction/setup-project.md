@@ -119,11 +119,11 @@ Troubleshoot issues:
 
 ### Correlation ids
 
-Two correlation ids are attached to every session replay, event, and trace to **unify** the telemetry platforms. To verify they are attached correctly, try the correlation ids [troubleshooting example]().
+Two correlation ids are attached to every session replay, event, and trace to **unify** the telemetry platforms. To verify they are attached correctly, try the correlation ids [troubleshooting example](./use-correlation-values.md#troubleshooting-example).
 
 ### LogRocket session URL
 
-If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events will automatically attach the LogRocket session URL. To verify the URL is attached correctly, try the LogRocket session replay URL [troubleshooting example]().
+If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events will automatically attach the LogRocket session URL. To verify the URL is attached correctly, try the LogRocket session replay URL [troubleshooting example](./use-correlation-values.md#troubleshooting-example-1).
 
 ## Learn more
 

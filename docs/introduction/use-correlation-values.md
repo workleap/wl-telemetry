@@ -23,7 +23,7 @@ The following is an example of a troubleshooting workflow using the telemetry co
 
 - **Honeycomb**: Locate the `app.telemetry_id` attribute in a trace to retrieve its value.
 - **LogRocket**: Navigate to the "Session Replay" page. Open the "User Traits" filter, select the `Telemetry Id` trait, paste the `app.telemetry_id` value, and press "Enter" to view the matching sessions.
-- **Mixpanel**: Navigate to the "Events" page. Add a "filter", select the `Telemetry Id` propertt, paste the `app.telemetry_id` value, and press on the "Add" button to view the matching events.
+- **Mixpanel**: Navigate to the "Events" page. Add a "filter", select the `Telemetry Id` property, paste the `app.telemetry_id` value, and press on the "Add" button to view the matching events.
 
 ## LogRocket session URL
 
@@ -34,3 +34,8 @@ If LogRocket instrumentation is enabled, the Honeycomb and Mixpanel libraries wi
 | `app.logrocket_session_url` | `LogRocket Session URL` |
 
 ### Troubleshooting example
+
+The following example illustrates a troubleshooting workflow using the LogRocket session URL:
+
+- **Honeycomb**: Navigate to "Query" page, select a trace and locate the `app.logrocket_session_url` attribute in the trace and click the link. This opens the corresponding LogRocket session, where you can review the user's actions, inspect console output, and debug the issue.
+- **Mixpanel**: Navigate to the "Events" page, selected an event and locate the `LogRocket Session URL` property in the event and click the link. This opens the corresponding LogRocket session, where you can review the user's actions, inspect console output, and debug the issue.

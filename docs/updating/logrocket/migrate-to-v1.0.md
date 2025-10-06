@@ -17,7 +17,7 @@ Follow this guide to migrate from `@workleap-tracking/logrocket` :point_down:
 
 ### Removed
 
-- The `registerAnonymousLogRocketInstrumentation` function doesn't exist anymore, use [registerLogRocketInstrumentation](../reference/registerLogRocketInstrumentation.md) instead.
+- The `registerAnonymousLogRocketInstrumentation` function doesn't exist anymore, use `registerLogRocketInstrumentation` instead.
 - The `getTrackingIdentifier` function doesn't exist anymore. A similar identifier is now automatically added as a user trait for every session replay.
 - The `registerLogRocketInstrumentation` function `trackingIdentifier`, `identifyOptions` and `onSessionUrlInitialized` options doesn't exist anymore.
 
@@ -97,7 +97,7 @@ LogRocket.identify(traits.userId, traits);
 
 ### Removed `registerAnonymousLogRocketInstrumentation`
 
-The `registerAnonymousLogRocketInstrumentation` function doesn't exist anymore, use [registerLogRocketInstrumentation](../reference/registerLogRocketInstrumentation.md) instead.
+The `registerAnonymousLogRocketInstrumentation` function doesn't exist anymore, use `registerLogRocketInstrumentation` instead.
 
 Before:
 
@@ -131,7 +131,7 @@ registerLogRocketInstrumentation(appId);
 
 ### Correlation ids
 
-To help unify and correlate data across LogRocket, Honeycomb, and Mixpanel, the [registerLogRocketInstrumentation](../reference/registerLogRocketInstrumentation.md) function now automatically adds two correlation ids as user traits to every session replay:
+To help unify and correlate data across LogRocket, Honeycomb, and Mixpanel, the `registerLogRocketInstrumentation` function now automatically adds two correlation ids as user traits to every session replay:
 
 - `telemetryId` is a new identifier that represents a single application load.
 - `deviceId` replaces the former `trackingId` and reuses the original name from the `wl-identity` cookie, better reflecting its purpose as a persistent device identifier.
@@ -150,10 +150,10 @@ For example, with the Honeycomb integration, once the LogRocket session URL is r
 
 Follow these steps to migrate an existing application `@workleap-tracking/logrocket` to `@workleap/logrocket`:
 
-- Rename `registerAnonymousLogRocketInstrumentation` to [registerLogRocketInstrumentation](../reference/registerLogRocketInstrumentation.md).
-- Remove all usage of `getTrackingIdentifier`. The new [registerLogRocketInstrumentation](../reference/registerLogRocketInstrumentation.md) function automatically sets the tracking identifier as a correlation id under the `Device Id` name.
-- Remove the `trackingIdentifier` and `identifyOptions` options. To identify a user, use `createDefaultUserTraits` in combination to [LogRocket.identify](https://docs.logrocket.com/reference/identify). [View example](../getting-started.md#identify-a-user)
-- Replace the `onSessionUrlInitialized` option with the [LogRocket.getSessionUrl](https://docs.logrocket.com/reference/get-session-url) function. [View example](../getting-started.md#get-the-session-url)
+- Rename `registerAnonymousLogRocketInstrumentation` to `registerLogRocketInstrumentation`.
+- Remove all usage of `getTrackingIdentifier`. The new `registerLogRocketInstrumentation` function automatically sets the tracking identifier as a correlation id under the `Device Id` name.
+- Remove the `trackingIdentifier` and `identifyOptions` options. To identify a user, use `createDefaultUserTraits` in combination to [LogRocket.identify](https://docs.logrocket.com/reference/identify).
+- Replace the `onSessionUrlInitialized` option with the [LogRocket.getSessionUrl](https://docs.logrocket.com/reference/get-session-url) function.
 - Rename any instances of `WorkleapLogRocketIdentification` to `LogRocketIdentification`.
 - Rename any instances of `WorkleapUserTraits` to `LogRocketUserTraits`.
 

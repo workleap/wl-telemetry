@@ -27,7 +27,7 @@ pnpm add @workleap/telemetry logrocket
 
 ### Update the initialization code
 
-Change the initialize code to use the [initializeTelemetry](./reference/initializeTelemetry.md) function instead of standalone registration/initialization functions:
+Change the initialize code to use the [initializeTelemetry](../reference/telemetry/initializeTelemetry.md) function instead of standalone registration/initialization functions:
 
 Before:
 
@@ -87,7 +87,7 @@ root.render(
 
 ### Replace `createUserTraits` with the client
 
-The `createUserTraits` standalone function is not exported anymore. Use the client [createWorkleapPlatformDefaultUserTraits](../logrocket/reference/LogRocketInstrumentationClient.md#methods) method instead.
+The `createUserTraits` standalone function is not exported anymore. Use the client [createWorkleapPlatformDefaultUserTraits](../reference/telemetry/LogRocketInstrumentationClient.md#methods) method instead.
 
 Before:
 
@@ -129,7 +129,7 @@ LogRocket.identify(traits.userId, traits);
 
 ### Replace `setGlobalSpanAttribute` and `setGlobalSpanAttributes` with the client
 
-The `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions are not exported anymore. Use the client [setGlobalSpanAttribute](../honeycomb/reference/HoneycombInstrumentationClient.md#methods) and [setGlobalSpanAttributes](../honeycomb/reference/HoneycombInstrumentationClient.md#methods) methods instead.
+The `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions are not exported anymore. Use the client [setGlobalSpanAttribute](../reference/telemetry/HoneycombInstrumentationClient.md#methods) and [setGlobalSpanAttributes](../reference/telemetry/HoneycombInstrumentationClient.md#methods) methods instead.
 
 Before:
 
@@ -155,7 +155,7 @@ client.setGlobalSpanAttributes({
 
 ### Replace `setSuperProperty` and `setSuperProperties` with the client
 
-The `setSuperProperty` and `setSuperProperties` standalone functions are not exported anymore. Use the client [setGlobalEventProperty](../mixpanel/reference/MixpanelClient.md#methods) and [setGlobalEventProperties](../mixpanel/reference/MixpanelClient.md#methods) methods instead.
+The `setSuperProperty` and `setSuperProperties` standalone functions are not exported anymore. Use the client [setGlobalEventProperty](../reference/telemetry/MixpanelClient.md#methods) and [setGlobalEventProperties](../reference/telemetry/MixpanelClient.md#methods) methods instead.
 
 Before:
 
@@ -183,7 +183,7 @@ client.setGlobalEventProperties({
 
 ### Replace `createTrackingFunction` with the client
 
-The `createTrackingFunction` standalone function is not exported anymore. Use the client [createTrackingFunction](../mixpanel/reference/MixpanelClient.md#methods) method instead.
+The `createTrackingFunction` standalone function is not exported anymore. Use the client [createTrackingFunction](../reference/telemetry/MixpanelClient.md#methods) method instead.
 
 Before:
 

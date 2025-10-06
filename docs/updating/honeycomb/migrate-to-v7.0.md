@@ -7,28 +7,28 @@ meta:
 
 # Migrate to v7.0
 
-This major version introduces several important changes. `registerHoneycombInstrumentation` now returns a [client](../reference/HoneycombInstrumentationClient.md) instance. The standalone `setGlobalSpanAttribute` and `setGlobalSpanAttributes` functions has been moved to the client, telemetry correlation ids are no longuer implicitly added to traces, and global variables for third-party integrations have been deprecated. To attach telemetry correlation ids to traces, you must now provide a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance. Third-party libraries such as [Squide](https://workleap.github.io/wl-squide) and the [Platform widgets](https://dev.azure.com/workleap/WorkleapPlatform/_git/workleap-platform-widgets?path=/README.md) should also be explicitly provided with the returned client instance to integrate with Workleap's Honeycomb instrumentation.
+This major version introduces several important changes. `registerHoneycombInstrumentation` now returns a [client](../../reference/telemetry/LogRocketInstrumentationClient.md) instance. The standalone `setGlobalSpanAttribute` and `setGlobalSpanAttributes` functions has been moved to the client, telemetry correlation ids are no longuer implicitly added to traces, and global variables for third-party integrations have been deprecated. To attach telemetry correlation ids to traces, you must now provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance. Third-party libraries such as [Squide](https://workleap.github.io/wl-squide) and the [Platform widgets](https://dev.azure.com/workleap/WorkleapPlatform/_git/workleap-platform-widgets?path=/README.md) should also be explicitly provided with the returned client instance to integrate with Workleap's Honeycomb instrumentation.
 
 ## Breaking changes
 
 ### Removed
 
-- Removed the `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions, use the client [setGlobalSpanAttribute](../reference/HoneycombInstrumentationClient.md#methods) and [setGlobalSpanAttributes](../reference/HoneycombInstrumentationClient.md#methods) methods instead.
+- Removed the `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions, use the client [setGlobalSpanAttribute](../../reference/telemetry/HoneycombInstrumentationClient.md#methods) and [setGlobalSpanAttributes](../../reference/telemetry/HoneycombInstrumentationClient.md#methods) methods instead.
 
 ### Deprecated
 
-- The `window.__WLP_HONEYCOMB_INSTRUMENTATION_IS_REGISTERED__` global variable have been deprecated. Instead, provide a [client](../reference/HoneycombInstrumentationClient.md) instance to the third-party libraries.
-- The `window.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK__` global variable have been deprecated. Instead, provide a [client](../reference/HoneycombInstrumentationClient.md) instance to the third-party libraries.
-- The `window.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK_AT_START__` global variable have been deprecated. Instead, provide a [client](../reference/HoneycombInstrumentationClient.md) instance to the third-party libraries.
+- The `window.__WLP_HONEYCOMB_INSTRUMENTATION_IS_REGISTERED__` global variable have been deprecated. Instead, provide a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) instance to the third-party libraries.
+- The `window.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK__` global variable have been deprecated. Instead, provide a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) instance to the third-party libraries.
+- The `window.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK_AT_START__` global variable have been deprecated. Instead, provide a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) instance to the third-party libraries.
 
 ### Others
 
-- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to Honeycomb traces. To attach these ids, provide a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance to the [registerHoneycombInstrumentation](../reference/registerHoneycombInstrumentation.md) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../reference/createTelemetryContext.md) utility function.
+- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to Honeycomb traces. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [registerHoneycombInstrumentation](../../standalone-libraries/setup-honeycomb.md) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/setup-honeycomb.md) utility function.
 - If your application is a React application, you must now import everything from `@workleap/honeycomb/react` rather than `@workleap/honeycomb`.
 
 ### Update the initialization code
 
-The [registerHoneycombInstrumentation](../reference/registerHoneycombInstrumentation.md) function now returns a [client](../reference/HoneycombInstrumentationClient.md) that must be forwarded to the [HoneycombInstrumentationProvider](../reference/HoneycombInstrumentationProvider.md). In addition, a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Honeycomb traces.
+The [registerHoneycombInstrumentation](../../standalone-libraries/setup-honeycomb.md) function now returns a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) that must be forwarded to the [HoneycombInstrumentationProvider](../../standalone-libraries/setup-honeycomb.md). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Honeycomb traces.
 
 Before:
 
@@ -81,7 +81,7 @@ root.render(
 
 ### Replace `setGlobalSpanAttribute` and `setGlobalSpanAttributes` with the client
 
-The `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions are not exported anymore. Use the client [setGlobalSpanAttribute](../reference/HoneycombInstrumentationClient.md#methods) and [setGlobalSpanAttributes](../reference/HoneycombInstrumentationClient.md#methods) methods instead.
+The `setGlobalSpanAttribute` and `setGlobalSpanAttributes` standalone functions are not exported anymore. Use the client [setGlobalSpanAttribute](../../reference/telemetry/HoneycombInstrumentationClient.md#methods) and [setGlobalSpanAttributes](../../reference/telemetry/HoneycombInstrumentationClient.md#methods) methods instead.
 
 Before:
 
@@ -107,5 +107,5 @@ client.setGlobalSpanAttributes({
 
 ## New React context
 
-- A new [HoneycombInstrumentationProvider](../reference/HoneycombInstrumentationProvider.md) React context provider is available to forward a `HoneycombInstrumentationClient` instance.
-- A new [useHoneycombInstrumentationClient](../reference/useHoneycombInstrumentationClient.md) hook is available to retrieve the provided `HoneycombInstrumentatonClient` instance.
+- A new [HoneycombInstrumentationProvider](../../standalone-libraries/setup-honeycomb.md) React context provider is available to forward a `HoneycombInstrumentationClient` instance.
+- A new [useHoneycombInstrumentationClient](../../standalone-libraries/setup-honeycomb.md) hook is available to retrieve the provided `HoneycombInstrumentatonClient` instance.

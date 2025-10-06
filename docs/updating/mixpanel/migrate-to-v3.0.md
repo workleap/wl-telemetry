@@ -7,27 +7,27 @@ meta:
 
 # Migrate to v3.0
 
-This major version introduces several important changes. `initializeMixpanel` now returns a [client](../reference/MixpanelClient.md) instance. The standalone `createTrackingFunction` and `setSuperProperties` functions has been moved to the client, telemetry correlation ids are no longuer implicitly added to session replays, and global variables for third-party integrations have been deprecated. To attach telemetry correlation ids to session replays, you must now provide a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance. Third-party libraries such as [Squide](https://workleap.github.io/wl-squide) and the [Platform widgets](https://dev.azure.com/workleap/WorkleapPlatform/_git/workleap-platform-widgets?path=/README.md) should also be explicitly provided with the returned client instance to use Mixpanel.
+This major version introduces several important changes. `initializeMixpanel` now returns a [client](../../reference/telemetry/MixpanelClient.md) instance. The standalone `createTrackingFunction` and `setSuperProperties` functions has been moved to the client, telemetry correlation ids are no longuer implicitly added to session replays, and global variables for third-party integrations have been deprecated. To attach telemetry correlation ids to session replays, you must now provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance. Third-party libraries such as [Squide](https://workleap.github.io/wl-squide) and the [Platform widgets](https://dev.azure.com/workleap/WorkleapPlatform/_git/workleap-platform-widgets?path=/README.md) should also be explicitly provided with the returned client instance to use Mixpanel.
 
 ## Breaking changes
 
 ### Removed
 
-- Removed the `setSuperProperty` and `setSuperProperties` standalone functions, use the client [setGlobalEventProperty](../reference/MixpanelClient.md#methods) and [setGlobalEventProperties](../reference/MixpanelClient.md#methods) methods instead.
+- Removed the `setSuperProperty` and `setSuperProperties` standalone functions, use the client [setGlobalEventProperty](../../reference/telemetry/MixpanelClient.md#methods) and [setGlobalEventProperties](../../reference/telemetry/MixpanelClient.md#methods) methods instead.
 
 ### Deprecated
 
-- The `createTrackingFunction` has been deprecated, use the client [createTrackingFunction](../reference/MixpanelClient.md#methods) method instead.
-- The `window.__WLP_MIXPANEL_IS_INITIALIZED__` global variable have been deprecated. Instead, provide a [client](../reference/MixpanelClient.md) instance to the third-party libraries.
+- The `createTrackingFunction` has been deprecated, use the client [createTrackingFunction](../../reference/telemetry/MixpanelClient.md#methods) method instead.
+- The `window.__WLP_MIXPANEL_IS_INITIALIZED__` global variable have been deprecated. Instead, provide a [client](../../reference/telemetry/MixpanelClient.md) instance to the third-party libraries.
 
 ### Others
 
-- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to LogRocket session replays. To attach these ids, provide a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance to the [initializeMixpanel](../reference/initializeMixpanel.md) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../reference/createTelemetryContext.md) utility function.
+- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to LogRocket session replays. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [initializeMixpanel](../../standalone-libraries/setup-mixpanel.md) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/setup-mixpanel.md) utility function.
 - If your application is a React application, you must now import everything from `@workleap/mixpanel/react` rather than `@workleap/mixpanel`.
 
 ### Update the initialization code
 
-The [initializeMixpanel](../reference/initializeMixpanel.md) function now returns a [client](../reference/MixpanelClient.md) that must be forwarded to the [MixpanelProvider](../reference/MixpanelProvider.md). In addition, a [TelemetryContext](../../introduction/reference/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Mixpanel events.
+The [initializeMixpanel](../../standalone-libraries/setup-mixpanel.md) function now returns a [client](../../reference/telemetry/MixpanelClient.md) that must be forwarded to the [MixpanelProvider](../../standalone-libraries/setup-mixpanel.md). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Mixpanel events.
 
 Before:
 
@@ -73,7 +73,7 @@ root.render(
 
 ### Replace `setSuperProperty` and `setSuperProperties` with the client
 
-The `setSuperProperty` and `setSuperProperties` standalone functions are not exported anymore. Use the client [setGlobalEventProperty](../reference/MixpanelClient.md#methods) and [setGlobalEventProperties](../reference/MixpanelClient.md#methods) methods instead.
+The `setSuperProperty` and `setSuperProperties` standalone functions are not exported anymore. Use the client [setGlobalEventProperty](../../reference/telemetry/MixpanelClient.md#methods) and [setGlobalEventProperties](../../reference/telemetry/MixpanelClient.md#methods) methods instead.
 
 Before:
 
@@ -101,7 +101,7 @@ client.setGlobalEventProperties({
 
 ### Replace `createTrackingFunction` with the client
 
-The `createTrackingFunction` standalone function is not exported anymore. Use the client [createTrackingFunction](../reference/MixpanelClient.md#methods) method instead.
+The `createTrackingFunction` standalone function is not exported anymore. Use the client [createTrackingFunction](../../reference/telemetry/MixpanelClient.md#methods) method instead.
 
 Before:
 
@@ -127,5 +127,5 @@ track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 
 ## New React context
 
-- A new [MixpanelProvider](../reference/MixpanelProvider.md) React context provider is available to forward a `MixpanelClient` instance.
-- A new [useMixpanelClient](../reference/useMixpanelClient.md) hook is available to retrieve the provided `MixpanelClient` instance.
+- A new [MixpanelProvider](../../standalone-libraries/setup-mixpanel.md) React context provider is available to forward a `MixpanelClient` instance.
+- A new [useMixpanelClient](../../standalone-libraries/setup-mixpanel.md) hook is available to retrieve the provided `MixpanelClient` instance.
