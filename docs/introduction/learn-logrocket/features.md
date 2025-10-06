@@ -65,6 +65,13 @@ Use `data-public` to explicitly allow LogRocket to record the content of an elem
 To learn more about the built-in privacy settings of this instrumentation, refer to the [Privacy](./privacy.md) page.
 !!!
 
+## Correlation ids
+
+Two correlation ids are automatically added to each session and can be used to filter sessions by user traits:
+
+- `Telemetry Id`: Identifies a single application load. It's primarily used to correlate Honeycomb traces with the other telemetry platforms.
+- `Device Id`: Identifies the user's device across sessions. This value is extracted from the shared `wl-identity` cookie, which is used across Workleap's marketing sites and web applications.
+
 ## Identify a user
 
 Most applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](../../reference/telemetry/LogRocketInstrumentationClient.md) expose the [createWorkleapPlatformDefaultUserTraits](../../reference/telemetry/LogRocketInstrumentationClient.md#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:

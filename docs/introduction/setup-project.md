@@ -63,6 +63,10 @@ root.render(
 For Honeycomb, avoid using `/.+/g`, in production, as it could expose customer data to third parties. Instead, ensure you specify values that accurately matches your application's backend URLs.
 !!!
 
+!!!warning
+For Honeycomb, we recommend using an [OpenTelemetry collector](https://docs.honeycomb.io/send-data/opentelemetry/collector/) with an authenticated proxy over an ingestion [API key](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key), as API keys can expose Workleap to potential attacks.
+!!!
+
 ## Try it :rocket:
 
 Start the application in a development environment using the `dev` script and test each platform.

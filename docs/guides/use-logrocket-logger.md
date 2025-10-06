@@ -1,5 +1,5 @@
 ---
-order: 180
+order: 190
 label: Use LogRocket logger
 ---
 

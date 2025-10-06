@@ -1,5 +1,5 @@
 ---
-order: 190
+order: 200
 label: Setup loggers
 ---
 

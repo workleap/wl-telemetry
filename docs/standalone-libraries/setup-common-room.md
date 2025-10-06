@@ -1,5 +1,5 @@
 ---
-order: 175
+order: 70
 label: Setup Common Room
 ---
 
