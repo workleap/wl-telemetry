@@ -125,6 +125,15 @@ Two correlation ids are attached to every session replay, event, and trace to **
 
 If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events will automatically attach the LogRocket session URL. To verify the URL is attached correctly, try the LogRocket session replay URL [troubleshooting example]().
 
+## Learn more
+
+:point_right: Explore the available features for each telemetry platform:
+
+- [LogRocket](./learn-logrocket/features.md)
+- [Honeycomb](./learn-honeycomb/features.md)
+- [Mixpanel](./learn-mixpanel/features.md)
+- [Common Room](../standalone-libraries/setup-common-room.md)
+
 ## Setup loggers
 
 :point_right: Providing loggers to the initialization/registration functions is optional, but recommended to simplify troubleshooting. To set up loggers, follow the [guide](../guides/setup-loggers.md).

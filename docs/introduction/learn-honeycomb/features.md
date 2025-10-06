@@ -78,7 +78,7 @@ If LogRocket instrumentation is enabled, Honeycomb traces are enriched with the 
 Most applications need to set custom attributes about the current user environment on all traces. To help with that, [HoneycombInstrumentationClient](../../reference/telemetry/HoneycombInstrumentationClient.md) expose the [setGlobalSpanAttributes](../../reference/telemetry/HoneycombInstrumentationClient.md#methods) method:
 
 ```ts !#5-7
-import { useHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
+import { useHoneycombInstrumentationClient } from "@workleap/telemetry/react";
 
 const client = useHoneycombInstrumentationClient();
 
