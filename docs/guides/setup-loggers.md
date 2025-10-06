@@ -7,13 +7,15 @@ label: Setup loggers
 
 Providing loggers to the initialization or registration functions is optional but recommended, as it helps simplify troubleshooting.
 
-## Configure loggers
+## Install packages
 
-First, install the required packages (only install `@workleap/logrocket` if the application logs should be captured in LogRocket sessions):
+First, open a terminal at the root of the application and install the packages (only install `@workleap/logrocket` if the application logs should be captured in LogRocket sessions):
 
 ```bash
 pnpm add @workleap/logging @workleap/logrocket
 ```
+
+## Configure loggers
 
 Then update the application bootstrapping code to configure the loggers:
 
