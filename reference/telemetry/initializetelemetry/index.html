@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.813119970839">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.813175639448">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../../static/favicon.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.11.0.813119970839" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.813175639448" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.813119970839" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.813175639448" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.813119970839" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.813119970839" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.813175639448" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.813175639448" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -412,7 +412,6 @@
     </h3>
 </doc-anchor-target>
 <p>A <a href="../telemetryclient/">TelemetryClient</a> instance.</p>
-<!-- ## Usage -->
 <doc-anchor-target id="initialize-all-telemetry-platforms">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-all-telemetry-platforms">#</doc-anchor-trigger>
@@ -438,105 +437,6 @@ const client = initializeTelemetry({
         productId: &quot;wlp&quot;,
         envOrTrackingApiBaseUrl: &quot;development&quot;
     }
-});</code></pre>
-</doc-codeblock></div>
-<!-- ### Initialize LogRocket
-
-```ts !#4-6
-import { initializeTelemetry } from "@workleap/telemetry/react";
-
-const client = initializeTelemetry({
-    logRocket: {
-        appId: "my-app-id"
-    }
-});
-```
-
-### Initialize Honeycomb
-
-```ts !#4-11
-import { initializeTelemetry } from "@workleap/telemetry/react";
-
-const client = initializeTelemetry({
-    honeycomb: {
-        namespace: "sample",
-        serviceName: "my-app-name",
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: "https://sample-proxy"
-        }
-    }
-});
-```
-
-### Initialize Mixpanel
-
-```ts !#4-7
-import { initializeTelemetry } from "@workleap/telemetry/react";
-
-const client = initializeTelemetry({
-    mixpanel: {
-        productId: "wlp",
-        envOrTrackingApiBaseUrl: "development"
-    }
-});
-``` -->
-<doc-anchor-target id="verbose-mode">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#verbose-mode">#</doc-anchor-trigger>
-        <span>Verbose mode</span>
-    </h2>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="19"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
-
-const client = initializeTelemetry({
-    logRocket: {
-        appId: &quot;my-app-id&quot;
-    },
-    honeycomb: {
-        namespace: &quot;sample&quot;,
-        serviceName: &quot;my-app-name&quot;,
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: &quot;https://sample-proxy&quot;
-        }
-    },
-    mixpanel: {
-        productId: &quot;wlp&quot;,
-        envOrTrackingApiBaseUrl: &quot;development&quot;
-    },
-    verbose: true
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="use-loggers">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#use-loggers">#</doc-anchor-trigger>
-        <span>Use loggers</span>
-    </h2>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="21"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
-import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
-
-const client = initializeTelemetry({
-    logRocket: {
-        appId: &quot;my-app-id&quot;
-    },
-    honeycomb: {
-        namespace: &quot;sample&quot;,
-        serviceName: &quot;my-app-name&quot;,
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: &quot;https://sample-proxy&quot;
-        }
-    },
-    mixpanel: {
-        productId: &quot;wlp&quot;,
-        envOrTrackingApiBaseUrl: &quot;development&quot;
-    },
-    loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="logrocket">
@@ -1040,6 +940,64 @@ const client = initializeTelemetry({
             trackingEndpoint: &quot;custom/tracking/track&quot;
         }
     }
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="verbose-mode">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#verbose-mode">#</doc-anchor-trigger>
+        <span>Verbose mode</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="19"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
+
+const client = initializeTelemetry({
+    logRocket: {
+        appId: &quot;my-app-id&quot;
+    },
+    honeycomb: {
+        namespace: &quot;sample&quot;,
+        serviceName: &quot;my-app-name&quot;,
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: &quot;https://sample-proxy&quot;
+        }
+    },
+    mixpanel: {
+        productId: &quot;wlp&quot;,
+        envOrTrackingApiBaseUrl: &quot;development&quot;
+    },
+    verbose: true
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="use-loggers">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#use-loggers">#</doc-anchor-trigger>
+        <span>Use loggers</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="21"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
+import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
+import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
+
+const client = initializeTelemetry({
+    logRocket: {
+        appId: &quot;my-app-id&quot;
+    },
+    honeycomb: {
+        namespace: &quot;sample&quot;,
+        serviceName: &quot;my-app-name&quot;,
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: &quot;https://sample-proxy&quot;
+        }
+    },
+    mixpanel: {
+        productId: &quot;wlp&quot;,
+        envOrTrackingApiBaseUrl: &quot;development&quot;
+    },
+    loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
 
