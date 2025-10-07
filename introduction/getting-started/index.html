@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.812775043330">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.813118112551">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>Getting started - Introduction</title>
-    <meta name="title" content="Getting started - Introduction">
-    <meta name="description" content="Welcome to workleap/telemetry, a collection of telemetry libraries for building web applications at Workleap.">
+    <title>Getting started</title>
+    <meta name="title" content="Getting started">
+    <meta name="description" content="Welcome to @workleap/telemetry, a collection of telemetry packages for building web applications at Workleap.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://workleap.github.io/wl-telemetry/introduction/getting-started/">
@@ -20,26 +20,25 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://workleap.github.io/wl-telemetry/introduction/getting-started/">
-    <meta property="og:title" content="Getting started - Introduction">
-    <meta property="og:description" content="Welcome to workleap/telemetry, a collection of telemetry libraries for building web applications at Workleap.">
+    <meta property="og:title" content="Getting started">
+    <meta property="og:description" content="Welcome to @workleap/telemetry, a collection of telemetry packages for building web applications at Workleap.">
     <meta property="og:image" content="https://workleap.github.io/wl-telemetry/static/logos/logrocket.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://workleap.github.io/wl-telemetry/introduction/getting-started/">
-    <meta property="twitter:title" content="Getting started - Introduction">
-    <meta property="twitter:description" content="Welcome to workleap/telemetry, a collection of telemetry libraries for building web applications at Workleap.">
+    <meta property="twitter:title" content="Getting started">
+    <meta property="twitter:description" content="Welcome to @workleap/telemetry, a collection of telemetry packages for building web applications at Workleap.">
     <meta property="twitter:image" content="https://workleap.github.io/wl-telemetry/static/logos/logrocket.svg">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.812775043330" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.813118112551" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.812775043330" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.813118112551" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.812775043330" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.812775043330" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.813118112551" data-turbo-eval="false" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -52,8 +51,8 @@
             min-width: 185px !important;
         }
 
-        .supported-platforms-table th:nth-of-type(2) {
-            min-width: 120px !important;
+        .supported-platforms-table th:nth-of-type(3) {
+            min-width: 180px !important;
         }
 
         @media (min-width: 961px) {
@@ -332,7 +331,7 @@
         <span>Getting started</span>
     </h1>
 </doc-anchor-target>
-<p>Welcome to <code v-pre>workleap/telemetry</code>, a collection of telemetry libraries for building web applications at Workleap. On this getting started page, you&#x27;ll find an overview of the project and a list of <doc-anchor-trigger to="#supported-platforms">supported platforms</doc-anchor-trigger>.</p>
+<p>Welcome to <code v-pre>@workleap/telemetry</code>, a collection of telemetry packages for building web applications at Workleap. On this getting started page, you&#x27;ll find an overview of the project and a list of <doc-anchor-trigger to="#supported-platforms">supported platforms</doc-anchor-trigger>.</p>
 <doc-anchor-target id="an-integrated-experience">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#an-integrated-experience">#</doc-anchor-trigger>
@@ -340,28 +339,20 @@
     </h2>
 </doc-anchor-target>
 <p>Without a unified and cohesive telemetry setup, debugging issues or analyzing product behavior often requires <strong>jumping between</strong> tools with <strong>disconnected data</strong>. Session replays in <a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a>, traces in <a href="https://www.honeycomb.io/" class="outbound" target="_blank">Honeycomb</a>, and user events in <a href="https://mixpanel.com/" class="outbound" target="_blank">Mixpanel</a> each offer valuable insights, but without shared identifiers or cross-platform context, it becomes difficult to correlate events, reconstruct user journeys, or measure the full impact of a technical issue in production.</p>
-<p>This integrated experience brings together LogRocket, Honeycomb, and Mixpanel. By linking session data, performance traces, and user interactions through consistent identifiers. It becomes possible to <strong>trace</strong> a <strong>single</strong> application <strong>event across systems</strong>, from backend performance to frontend behavior to product impact. This integration streamlines will hopefully enables faster, and more informed decision-making.</p>
+<p>This integrated experience brings together LogRocket, Honeycomb, and Mixpanel. By linking session data, performance traces, and user interactions through consistent identifiers, it becomes possible to <strong>trace</strong> a <strong>single</strong> application <strong>event across systems</strong>, from backend performance to frontend behavior to product impact. This integration streamlines will hopefully enables faster, and more informed decision-making.</p>
+<doc-anchor-target id="a-new-umbrella-package">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#a-new-umbrella-package">#</doc-anchor-trigger>
+        <span>A new umbrella package</span>
+    </h2>
+</doc-anchor-target>
+<p>Although Workleap provides a standalone package for each platform, <strong>we recommend</strong> going forward <strong>using</strong> the <code v-pre>@workleap/telemetry</code> umbrella package for LogRocket, Honeycomb, and Mixpanel. This simplifies the integration, compared to relying on the individual standalone packages for these. To migrate to the <code v-pre>@workleap/telemetry</code> umbrella package, refer to the <a href="../../updating/migrate-to-umbrella-package/">migration guide</a>.</p>
 <doc-anchor-target id="supported-platforms">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#supported-platforms">#</doc-anchor-trigger>
         <span>Supported platforms</span>
     </h2>
 </doc-anchor-target>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-tip"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-tip" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M7.90625 2.15625C4.50944 2.15625 2.15625 4.58563 2.15625 7.54688C2.15625 8.96138 2.76575 9.88281 3.57075 10.8589L3.87837 11.2226C4.19894 11.6021 4.554 12.0218 4.84581 12.4416C5.25406 13.0324 5.61775 13.7296 5.7385 14.5834C5.76728 14.8608 5.68746 15.1386 5.51579 15.3583C5.34413 15.5781 5.09399 15.7228 4.8179 15.7621C4.5418 15.8013 4.26124 15.7321 4.03512 15.5689C3.809 15.4056 3.65493 15.1612 3.60525 14.8867C3.54775 14.4814 3.37094 14.1004 3.07338 13.6692C2.8306 13.3302 2.57055 13.0039 2.29425 12.6917C2.1735 12.5479 2.04556 12.397 1.909 12.2317C1.00769 11.1406 0 9.72613 0 7.54688C0 3.32062 3.39681 0 7.90625 0C12.4157 0 15.8125 3.32062 15.8125 7.54688C15.8125 9.72613 14.8048 11.1406 13.9035 12.2317C13.7669 12.397 13.639 12.5479 13.5183 12.6903C13.2207 13.0424 12.9677 13.3414 12.7406 13.6692C12.4416 14.1004 12.2662 14.4814 12.2087 14.8867C12.1557 15.1584 12.0003 15.3994 11.7747 15.5598C11.5492 15.7202 11.2706 15.7879 10.9965 15.7488C10.7225 15.7096 10.474 15.5667 10.3023 15.3496C10.1306 15.1325 10.0489 14.8577 10.074 14.582C10.1948 13.7296 10.5584 13.0324 10.9667 12.4416C11.2585 12.0218 11.6136 11.6021 11.9341 11.2226C12.0419 11.0961 12.1454 10.9739 12.2403 10.8589C13.0468 9.88281 13.6562 8.96138 13.6562 7.54688C13.6562 4.58563 11.3031 2.15625 7.90625 2.15625ZM4.67188 17.25H11.1406C11.4266 17.25 11.7008 17.3636 11.903 17.5658C12.1052 17.768 12.2188 18.0422 12.2188 18.3281C12.2188 18.6141 12.1052 18.8883 11.903 19.0905C11.7008 19.2927 11.4266 19.4062 11.1406 19.4062H4.67188C4.38594 19.4062 4.11171 19.2927 3.90953 19.0905C3.70734 18.8883 3.59375 18.6141 3.59375 18.3281C3.59375 18.0422 3.70734 17.768 3.90953 17.5658C4.11171 17.3636 4.38594 17.25 4.67188 17.25ZM5.03125 21.9219C5.03125 21.6359 5.14484 21.3617 5.34703 21.1595C5.54921 20.9573 5.82344 20.8438 6.10938 20.8438H9.70312C9.98906 20.8438 10.2633 20.9573 10.4655 21.1595C10.6677 21.3617 10.7812 21.6359 10.7812 21.9219C10.7812 22.2078 10.6677 22.482 10.4655 22.6842C10.2633 22.8864 9.98906 23 9.70312 23H6.10938C5.82344 23 5.54921 22.8864 5.34703 22.6842C5.14484 22.482 5.03125 22.2078 5.03125 21.9219Z" />
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Although Workleap provides a standalone package for each platform, we recommend using the <a href="https://www.npmjs.com/package/@workleap/telemetry" class="outbound" target="_blank">@workleap/telemetry</a> umbrella package for LogRocket, Honeycomb, and Mixpanel. This simplifies the integration, compared to relying on the individual standalone packages for these.</p>
-        </div>
-    </div>
-</div>
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable supported-platforms-table">
 <thead>
@@ -375,417 +366,33 @@
 <tr>
 <td><img src="../../static/logos/logrocket.svg" alt="" class="h-5 w-5 mr-2 -mt-1" /><a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a></td>
 <td>Records frontend sessions and logs to help debug and resolve issues in production and surface critical issues.</td>
-<td><a href="../../logrocket/getting-started/">Learn more</a></td>
+<td><a href="../learn-logrocket/features/">Learn more</a></td>
 </tr>
 <tr>
 <td><img src="../../static/logos/honeycomb.svg" alt="" class="h-5 w-5 mr-2 -mt-1" /><a href="https://www.honeycomb.io/" class="outbound" target="_blank">Honeycomb</a></td>
 <td>Captures and analyzes distributed traces and metrics to understand and monitor complex systems, application behaviors, and performance.</td>
-<td><a href="../../honeycomb/getting-started/">Learn more</a></td>
+<td><a href="../learn-honeycomb/features/">Learn more</a></td>
 </tr>
 <tr>
 <td><img src="../../static/logos/mixpanel.svg" alt="" class="h-5 w-5 mr-2 -mt-1" /><a href="https://mixpanel.com/" class="outbound" target="_blank">Mixpanel</a></td>
 <td>Tracks user interactions to analyze behavior and measure product impact.</td>
-<td><a href="../../mixpanel/getting-started/">Learn more</a></td>
+<td><a href="../learn-mixpanel/features/">Learn more</a></td>
 </tr>
 <tr>
 <td><img src="../../static/logos/common-room.svg" alt="" class="h-5 w-5 mr-2 -mt-1" /><a href="https://www.commonroom.io/" class="outbound" target="_blank">Common Room</a></td>
 <td>Connects user activity across platforms to provide insight into community engagement and behavior.<br/><br/><em>(Common Room is not part of the integrated experience, as it is a standalone tool used by marketers for a completely different purpose.)</em></td>
-<td><a href="../../common-room/getting-started/">Learn more</a></td>
+<td><a href="../../standalone-libraries/setup-common-room/">Getting started</a></td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- ## Umbrella package
-
-Although Workleap provides a standalone package for each platform, we recommend using the [@workleap/telemetry](https://www.npmjs.com/package/@workleap/telemetry) umbrella package for LogRocket, Honeycomb, and Mixpanel. This simplifies the integration, compared to relying on the individual standalone packages for these. -->
-<doc-anchor-target id="setup-a-project">
+<doc-anchor-target id="setup-your-project">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#setup-a-project">#</doc-anchor-trigger>
-        <span>Setup a project</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#setup-your-project">#</doc-anchor-trigger>
+        <span>Setup your project</span>
     </h2>
 </doc-anchor-target>
-<p>First, open a terminal at the root of the application and install the telemetry umbrella package:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/telemetry @workleap/common-room logrocket</code></pre>
-</doc-codeblock></div>
-<p>Then, update the application bootstrapping code to initialize the libraries:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="7-23,25,31-32,34-35"><code v-pre class="language-tsx">import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
-import { StrictMode } from &quot;react&quot;;
-import { createRoot } from &quot;react-dom/client&quot;;
-import { App } from &quot;./App.tsx&quot;;
-
-const telemetryClient = initializeTelemetry({
-    logRocket: {
-        appId: &quot;my-app-id&quot;
-    },
-    honeycomb: {
-        namespace: &quot;sample&quot;,
-        serviceName: &quot;my-app&quot;,
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: &quot;https://sample-proxy&quot;
-        }
-    },
-    mixpanel: {
-        productId: &quot;wlp&quot;,
-        envOrTrackingApiBaseUrl: &quot;development&quot;
-    }
-});
-
-const commonRoomClient = registerCommonRoomInstrumentation(&quot;my-site-id&quot;);
-
-const root = createRoot(document.getElementById(&quot;root&quot;)!);
-
-root.render(
-    &lt;StrictMode&gt;
-        &lt;TelemetryProvider client={telemetryClient}&gt;
-            &lt;CommonRoomInstrumentationProvider client={commonRoomClient}&gt;
-                &lt;App /&gt;
-            &lt;/CommonRoomInstrumentationProvider&gt;
-        &lt;/TelemetryProvider&gt;
-    &lt;/StrictMode&gt;
-);</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-warning"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-warning" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
-                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>For Honeycomb, avoid using <code v-pre>/.+/g</code>, in production, as it could expose customer data to third parties. Instead, ensure you specify values that accurately matches your application&#x27;s backend URLs.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="identify-a-user-for-logrocket">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#identify-a-user-for-logrocket">#</doc-anchor-trigger>
-        <span>Identify a user for LogRocket</span>
-    </h2>
-</doc-anchor-target>
-<p>To identify the current user environment for LogRocket, <a href="../../logrocket/reference/logrocketinstrumentationclient/">LogRocketInstrumentationClient</a> expose the <a href="../../logrocket/reference/logrocketinstrumentationclient/#methods">createWorkleapPlatformDefaultUserTraits</a> method. When used with <a href="https://docs.logrocket.com/reference/identify" class="outbound" target="_blank">LogRocket.identify</a>, it provides all the tools to identify a  user with the key information that we track at Workleap.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="6-13"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
-import LogRocket from &quot;logrocket&quot;;
-
-const client = useLogRocketInstrumentationClient();
-
-const traits = client.createWorkleapPlatformDefaultUserTraits({
-    userId: &quot;6a5e6b06-0cac-44ee-8d2b-00b9419e7da9&quot;,
-    organizationId: &quot;e6bb30f8-0a00-4928-8943-1630895a3f14&quot;,
-    organizationName: &quot;Acme&quot;,
-    isMigratedToWorkleap: true,
-    isOrganizationCreator: false,
-    isAdmin: false
-});
-
-Logrocket.identify(traits.userId, traits);</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-tip"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-tip" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M7.90625 2.15625C4.50944 2.15625 2.15625 4.58563 2.15625 7.54688C2.15625 8.96138 2.76575 9.88281 3.57075 10.8589L3.87837 11.2226C4.19894 11.6021 4.554 12.0218 4.84581 12.4416C5.25406 13.0324 5.61775 13.7296 5.7385 14.5834C5.76728 14.8608 5.68746 15.1386 5.51579 15.3583C5.34413 15.5781 5.09399 15.7228 4.8179 15.7621C4.5418 15.8013 4.26124 15.7321 4.03512 15.5689C3.809 15.4056 3.65493 15.1612 3.60525 14.8867C3.54775 14.4814 3.37094 14.1004 3.07338 13.6692C2.8306 13.3302 2.57055 13.0039 2.29425 12.6917C2.1735 12.5479 2.04556 12.397 1.909 12.2317C1.00769 11.1406 0 9.72613 0 7.54688C0 3.32062 3.39681 0 7.90625 0C12.4157 0 15.8125 3.32062 15.8125 7.54688C15.8125 9.72613 14.8048 11.1406 13.9035 12.2317C13.7669 12.397 13.639 12.5479 13.5183 12.6903C13.2207 13.0424 12.9677 13.3414 12.7406 13.6692C12.4416 14.1004 12.2662 14.4814 12.2087 14.8867C12.1557 15.1584 12.0003 15.3994 11.7747 15.5598C11.5492 15.7202 11.2706 15.7879 10.9965 15.7488C10.7225 15.7096 10.474 15.5667 10.3023 15.3496C10.1306 15.1325 10.0489 14.8577 10.074 14.582C10.1948 13.7296 10.5584 13.0324 10.9667 12.4416C11.2585 12.0218 11.6136 11.6021 11.9341 11.2226C12.0419 11.0961 12.1454 10.9739 12.2403 10.8589C13.0468 9.88281 13.6562 8.96138 13.6562 7.54688C13.6562 4.58563 11.3031 2.15625 7.90625 2.15625ZM4.67188 17.25H11.1406C11.4266 17.25 11.7008 17.3636 11.903 17.5658C12.1052 17.768 12.2188 18.0422 12.2188 18.3281C12.2188 18.6141 12.1052 18.8883 11.903 19.0905C11.7008 19.2927 11.4266 19.4062 11.1406 19.4062H4.67188C4.38594 19.4062 4.11171 19.2927 3.90953 19.0905C3.70734 18.8883 3.59375 18.6141 3.59375 18.3281C3.59375 18.0422 3.70734 17.768 3.90953 17.5658C4.11171 17.3636 4.38594 17.25 4.67188 17.25ZM5.03125 21.9219C5.03125 21.6359 5.14484 21.3617 5.34703 21.1595C5.54921 20.9573 5.82344 20.8438 6.10938 20.8438H9.70312C9.98906 20.8438 10.2633 20.9573 10.4655 21.1595C10.6677 21.3617 10.7812 21.6359 10.7812 21.9219C10.7812 22.2078 10.6677 22.482 10.4655 22.6842C10.2633 22.8864 9.98906 23 9.70312 23H6.10938C5.82344 23 5.54921 22.8864 5.34703 22.6842C5.14484 22.482 5.03125 22.2078 5.03125 21.9219Z" />
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>For more details, see the LogRocket client <a href="../../logrocket/reference/logrocketinstrumentationclient/">reference</a> documentation.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="get-logrocket-session-replay-url">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#get-logrocket-session-replay-url">#</doc-anchor-trigger>
-        <span>Get LogRocket session replay URL</span>
-    </h2>
-</doc-anchor-target>
-<p>Every LogRocket session replay is associated with a unique URL. To register a callback receiving the session replay once it&#x27;s available, use the <a href="https://docs.logrocket.com/reference/get-session-url" class="outbound" target="_blank">LogRocket.getSessionURL</a> function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3-5"><code v-pre class="language-typescript">import LogRocket from &quot;logrocket&quot;;
-
-LogRocket.getSessionUrl(url =&gt; {
-    console.log(url);
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="set-honeycomb-custom-user-attributes">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#set-honeycomb-custom-user-attributes">#</doc-anchor-trigger>
-        <span>Set Honeycomb custom user attributes</span>
-    </h2>
-</doc-anchor-target>
-<p>To set custom attributes about the current user environment on all Honeycomb traces, <a href="../../honeycomb/reference/honeycombinstrumentationclient/">HoneycombInstrumentationClient</a> expose the <a href="../../honeycomb/reference/honeycombinstrumentationclient/#methods">setGlobalSpanAttributes</a> method:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5-7"><code v-pre class="language-typescript">import { useHoneycombInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
-
-const client = useHoneycombInstrumentationClient();
-
-client.setGlobalSpanAttributes({
-    &quot;app.user_id&quot;: &quot;123&quot;
-});</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-tip"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-tip" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M7.90625 2.15625C4.50944 2.15625 2.15625 4.58563 2.15625 7.54688C2.15625 8.96138 2.76575 9.88281 3.57075 10.8589L3.87837 11.2226C4.19894 11.6021 4.554 12.0218 4.84581 12.4416C5.25406 13.0324 5.61775 13.7296 5.7385 14.5834C5.76728 14.8608 5.68746 15.1386 5.51579 15.3583C5.34413 15.5781 5.09399 15.7228 4.8179 15.7621C4.5418 15.8013 4.26124 15.7321 4.03512 15.5689C3.809 15.4056 3.65493 15.1612 3.60525 14.8867C3.54775 14.4814 3.37094 14.1004 3.07338 13.6692C2.8306 13.3302 2.57055 13.0039 2.29425 12.6917C2.1735 12.5479 2.04556 12.397 1.909 12.2317C1.00769 11.1406 0 9.72613 0 7.54688C0 3.32062 3.39681 0 7.90625 0C12.4157 0 15.8125 3.32062 15.8125 7.54688C15.8125 9.72613 14.8048 11.1406 13.9035 12.2317C13.7669 12.397 13.639 12.5479 13.5183 12.6903C13.2207 13.0424 12.9677 13.3414 12.7406 13.6692C12.4416 14.1004 12.2662 14.4814 12.2087 14.8867C12.1557 15.1584 12.0003 15.3994 11.7747 15.5598C11.5492 15.7202 11.2706 15.7879 10.9965 15.7488C10.7225 15.7096 10.474 15.5667 10.3023 15.3496C10.1306 15.1325 10.0489 14.8577 10.074 14.582C10.1948 13.7296 10.5584 13.0324 10.9667 12.4416C11.2585 12.0218 11.6136 11.6021 11.9341 11.2226C12.0419 11.0961 12.1454 10.9739 12.2403 10.8589C13.0468 9.88281 13.6562 8.96138 13.6562 7.54688C13.6562 4.58563 11.3031 2.15625 7.90625 2.15625ZM4.67188 17.25H11.1406C11.4266 17.25 11.7008 17.3636 11.903 17.5658C12.1052 17.768 12.2188 18.0422 12.2188 18.3281C12.2188 18.6141 12.1052 18.8883 11.903 19.0905C11.7008 19.2927 11.4266 19.4062 11.1406 19.4062H4.67188C4.38594 19.4062 4.11171 19.2927 3.90953 19.0905C3.70734 18.8883 3.59375 18.6141 3.59375 18.3281C3.59375 18.0422 3.70734 17.768 3.90953 17.5658C4.11171 17.3636 4.38594 17.25 4.67188 17.25ZM5.03125 21.9219C5.03125 21.6359 5.14484 21.3617 5.34703 21.1595C5.54921 20.9573 5.82344 20.8438 6.10938 20.8438H9.70312C9.98906 20.8438 10.2633 20.9573 10.4655 21.1595C10.6677 21.3617 10.7812 21.6359 10.7812 21.9219C10.7812 22.2078 10.6677 22.482 10.4655 22.6842C10.2633 22.8864 9.98906 23 9.70312 23H6.10938C5.82344 23 5.54921 22.8864 5.34703 22.6842C5.14484 22.482 5.03125 22.2078 5.03125 21.9219Z" />
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>For more details, see the Honeycomb client <a href="../../honeycomb/reference/honeycombinstrumentationclient/">reference</a> documentation.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="create-a-mixpanel-track-function">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#create-a-mixpanel-track-function">#</doc-anchor-trigger>
-        <span>Create a Mixpanel track function</span>
-    </h2>
-</doc-anchor-target>
-<p>To create a tracking function for Mixpanel, use the <a href="../reference/usemixpaneltrackingfunction/">useMixpanelTrackingFunction</a> hook:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useMixpanelTrackingFunction } from &quot;@workleap/telemetry/react&quot;;
-
-const track = useMixpanelTrackingFunction();
-
-track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="track-a-mixpanel-event">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-mixpanel-event">#</doc-anchor-trigger>
-        <span>Track a Mixpanel event</span>
-    </h2>
-</doc-anchor-target>
-<p>Use the retrieved <code v-pre>track</code> function to send a telemetry event:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/telemetry/react&quot;;
-
-const track = useTrackingFunction();
-
-track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-tip"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-tip" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M7.90625 2.15625C4.50944 2.15625 2.15625 4.58563 2.15625 7.54688C2.15625 8.96138 2.76575 9.88281 3.57075 10.8589L3.87837 11.2226C4.19894 11.6021 4.554 12.0218 4.84581 12.4416C5.25406 13.0324 5.61775 13.7296 5.7385 14.5834C5.76728 14.8608 5.68746 15.1386 5.51579 15.3583C5.34413 15.5781 5.09399 15.7228 4.8179 15.7621C4.5418 15.8013 4.26124 15.7321 4.03512 15.5689C3.809 15.4056 3.65493 15.1612 3.60525 14.8867C3.54775 14.4814 3.37094 14.1004 3.07338 13.6692C2.8306 13.3302 2.57055 13.0039 2.29425 12.6917C2.1735 12.5479 2.04556 12.397 1.909 12.2317C1.00769 11.1406 0 9.72613 0 7.54688C0 3.32062 3.39681 0 7.90625 0C12.4157 0 15.8125 3.32062 15.8125 7.54688C15.8125 9.72613 14.8048 11.1406 13.9035 12.2317C13.7669 12.397 13.639 12.5479 13.5183 12.6903C13.2207 13.0424 12.9677 13.3414 12.7406 13.6692C12.4416 14.1004 12.2662 14.4814 12.2087 14.8867C12.1557 15.1584 12.0003 15.3994 11.7747 15.5598C11.5492 15.7202 11.2706 15.7879 10.9965 15.7488C10.7225 15.7096 10.474 15.5667 10.3023 15.3496C10.1306 15.1325 10.0489 14.8577 10.074 14.582C10.1948 13.7296 10.5584 13.0324 10.9667 12.4416C11.2585 12.0218 11.6136 11.6021 11.9341 11.2226C12.0419 11.0961 12.1454 10.9739 12.2403 10.8589C13.0468 9.88281 13.6562 8.96138 13.6562 7.54688C13.6562 4.58563 11.3031 2.15625 7.90625 2.15625ZM4.67188 17.25H11.1406C11.4266 17.25 11.7008 17.3636 11.903 17.5658C12.1052 17.768 12.2188 18.0422 12.2188 18.3281C12.2188 18.6141 12.1052 18.8883 11.903 19.0905C11.7008 19.2927 11.4266 19.4062 11.1406 19.4062H4.67188C4.38594 19.4062 4.11171 19.2927 3.90953 19.0905C3.70734 18.8883 3.59375 18.6141 3.59375 18.3281C3.59375 18.0422 3.70734 17.768 3.90953 17.5658C4.11171 17.3636 4.38594 17.25 4.67188 17.25ZM5.03125 21.9219C5.03125 21.6359 5.14484 21.3617 5.34703 21.1595C5.54921 20.9573 5.82344 20.8438 6.10938 20.8438H9.70312C9.98906 20.8438 10.2633 20.9573 10.4655 21.1595C10.6677 21.3617 10.7812 21.6359 10.7812 21.9219C10.7812 22.2078 10.6677 22.482 10.4655 22.6842C10.2633 22.8864 9.98906 23 9.70312 23H6.10938C5.82344 23 5.54921 22.8864 5.34703 22.6842C5.14484 22.482 5.03125 22.2078 5.03125 21.9219Z" />
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>For more details, see the Mixpanel client <a href="../../mixpanel/reference/mixpanelclient/">reference</a> documentation.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="track-a-link-with-mixpanel">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-link-with-mixpanel">#</doc-anchor-trigger>
-        <span>Track a link with Mixpanel</span>
-    </h2>
-</doc-anchor-target>
-<p>Tracking link clicks with Mixpanel requires to keep the page alive while the tracking request is being processed. To do so, set the <code v-pre>keepAlive</code> option of the <code v-pre>track</code> function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/telemetry/react&quot;;
-
-const track = useTrackingFunction();
-
-track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; }, {
-    keepAlive: true
-});</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-tip"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-tip" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M7.90625 2.15625C4.50944 2.15625 2.15625 4.58563 2.15625 7.54688C2.15625 8.96138 2.76575 9.88281 3.57075 10.8589L3.87837 11.2226C4.19894 11.6021 4.554 12.0218 4.84581 12.4416C5.25406 13.0324 5.61775 13.7296 5.7385 14.5834C5.76728 14.8608 5.68746 15.1386 5.51579 15.3583C5.34413 15.5781 5.09399 15.7228 4.8179 15.7621C4.5418 15.8013 4.26124 15.7321 4.03512 15.5689C3.809 15.4056 3.65493 15.1612 3.60525 14.8867C3.54775 14.4814 3.37094 14.1004 3.07338 13.6692C2.8306 13.3302 2.57055 13.0039 2.29425 12.6917C2.1735 12.5479 2.04556 12.397 1.909 12.2317C1.00769 11.1406 0 9.72613 0 7.54688C0 3.32062 3.39681 0 7.90625 0C12.4157 0 15.8125 3.32062 15.8125 7.54688C15.8125 9.72613 14.8048 11.1406 13.9035 12.2317C13.7669 12.397 13.639 12.5479 13.5183 12.6903C13.2207 13.0424 12.9677 13.3414 12.7406 13.6692C12.4416 14.1004 12.2662 14.4814 12.2087 14.8867C12.1557 15.1584 12.0003 15.3994 11.7747 15.5598C11.5492 15.7202 11.2706 15.7879 10.9965 15.7488C10.7225 15.7096 10.474 15.5667 10.3023 15.3496C10.1306 15.1325 10.0489 14.8577 10.074 14.582C10.1948 13.7296 10.5584 13.0324 10.9667 12.4416C11.2585 12.0218 11.6136 11.6021 11.9341 11.2226C12.0419 11.0961 12.1454 10.9739 12.2403 10.8589C13.0468 9.88281 13.6562 8.96138 13.6562 7.54688C13.6562 4.58563 11.3031 2.15625 7.90625 2.15625ZM4.67188 17.25H11.1406C11.4266 17.25 11.7008 17.3636 11.903 17.5658C12.1052 17.768 12.2188 18.0422 12.2188 18.3281C12.2188 18.6141 12.1052 18.8883 11.903 19.0905C11.7008 19.2927 11.4266 19.4062 11.1406 19.4062H4.67188C4.38594 19.4062 4.11171 19.2927 3.90953 19.0905C3.70734 18.8883 3.59375 18.6141 3.59375 18.3281C3.59375 18.0422 3.70734 17.768 3.90953 17.5658C4.11171 17.3636 4.38594 17.25 4.67188 17.25ZM5.03125 21.9219C5.03125 21.6359 5.14484 21.3617 5.34703 21.1595C5.54921 20.9573 5.82344 20.8438 6.10938 20.8438H9.70312C9.98906 20.8438 10.2633 20.9573 10.4655 21.1595C10.6677 21.3617 10.7812 21.6359 10.7812 21.9219C10.7812 22.2078 10.6677 22.482 10.4655 22.6842C10.2633 22.8864 9.98906 23 9.70312 23H6.10938C5.82344 23 5.54921 22.8864 5.34703 22.6842C5.14484 22.482 5.03125 22.2078 5.03125 21.9219Z" />
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>For more details, see the Mixpanel client <a href="../../mixpanel/reference/mixpanelclient/">reference</a> documentation.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="set-mixpanel-custom-user-properties">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#set-mixpanel-custom-user-properties">#</doc-anchor-trigger>
-        <span>Set Mixpanel custom user properties</span>
-    </h2>
-</doc-anchor-target>
-<p>To set custom properties about the current user environment on all events, <a href="../../mixpanel/reference/mixpanelclient/">MixpanelClient</a> expose the <a href="../../mixpanel/reference/mixpanelclient/#methods">setGlobalEventProperties</a> method:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5-7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/telemetry/react&quot;;
-
-const client = useMixpanelClient();
-
-client.setGlobalEventProperties({
-    &quot;User Id&quot;: &quot;123&quot; 
-})</code></pre>
-</doc-codeblock></div>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-tip"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-tip" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M7.90625 2.15625C4.50944 2.15625 2.15625 4.58563 2.15625 7.54688C2.15625 8.96138 2.76575 9.88281 3.57075 10.8589L3.87837 11.2226C4.19894 11.6021 4.554 12.0218 4.84581 12.4416C5.25406 13.0324 5.61775 13.7296 5.7385 14.5834C5.76728 14.8608 5.68746 15.1386 5.51579 15.3583C5.34413 15.5781 5.09399 15.7228 4.8179 15.7621C4.5418 15.8013 4.26124 15.7321 4.03512 15.5689C3.809 15.4056 3.65493 15.1612 3.60525 14.8867C3.54775 14.4814 3.37094 14.1004 3.07338 13.6692C2.8306 13.3302 2.57055 13.0039 2.29425 12.6917C2.1735 12.5479 2.04556 12.397 1.909 12.2317C1.00769 11.1406 0 9.72613 0 7.54688C0 3.32062 3.39681 0 7.90625 0C12.4157 0 15.8125 3.32062 15.8125 7.54688C15.8125 9.72613 14.8048 11.1406 13.9035 12.2317C13.7669 12.397 13.639 12.5479 13.5183 12.6903C13.2207 13.0424 12.9677 13.3414 12.7406 13.6692C12.4416 14.1004 12.2662 14.4814 12.2087 14.8867C12.1557 15.1584 12.0003 15.3994 11.7747 15.5598C11.5492 15.7202 11.2706 15.7879 10.9965 15.7488C10.7225 15.7096 10.474 15.5667 10.3023 15.3496C10.1306 15.1325 10.0489 14.8577 10.074 14.582C10.1948 13.7296 10.5584 13.0324 10.9667 12.4416C11.2585 12.0218 11.6136 11.6021 11.9341 11.2226C12.0419 11.0961 12.1454 10.9739 12.2403 10.8589C13.0468 9.88281 13.6562 8.96138 13.6562 7.54688C13.6562 4.58563 11.3031 2.15625 7.90625 2.15625ZM4.67188 17.25H11.1406C11.4266 17.25 11.7008 17.3636 11.903 17.5658C12.1052 17.768 12.2188 18.0422 12.2188 18.3281C12.2188 18.6141 12.1052 18.8883 11.903 19.0905C11.7008 19.2927 11.4266 19.4062 11.1406 19.4062H4.67188C4.38594 19.4062 4.11171 19.2927 3.90953 19.0905C3.70734 18.8883 3.59375 18.6141 3.59375 18.3281C3.59375 18.0422 3.70734 17.768 3.90953 17.5658C4.11171 17.3636 4.38594 17.25 4.67188 17.25ZM5.03125 21.9219C5.03125 21.6359 5.14484 21.3617 5.34703 21.1595C5.54921 20.9573 5.82344 20.8438 6.10938 20.8438H9.70312C9.98906 20.8438 10.2633 20.9573 10.4655 21.1595C10.6677 21.3617 10.7812 21.6359 10.7812 21.9219C10.7812 22.2078 10.6677 22.482 10.4655 22.6842C10.2633 22.8864 9.98906 23 9.70312 23H6.10938C5.82344 23 5.54921 22.8864 5.34703 22.6842C5.14484 22.482 5.03125 22.2078 5.03125 21.9219Z" />
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>For more details, see the Mixpanel client <a href="../../mixpanel/reference/mixpanelclient/">reference</a> documentation.</p>
-        </div>
-    </div>
-</div>
-<doc-anchor-target id="set-up-loggers">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#set-up-loggers">#</doc-anchor-trigger>
-        <span>Set up loggers</span>
-    </h2>
-</doc-anchor-target>
-<p>Providing loggers to the initialization/registration functions is optional, but recommended to simplify troubleshooting.</p>
-<p>First install the missing packages (<code v-pre>@workleap/logrocket</code> is optionnal):</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/logging @workleap/logrocket</code></pre>
-</doc-codeblock></div>
-<p>Then update the application bootstrapping code to set up the loggers:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="13,31-32,36-37"><code v-pre class="language-tsx">import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
-import { BrowserConsoleLogger, LogLevel, type RootLogger } from &quot;@workleap/logging&quot;;
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
-import { StrictMode } from &quot;react&quot;;
-import { createRoot } from &quot;react-dom/client&quot;;
-import { App } from &quot;./App.tsx&quot;;
-
-// Do not do this, it's only for demo purpose.
-const isDev = process.env === &quot;development&quot;;
-
-// Only add LogRocket logger if your product is set up with LogRocket.
-const loggers: RootLogger[] = [isDev ? new BrowserConsoleLogger() : new LogRocketLogger({ logLevel: LogLevel.information })];
-
-const telemetryClient = initializeTelemetry({
-    logRocket: {
-        appId: &quot;my-app-id&quot;
-    },
-    honeycomb: {
-        namespace: &quot;sample&quot;,
-        serviceName: &quot;my-app&quot;,
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: &quot;https://sample-proxy&quot;
-        }
-    },
-    mixpanel: {
-        productId: &quot;wlp&quot;,
-        envOrTrackingApiBaseUrl: &quot;development&quot;
-    },
-    verbose: isDev,
-    loggers
-});
-
-const commonRoomClient = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
-    verbose: isDev,
-    loggers
-});
-
-const root = createRoot(document.getElementById(&quot;root&quot;)!);
-
-root.render(
-    &lt;StrictMode&gt;
-        &lt;TelemetryProvider client={telemetryClient}&gt;
-            &lt;CommonRoomInstrumentationProvider client={commonRoomClient}&gt;
-                &lt;App /&gt;
-            &lt;/CommonRoomInstrumentationProvider&gt;
-        &lt;/TelemetryProvider&gt;
-    &lt;/StrictMode&gt;
-);</code></pre>
-</doc-codeblock></div>
-<p>To troubleshoot production issues, remove the <code v-pre>LogLevel</code> from the <code v-pre>LogRocketLogger</code> constructor options and set the <code v-pre>verbose</code> option to <code v-pre>true</code>:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="13,31,36"><code v-pre class="language-tsx">import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
-import { BrowserConsoleLogger, LogLevel, type RootLogger } from &quot;@workleap/logging&quot;;
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
-import { StrictMode } from &quot;react&quot;;
-import { createRoot } from &quot;react-dom/client&quot;;
-import { App } from &quot;./App.tsx&quot;;
-
-// Do not do this, it's only for demo purpose.
-const isDev = process.env === &quot;development&quot;;
-
-// Only add LogRocket logger if your product is set up with LogRocket.
-const loggers: RootLogger[] = [isDev ? new BrowserConsoleLogger() : new LogRocketLogger({ logLevel })];
-
-const telemetryClient = initializeTelemetry({
-    logRocket: {
-        appId: &quot;my-app-id&quot;
-    },
-    honeycomb: {
-        namespace: &quot;sample&quot;,
-        serviceName: &quot;my-app&quot;,
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: &quot;https://sample-proxy&quot;
-        }
-    },
-    mixpanel: {
-        productId: &quot;wlp&quot;,
-        envOrTrackingApiBaseUrl: &quot;development&quot;
-    },
-    verbose: true,
-    loggers
-});
-
-const commonRoomClient = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
-    verbose: true,
-    loggers
-});
-
-const root = createRoot(document.getElementById(&quot;root&quot;)!);
-
-root.render(
-    &lt;StrictMode&gt;
-        &lt;TelemetryProvider client={telemetryClient}&gt;
-            &lt;CommonRoomInstrumentationProvider client={commonRoomClient}&gt;
-                &lt;App /&gt;
-            &lt;/CommonRoomInstrumentationProvider&gt;
-        &lt;/TelemetryProvider&gt;
-    &lt;/StrictMode&gt;
-);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="try-it-rocket">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#try-it-rocket">#</doc-anchor-trigger>
-        <span>Try it <span class="docs-emoji">&#x1F680;</span></span>
-    </h2>
-</doc-anchor-target>
-<p>To test the telemetry setup, follow the <em>try it</em> section in each package&#x27;s documentation:</p>
-<ul>
-<li><a href="../../logrocket/getting-started/#try-it-">LogRocket</a></li>
-<li><a href="../../honeycomb/getting-started/#try-it-">Honeycomb</a></li>
-<li><a href="../../mixpanel/getting-started/#try-it-">Mixpanel</a></li>
-<li><a href="../../common-room/getting-started/#try-it-">Common Room</a></li>
-</ul>
+<p><span class="docs-emoji">&#x1F449;</span> To get started, follow the <a href="../setup-project/">quick start</a> guide to set up your project with Workleap&#x27;s supported telemetry platforms.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -804,10 +411,10 @@ root.render(
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../introduction/correlation-ids/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../introduction/setup-project/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">Correlation ids</span>
+                                                <span class="block mt-1">Setup a project</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -871,6 +478,6 @@ root.render(
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Getting started", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 2 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Getting started", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 2 }</script>
 </body>
 </html>
