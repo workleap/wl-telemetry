@@ -243,7 +243,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 
 Generic transformers can use the `context` argument to gather additional information about their execution context:
 
-```ts !#4,8 transformer.js
+```ts !#4,8 transformer.ts
 import type { LogRocketSdkOptionsTransformer } from "@workleap/logrocket/react";
 
 const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) => {

@@ -439,7 +439,7 @@ const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
 
 The predefined options are useful to quickly customize the default configuration of the [Honeycomb Web SDK](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution), but only covers a subset of the [options](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#advanced-configuration). If you need full control over the configuration, you can provide configuration transformer functions through the `transformers` option of the `registerHoneycombInstrumentation` function. Remember, **no locked in** :heart::v:.
 
-To view the default configuration of `registerHoneycombInstrumentation`, have a look at the [registerHoneycombInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/honeycomb/src/registerHoneycombInstrumentation.ts) file on GitHub.
+To view the default configuration of [registerHoneycombInstrumentation](#registerhoneycombinstrumentation), have a look at the [registerHoneycombInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/honeycomb/src/registerHoneycombInstrumentation.ts) file on GitHub.
 
 ```tsx !#3-7,11
 import { registerHoneycombInstrumentation, type HoneycombSdkOptionsTransformer } from "@workleap/honeycomb/react";
@@ -458,7 +458,7 @@ const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
 
 Generic transformers can use the `context` argument to gather additional information about their execution context:
 
-```ts !#4 transformer.js
+```ts !#4 transformer.ts
 import type { HoneycombSdkOptionsTransformer } from "@workleap/honeycomb/react";
 
 const debugTransformer: HoneycombSdkOptionsTransformer = (config, context) => {
