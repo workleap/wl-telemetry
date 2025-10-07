@@ -105,7 +105,7 @@ root.render(
 );
 ```
 
-## Custrom traces
+## Custom traces
 
 Applications are expected to use the [OpenTelemetry API](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#add-custom-instrumentation) to send custom traces to Honeycomb:
 
