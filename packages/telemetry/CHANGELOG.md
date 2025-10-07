@@ -1,5 +1,11 @@
 # @workleap/telemetry
 
+## 2.0.2
+
+### Patch Changes
+
+- [#97](https://github.com/workleap/wl-telemetry/pull/97) [`17cb7ed`](https://github.com/workleap/wl-telemetry/commit/17cb7ed9bc694603981e6e41e2330c1dcb649c62) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Fix package export paths for @workleap/telemetry.
+
 ## 2.0.1
 
 ### Patch Changes
