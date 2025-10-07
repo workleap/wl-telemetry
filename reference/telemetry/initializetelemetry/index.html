@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.813118112551">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.813119584529">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../../static/favicon.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.11.0.813118112551" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.813119584529" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.813118112551" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.813119584529" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.813118112551" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.813118112551" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.813119584529" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.813119584529" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -1040,65 +1040,6 @@ const client = initializeTelemetry({
             trackingEndpoint: &quot;custom/tracking/track&quot;
         }
     }
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="track-events">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-events">#</doc-anchor-trigger>
-        <span>Track events</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3,5"><code v-pre class="language-typescript">import { useMixpanelTrackingFunction } from &quot;@workleap/telemetry/react&quot;;
-
-const track = useMixpanelTrackingFunction();
-
-track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="specify-a-target-product">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#specify-a-target-product">#</doc-anchor-trigger>
-        <span>Specify a target product</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { useMixpanelTrackingFunction } from &quot;@workleap/telemetry/react&quot;;
-
-const track = useMixpanelTrackingFunction({
-    targetProductId: &quot;wov&quot;
-});
-
-track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="track-a-link">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-link">#</doc-anchor-trigger>
-        <span>Track a link</span>
-    </h3>
-</doc-anchor-target>
-<p>To track a link click, use the <code v-pre>keepAlive</code> option to keep the page alive while the tracking request is being processed:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useMixpanelTrackingFunction } from &quot;@workleap/telemetry/react&quot;;
-
-const track = useMixpanelTrackingFunction();
-
-track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; }, {
-    keepAlive: true
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="register-global-properties">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#register-global-properties">#</doc-anchor-trigger>
-        <span>Register global properties</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5-7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/telemetry/react&quot;;
-
-const client = useMixpanelClient();
-
-client.setGlobalEventProperties({
-    &quot;User Id&quot;: &quot;123&quot;
 });</code></pre>
 </doc-codeblock></div>
 
