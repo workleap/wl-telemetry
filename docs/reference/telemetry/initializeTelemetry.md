@@ -537,7 +537,7 @@ The predefined options are useful to quickly customize the default configuration
 To view the default configuration, have a look at the [registerHoneycombInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/honeycomb/src/registerHoneycombInstrumentation.ts) file on GitHub.
 
 ```tsx !#3-7,16
-import { initializeTelemetry, type HoneycombSdkOptionsTransformer } from "@workleap/tekemetry/react";
+import { initializeTelemetry, type HoneycombSdkOptionsTransformer } from "@workleap/telemetry/react";
 
 const skipOptionsValidationTransformer: HoneycombSdkOptionsTransformer = config => {
     config.skipOptionsValidation = true;
