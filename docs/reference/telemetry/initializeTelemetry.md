@@ -49,8 +49,6 @@ const client = initializeTelemetry(options?: { logRocket?, honeycomb?, mixpanel?
 
 A [TelemetryClient](./TelemetryClient.md) instance.
 
-<!-- ## Usage -->
-
 ## Initialize all telemetry platforms
 
 ```ts !#4-18
@@ -72,100 +70,6 @@ const client = initializeTelemetry({
         productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     }
-});
-```
-
-<!-- ### Initialize LogRocket
-
-```ts !#4-6
-import { initializeTelemetry } from "@workleap/telemetry/react";
-
-const client = initializeTelemetry({
-    logRocket: {
-        appId: "my-app-id"
-    }
-});
-```
-
-### Initialize Honeycomb
-
-```ts !#4-11
-import { initializeTelemetry } from "@workleap/telemetry/react";
-
-const client = initializeTelemetry({
-    honeycomb: {
-        namespace: "sample",
-        serviceName: "my-app-name",
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: "https://sample-proxy"
-        }
-    }
-});
-```
-
-### Initialize Mixpanel
-
-```ts !#4-7
-import { initializeTelemetry } from "@workleap/telemetry/react";
-
-const client = initializeTelemetry({
-    mixpanel: {
-        productId: "wlp",
-        envOrTrackingApiBaseUrl: "development"
-    }
-});
-``` -->
-
-## Verbose mode
-
-```ts !#19
-import { initializeTelemetry } from "@workleap/telemetry/react";
-
-const client = initializeTelemetry({
-    logRocket: {
-        appId: "my-app-id"
-    },
-    honeycomb: {
-        namespace: "sample",
-        serviceName: "my-app-name",
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: "https://sample-proxy"
-        }
-    },
-    mixpanel: {
-        productId: "wlp",
-        envOrTrackingApiBaseUrl: "development"
-    },
-    verbose: true
-});
-```
-
-## Use loggers
-
-```ts !#21
-import { initializeTelemetry } from "@workleap/telemetry/react";
-import { LogRocketLogger } from "@workleap/logrocket/react";
-import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
-
-const client = initializeTelemetry({
-    logRocket: {
-        appId: "my-app-id"
-    },
-    honeycomb: {
-        namespace: "sample",
-        serviceName: "my-app-name",
-        apiServiceUrls: [/.+/g],
-        options: {
-            proxy: "https://sample-proxy"
-        }
-    },
-    mixpanel: {
-        productId: "wlp",
-        envOrTrackingApiBaseUrl: "development"
-    },
-    loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
 
@@ -614,6 +518,58 @@ const client = initializeTelemetry({
             trackingEndpoint: "custom/tracking/track"
         }
     }
+});
+```
+
+## Verbose mode
+
+```ts !#19
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry({
+    logRocket: {
+        appId: "my-app-id"
+    },
+    honeycomb: {
+        namespace: "sample",
+        serviceName: "my-app-name",
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: "https://sample-proxy"
+        }
+    },
+    mixpanel: {
+        productId: "wlp",
+        envOrTrackingApiBaseUrl: "development"
+    },
+    verbose: true
+});
+```
+
+## Use loggers
+
+```ts !#21
+import { initializeTelemetry } from "@workleap/telemetry/react";
+import { LogRocketLogger } from "@workleap/logrocket/react";
+import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
+
+const client = initializeTelemetry({
+    logRocket: {
+        appId: "my-app-id"
+    },
+    honeycomb: {
+        namespace: "sample",
+        serviceName: "my-app-name",
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: "https://sample-proxy"
+        }
+    },
+    mixpanel: {
+        productId: "wlp",
+        envOrTrackingApiBaseUrl: "development"
+    },
+    loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
 
