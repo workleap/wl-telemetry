@@ -1,11 +1,12 @@
 {
     "$schema": "https://context7.com/schema/context7.json",
     "projectTitle": "Workleap Telemetry",
-    "description": "Telemetry libraries for building web applications at Workleap.",
+    "description": "A telemetry library for Workleap's web applications.",
     "folders": [
         "docs"
     ],
     "excludeFolders": [
+        "docs/standalone-libraries",
         "docs/updating"
     ]
 }

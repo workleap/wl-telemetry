@@ -2,7 +2,7 @@
     "name": "@workleap/telemetry",
     "author": "Workleap",
     "version": "2.0.0",
-    "description": "A package including telemetry utilities for Workleap web applications.",
+    "description": "A telemetry library for Workleap's web applications.",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",

@@ -1,0 +1,96 @@
+---
+order: 130
+label: HoneycombInstrumentationClient
+toc:
+    depth: 2-3
+---
+
+# HoneycombInstrumentationClient
+
+A lightweight client providing access to Honeycomb instrumentation utilities.
+
+### Methods
+
+- `setGlobalSpanAttribute(key, value)`: Set a single global attribute to be included in all traces.
+- `setGlobalSpanAttributes(attributes)`: Set a single or multiple global attributes to be included in all traces.
+- `registerFetchRequestHook(hook)`: Dynamically registers fetch request hook at the end of the pipeline.
+- `registerFetchRequestHookAtStart(hook)`: Dynamically registers a fetch request hook at the start of the pipeline.
+
+## Usage
+
+### Register global attributes
+
+```ts !#5-7
+import { useHoneycombInstrumentationClient } from "@workleap/telemetry/react";
+
+const client = useHoneycombInstrumentationClient();
+
+client.setGlobalSpanAttributes({
+    "app.user_id": "123"
+});
+```
+
+### Register a dynamic request hook
+
+```ts !#5-15
+import { useHoneycombInstrumentationClient } from "@workleap/telemetry/react";
+
+const client = useHoneycombInstrumentationClient();
+
+client.registerFetchRequestHook((requestSpan, request) => {
+    let headers: Headers;
+
+    if (request instanceof Request) {
+        const moduleId = request.headers.get("x-module-id");
+
+        if (moduleId) {
+            requestSpan.setAttribute("app.module_id", moduleId);
+        }
+    }
+});
+```
+
+### Register a dynamic request hook to be executed first
+
+```ts !#5-15
+import { useHoneycombInstrumentationClient } from "@workleap/telemetry/react";
+
+const client = useHoneycombInstrumentationClient();
+
+client.registerFetchRequestHookAtStart((requestSpan, request) => {
+    let headers: Headers;
+
+    if (request instanceof Request) {
+        const moduleId = request.headers.get("x-module-id");
+
+        if (moduleId) {
+            requestSpan.setAttribute("app.module_id", moduleId);
+        }
+    }
+});
+```
+
+### Prevent the execution of subsequent request hooks
+
+A dynamic request hook can stop the execution of subsequent request hooks by returning `true`.
+
+```ts !#15
+import { useHoneycombInstrumentationClient } from "@workleap/telemetry/react";
+
+const client = useHoneycombInstrumentationClient();
+
+client.registerFetchRequestHookAtStart((requestSpan, request) => {
+    let headers: Headers;
+
+    if (request instanceof Request) {
+        const moduleId = request.headers.get("x-module-id");
+
+        if (moduleId) {
+            requestSpan.setAttribute("app.module_id", moduleId);
+
+            // Indicates to not propagate the requests to the subsequent hooks.
+            return true;
+        }
+    }
+});
+```

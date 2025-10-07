@@ -27,9 +27,9 @@ const client = new TelemetryClient(logRocketClient?, honeycombClient?, mixpanelC
 
 ### Getters
 
-- `logRocketClient`: Return the LogRocket instrumentation client.
-- `honeycombClient`: Return the Honeycomb instrumentation client.
-- `mixpanelClient`: Return the Mixpanel client.
+- `logRocketClient`: Return the [LogRocketInstrumentationClient](../../logrocket/reference/LogRocketInstrumentationClient.md) instance.
+- `honeycombClient`: Return the [HoneycombInstrumentationClient](../../honeycomb/reference/HoneycombInstrumentationClient.md) instance.
+- `mixpanelClient`: Return the [MixpanelClient](../../mixpanel/reference/MixpanelClient.md) instance.
 
 ## Usage
 
