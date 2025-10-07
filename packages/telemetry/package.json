@@ -20,9 +20,9 @@
                 "default": "./dist/js/index.js"
             },
             "./react": {
-                "types": "./dist/react.d.ts",
-                "import": "./dist/react.js",
-                "default": "./dist/react.js"
+                "types": "./dist/react/index.d.ts",
+                "import": "./dist/react/index.js",
+                "default": "./dist/react/index.js"
             }
         }
     },
