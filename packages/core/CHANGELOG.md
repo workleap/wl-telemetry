@@ -1,5 +1,11 @@
 # @workleap-telemetry/core
 
+## 1.0.1
+
+### Patch Changes
+
+- [#94](https://github.com/workleap/wl-telemetry/pull/94) [`6666dd8`](https://github.com/workleap/wl-telemetry/commit/6666dd843eb7e9d5db3ec28b8777668e62543a1f) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Added a new HoneycombInstrumentationPartialClient typing.
+
 ## 1.0.0
 
 ### Major Changes
