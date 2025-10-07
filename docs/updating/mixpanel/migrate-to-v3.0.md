@@ -7,7 +7,7 @@ meta:
 
 # Migrate to v3.0
 
-This major version introduces several important changes. `initializeMixpanel` now returns a [client](../../reference/telemetry/MixpanelClient.md) instance. The standalone `createTrackingFunction` and `setSuperProperties` functions has been moved to the client, telemetry correlation ids are no longuer implicitly added to session replays, and global variables for third-party integrations have been deprecated. To attach telemetry correlation ids to session replays, you must now provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance. Third-party libraries such as [Squide](https://workleap.github.io/wl-squide) and the [Platform widgets](https://dev.azure.com/workleap/WorkleapPlatform/_git/workleap-platform-widgets?path=/README.md) should also be explicitly provided with the returned client instance to use Mixpanel.
+This major version introduces several important changes. `initializeMixpanel` now returns a [client](../../reference/telemetry/MixpanelClient.md) instance. The standalone `createTrackingFunction` and `setSuperProperties` functions has been moved to the client, telemetry correlation ids are no longer implicitly added to session replays, and global variables for third-party integrations have been deprecated. To attach telemetry correlation ids to session replays, you must now provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance. Third-party libraries such as [Squide](https://workleap.github.io/wl-squide) and the [Platform widgets](https://dev.azure.com/workleap/WorkleapPlatform/_git/workleap-platform-widgets?path=/README.md) should also be explicitly provided with the returned client instance to use Mixpanel.
 
 ## Breaking changes
 
