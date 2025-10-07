@@ -532,7 +532,7 @@ const client = initializeTelemetry({
 
 ### Use transformer functions
 
-The predefined options are useful to quickly customize the default configuration of the [Honeycomb Web SDK](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution), but only covers a subset of the [options](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#advanced-configuration). If you need full control over the configuration, you can provide configuration transformer functions through the `honeycomb.ransformers` option of the [initializeTelemetry](./initializeTelemetry.md) function. Remember, **no locked in** :heart::v:.
+The predefined options are useful to quickly customize the default configuration of the [Honeycomb Web SDK](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution), but only covers a subset of the [options](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#advanced-configuration). If you need full control over the configuration, you can provide configuration transformer functions through the `honeycomb.transformers` option of the [initializeTelemetry](./initializeTelemetry.md) function. Remember, **no locked in** :heart::v:.
 
 To view the default configuration, have a look at the [registerHoneycombInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/honeycomb/src/registerHoneycombInstrumentation.ts) file on GitHub.
 
