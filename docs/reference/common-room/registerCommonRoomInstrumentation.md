@@ -46,7 +46,7 @@ const client = registerCommonRoomInstrumentation("my-site-id", {
 });
 ```
 
-### Loggers
+### Use loggers
 
 ```ts !#6
 import { registerCommonRoomInstrumentation } from "@workleap/common-room";
