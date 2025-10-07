@@ -6,7 +6,7 @@ order: 70
 
 ## Telemetry
 
-- [Mirate to umbrella package](./migrate-to-umbrella-package.md)
+- [Migrate to umbrella package](./migrate-to-umbrella-package.md)
 
 ## LogRocket
 
