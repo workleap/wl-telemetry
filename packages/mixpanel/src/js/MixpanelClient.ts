@@ -1,5 +1,5 @@
+import type { CreateMixpanelTrackingFunctionOptions, MixpanelTrackingFunction } from "@workleap-telemetry/core";
 import type { Logger } from "@workleap/logging";
-import type { CreateMixpanelTrackingFunctionOptions, MixpanelTrackingFunction } from "./createTrackingFunction.ts";
 import { getBaseProperties } from "./properties.ts";
 
 export type MixpanelGlobalEventProperties = Map<string, unknown>;
@@ -20,6 +20,8 @@ export class MixpanelClient {
         this.#logger = logger;
     }
 
+    // IMPORTANT: If you update this method, make sure to update the MixpanelPartialClient
+    // interface as well in @workleap-telemetry/core.
     /**
      * @see {@link https://workleap.github.io/wl-telemetry}
      */

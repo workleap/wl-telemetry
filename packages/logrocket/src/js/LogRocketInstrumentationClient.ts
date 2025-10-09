@@ -98,6 +98,8 @@ export class LogRocketInstrumentationClient {
         this.#telemetryContext = telemetryContext;
     }
 
+    // IMPORTANT: If you update this method, make sure to update the LogRocketInstrumentationPartialClient
+    // interface as well in @workleap-telemetry/core.
     /**
      * Register a listener to receive the LogRocket session id when it's available.
      * This method is the equivalent of the LogRocket.getSessionURL function but is
