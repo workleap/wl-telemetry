@@ -30,6 +30,8 @@ export class HoneycombInstrumentationClient {
         this.#globalAttributeSpanProcessor.setAttributes(attributes);
     }
 
+    // IMPORTANT: If you update this method, make sure to update the HoneycombInstrumentationPartialClient
+    // interface as well in @workleap-telemetry/core.
     /**
      * Register dynamically an OTel fetch request hook.
      * @see {@link https://workleap.github.io/wl-telemetry}
@@ -38,6 +40,8 @@ export class HoneycombInstrumentationClient {
         this.#fetchRequestPipeline.registerHook(hook);
     }
 
+    // IMPORTANT: If you update this method, make sure to update the HoneycombInstrumentationPartialClient
+    // interface as well in @workleap-telemetry/core.
     /**
      * Register dynamically an OTel fetch request hook at the beginning of the execution pipeline.
      * @see {@link https://workleap.github.io/wl-telemetry}

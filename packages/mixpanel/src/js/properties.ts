@@ -1,8 +1,6 @@
 
-import type { TelemetryContext } from "@workleap-telemetry/core";
+import type { MixpanelEventProperties, TelemetryContext } from "@workleap-telemetry/core";
 import { browserName, browserVersion, deviceType, osName, referringDomain } from "./utils.ts";
-
-export type MixpanelEventProperties = Record<string, unknown>;
 
 export const BaseProperties = {
     Browser: "$browser",

@@ -1,5 +1,6 @@
+import type { CreateMixpanelTrackingFunctionOptions } from "@workleap-telemetry/core";
 import { useContext, useMemo } from "react";
-import { createTrackingFunction, type CreateMixpanelTrackingFunctionOptions } from "../js/createTrackingFunction.ts";
+import { createTrackingFunction } from "../js/createTrackingFunction.ts";
 import { MixpanelContext } from "./MixpanelContext.tsx";
 
 /**
