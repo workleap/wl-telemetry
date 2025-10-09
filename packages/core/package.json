@@ -1,7 +1,7 @@
 {
     "name": "@workleap-telemetry/core",
     "author": "Workleap",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A package including telemetry core utilities for Workleap web applications.",
     "license": "Apache-2.0",
     "repository": {
