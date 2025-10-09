@@ -1,5 +1,15 @@
 # @workleap/telemetry
 
+## 2.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`0fc78f2`](https://github.com/workleap/wl-telemetry/commit/0fc78f29c914075ced4d96c916edcb78e8033983)]:
+  - @workleap/honeycomb@7.0.2
+  - @workleap/logrocket@2.0.2
+  - @workleap/mixpanel@3.0.2
+  - @workleap-telemetry/core@1.0.2
+
 ## 2.0.2
 
 ### Patch Changes

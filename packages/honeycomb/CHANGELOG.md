@@ -1,5 +1,14 @@
 # @workleap/honeycomb
 
+## 7.0.2
+
+### Patch Changes
+
+- [#99](https://github.com/workleap/wl-telemetry/pull/99) [`0fc78f2`](https://github.com/workleap/wl-telemetry/commit/0fc78f29c914075ced4d96c916edcb78e8033983) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Added a MixpanelPartialClient to the core package.
+
+- Updated dependencies [[`0fc78f2`](https://github.com/workleap/wl-telemetry/commit/0fc78f29c914075ced4d96c916edcb78e8033983)]:
+  - @workleap-telemetry/core@1.0.2
+
 ## 7.0.1
 
 ### Patch Changes
