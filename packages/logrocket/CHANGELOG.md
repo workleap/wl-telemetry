@@ -1,5 +1,11 @@
 # @workleap/logrocket
 
+## 2.1.0
+
+### Minor Changes
+
+- [#101](https://github.com/workleap/wl-telemetry/pull/101) [`107d7ef`](https://github.com/workleap/wl-telemetry/commit/107d7efecd77470c8d13ee2ca055cf27405b31a8) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Added "noop" clients for LogRocket, Honeycomb and Mixpanel.
+
 ## 2.0.2
 
 ### Patch Changes
