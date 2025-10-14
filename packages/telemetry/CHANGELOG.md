@@ -1,5 +1,11 @@
 # @workleap/telemetry
 
+## 2.1.1
+
+### Patch Changes
+
+- [#105](https://github.com/workleap/wl-telemetry/pull/105) [`6983cc7`](https://github.com/workleap/wl-telemetry/commit/6983cc7e91696dda64b05036076176386b5bb85e) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Fix export of "noop" clients.
+
 ## 2.1.0
 
 ### Minor Changes
