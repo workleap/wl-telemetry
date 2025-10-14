@@ -7,6 +7,7 @@ export type {
     HoneycombInstrumentationClient,
     HoneycombSdkFactory,
     HoneycombSdkOptionsTransformer,
+    NoopHoneycombInstrumentationClient,
     RegisterHoneycombInstrumentationOptions
 } from "@workleap/honeycomb";
 export type {
@@ -15,6 +16,7 @@ export type {
     LogRocketSdkOptionsTransformer,
     LogRocketWorkleapPlatformIdentification,
     LogRocketWorkleapPlatformUserTraits,
+    NoopLogRocketInstrumentationClient,
     RegisterLogRocketInstrumentationOptions
 } from "@workleap/logrocket";
 export type {
@@ -24,7 +26,8 @@ export type {
     MixpanelEventProperties,
     MixpanelGlobalEventProperties,
     MixpanelTrackingFunction,
-    MixpanelTrackingFunctionOptions
+    MixpanelTrackingFunctionOptions,
+    NoopMixpanelClient
 } from "@workleap/mixpanel";
 export { initializeTelemetry, type InitializeTelemetryOptions } from "./initializeTelemetry.ts";
 export { TelemetryClient } from "./TelemetryClient.ts";
