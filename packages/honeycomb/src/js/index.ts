@@ -3,6 +3,7 @@ export type { HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 export { type FetchRequestHookFunction } from "./FetchRequestPipeline.ts";
 export { type HoneycombInstrumentationClient } from "./HoneycombInstrumentationClient.ts";
 export * from "./honeycombTypes.ts";
+export { NoopHoneycombInstrumentationClient } from "./NoopHoneycombInstrumentationClient.ts";
 export {
     registerHoneycombInstrumentation,
     type DefineDocumentLoadInstrumentationOptionsFunction,
