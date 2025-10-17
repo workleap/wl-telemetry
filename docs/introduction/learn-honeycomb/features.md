@@ -7,6 +7,10 @@ meta:
 
 # Honeycomb features
 
+!!!warning
+If telemetry hasn't been set up for your project yet, please refer to the [setup guide](../setup-project.md) before continuing.
+!!!
+
 To monitor **application performance**, Workleap has adopted [Honeycomb](https://www.honeycomb.io/), a tool that helps teams capture and analyze **distributed traces** and metrics to understand and monitor complex systems, application behaviors, and performance. Built on [OpenTelemetry](https://opentelemetry.io/), Honeycomb provides a robust API for frontend telemetry.
 
 While Honeycomb's in-house [HoneycombWebSDK](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/) includes great default instrumentation, the `@workleap/telemetry` package provides a slightly altered default instrumentation which is adapted for Workleap's applications' requirements.

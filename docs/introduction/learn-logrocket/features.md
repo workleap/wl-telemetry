@@ -7,6 +7,10 @@ meta:
 
 # LogRocket features
 
+!!!warning
+If telemetry hasn't been set up for your project yet, please refer to the [setup guide](../setup-project.md) before continuing.
+!!!
+
 To gain full visibility into **frontend behavior** in **production**, Workleap has adopted [LogRocket](https://logrocket.com/), a tool that combines session replay, performance tracking, and error logging to help **understand** and resolve **issues** in **production**.
 
 The `@workleap/telemetry` package provides default LogRocket instrumentation tailored to Workleap's applications' needs, including the **removal** of **sensitive information** from HTML documents, HTTP requests/responses and URLs.

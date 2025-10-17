@@ -7,6 +7,10 @@ meta:
 
 # Mixpanel features
 
+!!!warning
+If telemetry hasn't been set up for your project yet, please refer to the [setup guide](../setup-project.md) before continuing.
+!!!
+
 To make data-informed decisions, understand user behavior, and measure product impact, Workleap has adopted [Mixpanel](https://mixpanel.com/), an analytics platform that helps **understand how users interact with** a **product**.
 
 The `@workleap/telemetry` package add basic Mixpanel tracking capabilities to an application. It provides a single `track` function that sends `POST` requests to a dedicated tracking endpoint compliant with the Workleap platform tracking API.
