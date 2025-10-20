@@ -1,5 +1,5 @@
 ---
-order: 85
+order: 80
 label: Standalone libraries
 ---
 
