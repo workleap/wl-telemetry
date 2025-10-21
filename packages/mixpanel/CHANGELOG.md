@@ -1,5 +1,14 @@
 # @workleap/mixpanel
 
+## 4.0.1
+
+### Patch Changes
+
+- [#109](https://github.com/workleap/wl-telemetry/pull/109) [`0a423ff`](https://github.com/workleap/wl-telemetry/commit/0a423ffc47baea121607283fc23aacdad43e36f9) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Fix a typing issues with the React context providers.
+
+- Updated dependencies [[`0a423ff`](https://github.com/workleap/wl-telemetry/commit/0a423ffc47baea121607283fc23aacdad43e36f9)]:
+  - @workleap/logrocket@2.1.1
+
 ## 4.0.0
 
 ### Minor Changes
