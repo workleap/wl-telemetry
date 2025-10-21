@@ -15,7 +15,7 @@ To make this easier, the library provides "noop" implementations that satisfy th
 
 ## Create a Storybook decorator
 
-To integrate with stories that depend on a telemetry client instance, start by creating a Storybook [decorator]() that provides a fake client instance to your components:
+To integrate with stories that depend on a telemetry client instance, start by creating a Storybook [decorator](https://storybook.js.org/docs/writing-stories/decorators) that provides a fake client instance to your components:
 
 ```tsx !#9-15 withTelemetryProvider.tsx
 import { TelemetryClient, TelemetryProvider, NoopLogRocketInstrumentationClient, NoopHoneycombInstrumentationClient, NoopMixpanelClient } from "@workleap/telemetry/react";
