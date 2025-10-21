@@ -1,7 +1,7 @@
 {
     "name": "@workleap/honeycomb",
     "author": "Workleap",
-    "version": "7.1.0",
+    "version": "7.1.1",
     "description": "Shared Honeycomb configuration for web application at Workleap.",
     "license": "Apache-2.0",
     "repository": {
