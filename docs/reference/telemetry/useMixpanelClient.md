@@ -1,5 +1,5 @@
 ---
-order: 110
+order: 101
 label: useMixpanelClient
 toc:
     depth: 2-3

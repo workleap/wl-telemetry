@@ -1,13 +1,13 @@
+import type { LogRocketInstrumentationPartialClient } from "@workleap-telemetry/core";
 import { createContext, type PropsWithChildren, useContext } from "react";
-import type { LogRocketInstrumentationClient } from "../js/LogRocketInstrumentationClient.ts";
 
-const LogRocketInstrumentationContext = createContext<LogRocketInstrumentationClient | undefined>(undefined);
+const LogRocketInstrumentationContext = createContext<LogRocketInstrumentationPartialClient | undefined>(undefined);
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export interface LogRocketInstrumentationProviderProps extends PropsWithChildren {
-    client: LogRocketInstrumentationClient;
+    client: LogRocketInstrumentationPartialClient;
 }
 
 /**

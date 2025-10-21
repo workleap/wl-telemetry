@@ -1,4 +1,4 @@
-import type { TelemetryContext } from "@workleap-telemetry/core";
+import type { LogRocketInstrumentationPartialClient, TelemetryContext } from "@workleap-telemetry/core";
 import LogRocket from "logrocket";
 import { isDefined } from "./assertions.ts";
 
@@ -91,7 +91,7 @@ export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unkn
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export class LogRocketInstrumentationClient {
+export class LogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
     readonly #telemetryContext?: TelemetryContext;
 
     constructor(telemetryContext?: TelemetryContext) {

@@ -1,13 +1,13 @@
+import type { MixpanelPartialClient } from "@workleap-telemetry/core";
 import { createContext, type PropsWithChildren, useContext } from "react";
-import type { MixpanelClient } from "../js/MixpanelClient.ts";
 
-export const MixpanelContext = createContext<MixpanelClient | undefined>(undefined);
+export const MixpanelContext = createContext<MixpanelPartialClient | undefined>(undefined);
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export interface MixpanelProviderProps extends PropsWithChildren {
-    client: MixpanelClient;
+    client: MixpanelPartialClient;
 }
 
 /**

@@ -351,6 +351,16 @@ client.setGlobalEventProperties({
 });
 ```
 
+### NoopMixpanelClient
+
+A fake implementation of [NoopMixpanelClient](#mixpanelclient) for use in non-standard contexts such as unit tests and Storybook.
+
+```ts
+import { NoopMixpanelClient } from "@workleap/mixpanel/react";
+
+const client = new NoopMixpanelClient();
+```
+
 ### MixpanelProvider
 
 React provider to share a `MixpanelClient` instance with the application code.
