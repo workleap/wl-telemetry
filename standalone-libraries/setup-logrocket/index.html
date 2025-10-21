@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.814288535659">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.814402056396">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.814288535659" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.814402056396" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.814288535659" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.814402056396" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.814288535659" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.814288535659" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.814402056396" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.814402056396" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -794,15 +794,91 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
     console.log(sessionUrl);
 });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="uselogrocketinstrumentationclient">
+<doc-anchor-target id="nooplogrocketinstrumentationclient">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#uselogrocketinstrumentationclient">#</doc-anchor-trigger>
-        <span>useLogRocketInstrumentationClient</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#nooplogrocketinstrumentationclient">#</doc-anchor-trigger>
+        <span>NoopLogRocketInstrumentationClient</span>
     </h3>
 </doc-anchor-target>
-<p>Retrieve a <doc-anchor-trigger to="#logrocketinstrumentationclient">LogRocketInstrumentationClient</doc-anchor-trigger> instance.</p>
+<p>A fake implementation of <doc-anchor-trigger to="#logrocketinstrumentationclient">NoopLogRocketInstrumentationClient</doc-anchor-trigger> for use in non-standard contexts such as unit tests and Storybook.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useLogRocketInstrumentationClient();</code></pre>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { NoopLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
+
+const client = new NoopLogRocketInstrumentationClient();</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="logrocketinstrumentationprovider-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#logrocketinstrumentationprovider-1">#</doc-anchor-trigger>
+        <span>LogRocketInstrumentationProvider</span>
+    </h3>
+</doc-anchor-target>
+<p>React provider to share a <code v-pre>LogRocketInstrumentationProvider</code> instance with the application code.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-tsx"><code v-pre class="language-tsx">&lt;LogRocketInstrumentationProvider client={client}&gt;
+    &lt;App /&gt;
+&lt;/LogRocketInstrumentationProvider&gt;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="properties-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#properties-1">#</doc-anchor-trigger>
+        <span>Properties</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li><code v-pre>client</code>: A <doc-anchor-trigger to="#logrocketinstrumentationclient">LogRocketInstrumentationClient</doc-anchor-trigger> instance.</li>
+</ul>
+<doc-anchor-target id="provide-a-client-instance-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#provide-a-client-instance-1">#</doc-anchor-trigger>
+        <span>Provide a client instance</span>
+    </h4>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-tsx" data-line="12-14"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider } from &quot;@workleap/logrocket/react&quot;;
+import { createRoot } from &quot;react-dom/client&quot;;
+import { App } from &quot;./App.tsx&quot;;
+
+const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
+    rootHostname: &quot;an-host.com&quot;
+});
+
+const root = createRoot(document.getElementById(&quot;root&quot;));
+
+root.render(
+    &lt;LogRocketInstrumentationProvider client={client}&gt;
+        &lt;App /&gt;
+    &lt;/LogRocketInstrumentationProvider&gt;
+);</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="retrieve-a-client-instance-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#retrieve-a-client-instance-1">#</doc-anchor-trigger>
+        <span>Retrieve a client instance</span>
+    </h4>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    userId: &quot;6a5e6b06-0cac-44ee-8d2b-00b9419e7da9&quot;,
+    organizationId: &quot;e6bb30f8-0a00-4928-8943-1630895a3f14&quot;,
+    organizationName: &quot;Acme&quot;,
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="usehoneycombinstrumentationclient">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#usehoneycombinstrumentationclient">#</doc-anchor-trigger>
+        <span>useHoneycombInstrumentationClient</span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieve a <code v-pre>LogRocketInstrumentationClient</code> instance.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useLogRocketInstrumentationClient()</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-2">
     <h4>
@@ -829,6 +905,50 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
 
 const client = useLogRocketInstrumentationClient();
 
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    userId: &quot;6a5e6b06-0cac-44ee-8d2b-00b9419e7da9&quot;,
+    organizationId: &quot;e6bb30f8-0a00-4928-8943-1630895a3f14&quot;,
+    organizationName: &quot;Acme&quot;,
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="uselogrocketinstrumentationclient">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uselogrocketinstrumentationclient">#</doc-anchor-trigger>
+        <span>useLogRocketInstrumentationClient</span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieve a <doc-anchor-trigger to="#logrocketinstrumentationclient">LogRocketInstrumentationClient</doc-anchor-trigger> instance.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useLogRocketInstrumentationClient();</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="parameters-3">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-3">#</doc-anchor-trigger>
+        <span>Parameters</span>
+    </h4>
+</doc-anchor-target>
+<p>None</p>
+<doc-anchor-target id="returns-2">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#returns-2">#</doc-anchor-trigger>
+        <span>Returns</span>
+    </h4>
+</doc-anchor-target>
+<p>A <doc-anchor-trigger to="#logrocketinstrumentationclient">LogRocketInstrumentationClient</doc-anchor-trigger> instance.</p>
+<doc-anchor-target id="usage-1">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#usage-1">#</doc-anchor-trigger>
+        <span>Usage</span>
+    </h4>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
+
+const client = useLogRocketInstrumentationClient();
+
 client.registerGetSessionUrlListener(sessionUrl =&gt; {
     console.log(sessionUrl);
 });</code></pre>
@@ -843,9 +963,9 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const telemetryContext = createTelemetryContext(options?: { identityCookieExpiration?, identityCookieDomain?, verbose?, loggers? });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="parameters-3">
+<doc-anchor-target id="parameters-4">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-3">#</doc-anchor-trigger>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-4">#</doc-anchor-trigger>
         <span>Parameters</span>
     </h4>
 </doc-anchor-target>
@@ -859,9 +979,9 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
 </ul>
 </li>
 </ul>
-<doc-anchor-target id="returns-2">
+<doc-anchor-target id="returns-3">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#returns-2">#</doc-anchor-trigger>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#returns-3">#</doc-anchor-trigger>
         <span>Returns</span>
     </h4>
 </doc-anchor-target>
