@@ -375,6 +375,100 @@ client.registerGetSessionUrlListener(sessionUrl => {
 });
 ```
 
+### NoopLogRocketInstrumentationClient
+
+A fake implementation of [NoopLogRocketInstrumentationClient](#logrocketinstrumentationclient) for use in non-standard contexts such as unit tests and Storybook.
+
+```ts
+import { NoopLogRocketInstrumentationClient } from "@workleap/logrocket/react";
+
+const client = new NoopLogRocketInstrumentationClient();
+```
+
+### LogRocketInstrumentationProvider
+
+React provider to share a `LogRocketInstrumentationProvider` instance with the application code.
+
+```tsx
+<LogRocketInstrumentationProvider client={client}>
+    <App />
+</LogRocketInstrumentationProvider>
+```
+
+#### Properties
+
+- `client`: A [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
+
+#### Provide a client instance
+
+```tsx !#12-14
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider } from "@workleap/logrocket/react";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.tsx";
+
+const client = registerLogRocketInstrumentation("my-app-id", {
+    rootHostname: "an-host.com"
+});
+
+const root = createRoot(document.getElementById("root"));
+
+root.render(
+    <LogRocketInstrumentationProvider client={client}>
+        <App />
+    </LogRocketInstrumentationProvider>
+);
+```
+
+#### Retrieve a client instance
+
+```ts !#3
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
+    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
+    organizationName: "Acme",
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});
+```
+
+### useHoneycombInstrumentationClient
+
+Retrieve a `LogRocketInstrumentationClient` instance.
+
+```ts
+const client = useLogRocketInstrumentationClient()
+```
+
+#### Parameters
+
+None
+
+#### Returns
+
+A [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
+
+#### Usage
+
+```ts !#3
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
+    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
+    organizationName: "Acme",
+    isMigratedToWorkleap: true,
+    isOrganizationCreator: false,
+    isAdmin: false
+});
+```
+
 ### useLogRocketInstrumentationClient
 
 Retrieve a [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.

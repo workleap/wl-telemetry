@@ -568,6 +568,16 @@ client.registerFetchRequestHookAtStart((requestSpan, request) => {
 });
 ```
 
+### NoopHoneycombInstrumentationClient
+
+A fake implementation of [HoneycombInstrumentationClient](#honeycombinstrumentationclient) for use in non-standard contexts such as unit tests and Storybook.
+
+```ts
+import { NoopHoneycombInstrumentationClient } from "@workleap/honeycomb/react";
+
+const client = new NoopHoneycombInstrumentationClient();
+```
+
 ### HoneycombInstrumentationProvider
 
 React provider to share a `HoneycombInstrumentationProvider` instance with the application code.

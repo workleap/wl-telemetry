@@ -12,10 +12,13 @@ order: 85
 - [useTelemetryClient](./telemetry/useTelemetryClient.md)
 - [TelemetryContext](./telemetry/TelemetryContext.md)
 - [LogRocketInstrumentationClient](./telemetry/LogRocketInstrumentationClient.md)
+- [NoopLogRocketInstrumentationClient](./telemetry/NoopLogRocketInstrumentationClient.md)
 - [useLogRocketInstrumentationClient](./telemetry/useLogRocketInstrumentationClient.md)
 - [HoneycombInstrumentationClient](./telemetry/HoneycombInstrumentationClient.md)
+- [NoopHoneycombInstrumentationClient](./telemetry/NoopHoneycombInstrumentationClient.md)
 - [useHoneycombInstrumentationClient](./telemetry/useHoneycombInstrumentationClient.md)
 - [MixpanelClient](./telemetry/MixpanelClient.md)
+- [NoopMixpanelClient](./telemetry/NoopMixpanelClient.md)
 - [useMixpanelClient](./telemetry/useMixpanelClient.md)
 - [useMixpanelTrackingFunction](./telemetry/useMixpanelTrackingFunction.md)
 
