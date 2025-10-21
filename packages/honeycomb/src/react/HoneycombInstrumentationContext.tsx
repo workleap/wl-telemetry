@@ -1,13 +1,13 @@
+import type { HoneycombInstrumentationPartialClient } from "@workleap-telemetry/core";
 import { createContext, type PropsWithChildren, useContext } from "react";
-import type { HoneycombInstrumentationClient } from "../js/HoneycombInstrumentationClient.ts";
 
-const HoneycombInstrumentationContext = createContext<HoneycombInstrumentationClient | undefined>(undefined);
+const HoneycombInstrumentationContext = createContext<HoneycombInstrumentationPartialClient | undefined>(undefined);
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export interface HoneycombInstrumentationProviderProps extends PropsWithChildren {
-    client: HoneycombInstrumentationClient;
+    client: HoneycombInstrumentationPartialClient;
 }
 
 /**

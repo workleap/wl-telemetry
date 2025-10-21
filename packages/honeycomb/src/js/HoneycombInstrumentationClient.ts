@@ -1,11 +1,12 @@
 import type { Attributes, AttributeValue } from "@opentelemetry/api";
+import type { HoneycombInstrumentationPartialClient } from "@workleap-telemetry/core";
 import type { FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
 import type { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export class HoneycombInstrumentationClient {
+export class HoneycombInstrumentationClient implements HoneycombInstrumentationPartialClient {
     readonly #globalAttributeSpanProcessor: GlobalAttributeSpanProcessor;
     readonly #fetchRequestPipeline: FetchRequestPipeline;
 
