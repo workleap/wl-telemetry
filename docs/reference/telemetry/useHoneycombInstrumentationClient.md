@@ -12,13 +12,13 @@ Retrieve a `HoneycombInstrumentationClient` instance.
 ## Reference
 
 ```ts
-const client = useHoneycombInstrumentationClient(options?: { dontThrowOnUndefined? });
+const client = useHoneycombInstrumentationClient(options?: { throwOnUndefined? });
 ```
 
 ### Parameters
 
 - `options`: An optional object literal of options:
-    - `dontThrowOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
+    - `throwOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
 
 ### Returns
 

@@ -5,11 +5,11 @@ export interface UseMixpanelClientOptions {
     /**
      * Whether or not an exception should be thrown if the client hasn't been provided.
      */
-    dontThrowOnUndefined?: boolean;
+    throwOnUndefined?: boolean;
 }
 
-export function useMixpanelClient(options?: { dontThrowOnUndefined?: false }): MixpanelClient;
-export function useMixpanelClient(options: { dontThrowOnUndefined: true }): MixpanelClient | undefined;
+export function useMixpanelClient(options?: { throwOnUndefined?: true }): MixpanelClient;
+export function useMixpanelClient(options: { throwOnUndefined: false }): MixpanelClient | undefined;
 
 /**
  * Retrieve the Mixpanel client.
@@ -17,12 +17,12 @@ export function useMixpanelClient(options: { dontThrowOnUndefined: true }): Mixp
  */
 export function useMixpanelClient(options: UseMixpanelClientOptions = {}) {
     const {
-        dontThrowOnUndefined = false
+        throwOnUndefined = true
     } = options;
 
     const telemetryClient = useTelemetryClient();
 
-    if (!telemetryClient.mixpanel && !dontThrowOnUndefined) {
+    if (!telemetryClient.mixpanel && throwOnUndefined) {
         throw new Error("[telemetry] The useMixpanelClient function is called but the TelemetryClient doesn't include a Mixpanel client. Did you initialize Mixpanel when you called the \"initializeTelemetry\" function?");
     }
 

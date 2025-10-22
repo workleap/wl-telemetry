@@ -30,11 +30,11 @@ export interface UseHoneycombInstrumentationClientOptions {
     /**
      * Whether or not an exception should be thrown if the client hasn't been provided.
      */
-    dontThrowOnUndefined?: boolean;
+    throwOnUndefined?: boolean;
 }
 
-export function useHoneycombInstrumentationClient(options?: { dontThrowOnUndefined?: false }): HoneycombInstrumentationClient;
-export function useHoneycombInstrumentationClient(options: { dontThrowOnUndefined: true }): HoneycombInstrumentationClient | undefined;
+export function useHoneycombInstrumentationClient(options?: { throwOnUndefined?: true }): HoneycombInstrumentationClient;
+export function useHoneycombInstrumentationClient(options: { throwOnUndefined: false }): HoneycombInstrumentationClient | undefined;
 
 /**
  * Retrieve the Honeycomb instrumentation client.
@@ -42,12 +42,12 @@ export function useHoneycombInstrumentationClient(options: { dontThrowOnUndefine
  */
 export function useHoneycombInstrumentationClient(options: UseHoneycombInstrumentationClientOptions = {}) {
     const {
-        dontThrowOnUndefined = false
+        throwOnUndefined = true
     } = options;
 
     const client = useContext(HoneycombInstrumentationContext);
 
-    if (!client && !dontThrowOnUndefined) {
+    if (!client && throwOnUndefined) {
         throw new Error("[honeycomb] The useHoneycombInstrumentationClient function is called before an HoneycombInstrumentationClient instance has been provided.");
     }
 

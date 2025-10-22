@@ -5,11 +5,11 @@ export interface UseHoneycombInstrumentationClientOptions {
     /**
      * Whether or not an exception should be thrown if the client hasn't been provided.
      */
-    dontThrowOnUndefined?: boolean;
+    throwOnUndefined?: boolean;
 }
 
-export function useHoneycombInstrumentationClient(options?: { dontThrowOnUndefined?: false }): HoneycombInstrumentationClient;
-export function useHoneycombInstrumentationClient(options: { dontThrowOnUndefined: true }): HoneycombInstrumentationClient | undefined;
+export function useHoneycombInstrumentationClient(options?: { throwOnUndefined?: true }): HoneycombInstrumentationClient;
+export function useHoneycombInstrumentationClient(options: { throwOnUndefined: false }): HoneycombInstrumentationClient | undefined;
 
 /**
  * Retrieve the Honeycomb instrumentation client.
@@ -17,12 +17,12 @@ export function useHoneycombInstrumentationClient(options: { dontThrowOnUndefine
  */
 export function useHoneycombInstrumentationClient(options: UseHoneycombInstrumentationClientOptions = {}) {
     const {
-        dontThrowOnUndefined = false
+        throwOnUndefined = true
     } = options;
 
     const telemetryClient = useTelemetryClient();
 
-    if (!telemetryClient.honeycomb && !dontThrowOnUndefined) {
+    if (!telemetryClient.honeycomb && throwOnUndefined) {
         throw new Error("[telemetry] The useHoneycombInstrumentationClient function is called but the TelemetryClient doesn't include an Honeycomb client. Did you initialize Honeycomb when you called the \"initializeTelemetry\" function?");
     }
 
