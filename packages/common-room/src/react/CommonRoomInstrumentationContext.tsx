@@ -30,11 +30,11 @@ export interface UseCommonRoomInstrumentationClientOptions {
     /**
      * Whether or not an exception should be thrown if the client hasn't been provided.
      */
-    dontThrowOnUndefined?: boolean;
+    throwOnUndefined?: boolean;
 }
 
-export function useCommonRoomInstrumentationClient(options?: { dontThrowOnUndefined?: false }): CommonRoomInstrumentationClient;
-export function useCommonRoomInstrumentationClient(options: { dontThrowOnUndefined: true }): CommonRoomInstrumentationClient | undefined;
+export function useCommonRoomInstrumentationClient(options?: { throwOnUndefined?: true }): CommonRoomInstrumentationClient;
+export function useCommonRoomInstrumentationClient(options: { throwOnUndefined: false }): CommonRoomInstrumentationClient | undefined;
 
 /**
  * Retrieve the Common Room instrumentation client.
@@ -42,12 +42,12 @@ export function useCommonRoomInstrumentationClient(options: { dontThrowOnUndefin
  */
 export function useCommonRoomInstrumentationClient(options: UseCommonRoomInstrumentationClientOptions = {}) {
     const {
-        dontThrowOnUndefined = false
+        throwOnUndefined = true
     } = options;
 
     const client = useContext(CommonRoomInstrumentationContext);
 
-    if (!client && !dontThrowOnUndefined) {
+    if (!client && throwOnUndefined) {
         throw new Error("[common-room] The useCommonInstrumentationClient function is called before an CommonRoomInstrumentationClient instance has been provided.");
     }
 

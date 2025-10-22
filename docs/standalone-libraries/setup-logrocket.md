@@ -441,13 +441,13 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 Retrieve a `LogRocketInstrumentationClient` instance.
 
 ```ts
-const client = useLogRocketInstrumentationClient(options?: { dontThrowOnUndefined? })
+const client = useLogRocketInstrumentationClient(options?: { throwOnUndefined? })
 ```
 
 #### Parameters
 
 - `options`: An optional object literal of options:
-    - `dontThrowOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
+    - `throwOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
 
 #### Returns
 

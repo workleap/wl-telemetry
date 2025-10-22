@@ -30,11 +30,11 @@ export interface UseLogRocketInstrumentationClientOptions {
     /**
      * Whether or not an exception should be thrown if the client hasn't been provided.
      */
-    dontThrowOnUndefined?: boolean;
+    throwOnUndefined?: boolean;
 }
 
-export function useLogRocketInstrumentationClient(options?: { dontThrowOnUndefined?: false }): LogRocketInstrumentationClient;
-export function useLogRocketInstrumentationClient(options: { dontThrowOnUndefined: true }): LogRocketInstrumentationClient | undefined;
+export function useLogRocketInstrumentationClient(options?: { throwOnUndefined?: true }): LogRocketInstrumentationClient;
+export function useLogRocketInstrumentationClient(options: { throwOnUndefined: false }): LogRocketInstrumentationClient | undefined;
 
 /**
  * Retrieve the LogRocket instrumentation client.
@@ -42,12 +42,12 @@ export function useLogRocketInstrumentationClient(options: { dontThrowOnUndefine
  */
 export function useLogRocketInstrumentationClient(options: UseLogRocketInstrumentationClientOptions = {}) {
     const {
-        dontThrowOnUndefined = false
+        throwOnUndefined = true
     } = options;
 
     const client = useContext(LogRocketInstrumentationContext);
 
-    if (!client && !dontThrowOnUndefined) {
+    if (!client && throwOnUndefined) {
         throw new Error("[logrocket] The useLogRocketInstrumentationClient function is called before an LogRocketInstrumentationClient instance has been provided.");
     }
 
