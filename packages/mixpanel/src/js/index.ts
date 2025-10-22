@@ -3,6 +3,6 @@ export type { CreateMixpanelTrackingFunctionOptions, MixpanelEventProperties, Mi
 export { createTrackingFunction } from "./createTrackingFunction.ts";
 export type { MixpanelEnvironment } from "./env.ts";
 export { initializeMixpanel, type InitializeMixpanelOptions } from "./initializeMixpanel.ts";
-export { MixpanelClient, type MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
+export type { MixpanelClient, MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
 export { NoopMixpanelClient } from "./NoopMixpanelClient.ts";
 

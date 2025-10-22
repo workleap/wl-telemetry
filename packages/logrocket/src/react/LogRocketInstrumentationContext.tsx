@@ -1,13 +1,13 @@
-import type { LogRocketInstrumentationPartialClient } from "@workleap-telemetry/core";
 import { createContext, type PropsWithChildren, useContext } from "react";
+import type { LogRocketInstrumentationClient } from "../js/LogRocketInstrumentationClient.ts";
 
-const LogRocketInstrumentationContext = createContext<LogRocketInstrumentationPartialClient | undefined>(undefined);
+const LogRocketInstrumentationContext = createContext<LogRocketInstrumentationClient | undefined>(undefined);
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export interface LogRocketInstrumentationProviderProps extends PropsWithChildren {
-    client: LogRocketInstrumentationPartialClient;
+    client: LogRocketInstrumentationClient;
 }
 
 /**
@@ -26,14 +26,25 @@ export function LogRocketInstrumentationProvider(props: LogRocketInstrumentation
     );
 }
 
+export interface UseLogRocketInstrumentationClientOptions {
+    /**
+     * Whether or not an exception should be thrown if the client hasn't been provided.
+     */
+    dontThrowOnUndefined?: boolean;
+}
+
 /**
  * Retrieve the LogRocket instrumentation client.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function useLogRocketInstrumentationClient() {
+export function useLogRocketInstrumentationClient(options: UseLogRocketInstrumentationClientOptions = {}) {
+    const {
+        dontThrowOnUndefined = false
+    } = options;
+
     const client = useContext(LogRocketInstrumentationContext);
 
-    if (!client) {
+    if (!client && !dontThrowOnUndefined) {
         throw new Error("[logrocket] The useLogRocketInstrumentationClient function is called before an LogRocketInstrumentationClient instance has been provided.");
     }
 

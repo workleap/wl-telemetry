@@ -1,4 +1,4 @@
-import type { CreateMixpanelTrackingFunctionOptions, MixpanelPartialClient, MixpanelTrackingFunction } from "@workleap-telemetry/core";
+import type { CreateMixpanelTrackingFunctionOptions, MixpanelTrackingFunction } from "@workleap-telemetry/core";
 import type { Logger } from "@workleap/logging";
 import { getBaseProperties } from "./properties.ts";
 
@@ -7,7 +7,24 @@ export type MixpanelGlobalEventProperties = Map<string, unknown>;
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export class MixpanelClient implements MixpanelPartialClient {
+export interface MixpanelClient {
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    createTrackingFunction: (options: CreateMixpanelTrackingFunctionOptions) => MixpanelTrackingFunction;
+
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    setGlobalEventProperty: (key: string, value: unknown) => void;
+
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    setGlobalEventProperties: (values: Record<string, unknown>) => void;
+}
+
+export class MixpanelClientImpl implements MixpanelClient {
     readonly #productId: string;
     readonly #endpoint: string;
     readonly #globalEventProperties: MixpanelGlobalEventProperties;
@@ -22,9 +39,6 @@ export class MixpanelClient implements MixpanelPartialClient {
 
     // IMPORTANT: If you update this method, make sure to update the MixpanelPartialClient
     // interface as well in @workleap-telemetry/core.
-    /**
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     createTrackingFunction(options: CreateMixpanelTrackingFunctionOptions = {}) {
         const {
             targetProductId
@@ -69,16 +83,10 @@ export class MixpanelClient implements MixpanelPartialClient {
         return trackFunction;
     }
 
-    /**
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     setGlobalEventProperty(key: string, value: unknown) {
         this.#globalEventProperties.set(key, value);
     }
 
-    /**
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     setGlobalEventProperties(values: Record<string, unknown>) {
         Object.keys(values).forEach(x => {
             this.#globalEventProperties.set(x, values[x]);

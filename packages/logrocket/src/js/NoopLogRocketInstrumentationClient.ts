@@ -1,5 +1,9 @@
-import type { LogRocketInstrumentationPartialClient } from "@workleap-telemetry/core";
+import type { LogRocketInstrumentationClient, LogRocketWorkleapPlatformUserTraits } from "./LogRocketInstrumentationClient.ts";
 
-export class NoopLogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
+export class NoopLogRocketInstrumentationClient implements LogRocketInstrumentationClient {
+    createWorkleapPlatformDefaultUserTraits() {
+        return {} as LogRocketWorkleapPlatformUserTraits;
+    }
+
     registerGetSessionUrlListener() {}
 }

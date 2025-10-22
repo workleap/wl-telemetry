@@ -1,13 +1,13 @@
-import type { HoneycombInstrumentationPartialClient } from "@workleap-telemetry/core";
 import { createContext, type PropsWithChildren, useContext } from "react";
+import type { HoneycombInstrumentationClient } from "../js/HoneycombInstrumentationClient.ts";
 
-const HoneycombInstrumentationContext = createContext<HoneycombInstrumentationPartialClient | undefined>(undefined);
+const HoneycombInstrumentationContext = createContext<HoneycombInstrumentationClient | undefined>(undefined);
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export interface HoneycombInstrumentationProviderProps extends PropsWithChildren {
-    client: HoneycombInstrumentationPartialClient;
+    client: HoneycombInstrumentationClient;
 }
 
 /**
@@ -26,14 +26,25 @@ export function HoneycombInstrumentationProvider(props: HoneycombInstrumentation
     );
 }
 
+export interface UseHoneycombInstrumentationClientOptions {
+    /**
+     * Whether or not an exception should be thrown if the client hasn't been provided.
+     */
+    dontThrowOnUndefined?: boolean;
+}
+
 /**
  * Retrieve the Honeycomb instrumentation client.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function useHoneycombInstrumentationClient() {
+export function useHoneycombInstrumentationClient(options: UseHoneycombInstrumentationClientOptions = {}) {
+    const {
+        dontThrowOnUndefined = false
+    } = options;
+
     const client = useContext(HoneycombInstrumentationContext);
 
-    if (!client) {
+    if (!client && !dontThrowOnUndefined) {
         throw new Error("[honeycomb] The useHoneycombInstrumentationClient function is called before an HoneycombInstrumentationClient instance has been provided.");
     }
 

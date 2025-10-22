@@ -1,6 +1,8 @@
-import type { HoneycombInstrumentationPartialClient } from "@workleap-telemetry/core";
+import type { HoneycombInstrumentationClient } from "./HoneycombInstrumentationClient.ts";
 
-export class NoopHoneycombInstrumentationClient implements HoneycombInstrumentationPartialClient {
+export class NoopHoneycombInstrumentationClient implements HoneycombInstrumentationClient {
+    setGlobalSpanAttribute() {}
+    setGlobalSpanAttributes() {}
     registerFetchRequestHook() {}
     registerFetchRequestHookAtStart() {}
 }

@@ -30,5 +30,6 @@ export {
     type MixpanelTrackingFunctionOptions
 } from "@workleap/mixpanel";
 export { initializeTelemetry, type InitializeTelemetryOptions } from "./initializeTelemetry.ts";
-export { TelemetryClient } from "./TelemetryClient.ts";
+export { NoopTelemetryClient } from "./NoopTelemetryClient.ts";
+export type { TelemetryClient } from "./TelemetryClient.ts";
 

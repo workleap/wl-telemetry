@@ -7,25 +7,17 @@ label: Use with Storybook
 
 When working with third-party tools like Storybook, developpers typically don't want to send real telemetry data to external platforms. However, the code may still depend on having an instance of the telemetry clients available.
 
-To make this easier, the library provides "noop" implementations that satisfy the same interfaces without sending any data:
-
-- [NoopLogRocketInstrumentationClient](../reference/telemetry/NoopLogRocketInstrumentationClient.md)
-- [NoopHoneycombInstrumentationClient](../reference/telemetry/NoopHoneycombInstrumentationClient.md)
-- [NoopMixpanelClient](../reference/telemetry/NoopMixpanelClient.md)
+To simplify this setup, the library provides a [NoopTelemetryClient](../reference/telemetry/NoopTelemetryClient.md) class. Follow these steps to use the telemetry clients with Storybook :point_down:
 
 ## Create a Storybook decorator
 
-To integrate with stories that depend on a telemetry client instance, start by creating a Storybook [decorator](https://storybook.js.org/docs/writing-stories/decorators) that provides a fake client instance to your components:
+First, create a Storybook [decorator](https://storybook.js.org/docs/writing-stories/decorators) that will provide a fake telemetry client instance to the components:
 
-```tsx !#10-16 withTelemetryProvider.tsx
-import { TelemetryClient, TelemetryProvider, NoopLogRocketInstrumentationClient, NoopHoneycombInstrumentationClient, NoopMixpanelClient } from "@workleap/telemetry/react";
+```tsx !#6-12 withTelemetryProvider.tsx
+import { NoopTelemetryClient, TelemetryProvider } from "@workleap/telemetry/react";
 import { Decorator } from "storybook-react-rsbuild";
 
-const telemetryClient = new TelemetryClient(
-    new NoopLogRocketInstrumentationClient(),
-    new NoopHoneycombInstrumentationClient(),
-    new NoopMixpanelClient()
-);
+const telemetryClient = new NoopTelemetryClient();
 
 export const withTelemetryProvider: Decorator = Story => {
     return (
@@ -86,6 +78,10 @@ export const Default: Story = {
     decorators: [withTelemetryProvider]
 };
 ```
+
+## Try it :rocket:
+
+Start the Storybook development server and navigate to the story of a component that depends on the telemetry client. The story should render without any error.
 
 
 
