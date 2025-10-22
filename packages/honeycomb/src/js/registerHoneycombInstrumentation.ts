@@ -366,7 +366,7 @@ export class HoneycombInstrumentationRegistrator {
 
         const client = new HoneycombInstrumentationClientImpl(this.#globalAttributeSpanProcessor, this.#fetchRequestPipeline);
 
-        // The cast is to normalize the infered return type to the "HoneycombInstrumentationClient" type.
+        // The cast is to normalize the inferred return type to the "HoneycombInstrumentationClient" type.
         return client as HoneycombInstrumentationClient;
     }
 }
