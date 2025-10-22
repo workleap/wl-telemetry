@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.814471398710">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.814472070085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.814471398710" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.814472070085" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.814471398710" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.814472070085" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.814471398710" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.814471398710" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.814472070085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.814472070085" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -331,29 +331,20 @@
     </h1>
 </doc-anchor-target>
 <p>When working with third-party tools like Storybook, developpers typically don&#x27;t want to send real telemetry data to external platforms. However, the code may still depend on having an instance of the telemetry clients available.</p>
-<p>To make this easier, the library provides &quot;noop&quot; implementations that satisfy the same interfaces without sending any data:</p>
-<ul>
-<li><a href="../../reference/telemetry/nooplogrocketinstrumentationclient/">NoopLogRocketInstrumentationClient</a></li>
-<li><a href="../../reference/telemetry/noophoneycombinstrumentationclient/">NoopHoneycombInstrumentationClient</a></li>
-<li><a href="../../reference/telemetry/noopmixpanelclient/">NoopMixpanelClient</a></li>
-</ul>
+<p>To simplify this setup, the library provides a <a href="../../reference/telemetry/nooptelemetryclient/">NoopTelemetryClient</a> class. Follow these steps to use the telemetry clients with Storybook <span class="docs-emoji">&#x1F447;</span></p>
 <doc-anchor-target id="create-a-storybook-decorator">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#create-a-storybook-decorator">#</doc-anchor-trigger>
         <span>Create a Storybook decorator</span>
     </h2>
 </doc-anchor-target>
-<p>To integrate with stories that depend on a telemetry client instance, start by creating a Storybook <a href="https://storybook.js.org/docs/writing-stories/decorators" class="outbound" target="_blank">decorator</a> that provides a fake client instance to your components:</p>
+<p>First, create a Storybook <a href="https://storybook.js.org/docs/writing-stories/decorators" class="outbound" target="_blank">decorator</a> that will provide a fake telemetry client instance to the components:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">withTelemetryProvider.tsx</div>
-<pre translate="no" class="language-tsx" data-line="10-16"><code v-pre class="language-tsx">import { TelemetryClient, TelemetryProvider, NoopLogRocketInstrumentationClient, NoopHoneycombInstrumentationClient, NoopMixpanelClient } from &quot;@workleap/telemetry/react&quot;;
+<pre translate="no" class="language-tsx" data-line="6-12"><code v-pre class="language-tsx">import { NoopTelemetryClient, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
 import { Decorator } from &quot;storybook-react-rsbuild&quot;;
 
-const telemetryClient = new TelemetryClient(
-    new NoopLogRocketInstrumentationClient(),
-    new NoopHoneycombInstrumentationClient(),
-    new NoopMixpanelClient()
-);
+const telemetryClient = new NoopTelemetryClient();
 
 export const withTelemetryProvider: Decorator = Story =&gt; {
     return (
@@ -415,6 +406,13 @@ export const Default: Story = {
     decorators: [withTelemetryProvider]
 };</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="try-it-rocket">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#try-it-rocket">#</doc-anchor-trigger>
+        <span>Try it <span class="docs-emoji">&#x1F680;</span></span>
+    </h2>
+</doc-anchor-target>
+<p>Start the Storybook development server and navigate to the story of a component that depends on the telemetry client. The story should render without any error.</p>
 
                                 
                                 <!-- Required only on API pages -->

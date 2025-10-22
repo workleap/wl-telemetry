@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.814471398710">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.814472070085">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -34,12 +34,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.814471398710" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.814472070085" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.814471398710" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.814472070085" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.814471398710" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.814471398710" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.814472070085" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.814472070085" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -350,7 +350,7 @@
         <span>Register instrumentation</span>
     </h2>
 </doc-anchor-target>
-<p>Then, register Common Room instrumentation using the <doc-anchor-trigger to="#registercommonroominstrumentation">registerCommonRoomInstrumentation</doc-anchor-trigger> function:</p>
+<p>Then, register Common Room instrumentation using the <a href="../../reference/common-room/registercommonroominstrumentation/">registerCommonRoomInstrumentation</a> function:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx" data-line="6,12,14"><code v-pre class="language-tsx">import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
@@ -376,7 +376,7 @@ root.render(
         <span>Identify a user</span>
     </h2>
 </doc-anchor-target>
-<p>To associate the anonymous activities with an existing user, the <doc-anchor-trigger to="#commonroominstrumentationclient">CommonRoomInstrumentationClient</doc-anchor-trigger> expose the <doc-anchor-trigger to="#methods">identify</doc-anchor-trigger> method:</p>
+<p>To associate the anonymous activities with an existing user, the <a href="../../reference/common-room/commonroominstrumentationclient/">CommonRoomInstrumentationClient</a> expose the <a href="../../reference/common-room/commonroominstrumentationclient/#methods">identify</a> method:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { useCommonRoomInstrumentationClient } from &quot;@workleap/common-room/react&quot;;
 
@@ -405,7 +405,7 @@ client.identify(&quot;johndoe@contoso.com&quot;);</code></pre>
 </doc-anchor-target>
 <p>If you are experiencing issues with this guide:</p>
 <ul>
-<li>Set the <doc-anchor-trigger to="#verbose-mode">verbose</doc-anchor-trigger> predefined option to <code v-pre>true</code>.</li>
+<li>Set the <a href="../../reference/common-room/registercommonroominstrumentation/#verbose-mode">verbose</a> predefined option to <code v-pre>true</code>.</li>
 <li>Open the <a href="https://developer.chrome.com/docs/devtools/" class="outbound" target="_blank">DevTools</a> console and look for logs starting with <code v-pre>[common-room]</code>.</li>
 <li>Refer to the sample on <a href="https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms" class="outbound" target="_blank">GitHub</a>.</li>
 </ul>
@@ -430,211 +430,7 @@ client.identify(&quot;johndoe@contoso.com&quot;);</code></pre>
         <span>Reference</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="registercommonroominstrumentation">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#registercommonroominstrumentation">#</doc-anchor-trigger>
-        <span>registerCommonRoomInstrumentation</span>
-    </h3>
-</doc-anchor-target>
-<p>Initialize <a href="https://www.commonroom.io/" class="outbound" target="_blank">Common Room</a> instrumentation.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = registerCommonRoomInstrumentation(siteId, options?: { onReady, verbose })</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="parameters">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#parameters">#</doc-anchor-trigger>
-        <span>Parameters</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li><code v-pre>siteId</code>: The site id.</li>
-<li><code v-pre>options</code>: An optional object literal of options:
-<ul>
-<li><code v-pre>verbose</code>: If no <code v-pre>loggers</code> are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
-<li><code v-pre>loggers</code>: An optional array of <code v-pre>RootLogger</code> instances.</li>
-</ul>
-</li>
-</ul>
-<doc-anchor-target id="returns">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#returns">#</doc-anchor-trigger>
-        <span>Returns</span>
-    </h4>
-</doc-anchor-target>
-<p>A <doc-anchor-trigger to="#commonroominstrumentationclient">CommonRoomInstrumentationClient</doc-anchor-trigger> instance.</p>
-<doc-anchor-target id="initialize-with-a-site-id">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-with-a-site-id">#</doc-anchor-trigger>
-        <span>Initialize with a site id</span>
-    </h4>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { registerCommonRoomInstrumentation } from &quot;@workleap/common-room/react&quot;;
-
-const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="verbose-mode">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#verbose-mode">#</doc-anchor-trigger>
-        <span>Verbose mode</span>
-    </h4>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerCommonRoomInstrumentation } from &quot;@workleap/common-room/react&quot;;
-
-const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
-    verbose: true
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="use-loggers">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#use-loggers">#</doc-anchor-trigger>
-        <span>Use loggers</span>
-    </h4>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { registerCommonRoomInstrumentation } from &quot;@workleap/common-room/react&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket&quot;;
-import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
-
-const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
-    loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="commonroominstrumentationclient">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#commonroominstrumentationclient">#</doc-anchor-trigger>
-        <span>CommonRoomInstrumentationClient</span>
-    </h3>
-</doc-anchor-target>
-<p>A lightweight client providing access to Common Room instrumentation utilities.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = new CommonRoomInstrumentationClient(logger?)</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="parameters-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-1">#</doc-anchor-trigger>
-        <span>Parameters</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li><code v-pre>logger</code>: A <code v-pre>Logger</code> instance.</li>
-</ul>
-<doc-anchor-target id="methods">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#methods">#</doc-anchor-trigger>
-        <span>Methods</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li><code v-pre>identify(emailAddress)</code>: Identify a <a href="https://www.commonroom.io/" class="outbound" target="_blank">Common Room</a> user session using an email address.</li>
-</ul>
-<doc-anchor-target id="usage">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#usage">#</doc-anchor-trigger>
-        <span>Usage</span>
-    </h4>
-</doc-anchor-target>
-<p>Once identified, any previous anonymous traces that share the same user id and session id will be linked to the email address. Additionally, any existing data associated with that email address will be attached to the current session.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { useCommonRoomInstrumentationClient } from &quot;@workleap/common-room/react&quot;;
-
-const client = useCommonRoomInstrumentationClient();
-
-client.identify(&quot;johndoe@contoso.com&quot;);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="commonroominstrumentationprovider">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#commonroominstrumentationprovider">#</doc-anchor-trigger>
-        <span>CommonRoomInstrumentationProvider</span>
-    </h3>
-</doc-anchor-target>
-<p>React provider to share a <code v-pre>CommonRoomInstrumentationProvider</code> instance with the application code.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-tsx"><code v-pre class="language-tsx">&lt;CommonRoomInstrumentationProvider client={client}&gt;
-    &lt;App /&gt;
-&lt;/CommonRoomInstrumentationProvider&gt;</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="properties">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#properties">#</doc-anchor-trigger>
-        <span>Properties</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li><code v-pre>client</code>: A <doc-anchor-trigger to="#commonroominstrumentationclient">CommonRoomInstrumentationClient</doc-anchor-trigger> instance.</li>
-</ul>
-<doc-anchor-target id="provide-a-client-instance">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#provide-a-client-instance">#</doc-anchor-trigger>
-        <span>Provide a client instance</span>
-    </h4>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-tsx" data-line="10,12"><code v-pre class="language-tsx">import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
-import { createRoot } from &quot;react-dom/client&quot;;
-import { App } from &quot;./App.tsx&quot;;
-
-const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;)
-
-const root = createRoot(document.getElementById(&quot;root&quot;));
-
-root.render(
-    &lt;CommonRoomInstrumentationProvider client={client}&gt;
-        &lt;App /&gt;
-    &lt;/CommonRoomInstrumentationProvider&gt;
-);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="retrieve-a-client-instance">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#retrieve-a-client-instance">#</doc-anchor-trigger>
-        <span>Retrieve a client instance</span>
-    </h4>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useCommonRoomInstrumentationClient } from &quot;@workleap/common-room/react&quot;;
-
-const client = useCommonRoomInstrumentationClient();
-
-client.identify(&quot;johndoe@contoso.com&quot;);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="usecommonroominstrumentationclient">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#usecommonroominstrumentationclient">#</doc-anchor-trigger>
-        <span>useCommonRoomInstrumentationClient</span>
-    </h3>
-</doc-anchor-target>
-<p>Retrieve a <code v-pre>CommonRoomInstrumentationClient</code> instance.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useCommonRoomInstrumentationClient()</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="parameters-2">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-2">#</doc-anchor-trigger>
-        <span>Parameters</span>
-    </h4>
-</doc-anchor-target>
-<p>None</p>
-<doc-anchor-target id="returns-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#returns-1">#</doc-anchor-trigger>
-        <span>Returns</span>
-    </h4>
-</doc-anchor-target>
-<p>A <doc-anchor-trigger to="#commonroominstrumentationclient">CommonRoomInstrumentationClient</doc-anchor-trigger> instance.</p>
-<doc-anchor-target id="usage-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#usage-1">#</doc-anchor-trigger>
-        <span>Usage</span>
-    </h4>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useCommonRoomInstrumentationClient } from &quot;@workleap/common-room/react&quot;;
-
-const client = useCommonRoomInstrumentationClient();
-
-client.identify(&quot;johndoe@contoso.com&quot;);</code></pre>
-</doc-codeblock></div>
+<p>Refer to <a href="../../reference/#common-room">reference documentation</a>.</p>
 
                                 
                                 <!-- Required only on API pages -->
