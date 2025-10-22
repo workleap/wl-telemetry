@@ -1,5 +1,16 @@
 # @workleap/telemetry
 
+## 2.1.5
+
+### Patch Changes
+
+- [#115](https://github.com/workleap/wl-telemetry/pull/115) [`97f3f76`](https://github.com/workleap/wl-telemetry/commit/97f3f76199231d43a56d78209e8193a781df490d) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Renamed `dontThrowOnUndefined` to `throwOnUndefined` for the hooks to retrieve the telemetry clients.
+
+- Updated dependencies [[`97f3f76`](https://github.com/workleap/wl-telemetry/commit/97f3f76199231d43a56d78209e8193a781df490d)]:
+  - @workleap/honeycomb@7.1.4
+  - @workleap/logrocket@2.1.4
+  - @workleap/mixpanel@4.0.4
+
 ## 2.1.4
 
 ### Patch Changes
