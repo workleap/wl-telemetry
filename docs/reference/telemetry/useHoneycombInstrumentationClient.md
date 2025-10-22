@@ -18,7 +18,7 @@ const client = useHoneycombInstrumentationClient(options?: { dontThrowOnUndefine
 ### Parameters
 
 - `options`: An optional object literal of options:
-    - `dontThrowOnUndefined`: Whether or not an exception should be throw if a client instance hasn't been provided.
+    - `dontThrowOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
 
 ### Returns
 
