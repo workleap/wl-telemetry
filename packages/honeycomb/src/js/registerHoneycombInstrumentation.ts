@@ -11,7 +11,7 @@ import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 import { type FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
-import { HoneycombInstrumentationClient } from "./HoneycombInstrumentationClient.ts";
+import { type HoneycombInstrumentationClient, HoneycombInstrumentationClientImpl } from "./HoneycombInstrumentationClient.ts";
 import type { HoneycombSdkInstrumentations, HoneycombSdkOptions } from "./honeycombTypes.ts";
 import { NormalizeAttributesSpanProcessor } from "./NormalizeAttributesSpanProcessor.ts";
 import { patchXmlHttpRequest } from "./patchXmlHttpRequest.ts";
@@ -364,7 +364,10 @@ export class HoneycombInstrumentationRegistrator {
 
         logger.information("[honeycomb] Honeycomb instrumentation is registered.");
 
-        return new HoneycombInstrumentationClient(this.#globalAttributeSpanProcessor, this.#fetchRequestPipeline);
+        const client = new HoneycombInstrumentationClientImpl(this.#globalAttributeSpanProcessor, this.#fetchRequestPipeline);
+
+        // The cast is to normalize the inferred return type to the "HoneycombInstrumentationClient" type.
+        return client as HoneycombInstrumentationClient;
     }
 }
 

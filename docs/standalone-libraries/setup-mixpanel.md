@@ -410,12 +410,13 @@ client.setGlobalEventProperties({
 Retrieve a `MixpanelClient` instance.
 
 ```ts
-const client = useMixpanelClient()
+const client = useMixpanelClient(options?: { dontThrowOnUndefined? })
 ```
 
 #### Parameters
 
-None
+- `options`: An optional object literal of options:
+    - `dontThrowOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
 
 #### Returns
 

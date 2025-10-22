@@ -5,7 +5,25 @@ import type { MixpanelClient } from "@workleap/mixpanel";
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export class TelemetryClient {
+export interface TelemetryClient {
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    get logRocket(): LogRocketInstrumentationClient | undefined;
+
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    get honeycomb(): HoneycombInstrumentationClient | undefined;
+
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    get mixpanel(): MixpanelClient | undefined;
+}
+
+
+export class TelemetryClientImpl implements TelemetryClient {
     readonly #logRocketClient?: LogRocketInstrumentationClient;
     readonly #honeycombClient?: HoneycombInstrumentationClient;
     readonly #mixpanelClient?: MixpanelClient;
@@ -16,23 +34,14 @@ export class TelemetryClient {
         this.#mixpanelClient = mixpanelClient;
     }
 
-    /**
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     get logRocket() {
         return this.#logRocketClient;
     }
 
-    /**
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     get honeycomb() {
         return this.#honeycombClient;
     }
 
-    /**
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     get mixpanel() {
         return this.#mixpanelClient;
     }

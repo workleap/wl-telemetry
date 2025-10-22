@@ -8,17 +8,15 @@ order: 85
 
 - [initializeTelemetry](./telemetry/initializeTelemetry.md)
 - [TelemetryClient](./telemetry/TelemetryClient.md)
+- [NoopTelemetryClient](./telemetry/NoopTelemetryClient.md)
 - [TelemetryProvider](./telemetry/TelemetryProvider.md)
 - [useTelemetryClient](./telemetry/useTelemetryClient.md)
 - [TelemetryContext](./telemetry/TelemetryContext.md)
 - [LogRocketInstrumentationClient](./telemetry/LogRocketInstrumentationClient.md)
-- [NoopLogRocketInstrumentationClient](./telemetry/NoopLogRocketInstrumentationClient.md)
 - [useLogRocketInstrumentationClient](./telemetry/useLogRocketInstrumentationClient.md)
 - [HoneycombInstrumentationClient](./telemetry/HoneycombInstrumentationClient.md)
-- [NoopHoneycombInstrumentationClient](./telemetry/NoopHoneycombInstrumentationClient.md)
 - [useHoneycombInstrumentationClient](./telemetry/useHoneycombInstrumentationClient.md)
 - [MixpanelClient](./telemetry/MixpanelClient.md)
-- [NoopMixpanelClient](./telemetry/NoopMixpanelClient.md)
 - [useMixpanelClient](./telemetry/useMixpanelClient.md)
 - [useMixpanelTrackingFunction](./telemetry/useMixpanelTrackingFunction.md)
 
@@ -26,6 +24,7 @@ order: 85
 
 - [registerCommonRoomInstrumentation](./common-room/registerCommonRoomInstrumentation.md)
 - [CommonRoomInstrumentationClient](./common-room/CommonRoomInstrumentationClient.md)
+- [NoopCommonRoomInstrumentationClient](./common-room/NoopCommonRoomInstrumentationClient.md)
 - [CommonRoomInstrumentationProvider](./common-room/CommonRoomInstrumentationProvider.md)
 - [useCommonRoomInstrumentationClient](./common-room/useCommonRoomInstrumentationClient.md)
 

@@ -1,7 +1,10 @@
-import type { MixpanelPartialClient } from "@workleap-telemetry/core";
+import type { MixpanelClient } from "./MixpanelClient.ts";
 
-export class NoopMixpanelClient implements MixpanelPartialClient {
+export class NoopMixpanelClient implements MixpanelClient {
     createTrackingFunction() {
         return () => Promise.resolve();
     }
+
+    setGlobalEventProperty() {}
+    setGlobalEventProperties() {}
 }

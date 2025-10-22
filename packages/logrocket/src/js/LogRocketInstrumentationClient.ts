@@ -91,7 +91,24 @@ export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unkn
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export class LogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
+export interface LogRocketInstrumentationClient extends LogRocketInstrumentationPartialClient {
+    /**
+     * Register a listener to receive the LogRocket session id when it's available.
+     * This method is the equivalent of the LogRocket.getSessionURL function but is
+     * particularly useful for third party libraries that doesn't want to take a dependency
+     * on `logrocket`.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    registerGetSessionUrlListener: (listener: GetLogRocketSessionUrlListener) => void;
+
+    /**
+     * Create the default user traits for a Workleap Platform user.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    createWorkleapPlatformDefaultUserTraits: (identification: LogRocketWorkleapPlatformIdentification) => LogRocketWorkleapPlatformUserTraits;
+}
+
+export class LogRocketInstrumentationClientImpl implements LogRocketInstrumentationClient {
     readonly #telemetryContext?: TelemetryContext;
 
     constructor(telemetryContext?: TelemetryContext) {
@@ -100,21 +117,10 @@ export class LogRocketInstrumentationClient implements LogRocketInstrumentationP
 
     // IMPORTANT: If you update this method, make sure to update the LogRocketInstrumentationPartialClient
     // interface as well in @workleap-telemetry/core.
-    /**
-     * Register a listener to receive the LogRocket session id when it's available.
-     * This method is the equivalent of the LogRocket.getSessionURL function but is
-     * particularly useful for third party libraries that doesn't want to take a dependency
-     * on `logrocket`.
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     registerGetSessionUrlListener(listener: GetLogRocketSessionUrlListener) {
         LogRocket.getSessionURL(listener);
     }
 
-    /**
-     * Create the default user traits for a Workleap Platform user.
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     createWorkleapPlatformDefaultUserTraits(identification: LogRocketWorkleapPlatformIdentification) {
         const {
             userId,

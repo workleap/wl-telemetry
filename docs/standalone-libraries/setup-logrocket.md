@@ -263,7 +263,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) 
 A lightweight client providing access to LogRocket instrumentation utilities.
 
 ```ts
-const client = new LogRocketInstrumentationClient(telemetryContext?)
+const client = new LogRocketInstrumentationClientImpl(telemetryContext?)
 ```
 
 #### Parameters
@@ -436,17 +436,18 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 });
 ```
 
-### useHoneycombInstrumentationClient
+### useLogRocketInstrumentationClient
 
 Retrieve a `LogRocketInstrumentationClient` instance.
 
 ```ts
-const client = useLogRocketInstrumentationClient()
+const client = useLogRocketInstrumentationClient(options?: { dontThrowOnUndefined? })
 ```
 
 #### Parameters
 
-None
+- `options`: An optional object literal of options:
+    - `dontThrowOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
 
 #### Returns
 

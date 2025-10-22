@@ -2,7 +2,7 @@ import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type Tele
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
 import { setMixpanelContext } from "./context.ts";
 import { getTrackingEndpoint, type MixpanelEnvironment } from "./env.ts";
-import { MixpanelClient, type MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
+import { type MixpanelClient, MixpanelClientImpl, type MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
 import { getTelemetryProperties, OtherProperties } from "./properties.ts";
 
 // DEPRECATED: Grace period ends on January 1th 2026.
@@ -130,7 +130,10 @@ export class MixpanelInitializer {
 
         logger.information("[mixpanel] Mixpanel is initialized.");
 
-        return new MixpanelClient(productId, endpoint, this.#globalEventProperties, logger);
+        const client = new MixpanelClientImpl(productId, endpoint, this.#globalEventProperties, logger);
+
+        // The cast is to normalize the inferred return type to the "LogRocketInstrumentationClient" type.
+        return client as MixpanelClient;
     }
 }
 

@@ -1,6 +1,6 @@
 import { HasExecutedGuard } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
-import { CommonRoomInstrumentationClient } from "./CommonRoomInstrumentationClient.ts";
+import { type CommonRoomInstrumentationClient, CommonRoomInstrumentationClientImpl } from "./CommonRoomInstrumentationClient.ts";
 
 let registrationGuardInstance: HasExecutedGuard | undefined;
 
@@ -82,7 +82,10 @@ export class CommonRoomInstrumentationRegistrator {
                 logger.error(`[common-room] ${reason}`);
             });
 
-        return new CommonRoomInstrumentationClient(logger);
+        const client = new CommonRoomInstrumentationClientImpl(logger);
+
+        // The cast is to normalize the inferred return type to the "HoneycombInstrumentationClient" type.
+        return client as CommonRoomInstrumentationClient;
     }
 }
 
