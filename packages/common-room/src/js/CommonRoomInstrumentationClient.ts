@@ -3,17 +3,21 @@ import type { Logger } from "@workleap/logging";
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export class CommonRoomInstrumentationClient {
+export interface CommonRoomInstrumentationClient {
+    /**
+     * Identify a user for the Common Room platform.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    identify: (email: string) => void;
+}
+
+export class CommonRoomInstrumentationClientImpl implements CommonRoomInstrumentationClient {
     readonly #logger: Logger;
 
     constructor(logger: Logger) {
         this.#logger = logger;
     }
 
-    /**
-     * Identify a user for the Common Room platform.
-     * @see {@link https://workleap.github.io/wl-telemetry}
-     */
     identify(email: string) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
