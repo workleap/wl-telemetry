@@ -1,3 +1,4 @@
+import type { LogRocketInstrumentationClient } from "@workleap/logrocket";
 import { useTelemetryClient } from "./TelemetryContext.tsx";
 
 export interface UseLogRocketInstrumentationClientOptions {
@@ -6,6 +7,9 @@ export interface UseLogRocketInstrumentationClientOptions {
      */
     dontThrowOnUndefined?: boolean;
 }
+
+export function useLogRocketInstrumentationClient(options?: { dontThrowOnUndefined?: false }): LogRocketInstrumentationClient;
+export function useLogRocketInstrumentationClient(options: { dontThrowOnUndefined: true }): LogRocketInstrumentationClient | undefined;
 
 /**
  * Retrieve the LogRocket instrumentation client.

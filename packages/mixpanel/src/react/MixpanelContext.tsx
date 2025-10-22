@@ -33,6 +33,9 @@ export interface UseMixpanelClientOptions {
     dontThrowOnUndefined?: boolean;
 }
 
+export function useMixpanelClient(options?: { dontThrowOnUndefined?: false }): MixpanelClient;
+export function useMixpanelClient(options: { dontThrowOnUndefined: true }): MixpanelClient | undefined;
+
 /**
  * Retrieve the Mixpanel client.
  * @see {@link https://workleap.github.io/wl-telemetry}

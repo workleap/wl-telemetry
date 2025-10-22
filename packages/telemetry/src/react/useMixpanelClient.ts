@@ -1,3 +1,4 @@
+import type { MixpanelClient } from "@workleap/mixpanel";
 import { useTelemetryClient } from "./TelemetryContext.tsx";
 
 export interface UseMixpanelClientOptions {
@@ -6,6 +7,9 @@ export interface UseMixpanelClientOptions {
      */
     dontThrowOnUndefined?: boolean;
 }
+
+export function useMixpanelClient(options?: { dontThrowOnUndefined?: false }): MixpanelClient;
+export function useMixpanelClient(options: { dontThrowOnUndefined: true }): MixpanelClient | undefined;
 
 /**
  * Retrieve the Mixpanel client.

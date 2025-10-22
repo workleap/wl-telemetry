@@ -6,7 +6,7 @@ import { applyTransformers, type LogRocketSdkOptionsTransformer } from "./applyT
 import { createRequestSanitizer } from "./createRequestSanitizer.ts";
 import { createResponseSanitizer } from "./createResponseSanitizer.ts";
 import { createUrlSanitizer } from "./createUrlSanitizer.ts";
-import { DeviceIdTrait, LogRocketInstrumentationClient, TelemetryIdTrait } from "./LogRocketInstrumentationClient.ts";
+import { DeviceIdTrait, type LogRocketInstrumentationClient, LogRocketInstrumentationClientImpl, TelemetryIdTrait } from "./LogRocketInstrumentationClient.ts";
 import type { LogRocketSdkOptions } from "./logRocketTypes.ts";
 
 const DefaultPrivateFieldNames = [
@@ -207,7 +207,10 @@ export class LogRocketInstrumentationRegistrator {
 
         logger.information("[logrocket] LogRocket instrumentation is registered.");
 
-        return new LogRocketInstrumentationClient(telemetryContext);
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
+
+        // The cast is to normalize the inferred return type to the "LogRocketInstrumentationClient" type.
+        return client as LogRocketInstrumentationClient;
     }
 }
 

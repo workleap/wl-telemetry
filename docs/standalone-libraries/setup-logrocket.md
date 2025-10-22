@@ -263,7 +263,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) 
 A lightweight client providing access to LogRocket instrumentation utilities.
 
 ```ts
-const client = new LogRocketInstrumentationClient(telemetryContext?)
+const client = new LogRocketInstrumentationClientImpl(telemetryContext?)
 ```
 
 #### Parameters

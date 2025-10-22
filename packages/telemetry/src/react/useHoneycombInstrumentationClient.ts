@@ -1,3 +1,4 @@
+import type { HoneycombInstrumentationClient } from "@workleap/honeycomb";
 import { useTelemetryClient } from "./TelemetryContext.tsx";
 
 export interface UseHoneycombInstrumentationClientOptions {
@@ -6,6 +7,9 @@ export interface UseHoneycombInstrumentationClientOptions {
      */
     dontThrowOnUndefined?: boolean;
 }
+
+export function useHoneycombInstrumentationClient(options?: { dontThrowOnUndefined?: false }): HoneycombInstrumentationClient;
+export function useHoneycombInstrumentationClient(options: { dontThrowOnUndefined: true }): HoneycombInstrumentationClient | undefined;
 
 /**
  * Retrieve the Honeycomb instrumentation client.

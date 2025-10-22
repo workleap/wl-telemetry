@@ -33,6 +33,9 @@ export interface UseLogRocketInstrumentationClientOptions {
     dontThrowOnUndefined?: boolean;
 }
 
+export function useLogRocketInstrumentationClient(options?: { dontThrowOnUndefined?: false }): LogRocketInstrumentationClient;
+export function useLogRocketInstrumentationClient(options: { dontThrowOnUndefined: true }): LogRocketInstrumentationClient | undefined;
+
 /**
  * Retrieve the LogRocket instrumentation client.
  * @see {@link https://workleap.github.io/wl-telemetry}

@@ -33,6 +33,9 @@ export interface UseHoneycombInstrumentationClientOptions {
     dontThrowOnUndefined?: boolean;
 }
 
+export function useHoneycombInstrumentationClient(options?: { dontThrowOnUndefined?: false }): HoneycombInstrumentationClient;
+export function useHoneycombInstrumentationClient(options: { dontThrowOnUndefined: true }): HoneycombInstrumentationClient | undefined;
+
 /**
  * Retrieve the Honeycomb instrumentation client.
  * @see {@link https://workleap.github.io/wl-telemetry}

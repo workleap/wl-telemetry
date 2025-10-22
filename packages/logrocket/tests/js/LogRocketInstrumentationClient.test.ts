@@ -1,6 +1,6 @@
 import { TelemetryContext } from "@workleap-telemetry/core";
 import { describe, test } from "vitest";
-import { LogRocketInstrumentationClient } from "../../src/js/LogRocketInstrumentationClient.ts";
+import { LogRocketInstrumentationClientImpl } from "../../src/js/LogRocketInstrumentationClient.ts";
 
 describe("createWorkleapPlatformDefaultUserTraits", () => {
     test.concurrent("required user traits are returned", ({ expect }) => {
@@ -14,7 +14,7 @@ describe("createWorkleapPlatformDefaultUserTraits", () => {
         };
 
         const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClient(telemetryContext);
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
 
         const result = client.createWorkleapPlatformDefaultUserTraits(identification);
 
@@ -35,7 +35,7 @@ describe("createWorkleapPlatformDefaultUserTraits", () => {
         };
 
         const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClient(telemetryContext);
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
 
         const result = client.createWorkleapPlatformDefaultUserTraits(identification);
 
@@ -70,7 +70,7 @@ describe("createWorkleapPlatformDefaultUserTraits", () => {
         };
 
         const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClient(telemetryContext);
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
 
         const result = client.createWorkleapPlatformDefaultUserTraits(identification);
 
@@ -103,7 +103,7 @@ describe("createWorkleapPlatformDefaultUserTraits", () => {
         };
 
         const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClient(telemetryContext);
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
 
         const result = client.createWorkleapPlatformDefaultUserTraits(identification);
 
