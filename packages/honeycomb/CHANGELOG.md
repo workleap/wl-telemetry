@@ -1,5 +1,14 @@
 # @workleap/honeycomb
 
+## 7.1.2
+
+### Patch Changes
+
+- [#112](https://github.com/workleap/wl-telemetry/pull/112) [`5d70e28`](https://github.com/workleap/wl-telemetry/commit/5d70e286d428ee5ffcd3466924662274f97232c8) Thanks [@alexasselin008](https://github.com/alexasselin008)! - Bump versions to test OIDC publishing
+
+- Updated dependencies [[`5d70e28`](https://github.com/workleap/wl-telemetry/commit/5d70e286d428ee5ffcd3466924662274f97232c8)]:
+  - @workleap-telemetry/core@1.0.3
+
 ## 7.1.1
 
 ### Patch Changes
