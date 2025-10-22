@@ -1,5 +1,11 @@
 # @workleap/common-room
 
+## 2.0.4
+
+### Patch Changes
+
+- [#111](https://github.com/workleap/wl-telemetry/pull/111) [`e146e03`](https://github.com/workleap/wl-telemetry/commit/e146e030aa9e4a624d4429e0ba4f0627153179cc) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Added a `NoopCommonRoomInstrumentationClient` and added `dontThrowOnUndefined` option to `useCommonRoomInstrumentationClient`.
+
 ## 2.0.3
 
 ### Patch Changes
