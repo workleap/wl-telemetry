@@ -1,7 +1,7 @@
 {
     "name": "@workleap/common-room",
     "author": "Workleap",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "description": "Shared Common Room utilities for web application at Workleap.",
     "license": "Apache-2.0",
     "repository": {
