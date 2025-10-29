@@ -33,9 +33,9 @@
         "clean": "pnpm -r --parallel --include-workspace-root exec pnpm dlx rimraf dist .turbo .rslib node_modules/.cache",
         "reset": "pnpm clean && pnpm reset:modules",
         "reset:modules": "pnpm -r --parallel --include-workspace-root exec pnpm dlx rimraf node_modules pnpm-lock.yaml",
-        "list-outdated-deps": "pnpm outdated -r --format list !eslint !logrocket-fuzzy-search-sanitizer",
+        "list-outdated-deps": "pnpm outdated -r --format list !logrocket-fuzzy-search-sanitizer",
         "update-outdated-deps": "pnpm run --sequential \"/^update-outdated-deps:.*/\"",
-        "update-outdated-deps:update-version": "pnpm update -r --latest !eslint !logrocket-fuzzy-search-sanitizer",
+        "update-outdated-deps:update-version": "pnpm update -r --latest !logrocket-fuzzy-search-sanitizer",
         "update-outdated-deps:update-peers": "syncpack fix-mismatches"
     },
     "devDependencies": {
