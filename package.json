@@ -23,7 +23,7 @@
         "serve-honeycomb-api-key": "turbo run serve-build --filter=./samples/honeycomb/api-key/**",
         "serve-honeycomb-proxy": "turbo run serve-build --filter=./samples/honeycomb/proxy/**",
         "lint": "turbo run lint --continue",
-        "eslint": "eslint . --ignore-pattern packages --ignore-pattern samples --max-warnings=-0 --cache --cache-location node_modules/.cache/eslint",
+        "eslint": "eslint . --max-warnings=0 --cache --cache-location node_modules/.cache/eslint",
         "typecheck": "tsc",
         "syncpack": "syncpack lint",
         "test": "turbo run test --continue",
