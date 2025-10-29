@@ -72,5 +72,3 @@ test("register get session url global function is defined", ({ expect }) => {
     // @ts-ignore
     expect(typeof globalThis[RegisterGetSessionUrlFunctionName]).toBe("function");
 });
-
-

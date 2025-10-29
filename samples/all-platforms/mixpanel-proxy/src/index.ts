@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 import cors from "cors";
 import * as dotenv from "dotenv";
 import express, { type Request, type Response } from "express";
@@ -14,7 +12,7 @@ dotenv.config({
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const projectToken = process.env.MIXPANEL_PROJECT_TOKEN as string;
+const projectToken = process.env.MIXPANEL_PROJECT_TOKEN!;
 
 const mixpanel = Mixpanel.init(projectToken, {
     verbose: true

@@ -19,4 +19,3 @@ export function applyTransformers(options: HoneycombSdkOptions, transformers: Ho
     return transformers.reduce((acc, transformer) => transformer(acc, context), options);
 }
 
-

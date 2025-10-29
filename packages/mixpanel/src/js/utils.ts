@@ -85,6 +85,7 @@ export function browserVersion(userAgent: string, vendor?: string, opera?: objec
 export function osName(userAgent: string) {
     const a = userAgent;
     if (/Windows/i.test(a)) {
+        // eslint-disable-next-line @typescript-eslint/prefer-includes
         if (/Phone/.test(a) || /WPDesktop/.test(a)) {
             return "Windows Phone";
         }
@@ -92,14 +93,17 @@ export function osName(userAgent: string) {
         return "Windows";
     } else if (/(iPhone|iPad|iPod)/.test(a)) {
         return "iOS";
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/Android/.test(a)) {
         return "Android";
     } else if (/(BlackBerry|PlayBook|BB10)/i.test(a)) {
         return "BlackBerry";
     } else if (/Mac/i.test(a)) {
         return "Mac OS X";
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/Linux/.test(a)) {
         return "Linux";
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/CrOS/.test(a)) {
         return "Chrome OS";
     }
@@ -108,16 +112,21 @@ export function osName(userAgent: string) {
 }
 
 export function deviceType(userAgent: string) {
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     if (/Windows Phone/i.test(userAgent) || /WPDesktop/.test(userAgent)) {
         return "Windows Phone";
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/iPad/.test(userAgent)) {
         return "iPad";
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/iPod/.test(userAgent)) {
         return "iPod Touch";
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/iPhone/.test(userAgent)) {
         return "iPhone";
     } else if (/(BlackBerry|PlayBook|BB10)/i.test(userAgent)) {
         return "BlackBerry";
+    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/Android/.test(userAgent)) {
         return "Android";
     }

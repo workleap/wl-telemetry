@@ -19,5 +19,3 @@ export type LogRocketSdkOptionsTransformer = (options: LogRocketSdkOptions, cont
 export function applyTransformers(options: LogRocketSdkOptions, transformers: LogRocketSdkOptionsTransformer[], context: LogRocketSdkOptionsTransformerContext): LogRocketSdkOptions {
     return transformers.reduce((acc, transformer) => transformer(acc, context), options);
 }
-
-

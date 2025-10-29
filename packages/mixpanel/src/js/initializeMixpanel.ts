@@ -82,7 +82,6 @@ export interface InitializeMixpanelOptions {
     loggers?: RootLogger[];
 }
 
-
 export class MixpanelInitializer {
     readonly #globalEventProperties: MixpanelGlobalEventProperties;
 

@@ -191,4 +191,3 @@ test.concurrent("when a logrocket client is provided, register a listener for lo
     expect(logRocketInstrumentationClient.listenerCount).toBe(1);
 });
 
-

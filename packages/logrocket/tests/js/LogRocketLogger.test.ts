@@ -29,7 +29,7 @@ const getMocks = () => {
 };
 
 afterEach(() => {
-    vi.restoreAllMocks();
+    vi.clearAllMocks();
 });
 
 describe("LogRocketLogger", () => {
@@ -62,8 +62,7 @@ describe("LogRocketLogger", () => {
             }
 
             if (expectedResult) {
-                expect(logMock).toHaveBeenCalledOnce();
-                expect(logMock).toHaveBeenCalledWith(logValue);
+                expect(logMock).toHaveBeenCalledExactlyOnceWith(logValue);
             } else {
                 expect(logMock).not.toHaveBeenCalled();
             }
@@ -90,8 +89,7 @@ describe("LogRocketLogger", () => {
                 // eslint-disable-next-line no-unexpected-multiline
                 [loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith("Hello World");
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("Hello World");
         });
 
         test.for(pairs)("can build a \"%s\" log with object", ([loggerFunction, logRocketMethod], { expect }) => {
@@ -106,8 +104,7 @@ describe("LogRocketLogger", () => {
                 // eslint-disable-next-line no-unexpected-multiline
                 [loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "User:",
                 obj
             );
@@ -125,8 +122,7 @@ describe("LogRocketLogger", () => {
                 // eslint-disable-next-line no-unexpected-multiline
                 [loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "Error occurred:",
                 error
             );
@@ -150,8 +146,7 @@ describe("LogRocketLogger", () => {
                 // eslint-disable-next-line no-unexpected-multiline
                 [loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "Processing segment",
                 "\r\n",
                 "on multiple lines",
@@ -177,9 +172,8 @@ describe("LogRocketLogger", () => {
                 // eslint-disable-next-line no-unexpected-multiline
                 [loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledOnce();
             // The sequencing has been preserved because there's no styling.
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "Processing segment",
                 obj,
                 "failed with error",
@@ -258,8 +252,7 @@ describe("LogRocketLogger", () => {
             logger.startScope("foo");
             logger.information(logValue);
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(logValue);
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(logValue);
         });
     });
 
@@ -275,8 +268,7 @@ describe("LogRocketLogger", () => {
                 .withText("Second line")
                 .debug();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "First line",
                 "\r\n",
                 "Second line"
@@ -296,8 +288,7 @@ describe("LogRocketLogger", () => {
                 .withText("Last line")
                 .debug();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "First line",
                 "\r\n",
                 "\r\n",
@@ -325,8 +316,7 @@ describe("LogRocketLogger", () => {
                 .withObject(obj3)
                 .debug();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "First line",
                 obj1,
                 "\r\n",
@@ -350,8 +340,7 @@ describe("LogRocketLogger", () => {
                 .withText("Second", { leadingSpace: false })
                 .debug();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith("FirstSecond");
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("FirstSecond");
         });
 
         test("can remove the leading space from multiple mixed text segments", ({ expect }) => {
@@ -370,8 +359,7 @@ describe("LogRocketLogger", () => {
                 .withText("Text 5", { leadingSpace: false })
                 .debug();
 
-            expect(logMock).toHaveBeenCalledOnce();
-            expect(logMock).toHaveBeenCalledWith(
+            expect(logMock).toHaveBeenCalledExactlyOnceWith(
                 "Text 1Text 2",
                 obj,
                 "Text 3Text 4",
@@ -451,8 +439,7 @@ describe("LogRocketLoggerScope", () => {
             } else {
                 expect(logMock).toHaveBeenCalledOnce();
 
-                expect(getMocks().log).toHaveBeenCalledOnce();
-                expect(getMocks().log).toHaveBeenCalledWith("foo");
+                expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
             expect(logMock).toHaveBeenCalledWith(
@@ -481,8 +468,7 @@ describe("LogRocketLoggerScope", () => {
             } else {
                 expect(logMock).toHaveBeenCalledOnce();
 
-                expect(getMocks().log).toHaveBeenCalledOnce();
-                expect(getMocks().log).toHaveBeenCalledWith("foo");
+                expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
             expect(logMock).toHaveBeenCalledWith(
@@ -512,8 +498,7 @@ describe("LogRocketLoggerScope", () => {
             } else {
                 expect(logMock).toHaveBeenCalledOnce();
 
-                expect(getMocks().log).toHaveBeenCalledOnce();
-                expect(getMocks().log).toHaveBeenCalledWith("foo");
+                expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
             expect(logMock).toHaveBeenCalledWith(
@@ -523,6 +508,7 @@ describe("LogRocketLoggerScope", () => {
             );
         });
 
+        // eslint-disable-next-line vitest/no-identical-title
         test.for(pairs)("can build a \"%s\" log with error", ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
@@ -549,8 +535,7 @@ describe("LogRocketLoggerScope", () => {
             } else {
                 expect(logMock).toHaveBeenCalledOnce();
 
-                expect(getMocks().log).toHaveBeenCalledOnce();
-                expect(getMocks().log).toHaveBeenCalledWith("foo");
+                expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
             expect(logMock).toHaveBeenCalledWith(
@@ -588,8 +573,7 @@ describe("LogRocketLoggerScope", () => {
             } else {
                 expect(logMock).toHaveBeenCalledOnce();
 
-                expect(getMocks().log).toHaveBeenCalledOnce();
-                expect(getMocks().log).toHaveBeenCalledWith("foo");
+                expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
             expect(logMock).toHaveBeenCalledWith(

@@ -22,7 +22,6 @@ export interface TelemetryClient {
     get mixpanel(): MixpanelClient | undefined;
 }
 
-
 export class TelemetryClientImpl implements TelemetryClient {
     readonly #logRocketClient?: LogRocketInstrumentationClient;
     readonly #honeycombClient?: HoneycombInstrumentationClient;

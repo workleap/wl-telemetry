@@ -45,7 +45,7 @@ export function createTrackingFunction(options: CreateMixpanelTrackingFunctionOp
                     productIdentifier: productId,
                     // Not sure why, but it seems important to send "null" if not target product identifier
                     // are provided.
-                    targetProductIdentifier : targetProductId ?? null,
+                    targetProductIdentifier: targetProductId ?? null,
                     properties: allProperties
                 })
             });

@@ -6,4 +6,3 @@ export type * from "./logRocketTypes.ts";
 export { NoopLogRocketInstrumentationClient } from "./NoopLogRocketInstrumentationClient.ts";
 export { registerLogRocketInstrumentation, type RegisterLogRocketInstrumentationOptions } from "./registerLogRocketInstrumentation.ts";
 
-

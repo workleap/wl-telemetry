@@ -37,6 +37,7 @@ function loadSignals(siteId: string) {
         };
 
         script.onerror = () => {
+            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
             reject(`Failed to load Common Room script at "${url}".`);
         };
 

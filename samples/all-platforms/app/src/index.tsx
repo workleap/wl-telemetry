@@ -13,7 +13,7 @@ const loggers: RootLogger[] = [
 
 const telemetryClient = initializeTelemetry({
     logRocket: {
-        appId: process.env.LOGROCKET_APP_ID as string,
+        appId: process.env.LOGROCKET_APP_ID!,
         options: {
             rootHostname: "workleap.com"
         }
@@ -34,7 +34,7 @@ const telemetryClient = initializeTelemetry({
     loggers
 });
 
-const commonRoomClient = registerCommonRoomInstrumentation(process.env.COMMON_ROOM_SITE_ID as string, {
+const commonRoomClient = registerCommonRoomInstrumentation(process.env.COMMON_ROOM_SITE_ID!, {
     verbose: true,
     loggers
 });

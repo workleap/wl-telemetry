@@ -14,7 +14,6 @@ test.concurrent("case 2", ({ expect }) => {
 });
 
 test.concurrent("case 3", ({ expect }) => {
-    // eslint-disable-next-line max-len
     const result = removeIdsFromUrl("https://officevibe.workleap.com/portal/api/teams-and-segments/recent?recentTeamIds[]=048b2d9b-4481-41fb-b9c3-b7bc5102eb24&recentTeamIds[]=e4208b62-0f35-47a6-a5dc-b4594d207449&recentTeamIds[]=e5c88e7c-2ab7-4f80-8785-0664e9b999d2&recentTeamIds[]=f9282a7b-32fd-4e7f-8880-ce4e4f7cf777&recentTeamIds[]=cf8b9440-51af-4ccf-be68-1c1f753d4891&recentTeamIds[]=d563a72a-1298-428c-9a20-e40b7e78fec7&recentTeamIds[]=a2530fb6-3798-45ed-8328-3dab4ef25253");
 
     expect(result).toBe("https://officevibe.workleap.com/portal/api/teams-and-segments/recent?recentTeamIds[]={guid}&recentTeamIds[]={guid}&recentTeamIds[]={guid}&recentTeamIds[]={guid}&recentTeamIds[]={guid}&recentTeamIds[]={guid}&recentTeamIds[]={guid}");

@@ -66,11 +66,11 @@ function removeInstrumentationVersionsForSnapshot(options: any) {
                 delete x["version"];
             }
 
-            if (x["_logger"] && x["_logger"]["version"]) {
+            if (x["_logger"]?.["version"]) {
                 delete x["_logger"]["version"];
             }
 
-            if (x["_tracer"] && x["_tracer"]["version"]) {
+            if (x["_tracer"]?.["version"]) {
                 delete x["_tracer"]["version"];
             }
         });
