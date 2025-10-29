@@ -1,5 +1,14 @@
 # @workleap/honeycomb
 
+## 7.1.5
+
+### Patch Changes
+
+- [#117](https://github.com/workleap/wl-telemetry/pull/117) [`5bc65a7`](https://github.com/workleap/wl-telemetry/commit/5bc65a700b3b2066498456f470e1b914998c6bb8) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Bumped dependency versions.
+
+- Updated dependencies [[`5bc65a7`](https://github.com/workleap/wl-telemetry/commit/5bc65a700b3b2066498456f470e1b914998c6bb8)]:
+  - @workleap-telemetry/core@1.0.4
+
 ## 7.1.4
 
 ### Patch Changes
