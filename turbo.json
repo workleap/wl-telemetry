@@ -16,7 +16,7 @@
             "persistent": true
         },
         "lint": {
-            "dependsOn": ["eslint", "typecheck", "//#syncpack"]
+            "dependsOn": ["eslint", "//#eslint", "typecheck", "//#typecheck", "//#syncpack"]
         },
         "//#eslint": {
             "outputs": ["node_modules/.cache/eslint"]
