@@ -12,7 +12,7 @@ Let's set up an application with all four Workleap's supported telemetry platfor
 First, open a terminal at the root of the application and install the packages:
 
 ```bash
-pnpm add @workleap/telemetry @workleap/common-room logrocket
+pnpm add @workleap/telemetry @workleap/common-room @opentelemetry/api logrocket
 ```
 
 ## Initialize telemetry libraries
