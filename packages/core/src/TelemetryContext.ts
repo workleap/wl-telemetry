@@ -42,7 +42,7 @@ export function setDeviceId(deviceId: string, cookieExpiration: Date, cookieDoma
             domain: cookieDomain
         });
 
-        logger.debug(`Set identity cookie with name: "${IdentityCookieName}", expiration: "${cookieExpiration}", domain: "${cookieDomain}".`);
+        logger.debug(`[telemetry] Set identity cookie with name: "${IdentityCookieName}", expiration: "${cookieExpiration}", domain: "${cookieDomain}".`);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: unknown) {
         // Do nothing.
