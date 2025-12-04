@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.817929196230">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.818200894606">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -34,12 +34,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../../static/favicon.png" rel="icon">
-    <link href="../../../resources/css/retype.css?v=3.11.0.817929196230" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.818200894606" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.817929196230" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.818200894606" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.817929196230" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.817929196230" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.818200894606" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.818200894606" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -356,7 +356,7 @@
         </div>
     </div>
 </div>
-<p>To gain full visibility into <strong>frontend behavior</strong> in <strong>production</strong>, Workleap has adopted <a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a>, a tool that combines session replay, performance tracking, and error logging to help <strong>understand</strong> and resolve <strong>issues</strong> in <strong>production</strong>.</p>
+<p>To gain full visibility into <strong>frontend behavior</strong> in <strong>production</strong>, Workleap has adopted <a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a>, a tool that combines session replay, performance tracking, error logging, and issues tracking to help <strong>surface</strong>, <strong>understand</strong> and resolve <strong>issues</strong> in <strong>production</strong>.</p>
 <p>The <code v-pre>@workleap/telemetry</code> package provides default LogRocket instrumentation tailored to Workleap&#x27;s applications&#x27; needs, including the <strong>removal</strong> of <strong>sensitive information</strong> from HTML documents, HTTP requests/responses and URLs.</p>
 <doc-anchor-target id="session-replays">
     <h2>
@@ -416,6 +416,39 @@
 </doc-anchor-target>
 <div class="align-image-left"><p><figure class="content-center">
     <img src="../../../static/logrocket/logrocket-dom-interactions.png" alt="" class="rounded-image-rounded border-image-border border-image-border-width" />
+    <figcaption class="caption"></figcaption>
+</figure>
+</p>
+</div>
+<doc-anchor-target id="monitor-issues">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#monitor-issues">#</doc-anchor-trigger>
+        <span>Monitor issues</span>
+    </h2>
+</doc-anchor-target>
+<p><a href="https://logrocket.com/products/galileo-ai" class="outbound" target="_blank">Galileo</a>, LogRocket&#x27;s proprietary AI, watches every session and tracks product changes to proactively surface issues that are impacting users.</p>
+<doc-anchor-target id="triage">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#triage">#</doc-anchor-trigger>
+        <span>Triage</span>
+    </h4>
+</doc-anchor-target>
+<p>Galileo highlights recurring issues so you can triage them quickly:</p>
+<div class="align-image-left"><p><figure class="content-center">
+    <img src="../../../static/logrocket/logrocket-issues.png" alt="" class="rounded-image-rounded border-image-border border-image-border-width" />
+    <figcaption class="caption"></figcaption>
+</figure>
+</p>
+</div>
+<doc-anchor-target id="digest">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#digest">#</doc-anchor-trigger>
+        <span>Digest</span>
+    </h4>
+</doc-anchor-target>
+<p>A daily or weekly digest of newly detected and untriaged issues can be delivered to Slack:</p>
+<div class="align-image-left"><p><figure class="content-center">
+    <img src="../../../static/logrocket/logrocket-issues-digest.png" alt="" class="rounded-image-rounded border-image-border border-image-border-width" width="408" />
     <figcaption class="caption"></figcaption>
 </figure>
 </p>
