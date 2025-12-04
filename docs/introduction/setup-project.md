@@ -136,7 +136,11 @@ If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events wi
 
 ## Setup loggers
 
-:point_right: Providing loggers to the initialization or registration functions is optionnal, but recommended to simplify troubleshooting. To set up loggers, follow the [guide](../guides/setup-loggers.md).
+:point_right: Providing loggers to the initialization or registration functions is optional, but recommended to simplify troubleshooting. To set up loggers, follow the [guide](../guides/setup-loggers.md).
+
+## Setup issues digest in Slack
+
+:point_right: Set up a LogRocket [issues digest](https://docs.logrocket.com/docs/issues-digests) to receive Slack notifications for important issues surfaced by [Galileo AI](https://logrocket.com/products/galileo-ai).
 
 
 
