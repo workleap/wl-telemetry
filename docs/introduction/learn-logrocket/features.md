@@ -11,7 +11,7 @@ meta:
 If telemetry hasn't been set up for your project yet, please refer to the [setup guide](../setup-project.md) before continuing.
 !!!
 
-To gain full visibility into **frontend behavior** in **production**, Workleap has adopted [LogRocket](https://logrocket.com/), a tool that combines session replay, performance tracking, and error logging to help **understand** and resolve **issues** in **production**.
+To gain full visibility into **frontend behavior** in **production**, Workleap has adopted [LogRocket](https://logrocket.com/), a tool that combines session replay, performance tracking, error logging, and issues tracking to help **surface**, **understand** and resolve **issues** in **production**.
 
 The `@workleap/telemetry` package provides default LogRocket instrumentation tailored to Workleap's applications' needs, including the **removal** of **sensitive information** from HTML documents, HTTP requests/responses and URLs.
 
@@ -47,6 +47,26 @@ Session replays offer a wide range of features to help debug production issues, 
 
 :::align-image-left
 ![](../../static/logrocket/logrocket-dom-interactions.png)
+:::
+
+## Monitor issues
+
+[Galileo](https://logrocket.com/products/galileo-ai), LogRocket proprietary AI, watches every session and tracks product changes to proactively surface issues that are impacting users.
+
+#### Triage
+
+Galileo highlights recurring issues so you can triage them quickly:
+
+:::align-image-left
+![](../../static/logrocket/logrocket-issues.png)
+:::
+
+#### Digest
+
+A daily or weekly digest of newly detected and untriaged issues can be delivered to Slack:
+
+:::align-image-left
+![](../../static/logrocket/logrocket-issues-digest.png){width=408}
 :::
 
 ## Record elements
