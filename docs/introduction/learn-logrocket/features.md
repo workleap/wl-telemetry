@@ -51,7 +51,7 @@ Session replays offer a wide range of features to help debug production issues, 
 
 ## Monitor issues
 
-[Galileo](https://logrocket.com/products/galileo-ai), LogRocket proprietary AI, watches every session and tracks product changes to proactively surface issues that are impacting users.
+[Galileo](https://logrocket.com/products/galileo-ai), LogRocket's proprietary AI, watches every session and tracks product changes to proactively surface issues that are impacting users.
 
 #### Triage
 
