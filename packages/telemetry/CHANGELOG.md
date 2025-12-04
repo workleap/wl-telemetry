@@ -1,5 +1,11 @@
 # @workleap/telemetry
 
+## 2.1.8
+
+### Patch Changes
+
+- [#125](https://github.com/workleap/wl-telemetry/pull/125) [`4810c6d`](https://github.com/workleap/wl-telemetry/commit/4810c6dc54bff2a5f6101536d8832abcc2097ac5) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Fixed peerDependencies.
+
 ## 2.1.7
 
 ### Patch Changes
