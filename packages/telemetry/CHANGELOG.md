@@ -1,5 +1,11 @@
 # @workleap/telemetry
 
+## 2.1.9
+
+### Patch Changes
+
+- [#127](https://github.com/workleap/wl-telemetry/pull/127) [`8c82a05`](https://github.com/workleap/wl-telemetry/commit/8c82a051c065f26fb9f3e096d7491167957783a4) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Fix a bug where `initializeTelemetry` wasn't forwarding the LogRocket client to Honeycomb.
+
 ## 2.1.8
 
 ### Patch Changes
