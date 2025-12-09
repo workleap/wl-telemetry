@@ -129,6 +129,7 @@ export function initializeTelemetry(options: InitializeTelemetryOptions = {}) {
             honeycomb.apiServiceUrls,
             {
                 ...(honeycomb.options ?? {}),
+                logRocketInstrumentationClient: logRocketClient,
                 telemetryContext,
                 verbose,
                 loggers
