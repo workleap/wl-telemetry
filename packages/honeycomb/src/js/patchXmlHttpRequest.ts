@@ -15,7 +15,7 @@ export function patchXmlHttpRequest(proxy: string) {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    XMLHttpRequest.prototype.open = function (...args) {
+    XMLHttpRequest.prototype.open = function(...args) {
         const verb = args[0];
         const url = args[1];
 

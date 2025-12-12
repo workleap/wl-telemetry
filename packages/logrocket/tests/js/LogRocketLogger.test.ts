@@ -62,8 +62,10 @@ describe("LogRocketLogger", () => {
             }
 
             if (expectedResult) {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledExactlyOnceWith(logValue);
             } else {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).not.toHaveBeenCalled();
             }
         });
@@ -401,11 +403,14 @@ describe("LogRocketLoggerScope", () => {
 
             if (expectedResult) {
                 if ((loggerFunction === "debug" || loggerFunction === "information") && (logLevel === LogLevel.debug || logLevel === LogLevel.information)) {
+                    // eslint-disable-next-line vitest/no-conditional-expect
                     expect(logMock).toHaveBeenCalledTimes(2);
                 } else {
+                    // eslint-disable-next-line vitest/no-conditional-expect
                     expect(logMock).toHaveBeenCalledOnce();
                 }
             } else {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).not.toHaveBeenCalled();
             }
         });
@@ -434,11 +439,16 @@ describe("LogRocketLoggerScope", () => {
             scope.end();
 
             if (logRocketMethod === "log") {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
+
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
@@ -463,11 +473,16 @@ describe("LogRocketLoggerScope", () => {
             scope.end();
 
             if (logRocketMethod === "log") {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
+
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
@@ -493,11 +508,16 @@ describe("LogRocketLoggerScope", () => {
             scope.end();
 
             if (logRocketMethod === "log") {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
+
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
@@ -508,7 +528,6 @@ describe("LogRocketLoggerScope", () => {
             );
         });
 
-        // eslint-disable-next-line vitest/no-identical-title
         test.for(pairs)("can build a \"%s\" log with error", ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
@@ -530,11 +549,16 @@ describe("LogRocketLoggerScope", () => {
             scope.end();
 
             if (logRocketMethod === "log") {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
+
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
@@ -568,11 +592,16 @@ describe("LogRocketLoggerScope", () => {
             scope.end();
 
             if (logRocketMethod === "log") {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
+
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
+                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
