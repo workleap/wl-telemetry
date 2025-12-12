@@ -1,9 +1,13 @@
 packages:
-  - "packages/*"
-  - "samples/**"
+  - packages/*
+  - samples/**
 
 minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-  - "@workleap*"
 
-dangerouslyAllowAllBuilds: true
+minimumReleaseAgeExclude:
+  - '@workleap*'
+
+onlyBuiltDependencies:
+  - core-js
+  - esbuild
+  - protobufjs

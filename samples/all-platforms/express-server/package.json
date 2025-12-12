@@ -14,20 +14,20 @@
     },
     "dependencies": {
         "cors": "2.8.5",
-        "express": "5.1.0"
+        "express": "5.2.1"
     },
     "devDependencies": {
-        "@eslint/js": "9.38.0",
+        "@eslint/js": "9.39.1",
         "@types/cors": "2.8.19",
-        "@types/express": "5.0.5",
-        "@types/node": "24.9.2",
-        "@typescript-eslint/parser": "8.46.2",
-        "@workleap/eslint-configs": "1.1.0",
+        "@types/express": "5.0.6",
+        "@types/node": "25.0.0",
+        "@typescript-eslint/parser": "8.49.0",
+        "@workleap/eslint-configs": "1.1.7",
         "@workleap/typescript-configs": "3.0.7",
-        "eslint": "9.38.0",
-        "nodemon": "3.1.10",
-        "tsx": "4.20.6",
+        "eslint": "9.39.1",
+        "nodemon": "3.1.11",
+        "tsx": "4.21.0",
         "typescript": "5.9.3",
-        "typescript-eslint": "8.46.2"
+        "typescript-eslint": "8.49.0"
     }
 }
