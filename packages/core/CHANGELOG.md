@@ -1,5 +1,11 @@
 # @workleap-telemetry/core
 
+## 1.0.6
+
+### Patch Changes
+
+- [#129](https://github.com/workleap/wl-telemetry/pull/129) [`2b3bf24`](https://github.com/workleap/wl-telemetry/commit/2b3bf24e69abdcfe33c0bd3ce09350ec4f49d9ff) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Bumped dependency versions.
+
 ## 1.0.5
 
 ### Patch Changes
