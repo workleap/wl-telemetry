@@ -120,7 +120,7 @@ LogRocket.identify(traits.userId, traits);
 
 ## Get the session URL
 
-Every session replay is associated with a unique URL. To register a callback receiving the session replay once it's available, use the [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) function: 
+Every session replay is associated with a unique URL. To register a callback receiving the session replay once it's available, use the [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) function:
 
 ```ts !#3-5 index.tsx
 import LogRocket from "logrocket";
@@ -138,7 +138,7 @@ By default, Workleap's LogRocket configuration does not capture console logs. To
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { LogLevel, type RootLogger } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logger";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -191,7 +191,7 @@ To troubleshoot an production issue, remove the `LogLevel` from the `LogRocketLo
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { type RootLogger } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logger";
+import { LogRocketLogger } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
