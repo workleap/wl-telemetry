@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.821674562195">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.821817753331">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.821674562195" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.821817753331" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.821674562195" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.821817753331" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.821674562195" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.821674562195" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.821817753331" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.821817753331" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -337,9 +337,9 @@
         <span>Install packages</span>
     </h2>
 </doc-anchor-target>
-<p>First, open a terminal at the root of the application and install the packages (only install <code v-pre>@workleap/logrocket</code> if the application logs should be captured in LogRocket sessions):</p>
+<p>First, open a terminal at the root of the application and install the package <code v-pre>@workleap/logging</code> package:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/logging @workleap/logrocket</code></pre>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/logging</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="configure-loggers">
     <h2>
@@ -350,8 +350,7 @@
 <p>Then update the application bootstrapping code to configure the loggers:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="13,31-32,36-37"><code v-pre class="language-tsx">import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
+<pre translate="no" class="language-tsx" data-line="12,30-31,35-36"><code v-pre class="language-tsx">import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from &quot;@workleap/logging&quot;;
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
 import { StrictMode } from &quot;react&quot;;
@@ -410,8 +409,7 @@ root.render(
 <p>To troubleshoot production issues, remove the <code v-pre>LogLevel</code> from the <code v-pre>LogRocketLogger</code> constructor options and set the <code v-pre>verbose</code> option to <code v-pre>true</code>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="13,31,36"><code v-pre class="language-tsx">import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
-import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
+<pre translate="no" class="language-tsx" data-line="12,30,35"><code v-pre class="language-tsx">import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from &quot;@workleap/logging&quot;;
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
 import { StrictMode } from &quot;react&quot;;
