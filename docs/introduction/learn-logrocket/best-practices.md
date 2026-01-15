@@ -30,9 +30,8 @@ For debugging, use `console.log` instead, since its output is not captured in Lo
 Initialize telemetry with a [LogRocketLogger](../../reference/LogRocketLogger.md) instance:
 
 ```ts
-import { initializeTelemetry } from "@workleap/telemetry/react";
+import { initializeTelemetry, LogRocketLogger } from "@workleap/telemetry/react";
 import { LogLevel } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket";
 
 const client = initializeTelemetry({
     logRocket: {
@@ -61,7 +60,7 @@ Initialize Common Room with a [LogRocketLogger](../../reference/LogRocketLogger.
 ```ts !#6
 import { registerCommonRoomInstrumentation } from "@workleap/common-room/react";
 import { LogLevel } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const client = registerCommonRoomInstrumentation("my-site-id", {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
@@ -75,7 +74,7 @@ Initialize Squide firefly with a [LogRocketLogger](../../reference/LogRocketLogg
 ```ts !#6
 import { initializeFirefly } from "@squide/firefly";
 import { LogLevel } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react";
 
 const runtime = initializeFirefly({
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
@@ -89,7 +88,7 @@ Initialize platform widgets with verbose mode activated and a [LogRocketLogger](
 ```ts !#6
 import { initializeWidgets } from "@workleap-widgets/client/react";
 import { LogLevel } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react";
 
 const widgetsRuntime = initializeWidgets("wlp", "development" , {
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]

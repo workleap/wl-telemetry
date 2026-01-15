@@ -9,19 +9,18 @@ Providing loggers to the initialization or registration functions is optional bu
 
 ## Install packages
 
-First, open a terminal at the root of the application and install the packages (only install `@workleap/logrocket` if the application logs should be captured in LogRocket sessions):
+First, open a terminal at the root of the application and install the package `@workleap/logging` package:
 
 ```bash
-pnpm add @workleap/logging @workleap/logrocket
+pnpm add @workleap/logging
 ```
 
 ## Configure loggers
 
 Then update the application bootstrapping code to configure the loggers:
 
-```tsx !#13,31-32,36-37 index.tsx
-import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
-import { LogRocketLogger } from "@workleap/logrocket/react";
+```tsx !#12,30-31,35-36 index.tsx
+import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
@@ -76,9 +75,8 @@ root.render(
 
 To troubleshoot production issues, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#13,31,36 index.tsx
-import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
-import { LogRocketLogger } from "@workleap/logrocket/react";
+```tsx !#12,30,35 index.tsx
+import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";

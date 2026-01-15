@@ -134,11 +134,10 @@ LogRocket.getSessionUrl(url => {
 
 By default, Workleap's LogRocket configuration does not capture console logs. To send loggers output to LogRocket, use the [LogRocketLogger](../../reference/LogRocketLogger.md) class.
 
-```tsx !#9,27,31 index.tsx
-import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
+```tsx !#8,26,30 index.tsx
+import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { LogLevel, type RootLogger } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -187,11 +186,10 @@ Console logs are not captured by default to reduce the risk of exposing Personal
 
 To troubleshoot an production issue, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#9,27,32 index.tsx
-import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
+```tsx !#8,26,31 index.tsx
+import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { type RootLogger } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";

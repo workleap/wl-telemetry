@@ -1,7 +1,6 @@
 import { CommonRoomInstrumentationProvider, registerCommonRoomInstrumentation } from "@workleap/common-room/react";
 import { BrowserConsoleLogger, type RootLogger } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket";
-import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
+import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -21,7 +20,7 @@ const telemetryClient = initializeTelemetry({
     honeycomb: {
         namespace: "sample",
         serviceName: "all-platforms-sample",
-        apiServiceUrls: [/.+/g],
+        apiServiceUrls: [/http:\/\/localhost:1234.*/],
         options: {
             apiKey: process.env.HONEYCOMB_API_KEY
         }

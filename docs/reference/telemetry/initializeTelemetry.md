@@ -548,9 +548,8 @@ const client = initializeTelemetry({
 
 ## Use loggers
 
-```ts !#21
-import { initializeTelemetry } from "@workleap/telemetry/react";
-import { LogRocketLogger } from "@workleap/logrocket/react";
+```ts !#20
+import { initializeTelemetry, LogRocketLogger } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
 const client = initializeTelemetry({
