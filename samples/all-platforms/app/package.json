@@ -19,7 +19,6 @@
         "@tanstack/react-query": "5.90.16",
         "@workleap/common-room": "workspace:*",
         "@workleap/logging": "1.3.3",
-        "@workleap/logrocket": "workspace:*",
         "@workleap/telemetry": "workspace:*",
         "logrocket": "11.0.0",
         "react": "19.2.3",

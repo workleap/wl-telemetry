@@ -22,7 +22,7 @@ pnpm remove @workleap/logrocket @workleap/honeycomb @workleap/mixpanel
 Then, install the `@workleap/telemetry` package:
 
 ```bash
-pnpm add @workleap/telemetry logrocket
+pnpm add @workleap/telemetry @opentelemetry/api logrocket
 ```
 
 ### Update the initialization code

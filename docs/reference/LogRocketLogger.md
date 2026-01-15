@@ -29,7 +29,7 @@ Refer to the [Logger](https://workleap.github.io/wl-logging/reference/logger) an
 ### Log a debug entry
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 logger.debug("Hello world!");
@@ -38,7 +38,7 @@ logger.debug("Hello world!");
 ### Log an information entry
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 logger.information("Hello world!");
@@ -47,7 +47,7 @@ logger.information("Hello world!");
 ### Log a warning entry
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 logger.warning("Hello world!");
@@ -56,7 +56,7 @@ logger.warning("Hello world!");
 ### Log an error entry
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 logger.error("Hello world!");
@@ -65,7 +65,7 @@ logger.error("Hello world!");
 ### Log a critical entry
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 logger.critical("Hello world!");
@@ -76,7 +76,7 @@ logger.critical("Hello world!");
 A minimum severity of entries to process can be configured as an option. Messages with a lower severity than the configured level will then be ignored.
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger({
     logLevel: LogLevel.error
@@ -118,7 +118,7 @@ For reference, here's a description of each level:
 Multiple segments can be chained to create a log entry that combines styled text, errors, and objects. To process all segments and output the log to the console, complete the chain by calling any log method.
 
 ```ts !#5-10
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 
@@ -133,7 +133,7 @@ logger
 ### Use a logging scope
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 const scope = logger.startScope("Module 1 registration");
@@ -166,7 +166,7 @@ scope.end();
 A scope can be dismissed to prevent it's log entries from being outputted to the console.
 
 ```ts !#19
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
 
 const logger = new LogRocketLogger();
 const scope = logger.startScope("Module 1 registration");

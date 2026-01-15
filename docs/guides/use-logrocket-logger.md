@@ -9,20 +9,12 @@ By default, LogRocket session replays can display logs captured during a user se
 
 To capure logs explicitly into LogRocket, a [LogRocketLogger](../reference/LogRocketLogger.md) instance must be used.
 
-## Install packages
-
-First, open a terminal at the root of the application and install the packages:
-
-```bash
-pnpm add @workleap/logrocket logrocket
-```
-
 ## Configure the logger
 
-Then, create an instance of [LogRocketLogger](../reference/LogRocketLogger.md):
+First, create an instance of [LogRocketLogger](../reference/LogRocketLogger.md):
 
 ```ts !#3
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react";
 
 const logger = new LogRocketLogger();
 ```
@@ -32,7 +24,7 @@ const logger = new LogRocketLogger();
 And log an entry:
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react";
 
 const logger = new LogRocketLogger();
 logger.debug("Hello world!");
@@ -43,7 +35,7 @@ logger.debug("Hello world!");
 A minimum severity of entries to process can be configured as an option. Messages with a lower severity than the configured level will then be ignored:
 
 ```ts !#4
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react";
 
 const logger = new LogRocketLogger({
     logLevel: LogLevel.error
@@ -62,7 +54,7 @@ To learn more about the severity level, refer to the [reference](../reference/Lo
 Multiple segments can be chained to create a log entry that combines styled text, errors, and objects. To process all segments and output the log to the console, complete the chain by calling any log method:
 
 ```ts !#5-10
-import { LogRocketLogger } from "@workleap/logrocket/react";
+import { LogRocketLogger } from "@workleap/telemetry/react";
 
 const logger = new LogRocketLogger();
 

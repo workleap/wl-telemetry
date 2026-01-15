@@ -1,6 +1,5 @@
 import { BrowserConsoleLogger, CompositeLogger, type CompositeLoggerScope } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/logrocket";
-import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
+import { LogRocketLogger, useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 import { useCallback, useState } from "react";
 
 function getShortId() {

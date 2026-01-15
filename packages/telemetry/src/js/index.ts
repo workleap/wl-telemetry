@@ -11,6 +11,8 @@ export {
     type RegisterHoneycombInstrumentationOptions
 } from "@workleap/honeycomb";
 export {
+    LogRocketLogger,
+    LogRocketLoggerScope,
     NoopLogRocketInstrumentationClient,
     type GetLogRocketSessionUrlListener,
     type LogRocketInstrumentationClient,
