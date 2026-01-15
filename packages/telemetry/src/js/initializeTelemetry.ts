@@ -137,6 +137,7 @@ export function initializeTelemetry(options: InitializeTelemetryOptions = {}) {
         );
     }
 
+    // TOTO
     if (mixpanel) {
         mixpanelClient = initializeMixpanel(
             mixpanel.productId,
