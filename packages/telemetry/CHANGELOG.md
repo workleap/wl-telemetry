@@ -1,5 +1,17 @@
 # @workleap/telemetry
 
+## 2.1.11
+
+### Patch Changes
+
+- [#133](https://github.com/workleap/wl-telemetry/pull/133) [`c1bd63a`](https://github.com/workleap/wl-telemetry/commit/c1bd63a18764ac34db9a1bafcc861fc87b5ce1f7) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Bumped dependencies and this package is now exporting `LogRocketLogger`.
+
+- Updated dependencies [[`c1bd63a`](https://github.com/workleap/wl-telemetry/commit/c1bd63a18764ac34db9a1bafcc861fc87b5ce1f7)]:
+  - @workleap/honeycomb@7.1.8
+  - @workleap/logrocket@2.1.8
+  - @workleap/mixpanel@4.0.8
+  - @workleap-telemetry/core@1.0.7
+
 ## 2.1.10
 
 ### Patch Changes
