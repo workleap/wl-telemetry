@@ -21,7 +21,7 @@ const telemetryClient = initializeTelemetry({
     honeycomb: {
         namespace: "sample",
         serviceName: "all-platforms-sample",
-        apiServiceUrls: [/.+/g],
+        apiServiceUrls: [/http:\/\/localhost:1234.*/],
         options: {
             apiKey: process.env.HONEYCOMB_API_KEY
         }
