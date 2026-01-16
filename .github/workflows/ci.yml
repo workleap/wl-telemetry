@@ -92,7 +92,7 @@ jobs:
             fi
 
       - name: ESLint
-        # For a PR, only lint the packages that are diverging from the pull request original baseline.
+        # For a PR, only lint the projects that are diverging from the pull request original baseline.
         run: |
             if [ "${{ github.event_name }}" == "pull_request" ]; then
                 pnpm turbo run eslint --filter=...[${{ github.event.pull_request.base.sha }}]
@@ -101,7 +101,7 @@ jobs:
             fi
 
       - name: Typecheck
-        # For a PR, only typecheck the packages that are diverging from the pull request original baseline.
+        # For a PR, only typecheck the projects that are diverging from the pull request original baseline.
         run: |
             if [ "${{ github.event_name }}" == "pull_request" ]; then
                 pnpm turbo run typecheck --filter=...[${{ github.event.pull_request.base.sha }}]
@@ -113,7 +113,7 @@ jobs:
         run: pnpm turbo run syncpack
 
       - name: Test packages
-        # For a PR, only test the packages that are diverging from the pull request original baseline.
+        # For a PR, only test the projects that are diverging from the pull request original baseline.
         run: |
             if [ "${{ github.event_name }}" == "pull_request" ]; then
                 pnpm test --filter=...[${{ github.event.pull_request.base.sha }}]
