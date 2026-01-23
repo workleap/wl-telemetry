@@ -2,10 +2,12 @@ packages:
   - packages/*
   - samples/**
 
-# minimumReleaseAge: 1440
+minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
   - '@workleap*'
+  - '@typescript/native-preview'
+  - '@typescript/native-preview-win32-x64'
 
 onlyBuiltDependencies:
   - core-js
