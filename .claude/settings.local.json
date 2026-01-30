@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(dir \"C:\\\\Users\\\\patrick.lafrance\\\\.claude\\\\skills\\\\wl-telemetry*\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path ''C:\\\\Users\\\\patrick.lafrance\\\\.claude\\\\skills\\\\wl-telemetry*'' | Format-Table Name, Length, LastWriteTime\")",
+      "Bash(powershell -Command:*)"
+    ]
+  }
+}
