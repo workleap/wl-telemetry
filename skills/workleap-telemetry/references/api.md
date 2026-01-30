@@ -34,16 +34,16 @@ const telemetryClient = initializeTelemetry({
   honeycomb?: {
     namespace: string;                // Required: Trace namespace
     serviceName: string;              // Required: Service name in traces
-    apiServiceUrls: RegExp | string[];  // Required: URLs to instrument
+    apiServiceUrls: string | RegExp | (string | RegExp)[];  // Required: URLs to instrument
     options?: {
       proxy?: string;                 // Required if no apiKey: OTEL collector URL
       apiKey?: string;                // Required if no proxy: Honeycomb API key
       instrumentations?: OpenTelemetryInstrumentation[];
       spanProcessors?: SpanProcessor[];
-      fetchInstrumentation?: boolean | ((defaults) => FetchInstrumentationOptions);
-      documentLoadInstrumentation?: boolean | ((defaults) => DocumentLoadInstrumentationOptions);
-      xmlHttpRequestInstrumentation?: boolean | true | ((defaults) => XHRInstrumentationOptions);
-      userInteractionInstrumentation?: boolean | true | ((defaults) => UserInteractionOptions);
+      fetchInstrumentation?: false | ((defaults) => FetchInstrumentationOptions);
+      documentLoadInstrumentation?: false | ((defaults) => DocumentLoadInstrumentationOptions);
+      xmlHttpRequestInstrumentation?: false | ((defaults) => XHRInstrumentationOptions);
+      userInteractionInstrumentation?: false | ((defaults) => UserInteractionOptions);
       transformers?: HoneycombSdkOptionsTransformer[];
     }
   },
@@ -71,9 +71,9 @@ Main interface to access platform-specific clients.
 
 | Property | Type | Description |
 |---|---|---|
-| `logRocketClient` | `LogRocketInstrumentationClient \| undefined` | LogRocket client if configured |
-| `honeycombClient` | `HoneycombInstrumentationClient \| undefined` | Honeycomb client if configured |
-| `mixpanelClient` | `MixpanelClient \| undefined` | Mixpanel client if configured |
+| `logRocket` | `LogRocketInstrumentationClient \| undefined` | LogRocket client if configured |
+| `honeycomb` | `HoneycombInstrumentationClient \| undefined` | Honeycomb client if configured |
+| `mixpanel` | `MixpanelClient \| undefined` | Mixpanel client if configured |
 
 ### React Hook
 

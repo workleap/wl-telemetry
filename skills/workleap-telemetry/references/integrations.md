@@ -42,11 +42,11 @@ honeycomb: {
     instrumentations: [],             // Additional OpenTelemetry instrumentations
     spanProcessors: [],               // Custom span processors
 
-    // Fine-grained control
-    fetchInstrumentation: true,                    // Enable/disable or customize
-    documentLoadInstrumentation: true,             // Enable/disable or customize
-    xmlHttpRequestInstrumentation: true,           // Enable/disable or customize
-    userInteractionInstrumentation: true,          // Enable/disable or customize
+    // Use `false` to disable, or a function to enable/customize the instrumentation.
+    fetchInstrumentation: (config) => config,                // Customize fetch instrumentation
+    documentLoadInstrumentation: (config) => config,         // Customize document load instrumentation
+    xmlHttpRequestInstrumentation: (config) => config,       // Providing a function enables/customizes XHR
+    userInteractionInstrumentation: (config) => config,      // Providing a function enables/customizes user interactions
 
     transformers: []                  // SDK-level configuration transformers
   }
