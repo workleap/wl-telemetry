@@ -281,10 +281,10 @@ trackWov("FeatureUsed", { Feature: "Dashboard" });
 const mixpanelClient = useMixpanelClient();
 
 // Single property
-mixpanelClient.setGlobalProperty("Plan", "premium");
+mixpanelClient.setGlobalEventProperty("Plan", "premium");
 
 // Multiple properties
-mixpanelClient.setGlobalProperties({
+mixpanelClient.setGlobalEventProperties({
   "User Id": "123",
   "Plan": "premium",
   "Team Size": 10

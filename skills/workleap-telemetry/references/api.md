@@ -211,8 +211,8 @@ LogRocket.identify(traits.userId, traits);
 | Method | Description |
 |---|---|
 | `createTrackingFunction(options?)` | Create tracking function |
-| `setGlobalProperty(key: string, value: any)` | Set single global property |
-| `setGlobalProperties(properties: Record<string, any>)` | Set multiple global properties |
+| `setGlobalEventProperty(key: string, value: any)` | Set single global property |
+| `setGlobalEventProperties(properties: Record<string, any>)` | Set multiple global properties |
 
 ### `createTrackingFunction` Options
 

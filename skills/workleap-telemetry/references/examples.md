@@ -414,7 +414,7 @@ function UserContextProvider({ user, children }) {
   useEffect(() => {
     if (!user || !mixpanelClient) return;
 
-    mixpanelClient.setGlobalProperties({
+    mixpanelClient.setGlobalEventProperties({
       "User Id": user.id,
       "Plan": user.plan,
       "Team Size": user.teamSize
