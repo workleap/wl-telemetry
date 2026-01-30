@@ -345,13 +345,9 @@ wl-telemetry automatically propagates two IDs across all platforms:
 
 ### Accessing Correlation Values
 
-```typescript
-import { TelemetryContext } from "@workleap/telemetry/react";
+**Important:** Do not create your own `TelemetryContext` instances. Correlation values are automatically managed by wl-telemetry and propagated to all platforms.
 
-// In code (rarely needed - correlation is automatic)
-const context = new TelemetryContext();
-console.log(context.telemetryId);  // Current session ID
-console.log(context.deviceId);     // Device ID from cookie
-```
-
-**Note:** Direct access to TelemetryContext is rarely needed. Correlation is automatically handled by wl-telemetry.
+To verify correlation IDs are working:
+- **Honeycomb**: Look for `app.telemetry_id` and `app.device_id` attributes in traces
+- **LogRocket**: Check the "User Traits" filter for `Telemetry Id` and `Device Id`
+- **Mixpanel**: Look for `Telemetry Id` and `Device Id` properties in events
