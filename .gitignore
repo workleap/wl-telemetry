@@ -6,6 +6,7 @@ storybook-static
 .turbo
 .rslib
 .retype
+.claude/settings.local.json
 *.env.local
 
 # Mac
