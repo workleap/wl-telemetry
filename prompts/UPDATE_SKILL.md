@@ -1,4 +1,4 @@
-Review the `workleap-telemetry` skill you created in the `./skills/workleap-telemetry` directory and make sure that all API definition and examples match the current documentation available in the `./docs` folder. Ignore anything related standalone libraries or updates. Do not make any mistake.
+Review the `workleap-telemetry` skill you created in the `./agent-skills/workleap-telemetry` directory and make sure that all API definition and examples match the current documentation available in the `./docs` folder. Ignore anything related standalone libraries or updates. Do not make any mistake.
 
 Validate that the skill can still answer the following questions:
 

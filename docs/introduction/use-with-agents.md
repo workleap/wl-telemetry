@@ -1,6 +1,8 @@
 ---
 order: 40
 label: Use with agents
+toc:
+    depth: 2-3
 ---
 
 # Use with agents
@@ -83,7 +85,7 @@ Open the Extensions view in VS Code and locate the `context7` MCP server. Click 
 
 ### Claude Code
 
-To install Context7 with Claude Code, open a terminal and execute one of the following command:
+To install Context7 with Claude Code, open a terminal and execute one of the following commands:
 
 +++ Remote server connection
 ```bash
@@ -120,5 +122,5 @@ Alternatively, you can verify the connection from a terminal by executing the `c
 Once the MCP server is set up, ask the agent to use Context7 to perform tasks such as generating boilerplate code:
 
 ```
-I'm setting up telemetry in a new React + TypeScript application. Use context7 "/workleap/wl-telemetry" library  to set up Workleap telemetry end-to-end using the documented APIs and patterns.
+I'm setting up telemetry in a new React + TypeScript application. Use context7 "/workleap/wl-telemetry" library to set up Workleap telemetry end-to-end using the documented APIs and patterns.
 ```
