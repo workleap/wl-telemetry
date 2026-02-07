@@ -18,6 +18,7 @@ The skill must:
 * Avoid generic observability advice unless it is explicitly tied to wl-telemetry concepts.
 * Treat the official wl-telemetry documentation as the single source of truth.
 * Ignore everything standalone libraries, focus only on the umbrella package.
+* Not have a description exceeding a maximum length of 1024 characters.
 
 The agent should assume:
 
