@@ -49,7 +49,7 @@ Session replays offer a wide range of features to help debug production issues, 
 ![](../../static/logrocket/logrocket-dom-interactions.png)
 :::
 
-## Monitor issues
+## Surface issues
 
 [Galileo](https://logrocket.com/products/galileo-ai), LogRocket's proprietary AI, watches every session and tracks product changes to proactively surface issues that are impacting users.
 
@@ -67,6 +67,14 @@ A daily or weekly digest of newly detected and untriaged issues can be delivered
 
 :::align-image-left
 ![](../../static/logrocket/logrocket-issues-digest.png){width=408}
+:::
+
+#### Alert
+
+Impactful issues flagged by Galileo AI can be delivered immediatly to Slack:
+
+:::align-image-left
+![](../../static/logrocket/logrocket-alert.png)
 :::
 
 ## Record elements

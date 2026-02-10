@@ -11,7 +11,7 @@ export interface MixpanelClient {
     /**
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
-    createTrackingFunction: (options: CreateMixpanelTrackingFunctionOptions) => MixpanelTrackingFunction;
+    createTrackingFunction: (options?: CreateMixpanelTrackingFunctionOptions) => MixpanelTrackingFunction;
 
     /**
      * @see {@link https://workleap.github.io/wl-telemetry}

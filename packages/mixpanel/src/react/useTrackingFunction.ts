@@ -1,7 +1,6 @@
 import type { CreateMixpanelTrackingFunctionOptions } from "@workleap-telemetry/core";
-import { useContext, useMemo } from "react";
-import { createTrackingFunction } from "../js/createTrackingFunction.ts";
-import { MixpanelContext } from "./MixpanelContext.tsx";
+import { useMemo } from "react";
+import { useMixpanelClient } from "./MixpanelContext.tsx";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
@@ -17,18 +16,13 @@ export function useTrackingFunction(options: UseTrackingFunctionOptions = {}) {
         targetProductId
     } = options;
 
-    const client = useContext(MixpanelContext);
+    const client = useMixpanelClient();
 
     return useMemo(() => {
         const trackOptions = {
             targetProductId
         } satisfies CreateMixpanelTrackingFunctionOptions;
 
-        // DEPRECATED: Grace period ends on January 1th 2026.
-        // After the grace period, only create the tracking function from the client, remove the fallback
-        // and also use "useMixpanelClient" to retrieve the client rather than "useContext".
-        return client
-            ? client.createTrackingFunction(trackOptions)
-            : createTrackingFunction(trackOptions);
+        return client.createTrackingFunction(trackOptions);
     }, [client, targetProductId]);
 }

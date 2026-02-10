@@ -121,33 +121,6 @@ export function getLogRocketSdkOptions(userOptions: RegisterLogRocketInstrumenta
 
 ///////////////////////////
 
-// DEPRECATED: Grace period ends on January 1th 2026.
-export const IsRegisteredVariableName = "__WLP_LOGROCKET_INSTRUMENTATION_IS_REGISTERED__";
-export const RegisterGetSessionUrlFunctionName = "__WLP_LOGROCKET_INSTRUMENTATION_REGISTER_GET_SESSION_URL_LISTENER__";
-
-// DEPRECATED: Grace period ends on January 1th 2026.
-function registerDeprecatedGlobalVariables() {
-    // Indicates to the host applications that logrocket has been initialized.
-    // It's useful in cases where an "add-on", like the platform widgets needs
-    // to know whether or not the host application is using LogRocket.
-    // While there are ways that the host application could tell to an "add-on" if
-    // it's using LogRocket or not, doing it this way is transparent for the consumer,
-    // which is great for DX.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis[IsRegisteredVariableName] = true;
-
-    // While consumers could directly call LogRocket.getSessionURL, by doing it this way,
-    // it allow consumers to not take a direct dependency on the "logrocket" package.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis[RegisterGetSessionUrlFunctionName] = listener => {
-        LogRocket.getSessionURL(listener);
-    };
-}
-
-///////////////////////////
-
 let registrationGuardInstance: HasExecutedGuard | undefined;
 
 // It's important to use a lazy singleton instead of a singleton to avoid
@@ -202,8 +175,6 @@ export class LogRocketInstrumentationRegistrator {
                 .withText(url)
                 .debug();
         });
-
-        registerDeprecatedGlobalVariables();
 
         logger.information("[logrocket] LogRocket instrumentation is registered.");
 

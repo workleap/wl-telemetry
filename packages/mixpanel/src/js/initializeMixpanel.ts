@@ -1,32 +1,8 @@
 import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
-import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
-import { setMixpanelContext } from "./context.ts";
+import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { getTrackingEndpoint, type MixpanelEnvironment } from "./env.ts";
 import { type MixpanelClient, MixpanelClientImpl, type MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
 import { getTelemetryProperties, OtherProperties } from "./properties.ts";
-
-// DEPRECATED: Grace period ends on January 1th 2026.
-// Don't forget to remove the tests as well.
-export const IsInitializedVariableName = "__WLP_MIXPANEL_IS_INITIALIZED__";
-
-// DEPRECATED: Grace period ends on January 1th 2026.
-function registerDeprecatedContextAndGlobalVariables(productId: string, endpoint: string, globalEventProperties: Map<string, unknown>, logger: Logger) {
-    setMixpanelContext({
-        productId,
-        endpoint,
-        globalEventProperties,
-        logger
-    });
-
-    // Indicates to the host applications that Mixpanel has been initialized.
-    // It's useful in cases where an "add-on", like the platform widgets needs
-    // to know whether or not the host application is using Mixpanel.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis[IsInitializedVariableName] = true;
-}
-
-///////////////////////////
 
 let registrationGuardInstance: HasExecutedGuard | undefined;
 
@@ -124,8 +100,6 @@ export class MixpanelInitializer {
                 this.#globalEventProperties.set(OtherProperties.LogRocketSessionUrl, sessionUrl);
             });
         }
-
-        registerDeprecatedContextAndGlobalVariables(productId, endpoint, this.#globalEventProperties, logger);
 
         logger.information("[mixpanel] Mixpanel is initialized.");
 
