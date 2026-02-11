@@ -1,5 +1,25 @@
-import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
+import { AdditionalMixpanelPropertiesProvider, useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 import { useCallback } from "react";
+
+const FooProp = {
+    foo: "bar"
+};
+
+const JohnProp = {
+    john: "doe"
+};
+
+function NestedTrack({ buttonLabel }: { buttonLabel: string }) {
+    const track = useMixpanelTrackingFunction();
+
+    const handleTrack = useCallback(() => {
+        track("event", {});
+    }, []);
+
+    return (
+        <button type="button" onClick={handleTrack}>{buttonLabel}</button>
+    );
+}
 
 export function MixpanelPage() {
     const trackWithProductId = useMixpanelTrackingFunction({
@@ -34,6 +54,14 @@ export function MixpanelPage() {
             <button type="button" onClick={handleTrackWithTargetProductId}>Track with a target product id</button>
             <br />
             <button type="button" onClick={handleTrackWithBothIds}>Track with both ids</button>
+            <br />
+            <AdditionalMixpanelPropertiesProvider value={FooProp}>
+                <NestedTrack buttonLabel="Track with Foo" />
+                <br />
+                <AdditionalMixpanelPropertiesProvider value={JohnProp}>
+                    <NestedTrack buttonLabel="Track with Foo & John" />
+                </AdditionalMixpanelPropertiesProvider>
+            </AdditionalMixpanelPropertiesProvider>
         </>
     );
 }

@@ -51,7 +51,8 @@ export class MixpanelClientImpl implements MixpanelClient {
     createTrackingFunction(options: CreateMixpanelTrackingFunctionOptions = {}) {
         const {
             productId,
-            targetProductId
+            targetProductId,
+            additionalProperties = {}
         } = options;
 
         const trackFunction: MixpanelTrackingFunction = async (eventName, properties, _options = {}) => {
@@ -65,6 +66,7 @@ export class MixpanelClientImpl implements MixpanelClient {
                 const allProperties = {
                     ...baseProperties,
                     ...Object.fromEntries(this.#globalEventProperties),
+                    ...additionalProperties,
                     ...properties
                 };
 

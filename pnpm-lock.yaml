@@ -568,9 +568,6 @@ importers:
       eslint:
         specifier: 9.39.2
         version: 9.39.2(jiti@2.6.1)
-      nodemon:
-        specifier: 3.1.11
-        version: 3.1.11
       tsx:
         specifier: 4.21.0
         version: 4.21.0
@@ -623,9 +620,6 @@ importers:
       eslint:
         specifier: 9.39.2
         version: 9.39.2(jiti@2.6.1)
-      nodemon:
-        specifier: 3.1.11
-        version: 3.1.11
       tsx:
         specifier: 4.21.0
         version: 4.21.0
