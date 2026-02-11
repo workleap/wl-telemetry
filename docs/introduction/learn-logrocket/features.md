@@ -152,7 +152,7 @@ import { App } from "./App.tsx";
 
 const loggers: RootLogger[] = [new LogRocketLogger({ logLevel: LogLevel.information })];
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -204,7 +204,7 @@ import { App } from "./App.tsx";
 
 const loggers: RootLogger[] = [new LogRocketLogger()];
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },

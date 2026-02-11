@@ -10,11 +10,12 @@ toc:
 ## Reference
 
 ```ts
-const client = initializeTelemetry(options?: { logRocket?, honeycomb?, mixpanel?, verbose?, loggers? });
+const client = initializeTelemetry(productFamily, options?: { logRocket?, honeycomb?, mixpanel?, verbose?, loggers? });
 ```
 
 ### Parameters
 
+- `productFamily`: The family of Workleap products.
 - `options`: An optional object literal of options:
     - `logRocket`: An optional LogRocket instrumentation registration options object. If provided, LogRocket instrumentation is registered, if omitted, it is skipped.
         - `appId`: The LogRocket application id.
@@ -54,7 +55,7 @@ A [TelemetryClient](./TelemetryClient.md) instance.
 ```ts !#4-18
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -80,7 +81,7 @@ const client = initializeTelemetry({
 ```ts !#7
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     logRocket: {
         appId: "my-app-id",
         options: {
@@ -95,7 +96,7 @@ const client = initializeTelemetry({
 ```ts !#7
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id",
         options: {
@@ -112,7 +113,7 @@ To view the default private fields, have a look at the [registerLogRocketInstrum
 ```ts !#7
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     logRocket: {
         appId: "my-app-id",
         options: {
@@ -140,7 +141,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = config => {
     return config;
 };
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id",
         options: {
@@ -174,7 +175,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) 
 ```ts !#9
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -197,7 +198,7 @@ Prefer using an [OpenTelemetry collector](https://docs.honeycomb.io/send-data/op
 ```ts !#9
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -215,7 +216,7 @@ const client = initializeTelemetry({
 import { initializeTelemetry } from "@workleap/telemetry/react";
 import { LongTaskInstrumentation } from "@opentelemetry/instrumentation-long-task";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -256,7 +257,7 @@ export class CustomSpanProcessor implements SpanProcessor {
 import { initializeTelemetry } from "@workleap/telemetry/react";
 import { CustomSpanProcessor } from "./CustomSpanProcessor.ts";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -276,7 +277,7 @@ const client = initializeTelemetry({
 ```ts !#10-15
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -299,7 +300,7 @@ To disable [@opentelemetry/instrumentation-fetch](https://github.com/open-teleme
 ```ts !#10
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -316,7 +317,7 @@ const client = initializeTelemetry({
 ```ts !#10-15
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -339,7 +340,7 @@ To disable [@opentelemetry/instrumentation-document-load](https://github.com/ope
 ```ts !#10
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -357,7 +358,7 @@ const client = initializeTelemetry({
 ```ts !#10-15
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -380,7 +381,7 @@ Or set the option to `true` to enable [@opentelemetry/instrumentation-xml-http-r
 ```ts !#10
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -398,7 +399,7 @@ const client = initializeTelemetry({
 ```ts !#10-15
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -421,7 +422,7 @@ Or set the option to `true` to enable [@opentelemetryinstrumentation-user-intera
 ```ts !#10
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -449,7 +450,7 @@ const skipOptionsValidationTransformer: HoneycombSdkOptionsTransformer = config 
     return config;
 };
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     honeycomb: {
         namespace: "sample",
         serviceName: "my-app-name",
@@ -484,7 +485,7 @@ const debugTransformer: HoneycombSdkOptionsTransformer = (config, context) => {
 ```ts !#6
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     mixpanel: {
         productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
@@ -497,7 +498,7 @@ const client = initializeTelemetry({
 ```ts !#6
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     mixpanel: {
         productId: "wlp",
         envOrTrackingApiBaseUrl: "https://my-tracking-api"
@@ -510,7 +511,7 @@ const client = initializeTelemetry({
 ```ts !#8
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     mixpanel: {
         productId: "wlp",
         envOrTrackingApiBaseUrl: "development",
@@ -526,7 +527,7 @@ const client = initializeTelemetry({
 ```ts !#19
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("wlp", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -552,7 +553,7 @@ const client = initializeTelemetry({
 import { initializeTelemetry, LogRocketLogger } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },

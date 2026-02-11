@@ -1,7 +1,7 @@
-// These tests cannot be concurrent because of global mocked on LogRocket.
+// These tests cannot be concurrent because of global mocked on LogRocket and the fetch mock.
 
 import { type LogRocketInstrumentationPartialClient, TelemetryContext } from "@workleap-telemetry/core";
-import { afterEach, test, vi } from "vitest";
+import { afterEach, type ExpectStatic, type MockInstance, test, vi } from "vitest";
 import { MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
 import { BaseProperties, OtherProperties, TelemetryProperties } from "../../src/js/properties.ts";
 
@@ -21,42 +21,57 @@ class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPar
     }
 }
 
-const fetchMock = vi.fn();
+async function getFetchCall(fetchMock: MockInstance, expect: ExpectStatic) {
+    await vi.waitFor(() => expect(fetchMock).toHaveBeenCalled());
 
-globalThis.fetch = fetchMock;
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+
+    const [url, init] = fetchMock.mock.calls[0];
+
+    const body = JSON.parse(init.body as string);
+
+    return {
+        url,
+        init,
+        body
+    };
+}
 
 afterEach(() => {
     vi.clearAllMocks();
+    vi.restoreAllMocks();
 });
 
 test("the custom properties are sent", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
 
     const track = client.createTrackingFunction();
 
     await track("event", { customProp: 123 });
 
-    const [url, init] = fetchMock.mock.calls[0];
-    const body = JSON.parse(init.body);
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("http://api/navigation/tracking/track");
-    expect(body.properties[BaseProperties.IsMobile]).toBeFalsy();
-    expect(body.properties.customProp).toBe(123);
-    expect(body.productIdentifier).toBe("wlp");
-    expect(body.targetProductIdentifier).toBeNull();
+    expect(request.url).toBe("http://api/navigation/tracking/track");
+    expect(request.body.properties[BaseProperties.IsMobile]).toBeFalsy();
+    expect(request.body.properties.customProp).toBe(123);
+    expect(request.body.productIdentifier).toBeUndefined();
+    expect(request.body.targetProductIdentifier).toBeNull();
 });
 
-test("when a telemetry context is provided, the telemetry context values are sent", async ({ expect }) => {
+test("when a telemetry context is provided at initialization, the telemetry context values are sent", async ({ expect }) => {
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
+
     const telemetryContext = new TelemetryContext("123", "456");
+    const initializer = new MixpanelInitializer();
 
-    const globalEventProperties = new Map<string, unknown>();
-
-    const initializer = new MixpanelInitializer(globalEventProperties);
-
-    const client = initializer.initialize("wlp", "http://api/navigation", {
+    const client = initializer.initialize("http://api/navigation", {
         telemetryContext
     });
 
@@ -64,21 +79,42 @@ test("when a telemetry context is provided, the telemetry context values are sen
 
     await track("event", {});
 
-    const [url, init] = fetchMock.mock.calls[0];
-    const body = JSON.parse(init.body);
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("http://api/navigation/tracking/track");
-    expect(body.properties[TelemetryProperties.DeviceId]).toBe(telemetryContext.deviceId);
-    expect(body.properties[TelemetryProperties.TelemetryId]).toBe(telemetryContext.telemetryId);
+    expect(request.url).toBe("http://api/navigation/tracking/track");
+    expect(request.body.properties[TelemetryProperties.DeviceId]).toBe(telemetryContext.deviceId);
+    expect(request.body.properties[TelemetryProperties.TelemetryId]).toBe(telemetryContext.telemetryId);
+});
+
+test("when a product id is provided at initialization, the product id is sent", async ({ expect }) => {
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
+
+    const initializer = new MixpanelInitializer();
+
+    const client = initializer.initialize("http://api/navigation", {
+        productId: "app"
+    });
+
+    const track = client.createTrackingFunction();
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.productIdentifier).toBe("app");
 });
 
 test("when a logrocket instrumentation client is provided, the logrocket session url is sent", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
+
     const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
+    const initializer = new MixpanelInitializer();
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-
-    const client = initializer.initialize("wlp", "http://api/navigation", {
+    const client = initializer.initialize("http://api/navigation", {
         logRocketInstrumentationClient
     });
 
@@ -90,49 +126,95 @@ test("when a logrocket instrumentation client is provided, the logrocket session
 
     await track("event", {});
 
-    const [url, init] = fetchMock.mock.calls[0];
-    const body = JSON.parse(init.body);
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("http://api/navigation/tracking/track");
-    expect(body.properties[OtherProperties.LogRocketSessionUrl]).toBe(sessionUrl);
+    expect(request.url).toBe("http://api/navigation/tracking/track");
+    expect(request.body.properties[OtherProperties.LogRocketSessionUrl]).toBe(sessionUrl);
 });
 
 test("the request body include the event name", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
 
     const track = client.createTrackingFunction();
 
     await track("customEvent", {});
 
-    const [, init] = fetchMock.mock.calls[0];
-    const body = JSON.parse(init.body);
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(body.eventName).toBe("customEvent");
+    expect(request.body.eventName).toBe("customEvent");
 });
 
 test("when the keep alive option is provided, the fetch options include the \"keepAlive\" option", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
 
     const track = client.createTrackingFunction();
 
     await track("keepaliveEvent", {}, { keepAlive: true });
 
-    const [, init] = fetchMock.mock.calls[0];
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(init.keepalive).toBe(true);
+    expect(request.init.keepalive).toBe(true);
 });
 
-test("when a target product id is provided, the request body include the provided id", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+test("when a product id is provided at initialization and a scoped product is provided, the scoped product id is sent", async ({ expect }) => {
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer();
+
+    const client = initializer.initialize("http://api/navigation", {
+        productId: "app"
+    });
+
+    const track = client.createTrackingFunction({
+        productId: "scoped"
+    });
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.productIdentifier).toBe("scoped");
+});
+
+test("when no product id is provided at initialization and a scoped product is provided, the scoped product id is sent", async ({ expect }) => {
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
+
+    const initializer = new MixpanelInitializer();
+
+    const client = initializer.initialize("http://api/navigation");
+
+    const track = client.createTrackingFunction({
+        productId: "scoped"
+    });
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.productIdentifier).toBe("scoped");
+});
+
+test("when a target product id is provided, the provided id is sent", async ({ expect }) => {
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
+
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
 
     const track = client.createTrackingFunction({
         targetProductId: "target-app"
@@ -140,78 +222,87 @@ test("when a target product id is provided, the request body include the provide
 
     await track("event", {});
 
-    const [, init] = fetchMock.mock.calls[0];
-    const body = JSON.parse(init.body);
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(body.targetProductIdentifier).toBe("target-app");
+    expect(request.body.targetProductIdentifier).toBe("target-app");
 });
 
-test("when a target product id is not provided, the request body include the property with a null value", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+test("when a target product id is not provided, a null value is sent", async ({ expect }) => {
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
 
     const track = client.createTrackingFunction();
 
     await track("event", {});
 
-    const [, init] = fetchMock.mock.calls[0];
-    const body = JSON.parse(init.body);
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(body).toHaveProperty("targetProductIdentifier", null);
+    expect(request.body).toHaveProperty("targetProductIdentifier", null);
 });
 
 test("when a base URL is provided, the endpoint include the provided base URL", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
 
     const track = client.createTrackingFunction();
 
     await track("customEvent", {});
 
-    const [url] = fetchMock.mock.calls[0];
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("http://api/navigation/tracking/track");
+    expect(request.url).toBe("http://api/navigation/tracking/track");
 });
 
 test("when the provided base URL end with a slash is provided, the ending slash is escaped", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation/");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation/");
 
     const track = client.createTrackingFunction();
 
     await track("event", {});
 
-    const [url] = fetchMock.mock.calls[0];
-    expect(url).toBe("http://api/navigation/tracking/track");
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.url).toBe("http://api/navigation/tracking/track");
 });
 
 test("when an environment is provided, the resolved endpoint URL match the provided environment", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "development");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("development");
 
     const track = client.createTrackingFunction();
 
     await track("event", {});
 
-    const [url] = fetchMock.mock.calls[0];
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("https://api.platform.workleap-dev.com/shell/navigation/tracking/track");
+    expect(request.url).toBe("https://api.platform.workleap-dev.com/shell/navigation/tracking/track");
 });
 
 test("when a custom tracking endpoint is provided, use the provided custom endpoint", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
+    const initializer = new MixpanelInitializer();
 
-    const client = initializer.initialize("wlp", "http://api/navigation", {
+    const client = initializer.initialize("http://api/navigation", {
         trackingEndpoint: "custom/tracking/endpoint"
     });
 
@@ -219,17 +310,19 @@ test("when a custom tracking endpoint is provided, use the provided custom endpo
 
     await track("event", {});
 
-    const [url] = fetchMock.mock.calls[0];
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("http://api/navigation/custom/tracking/endpoint");
+    expect(request.url).toBe("http://api/navigation/custom/tracking/endpoint");
 });
 
 test("when a custom tracking endpoint starts with slash, remove the leading slash from the provided custom tracking endpoint", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
+    const initializer = new MixpanelInitializer();
 
-    const client = initializer.initialize("wlp", "http://api/navigation", {
+    const client = initializer.initialize("http://api/navigation", {
         trackingEndpoint: "/custom/endpoint"
     });
 
@@ -237,31 +330,36 @@ test("when a custom tracking endpoint starts with slash, remove the leading slas
 
     await track("event", {});
 
-    const [url] = fetchMock.mock.calls[0];
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("http://api/navigation/custom/endpoint");
+    expect(request.url).toBe("http://api/navigation/custom/endpoint");
 });
 
 test("when no tracking endpoint is provided, use the default \"tracking/track\" endpoint", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
-    const client = initializer.initialize("wlp", "http://api/navigation");
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
 
     const track = client.createTrackingFunction();
 
     await track("event", {});
 
-    const [url] = fetchMock.mock.calls[0];
-    expect(url).toBe("http://api/navigation/tracking/track");
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.url).toBe("http://api/navigation/tracking/track");
 });
 
 test("when a custom tracking endpoint is provided with an environment, use the provided custom endpoint", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
+    const initializer = new MixpanelInitializer();
 
-    const client = initializer.initialize("wlp", "development", {
+    const client = initializer.initialize("development", {
         trackingEndpoint: "/custom/endpoint"
     });
 
@@ -269,17 +367,19 @@ test("when a custom tracking endpoint is provided with an environment, use the p
 
     await track("event", {});
 
-    const [url] = fetchMock.mock.calls[0];
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("https://api.platform.workleap-dev.com/shell/navigation/custom/endpoint");
+    expect(request.url).toBe("https://api.platform.workleap-dev.com/shell/navigation/custom/endpoint");
 });
 
 test("when a custom tracking endpoint starts with slash and an environment is provided, remove the custom tracking endpoint leading slash", async ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
+    const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(new Response(null, { status: 200 }));
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
+    const initializer = new MixpanelInitializer();
 
-    const client = initializer.initialize("wlp", "staging", {
+    const client = initializer.initialize("staging", {
         trackingEndpoint: "/custom/endpoint"
     });
 
@@ -287,8 +387,8 @@ test("when a custom tracking endpoint starts with slash and an environment is pr
 
     await track("event", {});
 
-    const [url] = fetchMock.mock.calls[0];
+    const request = await getFetchCall(fetchMock, expect);
 
-    expect(url).toBe("https://api.platform.workleap-stg.com/shell/navigation/custom/endpoint");
+    expect(request.url).toBe("https://api.platform.workleap-stg.com/shell/navigation/custom/endpoint");
 });
 

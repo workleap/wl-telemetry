@@ -2,8 +2,6 @@ import type { CreateMixpanelTrackingFunctionOptions, MixpanelTrackingFunction } 
 import type { Logger } from "@workleap/logging";
 import { getBaseProperties } from "./properties.ts";
 
-export type MixpanelGlobalEventProperties = Map<string, unknown>;
-
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
@@ -12,35 +10,47 @@ export interface MixpanelClient {
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     createTrackingFunction: (options?: CreateMixpanelTrackingFunctionOptions) => MixpanelTrackingFunction;
-
     /**
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     setGlobalEventProperty: (key: string, value: unknown) => void;
-
     /**
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     setGlobalEventProperties: (values: Record<string, unknown>) => void;
 }
 
-export class MixpanelClientImpl implements MixpanelClient {
-    readonly #productId: string;
-    readonly #endpoint: string;
-    readonly #globalEventProperties: MixpanelGlobalEventProperties;
-    readonly #logger: Logger;
+/**
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
+export interface MixpanelClientOptions {
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    productId?: string;
+}
 
-    constructor(productId: string, endpoint: string, globalEventProperties: MixpanelGlobalEventProperties, logger: Logger) {
-        this.#productId = productId;
+export class MixpanelClientImpl implements MixpanelClient {
+    readonly #globalEventProperties = new Map<string, unknown>();
+    readonly #endpoint: string;
+    readonly #logger: Logger;
+    readonly #productId?: string;
+
+    constructor(endpoint: string, logger: Logger, options: MixpanelClientOptions = {}) {
+        const {
+            productId
+        } = options;
+
         this.#endpoint = endpoint;
-        this.#globalEventProperties = globalEventProperties;
         this.#logger = logger;
+        this.#productId = productId;
     }
 
     // IMPORTANT: If you update this method, make sure to update the MixpanelPartialClient
     // interface as well in @workleap-telemetry/core.
     createTrackingFunction(options: CreateMixpanelTrackingFunctionOptions = {}) {
         const {
+            productId,
             targetProductId
         } = options;
 
@@ -65,7 +75,7 @@ export class MixpanelClientImpl implements MixpanelClient {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         eventName,
-                        productIdentifier: this.#productId,
+                        productIdentifier: productId ?? this.#productId,
                         // Not sure why, but it seems important to send "null" if not target product identifier
                         // are provided.
                         targetProductIdentifier: targetProductId ?? null,

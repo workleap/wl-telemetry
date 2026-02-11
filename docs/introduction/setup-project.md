@@ -26,7 +26,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },

@@ -30,7 +30,7 @@ import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/reac
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },

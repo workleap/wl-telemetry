@@ -9,7 +9,7 @@ toc:
 
 # Migrate to v3.0
 
-This major version remove the global variables deprecated in [v.2.0](./migrate-to-v2.0.md#deprecated) and introduce a `productFamily` argument.
+This major version remove the global variables deprecated in [v2.0](./migrate-to-v2.0.md#deprecated).
 
 ## Breaking changes
 

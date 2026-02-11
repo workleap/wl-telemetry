@@ -7,7 +7,7 @@ meta:
 
 # Migrate to v8.0
 
-This major version remove the global variables deprecated in [v.7.0](./migrate-to-v7.0.md#deprecated) and introduce a `productFamily` argument.
+This major version remove the global variables deprecated in [v7.0](./migrate-to-v7.0.md#deprecated).
 
 ## Breaking changes
 

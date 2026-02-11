@@ -1,7 +1,7 @@
 import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { getTrackingEndpoint, type MixpanelEnvironment } from "./env.ts";
-import { type MixpanelClient, MixpanelClientImpl, type MixpanelGlobalEventProperties } from "./MixpanelClient.ts";
+import { MixpanelClientImpl, type MixpanelClient } from "./MixpanelClient.ts";
 import { getTelemetryProperties, OtherProperties } from "./properties.ts";
 
 let registrationGuardInstance: HasExecutedGuard | undefined;
@@ -29,6 +29,11 @@ export function __resetRegistrationGuard() {
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export interface InitializeMixpanelOptions {
+    /**
+     * An optional product id that will be attached to every event.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    productId?: string;
     /**
      * An optional tracking endpoint.
      * @default "tracking/track"
@@ -59,18 +64,9 @@ export interface InitializeMixpanelOptions {
 }
 
 export class MixpanelInitializer {
-    readonly #globalEventProperties: MixpanelGlobalEventProperties;
-
-    constructor(globalEventProperties: MixpanelGlobalEventProperties) {
-        this.#globalEventProperties = globalEventProperties;
-    }
-
-    initialize(
-        productId: string,
-        envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}),
-        options: InitializeMixpanelOptions = {}
-    ) {
+    initialize(envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}), options: Omit<InitializeMixpanelOptions, "globalEventProperties"> = {}) {
         const {
+            productId,
             trackingEndpoint,
             telemetryContext,
             logRocketInstrumentationClient,
@@ -81,10 +77,16 @@ export class MixpanelInitializer {
         const logger = createCompositeLogger(verbose, loggers);
         const endpoint = getTrackingEndpoint(envOrTrackingApiBaseUrl, trackingEndpoint);
 
+        logger.information("[mixpanel] Mixpanel is initialized.");
+
+        const client = new MixpanelClientImpl(endpoint, logger, {
+            productId
+        });
+
         // Set the telemetry correlation ids on every Mixpanel event.
         if (telemetryContext) {
             for (const [key, value] of Object.entries(getTelemetryProperties(telemetryContext))) {
-                this.#globalEventProperties.set(key, value);
+                client.setGlobalEventProperty(key, value);
             }
         }
 
@@ -97,13 +99,9 @@ export class MixpanelInitializer {
                     .withText(sessionUrl)
                     .debug();
 
-                this.#globalEventProperties.set(OtherProperties.LogRocketSessionUrl, sessionUrl);
+                client.setGlobalEventProperty(OtherProperties.LogRocketSessionUrl, sessionUrl);
             });
         }
-
-        logger.information("[mixpanel] Mixpanel is initialized.");
-
-        const client = new MixpanelClientImpl(productId, endpoint, this.#globalEventProperties, logger);
 
         // The cast is to normalize the inferred return type to the "LogRocketInstrumentationClient" type.
         return client as MixpanelClient;
@@ -112,23 +110,18 @@ export class MixpanelInitializer {
 
 /**
  * Initialize Mixpanel telemetry.
- * @param productId The Mixpanel product identifier.
  * @param envOrTrackingApiBaseUrl The environment to get the navigation url from or a base URL.
  * @param options Mixpanel instrumentation options.
  * @returns {MixpanelClient} A Mixpanel client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function initializeMixpanel(
-    productId: string,
     envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}),
     options?: InitializeMixpanelOptions
 ) {
     getRegistrationGuard().throw("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
 
-    return new MixpanelInitializer(
-        new Map<string, unknown>()
-    ).initialize(
-        productId,
+    return new MixpanelInitializer().initialize(
         envOrTrackingApiBaseUrl,
         options
     );

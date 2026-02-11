@@ -33,7 +33,7 @@ const isDev = process.env === "development";
 // Only add LogRocket logger if your product is set up with LogRocket.
 const loggers: RootLogger[] = [isDev ? new BrowserConsoleLogger() : new LogRocketLogger({ logLevel: LogLevel.information })];
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -89,7 +89,7 @@ const isDev = process.env === "development";
 // Only add LogRocket logger if your product is set up with LogRocket.
 const loggers: RootLogger[] = [isDev ? new BrowserConsoleLogger() : new LogRocketLogger({ logLevel })];
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },

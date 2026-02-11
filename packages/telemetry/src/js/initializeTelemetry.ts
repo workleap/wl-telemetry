@@ -1,5 +1,5 @@
 import type { PropagateTraceHeaderCorsUrls } from "@opentelemetry/sdk-trace-web";
-import { createTelemetryContext } from "@workleap-telemetry/core";
+import { createTelemetryContext, ProductFamily } from "@workleap-telemetry/core";
 import { registerHoneycombInstrumentation, type HoneycombInstrumentationClient, type HoneycombSdkOptions, type RegisterHoneycombInstrumentationOptions } from "@workleap/honeycomb";
 import type { RootLogger } from "@workleap/logging";
 import { registerLogRocketInstrumentation, type LogRocketInstrumentationClient, type RegisterLogRocketInstrumentationOptions } from "@workleap/logrocket";
@@ -59,11 +59,6 @@ export interface InitializeTelemetryOptions {
      */
     mixpanel?: {
         /**
-         * The Mixpanel product identifier.
-         * @see {@link https://workleap.github.io/wl-telemetry}
-         */
-        productId: string;
-        /**
          * The environment to get the navigation url from or a base URL.
          * @see {@link https://workleap.github.io/wl-telemetry}
          */
@@ -88,11 +83,12 @@ export interface InitializeTelemetryOptions {
 
 /**
  * Composite telemetry initialization orchestrating the bootstrapping of Workleap telemetry platforms trio.
+ * @param productFamily The family of Workleap products.
  * @param options Telemetry platform options.
  * @returns {TelemetryClient} A telemetry client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function initializeTelemetry(options: InitializeTelemetryOptions = {}) {
+export function initializeTelemetry(productFamily: ProductFamily, options: InitializeTelemetryOptions = {}) {
     const {
         logRocket,
         honeycomb,
@@ -101,7 +97,7 @@ export function initializeTelemetry(options: InitializeTelemetryOptions = {}) {
         loggers
     } = options;
 
-    const telemetryContext = createTelemetryContext({
+    const telemetryContext = createTelemetryContext(productFamily, {
         verbose,
         loggers
     });
@@ -139,7 +135,6 @@ export function initializeTelemetry(options: InitializeTelemetryOptions = {}) {
 
     if (mixpanel) {
         mixpanelClient = initializeMixpanel(
-            mixpanel.productId,
             mixpanel.envOrTrackingApiBaseUrl,
             {
                 ...(mixpanel.options ?? {}),

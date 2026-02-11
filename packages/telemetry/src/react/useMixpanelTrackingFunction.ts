@@ -13,6 +13,7 @@ export type UseMixpanelTrackingFunctionOptions = CreateMixpanelTrackingFunctionO
  */
 export function useMixpanelTrackingFunction(options: UseMixpanelTrackingFunctionOptions = {}) {
     const {
+        productId,
         targetProductId
     } = options;
 
@@ -20,7 +21,8 @@ export function useMixpanelTrackingFunction(options: UseMixpanelTrackingFunction
 
     return useMemo(() => {
         return client.createTrackingFunction({
+            productId,
             targetProductId
         });
-    }, [client, targetProductId]);
+    }, [client, productId, targetProductId]);
 }

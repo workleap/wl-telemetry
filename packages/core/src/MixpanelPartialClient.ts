@@ -3,6 +3,10 @@
  */
 export interface CreateMixpanelTrackingFunctionOptions {
     /**
+     * The product identifier.
+     */
+    productId?: string;
+    /**
      * The product identifier of the target product.
      */
     targetProductId?: string;

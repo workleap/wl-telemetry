@@ -27,7 +27,6 @@ export {
     type InitializeMixpanelOptions,
     type MixpanelClient,
     type MixpanelEventProperties,
-    type MixpanelGlobalEventProperties,
     type MixpanelTrackingFunction,
     type MixpanelTrackingFunctionOptions
 } from "@workleap/mixpanel";
