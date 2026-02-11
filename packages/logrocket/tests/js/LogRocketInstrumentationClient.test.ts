@@ -2,7 +2,7 @@ import { TelemetryContext } from "@workleap-telemetry/core";
 import { describe, test } from "vitest";
 import { LogRocketInstrumentationClientImpl } from "../../src/js/LogRocketInstrumentationClient.ts";
 
-describe("createWorkleapPlatformDefaultUserTraits", () => {
+describe.concurrent("createWorkleapPlatformDefaultUserTraits", () => {
     test.concurrent("required user traits are returned", ({ expect }) => {
         const identification = {
             userId: "123",
@@ -91,28 +91,60 @@ describe("createWorkleapPlatformDefaultUserTraits", () => {
         expect(Object.keys(result)).not.toContain(["Is Collaborator - LMS", "Is Collaborator - Onboarding", "Is Collaborator - Skills", "Is Collaborator - Performance", "Is Collaborator - Pingboard"]);
         expect(Object.keys(result)).not.toContain(["Plan Code - LMS", "Plan Code - Onboarding", "Plan Code - Skills", "Plan Code - Performance", "Plan Code - Pingboard"]);
     });
+});
 
-    test.concurrent("when a telemetry context is available, telemetry user traits are returned", ({ expect }) => {
+describe.concurrent("createShareGateDefaultUserTraits", () => {
+    test.concurrent("required user traits are returned", ({ expect }) => {
         const identification = {
-            userId: "123",
-            organizationId: "456",
-            organizationName: "Test Organization",
-            isMigratedToWorkleap: true,
-            isOrganizationCreator: false,
-            isAdmin: false
+            shareGateAccountId: "123",
+            microsoftUserId: "456",
+            microsoftTenantId: "789",
+            workspaceId: "ws-123"
         };
 
         const telemetryContext = new TelemetryContext("789", "device-1");
         const client = new LogRocketInstrumentationClientImpl(telemetryContext);
 
-        const result = client.createWorkleapPlatformDefaultUserTraits(identification);
+        const result = client.createShareGateDefaultUserTraits(identification);
 
-        expect(result["User Id"]).toEqual(identification.userId);
-        expect(result["Organization Id"]).toEqual(identification.organizationId);
-        expect(result["Organization Name"]).toEqual(identification.organizationName);
-        expect(result["Is Migrated To Workleap"]).toEqual(identification.isMigratedToWorkleap);
-        expect(result["Is Admin"]).toEqual(identification.isAdmin);
+        expect(result["ShareGate Account Id"]).toEqual(identification.shareGateAccountId);
+        expect(result["Microsoft User Id"]).toEqual(identification.microsoftUserId);
+        expect(result["Microsoft Tenant Id"]).toEqual(identification.microsoftTenantId);
+        expect(result["Workspace Id"]).toEqual(identification.workspaceId);
         expect(result["Device Id"]).toEqual(telemetryContext.deviceId);
         expect(result["Telemetry Id"]).toEqual(telemetryContext.telemetryId);
+    });
+
+    test.concurrent("optional user traits with no value provided are skipped", ({ expect }) => {
+        const identification = {
+            shareGateAccountId: "123",
+            microsoftUserId: "456",
+            microsoftTenantId: "789",
+            workspaceId: "ws-123"
+        };
+
+        const telemetryContext = new TelemetryContext("789", "device-1");
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
+
+        const result = client.createShareGateDefaultUserTraits(identification);
+
+        expect(Object.keys(result)).not.toContain(["Is In Partner Program"]);
+    });
+
+    test.concurrent("optional user traits with values provided are returned", ({ expect }) => {
+        const identification = {
+            shareGateAccountId: "123",
+            microsoftUserId: "456",
+            microsoftTenantId: "789",
+            workspaceId: "ws-123",
+            isInPartnerProgram: true
+        };
+
+        const telemetryContext = new TelemetryContext("789", "device-1");
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
+
+        const result = client.createShareGateDefaultUserTraits(identification);
+
+        expect(result["Is In Partner Program"]).toBeTruthy();
     });
 });

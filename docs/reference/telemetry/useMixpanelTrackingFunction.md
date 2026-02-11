@@ -12,13 +12,14 @@ Returns a function sending `POST` requests to a dedicated tracking endpoint full
 ## Reference
 
 ```ts
-const track = useMixpanelTrackingFunction(options?: { targetProductId })
+const track = useMixpanelTrackingFunction(options?: { productId?, targetProductId? })
 ```
 
 ### Parameters
 
 - `options`: An optional object literal of options:
-    - `targetProductId`: The product id of the target product. Useful to track an event for another product.
+    - `productId`: An optional product id.
+    - `targetProductId`: An optional product id of the target product. Useful to track an event for another product.
 
 ### Returns
 
@@ -41,6 +42,22 @@ The body size for keepalive requests is [limited to 64 kibibytes](https://develo
 import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 
 const track = useMixpanelTrackingFunction();
+
+track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
+```
+
+### Specific a product id
+
+To track an action targeting a specific product, use the `productId` option:
+
+```ts !#6
+import { useMixpanelClient } from "@workleap/telemetry/react";
+
+const client = useMixpanelClient();
+
+const track = client.createTrackingFunction({
+    productId: "wlp"
+});
 
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```

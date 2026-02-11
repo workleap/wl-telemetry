@@ -394,7 +394,7 @@ import { registerHoneycombInstrumentation, createTelemetryContext } from "@workl
 const telemetryContext = createTelemetryContext();
 
 const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
-    proxy: "https://sample-proxy"
+    telemetryContext
 });
 ```
 
@@ -663,9 +663,9 @@ const telemetryContext = createTelemetryContext(options?: { identityCookieExpira
 
 #### Parameters
 
+- `productFamily`: `wlp` or `sg`.
 - `options`: An optional object literal of options:
     - `identityCookieExpiration`: The expiration date of the `wl-identity` cookie if the cookie hasn't been already written. The default value is 365 days.
-    - `identityCookieDomain`: The domain of the `wl-identity` cookie if the cookie hasn't been already written. The default value is `*.workleap`
     - `verbose`: If no loggers are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `Logger` instances.
 
@@ -678,7 +678,7 @@ A `TelemetryContext` instance.
 ```ts !#3
 import { createTelemetryContext } from "@workleap/honeycomb/react";
 
-const context = createTelemetryContext();
+const context = createTelemetryContext("sg");
 ```
 
 #### Set a custom cookie expiration
@@ -686,18 +686,8 @@ const context = createTelemetryContext();
 ```ts !#4
 import { createTelemetryContext } from "@workleap/honeycomb/react";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("wlp", {
     identityCookieExpiration: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
-});
-```
-
-#### Set a custom cookie domain
-
-```ts !#4
-import { createTelemetryContext } from "@workleap/honeycomb/react";
-
-const context = createTelemetryContext({
-    identityCookieDomain: ".contso.com";
 });
 ```
 
@@ -706,7 +696,7 @@ const context = createTelemetryContext({
 ```ts !#4
 import { createTelemetryContext } from "@workleap/honeycomb/react";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("wlp", {
     verbose: true
 });
 ```
@@ -717,7 +707,7 @@ const context = createTelemetryContext({
 import { createTelemetryContext, LogRocketLogger } from "@workleap/honeycomb/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("sg", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```

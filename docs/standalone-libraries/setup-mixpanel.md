@@ -31,7 +31,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-const client = initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("development", {
     telemetryContext: createTelemetryContext()
 });
 
@@ -113,7 +113,7 @@ import { App } from "./App.tsx";
 
 const logRocketInstrumentationClient = registerLogRocketInstrumentation("my-app-id");
 
-const mixpanelClient = initializeMixpanel("wlp", "development", {
+const mixpanelClient = initializeMixpanel("development", {
     telemetryContext: createTelemetryContext(),
     logRocketInstrumentationClient
 });
@@ -163,9 +163,9 @@ const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: 
 
 #### Parameters
 
-- `productId`: The product id.
 - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL.
 - `options`: An optional object literal of options:
+    - `productId`: An optional product id.
     - `trackingEndpoint`: An optional tracking endpoint.
     - `telemetryContext`: A `TelemetryContext` instance containing the telemetry correlation ids to attach to Honeycomb traces.
     - `logRocketInstrumentationClient`: A `LogRocketInstrumentationClient` instance to integrate Honeycomb traces with LogRocket session replays.
@@ -193,7 +193,7 @@ Mixpanel can be initialized for any of the following predefined environments:
 ```ts !#3
 import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development");
+const client = initializeMixpanel("development");
 ```
 
 #### Initialize with a base url
@@ -201,7 +201,17 @@ const client = initializeMixpanel("wlp", "development");
 ```ts !#3
 import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "https://my-tracking-api");
+const client = initializeMixpanel("https://my-tracking-api");
+```
+
+#### Initialize with a product id
+
+```ts !#4
+import { initializeMixpanel } from "@workleap/mixpanel/react";
+
+const client = initializeMixpanel("development", {
+    productId: "wlp"
+});
 ```
 
 #### Use a custom tracking endpoint
@@ -209,7 +219,7 @@ const client = initializeMixpanel("wlp", "https://my-tracking-api");
 ```ts !#4
 import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("development", {
     trackingEndpoint: "custom/tracking/track"
 });
 ```
@@ -221,7 +231,7 @@ import { initializeMixpanel, createTelemetryContext } from "@workleap/mixpanel/r
 
 const telemetryContext = createTelemetryContext();
 
-const client = initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("development", {
     telemetryContext
 });
 ```
@@ -234,7 +244,7 @@ import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
 
 const logRocketInstrumentationClient = registerLogRocketInstrumentation("my-app-id");
 
-const client = initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("development", {
     logRocketInstrumentationClient
 });
 ```
@@ -244,7 +254,7 @@ const client = initializeMixpanel("wlp", "development", {
 ```ts !#4
 import { initializeMixpanel } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("development", {
     verbose: true
 });
 ```
@@ -256,7 +266,7 @@ import { initializeMixpanel } from "@workleap/mixpanel/react";
 import { LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-const client = initializeMixpanel("wlp", "development", {
+const client = initializeMixpanel("development", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
@@ -266,7 +276,7 @@ const client = initializeMixpanel("wlp", "development", {
 A lightweight client providing access to Mixpanel utilities.
 
 ```ts
-const client = new MixpanelClient(productId, endpoint, superProperties, logger);
+const client = new MixpanelClient(endpoint, superProperties, logger, options?);
 ```
 
 #### Parameters
@@ -275,10 +285,12 @@ const client = new MixpanelClient(productId, endpoint, superProperties, logger);
 - `endpoint`: The Mixpanel endpoint URL.
 - `globalProperties`: Properties to attach to all events.
 - `logger`: A `Logger` instance.
+- `options`: An optional object literal of options:
+    - `productId`: An optional product id.
 
 #### Methods
 
-- `createTrackingFunction(options?: { targetProductId? })`: Returns a [TrackingFunction](#trackingfunction) function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
+- `createTrackingFunction(options?: { productId?, targetProductId? })`: Returns a [TrackingFunction](#trackingfunction) function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
 - `setGlobalProperty(key, value)`: Set a single global property that will be attached to all events.
 - `setGlobalProperties(values)`: Set one or multiple global properties that will be attached to all events.
 
@@ -303,6 +315,22 @@ import { useMixpanelClient } from "@workleap/mixpanel/react";
 const client = useMixpanelClient();
 
 const track = client.createTrackingFunction();
+
+track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
+```
+
+#### Specify a product id
+
+To track an action targeting a specific product, use the `productId` option:
+
+```ts !#6
+import { useMixpanelClient } from "@workleap/mixpanel/react";
+
+const client = useMixpanelClient();
+
+const track = client.createTrackingFunction({
+    productId: "wlp"
+});
 
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
@@ -382,7 +410,7 @@ import { initializeMixpanel, MixpanelProvider } from "@workleap/mixpanel/react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-const client = initializeMixpanel("wlp", "development");
+const client = initializeMixpanel("development");
 
 const root = createRoot(document.getElementById("root"));
 
@@ -398,7 +426,7 @@ root.render(
 ```ts !#3
 import { useMixpanelClient } from "@workleap/mixpanel/react";
 
-const client = initializeMixpanel("wlp", "development");
+const client = initializeMixpanel("development");
 
 client.setGlobalEventProperties({
     "User Id": "123"
@@ -439,13 +467,14 @@ client.setGlobalEventProperties({
 Returns a function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
 
 ```ts
-const track = useTrackingFunction(options?: { targetProductId })
+const track = useTrackingFunction(options?: { productId?, targetProductId? })
 ```
 
 #### Parameters
 
 - `options`: An optional object literal of options:
-    - `targetProductId`: The product id of the target product. Useful to track an event for another product.
+    - `productId`: An optional product id.
+    - `targetProductId`: An optional product id of the target product. Useful to track an event for another product.
 
 #### Returns
 
@@ -466,6 +495,20 @@ The body size for keepalive requests is [limited to 64 kibibytes](https://develo
 import { useTrackingFunction } from "@workleap/mixpanel/react";
 
 const track = useTrackingFunction();
+
+track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
+```
+
+#### Specify a product id
+
+To track an action targeting a specific product, use the `productId` option:
+
+```ts !#4
+import { useTrackingFunction } from "@workleap/mixpanel/react";
+
+const track = useTrackingFunction({
+    productId: "wlp"
+});
 
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
@@ -503,14 +546,14 @@ track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
 Creates a `TelemetryContext` instance containing the telemetry correlation ids.
 
 ```ts
-const telemetryContext = createTelemetryContext(options?: { identityCookieExpiration?, identityCookieDomain?, verbose?, loggers? })
+const telemetryContext = createTelemetryContext(productFamily, options?: { identityCookieExpiration?, verbose?, loggers? })
 ```
 
 #### Parameters
 
+- `productFamily`: `wlp` or `sg`.
 - `options`: An optional object literal of options:
     - `identityCookieExpiration`: The expiration date of the `wl-identity` cookie if the cookie hasn't been already written. The default value is 365 days.
-    - `identityCookieDomain`: The domain of the `wl-identity` cookie if the cookie hasn't been already written. The default value is `*.workleap`
     - `verbose`: If no loggers are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `Logger` instances.
 
@@ -523,7 +566,7 @@ A `TelemetryContext` instance.
 ```ts !#3
 import { createTelemetryContext } from "@workleap/mixpanel/react";
 
-const context = createTelemetryContext();
+const context = createTelemetryContext("sg");
 ```
 
 #### Set a custom cookie expiration
@@ -531,18 +574,8 @@ const context = createTelemetryContext();
 ```ts !#4
 import { createTelemetryContext } from "@workleap/mixpanel/react";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("wlp", {
     identityCookieExpiration: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
-});
-```
-
-#### Set a custom cookie domain
-
-```ts !#4
-import { createTelemetryContext } from "@workleap/mixpanel/react";
-
-const context = createTelemetryContext({
-    identityCookieDomain: ".contso.com";
 });
 ```
 
@@ -551,7 +584,7 @@ const context = createTelemetryContext({
 ```ts !#4
 import { createTelemetryContext } from "@workleap/mixpanel/react";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("sg", {
     verbose: true
 });
 ```
@@ -562,7 +595,7 @@ const context = createTelemetryContext({
 import { createTelemetryContext, LogRocketLogger } from "@workleap/mixpanel/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("wlp", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```

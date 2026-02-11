@@ -11,7 +11,7 @@ A lightweight client providing access to Mixpanel utilities.
 
 ### Methods
 
-- `createTrackingFunction(options?: { targetProductId? })`: Returns a [TrackingFunction](#tracking-function) function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
+- `createTrackingFunction(options?: { productId?, targetProductId? })`: Returns a [TrackingFunction](#tracking-function) function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
 - `setGlobalProperty(key, value)`: Set a single global property that will be attached to all events.
 - `setGlobalProperties(values)`: Set one or multiple global properties that will be attached to all events.
 
@@ -41,6 +41,26 @@ const track = client.createTrackingFunction();
 
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
+
+### Specific a product id
+
+To track an action targeting a specific product, use the `productId` option:
+
+```ts !#6
+import { useMixpanelClient } from "@workleap/telemetry/react";
+
+const client = useMixpanelClient();
+
+const track = client.createTrackingFunction({
+    productId: "wlp"
+});
+
+track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
+```
+
+!!!tip
+If a `productId` is provided both to [initializeTelemetry](./initializeTelemetry.md#parameters) and as an option to `createTrackingFunction`, the value passed to `createTrackingFunction` takes precedence.
+!!!
 
 ### Specify a target product
 

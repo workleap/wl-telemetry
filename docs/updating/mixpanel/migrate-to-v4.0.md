@@ -45,7 +45,7 @@ initializeMixpanel("development", {
 
 ### New `productId` option for `createTrackingFunction`
 
-A Mixpanel client [createTrackingFunction](../../standalone-libraries/setup-mixpanel.md#create-a-track-function) instance now accept a `productId` as an option:
+A Mixpanel instrumentation client [createTrackingFunction](../../standalone-libraries/setup-mixpanel.md#create-a-track-function) instance now accept a `productId` as an option:
 
 ```ts !#6
 const client = initializeMixpanel("development", {

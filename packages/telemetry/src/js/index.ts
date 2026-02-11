@@ -17,6 +17,8 @@ export {
     type GetLogRocketSessionUrlListener,
     type LogRocketInstrumentationClient,
     type LogRocketSdkOptionsTransformer,
+    type LogRocketShareGateIdentification,
+    type LogRocketShareGateUserTraits,
     type LogRocketWorkleapPlatformIdentification,
     type LogRocketWorkleapPlatformUserTraits,
     type RegisterLogRocketInstrumentationOptions

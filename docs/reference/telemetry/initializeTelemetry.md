@@ -15,7 +15,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
 
 ### Parameters
 
-- `productFamily`: The family of Workleap products.
+- `productFamily`: `wlp` or `sg`.
 - `options`: An optional object literal of options:
     - `logRocket`: An optional LogRocket instrumentation registration options object. If provided, LogRocket instrumentation is registered, if omitted, it is skipped.
         - `appId`: The LogRocket application id.
@@ -39,9 +39,9 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
             - `userInteractionInstrumentation`: By default, [@opentelemetryinstrumentation-user-interaction](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-user-interaction) is disabled. To enable this instrumentation, provide a function that returns an object literal with the desired options. This function will receive an object literal of default options, which you can extend or replace as needed.
             - `transformers`: An array of transformer functions to update the default Honeycomb options.
     - `mixpanel`: An optional Mixpanel initialization options object. If provided, Mixpanel is initialized, if omitted, it is skipped.
-        - `productId`: The product id.
         - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL.
         - `options`: An optional object literal of options:
+            - `productId`: The product id.
             - `trackingEndpoint`: An optional tracking endpoint.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.
@@ -52,7 +52,7 @@ A [TelemetryClient](./TelemetryClient.md) instance.
 
 ## Initialize all telemetry platforms
 
-```ts !#4-18
+```ts !#4-17
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
 const client = initializeTelemetry("sg", {
@@ -68,7 +68,6 @@ const client = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     }
 });
@@ -482,12 +481,11 @@ const debugTransformer: HoneycombSdkOptionsTransformer = (config, context) => {
 
 ### Initialize with a predefined environment
 
-```ts !#6
+```ts !#5
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
 const client = initializeTelemetry("sg", {
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     }
 });
@@ -495,25 +493,38 @@ const client = initializeTelemetry("sg", {
 
 ### Initialize with a base url
 
-```ts !#6
+```ts !#5
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
 const client = initializeTelemetry("wlp", {
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "https://my-tracking-api"
+    }
+});
+```
+
+### Initialize with a product id
+
+```ts !#7
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry("wlp", {
+    mixpanel: {
+        envOrTrackingApiBaseUrl: "https://my-tracking-api",
+        options: {
+            productId: "wlp"
+        }
     }
 });
 ```
 
 ### Use a custom tracking endpoint
 
-```ts !#8
+```ts !#7
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
 const client = initializeTelemetry("sg", {
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development",
         options: {
             trackingEndpoint: "custom/tracking/track"
@@ -524,7 +535,7 @@ const client = initializeTelemetry("sg", {
 
 ## Verbose mode
 
-```ts !#19
+```ts !#18
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
 const client = initializeTelemetry("wlp", {
@@ -540,7 +551,6 @@ const client = initializeTelemetry("wlp", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     verbose: true
@@ -549,7 +559,7 @@ const client = initializeTelemetry("wlp", {
 
 ## Use loggers
 
-```ts !#20
+```ts !#19
 import { initializeTelemetry, LogRocketLogger } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
@@ -566,7 +576,6 @@ const client = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]

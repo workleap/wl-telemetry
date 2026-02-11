@@ -12,6 +12,7 @@ A lightweight client providing access to LogRocket instrumentation utilities.
 ### Methods
 
 - `createWorkleapPlatformDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for the Workleap platform.
+- `createShareGateDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for ShareGate.
 - `registerGetSessionUrlListener(listener)`: Registers a listener that receives the session replay URL as a parameter once it becomes available. Host applications should use [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) instead of this method.
 
 ## Usage
@@ -92,6 +93,46 @@ Is Executive - Officevibe<br/>Is Executive - LMS<br/>Is Executive - Onboarding<b
 Is Collaborator | `true` if this user is a collaborator in any product in the current workspace.
 Is Collaborator - Officevibe<br/>Is Collaborator - LMS<br />Is Collaborator - Onboarding<br/>Is Collaborator - Pingboard<br/>Is Collaborator - Skills<br/>Is Collaborator - Performance | `true` if this user is a collaborator in the corresponding product in the current workspace.
 Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan Code - Pingboard<br/>Plan Code - Skills<br/>Plan Code - Performance | <p>Indicates the plan code for the corresponding product in the workspace.</p><p>ex. `wov-essential-monthly-std`</p>
+
+### Get default user traits for ShareGate
+
+```ts !#6-11
+import { useLogRocketInstrumentationClient } from "@workleap/telemetry/react";
+import LogRocket from "logrocket";
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createShareGateDefaultUserTraits({
+    shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
+    microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
+    microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
+    workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
+});
+
+Logrocket.identify(traits.shareGateAccountId, traits);
+```
+
+#### Parameters
+
+- `identification`: tbd
+    - `shareGateAccountId`: A value that uniquely identifies the current ShareGate account.
+    - `microsoftUserId`: The id of the user Microsoft account.
+    - `microsoftTenantId`: The id of the user Microsoft tenant.
+    - `workspaceId`: The id of the workspace the user belongs to.
+    - `isInPartnerProgram`: An optional value indicating whether or not the user is in ShareGate partner program.
+
+#### Returns
+
+An object including the default user traits matching the provided identification values:
+
+{.user-traits-table}
+User Trait Name | Description
+---  | ---
+ShareGate Account Id | A value that uniquely identifies the current ShareGate account.
+Microsoft User Id | The id of the user Microsoft account.
+Microsoft Tenant Id | The id of the user Microsoft tenant.
+Workspace Id | The id of the workspace the user belongs to.
+Is In Partner Program | `true` if this user is in ShareGate partner program.
 
 ### Send additional traits
 

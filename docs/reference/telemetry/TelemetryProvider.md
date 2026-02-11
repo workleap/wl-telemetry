@@ -25,7 +25,7 @@ React provider to share a `TelemetryClient` instance with the application code.
 
 ### Provide a client instance
 
-```tsx !#26,28
+```tsx !#25,27
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -43,7 +43,6 @@ const client = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     }
 });

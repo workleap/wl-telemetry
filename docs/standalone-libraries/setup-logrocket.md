@@ -46,9 +46,9 @@ root.render(
 );
 ```
 
-## Identify a user
+## Identify a Workleap Platform user
 
-Most applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](#logrocketinstrumentationclient) expose the [createWorkleapPlatformDefaultUserTraits](#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
+Most Workleap Platform applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](#logrocketinstrumentationclient) expose the [createWorkleapPlatformDefaultUserTraits](#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
 
 ```tsx index.tsx
 import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
@@ -87,6 +87,47 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 });
 
 LogRocket.identify(traits.userId, traits);
+```
+
+## Identify a ShareGate user
+
+Most ShareGate applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](#logrocketinstrumentationclient) expose the [createShareGateDefaultUserTraits](#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
+
+```tsx index.tsx
+import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { App } from "./App.tsx";
+
+const client = registerLogRocketInstrumentation("my-app-id", {
+    telemetryContext: createTelemetryContext()
+});
+
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
+    <StrictMode>
+        <LogRocketInstrumentationProvider client={client}>
+            <App />
+        </LogRocketInstrumentationProvider>
+    </StrictMode>
+);
+```
+
+```ts !#6-11,13
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
+import LogRocket from "logrocket";
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createWorkleapPlatformDefaultUserTraits({
+    shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
+    microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
+    microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
+    workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
+});
+
+LogRocket.identify(traits.shareGateAccountId, traits);
 ```
 
 ## Get the session URL
@@ -273,6 +314,7 @@ const client = new LogRocketInstrumentationClientImpl(telemetryContext?)
 #### Methods
 
 - `createWorkleapPlatformDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for the Workleap platform.
+- `createShareGateDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for ShareGate.
 - `registerGetSessionUrlListener(listener)`: Registers a listener that receives the session replay URL as a parameter once it becomes available. Host applications should use [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) instead of this method.
 
 #### Get default user traits for the Workleap platform
@@ -293,6 +335,24 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 });
 
 Logrocket.identify(traits.userId, traits);
+```
+
+#### Get default user traits for ShareGate
+
+```ts !#6-11
+import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
+import LogRocket from "logrocket";
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createShareGateDefaultUserTraits({
+    shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
+    microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
+    microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
+    workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
+});
+
+Logrocket.identify(traits.shareGateAccountId, traits);
 ```
 
 #### Send additional traits
@@ -426,13 +486,8 @@ import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 
 const client = useLogRocketInstrumentationClient();
 
-const traits = client.createWorkleapPlatformDefaultUserTraits({
-    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
-    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
-    organizationName: "Acme",
-    isMigratedToWorkleap: true,
-    isOrganizationCreator: false,
-    isAdmin: false
+client.registerGetSessionUrlListener(sessionUrl => {
+    console.log(sessionUrl);
 });
 ```
 
@@ -460,13 +515,8 @@ import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 
 const client = useLogRocketInstrumentationClient();
 
-const traits = client.createWorkleapPlatformDefaultUserTraits({
-    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
-    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
-    organizationName: "Acme",
-    isMigratedToWorkleap: true,
-    isOrganizationCreator: false,
-    isAdmin: false
+client.registerGetSessionUrlListener(sessionUrl => {
+    console.log(sessionUrl);
 });
 ```
 
@@ -503,14 +553,14 @@ client.registerGetSessionUrlListener(sessionUrl => {
 Creates a `TelemetryContext` instance containing the telemetry correlation ids.
 
 ```ts
-const telemetryContext = createTelemetryContext(options?: { identityCookieExpiration?, identityCookieDomain?, verbose?, loggers? });
+const telemetryContext = createTelemetryContext(productFamily, options?: { identityCookieExpiration?, verbose?, loggers? });
 ```
 
 #### Parameters
 
+- `productFamily`: `wlp` or `sg`.
 - `options`: An optional object literal of options:
     - `identityCookieExpiration`: The expiration date of the `wl-identity` cookie if the cookie hasn't been already written. The default value is 365 days.
-    - `identityCookieDomain`: The domain of the `wl-identity` cookie if the cookie hasn't been already written. The default value is `*.workleap`
     - `verbose`: If no loggers are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `Logger` instances.
 
@@ -523,7 +573,7 @@ A `TelemetryContext` instance.
 ```ts !#3
 import { createTelemetryContext } from "@workleap/logrocket/react";
 
-const context = createTelemetryContext();
+const context = createTelemetryContext("sg");
 ```
 
 #### Set a custom cookie expiration
@@ -531,18 +581,8 @@ const context = createTelemetryContext();
 ```ts !#4
 import { createTelemetryContext } from "@workleap/logrocket/react";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("wlp", {
     identityCookieExpiration: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
-});
-```
-
-#### Set a custom cookie domain
-
-```ts !#4
-import { createTelemetryContext } from "@workleap/logrocket/react";
-
-const context = createTelemetryContext({
-    identityCookieDomain: ".contso.com";
 });
 ```
 
@@ -551,7 +591,7 @@ const context = createTelemetryContext({
 ```ts !#4
 import { createTelemetryContext } from "@workleap/logrocket/react";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("sg", {
     verbose: true
 });
 ```
@@ -562,7 +602,7 @@ const context = createTelemetryContext({
 import { createTelemetryContext, LogRocketLogger } from "@workleap/logrocket/react";
 import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
 
-const context = createTelemetryContext({
+const context = createTelemetryContext("wlp", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```

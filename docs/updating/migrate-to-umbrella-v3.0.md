@@ -61,6 +61,22 @@ const telemetryClient = initializeTelemetry("wlp", {
 });
 ```
 
+### `createTelemetryContext` now requires a `productFamily` argument
+
+The `createTelemetryContext` function signature has been updated to introduce a `productFamily` argument as the first parameter.
+
+Before:
+
+```ts
+const context = createTelemetryContext();
+```
+
+After:
+
+```ts !#1
+const context = createTelemetryContext("sg");
+```
+
 ## Improvements
 
 ### New `productId` option for `createTrackingFunction`
@@ -90,6 +106,14 @@ const track = useMixpanelTrackingFunction({
     productId: "wlp"
 });
 ```
+
+### New `createShareGateDefaultUserTraits` function
+
+The 
+
+### Use proper identity cookie domain for ShareGate
+
+When the product family is `sg`, the domain of the identity cookie will be `.sharegate.com` rather than `.workleap.com`.
 
 
 
