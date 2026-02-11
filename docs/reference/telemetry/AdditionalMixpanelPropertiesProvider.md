@@ -47,12 +47,13 @@ function App() {
 
 ### Track an event with additional properties
 
-```tsx !#9,13
+```tsx !#10,14
 import { AdditionalMixpanelPropertiesProvider, useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 import { useEffect } from "react";
 
 const AdditionalProperties = {
-    foo: "bar"
+    foo: "bar",
+    john: "doe"
 };
 
 function ComponentWithTracking() {
