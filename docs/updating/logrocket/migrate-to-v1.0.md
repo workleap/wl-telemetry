@@ -71,7 +71,7 @@ registerLogRocketInstrumentation({
 });
 ```
 
-After:
+Now:
 
 ```ts
 import { registerLogRocketInstrumentation, createDefaultUserTraits } from "@workleap/logrocket";
@@ -116,7 +116,7 @@ registerAnonymousLogRocketInstrumentation({
 });
 ```
 
-After:
+Now:
 
 ```ts
 import { registerLogRocketInstrumentation } from "@workleap/logrocket";

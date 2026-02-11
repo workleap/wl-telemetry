@@ -32,13 +32,29 @@ initializeMixpanel("wlp", "development", {
 });
 ```
 
-After:
+Now:
 
 ```ts !#2
 initializeMixpanel("development", {
     productId: "wlp",
     telemetryContext: createTelemetryContext()
 });
+```
+
+### `createTelemetryContext` now requires a `productFamily` argument
+
+The `createTelemetryContext` function signature has been updated to introduce a `productFamily` argument as the first parameter.
+
+Before:
+
+```ts
+const context = createTelemetryContext();
+```
+
+Now:
+
+```ts !#1
+const context = createTelemetryContext("sg");
 ```
 
 ## Improvements

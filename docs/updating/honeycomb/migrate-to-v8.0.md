@@ -19,5 +19,21 @@ This major version remove the global variables deprecated in [v7.0](./migrate-to
 - The `window.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK__` global variable have been removed. Instead, provide a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) instance to the third-party libraries.
 - The `window.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK_AT_START__` global variable have been removed. Instead, provide a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) instance to the third-party libraries.
 
+### `createTelemetryContext` now requires a `productFamily` argument
+
+The `createTelemetryContext` function signature has been updated to introduce a `productFamily` argument as the first parameter.
+
+Before:
+
+```ts
+const context = createTelemetryContext();
+```
+
+Now:
+
+```ts !#1
+const context = createTelemetryContext("sg");
+```
+
 
 

@@ -23,7 +23,7 @@ Before:
 const track = buildTrackingFunction(productId, targetProductIdentifier, environmentVariables.navigationApiBaseUrl);
 ```
 
-After:
+Now:
 
 ```ts
 const track = createTrackingFunction(productId, "development", {

@@ -30,7 +30,7 @@ const track = createTrackingFunction("wlp", "development", {
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
 
-After:
+Now:
 
 ```ts
 import { initializeMixpanel, createTrackingFunction } from "@workleap/mixpanel";

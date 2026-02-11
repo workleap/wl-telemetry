@@ -23,7 +23,7 @@ This major version remove the global variables deprecated in the previous versio
 
 ### `initializeTelemetry` requires a `productFamily` argument
 
-With the addition of ShareGate to this library, a way to distinguish whether the consumer is a Workleap Platform or a ShareGate application is now required. This is the purpose of the new [productFamily]() argument of the [initializeTelemetry]() function:
+With the addition of ShareGate to this library, a way to distinguish whether the consumer is a Workleap Platform or a ShareGate application is now required. This is the purpose of the new [productFamily](../reference/telemetry/initializeTelemetry.md#parameters) argument of the [initializeTelemetry](../reference/telemetry/initializeTelemetry.md) function:
 
 ```ts
 initializeTelemetry("sg", {
@@ -33,7 +33,7 @@ initializeTelemetry("sg", {
 
 ### Mixpanel `productId` is now an option
 
-The [initializeTelemetry]() function `mixpanel.productId` has been moved as an option.
+The [initializeTelemetry](../reference/telemetry/initializeTelemetry.md) function `mixpanel.productId` has been moved as an option.
 
 Previously, it made sense for `productId` to be a required argument because all WLP products were single-product applications, and the product identifier was known at initialization time. This is not the case for all ShareGate applications.
 
@@ -48,7 +48,7 @@ initializeTelemetry("wlp", {
 });
 ```
 
-After:
+Now:
 
 ```ts !#5
 const telemetryClient = initializeTelemetry("wlp", {
@@ -71,7 +71,7 @@ Before:
 const context = createTelemetryContext();
 ```
 
-After:
+Now:
 
 ```ts !#1
 const context = createTelemetryContext("sg");
@@ -109,11 +109,20 @@ const track = useMixpanelTrackingFunction({
 
 ### New `createShareGateDefaultUserTraits` function
 
-The 
+The LogRocket instrumentation client have a new [createShareGateDefaultUserTraits](../reference/telemetry/LogRocketInstrumentationClient.md#get-default-user-traits-for-sharegate) method:
+
+```ts
+const traits = client.createShareGateDefaultUserTraits({
+    shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
+    microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
+    microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
+    workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
+});
+```
 
 ### Use proper identity cookie domain for ShareGate
 
-When the product family is `sg`, the domain of the identity cookie will be `.sharegate.com` rather than `.workleap.com`.
+When the product family is `sg`, the domain of the identity cookie is now `.sharegate.com` instead of `.workleap.com`.
 
 
 
