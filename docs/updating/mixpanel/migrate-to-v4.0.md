@@ -3,6 +3,8 @@ order: 180
 label: Migrate to v4.0
 meta:
     title: Migrate to v4.0 - Mixpanel
+toc:
+    depth: 2-3
 ---
 
 # Migrate to v4.0
@@ -15,3 +17,46 @@ This major version remove the global variables deprecated in [v3.0](./migrate-to
 
 - The `createTrackingFunction` has been removed, use the client [createTrackingFunction](../../reference/telemetry/MixpanelClient.md#methods) method instead.
 - The `window.__WLP_MIXPANEL_IS_INITIALIZED__` global variable have been removed. Instead, provide a [client](../../reference/telemetry/MixpanelClient.md) instance to the third-party libraries.
+
+### `productId` is now an option of `initializeMixpanel`
+
+The [initializeMixpanel](../../standalone-libraries/setup-mixpanel.md#initialize-mixpanel) function no longuer accept `productId` as it's first argument, it is now provided as an option.
+
+Previously, it made sense for `productId` to be a required argument because all WLP products were single-product applications, and the product identifier was known at initialization time. This is not the case for all ShareGate applications.
+
+Before:
+
+```ts
+initializeMixpanel("wlp", "development", {
+    telemetryContext: createTelemetryContext()
+});
+```
+
+After:
+
+```ts !#2
+initializeMixpanel("development", {
+    productId: "wlp",
+    telemetryContext: createTelemetryContext()
+});
+```
+
+## Improvements
+
+### New `productId` option for `createTrackingFunction`
+
+A Mixpanel client [createTrackingFunction](../../standalone-libraries/setup-mixpanel.md#create-a-track-function) instance now accept a `productId` as an option:
+
+```ts !#6
+const client = initializeMixpanel("development", {
+    telemetryContext: createTelemetryContext()
+});
+
+const track = client.createTrackingFunction({
+    productId: "wlp"
+});
+```
+
+If a `productId` is provided both during initialization and as an option to `createTrackingFunction`, the value passed to `createTrackingFunction` takes precedence.
+
+

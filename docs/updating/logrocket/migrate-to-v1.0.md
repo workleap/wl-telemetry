@@ -3,6 +3,8 @@ order: 200
 label: Migrate to v1.0
 meta:
     title: Migrate to v1.0 - LogRocket
+toc:
+    depth: 2-3
 ---
 
 # Migrate to v1.0

@@ -3,6 +3,8 @@ order: 180
 label: Migrate to v8.0
 meta:
     title: Migrate to v8.0 - Honeycomb
+toc:
+    depth: 2-3
 ---
 
 # Migrate to v8.0

@@ -3,6 +3,8 @@ order: 190
 label: Migrate to v2.0
 meta:
     title: Migrate to v2.0 - Mixpanel
+toc:
+    depth: 2-3
 ---
 
 # Migrate to v2.0

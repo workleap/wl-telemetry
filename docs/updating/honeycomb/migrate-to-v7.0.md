@@ -3,6 +3,8 @@ order: 190
 label: Migrate to v7.0
 meta:
     title: Migrate to v7.0 - Honeycomb
+toc:
+    depth: 2-3
 ---
 
 # Migrate to v7.0
