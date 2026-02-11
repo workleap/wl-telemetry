@@ -1,11 +1,11 @@
 ---
 order: 190
-label: Migrate to the umbrella v3.0
+label: Migrate to umbrella v3.0
 toc:
     depth: 2-3
 ---
 
-# Migrate to the umbrella v3.0
+# Migrate to umbrella v3.0
 
 This major version remove the global variables deprecated in the previous versions of the standalone libraries and introduce a `productFamily` argument.
 
