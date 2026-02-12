@@ -1,5 +1,17 @@
 # @workleap/mixpanel
 
+## 5.0.0
+
+### Major Changes
+
+- [#150](https://github.com/workleap/wl-telemetry/pull/150) [`133e534`](https://github.com/workleap/wl-telemetry/commit/133e53429453d821086574789e29437001a3c0d5) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Remove deprecated global variables and functions. Updated `initializeMixpanel` signature with breaking changes. View [migration documentation](https://workleap.github.io/wl-telemetry/updating/mixpanel/migrate-to-v4.0/).
+
+### Patch Changes
+
+- Updated dependencies [[`133e534`](https://github.com/workleap/wl-telemetry/commit/133e53429453d821086574789e29437001a3c0d5), [`133e534`](https://github.com/workleap/wl-telemetry/commit/133e53429453d821086574789e29437001a3c0d5)]:
+  - @workleap-telemetry/core@2.0.0
+  - @workleap/logrocket@3.0.0
+
 ## 4.0.9
 
 ### Patch Changes
