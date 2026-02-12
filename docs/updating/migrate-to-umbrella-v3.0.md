@@ -120,6 +120,24 @@ const traits = client.createShareGateDefaultUserTraits({
 });
 ```
 
+### New `MixpanelPropertiesProvider`
+
+A new [MixpanelPropertiesProvider](../reference/telemetry/MixpanelPropertiesProvider.md) is available to define scoped Mixpanel properties. These properties are automatically attached to every event tracked by components nested within the provider.
+
+```tsx !#7,9
+const MixpanelProperties = {
+    section: "User Form"
+};
+
+function App() {
+    return (
+        <MixpanelPropertiesProvider value={MixpanelProperties}>
+            <NestedComponent />
+        </MixpanelPropertiesProvider>
+    )
+}
+```
+
 ### Use proper identity cookie domain for ShareGate
 
 When the product family is `sg`, the domain of the identity cookie is now `.sharegate.com` instead of `.workleap.com`.

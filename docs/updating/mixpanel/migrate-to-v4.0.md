@@ -75,4 +75,22 @@ const track = client.createTrackingFunction({
 
 If a `productId` is provided both during initialization and as an option to `createTrackingFunction`, the value passed to `createTrackingFunction` takes precedence.
 
+### New `MixpanelPropertiesProvider`
+
+A new [MixpanelPropertiesProvider](../../standalone-libraries/mixpanel/reference.md#mixpanelpropertiesprovider) is available to define scoped Mixpanel properties. These properties are automatically attached to every event tracked by components nested within the provider.
+
+```tsx !#7,9
+const MixpanelProperties = {
+    section: "User Form"
+};
+
+function App() {
+    return (
+        <MixpanelPropertiesProvider value={MixpanelProperties}>
+            <NestedComponent />
+        </MixpanelPropertiesProvider>
+    )
+}
+```
+
 

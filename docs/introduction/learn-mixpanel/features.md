@@ -101,7 +101,7 @@ Now, every event recorded after the execution of `setGlobalEventProperties` will
 
 ## Define scoped properties
 
-If you want to scope custom properties to a specific section of the application, wrap it with the [MixpanelPropertiesProvider](../../reference/telemetry/MixpanelPropertiesProvider.md). Define the provider with a static object of Mixpanel properties, and all nested components using track will automatically append those properties to their events:
+To scope custom properties to a specific section of the application, wrap it with a [MixpanelPropertiesProvider](../../reference/telemetry/MixpanelPropertiesProvider.md). Define the provider with a **static object** of Mixpanel properties, and all nested components tracking Mixpanel with a track function created by the [useMixpanelTrackingFunction](../../reference/telemetry/useMixpanelTrackingFunction.md) hook will automatically append those properties to their events:
 
 ```tsx !#10,12
 import { MixpanelPropertiesProvider } from "@workleap/telemetry/react";
