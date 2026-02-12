@@ -8,9 +8,8 @@
 4. [User Identification](#user-identification)
 5. [Custom Honeycomb Traces](#custom-honeycomb-traces)
 6. [Mixpanel Event Tracking](#mixpanel-event-tracking)
-7. [Scoped Mixpanel Properties](#scoped-mixpanel-properties)
-8. [Logging Configuration](#logging-configuration)
-9. [Troubleshooting Setup](#troubleshooting-setup)
+7. [Logging Configuration](#logging-configuration)
+8. [Troubleshooting Setup](#troubleshooting-setup)
 
 ---
 
@@ -22,7 +21,7 @@
 // telemetry.ts
 import { initializeTelemetry } from "@workleap/telemetry/react";
 
-export const telemetryClient = initializeTelemetry("sg", {
+export const telemetryClient = initializeTelemetry({
   logRocket: {
     appId: "your-org/your-app"
   },
@@ -35,6 +34,7 @@ export const telemetryClient = initializeTelemetry("sg", {
     }
   },
   mixpanel: {
+    productId: "wlp",
     envOrTrackingApiBaseUrl: "production"
   }
 });
@@ -57,7 +57,7 @@ export function App() {
 ### Honeycomb Only
 
 ```typescript
-const telemetryClient = initializeTelemetry("wlp", {
+const telemetryClient = initializeTelemetry({
   honeycomb: {
     namespace: "your-team",
     serviceName: "your-app",
@@ -72,7 +72,7 @@ const telemetryClient = initializeTelemetry("wlp", {
 ### LogRocket Only
 
 ```typescript
-const telemetryClient = initializeTelemetry("sg", {
+const telemetryClient = initializeTelemetry({
   logRocket: {
     appId: "your-org/your-app"
   }
@@ -82,8 +82,9 @@ const telemetryClient = initializeTelemetry("sg", {
 ### Mixpanel Only
 
 ```typescript
-const telemetryClient = initializeTelemetry("wlp", {
+const telemetryClient = initializeTelemetry({
   mixpanel: {
+    productId: "wlp",
     envOrTrackingApiBaseUrl: "production"
   }
 });
@@ -96,46 +97,40 @@ const telemetryClient = initializeTelemetry("wlp", {
 ### Storybook Decorator
 
 ```typescript
-// withTelemetryProvider.tsx
+// .storybook/preview.tsx
 import { NoopTelemetryClient, TelemetryProvider } from "@workleap/telemetry/react";
-import type { Decorator } from "storybook-react-rsbuild";
+import type { Decorator } from "@storybook/react";
 
 const telemetryClient = new NoopTelemetryClient();
 
-export const withTelemetryProvider: Decorator = (Story) => (
+export const withTelemetry: Decorator = (Story) => (
   <TelemetryProvider client={telemetryClient}>
     <Story />
   </TelemetryProvider>
 );
-```
 
-### Global Setup
-
-```typescript
-// preview.ts
-import { withTelemetryProvider } from "./withTelemetryProvider.tsx";
-
-export const decorators = [withTelemetryProvider];
+export const decorators = [withTelemetry];
 ```
 
 ### Per-Story Override
 
 ```typescript
 // MyComponent.stories.tsx
-import { withTelemetryProvider } from "./withTelemetryProvider.tsx";
-import { MyComponent } from "./MyComponent.tsx";
-import type { Meta, StoryObj } from "storybook-react-rsbuild";
+import { NoopTelemetryClient, TelemetryProvider } from "@workleap/telemetry/react";
 
-const meta = {
+const telemetryClient = new NoopTelemetryClient();
+
+export default {
   title: "Components/MyComponent",
   component: MyComponent,
-  decorators: [withTelemetryProvider]
-} satisfies Meta<typeof MyComponent>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {};
+  decorators: [
+    (Story) => (
+      <TelemetryProvider client={telemetryClient}>
+        <Story />
+      </TelemetryProvider>
+    )
+  ]
+};
 ```
 
 ---
@@ -178,7 +173,7 @@ test("renders correctly", () => {
 
 ## User Identification
 
-### Workleap Platform User Identification
+### Full User Identification
 
 ```typescript
 import LogRocket from "logrocket";
@@ -201,30 +196,6 @@ function useIdentifyUser(user: User | null) {
 
     LogRocket.identify(traits.userId, traits);
   }, [user, logRocketClient]);
-}
-```
-
-### ShareGate User Identification
-
-```typescript
-import LogRocket from "logrocket";
-import { useLogRocketInstrumentationClient } from "@workleap/telemetry/react";
-
-function useIdentifyUser() {
-  const logRocketClient = useLogRocketInstrumentationClient({ throwOnUndefined: false });
-
-  useEffect(() => {
-    if (!logRocketClient) return;
-
-    const traits = logRocketClient.createShareGateDefaultUserTraits({
-      shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
-      microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
-      microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
-      workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
-    });
-
-    LogRocket.identify(traits.shareGateAccountId, traits);
-  }, [logRocketClient]);
 }
 ```
 
@@ -267,29 +238,6 @@ function useIdentifyUser(user: User | null) {
     }
   }, [user, logRocketClient, honeycombClient]);
 }
-```
-
-### Send Additional Traits
-
-```typescript
-import LogRocket from "logrocket";
-import { useLogRocketInstrumentationClient } from "@workleap/telemetry/react";
-
-const client = useLogRocketInstrumentationClient();
-
-const allTraits = {
-  ...client.createWorkleapPlatformDefaultUserTraits({
-    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
-    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
-    organizationName: "Acme",
-    isMigratedToWorkleap: true,
-    isOrganizationCreator: false,
-    isAdmin: false
-  }),
-  "Additional Trait": "Trait Value"
-};
-
-LogRocket.identify(allTraits.userId, allTraits);
 ```
 
 ---
@@ -350,21 +298,39 @@ async function fetchUserData(userId: string) {
 }
 ```
 
-### React Component with Tracing
+### React Hook with Tracing
 
 ```typescript
-import { useEffect } from "react";
 import { trace } from "@opentelemetry/api";
+import { useEffect, useState } from "react";
 
 const tracer = trace.getTracer("my-app");
 
-export function Page() {
-  useEffect(() => {
-    const span = tracer.startSpan("page-load");
-    span.end();
-  }, []);
+function useTracedData<T>(fetchFn: () => Promise<T>, spanName: string) {
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-  return <div>Hello from a page!</div>;
+  useEffect(() => {
+    const span = tracer.startSpan(spanName);
+
+    fetchFn()
+      .then((result) => {
+        span.setAttribute("result.success", true);
+        setData(result);
+      })
+      .catch((err) => {
+        span.setAttribute("result.success", false);
+        span.recordException(err);
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
+        span.end();
+      });
+  }, [fetchFn, spanName]);
+
+  return { data, loading, error };
 }
 ```
 
@@ -461,51 +427,17 @@ function UserContextProvider({ user, children }) {
 
 ---
 
-## Scoped Mixpanel Properties
-
-### Using MixpanelPropertiesProvider
-
-```typescript
-import { MixpanelPropertiesProvider, useMixpanelTrackingFunction } from "@workleap/telemetry/react";
-
-// Define as a static object outside the component
-const MixpanelProperties = {
-  section: "User Form"
-};
-
-function NestedComponent() {
-  const track = useMixpanelTrackingFunction();
-
-  // Events tracked here automatically include { section: "User Form" }
-  const handleClick = () => {
-    track("ButtonClicked", { Trigger: "Submit" });
-  };
-
-  return <button onClick={handleClick}>Submit</button>;
-}
-
-function App() {
-  return (
-    <MixpanelPropertiesProvider value={MixpanelProperties}>
-      <NestedComponent />
-    </MixpanelPropertiesProvider>
-  );
-}
-```
-
----
-
 ## Logging Configuration
 
 ### Development vs Production Logging
 
 ```typescript
-import { initializeTelemetry, LogRocketLogger } from "@workleap/telemetry/react";
-import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
+import { initializeTelemetry, LogRocketLogger, LogLevel } from "@workleap/telemetry/react";
+import { BrowserConsoleLogger } from "@workleap/logging";
 
 const isDev = process.env.NODE_ENV === "development";
 
-const telemetryClient = initializeTelemetry("sg", {
+const telemetryClient = initializeTelemetry({
   // ... platform configs
   verbose: isDev,
   loggers: [
@@ -519,9 +451,9 @@ const telemetryClient = initializeTelemetry("sg", {
 ### LogRocket Logger Usage
 
 ```typescript
-import { LogRocketLogger } from "@workleap/telemetry/react";
+import { LogRocketLogger, LogLevel } from "@workleap/telemetry/react";
 
-const logger = new LogRocketLogger();
+const logger = new LogRocketLogger({ logLevel: LogLevel.information });
 
 // Simple messages
 logger.debug("Debug info");
@@ -546,9 +478,9 @@ logger
 ### Scoped Logging
 
 ```typescript
-import { LogRocketLogger } from "@workleap/telemetry/react";
+import { LogRocketLogger, LogLevel } from "@workleap/telemetry/react";
 
-const logger = new LogRocketLogger();
+const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
 function processCheckout(order: Order) {
   const scope = logger.startScope("Checkout Process");
@@ -560,9 +492,6 @@ function processCheckout(order: Order) {
 
   scope.information("Checkout complete");
   scope.end();
-
-  // Or dismiss a scope to prevent output
-  // scope.end({ dismiss: true });
 }
 ```
 
@@ -573,7 +502,7 @@ function processCheckout(order: Order) {
 ### Enable Verbose Mode
 
 ```typescript
-const telemetryClient = initializeTelemetry("wlp", {
+const telemetryClient = initializeTelemetry({
   // ... platform configs
   verbose: true
 });
@@ -582,9 +511,7 @@ const telemetryClient = initializeTelemetry("wlp", {
 ### Debug Production Issues
 
 ```typescript
-import { LogRocketLogger } from "@workleap/telemetry/react";
-
-const telemetryClient = initializeTelemetry("sg", {
+const telemetryClient = initializeTelemetry({
   // ... platform configs
   verbose: true,
   loggers: [new LogRocketLogger()]  // No log level = all levels captured
@@ -594,14 +521,11 @@ const telemetryClient = initializeTelemetry("sg", {
 ### Conditional Debug Mode
 
 ```typescript
-import { LogRocketLogger } from "@workleap/telemetry/react";
-import { BrowserConsoleLogger, LogLevel } from "@workleap/logging";
-
 // Enable debug mode via URL parameter: ?debug=telemetry
 const urlParams = new URLSearchParams(window.location.search);
 const debugTelemetry = urlParams.get("debug") === "telemetry";
 
-const telemetryClient = initializeTelemetry("wlp", {
+const telemetryClient = initializeTelemetry({
   // ... platform configs
   verbose: debugTelemetry,
   loggers: debugTelemetry
