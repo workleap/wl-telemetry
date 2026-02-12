@@ -19,7 +19,7 @@ pnpm add @workleap/logging
 
 Then update the application bootstrapping code to configure the loggers:
 
-```tsx !#12,30-31,35-36 index.tsx
+```tsx !#12,29-30,34-35 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
@@ -46,7 +46,6 @@ const telemetryClient = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     verbose: isDev,
@@ -75,7 +74,7 @@ root.render(
 
 To troubleshoot production issues, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#12,30,35 index.tsx
+```tsx !#12,29,34 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
@@ -102,7 +101,6 @@ const telemetryClient = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     verbose: true,

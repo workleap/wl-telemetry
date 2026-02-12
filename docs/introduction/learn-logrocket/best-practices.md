@@ -46,7 +46,6 @@ const client = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]

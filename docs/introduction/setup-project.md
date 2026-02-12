@@ -19,7 +19,7 @@ pnpm add @workleap/telemetry @workleap/common-room @opentelemetry/api logrocket
 
 And, update the application bootstrapping code to initialize the libraries with the [initializeTelemetry](../reference/telemetry/initializeTelemetry.md) and [registerCommonRoomInstrumentation](../reference/common-room/registerCommonRoomInstrumentation.md) functions:
 
-```tsx !#7-23,25,31-32,34-35 index.tsx
+```tsx !#7-22,24,30-31,33-34 index.tsx
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
@@ -39,7 +39,6 @@ const telemetryClient = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     }
 });

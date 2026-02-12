@@ -142,7 +142,7 @@ LogRocket.getSessionUrl(url => {
 
 By default, Workleap's LogRocket configuration does not capture console logs. To send loggers output to LogRocket, use the [LogRocketLogger](../../reference/LogRocketLogger.md) class.
 
-```tsx !#8,26,30 index.tsx
+```tsx !#8,25,29 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { LogLevel, type RootLogger } from "@workleap/logging";
@@ -165,7 +165,6 @@ const telemetryClient = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     loggers
@@ -194,7 +193,7 @@ Console logs are not captured by default to reduce the risk of exposing Personal
 
 To troubleshoot an production issue, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#8,26,31 index.tsx
+```tsx !#8,25,30 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { type RootLogger } from "@workleap/logging";
@@ -217,7 +216,6 @@ const telemetryClient = initializeTelemetry("sg", {
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     verbose: true,
