@@ -1,6 +1,13 @@
 export { createTelemetryContext, type CreateTelemetryContextOptions, type TelemetryContext } from "@workleap-telemetry/core";
 export type { LogRocketSdkOptionsTransformer } from "./applyTransformers.ts";
-export type { GetLogRocketSessionUrlListener, LogRocketInstrumentationClient, LogRocketWorkleapPlatformIdentification, LogRocketWorkleapPlatformUserTraits } from "./LogRocketInstrumentationClient.ts";
+export type {
+    GetLogRocketSessionUrlListener,
+    LogRocketInstrumentationClient,
+    LogRocketShareGateIdentification,
+    LogRocketShareGateUserTraits,
+    LogRocketWorkleapPlatformIdentification,
+    LogRocketWorkleapPlatformUserTraits
+} from "./LogRocketInstrumentationClient.ts";
 export { LogRocketLogger, LogRocketLoggerScope } from "./LogRocketLogger.ts";
 export type * from "./logRocketTypes.ts";
 export { NoopLogRocketInstrumentationClient } from "./NoopLogRocketInstrumentationClient.ts";

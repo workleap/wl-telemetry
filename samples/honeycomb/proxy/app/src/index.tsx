@@ -5,7 +5,7 @@ import { App } from "./App.tsx";
 
 const honeycombClient = registerHoneycombInstrumentation("sample", "honeycomb-proxy-sample", [/http:\/\/localhost:1234\.*/], {
     proxy: "http://localhost:5678/v1/traces",
-    telemetryContext: createTelemetryContext({ verbose: true }),
+    telemetryContext: createTelemetryContext("wlp", { verbose: true }),
     verbose: true
 });
 

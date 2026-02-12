@@ -1,8 +1,6 @@
-import { type LogRocketInstrumentationPartialClient, TelemetryContext } from "@workleap-telemetry/core";
-import { afterEach, test, vi } from "vitest";
-import { MixpanelContextVariableName } from "../../src/js/context.ts";
-import { initializeMixpanel, IsInitializedVariableName, MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
-import { TelemetryProperties } from "../../src/js/properties.ts";
+import { type LogRocketInstrumentationPartialClient } from "@workleap-telemetry/core";
+import { test } from "vitest";
+import { initializeMixpanel, MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
 
 class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,75 +16,21 @@ class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPar
     }
 }
 
-afterEach(() => {
-    vi.clearAllMocks();
-
-    // DEPRECATED: Grace period ends on January 1th 2026.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    delete globalThis[IsInitializedVariableName];
-});
-
 test.concurrent("when mixpanel has already been initialized, throw an error", ({ expect }) => {
-    initializeMixpanel("wlp", "http://api/navigation");
+    initializeMixpanel("http://api/navigation");
 
-    expect(() => initializeMixpanel("wlp", "http://api/navigation")).toThrow("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
+    expect(() => initializeMixpanel("http://api/navigation")).toThrow("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
 });
 
 test.concurrent("when a logrocket instrumentation client is provided, register a listener for logrocket get session url", ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
-
     const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
 
-    const initializer = new MixpanelInitializer(globalEventProperties);
+    const initializer = new MixpanelInitializer();
 
-    initializer.initialize("wlp", "http://api/navigation", {
+    initializer.initialize("http://api/navigation", {
         logRocketInstrumentationClient
     });
 
     expect(logRocketInstrumentationClient.listenerCount).toBe(1);
-});
-
-// DEPRECATED: Grace period ends on January 1th 2026.
-// Cannot be concurrent because it's using "globaThis".
-test("the context global variable is set", ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
-
-    const initializer = new MixpanelInitializer(globalEventProperties);
-
-    initializer.initialize("wlp", "http://api/navigation");
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    expect(globalThis[MixpanelContextVariableName]).toBeDefined();
-});
-
-// DEPRECATED: Grace period ends on January 1th 2026.
-// Cannot be concurrent because it's using "globaThis".
-test("the initialized global variable is set", ({ expect }) => {
-    const globalEventProperties = new Map<string, unknown>();
-
-    const initializer = new MixpanelInitializer(globalEventProperties);
-
-    initializer.initialize("wlp", "http://api/navigation");
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    expect(globalThis[IsInitializedVariableName]).toBeDefined();
-});
-
-test.concurrent("when a telemetry context is provided, the telemetry context values are added as super properties", ({ expect }) => {
-    const telemetryContext = new TelemetryContext("123", "456");
-
-    const globalEventProperties = new Map<string, unknown>();
-
-    const initializer = new MixpanelInitializer(globalEventProperties);
-
-    initializer.initialize("wlp", "http://api/navigation", {
-        telemetryContext
-    });
-
-    expect(globalEventProperties.get(TelemetryProperties.DeviceId)).toBe(telemetryContext.deviceId);
-    expect(globalEventProperties.get(TelemetryProperties.TelemetryId)).toBe(telemetryContext.telemetryId);
 });
 

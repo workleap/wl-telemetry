@@ -5,7 +5,7 @@ import { App } from "./App.tsx";
 
 const honeycombClient = registerHoneycombInstrumentation("sample", "honeycomb-api-key-sample", [/http:\/\/localhost:1234\.*/], {
     apiKey: process.env.HONEYCOMB_API_KEY,
-    telemetryContext: createTelemetryContext({ verbose: true }),
+    telemetryContext: createTelemetryContext("sg", { verbose: true }),
     verbose: true
 });
 

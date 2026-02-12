@@ -9,7 +9,7 @@ import type { PropagateTraceHeaderCorsUrls, SpanProcessor } from "@opentelemetry
 import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
-import { type FetchRequestHookFunction, FetchRequestPipeline } from "./FetchRequestPipeline.ts";
+import { FetchRequestPipeline } from "./FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
 import { type HoneycombInstrumentationClient, HoneycombInstrumentationClientImpl } from "./HoneycombInstrumentationClient.ts";
 import type { HoneycombSdkInstrumentations, HoneycombSdkOptions } from "./honeycombTypes.ts";
@@ -228,54 +228,6 @@ export function getHoneycombSdkOptions(
 
 ///////////////////////////
 
-// DEPRECATED: Grace period ends on January 1th 2026.
-// Don't forget to remove the tests as well.
-export const IsRegisteredVariableName = "__WLP_HONEYCOMB_INSTRUMENTATION_IS_REGISTERED__";
-export const RegisterDynamicFetchRequestHookFunctionName = "__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK__";
-export const RegisterDynamicFetchRequestHookAtStartFunctionName = "__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK_AT_START__";
-
-// DEPRECATED: Grace period ends on January 1th 2026.
-function registerDeprecatedGlobalVariables(fetchRequestPipeline: FetchRequestPipeline) {
-    // Indicates to the host applications that the Honeycomb instrumentation
-    // has been registered.
-    // It's useful in cases where an "add-on", like the platform widgets needs
-    // to know whether or not the host application is using Honeycomb.
-    // While there are ways that the host application could tell to an "add-on" if
-    // it's using Honeycomb or not, doing it this way is transparent for the consumer,
-    // which is great for DX.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis[IsRegisteredVariableName] = true;
-
-    const registerFetchRequestHook = (hook: FetchRequestHookFunction) => {
-        fetchRequestPipeline.registerHook(hook);
-    };
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis[RegisterDynamicFetchRequestHookFunctionName] = registerFetchRequestHook;
-
-    // Temporary naming due to a previous error.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK = registerFetchRequestHook;
-
-    const registerFetchRequestHookAtStart = (hook: FetchRequestHookFunction) => {
-        fetchRequestPipeline.registerHookAtStart(hook);
-    };
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis[RegisterDynamicFetchRequestHookAtStartFunctionName] = registerFetchRequestHookAtStart;
-
-    // Temporary naming due to a previous error.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    globalThis.__WLP_HONEYCOMB_REGISTER_DYNAMIC_FETCH_REQUEST_HOOK_AT_START = registerFetchRequestHookAtStart;
-}
-
-///////////////////////////
-
 let registrationGuardInstance: HasExecutedGuard | undefined;
 
 // It's important to use a lazy singleton instead of a singleton to avoid
@@ -359,8 +311,6 @@ export class HoneycombInstrumentationRegistrator {
                 this.#globalAttributeSpanProcessor.setAttribute("app.logrocket_session_url", sessionUrl);
             });
         }
-
-        registerDeprecatedGlobalVariables(this.#fetchRequestPipeline);
 
         logger.information("[honeycomb] Honeycomb instrumentation is registered.");
 

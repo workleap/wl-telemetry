@@ -91,6 +91,32 @@ export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unkn
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
+export interface LogRocketShareGateIdentification {
+    shareGateAccountId: string;
+    microsoftUserId: string;
+    microsoftTenantId: string;
+    workspaceId: string;
+    isInPartnerProgram?: boolean;
+}
+
+/**
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
+export interface LogRocketShareGateUserTraits extends Record<string, unknown> {
+    "ShareGate Account Id": string;
+    "Microsoft User Id": string;
+    "Microsoft Tenant Id": string;
+    "Workspace Id": string;
+    "Device Id": string;
+    "Telemetry Id": string;
+    "Is In Partner Program"?: boolean;
+}
+
+///////////////////////////
+
+/**
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export interface LogRocketInstrumentationClient extends LogRocketInstrumentationPartialClient {
     /**
      * Register a listener to receive the LogRocket session id when it's available.
@@ -106,8 +132,17 @@ export interface LogRocketInstrumentationClient extends LogRocketInstrumentation
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     createWorkleapPlatformDefaultUserTraits: (identification: LogRocketWorkleapPlatformIdentification) => LogRocketWorkleapPlatformUserTraits;
+
+    /**
+     * Create the default user traits for a ShareGate user.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    createShareGateDefaultUserTraits: (identification: LogRocketShareGateIdentification) => LogRocketShareGateUserTraits;
 }
 
+/**
+ * @see {@link https://workleap.github.io/wl-telemetry}
+ */
 export class LogRocketInstrumentationClientImpl implements LogRocketInstrumentationClient {
     readonly #telemetryContext?: TelemetryContext;
 
@@ -191,5 +226,17 @@ export class LogRocketInstrumentationClientImpl implements LogRocketInstrumentat
             ...(isDefined(planCode?.pbd) && { "Plan Code - Pingboard": planCode.pbd }),
             ...(isDefined(planCode?.cmp) && { "Plan Code - Compensation": planCode.cmp })
         } satisfies LogRocketWorkleapPlatformUserTraits;
+    }
+
+    createShareGateDefaultUserTraits(identification: LogRocketShareGateIdentification) {
+        return {
+            "ShareGate Account Id": identification.shareGateAccountId,
+            "Microsoft User Id": identification.microsoftUserId,
+            "Microsoft Tenant Id": identification.microsoftTenantId,
+            "Workspace Id": identification.workspaceId,
+            [DeviceIdTrait]: this.#telemetryContext?.deviceId ?? "N/A",
+            [TelemetryIdTrait]: this.#telemetryContext?.telemetryId ?? "N/A",
+            "Is In Partner Program": identification.isInPartnerProgram
+        } satisfies LogRocketShareGateUserTraits;
     }
 }

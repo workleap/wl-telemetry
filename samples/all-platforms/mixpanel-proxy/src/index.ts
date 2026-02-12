@@ -33,9 +33,20 @@ app.use(cors({
 
 app.use(express.json());
 
-https.createServer(certificates, app).listen(port, "127.0.0.1", () => {
+const server = https.createServer(certificates, app).listen(port, "127.0.0.1", () => {
     console.log(`[server]: Server is running at http://local.workleap.com:${port}`);
 });
+
+function shutdown() {
+    console.log("[server]: Shutting down...");
+
+    server.close(() => {
+        process.exit(0);
+    });
+}
+
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);
 
 // Local tracking service endpoint because the SSD tracking service only works
 // for products and requires an auth cookie.

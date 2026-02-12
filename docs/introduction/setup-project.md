@@ -19,14 +19,14 @@ pnpm add @workleap/telemetry @workleap/common-room @opentelemetry/api logrocket
 
 And, update the application bootstrapping code to initialize the libraries with the [initializeTelemetry](../reference/telemetry/initializeTelemetry.md) and [registerCommonRoomInstrumentation](../reference/common-room/registerCommonRoomInstrumentation.md) functions:
 
-```tsx !#7-23,25,31-32,34-35 index.tsx
+```tsx !#7-22,24,30-31,33-34 index.tsx
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -39,7 +39,6 @@ const telemetryClient = initializeTelemetry({
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     }
 });
@@ -132,7 +131,7 @@ If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events wi
 - [LogRocket](./learn-logrocket/features.md)
 - [Honeycomb](./learn-honeycomb/features.md)
 - [Mixpanel](./learn-mixpanel/features.md)
-- [Common Room](../standalone-libraries/setup-common-room.md)
+- [Common Room](../standalone-libraries/common-room/getting-started.md)
 
 ## Setup loggers
 

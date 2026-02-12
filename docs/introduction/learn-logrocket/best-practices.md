@@ -33,7 +33,7 @@ Initialize telemetry with a [LogRocketLogger](../../reference/LogRocketLogger.md
 import { initializeTelemetry, LogRocketLogger } from "@workleap/telemetry/react";
 import { LogLevel } from "@workleap/logging";
 
-const client = initializeTelemetry({
+const client = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -46,7 +46,6 @@ const client = initializeTelemetry({
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]

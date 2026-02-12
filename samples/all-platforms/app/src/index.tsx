@@ -10,7 +10,7 @@ const loggers: RootLogger[] = [
     new LogRocketLogger()
 ];
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: process.env.LOGROCKET_APP_ID!,
         options: {
@@ -26,8 +26,10 @@ const telemetryClient = initializeTelemetry({
         }
     },
     mixpanel: {
-        productId: "wlp",
-        envOrTrackingApiBaseUrl: "https://local.workleap.com:5678/api/shell/navigation/"
+        envOrTrackingApiBaseUrl: "https://local.workleap.com:5678/api/shell/navigation/",
+        options: {
+            productId: "wlp"
+        }
     },
     verbose: true,
     loggers

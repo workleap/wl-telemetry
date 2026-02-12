@@ -19,6 +19,7 @@ order: 85
 - [MixpanelClient](./telemetry/MixpanelClient.md)
 - [useMixpanelClient](./telemetry/useMixpanelClient.md)
 - [useMixpanelTrackingFunction](./telemetry/useMixpanelTrackingFunction.md)
+- [MixpanelPropertiesProvider](./telemetry/MixpanelPropertiesProvider.md)
 
 ## Common Room
 

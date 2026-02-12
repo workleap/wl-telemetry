@@ -18,6 +18,9 @@ export function Layout() {
                     <Link to="/identify">Identify</Link>
                 </li>
                 <li>
+                    <Link to="/mixpanel">Mixpanel</Link>
+                </li>
+                <li>
                     <Link to="/failing">Failing</Link>
                 </li>
                 <li>

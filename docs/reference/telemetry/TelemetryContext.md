@@ -8,7 +8,7 @@ toc:
 # TelemetryContext
 
 !!!warning
-Don't create your own instance of `TelemetryContext`, use a `createTelemetryContext` function instead.
+Don't create your own instance of `TelemetryContext`, use the `createTelemetryContext` function instead.
 !!!
 
 An object containing the telemetry correlation ids.

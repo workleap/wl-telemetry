@@ -6,6 +6,7 @@ import { HomePage } from "./HomePage.tsx";
 import { IdentifyPage } from "./IdentifyPage.tsx";
 import { Layout } from "./Layout.tsx";
 import { LogRocketLoggerPage } from "./LogRocketLoggerPage.tsx";
+import { MixpanelPage } from "./MixpanelPage.tsx";
 import { MoviesPage } from "./MoviesPage.tsx";
 import { SubscriptionPage } from "./SubscriptionPage.tsx";
 import { ThrowingPage } from "./ThrowingPage.tsx";
@@ -50,6 +51,12 @@ export function App() {
                                     path: "identify",
                                     element: (
                                         <IdentifyPage />
+                                    )
+                                },
+                                {
+                                    path: "mixpanel",
+                                    element: (
+                                        <MixpanelPage />
                                     )
                                 },
                                 {

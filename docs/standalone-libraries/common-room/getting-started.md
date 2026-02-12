@@ -1,6 +1,7 @@
 ---
-order: 70
-label: Setup Common Room
+order: 100
+label: Getting started
+title: Getting started - Common Room
 ---
 
 # Setup Common Room
@@ -19,7 +20,7 @@ pnpm add @workleap/common-room
 
 ## Register instrumentation
 
-Then, register Common Room instrumentation using the [registerCommonRoomInstrumentation](../reference/common-room/registerCommonRoomInstrumentation.md) function:
+Then, register Common Room instrumentation using the [registerCommonRoomInstrumentation](../../reference/common-room/registerCommonRoomInstrumentation.md) function:
 
 ```tsx !#6,12,14 index.tsx
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
@@ -42,7 +43,7 @@ root.render(
 
 ## Identify a user
 
-To associate the anonymous activities with an existing user, the [CommonRoomInstrumentationClient](../reference/common-room/CommonRoomInstrumentationClient.md) expose the [identify](../reference/common-room/CommonRoomInstrumentationClient.md#methods) method:
+To associate the anonymous activities with an existing user, the [CommonRoomInstrumentationClient](../../reference/common-room/CommonRoomInstrumentationClient.md) expose the [identify](../../reference/common-room/CommonRoomInstrumentationClient.md#methods) method:
 
 ```ts !#5
 import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
@@ -57,14 +58,14 @@ client.identify("johndoe@contoso.com");
 Start the application in a development environment using the dev script. Go to the "Identify" page and press the button to identify the current user. Then navigate to your [Common Room](https://app.commonroom.io/) instance and go to the "Activity" page, you should see new data appear in the **next 10 minutes**.
 
 :::align-image-left
-![Common Room activity entry|558](../static/common-room/common-room-activity-entry.png)
+![Common Room activity entry|558](../../static/common-room/common-room-activity-entry.png)
 :::
 
 ### Troubleshoot issues
 
 If you are experiencing issues with this guide:
 
-- Set the [verbose](../reference/common-room/registerCommonRoomInstrumentation.md#verbose-mode) predefined option to `true`.
+- Set the [verbose](../../reference/common-room/registerCommonRoomInstrumentation.md#verbose-mode) predefined option to `true`.
 - Open the [DevTools](https://developer.chrome.com/docs/devtools/) console and look for logs starting with `[common-room]`.
 - Refer to the sample on [GitHub](https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms).
 
@@ -77,11 +78,7 @@ To do this, open the browser's developer tools, navigate to `Application` > `Sto
 Finally, refresh the page to generate new cookies.
 
 :::align-image-left
-![Common Room cookies|540](../static/common-room/common-room-cookies.png)
+![Common Room cookies|540](../../static/common-room/common-room-cookies.png)
 :::
-
-## Reference
-
-Refer to [reference documentation](../reference/index.md#common-room).
 
 

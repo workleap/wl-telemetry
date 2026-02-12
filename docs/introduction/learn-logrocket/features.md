@@ -49,7 +49,7 @@ Session replays offer a wide range of features to help debug production issues, 
 ![](../../static/logrocket/logrocket-dom-interactions.png)
 :::
 
-## Monitor issues
+## Surface issues
 
 [Galileo](https://logrocket.com/products/galileo-ai), LogRocket's proprietary AI, watches every session and tracks product changes to proactively surface issues that are impacting users.
 
@@ -67,6 +67,14 @@ A daily or weekly digest of newly detected and untriaged issues can be delivered
 
 :::align-image-left
 ![](../../static/logrocket/logrocket-issues-digest.png){width=408}
+:::
+
+#### Alert
+
+Impactful issues flagged by Galileo AI can be delivered immediatly to Slack:
+
+:::align-image-left
+![](../../static/logrocket/logrocket-alert.png)
 :::
 
 ## Record elements
@@ -134,7 +142,7 @@ LogRocket.getSessionUrl(url => {
 
 By default, Workleap's LogRocket configuration does not capture console logs. To send loggers output to LogRocket, use the [LogRocketLogger](../../reference/LogRocketLogger.md) class.
 
-```tsx !#8,26,30 index.tsx
+```tsx !#8,25,29 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { LogLevel, type RootLogger } from "@workleap/logging";
@@ -144,7 +152,7 @@ import { App } from "./App.tsx";
 
 const loggers: RootLogger[] = [new LogRocketLogger({ logLevel: LogLevel.information })];
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -157,7 +165,6 @@ const telemetryClient = initializeTelemetry({
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     loggers
@@ -186,7 +193,7 @@ Console logs are not captured by default to reduce the risk of exposing Personal
 
 To troubleshoot an production issue, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#8,26,31 index.tsx
+```tsx !#8,25,30 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { type RootLogger } from "@workleap/logging";
@@ -196,7 +203,7 @@ import { App } from "./App.tsx";
 
 const loggers: RootLogger[] = [new LogRocketLogger()];
 
-const telemetryClient = initializeTelemetry({
+const telemetryClient = initializeTelemetry("sg", {
     logRocket: {
         appId: "my-app-id"
     },
@@ -209,7 +216,6 @@ const telemetryClient = initializeTelemetry({
         }
     },
     mixpanel: {
-        productId: "wlp",
         envOrTrackingApiBaseUrl: "development"
     },
     verbose: true,

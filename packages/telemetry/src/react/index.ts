@@ -1,3 +1,4 @@
+export { MixpanelPropertiesProvider, useMixpanelProviderProperties, type MixpanelPropertiesProviderProps } from "@workleap/mixpanel/react";
 export * from "../js/index.ts";
 export { TelemetryProvider, useTelemetryClient } from "./TelemetryContext.tsx";
 export { useHoneycombInstrumentationClient, type UseHoneycombInstrumentationClientOptions } from "./useHoneycombInstrumentationClient.ts";

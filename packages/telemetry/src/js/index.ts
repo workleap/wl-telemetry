@@ -17,6 +17,8 @@ export {
     type GetLogRocketSessionUrlListener,
     type LogRocketInstrumentationClient,
     type LogRocketSdkOptionsTransformer,
+    type LogRocketShareGateIdentification,
+    type LogRocketShareGateUserTraits,
     type LogRocketWorkleapPlatformIdentification,
     type LogRocketWorkleapPlatformUserTraits,
     type RegisterLogRocketInstrumentationOptions
@@ -27,7 +29,6 @@ export {
     type InitializeMixpanelOptions,
     type MixpanelClient,
     type MixpanelEventProperties,
-    type MixpanelGlobalEventProperties,
     type MixpanelTrackingFunction,
     type MixpanelTrackingFunctionOptions
 } from "@workleap/mixpanel";

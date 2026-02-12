@@ -83,7 +83,7 @@ If LogRocket instrumentation is enabled, Mixpanel events are enriched with the L
 ![LogRocket session URL](../../static/mixpanel/mixpanel-logrocket-session-url.png){width=464}
 :::
 
-## Set custom user properties
+## Set global properties
 
 Most applications need to set custom properties about the current user environment on all events. To help with that, [MixpanelClient](../../reference/telemetry/MixpanelClient.md) expose the [setGlobalEventProperties](../../reference/telemetry/MixpanelClient.md#methods) method:
 
@@ -98,3 +98,30 @@ client.setGlobalEventProperties({
 ```
 
 Now, every event recorded after the execution of `setGlobalEventProperties` will include the custom property `User Id`.
+
+## Define scoped properties
+
+To scope custom properties to a specific section of the application, wrap it with a [MixpanelPropertiesProvider](../../reference/telemetry/MixpanelPropertiesProvider.md). Define the provider with a **static object** of Mixpanel properties, and all nested components tracking Mixpanel with a track function created by the [useMixpanelTrackingFunction](../../reference/telemetry/useMixpanelTrackingFunction.md) hook will automatically append those properties to their events:
+
+```tsx !#10,12
+import { MixpanelPropertiesProvider } from "@workleap/telemetry/react";
+import { NestedComponent } from "./NestedComponent.tsx";
+
+const MixpanelProperties = {
+    section: "User Form"
+};
+
+function App() {
+    return (
+        <MixpanelPropertiesProvider value={MixpanelProperties}>
+            <NestedComponent />
+        </MixpanelPropertiesProvider>
+    )
+}
+```
+
+!!!tip
+Ensure that the value passed to `MixpanelPropertiesProvider` is a **static object**, either defined outside components scope or memoized. Otherwise, the `useMixpanelTrackingFunction` hook will create a new tracking function on every render.
+!!!
+
+

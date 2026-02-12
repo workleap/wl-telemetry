@@ -6,7 +6,7 @@ test.concurrent("when an identity cookie is available, the device id is retrieve
 
     vi.spyOn(document, "cookie", "get").mockReturnValue(`${IdentityCookieName}=${JSON.stringify({ deviceId })}`);
 
-    const result = createTelemetryContext();
+    const result = createTelemetryContext("sg");
 
     expect(result.deviceId).toBe(deviceId);
 });
