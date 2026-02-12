@@ -9,16 +9,13 @@ description: |
   (3) Using Honeycomb for distributed tracing and performance analysis
   (4) Creating and enriching Honeycomb traces/spans using OpenTelemetry
   (5) Using LogRocket for session replay and frontend debugging
-  (6) Exposing telemetry identifiers to LogRocket for cross-tool debugging
-  (7) Using Mixpanel for product analytics and event tracking
-  (8) Attaching telemetry/device IDs to Mixpanel events
-  (9) Understanding Honeycomb, LogRocket, and Mixpanel roles in wl-telemetry
-  (10) Correlating data across Honeycomb, LogRocket, and Mixpanel
-  (11) Configuring loggers for wl-telemetry diagnostics
-  (12) Using wl-telemetry safely in Storybook or non-production environments
-  (13) Using Noop telemetry clients to disable/mock telemetry
-  (14) Reviewing PRs that add or modify telemetry instrumentation
-  (15) Troubleshooting missing or inconsistent telemetry across tools
+  (6) Using Mixpanel for product analytics and event tracking
+  (7) Understanding Honeycomb, LogRocket, and Mixpanel roles in wl-telemetry
+  (8) Correlating data across Honeycomb, LogRocket, and Mixpanel
+  (9) Configuring loggers for wl-telemetry diagnostics
+  (10) Using Noop telemetry clients to disable/mock telemetry
+  (11) Reviewing PRs that add or modify telemetry instrumentation
+  (12) Troubleshooting missing or inconsistent telemetry across tools
 ---
 
 # Workleap Telemetry (wl-telemetry)
@@ -49,7 +46,7 @@ If LogRocket is enabled, Honeycomb and Mixpanel automatically receive `app.logro
 ```typescript
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
 
-const telemetryClient = initializeTelemetry("wlp", {
+const telemetryClient = initializeTelemetry({
   logRocket: { appId: "your-app-id" },
   honeycomb: {
     namespace: "your-namespace",
@@ -58,6 +55,7 @@ const telemetryClient = initializeTelemetry("wlp", {
     options: { proxy: "https://your-otel-proxy" }
   },
   mixpanel: {
+    productId: "wlp",
     envOrTrackingApiBaseUrl: "production"
   }
 });
@@ -104,4 +102,3 @@ const telemetryClient = new NoopTelemetryClient();
 3. **Correlation is automatic** - Never manually set Telemetry Id or Device Id
 4. **Noop for non-production** - Use `NoopTelemetryClient` in Storybook/tests
 5. **Privacy matters** - Never log PII to LogRocket; use `data-public`/`data-private` attributes
-6. **productFamily is required** - `initializeTelemetry` requires `"wlp"` or `"sg"` as the first argument
