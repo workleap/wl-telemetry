@@ -1,5 +1,5 @@
 ---
-name: workleap-telemetry
+name: workleap-telemetry-v2
 description: |
   Guide for Workleap's telemetry solution (@workleap/telemetry) that unifies Honeycomb, LogRocket, and Mixpanel with consistent correlation IDs.
 

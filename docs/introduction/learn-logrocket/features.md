@@ -106,7 +106,9 @@ Two correlation ids are automatically added to each session and can be used to f
 
 ## Identify a user
 
-Most applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](../../reference/telemetry/LogRocketInstrumentationClient.md) expose the [createWorkleapPlatformDefaultUserTraits](../../reference/telemetry/LogRocketInstrumentationClient.md#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
+Most applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](../../reference/telemetry/LogRocketInstrumentationClient.md) expose the [createWorkleapPlatformDefaultUserTraits](../../reference/telemetry/LogRocketInstrumentationClient.md#methods) and [createShareGateDefaultUserTraits](../../reference/telemetry/LogRocketInstrumentationClient.md#methods) methods. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
+
+### Workleap Platform
 
 ```ts !#6-13,15
 import { useLogRocketInstrumentationClient } from "@workleap/telemetry/react";
@@ -124,6 +126,24 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 });
 
 LogRocket.identify(traits.userId, traits);
+```
+
+### ShareGate
+
+```ts !#6-11,13
+import { useLogRocketInstrumentationClient } from "@workleap/telemetry/react";
+import LogRocket from "logrocket";
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createShareGateDefaultUserTraits({
+    shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
+    microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
+    microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
+    workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
+});
+
+LogRocket.identify(traits.shareGateAccountId, traits);
 ```
 
 ## Get the session URL
