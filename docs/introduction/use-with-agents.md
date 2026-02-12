@@ -25,8 +25,8 @@ The `skills.sh` CLI will prompt you to choose whether to install the skill globa
 
 Description | Agent skill
 ---  | ---
-Latest version | [workleap-telemetry](https://skills.sh/workleap/wl-telemetry/workleap-telemetry)
-Version 2.* | [workleap-telemetry-v2](https://skills.sh/workleap/wl-telemetry/workleap-telemetry-v2)
+Match the latest version of the library. | [workleap-telemetry](https://skills.sh/workleap/wl-telemetry/workleap-telemetry)
+Match the latest `2.*` version of the library. | [workleap-telemetry-v2](https://skills.sh/workleap/wl-telemetry/workleap-telemetry-v2)
 
 ## Try it :rocket:
 
