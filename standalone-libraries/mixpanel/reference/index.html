@@ -4,40 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.824007373320">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.12.0.824181891485">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 3.11.0">
+    <meta name="generator" content="Retype 3.12.0">
 
     <!-- Primary Meta Tags -->
-    <title>Setup Mixpanel</title>
-    <meta name="title" content="Setup Mixpanel">
-    <meta name="description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
+    <title>Reference - Mixpanel</title>
+    <meta name="title" content="Reference - Mixpanel">
+    <meta name="description" content="Initialize Mixpanel with Workleap's default settings.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://workleap.github.io/wl-telemetry/standalone-libraries/setup-mixpanel/">
+    <link rel="canonical" href="https://workleap.github.io/wl-telemetry/standalone-libraries/mixpanel/reference/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://workleap.github.io/wl-telemetry/standalone-libraries/setup-mixpanel/">
-    <meta property="og:title" content="Setup Mixpanel">
-    <meta property="og:description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
+    <meta property="og:url" content="https://workleap.github.io/wl-telemetry/standalone-libraries/mixpanel/reference/">
+    <meta property="og:title" content="Reference - Mixpanel">
+    <meta property="og:description" content="Initialize Mixpanel with Workleap's default settings.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://workleap.github.io/wl-telemetry/standalone-libraries/setup-mixpanel/">
-    <meta property="twitter:title" content="Setup Mixpanel">
-    <meta property="twitter:description" content="Prefer using the @workleap/telemetry umbrella package over this standalone library.">
+    <meta property="twitter:url" content="https://workleap.github.io/wl-telemetry/standalone-libraries/mixpanel/reference/">
+    <meta property="twitter:title" content="Reference - Mixpanel">
+    <meta property="twitter:description" content="Initialize Mixpanel with Workleap's default settings.">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="../../static/favicon.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.11.0.824007373320" rel="stylesheet">
+    <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
+    <link href="../../../resources/css/retype.css?v=3.12.0.824181891485" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.824007373320" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.824007373320" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.824007373320" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.12.0.824181891485" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.12.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.12.0.824181891485" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.12.0.824181891485" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -88,10 +88,10 @@
                                 <path d="M10.6763 23.0822C10.4303 23.328 10.0967 23.4661 9.74885 23.4661C9.40103 23.4661 9.06744 23.328 8.82135 23.0822L1.38384 15.6447C1.13806 15.3986 1 15.065 1 14.7172C1 14.3694 1.13806 14.0358 1.38384 13.7897L8.82135 6.35222C9.0703 6.1205 9.39939 5.99432 9.73945 6.0002C10.0795 6.00607 10.404 6.14354 10.6448 6.38372C10.885 6.62452 11.0225 6.94906 11.0284 7.28912C11.0342 7.62917 10.9081 7.95826 10.6763 8.20722L4.16635 14.7172L10.6763 21.2272C10.9221 21.4733 11.0602 21.8069 11.0602 22.1547C11.0602 22.5025 10.9221 22.8361 10.6763 23.0822Z" />
                             </svg>
                         </a>
-                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-2xl">
+                        <a id="retype-branding-logo" href="../../../" class="flex items-center leading-snug text-2xl">
                             <span class="w-10 mr-2 grow-0 shrink-0 overflow-hidden">
-                                <img class="max-h-10 dark:hidden md:inline-block" src="../../static/logo.png">
-                                <img class="max-h-10 hidden dark:inline-block" src="../../static/logo.png">
+                                <img class="max-h-10 dark:hidden md:inline-block" src="../../../static/logo.png">
+                                <img class="max-h-10 hidden dark:inline-block" src="../../../static/logo.png">
                             </span>
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">Telemetry</span>
                         </a>
@@ -105,7 +105,7 @@
                     <nav id="retype-header-nav" class="hidden md:flex">
                         <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="../../introduction/getting-started/">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="../../../introduction/getting-started/">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path d="M11.03 2.59a1.501 1.501 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"/>
@@ -115,7 +115,7 @@
                                 </a>
                             </li>
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/issues" target="_blank">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/issues" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Zm9.5 2a2 2 0 1 1-.001-3.999A2 2 0 0 1 12 14Z"/>
@@ -125,7 +125,7 @@
                                 </a>
                             </li>
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/discussions" target="_blank">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/discussions" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 14.25 14H8.061l-2.574 2.573A1.458 1.458 0 0 1 3 15.543V14H1.75A1.75 1.75 0 0 1 0 12.25v-9.5C0 1.784.784 1 1.75 1ZM1.5 2.75v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Z"/><path d="M22.5 8.75a.25.25 0 0 0-.25-.25h-3.5a.75.75 0 0 1 0-1.5h3.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 22.25 20H21v1.543a1.457 1.457 0 0 1-2.487 1.03L15.939 20H10.75A1.75 1.75 0 0 1 9 18.25v-1.465a.75.75 0 0 1 1.5 0v1.465c0 .138.112.25.25.25h5.5a.75.75 0 0 1 .53.22l2.72 2.72v-2.19a.75.75 0 0 1 .75-.75h2a.25.25 0 0 0 .25-.25v-9.5Z"/>
@@ -135,7 +135,7 @@
                                 </a>
                             </li>
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/releases" target="_blank">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/releases" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path d="M7.75 6.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path d="M2.5 1h8.44a1.5 1.5 0 0 1 1.06.44l10.25 10.25a1.5 1.5 0 0 1 0 2.12l-8.44 8.44a1.5 1.5 0 0 1-2.12 0L1.44 12A1.497 1.497 0 0 1 1 10.94V2.5A1.5 1.5 0 0 1 2.5 1Zm0 1.5v8.44l10.25 10.25 8.44-8.44L10.94 2.5Z"/>
@@ -145,17 +145,17 @@
                                 </a>
                             </li>
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry" target="_blank">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
-                                            <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-2.764.509-3.479-.674-3.699-1.292-.124-.317-.66-1.293-1.127-1.554-.385-.207-.936-.715-.014-.729.866-.014 1.485.797 1.691 1.128.99 1.663 2.571 1.196 3.204.907.096-.715.385-1.196.701-1.471-2.448-.275-5.005-1.224-5.005-5.432 0-1.196.426-2.186 1.128-2.956-.111-.275-.496-1.402.11-2.915 0 0 .921-.288 3.024 1.128a10.193 10.193 0 0 1 2.75-.371c.936 0 1.871.123 2.75.371 2.104-1.43 3.025-1.128 3.025-1.128.605 1.513.221 2.64.111 2.915.701.77 1.127 1.747 1.127 2.956 0 4.222-2.571 5.157-5.019 5.432.399.344.743 1.004.743 2.035 0 1.471-.014 2.654-.014 3.025 0 .289.206.632.756.522C19.851 20.979 23 16.854 23 12c0-6.077-4.922-11-11-11Z"/>
+                                            <path d="M10.303 16.652c-2.837-.344-4.835-2.385-4.835-5.028 0-1.074.387-2.235 1.031-3.008-.279-.709-.236-2.214.086-2.837.86-.107 2.02.344 2.708.967.816-.258 1.676-.386 2.728-.386 1.053 0 1.913.128 2.686.365.666-.602 1.848-1.053 2.708-.946.3.581.344 2.085.064 2.815.688.817 1.053 1.913 1.053 3.03 0 2.643-1.998 4.641-4.877 5.006.73.473 1.224 1.504 1.224 2.686v2.235c0 .644.537 1.01 1.182.752 3.889-1.483 6.94-5.372 6.94-10.185 0-6.081-4.942-11.044-11.022-11.044-6.081 0-10.98 4.963-10.98 11.044a10.84 10.84 0 0 0 7.112 10.206c.58.215 1.139-.172 1.139-.752v-1.719a2.768 2.768 0 0 1-1.032.215c-1.418 0-2.256-.773-2.857-2.213-.237-.58-.495-.924-.989-.988-.258-.022-.344-.129-.344-.258 0-.258.43-.451.86-.451.623 0 1.16.386 1.719 1.181.43.623.881.903 1.418.903.537 0 .881-.194 1.375-.688.365-.365.645-.687.903-.902Z"/>
                                         </g>
                                     </svg>
                                     <span>Github</span>
                                 </a>
                             </li>
                             <li class="mr-6">
-                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://www.npmjs.com/settings/workleap/packages" target="_blank">
+                                <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://www.npmjs.com/settings/workleap/packages" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                         <g fill="currentColor">
                                             <path d="M0 0H24V24H0V0Z" fill="#CC0000"/><path d="M11.9184 2.57758H2.57764V21.4214H11.9175V7.32958H16.6695V21.4214H21.4215V2.57758H11.9184Z" fill="white"/>
@@ -167,31 +167,6 @@
         
                         </ul>
                     </nav>
-        
-                    <!-- Header Right Skeleton -->
-                    <div v-cloak class="flex justify-end grow skeleton">
-        
-                        <!-- Search input mock -->
-                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
-                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
-                            </div>
-                            <input class="w-full h-10 placeholder-search-placeholder transition-colors duration-200 ease-in bg-search-bg border border-transparent rounded md:text-sm hover:border-search-border-hover focus:outline-none focus:border-search-border-focus" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
-                        </div>
-        
-                        <!-- Mobile search button -->
-                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
-                        </div>
-        
-                        <!-- Dark mode switch placeholder -->
-                        <div class="w-10 h-10 lg:ml-2"></div>
-        
-                        <!-- History button -->
-                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
-                        </div>
-                    </div>
         
                     <div v-cloak class="flex justify-end grow">
                         <div id="retype-mobile-search-button"></div>
@@ -230,7 +205,7 @@
                             <nav>
                                 <ul class="flex flex-wrap justify-center items-center">
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="../../introduction/getting-started/">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="../../../introduction/getting-started/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path d="M11.03 2.59a1.501 1.501 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"/>
@@ -240,7 +215,7 @@
                                         </a>
                                     </li>
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/issues" target="_blank">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/issues" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Zm9.5 2a2 2 0 1 1-.001-3.999A2 2 0 0 1 12 14Z"/>
@@ -250,7 +225,7 @@
                                         </a>
                                     </li>
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/discussions" target="_blank">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/discussions" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 14.25 14H8.061l-2.574 2.573A1.458 1.458 0 0 1 3 15.543V14H1.75A1.75 1.75 0 0 1 0 12.25v-9.5C0 1.784.784 1 1.75 1ZM1.5 2.75v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Z"/><path d="M22.5 8.75a.25.25 0 0 0-.25-.25h-3.5a.75.75 0 0 1 0-1.5h3.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 22.25 20H21v1.543a1.457 1.457 0 0 1-2.487 1.03L15.939 20H10.75A1.75 1.75 0 0 1 9 18.25v-1.465a.75.75 0 0 1 1.5 0v1.465c0 .138.112.25.25.25h5.5a.75.75 0 0 1 .53.22l2.72 2.72v-2.19a.75.75 0 0 1 .75-.75h2a.25.25 0 0 0 .25-.25v-9.5Z"/>
@@ -260,7 +235,7 @@
                                         </a>
                                     </li>
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/releases" target="_blank">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry/releases" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path d="M7.75 6.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path d="M2.5 1h8.44a1.5 1.5 0 0 1 1.06.44l10.25 10.25a1.5 1.5 0 0 1 0 2.12l-8.44 8.44a1.5 1.5 0 0 1-2.12 0L1.44 12A1.497 1.497 0 0 1 1 10.94V2.5A1.5 1.5 0 0 1 2.5 1Zm0 1.5v8.44l10.25 10.25 8.44-8.44L10.94 2.5Z"/>
@@ -270,17 +245,17 @@
                                         </a>
                                     </li>
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry" target="_blank">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://github.com/workleap/wl-telemetry" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
-                                                    <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-2.764.509-3.479-.674-3.699-1.292-.124-.317-.66-1.293-1.127-1.554-.385-.207-.936-.715-.014-.729.866-.014 1.485.797 1.691 1.128.99 1.663 2.571 1.196 3.204.907.096-.715.385-1.196.701-1.471-2.448-.275-5.005-1.224-5.005-5.432 0-1.196.426-2.186 1.128-2.956-.111-.275-.496-1.402.11-2.915 0 0 .921-.288 3.024 1.128a10.193 10.193 0 0 1 2.75-.371c.936 0 1.871.123 2.75.371 2.104-1.43 3.025-1.128 3.025-1.128.605 1.513.221 2.64.111 2.915.701.77 1.127 1.747 1.127 2.956 0 4.222-2.571 5.157-5.019 5.432.399.344.743 1.004.743 2.035 0 1.471-.014 2.654-.014 3.025 0 .289.206.632.756.522C19.851 20.979 23 16.854 23 12c0-6.077-4.922-11-11-11Z"/>
+                                                    <path d="M10.303 16.652c-2.837-.344-4.835-2.385-4.835-5.028 0-1.074.387-2.235 1.031-3.008-.279-.709-.236-2.214.086-2.837.86-.107 2.02.344 2.708.967.816-.258 1.676-.386 2.728-.386 1.053 0 1.913.128 2.686.365.666-.602 1.848-1.053 2.708-.946.3.581.344 2.085.064 2.815.688.817 1.053 1.913 1.053 3.03 0 2.643-1.998 4.641-4.877 5.006.73.473 1.224 1.504 1.224 2.686v2.235c0 .644.537 1.01 1.182.752 3.889-1.483 6.94-5.372 6.94-10.185 0-6.081-4.942-11.044-11.022-11.044-6.081 0-10.98 4.963-10.98 11.044a10.84 10.84 0 0 0 7.112 10.206c.58.215 1.139-.172 1.139-.752v-1.719a2.768 2.768 0 0 1-1.032.215c-1.418 0-2.256-.773-2.857-2.213-.237-.58-.495-.924-.989-.988-.258-.022-.344-.129-.344-.258 0-.258.43-.451.86-.451.623 0 1.16.386 1.719 1.181.43.623.881.903 1.418.903.537 0 .881-.194 1.375-.688.365-.365.645-.687.903-.902Z"/>
                                                 </g>
                                             </svg>
                                             <span>Github</span>
                                         </a>
                                     </li>
                                     <li class="mr-6">
-                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text-weight hover:text-header-text-hover" href="https://www.npmjs.com/settings/workleap/packages" target="_blank">
+                                        <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://www.npmjs.com/settings/workleap/packages" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                 <g fill="currentColor">
                                                     <path d="M0 0H24V24H0V0Z" fill="#CC0000"/><path d="M11.9184 2.57758H2.57764V21.4214H11.9175V7.32958H16.6695V21.4214H21.4215V2.57758H11.9184Z" fill="white"/>
@@ -308,7 +283,7 @@
                                 <nav id="retype-breadcrumb" class="breadcrumb" aria-label="Breadcrumb">
                                     <ol role="list">
                                         <li class="pr-4">
-                                            <a href="../../standalone-libraries/" class="pr-4">
+                                            <a href="../../../standalone-libraries/" class="pr-4">
                                                 Standalone libraries
                                             </a>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
@@ -316,201 +291,33 @@
                                             </svg>
                                         </li>
                                         <li class="pr-4">
-                                            <a href="../../standalone-libraries/setup-mixpanel/" class="pr-4">
-                                                Setup Mixpanel
+                                            <span class="pr-4">
+                                                Mixpanel
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"/>
+                                            </svg>
+                                        </li>
+                                        <li class="pr-4">
+                                            <a href="../../../standalone-libraries/mixpanel/reference/" class="pr-4">
+                                                Reference
                                             </a>
                                         </li>
                                     </ol>
                                 </nav>
                 
                                 <!-- Page content  -->
-<doc-anchor-target id="setup-mixpanel" class="break-words">
+<doc-anchor-target id="reference" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#setup-mixpanel">#</doc-anchor-trigger>
-        <span>Setup Mixpanel</span>
-    </h1>
-</doc-anchor-target>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-warning"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-warning" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
-                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-<p>Prefer using the <a href="../../introduction/getting-started/">@workleap/telemetry</a> umbrella package over this standalone library.</p>
-        </div>
-    </div>
-</div>
-<p>While we recommend using the <code v-pre>@workleap/telemetry</code> umbrella package, Workleap&#x27;s LogRocket instrumentation can also be used as a standalone <a href="https://www.npmjs.com/package/@workleap/mixpanel" class="outbound" target="_blank">@worleap/mixpanel</a> package.</p>
-<p>To set it up, follow these steps <span class="docs-emoji">&#x1F447;</span></p>
-<doc-anchor-target id="install-the-packages">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#install-the-packages">#</doc-anchor-trigger>
-        <span>Install the packages</span>
-    </h2>
-</doc-anchor-target>
-<p>First, open a terminal at the root of the application and install the following packages:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/mixpanel</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="initialize-mixpanel">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-mixpanel">#</doc-anchor-trigger>
-        <span>Initialize Mixpanel</span>
-    </h2>
-</doc-anchor-target>
-<p>Then, initialize Mixpanel using the <doc-anchor-trigger to="#initialize-mixpanel">initializeMixpanel</doc-anchor-trigger> function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-tsx" data-line="6-8,14,16"><code v-pre class="language-tsx">import { initializeMixpanel, MixpanelProvider, createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
-import { StrictMode } from &quot;react&quot;;
-import { createRoot } from &quot;react-dom/client&quot;;
-import { App } from &quot;./App.tsx&quot;;
-
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
-    telemetryContext: createTelemetryContext()
-});
-
-const root = createRoot(document.getElementById(&quot;root&quot;)!);
-
-root.render(
-    &lt;StrictMode&gt;
-        &lt;MixpanelProvider client={client}&gt;
-            &lt;App /&gt;
-        &lt;/MixpanelProvider&gt;
-    &lt;/StrictMode&gt;
-);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="create-a-track-function">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#create-a-track-function">#</doc-anchor-trigger>
-        <span>Create a track function</span>
-    </h2>
-</doc-anchor-target>
-<p>Then create a <code v-pre>track</code> function using the <doc-anchor-trigger to="#usetrackingfunction">useTrackingFunction</doc-anchor-trigger> hook if the host application is in React:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
-
-const track = useTrackingFunction();
-
-track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="track-an-event">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-an-event">#</doc-anchor-trigger>
-        <span>Track an event</span>
-    </h2>
-</doc-anchor-target>
-<p>Finally, using the retrieved <code v-pre>track</code> function to send a telemetry event:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
-
-const track = useTrackingFunction();
-
-track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="track-a-link">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-link">#</doc-anchor-trigger>
-        <span>Track a link</span>
-    </h2>
-</doc-anchor-target>
-<p>Link clicks requires to keep the page alive while the tracking request is being processed. To do so, set the <code v-pre>keepAlive</code> option of the <code v-pre>track</code> function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
-
-const track = useTrackingFunction();
-
-track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; }, {
-    keepAlive: true
-});</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="set-custom-user-properties">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#set-custom-user-properties">#</doc-anchor-trigger>
-        <span>Set custom user properties</span>
-    </h2>
-</doc-anchor-target>
-<p>Most applications need to set custom properties about the current user environment on all events. To help with that, <doc-anchor-trigger to="#mixpanelclient">MixpanelClient</doc-anchor-trigger> expose the <doc-anchor-trigger to="#methods">setGlobalEventProperties</doc-anchor-trigger> method:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="5-7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
-
-const client = useMixpanelClient();
-
-client.setGlobalEventProperties({
-    &quot;User Id&quot;: &quot;123&quot; 
-})</code></pre>
-</doc-codeblock></div>
-<p>Now, every event recorded after the execution of <code v-pre>setGlobalEventProperties</code> will include the custom property <code v-pre>User Id</code>.</p>
-<doc-anchor-target id="integrate-with-logrocket">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#integrate-with-logrocket">#</doc-anchor-trigger>
-        <span>Integrate with LogRocket</span>
-    </h2>
-</doc-anchor-target>
-<p>Starting with version <code v-pre>3.0</code>, attaching LogRocket session replays to Mixpanel events requires providing a <code v-pre>LogRocketInstrumentationClient</code> to the registration function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-tsx" data-line="7,11"><code v-pre class="language-tsx">import { initializeMixpanel, MixpanelProvider, createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
-import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
-import { StrictMode } from &quot;react&quot;;
-import { createRoot } from &quot;react-dom/client&quot;;
-import { App } from &quot;./App.tsx&quot;;
-
-const logRocketInstrumentationClient = registerLogRocketInstrumentation(&quot;my-app-id&quot;);
-
-const mixpanelClient = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
-    telemetryContext: createTelemetryContext(),
-    logRocketInstrumentationClient
-});
-
-const root = createRoot(document.getElementById(&quot;root&quot;)!);
-
-root.render(
-    &lt;StrictMode&gt;
-        &lt;MixpanelProvider client={mixpanelClient}&gt;
-            &lt;App /&gt;
-        &lt;/MixpanelProvider&gt;
-    &lt;/StrictMode&gt;
-);</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="try-it-rocket">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#try-it-rocket">#</doc-anchor-trigger>
-        <span>Try it <span class="docs-emoji">&#x1F680;</span></span>
-    </h2>
-</doc-anchor-target>
-<p>Start the application in a development environment using the dev script. Render a page, then navigate to your <a href="https://mixpanel.com/" class="outbound" target="_blank">Mixpanel</a> instance. Go to &quot;Events&quot; page. If you are tracking events, you should see a new event appear.</p>
-<p>You can try filtering the event list using different properties, such as:</p>
-<ul>
-<li><code v-pre>User Id</code></li>
-</ul>
-<doc-anchor-target id="troubleshoot-issues">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#troubleshoot-issues">#</doc-anchor-trigger>
-        <span>Troubleshoot issues</span>
-    </h3>
-</doc-anchor-target>
-<p>If you are experiencing issues with this guide:</p>
-<ul>
-<li>Set the <doc-anchor-trigger to="#verbose-mode">verbose</doc-anchor-trigger> predefined option to <code v-pre>true</code>.</li>
-<li>Open the <a href="https://developer.chrome.com/docs/devtools/" class="outbound" target="_blank">DevTools</a> console and look for logs starting with <code v-pre>[mixpanel]</code>.</li>
-<li>Refer to the sample on <a href="https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms" class="outbound" target="_blank">GitHub</a>.</li>
-</ul>
-<doc-anchor-target id="reference">
-    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#reference">#</doc-anchor-trigger>
         <span>Reference</span>
-    </h2>
+    </h1>
 </doc-anchor-target>
 <doc-anchor-target id="initializemixpanel">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#initializemixpanel">#</doc-anchor-trigger>
-        <span>initializeMixpanel</span>
-    </h3>
+        <span><code translate="no" v-pre>initializeMixpanel</code></span>
+    </h2>
 </doc-anchor-target>
 <p>Initialize <a href="https://mixpanel.com" class="outbound" target="_blank">Mixpanel</a> with Workleap&#x27;s default settings.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -523,101 +330,114 @@ root.render(
 })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#parameters">#</doc-anchor-trigger>
         <span>Parameters</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>productId</code>: The product id.</li>
-<li><code v-pre>envOrTrackingApiBaseUrl</code>: The environment to get the navigation url from or a base URL.</li>
-<li><code v-pre>options</code>: An optional object literal of options:
+<li><code translate="no" v-pre>envOrTrackingApiBaseUrl</code>: The environment to get the navigation url from or a base URL.</li>
+<li><code translate="no" v-pre>options</code>: An optional object literal of options:
 <ul>
-<li><code v-pre>trackingEndpoint</code>: An optional tracking endpoint.</li>
-<li><code v-pre>telemetryContext</code>: A <code v-pre>TelemetryContext</code> instance containing the telemetry correlation ids to attach to Honeycomb traces. Starting with version <code v-pre>7.0</code>, if no telemetry context is provided, the correlation ids will not be attached to Honeycomb traces.</li>
-<li><code v-pre>logRocketInstrumentationClient</code>: A <code v-pre>LogRocketInstrumentationClient</code> instance to integrate Honeycomb traces with LogRocket session replays. Starting with version <code v-pre>7.0</code>, if no LogRocket instrumentation client is provided, the Honeycomb traces will not integrate with LogRocket session replays.</li>
-<li><code v-pre>verbose</code>: If no <code v-pre>loggers</code> are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
-<li><code v-pre>loggers</code>: An optional array of <code v-pre>RootLogger</code> instances.</li>
+<li><code translate="no" v-pre>productId</code>: An optional product id.</li>
+<li><code translate="no" v-pre>trackingEndpoint</code>: An optional tracking endpoint.</li>
+<li><code translate="no" v-pre>telemetryContext</code>: A <code translate="no" v-pre>TelemetryContext</code> instance containing the telemetry correlation ids to attach to Honeycomb traces.</li>
+<li><code translate="no" v-pre>logRocketInstrumentationClient</code>: A <code translate="no" v-pre>LogRocketInstrumentationClient</code> instance to integrate Honeycomb traces with LogRocket session replays.</li>
+<li><code translate="no" v-pre>verbose</code>: If no <code translate="no" v-pre>loggers</code> are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
+<li><code translate="no" v-pre>loggers</code>: An optional array of <code translate="no" v-pre>RootLogger</code> instances.</li>
 </ul>
 </li>
 </ul>
 <doc-anchor-target id="returns">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#returns">#</doc-anchor-trigger>
         <span>Returns</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <p>A <doc-anchor-trigger to="#mixpanelclient">MixpanelClient</doc-anchor-trigger> instance.</p>
 <doc-anchor-target id="environments">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#environments">#</doc-anchor-trigger>
         <span>Environments</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <p>Supported environments are:</p>
 <ul>
-<li><code v-pre>production</code></li>
-<li><code v-pre>staging</code></li>
-<li><code v-pre>development</code></li>
-<li><code v-pre>local</code></li>
-<li><code v-pre>msw</code></li>
+<li><code translate="no" v-pre>production</code></li>
+<li><code translate="no" v-pre>staging</code></li>
+<li><code translate="no" v-pre>development</code></li>
+<li><code translate="no" v-pre>local</code></li>
+<li><code translate="no" v-pre>msw</code></li>
 </ul>
 <doc-anchor-target id="initialize-with-a-predefined-environment">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-with-a-predefined-environment">#</doc-anchor-trigger>
         <span>Initialize with a predefined environment</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <p>Mixpanel can be initialized for any of the following predefined environments:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;);</code></pre>
+const client = initializeMixpanel(&quot;development&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="initialize-with-a-base-url">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-with-a-base-url">#</doc-anchor-trigger>
         <span>Initialize with a base url</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;https://my-tracking-api&quot;);</code></pre>
+const client = initializeMixpanel(&quot;https://my-tracking-api&quot;);</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="use-a-custom-tracking-endpoint">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#use-a-custom-tracking-endpoint">#</doc-anchor-trigger>
-        <span>Use a custom tracking endpoint</span>
-    </h4>
+<doc-anchor-target id="initialize-with-a-product-id">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-with-a-product-id">#</doc-anchor-trigger>
+        <span>Initialize with a product id</span>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;development&quot;, {
+    productId: &quot;wlp&quot;
+});</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="use-a-custom-tracking-endpoint">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#use-a-custom-tracking-endpoint">#</doc-anchor-trigger>
+        <span>Use a custom tracking endpoint</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
+
+const client = initializeMixpanel(&quot;development&quot;, {
     trackingEndpoint: &quot;custom/tracking/track&quot;
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="initialize-with-a-telemetry-context">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#initialize-with-a-telemetry-context">#</doc-anchor-trigger>
         <span>Initialize with a telemetry context</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel, createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
 const telemetryContext = createTelemetryContext();
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;development&quot;, {
     telemetryContext
 });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="integrate-with-logrocket-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#integrate-with-logrocket-1">#</doc-anchor-trigger>
+<doc-anchor-target id="integrate-with-logrocket">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#integrate-with-logrocket">#</doc-anchor-trigger>
         <span>Integrate with LogRocket</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4,7"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
@@ -625,84 +445,89 @@ import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react
 
 const logRocketInstrumentationClient = registerLogRocketInstrumentation(&quot;my-app-id&quot;);
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;development&quot;, {
     logRocketInstrumentationClient
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="verbose-mode">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#verbose-mode">#</doc-anchor-trigger>
         <span>Verbose mode</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;development&quot;, {
     verbose: true
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="use-loggers">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#use-loggers">#</doc-anchor-trigger>
         <span>Use loggers</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
+const client = initializeMixpanel(&quot;development&quot;, {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="mixpanelclient">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#mixpanelclient">#</doc-anchor-trigger>
-        <span>MixpanelClient</span>
-    </h3>
+        <span><code translate="no" v-pre>MixpanelClient</code></span>
+    </h2>
 </doc-anchor-target>
 <p>A lightweight client providing access to Mixpanel utilities.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = new MixpanelClient(productId, endpoint, superProperties, logger);</code></pre>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = new MixpanelClient(endpoint, superProperties, logger, options?);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-1">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-1">#</doc-anchor-trigger>
         <span>Parameters</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>productId</code>: The product id.</li>
-<li><code v-pre>endpoint</code>: The Mixpanel endpoint URL.</li>
-<li><code v-pre>globalProperties</code>: Properties to attach to all events.</li>
-<li><code v-pre>logger</code>: A <code v-pre>Logger</code> instance.</li>
+<li><code translate="no" v-pre>productId</code>: The product id.</li>
+<li><code translate="no" v-pre>endpoint</code>: The Mixpanel endpoint URL.</li>
+<li><code translate="no" v-pre>globalProperties</code>: Properties to attach to all events.</li>
+<li><code translate="no" v-pre>logger</code>: A <code translate="no" v-pre>Logger</code> instance.</li>
+<li><code translate="no" v-pre>options</code>: An optional object literal of options:
+<ul>
+<li><code translate="no" v-pre>productId</code>: An optional product id.</li>
+</ul>
+</li>
 </ul>
 <doc-anchor-target id="methods">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#methods">#</doc-anchor-trigger>
         <span>Methods</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>createTrackingFunction(options?: { targetProductId? })</code>: Returns a <doc-anchor-trigger to="#trackingfunction">TrackingFunction</doc-anchor-trigger> function sending <code v-pre>POST</code> requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.</li>
-<li><code v-pre>setGlobalProperty(key, value)</code>: Set a single global property that will be attached to all events.</li>
-<li><code v-pre>setGlobalProperties(values)</code>: Set one or multiple global properties that will be attached to all events.</li>
+<li><code translate="no" v-pre>createTrackingFunction(options?: { productId?, targetProductId? })</code>: Returns a <doc-anchor-trigger to="#trackingfunction">TrackingFunction</doc-anchor-trigger> function sending <code translate="no" v-pre>POST</code> requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.</li>
+<li><code translate="no" v-pre>setGlobalProperty(key, value)</code>: Set a single global property that will be attached to all events.</li>
+<li><code translate="no" v-pre>setGlobalProperties(values)</code>: Set one or multiple global properties that will be attached to all events.</li>
 </ul>
 <doc-anchor-target id="trackingfunction">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#trackingfunction">#</doc-anchor-trigger>
-        <span><code v-pre>TrackingFunction</code></span>
-    </h4>
+        <span><code translate="no" v-pre>TrackingFunction</code></span>
+    </h3>
 </doc-anchor-target>
-<p>A <code v-pre>TrackingFunction</code> have the following signature: <code v-pre>(eventName, properties: {}, options?: { keepAlive }) =&gt; Promise&lt;void&gt;</code>.</p>
+<p>A <code translate="no" v-pre>TrackingFunction</code> have the following signature: <code translate="no" v-pre>(eventName, properties: {}, options?: { keepAlive }) =&gt; Promise&lt;void&gt;</code>.</p>
 <ul>
-<li><code v-pre>eventName</code>: The event name.</li>
-<li><code v-pre>properties</code>: The event properties.</li>
-<li><code v-pre>options</code>: An optional object literal of options:
+<li><code translate="no" v-pre>eventName</code>: The event name.</li>
+<li><code translate="no" v-pre>properties</code>: The event properties.</li>
+<li><code translate="no" v-pre>options</code>: An optional object literal of options:
 <ul>
-<li><code v-pre>keepAlive</code>: Whether or not to keep the connection alive for the tracking request. It is mostly used for tracking links where the user might navigate away before the request is completed.</li>
+<li><code translate="no" v-pre>keepAlive</code>: Whether or not to keep the connection alive for the tracking request. It is mostly used for tracking links where the user might navigate away before the request is completed.</li>
 </ul>
 </li>
 </ul>
@@ -722,10 +547,10 @@ const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;, {
     </div>
 </div>
 <doc-anchor-target id="track-events">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#track-events">#</doc-anchor-trigger>
         <span>Track events</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5,7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
@@ -736,13 +561,31 @@ const track = client.createTrackingFunction();
 
 track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="specify-a-product-id">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#specify-a-product-id">#</doc-anchor-trigger>
+        <span>Specify a product id</span>
+    </h3>
+</doc-anchor-target>
+<p>To track an action targeting a specific product, use the <code translate="no" v-pre>productId</code> option:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
+
+const client = useMixpanelClient();
+
+const track = client.createTrackingFunction({
+    productId: &quot;wlp&quot;
+});
+
+track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="specify-a-target-product">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#specify-a-target-product">#</doc-anchor-trigger>
         <span>Specify a target product</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
-<p>To track an action targeting another product, use the <code v-pre>targetProductId</code> option:</p>
+<p>To track an action targeting another product, use the <code translate="no" v-pre>targetProductId</code> option:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
@@ -754,13 +597,13 @@ const track = client.createTrackingFunction({
 
 track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="track-a-link-1">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-link-1">#</doc-anchor-trigger>
+<doc-anchor-target id="track-a-link">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-link">#</doc-anchor-trigger>
         <span>Track a link</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
-<p>To track a link click, use the <code v-pre>keepAlive</code> option to keep the page alive while the tracking request is being processed:</p>
+<p>To track a link click, use the <code translate="no" v-pre>keepAlive</code> option to keep the page alive while the tracking request is being processed:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="8"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
@@ -773,10 +616,10 @@ track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &q
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="register-global-properties">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#register-global-properties">#</doc-anchor-trigger>
         <span>Register global properties</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
@@ -788,10 +631,10 @@ client.setGlobalEventProperties({
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="noopmixpanelclient">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#noopmixpanelclient">#</doc-anchor-trigger>
-        <span>NoopMixpanelClient</span>
-    </h3>
+        <span><code translate="no" v-pre>NoopMixpanelClient</code></span>
+    </h2>
 </doc-anchor-target>
 <p>A fake implementation of <doc-anchor-trigger to="#mixpanelclient">NoopMixpanelClient</doc-anchor-trigger> for use in non-standard contexts such as unit tests and Storybook.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -800,38 +643,38 @@ client.setGlobalEventProperties({
 const client = new NoopMixpanelClient();</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="mixpanelprovider">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#mixpanelprovider">#</doc-anchor-trigger>
-        <span>MixpanelProvider</span>
-    </h3>
+        <span><code translate="no" v-pre>MixpanelProvider</code></span>
+    </h2>
 </doc-anchor-target>
-<p>React provider to share a <code v-pre>MixpanelClient</code> instance with the application code.</p>
+<p>React provider to share a <code translate="no" v-pre>MixpanelClient</code> instance with the application code.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">&lt;MixpanelProvider client={client}&gt;
     &lt;App /&gt;
 &lt;/MixpanelProvider&gt;</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="properties">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#properties">#</doc-anchor-trigger>
         <span>Properties</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>client</code>: A <doc-anchor-trigger to="#mixpanelclient">MixpanelClient</doc-anchor-trigger> instance.</li>
+<li><code translate="no" v-pre>client</code>: A <doc-anchor-trigger to="#mixpanelclient">MixpanelClient</doc-anchor-trigger> instance.</li>
 </ul>
 <doc-anchor-target id="provide-a-client-instance">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#provide-a-client-instance">#</doc-anchor-trigger>
         <span>Provide a client instance</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx" data-line="10-12"><code v-pre class="language-tsx">import { initializeMixpanel, MixpanelProvider } from &quot;@workleap/mixpanel/react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;);
+const client = initializeMixpanel(&quot;development&quot;);
 
 const root = createRoot(document.getElementById(&quot;root&quot;));
 
@@ -842,55 +685,55 @@ root.render(
 );</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="retrieve-a-client-instance">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#retrieve-a-client-instance">#</doc-anchor-trigger>
         <span>Retrieve a client instance</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
-const client = initializeMixpanel(&quot;wlp&quot;, &quot;development&quot;);
+const client = initializeMixpanel(&quot;development&quot;);
 
 client.setGlobalEventProperties({
     &quot;User Id&quot;: &quot;123&quot;
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="usemixpanelclient">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#usemixpanelclient">#</doc-anchor-trigger>
-        <span>useMixpanelClient</span>
-    </h3>
+        <span><code translate="no" v-pre>useMixpanelClient</code></span>
+    </h2>
 </doc-anchor-target>
-<p>Retrieve a <code v-pre>MixpanelClient</code> instance.</p>
+<p>Retrieve a <code translate="no" v-pre>MixpanelClient</code> instance.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useMixpanelClient(options?: { throwOnUndefined? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-2">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-2">#</doc-anchor-trigger>
         <span>Parameters</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>options</code>: An optional object literal of options:
+<li><code translate="no" v-pre>options</code>: An optional object literal of options:
 <ul>
-<li><code v-pre>throwOnUndefined</code>: Whether or not an exception should be thrown if a client instance hasn&#x27;t been provided.</li>
+<li><code translate="no" v-pre>throwOnUndefined</code>: Whether or not an exception should be thrown if a client instance hasn&#x27;t been provided.</li>
 </ul>
 </li>
 </ul>
 <doc-anchor-target id="returns-1">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#returns-1">#</doc-anchor-trigger>
         <span>Returns</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <p>A <doc-anchor-trigger to="#mixpanelclient">MixpanelClient</doc-anchor-trigger> instance.</p>
 <doc-anchor-target id="usage">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#usage">#</doc-anchor-trigger>
         <span>Usage</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
@@ -902,41 +745,42 @@ client.setGlobalEventProperties({
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="usetrackingfunction">
-    <h3>
+    <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#usetrackingfunction">#</doc-anchor-trigger>
-        <span>useTrackingFunction</span>
-    </h3>
+        <span><code translate="no" v-pre>useTrackingFunction</code></span>
+    </h2>
 </doc-anchor-target>
-<p>Returns a function sending <code v-pre>POST</code> requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.</p>
+<p>Returns a function sending <code translate="no" v-pre>POST</code> requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const track = useTrackingFunction(options?: { targetProductId })</code></pre>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const track = useTrackingFunction(options?: { productId?, targetProductId? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-3">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-3">#</doc-anchor-trigger>
         <span>Parameters</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>options</code>: An optional object literal of options:
+<li><code translate="no" v-pre>options</code>: An optional object literal of options:
 <ul>
-<li><code v-pre>targetProductId</code>: The product id of the target product. Useful to track an event for another product.</li>
+<li><code translate="no" v-pre>productId</code>: An optional product id.</li>
+<li><code translate="no" v-pre>targetProductId</code>: An optional product id of the target product. Useful to track an event for another product.</li>
 </ul>
 </li>
 </ul>
 <doc-anchor-target id="returns-2">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#returns-2">#</doc-anchor-trigger>
         <span>Returns</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
-<p>A <code v-pre>TrackingFunction</code> with the following signature: <code v-pre>(eventName, properties: {}, options?: { keepAlive }) =&gt; Promise&lt;void&gt;</code>.</p>
+<p>A <code translate="no" v-pre>TrackingFunction</code> with the following signature: <code translate="no" v-pre>(eventName, properties: {}, options?: { keepAlive }) =&gt; Promise&lt;void&gt;</code>.</p>
 <ul>
-<li><code v-pre>eventName</code>: The event name.</li>
-<li><code v-pre>properties</code>: The event properties.</li>
-<li><code v-pre>options</code>: An optional object literal of options:
+<li><code translate="no" v-pre>eventName</code>: The event name.</li>
+<li><code translate="no" v-pre>properties</code>: The event properties.</li>
+<li><code translate="no" v-pre>options</code>: An optional object literal of options:
 <ul>
-<li><code v-pre>keepAlive</code>: Whether or not to keep the connection alive for the tracking request. It is mostly used for tracking links where the user might navigate away before the request is completed.</li>
+<li><code translate="no" v-pre>keepAlive</code>: Whether or not to keep the connection alive for the tracking request. It is mostly used for tracking links where the user might navigate away before the request is completed.</li>
 </ul>
 </li>
 </ul>
@@ -956,10 +800,10 @@ client.setGlobalEventProperties({
     </div>
 </div>
 <doc-anchor-target id="track-events-1">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#track-events-1">#</doc-anchor-trigger>
         <span>Track events</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3,5"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
@@ -968,13 +812,29 @@ const track = useTrackingFunction();
 
 track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="specify-a-product-id-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#specify-a-product-id-1">#</doc-anchor-trigger>
+        <span>Specify a product id</span>
+    </h3>
+</doc-anchor-target>
+<p>To track an action targeting a specific product, use the <code translate="no" v-pre>productId</code> option:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
+
+const track = useTrackingFunction({
+    productId: &quot;wlp&quot;
+});
+
+track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="specify-a-target-product-1">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#specify-a-target-product-1">#</doc-anchor-trigger>
         <span>Specify a target product</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
-<p>To track an action targeting another product, use the <code v-pre>targetProductId</code> option:</p>
+<p>To track an action targeting another product, use the <code translate="no" v-pre>targetProductId</code> option:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
 
@@ -984,13 +844,13 @@ const track = useTrackingFunction({
 
 track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="track-a-link-2">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-link-2">#</doc-anchor-trigger>
+<doc-anchor-target id="track-a-link-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#track-a-link-1">#</doc-anchor-trigger>
         <span>Track a link</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
-<p>To track a link click, use the <code v-pre>keepAlive</code> option to keep the page alive while the tracking request is being processed:</p>
+<p>To track a link click, use the <code translate="no" v-pre>keepAlive</code> option to keep the page alive while the tracking request is being processed:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
 
@@ -1000,103 +860,221 @@ track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &q
     keepAlive: true
 });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="createtelemetrycontext">
+<doc-anchor-target id="mixpanelpropertiesprovider">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#mixpanelpropertiesprovider">#</doc-anchor-trigger>
+        <span><code translate="no" v-pre>MixpanelPropertiesProvider</code></span>
+    </h2>
+</doc-anchor-target>
+<p>A React provider used to define Mixpanel properties for nested components. These properties are automatically included in events tracked by nested components, provided the events are tracked using functions created with the <doc-anchor-trigger to="#usetrackingfunction">useTrackingFunction</doc-anchor-trigger> hook.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-tip"></div>
+    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-callout-tip" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M7.90625 2.15625C4.50944 2.15625 2.15625 4.58563 2.15625 7.54688C2.15625 8.96138 2.76575 9.88281 3.57075 10.8589L3.87837 11.2226C4.19894 11.6021 4.554 12.0218 4.84581 12.4416C5.25406 13.0324 5.61775 13.7296 5.7385 14.5834C5.76728 14.8608 5.68746 15.1386 5.51579 15.3583C5.34413 15.5781 5.09399 15.7228 4.8179 15.7621C4.5418 15.8013 4.26124 15.7321 4.03512 15.5689C3.809 15.4056 3.65493 15.1612 3.60525 14.8867C3.54775 14.4814 3.37094 14.1004 3.07338 13.6692C2.8306 13.3302 2.57055 13.0039 2.29425 12.6917C2.1735 12.5479 2.04556 12.397 1.909 12.2317C1.00769 11.1406 0 9.72613 0 7.54688C0 3.32062 3.39681 0 7.90625 0C12.4157 0 15.8125 3.32062 15.8125 7.54688C15.8125 9.72613 14.8048 11.1406 13.9035 12.2317C13.7669 12.397 13.639 12.5479 13.5183 12.6903C13.2207 13.0424 12.9677 13.3414 12.7406 13.6692C12.4416 14.1004 12.2662 14.4814 12.2087 14.8867C12.1557 15.1584 12.0003 15.3994 11.7747 15.5598C11.5492 15.7202 11.2706 15.7879 10.9965 15.7488C10.7225 15.7096 10.474 15.5667 10.3023 15.3496C10.1306 15.1325 10.0489 14.8577 10.074 14.582C10.1948 13.7296 10.5584 13.0324 10.9667 12.4416C11.2585 12.0218 11.6136 11.6021 11.9341 11.2226C12.0419 11.0961 12.1454 10.9739 12.2403 10.8589C13.0468 9.88281 13.6562 8.96138 13.6562 7.54688C13.6562 4.58563 11.3031 2.15625 7.90625 2.15625ZM4.67188 17.25H11.1406C11.4266 17.25 11.7008 17.3636 11.903 17.5658C12.1052 17.768 12.2188 18.0422 12.2188 18.3281C12.2188 18.6141 12.1052 18.8883 11.903 19.0905C11.7008 19.2927 11.4266 19.4062 11.1406 19.4062H4.67188C4.38594 19.4062 4.11171 19.2927 3.90953 19.0905C3.70734 18.8883 3.59375 18.6141 3.59375 18.3281C3.59375 18.0422 3.70734 17.768 3.90953 17.5658C4.11171 17.3636 4.38594 17.25 4.67188 17.25ZM5.03125 21.9219C5.03125 21.6359 5.14484 21.3617 5.34703 21.1595C5.54921 20.9573 5.82344 20.8438 6.10938 20.8438H9.70312C9.98906 20.8438 10.2633 20.9573 10.4655 21.1595C10.6677 21.3617 10.7812 21.6359 10.7812 21.9219C10.7812 22.2078 10.6677 22.482 10.4655 22.6842C10.2633 22.8864 9.98906 23 9.70312 23H6.10938C5.82344 23 5.54921 22.8864 5.34703 22.6842C5.14484 22.482 5.03125 22.2078 5.03125 21.9219Z" />
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Ensure that the value passed to <code translate="no" v-pre>MixpanelPropertiesProvider</code> is a <strong>static object</strong>, either defined outside components scope or memoized. Otherwise, the <code translate="no" v-pre>useTrackingFunction</code> hook will create a new tracking function on every render.</p>
+        </div>
+    </div>
+</div>
+<doc-anchor-target id="properties-1">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#createtelemetrycontext">#</doc-anchor-trigger>
-        <span>createTelemetryContext</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#properties-1">#</doc-anchor-trigger>
+        <span>Properties</span>
     </h3>
 </doc-anchor-target>
-<p>Creates a <code v-pre>TelemetryContext</code> instance containing the telemetry correlation ids.</p>
+<ul>
+<li><code translate="no" v-pre>value</code>: A <strong>static object</strong> literal of Mixpanel properties to track.</li>
+</ul>
+<doc-anchor-target id="define-a-provider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#define-a-provider">#</doc-anchor-trigger>
+        <span>Define a provider</span>
+    </h3>
+</doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const telemetryContext = createTelemetryContext(options?: { identityCookieExpiration?, identityCookieDomain?, verbose?, loggers? })</code></pre>
+<pre translate="no" class="language-tsx" data-line="9,11"><code v-pre class="language-tsx">import { MixpanelPropertiesProvider } from &quot;@workleap/mixpanel/react&quot;;
+
+const MixpanelProperties = {
+    section: &quot;User Form&quot;
+};
+
+function App() {
+    return (
+        &lt;MixpanelPropertiesProvider value={MixpanelProperties}&gt;
+            &lt;NestedComponent /&gt;
+        &lt;/MixpanelPropertiesProvider&gt;
+    )
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="track-an-event-with-additional-properties">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#track-an-event-with-additional-properties">#</doc-anchor-trigger>
+        <span>Track an event with additional properties</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-tsx" data-line="9,13,19-21"><code v-pre class="language-tsx">import { MixpanelPropertiesProvider, useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
+import { useEffect } from &quot;react&quot;;
+
+const MixpanelProperties = {
+    section: &quot;User Form&quot;
+};
+
+function NestedComponent() {
+    const track = useTrackingFunction();
+
+    // Please don't track in a &quot;useEffect&quot;, it's strictly for demo purpose.
+    useEffect(() =&gt; {
+        track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });
+    }, [track]);
+}
+
+function App() {
+    return (
+        &lt;MixpanelPropertiesProvider value={MixpanelProperties}&gt;
+            &lt;NestedComponent /&gt;
+        &lt;/MixpanelPropertiesProvider&gt;
+    )
+}</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="retrieve-the-provider-properties">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#retrieve-the-provider-properties">#</doc-anchor-trigger>
+        <span>Retrieve the provider properties</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useMixpanelProviderProperties } from &quot;@workleap/mixpanel/react&quot;;
+
+const props = useMixpanelProviderProperties();</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="createtelemetrycontext">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#createtelemetrycontext">#</doc-anchor-trigger>
+        <span><code translate="no" v-pre>createTelemetryContext</code></span>
+    </h2>
+</doc-anchor-target>
+<p>Creates a <code translate="no" v-pre>TelemetryContext</code> instance containing the telemetry correlation ids.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const telemetryContext = createTelemetryContext(productFamily, options?: { identityCookieExpiration?, verbose?, loggers? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-4">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#parameters-4">#</doc-anchor-trigger>
         <span>Parameters</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <ul>
-<li><code v-pre>options</code>: An optional object literal of options:
+<li><code translate="no" v-pre>productFamily</code>: <code translate="no" v-pre>wlp</code> or <code translate="no" v-pre>sg</code>.</li>
+<li><code translate="no" v-pre>options</code>: An optional object literal of options:
 <ul>
-<li><code v-pre>identityCookieExpiration</code>: The expiration date of the <code v-pre>wl-identity</code> cookie if the cookie hasn&#x27;t been already written. The default value is 365 days.</li>
-<li><code v-pre>identityCookieDomain</code>: The domain of the <code v-pre>wl-identity</code> cookie if the cookie hasn&#x27;t been already written. The default value is <code v-pre>*.workleap</code></li>
-<li><code v-pre>verbose</code>: If no loggers are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
-<li><code v-pre>loggers</code>: An optional array of <code v-pre>Logger</code> instances.</li>
+<li><code translate="no" v-pre>identityCookieExpiration</code>: The expiration date of the <code translate="no" v-pre>wl-identity</code> cookie if the cookie hasn&#x27;t been already written. The default value is 365 days.</li>
+<li><code translate="no" v-pre>verbose</code>: If no loggers are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
+<li><code translate="no" v-pre>loggers</code>: An optional array of <code translate="no" v-pre>Logger</code> instances.</li>
 </ul>
 </li>
 </ul>
 <doc-anchor-target id="returns-3">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#returns-3">#</doc-anchor-trigger>
         <span>Returns</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
-<p>A <code v-pre>TelemetryContext</code> instance.</p>
+<p>A <code translate="no" v-pre>TelemetryContext</code> instance.</p>
 <doc-anchor-target id="create-a-telemetry-context">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#create-a-telemetry-context">#</doc-anchor-trigger>
         <span>Create a telemetry context</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
-const context = createTelemetryContext();</code></pre>
+const context = createTelemetryContext(&quot;sg&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="set-a-custom-cookie-expiration">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#set-a-custom-cookie-expiration">#</doc-anchor-trigger>
         <span>Set a custom cookie expiration</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
-const context = createTelemetryContext({
+const context = createTelemetryContext(&quot;wlp&quot;, {
     identityCookieExpiration: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
 });</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="set-a-custom-cookie-domain">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#set-a-custom-cookie-domain">#</doc-anchor-trigger>
-        <span>Set a custom cookie domain</span>
-    </h4>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
-
-const context = createTelemetryContext({
-    identityCookieDomain: &quot;.contso.com&quot;;
-});</code></pre>
-</doc-codeblock></div>
 <doc-anchor-target id="verbose-mode-1">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#verbose-mode-1">#</doc-anchor-trigger>
         <span>Verbose mode</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
-const context = createTelemetryContext({
+const context = createTelemetryContext(&quot;sg&quot;, {
     verbose: true
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="loggers">
-    <h4>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#loggers">#</doc-anchor-trigger>
         <span>Loggers</span>
-    </h4>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { createTelemetryContext, LogRocketLogger } from &quot;@workleap/mixpanel/react&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 
-const context = createTelemetryContext({
+const context = createTelemetryContext(&quot;wlp&quot;, {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });</code></pre>
 </doc-codeblock></div>
+<div id="backlinks">
+    <h2>See also</h2>
+    <div class="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))]">
+        <a href="../../../standalone-libraries/mixpanel/getting-started/" class="group no-link">
+            <div class="flex flex-col">
+                <div>
+                    <span>Getting started - Mixpanel</span>
+                </div>
+                <p>Prefer using the @workleap/telemetry umbrella package over this standalone library.</p>
+            </div>
+        </a>
+        <a href="../../../updating/mixpanel/migrate-to-v3.0/" class="group no-link">
+            <div class="flex flex-col">
+                <div>
+                    <span>Migrate to v3.0</span>
+                </div>
+                <p>This major version introduces several important changes. initializeMixpanel now returns a client instance. The standalone</p>
+            </div>
+        </a>
+        <a href="../../../updating/mixpanel/migrate-to-v4.0/" class="group no-link">
+            <div class="flex flex-col">
+                <div>
+                    <span>Migrate to v4.0</span>
+                </div>
+                <p>This major version remove the global variables deprecated in v3.0.</p>
+            </div>
+        </a>
+        <a href="../../../standalone-libraries/" class="group no-link">
+            <div class="flex flex-col">
+                <div>
+                    <span>Standalone libraries</span>
+                </div>
+                <p>Getting started</p>
+            </div>
+        </a>
+    </div>
+</div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -1104,7 +1082,7 @@ const context = createTelemetryContext({
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                                 <div class="flex flex-wrap items-center justify-between mt-14">
-                                    <a id="retype-edit-this-page" class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-body-link font-body-link-weight hover:text-body-link-hover hover:underline" href="https://github.com/workleap/wl-telemetry/blob/main/docs/standalone-libraries/setup-mixpanel.md" target="_blank" rel="noopener">
+                                    <a id="retype-edit-this-page" class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-body-link font-body-link hover:text-body-link-hover hover:underline" href="https://github.com/workleap/wl-telemetry/blob/main/docs/standalone-libraries/mixpanel/reference.md" target="_blank" rel="noopener">
                                         <svg class="mr-1.5" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M20 12c-.55 0-1 .45-1 1v7c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h7c.55 0 1-.45 1-1s-.45-1-1-1H4C2.35 3 1 4.35 1 6v14c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-7c0-.55-.45-1-1-1z" /><path d="M22.21 1.79c-1.18-1.18-3.24-1.18-4.41 0l-9.5 9.5c-.13.13-.22.29-.26.46l-1 4c-.08.34.01.7.26.95.18.2.44.3.7.3.08 0 .16-.01.24-.03l4-1c.18-.04.34-.13.46-.26l9.5-9.5c1.22-1.22 1.22-3.2.01-4.42zm-1.42 3l-9.3 9.3-2.11.53.53-2.11 9.3-9.3c.42-.42 1.16-.42 1.59 0 .43.43.43 1.15-.01 1.58z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         <span>Edit this page</span>
                                     </a>
@@ -1112,20 +1090,20 @@ const context = createTelemetryContext({
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../standalone-libraries/setup-honeycomb/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../standalone-libraries/mixpanel/getting-started/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-base-text-muted">Previous</span>
-                                                <span class="block mt-1">Setup Honeycomb</span>
+                                                <span class="block mt-1">Getting started</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../standalone-libraries/setup-common-room/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../standalone-libraries/common-room/getting-started/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">Setup Common Room</span>
+                                                <span class="block mt-1">Getting started</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -1139,7 +1117,7 @@ const context = createTelemetryContext({
                                 <div id="retype-footer-links" class="print:hidden">
                                     <ul class="flex flex-wrap items-center text-sm">
                                         <li>
-                                            <a class="inline-flex items-center mr-4 py-2 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-footer-link hover:text-footer-link-hover md:mb-0" href="../../about/">
+                                            <a class="inline-flex items-center mr-4 py-2 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-footer-link hover:text-footer-link-hover md:mb-0" href="../../../about/">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                     <g fill="currentColor">
                                                         <path d="M10.97 8.265a1.45 1.45 0 0 0-.487.57.75.75 0 0 1-1.341-.67c.2-.402.513-.826.997-1.148C10.627 6.69 11.244 6.5 12 6.5c.658 0 1.369.195 1.934.619a2.45 2.45 0 0 1 1.004 2.006c0 1.033-.513 1.72-1.027 2.215-.19.183-.399.358-.579.508l-.147.123a4.329 4.329 0 0 0-.435.409v1.37a.75.75 0 1 1-1.5 0v-1.473c0-.237.067-.504.247-.736.22-.28.486-.517.718-.714l.183-.153.001-.001c.172-.143.324-.27.47-.412.368-.355.569-.676.569-1.136a.953.953 0 0 0-.404-.806C12.766 8.118 12.384 8 12 8c-.494 0-.814.121-1.03.265ZM13 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/><path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z"/>
@@ -1160,7 +1138,7 @@ const context = createTelemetryContext({
                                         </li>
                                     </ul>
                                 </div>
-                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link-weight text-sm leading-relaxed"><p>© Copyright 2026 - Workleap</p></div>
+                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link text-sm leading-relaxed"><p>© Copyright 2026 - Workleap</p></div>
                             </footer>
                         </div>
                     </div>
@@ -1189,6 +1167,6 @@ const context = createTelemetryContext({
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Setup Mixpanel", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 2 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Reference", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
