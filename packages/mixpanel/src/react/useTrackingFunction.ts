@@ -1,7 +1,7 @@
 import type { CreateMixpanelTrackingFunctionOptions } from "@workleap-telemetry/core";
 import { useMemo } from "react";
-import { useAdditionalMixpanelProperties } from "./AdditionalMixpanelPropertiesProvider.tsx";
 import { useMixpanelClient } from "./MixpanelContext.tsx";
+import { useMixpanelProviderProperties } from "./MixpanelPropertiesProvider.tsx";
 
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
@@ -19,7 +19,7 @@ export function useTrackingFunction(options: UseTrackingFunctionOptions = {}) {
     } = options;
 
     const client = useMixpanelClient();
-    const additionalProperties = useAdditionalMixpanelProperties();
+    const additionalProperties = useMixpanelProviderProperties();
 
     return useMemo(() => {
         const trackOptions = {

@@ -1,4 +1,4 @@
-import { useAdditionalMixpanelProperties, type CreateMixpanelTrackingFunctionOptions } from "@workleap/mixpanel/react";
+import { useMixpanelProviderProperties, type CreateMixpanelTrackingFunctionOptions } from "@workleap/mixpanel/react";
 import { useMemo } from "react";
 import { useMixpanelClient } from "./useMixpanelClient.ts";
 
@@ -18,7 +18,7 @@ export function useMixpanelTrackingFunction(options: UseMixpanelTrackingFunction
     } = options;
 
     const client = useMixpanelClient();
-    const additionalProperties = useAdditionalMixpanelProperties();
+    const additionalProperties = useMixpanelProviderProperties();
 
     return useMemo(() => {
         return client.createTrackingFunction({

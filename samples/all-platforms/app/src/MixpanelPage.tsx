@@ -14,7 +14,7 @@ function NestedTrack({ buttonLabel }: { buttonLabel: string }) {
 
     const handleTrack = useCallback(() => {
         track("event", {});
-    }, []);
+    }, [track]);
 
     return (
         <button type="button" onClick={handleTrack}>{buttonLabel}</button>
@@ -40,7 +40,7 @@ export function MixpanelPage() {
     }, [trackWithProductId]);
 
     const handleTrackWithTargetProductId = useCallback(() => {
-        trackWithTargetProductId("event", {})
+        trackWithTargetProductId("event", {});
     }, [trackWithTargetProductId]);
 
     const handleTrackWithBothIds = useCallback(() => {
