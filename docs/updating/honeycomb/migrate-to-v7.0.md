@@ -25,12 +25,12 @@ This major version introduces several important changes. `registerHoneycombInstr
 
 ### Others
 
-- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to Honeycomb traces. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [registerHoneycombInstrumentation](../../standalone-libraries/setup-honeycomb.md) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/setup-honeycomb.md) utility function.
+- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to Honeycomb traces. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [registerHoneycombInstrumentation](../../standalone-libraries/honeycomb/reference.md#registerhoneycombinstrumentation) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/honeycomb/reference.md#createtelemetrycontext) utility function.
 - If your application is a React application, you must now import everything from `@workleap/honeycomb/react` rather than `@workleap/honeycomb`.
 
 ### Update the initialization code
 
-The [registerHoneycombInstrumentation](../../standalone-libraries/setup-honeycomb.md) function now returns a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) that must be forwarded to the [HoneycombInstrumentationProvider](../../standalone-libraries/setup-honeycomb.md). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Honeycomb traces.
+The [registerHoneycombInstrumentation](../../standalone-libraries/honeycomb/reference.md#registerhoneycombinstrumentation) function now returns a [client](../../reference/telemetry/HoneycombInstrumentationClient.md) that must be forwarded to the [HoneycombInstrumentationProvider](../../standalone-libraries/honeycomb/reference.md#honeycombinstrumentationprovider). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Honeycomb traces.
 
 Before:
 
@@ -109,5 +109,5 @@ client.setGlobalSpanAttributes({
 
 ## New React context
 
-- A new [HoneycombInstrumentationProvider](../../standalone-libraries/setup-honeycomb.md) React context provider is available to forward a `HoneycombInstrumentationClient` instance.
-- A new [useHoneycombInstrumentationClient](../../standalone-libraries/setup-honeycomb.md) hook is available to retrieve the provided `HoneycombInstrumentatonClient` instance.
+- A new [HoneycombInstrumentationProvider](../../standalone-libraries/honeycomb/reference.md#honeycombinstrumentationprovider) React context provider is available to forward a `HoneycombInstrumentationClient` instance.
+- A new [useHoneycombInstrumentationClient](../../standalone-libraries/honeycomb/reference.md#usehoneycombinstrumentationclient) hook is available to retrieve the provided `HoneycombInstrumentatonClient` instance.

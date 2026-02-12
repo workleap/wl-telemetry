@@ -1,153 +1,14 @@
 ---
-order: 80
-label: Setup Mixpanel
+order: 90
+label: Reference
+title: Reference - Mixpanel
+toc:
+    depth: 2-3
 ---
 
-# Setup Mixpanel
+# Reference
 
-!!!warning
-Prefer using the [@workleap/telemetry](../introduction/getting-started.md) umbrella package over this standalone library.
-!!!
-
-While we recommend using the `@workleap/telemetry` umbrella package, Workleap's LogRocket instrumentation can also be used as a standalone [@worleap/mixpanel](https://www.npmjs.com/package/@workleap/mixpanel) package.
-
-To set it up, follow these steps :point_down:
-
-## Install the packages
-
-First, open a terminal at the root of the application and install the following packages:
-
-```bash
-pnpm add @workleap/mixpanel
-```
-
-## Initialize Mixpanel
-
-Then, initialize Mixpanel using the [initializeMixpanel](#initialize-mixpanel) function:
-
-```tsx !#6-8,14,16
-import { initializeMixpanel, MixpanelProvider, createTelemetryContext } from "@workleap/mixpanel/react";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
-
-const client = initializeMixpanel("development", {
-    telemetryContext: createTelemetryContext()
-});
-
-const root = createRoot(document.getElementById("root")!);
-
-root.render(
-    <StrictMode>
-        <MixpanelProvider client={client}>
-            <App />
-        </MixpanelProvider>
-    </StrictMode>
-);
-```
-
-## Create a track function
-
-Then create a `track` function using the [useTrackingFunction](#usetrackingfunction) hook if the host application is in React:
-
-```ts !#3
-import { useTrackingFunction } from "@workleap/mixpanel/react";
-
-const track = useTrackingFunction();
-
-track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
-```
-
-## Track an event
-
-Finally, using the retrieved `track` function to send a telemetry event:
-
-```ts !#5
-import { useTrackingFunction } from "@workleap/mixpanel/react";
-
-const track = useTrackingFunction();
-
-track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
-```
-
-## Track a link
-
-Link clicks requires to keep the page alive while the tracking request is being processed. To do so, set the `keepAlive` option of the `track` function:
-
-```ts !#6
-import { useTrackingFunction } from "@workleap/mixpanel/react";
-
-const track = useTrackingFunction();
-
-track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
-    keepAlive: true
-});
-```
-
-## Set custom user properties
-
-Most applications need to set custom properties about the current user environment on all events. To help with that, [MixpanelClient](#mixpanelclient) expose the [setGlobalEventProperties](#methods) method:
-
-```ts !#5-7
-import { useMixpanelClient } from "@workleap/mixpanel/react";
-
-const client = useMixpanelClient();
-
-client.setGlobalEventProperties({
-    "User Id": "123" 
-})
-```
-
-Now, every event recorded after the execution of `setGlobalEventProperties` will include the custom property `User Id`.
-
-## Integrate with LogRocket
-
-Starting with version `3.0`, attaching LogRocket session replays to Mixpanel events requires providing a `LogRocketInstrumentationClient` to the registration function:
-
-```tsx !#7,11
-import { initializeMixpanel, MixpanelProvider, createTelemetryContext } from "@workleap/mixpanel/react";
-import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
-
-const logRocketInstrumentationClient = registerLogRocketInstrumentation("my-app-id");
-
-const mixpanelClient = initializeMixpanel("development", {
-    telemetryContext: createTelemetryContext(),
-    logRocketInstrumentationClient
-});
-
-const root = createRoot(document.getElementById("root")!);
-
-root.render(
-    <StrictMode>
-        <MixpanelProvider client={mixpanelClient}>
-            <App />
-        </MixpanelProvider>
-    </StrictMode>
-);
-```
-
-## Try it :rocket:
-
-Start the application in a development environment using the dev script. Render a page, then navigate to your [Mixpanel](https://mixpanel.com/) instance. Go to "Events" page. If you are tracking events, you should see a new event appear.
-
-You can try filtering the event list using different properties, such as:
-
-- `User Id`
-
-### Troubleshoot issues
-
-If you are experiencing issues with this guide:
-
-- Set the [verbose](#verbose-mode) predefined option to `true`.
-- Open the [DevTools](https://developer.chrome.com/docs/devtools/) console and look for logs starting with `[mixpanel]`.
-- Refer to the sample on [GitHub](https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms).
-
-## Reference
-
-### initializeMixpanel
+## `initializeMixpanel`
 
 Initialize [Mixpanel](https://mixpanel.com) with Workleap's default settings.
 
@@ -161,7 +22,7 @@ const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: 
 })
 ```
 
-#### Parameters
+### Parameters
 
 - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL.
 - `options`: An optional object literal of options:
@@ -172,11 +33,11 @@ const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: 
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.
 
-#### Returns
+### Returns
 
 A [MixpanelClient](#mixpanelclient) instance.
 
-#### Environments
+### Environments
 
 Supported environments are:
 
@@ -186,7 +47,7 @@ Supported environments are:
 - `local`
 - `msw`
 
-#### Initialize with a predefined environment
+### Initialize with a predefined environment
 
 Mixpanel can be initialized for any of the following predefined environments:
 
@@ -196,7 +57,7 @@ import { initializeMixpanel } from "@workleap/mixpanel/react";
 const client = initializeMixpanel("development");
 ```
 
-#### Initialize with a base url
+### Initialize with a base url
 
 ```ts !#3
 import { initializeMixpanel } from "@workleap/mixpanel/react";
@@ -204,7 +65,7 @@ import { initializeMixpanel } from "@workleap/mixpanel/react";
 const client = initializeMixpanel("https://my-tracking-api");
 ```
 
-#### Initialize with a product id
+### Initialize with a product id
 
 ```ts !#4
 import { initializeMixpanel } from "@workleap/mixpanel/react";
@@ -214,7 +75,7 @@ const client = initializeMixpanel("development", {
 });
 ```
 
-#### Use a custom tracking endpoint
+### Use a custom tracking endpoint
 
 ```ts !#4
 import { initializeMixpanel } from "@workleap/mixpanel/react";
@@ -224,7 +85,7 @@ const client = initializeMixpanel("development", {
 });
 ```
 
-#### Initialize with a telemetry context
+### Initialize with a telemetry context
 
 ```ts !#6
 import { initializeMixpanel, createTelemetryContext } from "@workleap/mixpanel/react";
@@ -236,7 +97,7 @@ const client = initializeMixpanel("development", {
 });
 ```
 
-#### Integrate with LogRocket
+### Integrate with LogRocket
 
 ```ts !#4,7
 import { initializeMixpanel } from "@workleap/mixpanel/react";
@@ -249,7 +110,7 @@ const client = initializeMixpanel("development", {
 });
 ```
 
-#### Verbose mode
+### Verbose mode
 
 ```ts !#4
 import { initializeMixpanel } from "@workleap/mixpanel/react";
@@ -259,7 +120,7 @@ const client = initializeMixpanel("development", {
 });
 ```
 
-#### Use loggers
+### Use loggers
 
 ```ts !#6
 import { initializeMixpanel } from "@workleap/mixpanel/react";
@@ -271,7 +132,7 @@ const client = initializeMixpanel("development", {
 });
 ```
 
-### MixpanelClient
+## `MixpanelClient`
 
 A lightweight client providing access to Mixpanel utilities.
 
@@ -279,7 +140,7 @@ A lightweight client providing access to Mixpanel utilities.
 const client = new MixpanelClient(endpoint, superProperties, logger, options?);
 ```
 
-#### Parameters
+### Parameters
 
 - `productId`: The product id.
 - `endpoint`: The Mixpanel endpoint URL.
@@ -288,13 +149,13 @@ const client = new MixpanelClient(endpoint, superProperties, logger, options?);
 - `options`: An optional object literal of options:
     - `productId`: An optional product id.
 
-#### Methods
+### Methods
 
 - `createTrackingFunction(options?: { productId?, targetProductId? })`: Returns a [TrackingFunction](#trackingfunction) function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
 - `setGlobalProperty(key, value)`: Set a single global property that will be attached to all events.
 - `setGlobalProperties(values)`: Set one or multiple global properties that will be attached to all events.
 
-#### `TrackingFunction`
+### `TrackingFunction`
 
 A `TrackingFunction` have the following signature: `(eventName, properties: {}, options?: { keepAlive }) => Promise<void>`.
 
@@ -307,7 +168,7 @@ A `TrackingFunction` have the following signature: `(eventName, properties: {}, 
 The body size for keepalive requests is [limited to 64 kibibytes](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#keepalive).
 !!!
 
-#### Track events
+### Track events
 
 ```ts !#5,7
 import { useMixpanelClient } from "@workleap/mixpanel/react";
@@ -319,7 +180,7 @@ const track = client.createTrackingFunction();
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
 
-#### Specify a product id
+### Specify a product id
 
 To track an action targeting a specific product, use the `productId` option:
 
@@ -335,7 +196,7 @@ const track = client.createTrackingFunction({
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
 
-#### Specify a target product
+### Specify a target product
 
 To track an action targeting another product, use the `targetProductId` option:
 
@@ -351,7 +212,7 @@ const track = client.createTrackingFunction({
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
 
-#### Track a link
+### Track a link
 
 To track a link click, use the `keepAlive` option to keep the page alive while the tracking request is being processed:
 
@@ -367,7 +228,7 @@ track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
 });
 ```
 
-#### Register global properties
+### Register global properties
 
 ```ts !#5-7
 import { useMixpanelClient } from "@workleap/mixpanel/react";
@@ -379,7 +240,7 @@ client.setGlobalEventProperties({
 });
 ```
 
-### NoopMixpanelClient
+## `NoopMixpanelClient`
 
 A fake implementation of [NoopMixpanelClient](#mixpanelclient) for use in non-standard contexts such as unit tests and Storybook.
 
@@ -389,7 +250,7 @@ import { NoopMixpanelClient } from "@workleap/mixpanel/react";
 const client = new NoopMixpanelClient();
 ```
 
-### MixpanelProvider
+## `MixpanelProvider`
 
 React provider to share a `MixpanelClient` instance with the application code.
 
@@ -399,11 +260,11 @@ React provider to share a `MixpanelClient` instance with the application code.
 </MixpanelProvider>
 ```
 
-#### Properties
+### Properties
 
 - `client`: A [MixpanelClient](#mixpanelclient) instance.
 
-#### Provide a client instance
+### Provide a client instance
 
 ```tsx !#10-12
 import { initializeMixpanel, MixpanelProvider } from "@workleap/mixpanel/react";
@@ -421,7 +282,7 @@ root.render(
 );
 ```
 
-#### Retrieve a client instance
+### Retrieve a client instance
 
 ```ts !#3
 import { useMixpanelClient } from "@workleap/mixpanel/react";
@@ -433,7 +294,7 @@ client.setGlobalEventProperties({
 });
 ```
 
-### useMixpanelClient
+## `useMixpanelClient`
 
 Retrieve a `MixpanelClient` instance.
 
@@ -441,16 +302,16 @@ Retrieve a `MixpanelClient` instance.
 const client = useMixpanelClient(options?: { throwOnUndefined? })
 ```
 
-#### Parameters
+### Parameters
 
 - `options`: An optional object literal of options:
     - `throwOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
 
-#### Returns
+### Returns
 
 A [MixpanelClient](#mixpanelclient) instance.
 
-#### Usage
+### Usage
 
 ```ts !#3
 import { useMixpanelClient } from "@workleap/mixpanel/react";
@@ -462,7 +323,7 @@ client.setGlobalEventProperties({
 });
 ```
 
-### useTrackingFunction
+## `useTrackingFunction`
 
 Returns a function sending `POST` requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
 
@@ -470,13 +331,13 @@ Returns a function sending `POST` requests to a dedicated tracking endpoint full
 const track = useTrackingFunction(options?: { productId?, targetProductId? })
 ```
 
-#### Parameters
+### Parameters
 
 - `options`: An optional object literal of options:
     - `productId`: An optional product id.
     - `targetProductId`: An optional product id of the target product. Useful to track an event for another product.
 
-#### Returns
+### Returns
 
 A `TrackingFunction` with the following signature: `(eventName, properties: {}, options?: { keepAlive }) => Promise<void>`.
 
@@ -489,7 +350,7 @@ A `TrackingFunction` with the following signature: `(eventName, properties: {}, 
 The body size for keepalive requests is [limited to 64 kibibytes](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#keepalive).
 !!!
 
-#### Track events
+### Track events
 
 ```ts !#3,5
 import { useTrackingFunction } from "@workleap/mixpanel/react";
@@ -499,7 +360,7 @@ const track = useTrackingFunction();
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
 
-#### Specify a product id
+### Specify a product id
 
 To track an action targeting a specific product, use the `productId` option:
 
@@ -513,7 +374,7 @@ const track = useTrackingFunction({
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
 
-#### Specify a target product
+### Specify a target product
 
 To track an action targeting another product, use the `targetProductId` option:
 
@@ -527,7 +388,7 @@ const track = useTrackingFunction({
 track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 ```
 
-#### Track a link
+### Track a link
 
 To track a link click, use the `keepAlive` option to keep the page alive while the tracking request is being processed:
 
@@ -541,7 +402,73 @@ track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" }, {
 });
 ```
 
-### createTelemetryContext
+## `MixpanelPropertiesProvider`
+
+A React provider used to define Mixpanel properties for nested components. These properties are automatically included in events tracked by nested components, provided the events are tracked using functions created with the [useTrackingFunction](#usetrackingfunction) hook.
+
+!!!tip
+Ensure that the value passed to `MixpanelPropertiesProvider` is a **static object**, either defined outside components scope or memoized. Otherwise, the `useTrackingFunction` hook will create a new tracking function on every render.
+!!!
+
+### Properties
+
+- `value`: A **static object** literal of Mixpanel properties to track.
+
+### Define a provider
+
+```tsx !#9,11
+import { MixpanelPropertiesProvider } from "@workleap/mixpanel/react";
+
+const MixpanelProperties = {
+    section: "User Form"
+};
+
+function App() {
+    return (
+        <MixpanelPropertiesProvider value={MixpanelProperties}>
+            <NestedComponent />
+        </MixpanelPropertiesProvider>
+    )
+}
+```
+
+### Track an event with additional properties
+
+```tsx !#9,13,19-21
+import { MixpanelPropertiesProvider, useTrackingFunction } from "@workleap/mixpanel/react";
+import { useEffect } from "react";
+
+const MixpanelProperties = {
+    section: "User Form"
+};
+
+function NestedComponent() {
+    const track = useTrackingFunction();
+
+    // Please don't track in a "useEffect", it's strictly for demo purpose.
+    useEffect(() => {
+        track("LinkClicked", { "Trigger": "ChangePlan", "Location": "Header" });
+    }, [track]);
+}
+
+function App() {
+    return (
+        <MixpanelPropertiesProvider value={MixpanelProperties}>
+            <NestedComponent />
+        </MixpanelPropertiesProvider>
+    )
+}
+```
+
+### Retrieve the provider properties
+
+```ts !#3
+import { useMixpanelProviderProperties } from "@workleap/mixpanel/react";
+
+const props = useMixpanelProviderProperties();
+```
+
+## `createTelemetryContext`
 
 Creates a `TelemetryContext` instance containing the telemetry correlation ids.
 
@@ -549,7 +476,7 @@ Creates a `TelemetryContext` instance containing the telemetry correlation ids.
 const telemetryContext = createTelemetryContext(productFamily, options?: { identityCookieExpiration?, verbose?, loggers? })
 ```
 
-#### Parameters
+### Parameters
 
 - `productFamily`: `wlp` or `sg`.
 - `options`: An optional object literal of options:
@@ -557,11 +484,11 @@ const telemetryContext = createTelemetryContext(productFamily, options?: { ident
     - `verbose`: If no loggers are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `Logger` instances.
 
-#### Returns
+### Returns
 
 A `TelemetryContext` instance.
 
-#### Create a telemetry context
+### Create a telemetry context
 
 ```ts !#3
 import { createTelemetryContext } from "@workleap/mixpanel/react";
@@ -569,7 +496,7 @@ import { createTelemetryContext } from "@workleap/mixpanel/react";
 const context = createTelemetryContext("sg");
 ```
 
-#### Set a custom cookie expiration
+### Set a custom cookie expiration
 
 ```ts !#4
 import { createTelemetryContext } from "@workleap/mixpanel/react";
@@ -579,7 +506,7 @@ const context = createTelemetryContext("wlp", {
 });
 ```
 
-#### Verbose mode
+### Verbose mode
 
 ```ts !#4
 import { createTelemetryContext } from "@workleap/mixpanel/react";
@@ -589,7 +516,7 @@ const context = createTelemetryContext("sg", {
 });
 ```
 
-#### Loggers
+### Loggers
 
 ```ts !#5
 import { createTelemetryContext, LogRocketLogger } from "@workleap/mixpanel/react";

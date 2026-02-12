@@ -9,7 +9,7 @@ toc:
 
 A React provider used to define Mixpanel properties for nested components. These properties are automatically included in events tracked by nested components, provided the events are tracked using functions created with the [useMixpanelTrackingFunction](./useMixpanelTrackingFunction.md) hook.
 
-!!!warning
+!!!tip
 Ensure that the value passed to `MixpanelPropertiesProvider` is a **static object**, either defined outside components scope or memoized. Otherwise, the `useMixpanelTrackingFunction` hook will create a new tracking function on every render.
 !!!
 

@@ -24,12 +24,12 @@ This major version introduces several important changes. `registerLogRocketInstr
 
 ### Others
 
-- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to LogRocket session replays. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [registerLogRocketInstrumentation](../../standalone-libraries/setup-logrocket.md) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/setup-logrocket.md) utility function.
+- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to LogRocket session replays. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [registerLogRocketInstrumentation](../../standalone-libraries/logrocket/reference.md#registerlogrocketinstrumentation) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/logrocket/reference.md#createtelemetrycontext) utility function.
 - If your application is a React application, you must now import everything from `@workleap/logrocket/react` rather than `@workleap/logrocket`.
 
 ### Update the initialization code
 
-The [registerLogRocketInstrumentation](../../standalone-libraries/setup-logrocket.md) function now returns a [client](../../reference/telemetry/LogRocketInstrumentationClient.md) that must be forwarded to the [LogRocketInstrumentationProvider](../../standalone-libraries/setup-logrocket.md). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to LogRocket session replays.
+The [registerLogRocketInstrumentation](../../standalone-libraries/logrocket/reference.md#registerlogrocketinstrumentation) function now returns a [client](../../reference/telemetry/LogRocketInstrumentationClient.md) that must be forwarded to the [LogRocketInstrumentationProvider](../../standalone-libraries/logrocket/reference.md#logrocketinstrumentationprovider). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to LogRocket session replays.
 
 Before:
 
@@ -117,8 +117,8 @@ LogRocket.identify(traits.userId, traits);
 
 ## New React context
 
-- A new [LogRocketInstrumentationProvider](../../standalone-libraries/setup-logrocket.md) React context provider is available to forward a `LogRocketInstrumentatonClient` instance.
-- A new [useLogRocketInstrumentationClient](../../standalone-libraries/setup-logrocket.md) hook is available to retrieve the provided `LogRocketInstrumentatonClient` instance.
+- A new [LogRocketInstrumentationProvider](../../standalone-libraries/logrocket/reference.md#logrocketinstrumentationprovider) React context provider is available to forward a `LogRocketInstrumentatonClient` instance.
+- A new [useLogRocketInstrumentationClient](../../standalone-libraries/logrocket/reference.md#uselogrocketinstrumentationclient) hook is available to retrieve the provided `LogRocketInstrumentatonClient` instance.
 
 
 

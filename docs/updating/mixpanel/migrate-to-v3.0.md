@@ -24,12 +24,12 @@ This major version introduces several important changes. `initializeMixpanel` no
 
 ### Others
 
-- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to LogRocket session replays. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [initializeMixpanel](../../standalone-libraries/setup-mixpanel.md) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/setup-mixpanel.md) utility function.
+- The `telemetryId` and `deviceId` correlation ids are no longer implicitly attached to LogRocket session replays. To attach these ids, provide a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance to the [initializeMixpanel](../../standalone-libraries/mixpanel/reference.md#initializemixpanel) function. You can create a `TelemetryContext` instance using the [createTelemetryContext](../../standalone-libraries/mixpanel/reference.md#createtelemetrycontext) utility function.
 - If your application is a React application, you must now import everything from `@workleap/mixpanel/react` rather than `@workleap/mixpanel`.
 
 ### Update the initialization code
 
-The [initializeMixpanel](../../standalone-libraries/setup-mixpanel.md) function now returns a [client](../../reference/telemetry/MixpanelClient.md) that must be forwarded to the [MixpanelProvider](../../standalone-libraries/setup-mixpanel.md). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Mixpanel events.
+The [initializeMixpanel](../../standalone-libraries/mixpanel/reference.md#initializemixpanel) function now returns a [client](../../reference/telemetry/MixpanelClient.md) that must be forwarded to the [MixpanelProvider](../../standalone-libraries/mixpanel/reference.md#mixpanelprovider). In addition, a [TelemetryContext](../../reference/telemetry/TelemetryContext.md) instance must be manually provided to the registration function to ensure correlation ids continue being attached to Mixpanel events.
 
 Before:
 
@@ -129,5 +129,5 @@ track("ButtonClicked", { "Trigger": "ChangePlan", "Location": "Header" });
 
 ## New React context
 
-- A new [MixpanelProvider](../../standalone-libraries/setup-mixpanel.md) React context provider is available to forward a `MixpanelClient` instance.
-- A new [useMixpanelClient](../../standalone-libraries/setup-mixpanel.md) hook is available to retrieve the provided `MixpanelClient` instance.
+- A new [MixpanelProvider](../../standalone-libraries/mixpanel/reference.md#mixpanelprovider) React context provider is available to forward a `MixpanelClient` instance.
+- A new [useMixpanelClient](../../standalone-libraries/mixpanel/reference.md#usemixpanelclient) hook is available to retrieve the provided `MixpanelClient` instance.

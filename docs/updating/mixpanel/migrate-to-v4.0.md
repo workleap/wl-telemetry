@@ -20,7 +20,7 @@ This major version remove the global variables deprecated in [v3.0](./migrate-to
 
 ### `productId` is now an option of `initializeMixpanel`
 
-The [initializeMixpanel](../../standalone-libraries/setup-mixpanel.md#initialize-mixpanel) function no longuer accept `productId` as it's first argument, it is now provided as an option.
+The [initializeMixpanel](../../standalone-libraries/mixpanel/reference.md#initializemixpanel) function no longuer accept `productId` as it's first argument, it is now provided as an option.
 
 Previously, it made sense for `productId` to be a required argument because all WLP products were single-product applications, and the product identifier was known at initialization time. This is not the case for all ShareGate applications.
 
@@ -61,7 +61,7 @@ const context = createTelemetryContext("sg");
 
 ### New `productId` option for `createTrackingFunction`
 
-A Mixpanel instrumentation client [createTrackingFunction](../../standalone-libraries/setup-mixpanel.md#create-a-track-function) instance now accept a `productId` as an option:
+A Mixpanel instrumentation client [createTrackingFunction](../../standalone-libraries/mixpanel/reference.md#mixpanelclient) instance now accept a `productId` as an option:
 
 ```ts !#6
 const client = initializeMixpanel("development", {

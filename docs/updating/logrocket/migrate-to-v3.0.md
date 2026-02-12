@@ -38,7 +38,7 @@ const context = createTelemetryContext("sg");
 
 ### New `createShareGateDefaultUserTraits` function
 
-The LogRocket instrumentation client have a new [createShareGateDefaultUserTraits](../../standalone-libraries/setup-logrocket.md#get-default-user-traits-for-sharegate) method:
+The LogRocket instrumentation client have a new [createShareGateDefaultUserTraits](../../standalone-libraries/logrocket/reference.md#get-default-user-traits-for-sharegate) method:
 
 ```ts
 const traits = client.createShareGateDefaultUserTraits({

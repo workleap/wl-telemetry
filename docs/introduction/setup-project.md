@@ -132,7 +132,7 @@ If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events wi
 - [LogRocket](./learn-logrocket/features.md)
 - [Honeycomb](./learn-honeycomb/features.md)
 - [Mixpanel](./learn-mixpanel/features.md)
-- [Common Room](../standalone-libraries/setup-common-room.md)
+- [Common Room](../standalone-libraries/common-room/getting-started.md)
 
 ## Setup loggers
 

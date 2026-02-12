@@ -103,8 +103,9 @@ Now, every event recorded after the execution of `setGlobalEventProperties` will
 
 If you want to scope custom properties to a specific section of the application, wrap it with the [MixpanelPropertiesProvider](../../reference/telemetry/MixpanelPropertiesProvider.md). Define the provider with a static object of Mixpanel properties, and all nested components using track will automatically append those properties to their events:
 
-```tsx !#9,11
+```tsx !#10,12
 import { MixpanelPropertiesProvider } from "@workleap/telemetry/react";
+import { NestedComponent } from "./NestedComponent.tsx";
 
 const MixpanelProperties = {
     section: "User Form"
@@ -118,5 +119,9 @@ function App() {
     )
 }
 ```
+
+!!!tip
+Ensure that the value passed to `MixpanelPropertiesProvider` is a **static object**, either defined outside components scope or memoized. Otherwise, the `useMixpanelTrackingFunction` hook will create a new tracking function on every render.
+!!!
 
 

@@ -1,168 +1,14 @@
 ---
-order: 100
-label: Setup LogRocket
+order: 90
+label: Reference
+title: Reference - LogRocket
+toc:
+    depth: 2-3
 ---
 
-# Setup LogRocket
+# Reference
 
-!!!warning
-Prefer using the [@workleap/telemetry](../introduction/getting-started.md) umbrella package over this standalone library.
-!!!
-
-While we recommend using the `@workleap/telemetry` umbrella package, Workleap's LogRocket instrumentation can also be used as a standalone [@worleap/logrocket](https://www.npmjs.com/package/@workleap/logrocket) package.
-
-To set it up, follow these steps :point_down:
-
-## Install the packages
-
-First, open a terminal at the root of the application and install the following packages:
-
-```bash
-pnpm add @workleap/logrocket logrocket
-```
-
-## Register instrumentation
-
-Then, update the application bootstrapping code to register LogRocket instrumentation using the [registerLogRocketInstrumentation](#registerlogrocketinstrumentation) function and forward the client using a React context provider:
-
-```tsx !#6-8,14,16 index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
-
-const client = registerLogRocketInstrumentation("my-app-id", {
-    telemetryContext: createTelemetryContext()
-});
-
-const root = createRoot(document.getElementById("root")!);
-
-root.render(
-    <StrictMode>
-        <LogRocketInstrumentationProvider client={client}>
-            <App />
-        </LogRocketInstrumentationProvider>
-    </StrictMode>
-);
-```
-
-## Identify a Workleap Platform user
-
-Most Workleap Platform applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](#logrocketinstrumentationclient) expose the [createWorkleapPlatformDefaultUserTraits](#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
-
-```tsx index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
-
-const client = registerLogRocketInstrumentation("my-app-id", {
-    telemetryContext: createTelemetryContext()
-});
-
-const root = createRoot(document.getElementById("root")!);
-
-root.render(
-    <StrictMode>
-        <LogRocketInstrumentationProvider client={client}>
-            <App />
-        </LogRocketInstrumentationProvider>
-    </StrictMode>
-);
-```
-
-```ts !#6-13,15
-import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
-import LogRocket from "logrocket";
-
-const client = useLogRocketInstrumentationClient();
-
-const traits = client.createWorkleapPlatformDefaultUserTraits({
-    userId: "6a5e6b06-0cac-44ee-8d2b-00b9419e7da9",
-    organizationId: "e6bb30f8-0a00-4928-8943-1630895a3f14",
-    organizationName: "Acme",
-    isMigratedToWorkleap: true,
-    isOrganizationCreator: false,
-    isAdmin: false
-});
-
-LogRocket.identify(traits.userId, traits);
-```
-
-## Identify a ShareGate user
-
-Most ShareGate applications need to identify the current user environment. To help with that, [LogRocketInstrumentationClient](#logrocketinstrumentationclient) expose the [createShareGateDefaultUserTraits](#methods) method. When used with [LogRocket.identify](https://docs.logrocket.com/reference/identify), it provides all the tools to identify a  user with the key information that we track at Workleap:
-
-```tsx index.tsx
-import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from "@workleap/logrocket/react";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
-
-const client = registerLogRocketInstrumentation("my-app-id", {
-    telemetryContext: createTelemetryContext()
-});
-
-const root = createRoot(document.getElementById("root")!);
-
-root.render(
-    <StrictMode>
-        <LogRocketInstrumentationProvider client={client}>
-            <App />
-        </LogRocketInstrumentationProvider>
-    </StrictMode>
-);
-```
-
-```ts !#6-11,13
-import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
-import LogRocket from "logrocket";
-
-const client = useLogRocketInstrumentationClient();
-
-const traits = client.createWorkleapPlatformDefaultUserTraits({
-    shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
-    microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
-    microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
-    workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
-});
-
-LogRocket.identify(traits.shareGateAccountId, traits);
-```
-
-## Get the session URL
-
-Every session replay is associated with a unique URL. To register a callback receiving the session replay once it's available, use the [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) function: 
-
-```ts !#3-5 index.tsx
-import LogRocket from "logrocket";
-
-LogRocket.getSessionUrl(url => {
-    console.log(url);
-});
-```
-
-## Try it :rocket:
-
-Start the application in a development environment using the dev script. Render a page, then navigate to your [LogRocket](https://app.logrocket.com/) instance. Go to "Session Replay" page, you should see a new session appear.
-
-You can try filtering the session list using different user traits, such as:
-
-- `User Id`
-- `Organization Id`
-- `Is Admin`
-
-### Troubleshoot issues
-
-If you are experiencing issues with this guide:
-
-- Set the [verbose](#verbose-mode) predefined option to `true`.
-- Open the [DevTools](https://developer.chrome.com/docs/devtools/) console and look for logs starting with `[logrocket]`.
-- Refer to the sample on [GitHub](https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms).
-
-## Reference
-
-### registerLogRocketInstrumentation
+## `registerLogRocketInstrumentation`
 
 Initializes [LogRocket](https://logrocket.com/) instrumentation with Workleap's default settings.
 
@@ -178,7 +24,7 @@ const client = registerLogRocketInstrumentation(appId, options?: {
 })
 ```
 
-#### Parameters
+### Parameters
 
 - `appId`: The LogRocket application id.
 - `options`: An optional object literal of predefined options.
@@ -190,11 +36,11 @@ const client = registerLogRocketInstrumentation(appId, options?: {
     - `loggers`: An array of logger instances that will output messages.
     - `transformers`: An array of transformer functions to update the default LogRocket options.
 
-#### Returns
+### Returns
 
 A [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
 
-#### Set a root hostname
+### Set a root hostname
 
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
@@ -204,7 +50,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 });
 ```
 
-#### Remove custom private fields
+### Remove custom private fields
 
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
@@ -216,7 +62,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 
 To view the default private fields, have a look at the [registerLogRocketInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/logrocket/src/registerLogRocketInstrumentation.ts) file on GitHub.
 
-#### Remove custom query parameters
+### Remove custom query parameters
 
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
@@ -228,7 +74,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 
 To view the default private query parameters, have a look at the [registerLogRocketInstrumentation.ts](https://github.com/workleap/wl-telemetry/blob/main/packages/logrocket/src/registerLogRocketInstrumentation.ts) file on GitHub.
 
-#### Use a telemetry context
+### Use a telemetry context
 
 ```ts !#3,6
 import { registerLogRocketInstrumentation, createTelemetryContext } from "@workleap/logrocket/react";
@@ -240,7 +86,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 });
 ```
 
-#### Verbose mode
+### Verbose mode
 
 ```ts !#4
 import { registerLogRocketInstrumentation } from "@workleap/logrocket/react";
@@ -250,7 +96,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 });
 ```
 
-#### Use loggers
+### Use loggers
 
 ```ts !#5
 import { registerLogRocketInstrumentation, LogRocketLogger } from "@workleap/logrocket/react";
@@ -261,7 +107,7 @@ const client = registerLogRocketInstrumentation("my-app-id", {
 });
 ```
 
-#### Use transformer functions
+### Use transformer functions
 
 The predefined options are useful to quickly customize the default configuration of the [LogRocket SDK](https://docs.logrocket.com/reference/init), but only covers a subset of the options. If you need full control over the configuration, you can provide configuration transformer functions through the `transformers` option of the [registerLogRocketInstrumentation](#registerlogrocketinstrumentation) function. Remember, **no locked in** :heart::v:.
 
@@ -299,7 +145,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) 
 }
 ```
 
-### LogRocketInstrumentationClient
+## `LogRocketInstrumentationClient`
 
 A lightweight client providing access to LogRocket instrumentation utilities.
 
@@ -307,17 +153,17 @@ A lightweight client providing access to LogRocket instrumentation utilities.
 const client = new LogRocketInstrumentationClientImpl(telemetryContext?)
 ```
 
-#### Parameters
+### Parameters
 
 - `telemetryContext`: An optional `TelemetryContext` instance.
 
-#### Methods
+### Methods
 
 - `createWorkleapPlatformDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for the Workleap platform.
 - `createShareGateDefaultUserTraits(identification)`: Creates an object containing the default user traits used to identify a web user for ShareGate.
 - `registerGetSessionUrlListener(listener)`: Registers a listener that receives the session replay URL as a parameter once it becomes available. Host applications should use [LogRocket.getSessionURL](https://docs.logrocket.com/reference/get-session-url) instead of this method.
 
-#### Get default user traits for the Workleap platform
+### Get default user traits for the Workleap platform
 
 ```ts !#6-13
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -337,7 +183,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 Logrocket.identify(traits.userId, traits);
 ```
 
-#### Get default user traits for ShareGate
+### Get default user traits for ShareGate
 
 ```ts !#6-11
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -355,7 +201,7 @@ const traits = client.createShareGateDefaultUserTraits({
 Logrocket.identify(traits.shareGateAccountId, traits);
 ```
 
-#### Send additional traits
+### Send additional traits
 
 ```ts !#15
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -378,7 +224,7 @@ const allTraits = {
 Logrocket.identify(allTraits.userId, allTraits);
 ```
 
-#### Register a session URL listener
+### Register a session URL listener
 
 ```ts !#6-8
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -391,7 +237,7 @@ client.registerGetSessionUrlListener(sessionUrl => {
 });
 ```
 
-### LogRocketInstrumentationProvider
+## `LogRocketInstrumentationProvider`
 
 React provider to share a [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance with the application code.
 
@@ -401,11 +247,11 @@ React provider to share a [LogRocketInstrumentationClient](#logrocketinstrumenta
 </LogRocketInstrumentationProvider>
 ```
 
-#### Properties
+### Properties
 
 - `client`: A [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
 
-#### Provide a client instance
+### Provide a client instance
 
 ```tsx !#10-12
 import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider } from "@workleap/logrocket/react";
@@ -423,7 +269,7 @@ root.render(
 );
 ```
 
-#### Retrieve a client instance
+### Retrieve a client instance
 
 ```ts !#3
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -435,7 +281,7 @@ client.registerGetSessionUrlListener(sessionUrl => {
 });
 ```
 
-### NoopLogRocketInstrumentationClient
+## `NoopLogRocketInstrumentationClient`
 
 A fake implementation of [NoopLogRocketInstrumentationClient](#logrocketinstrumentationclient) for use in non-standard contexts such as unit tests and Storybook.
 
@@ -445,7 +291,7 @@ import { NoopLogRocketInstrumentationClient } from "@workleap/logrocket/react";
 const client = new NoopLogRocketInstrumentationClient();
 ```
 
-### LogRocketInstrumentationProvider
+## `LogRocketInstrumentationProvider`
 
 React provider to share a `LogRocketInstrumentationProvider` instance with the application code.
 
@@ -455,11 +301,11 @@ React provider to share a `LogRocketInstrumentationProvider` instance with the a
 </LogRocketInstrumentationProvider>
 ```
 
-#### Properties
+### Properties
 
 - `client`: A [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
 
-#### Provide a client instance
+### Provide a client instance
 
 ```tsx !#12-14
 import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider } from "@workleap/logrocket/react";
@@ -479,7 +325,7 @@ root.render(
 );
 ```
 
-#### Retrieve a client instance
+### Retrieve a client instance
 
 ```ts !#3
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -491,7 +337,7 @@ client.registerGetSessionUrlListener(sessionUrl => {
 });
 ```
 
-### useLogRocketInstrumentationClient
+## `useLogRocketInstrumentationClient`
 
 Retrieve a `LogRocketInstrumentationClient` instance.
 
@@ -499,16 +345,16 @@ Retrieve a `LogRocketInstrumentationClient` instance.
 const client = useLogRocketInstrumentationClient(options?: { throwOnUndefined? })
 ```
 
-#### Parameters
+### Parameters
 
 - `options`: An optional object literal of options:
     - `throwOnUndefined`: Whether or not an exception should be thrown if a client instance hasn't been provided.
 
-#### Returns
+### Returns
 
 A [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
 
-#### Usage
+### Usage
 
 ```ts !#3
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -520,7 +366,7 @@ client.registerGetSessionUrlListener(sessionUrl => {
 });
 ```
 
-### useLogRocketInstrumentationClient
+## `useLogRocketInstrumentationClient`
 
 Retrieve a [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
 
@@ -528,15 +374,15 @@ Retrieve a [LogRocketInstrumentationClient](#logrocketinstrumentationclient) ins
 const client = useLogRocketInstrumentationClient();
 ```
 
-#### Parameters
+### Parameters
 
 None
 
-#### Returns
+### Returns
 
 A [LogRocketInstrumentationClient](#logrocketinstrumentationclient) instance.
 
-#### Usage
+### Usage
 
 ```ts !#3
 import { useLogRocketInstrumentationClient } from "@workleap/logrocket/react";
@@ -548,7 +394,7 @@ client.registerGetSessionUrlListener(sessionUrl => {
 });
 ```
 
-### createTelemetryContext
+## `createTelemetryContext`
 
 Creates a `TelemetryContext` instance containing the telemetry correlation ids.
 
@@ -556,7 +402,7 @@ Creates a `TelemetryContext` instance containing the telemetry correlation ids.
 const telemetryContext = createTelemetryContext(productFamily, options?: { identityCookieExpiration?, verbose?, loggers? });
 ```
 
-#### Parameters
+### Parameters
 
 - `productFamily`: `wlp` or `sg`.
 - `options`: An optional object literal of options:
@@ -564,11 +410,11 @@ const telemetryContext = createTelemetryContext(productFamily, options?: { ident
     - `verbose`: If no loggers are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `Logger` instances.
 
-#### Returns
+### Returns
 
 A `TelemetryContext` instance.
 
-#### Create a telemetry context
+### Create a telemetry context
 
 ```ts !#3
 import { createTelemetryContext } from "@workleap/logrocket/react";
@@ -576,7 +422,7 @@ import { createTelemetryContext } from "@workleap/logrocket/react";
 const context = createTelemetryContext("sg");
 ```
 
-#### Set a custom cookie expiration
+### Set a custom cookie expiration
 
 ```ts !#4
 import { createTelemetryContext } from "@workleap/logrocket/react";
@@ -586,7 +432,7 @@ const context = createTelemetryContext("wlp", {
 });
 ```
 
-#### Verbose mode
+### Verbose mode
 
 ```ts !#4
 import { createTelemetryContext } from "@workleap/logrocket/react";
@@ -596,7 +442,7 @@ const context = createTelemetryContext("sg", {
 });
 ```
 
-#### Loggers
+### Loggers
 
 ```ts !#5
 import { createTelemetryContext, LogRocketLogger } from "@workleap/logrocket/react";
@@ -606,7 +452,3 @@ const context = createTelemetryContext("wlp", {
     loggers: [new BrowserConsoleLogger(), new LogRocketLogger({ logLevel: LogLevel.information })]
 });
 ```
-
-
-
-

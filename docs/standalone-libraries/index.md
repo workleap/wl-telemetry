@@ -5,7 +5,22 @@ label: Standalone libraries
 
 # Standalone libraries
 
-- [Setup LogRocket](./setup-logrocket.md)
-- [Setup Honeycomb](./setup-honeycomb.md)
-- [Setup Mixpanel](./setup-mixpanel.md)
-- [Setup Common Room](./setup-common-room.md)
+## LogRocket
+
+- [Getting started](./logrocket/getting-started.md)
+- [Reference](./logrocket/reference.md)
+
+## Honeycomb
+
+- [Getting started](./honeycomb/getting-started.md)
+- [Reference](./honeycomb/reference.md)
+
+## Mixpanel
+
+- [Getting started](./mixpanel/getting-started.md)
+- [Reference](./mixpanel/reference.md)
+
+## Common Room
+
+- [Getting started](./common-room/getting-started.md)
+- [Reference](./common-room/reference.md)
