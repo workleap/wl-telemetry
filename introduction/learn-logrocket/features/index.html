@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.12.0.824230781556">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.12.0.824231835675">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.12.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=3.12.0.824230781556" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.12.0.824231835675" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.12.0.824230781556" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.12.0.824231835675" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.12.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.12.0.824230781556" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.12.0.824230781556" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.12.0.824231835675" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.12.0.824231835675" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -489,7 +489,13 @@
         <span>Identify a user</span>
     </h2>
 </doc-anchor-target>
-<p>Most applications need to identify the current user environment. To help with that, <a href="../../../reference/telemetry/logrocketinstrumentationclient/">LogRocketInstrumentationClient</a> expose the <a href="../../../reference/telemetry/logrocketinstrumentationclient/#methods">createWorkleapPlatformDefaultUserTraits</a> method. When used with <a href="https://docs.logrocket.com/reference/identify" class="outbound" target="_blank">LogRocket.identify</a>, it provides all the tools to identify a  user with the key information that we track at Workleap:</p>
+<p>Most applications need to identify the current user environment. To help with that, <a href="../../../reference/telemetry/logrocketinstrumentationclient/">LogRocketInstrumentationClient</a> expose the <a href="../../../reference/telemetry/logrocketinstrumentationclient/#methods">createWorkleapPlatformDefaultUserTraits</a> and <a href="../../../reference/telemetry/logrocketinstrumentationclient/#methods">createShareGateDefaultUserTraits</a> methods. When used with <a href="https://docs.logrocket.com/reference/identify" class="outbound" target="_blank">LogRocket.identify</a>, it provides all the tools to identify a  user with the key information that we track at Workleap:</p>
+<doc-anchor-target id="workleap-platform">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#workleap-platform">#</doc-anchor-trigger>
+        <span>Workleap Platform</span>
+    </h3>
+</doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-13,15"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
@@ -506,6 +512,27 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 });
 
 LogRocket.identify(traits.userId, traits);</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="sharegate">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#sharegate">#</doc-anchor-trigger>
+        <span>ShareGate</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="6-11,13"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
+import LogRocket from &quot;logrocket&quot;;
+
+const client = useLogRocketInstrumentationClient();
+
+const traits = client.createShareGateDefaultUserTraits({
+    shareGateAccountId: &quot;cd7fb5ca-f13d-420f-9a87-637b3419d242&quot;,
+    microsoftUserId: &quot;e9bb1688-a68b-4235-b514-95a59a7bf8bc&quot;,
+    microsoftTenantId: &quot;86bea6e5-5dbb-43c9-93a4-b10bf91cc6db&quot;,
+    workspaceId: &quot;225e6494-c008-4086-ac80-3770aa47085b&quot;
+});
+
+LogRocket.identify(traits.shareGateAccountId, traits);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="get-the-session-url">
     <h2>
