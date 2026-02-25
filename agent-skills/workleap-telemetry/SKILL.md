@@ -12,6 +12,8 @@ description: |
   (6) Configuring wl-telemetry diagnostic loggers (LogRocketLogger)
   (7) Storybook/test setup with Noop telemetry clients
   (8) Reviewing or troubleshooting telemetry instrumentation
+metadata:
+  version: 3.1
 ---
 
 # Workleap Telemetry (wl-telemetry)
