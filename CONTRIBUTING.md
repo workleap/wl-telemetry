@@ -234,7 +234,7 @@ By default, the [sync-agent-skill](.github/workflows/sync-agent-skill.yml) workf
 If the workflow does not behave as expected, the simplest way to update an agent skill is to use an agent:
 
 1. Start your preferred agent.
-2. Copy the content of [UPDATE_SKILL.md](./prompts/UPDATE_SKILL.md) into the agent prompt.
+2. Copy the content of [UPDATE_SKILL.md](./user-prompts/UPDATE_SKILL.md) into the agent prompt.
 3. Commit the changes and merge the pull request.
 
 NOTE: Skills installed using [skills.sh](https://skills.sh/) are sourced directly from the repository files. Merging the pull request is therefore sufficient to update the installed skill.
