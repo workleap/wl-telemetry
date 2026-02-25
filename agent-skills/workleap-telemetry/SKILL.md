@@ -13,7 +13,7 @@ description: |
   (7) Storybook/test setup with Noop telemetry clients
   (8) Reviewing or troubleshooting telemetry instrumentation
 metadata:
-  version: 3.1
+  version: 3.2
 ---
 
 # Workleap Telemetry (wl-telemetry)
@@ -36,7 +36,3 @@ For detailed documentation beyond the rules above, consult:
 - **`references/api.md`** — Initialization options, TelemetryClient properties, Honeycomb/LogRocket/Mixpanel client APIs, React hooks, Noop clients, LogRocketLogger
 - **`references/integrations.md`** — Platform-specific configuration, Honeycomb tracing patterns, LogRocket privacy and user identification, Mixpanel event tracking, cross-platform correlation workflows
 - **`references/examples.md`** — Full application setup, Storybook/test configuration, user identification, custom Honeycomb traces, Mixpanel tracking patterns, logging configuration, troubleshooting
-
-## Maintenance Note
-
-Body budget: ~35 lines. The body retains critical rules that agents frequently violate; all API details, integration patterns, code examples, and troubleshooting live in the three reference files.
