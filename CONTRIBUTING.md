@@ -399,7 +399,7 @@ The following workflows are available with GitHub:
 | Update dependencies | `.github/workflows/update-dependencies.yml` | Weekly (Tue 14:00 UTC) | Automated dependency updates |
 | Code review | `.github/workflows/code-review.yml` | PRs | Automated code review |
 | Claude | `.github/workflows/claude.yml` | @claude mentions | Interactive AI assistance |
-| Sync agent skill | `.github/workflows/sync-agent-skill.yml` | Push to main (docs/) | Sync Squide skill with docs |
+| Sync agent skill | `.github/workflows/sync-agent-skill.yml` | Push to main (docs/) | Sync telemetry skill with docs |
 | Retype | `.github/workflows/retype-action.yml` | Push to main, PRs | Build and deploy documentation site |
 | Audit monorepo | `.github/workflows/audit-monorepo.yml` | First day of month | Best practices audit |
 
