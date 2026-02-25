@@ -2,7 +2,7 @@ Review the `workleap-telemetry` skill you created in the `./agent-skills/worklea
 
 Never update a versioned skill. You can identify a versioned skill with it's folder name pattern, e.g. `workleap-telemetry-v*`.
 
-Once updated, validate that the skill can still answer the following questions:
+After making changes to the skill, spawn a review agent using the **opus** model to validate that the skill can still answer the following questions:
 
 * What is wl-telemetry and what problems does it solve?
 * What are correlation values and why are they important?
