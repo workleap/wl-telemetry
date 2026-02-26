@@ -2,7 +2,6 @@
 
 /** @type {import("syncpack").RcFile} */
 export default {
-    "lintFormatting": false,
     "semverGroups": [
         {
             // Only the version "0.0.2" of the dependency seems to work.

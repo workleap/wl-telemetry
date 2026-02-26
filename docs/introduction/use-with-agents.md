@@ -14,7 +14,7 @@ Information about the telemetry libraries can be shared with different agents us
 Open a terminal and install the `workleap-telemetry` agent skill by running the following command:
 
 ```bash
-npx skills add https://github.com/workleap/wl-telemetry --skill workleap-telemetry
+pnpx skills add https://github.com/workleap/wl-telemetry --skill workleap-telemetry
 ```
 
 !!!tip

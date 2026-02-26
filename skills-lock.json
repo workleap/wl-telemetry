@@ -36,6 +36,11 @@
             "sourceType": "github",
             "computedHash": "5ba89e02b31ffabcebe72b45237dfaaa7e790b51dfdb7511174436841c85d161"
         },
+        "workleap-react-best-practices": {
+            "source": "workleap/wl-web-configs",
+            "sourceType": "github",
+            "computedHash": "f3849c705dd508216673f24efeff9ef25add517ed6a16743675ad53c09f3aba4"
+        },
         "workleap-web-configs": {
             "source": "workleap/wl-web-configs",
             "sourceType": "github",
