@@ -36,7 +36,7 @@ Under [packages/](./packages/) are the actual telemetry libraries.
 
 ### Samples
 
-Under [samples/](samples/) are applications to test the Squide functionalities while developing.
+Under [samples/](samples/) are applications to test the telemetry functionalities while developing.
 
 You'll find 3 samples:
 
