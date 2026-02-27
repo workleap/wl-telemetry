@@ -2,13 +2,13 @@ packages:
   - packages/*
   - samples/**
 
-# minimumReleaseAge: 1440
-# minimumReleaseAgeExclude:
-#   - '@workleap*'
-#   - '@typescript/native-preview*'
-
 onlyBuiltDependencies:
   - agent-browser
   - core-js
+  - edgedriver
   - esbuild
+  - geckodriver
   - protobufjs
+
+patchedDependencies:
+  logrocket@12.0.0: patches/logrocket@12.0.0.patch
