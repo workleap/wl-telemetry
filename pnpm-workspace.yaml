@@ -8,6 +8,7 @@ packages:
 #   - '@typescript/native-preview*'
 
 onlyBuiltDependencies:
+  - agent-browser
   - core-js
   - esbuild
   - protobufjs
