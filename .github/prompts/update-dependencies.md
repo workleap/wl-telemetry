@@ -92,7 +92,7 @@ The build must complete successfully with zero errors. This step validates that 
 
 ### Step 2d: Validate the "honeycomb/api-key" sample app
 
-Use `pnpx agent-browser` for all browser interactions in this step. Read the locally installed agent skill at `.agents/skills/agent-browser/` to learn the available commands. **Important**: the skill examples use bare `agent-browser` commands, but you MUST always prefix with `pnpx` (e.g., `agent-browser open <url>` becomes `pnpx agent-browser open <url>`). Running a build is NOT sufficient — you must start the dev server and validate in a real browser.
+Use `agent-browser` for all browser interactions in this step. It is installed as a workspace devDependency. Read the locally installed agent skill at `.agents/skills/agent-browser/` to learn the available commands. **Important**: Do NOT use `agent-browser screenshot` — screenshots are not used by this workflow. Use `agent-browser snapshot` (DOM snapshot) instead. Running a build is NOT sufficient — you must start the dev server and validate in a real browser.
 
 1. Start the dev server in the background using the shell `&` operator (do NOT use `run_in_background: true`): `pnpm dev-honeycomb-api-key > /tmp/honeycomb-dev.log 2>&1 &`
 2. The app listens on port **8080** and the Express server on port **1234**. Wait for both to be ready — do NOT use `sleep`, do NOT write polling loops, do NOT parse the log file for a URL. Instead, immediately run: `curl --retry 30 --retry-delay 5 --retry-connrefused --silent --output /dev/null http://localhost:8080 && curl --retry 30 --retry-delay 5 --retry-connrefused --silent --output /dev/null http://localhost:1234/api/subscription`
@@ -100,7 +100,7 @@ Use `pnpx agent-browser` for all browser interactions in this step. Read the loc
    - `/` (Home page)
    - `/movies`
    - `/subscription`
-4. For each page, use `pnpx agent-browser snapshot` to verify the page rendered content, and use `pnpx agent-browser console` to check for console errors. Ignore these specific console messages — they are expected in CI: (1) network errors to `api.honeycomb.io` (trace export failures with the CI dummy API key), (2) OpenTelemetry SDK warnings about dropped spans or failed exports, (3) `[honeycomb]` or `[telemetry]` verbose debug messages. Treat any OTHER console errors as real failures. Do NOT inspect the dev server log file (`/tmp/honeycomb-dev.log`) — only check the browser console.
+4. For each page, use `agent-browser snapshot` to verify the page rendered content, and use `agent-browser console` to check for console errors. Ignore these specific console messages — they are expected in CI: (1) network errors to `api.honeycomb.io` (trace export failures with the CI dummy API key), (2) OpenTelemetry SDK warnings about dropped spans or failed exports, (3) `[honeycomb]` or `[telemetry]` verbose debug messages. Treat any OTHER console errors as real failures. Do NOT inspect the dev server log file (`/tmp/honeycomb-dev.log`) — only check the browser console.
 5. Stop the dev server processes when done: `kill $(lsof -t -i:8080) 2>/dev/null || true; kill $(lsof -t -i:1234) 2>/dev/null || true; fuser -k 8080/tcp 2>/dev/null || true; fuser -k 1234/tcp 2>/dev/null || true`
 
 ## Step 3: Success
