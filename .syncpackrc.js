@@ -50,6 +50,20 @@ export default {
             "isIgnored": true
         },
         {
+            // Sample apps use "workspace:*" (pinned) while packages use "workspace:^" (range).
+            // Ignore this expected mismatch.
+            "packages": ["@all-platforms/*"],
+            "dependencies": ["@workleap/telemetry", "@workleap/common-room"],
+            "isIgnored": true
+        },
+        {
+            // Sample apps use "workspace:*" (pinned) while packages use "workspace:^" (range).
+            // Ignore this expected mismatch.
+            "packages": ["@honeycomb-api-key/*", "@honeycomb-proxy/*"],
+            "dependencies": ["@workleap/honeycomb"],
+            "isIgnored": true
+        },
+        {
             "packages": ["**"],
             "dependencyTypes": ["prod", "dev", "peer"],
             "preferVersion": "highestSemver",
