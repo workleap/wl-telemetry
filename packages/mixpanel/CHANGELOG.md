@@ -1,5 +1,14 @@
 # @workleap/mixpanel
 
+## 5.0.1
+
+### Patch Changes
+
+- [#165](https://github.com/workleap/wl-telemetry/pull/165) [`049e75d`](https://github.com/workleap/wl-telemetry/commit/049e75d3954c8564b757bb15bf6b75c4f8e79cb7) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Updated packages to use range version for workspace dependency versions.
+
+- Updated dependencies [[`049e75d`](https://github.com/workleap/wl-telemetry/commit/049e75d3954c8564b757bb15bf6b75c4f8e79cb7)]:
+  - @workleap/logrocket@3.0.1
+
 ## 5.0.0
 
 ### Major Changes
