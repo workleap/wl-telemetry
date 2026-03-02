@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>LogRocketLogger</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -309,7 +309,7 @@
         <span>Reference</span>
     </h2>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="reference-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const logger = new LogRocketLogger(options?: { logLevel? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters">
@@ -344,7 +344,7 @@
         <span>Log a debug entry</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="log-a-debug-entry-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
@@ -356,7 +356,7 @@ logger.debug(&quot;Hello world!&quot;);</code></pre>
         <span>Log an information entry</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="log-an-information-entry-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
@@ -368,7 +368,7 @@ logger.information(&quot;Hello world!&quot;);</code></pre>
         <span>Log a warning entry</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="log-a-warning-entry-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
@@ -380,7 +380,7 @@ logger.warning(&quot;Hello world!&quot;);</code></pre>
         <span>Log an error entry</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="log-an-error-entry-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
@@ -392,7 +392,7 @@ logger.error(&quot;Hello world!&quot;);</code></pre>
         <span>Log a critical entry</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="log-a-critical-entry-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
@@ -405,7 +405,7 @@ logger.critical(&quot;Hello world!&quot;);</code></pre>
     </h3>
 </doc-anchor-target>
 <p>A minimum severity of entries to process can be configured as an option. Messages with a lower severity than the configured level will then be ignored.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="filter-log-entries-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger({
@@ -473,7 +473,7 @@ logger.debug(&quot;Hello world!&quot;);</code></pre>
     </h3>
 </doc-anchor-target>
 <p>Multiple segments can be chained to create a log entry that combines styled text, errors, and objects. To process all segments and output the log to the console, complete the chain by calling any log method.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="build-complex-log-entry-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-10"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
@@ -491,7 +491,7 @@ logger
         <span>Use a logging scope</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="use-a-logging-scope-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();
@@ -526,7 +526,7 @@ scope.end();</code></pre>
     </h3>
 </doc-anchor-target>
 <p>A scope can be dismissed to prevent it&#x27;s log entries from being outputted to the console.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="dismiss-a-logging-scope-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="19"><code v-pre class="language-typescript">import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
 
 const logger = new LogRocketLogger();

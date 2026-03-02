@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>LogRocket features</title>
@@ -33,12 +33,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -453,7 +453,7 @@
 <li>Dynamic DOM mutations containing text</li>
 </ul>
 <p>Use <code translate="no" v-pre>data-public</code> to explicitly allow LogRocket to record the content of an element. When this attribute is present, the content inside the element (including child elements) will be captured in the session replay:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="record-elements-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-markup"><code v-pre class="language-markup">&lt;div data-public&gt;
     This text will be visible in the session replay.
 &lt;/div&gt;</code></pre>
@@ -497,7 +497,7 @@
         <span>Workleap Platform</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="workleap-platform-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-13,15"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -520,7 +520,7 @@ LogRocket.identify(traits.userId, traits);</code></pre>
         <span>ShareGate</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="sharegate-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-11,13"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -542,7 +542,7 @@ LogRocket.identify(traits.shareGateAccountId, traits);</code></pre>
     </h2>
 </doc-anchor-target>
 <p>Every session replay is associated with a unique URL. To register a callback receiving the session replay once it&#x27;s available, use the <a href="https://docs.logrocket.com/reference/get-session-url" class="outbound" target="_blank">LogRocket.getSessionURL</a> function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="get-the-session-url-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-typescript" data-line="3-5"><code v-pre class="language-typescript">import LogRocket from &quot;logrocket&quot;;
 
@@ -557,7 +557,7 @@ LogRocket.getSessionUrl(url =&gt; {
     </h2>
 </doc-anchor-target>
 <p>By default, Workleap&#x27;s LogRocket configuration does not capture console logs. To send loggers output to LogRocket, use the <a href="../../../reference/logrocketlogger/">LogRocketLogger</a> class.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="capture-logs-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx" data-line="8,25,29"><code v-pre class="language-tsx">import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
@@ -620,7 +620,7 @@ root.render(
     </div>
 </div>
 <p>To troubleshoot an production issue, remove the <code translate="no" v-pre>LogLevel</code> from the <code translate="no" v-pre>LogRocketLogger</code> constructor options and set the <code translate="no" v-pre>verbose</code> option to <code translate="no" v-pre>true</code>:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="capture-logs-indextsx-1" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx" data-line="8,25,30"><code v-pre class="language-tsx">import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
 import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;

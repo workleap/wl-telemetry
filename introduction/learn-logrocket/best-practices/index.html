@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Best practices</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -351,7 +351,7 @@
     </h3>
 </doc-anchor-target>
 <p>Initialize telemetry with a <a href="../../../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="telemetry-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { initializeTelemetry, LogRocketLogger } from &quot;@workleap/telemetry/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 
@@ -380,7 +380,7 @@ const client = initializeTelemetry(&quot;sg&quot;, {
     </h3>
 </doc-anchor-target>
 <p>Initialize Common Room with a <a href="../../../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="common-room-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { registerCommonRoomInstrumentation } from &quot;@workleap/common-room/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;; // or from &quot;@workleap/logrocket/react&quot;;
@@ -396,7 +396,7 @@ const client = registerCommonRoomInstrumentation(&quot;my-site-id&quot;, {
     </h3>
 </doc-anchor-target>
 <p>Initialize Squide firefly with a <a href="../../../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="squide-firefly-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeFirefly } from &quot;@squide/firefly&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;;
@@ -412,7 +412,7 @@ const runtime = initializeFirefly({
     </h3>
 </doc-anchor-target>
 <p>Initialize platform widgets with verbose mode activated and a <a href="../../../reference/logrocketlogger/">LogRocketLogger</a> instance:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="platform-widgets-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeWidgets } from &quot;@workleap-widgets/client/react&quot;;
 import { LogLevel } from &quot;@workleap/logging&quot;;
 import { LogRocketLogger } from &quot;@workleap/telemetry/react&quot;;

@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Migrate to umbrella v3.0</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -331,7 +331,7 @@
     </h3>
 </doc-anchor-target>
 <p>With the addition of ShareGate to this library, a way to distinguish whether the consumer is a Workleap Platform or a ShareGate application is now required. This is the purpose of the new <a href="../../reference/telemetry/initializetelemetry/#parameters">productFamily</a> argument of the <a href="../../reference/telemetry/initializetelemetry/">initializeTelemetry</a> function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="initializetelemetry-requires-a-productfamily-argument-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">initializeTelemetry(&quot;sg&quot;, {
     ...
 });</code></pre>
@@ -345,7 +345,7 @@
 <p>The <a href="../../reference/telemetry/initializetelemetry/">initializeTelemetry</a> function <code translate="no" v-pre>mixpanel.productId</code> has been moved as an option.</p>
 <p>Previously, it made sense for <code translate="no" v-pre>productId</code> to be a required argument because all WLP products were single-product applications, and the product identifier was known at initialization time. This is not the case for all ShareGate applications.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="mixpanel-productid-is-now-an-option-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">initializeTelemetry(&quot;wlp&quot;, {
     mixpanel: {
         productId: &quot;wlp&quot;,
@@ -354,7 +354,7 @@
 });</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="mixpanel-productid-is-now-an-option-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">const telemetryClient = initializeTelemetry(&quot;wlp&quot;, {
     mixpanel: {
         envOrTrackingApiBaseUrl: &quot;development&quot;,
@@ -372,11 +372,11 @@
 </doc-anchor-target>
 <p>The <code translate="no" v-pre>createTelemetryContext</code> function signature has been updated to introduce a <code translate="no" v-pre>productFamily</code> argument as the first parameter.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="createtelemetrycontext-now-requires-a-productfamily-argument-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const context = createTelemetryContext();</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="createtelemetrycontext-now-requires-a-productfamily-argument-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="1"><code v-pre class="language-typescript">const context = createTelemetryContext(&quot;sg&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="improvements">
@@ -392,7 +392,7 @@
     </h3>
 </doc-anchor-target>
 <p>A Mixpanel client <a href="../../reference/telemetry/mixpanelclient/">createTrackingFunction</a> instance now accept a <code translate="no" v-pre>productId</code> as an option:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="new-productid-option-for-createtrackingfunction-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="8"><code v-pre class="language-typescript">const telemetryClient = initializeTelemetry(&quot;wlp&quot;, {
     mixpanel: {
         envOrTrackingApiBaseUrl: &quot;development&quot;
@@ -411,7 +411,7 @@ const track = telemetryClient.mixpanelClient.createTrackingFunction({
     </h3>
 </doc-anchor-target>
 <p>The <a href="../../reference/telemetry/usemixpaneltrackingfunction/">useMixpanelTrackingFunction</a> hook now accept a <code translate="no" v-pre>productId</code> as an option:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="new-productid-option-for-usemixpaneltrackingfunction-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="2"><code v-pre class="language-typescript">const track = useMixpanelTrackingFunction({
     productId: &quot;wlp&quot;
 });</code></pre>
@@ -423,7 +423,7 @@ const track = telemetryClient.mixpanelClient.createTrackingFunction({
     </h3>
 </doc-anchor-target>
 <p>The LogRocket instrumentation client have a new <a href="../../reference/telemetry/logrocketinstrumentationclient/#get-default-user-traits-for-sharegate">createShareGateDefaultUserTraits</a> method:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="new-createsharegatedefaultusertraits-function-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const traits = client.createShareGateDefaultUserTraits({
     shareGateAccountId: &quot;cd7fb5ca-f13d-420f-9a87-637b3419d242&quot;,
     microsoftUserId: &quot;e9bb1688-a68b-4235-b514-95a59a7bf8bc&quot;,
@@ -438,7 +438,7 @@ const track = telemetryClient.mixpanelClient.createTrackingFunction({
     </h3>
 </doc-anchor-target>
 <p>A new <a href="../../reference/telemetry/mixpanelpropertiesprovider/">MixpanelPropertiesProvider</a> is available to define scoped Mixpanel properties. These properties are automatically attached to every event tracked by components nested within the provider.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="new-mixpanelpropertiesprovider-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx" data-line="7,9"><code v-pre class="language-tsx">const MixpanelProperties = {
     section: &quot;User Form&quot;
 };

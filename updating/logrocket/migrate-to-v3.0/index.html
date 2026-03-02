@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Migrate to v3.0 - LogRocket</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -335,11 +335,11 @@
 </doc-anchor-target>
 <p>The <code translate="no" v-pre>createTelemetryContext</code> function signature has been updated to introduce a <code translate="no" v-pre>productFamily</code> argument as the first parameter.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="createtelemetrycontext-now-requires-a-productfamily-argument-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const context = createTelemetryContext();</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="createtelemetrycontext-now-requires-a-productfamily-argument-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="1"><code v-pre class="language-typescript">const context = createTelemetryContext(&quot;sg&quot;);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="improvements">
@@ -355,7 +355,7 @@
     </h3>
 </doc-anchor-target>
 <p>The LogRocket instrumentation client have a new <a href="../../../standalone-libraries/logrocket/reference/#get-default-user-traits-for-sharegate">createShareGateDefaultUserTraits</a> method:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="new-createsharegatedefaultusertraits-function-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const traits = client.createShareGateDefaultUserTraits({
     shareGateAccountId: &quot;cd7fb5ca-f13d-420f-9a87-637b3419d242&quot;,
     microsoftUserId: &quot;e9bb1688-a68b-4235-b514-95a59a7bf8bc&quot;,

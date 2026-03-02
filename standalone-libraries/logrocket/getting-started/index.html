@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Getting started - LogRocket</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -335,7 +335,7 @@
     </h2>
 </doc-anchor-target>
 <p>First, open a terminal at the root of the application and install the following packages:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="install-the-packages-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/logrocket logrocket</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="register-instrumentation">
@@ -345,7 +345,7 @@
     </h2>
 </doc-anchor-target>
 <p>Then, update the application bootstrapping code to register LogRocket instrumentation using the <a href="../reference/#registerlogrocketinstrumentation">registerLogRocketInstrumentation</a> function and forward the client using a React context provider:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="register-instrumentation-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx" data-line="6-8,14,16"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 import { StrictMode } from &quot;react&quot;;
@@ -373,7 +373,7 @@ root.render(
     </h2>
 </doc-anchor-target>
 <p>Most Workleap Platform applications need to identify the current user environment. To help with that, <a href="../reference/#logrocketinstrumentationclient">LogRocketInstrumentationClient</a> expose the <a href="../reference/#methods">createWorkleapPlatformDefaultUserTraits</a> method. When used with <a href="https://docs.logrocket.com/reference/identify" class="outbound" target="_blank">LogRocket.identify</a>, it provides all the tools to identify a  user with the key information that we track at Workleap:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="identify-a-workleap-platform-user-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 import { StrictMode } from &quot;react&quot;;
@@ -394,7 +394,7 @@ root.render(
     &lt;/StrictMode&gt;
 );</code></pre>
 </doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="identify-a-workleap-platform-user-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-13,15"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -418,7 +418,7 @@ LogRocket.identify(traits.userId, traits);</code></pre>
     </h2>
 </doc-anchor-target>
 <p>Most ShareGate applications need to identify the current user environment. To help with that, <a href="../reference/#logrocketinstrumentationclient">LogRocketInstrumentationClient</a> expose the <a href="../reference/#methods">createShareGateDefaultUserTraits</a> method. When used with <a href="https://docs.logrocket.com/reference/identify" class="outbound" target="_blank">LogRocket.identify</a>, it provides all the tools to identify a  user with the key information that we track at Workleap:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="identify-a-sharegate-user-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 import { StrictMode } from &quot;react&quot;;
@@ -439,7 +439,7 @@ root.render(
     &lt;/StrictMode&gt;
 );</code></pre>
 </doc-codeblock></div>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="identify-a-sharegate-user-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-11,13"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -461,7 +461,7 @@ LogRocket.identify(traits.shareGateAccountId, traits);</code></pre>
     </h2>
 </doc-anchor-target>
 <p>Every session replay is associated with a unique URL. To register a callback receiving the session replay once it&#x27;s available, use the <a href="https://docs.logrocket.com/reference/get-session-url" class="outbound" target="_blank">LogRocket.getSessionURL</a> function:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="get-the-session-url-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-typescript" data-line="3-5"><code v-pre class="language-typescript">import LogRocket from &quot;logrocket&quot;;
 

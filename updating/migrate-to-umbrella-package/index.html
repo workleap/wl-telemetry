@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Migrate to the umbrella package</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -311,11 +311,11 @@
 </doc-anchor-target>
 <p>Since the <code translate="no" v-pre>@workleap/telemetry</code> package declares dependencies on the standalone telemetry libraries, host applications no longer need to declare direct dependencies on those packages.</p>
 <p>To get started, open a terminal at the root of your application and install the telemetry umbrella package. (If your application uses other packages for additional functionality, such as <code translate="no" v-pre>LogRocketLogger</code>, you may still want to keep those installed separately.)</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="remove-the-standalone-library-packages-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm remove @workleap/logrocket @workleap/honeycomb @workleap/mixpanel</code></pre>
 </doc-codeblock></div>
 <p>Then, install the <code translate="no" v-pre>@workleap/telemetry</code> package:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="remove-the-standalone-library-packages-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/telemetry @opentelemetry/api logrocket</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="update-the-initialization-code">
@@ -326,7 +326,7 @@
 </doc-anchor-target>
 <p>Change the initialize code to use the <a href="../../reference/telemetry/initializetelemetry/">initializeTelemetry</a> function instead of standalone registration/initialization functions:</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="update-the-initialization-code-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">import { createRoot } from &quot;react-dom/client&quot;;
 import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket&quot;;
@@ -348,7 +348,7 @@ root.render(
 );</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="update-the-initialization-code-indextsx-1" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
 <pre translate="no" class="language-tsx" data-line="4-20,25,27"><code v-pre class="language-tsx">import { createRoot } from &quot;react-dom/client&quot;;
 import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
@@ -387,7 +387,7 @@ root.render(
 </doc-anchor-target>
 <p>The <code translate="no" v-pre>createUserTraits</code> standalone function is not exported anymore. Use the client <a href="../../reference/telemetry/logrocketinstrumentationclient/#methods">createWorkleapPlatformDefaultUserTraits</a> method instead.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-createusertraits-with-the-client-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { createDefaultUserTraits } from &quot;@workleap/logrocket&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -403,7 +403,7 @@ const traits = createDefaultUserTraits({
 LogRocket.identify(traits.userId, traits);</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-createusertraits-with-the-client-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4,6-13"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -428,13 +428,13 @@ LogRocket.identify(traits.userId, traits);</code></pre>
 </doc-anchor-target>
 <p>The <code translate="no" v-pre>setGlobalSpanAttribute</code> and <code translate="no" v-pre>setGlobalSpanAttributes</code> standalone functions are not exported anymore. Use the client <a href="../../reference/telemetry/honeycombinstrumentationclient/#methods">setGlobalSpanAttribute</a> and <a href="../../reference/telemetry/honeycombinstrumentationclient/#methods">setGlobalSpanAttributes</a> methods instead.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-setglobalspanattribute-and-setglobalspanattributes-with-the-client-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { setGlobalSpanAttributes } from &quot;@workleap/honeycomb&quot;;
 
 setGlobalSpanAttribute(&quot;app.user_id&quot;, &quot;123&quot;);</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-setglobalspanattribute-and-setglobalspanattributes-with-the-client-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3,5,7-9"><code v-pre class="language-typescript">import { useHoneycombInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
 
 const client = useHoneycombInstrumentationClient();
@@ -453,7 +453,7 @@ client.setGlobalSpanAttributes({
 </doc-anchor-target>
 <p>The <code translate="no" v-pre>setSuperProperty</code> and <code translate="no" v-pre>setSuperProperties</code> standalone functions are not exported anymore. Use the client <a href="../../reference/telemetry/mixpanelclient/#methods">setGlobalEventProperty</a> and <a href="../../reference/telemetry/mixpanelclient/#methods">setGlobalEventProperties</a> methods instead.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-setsuperproperty-and-setsuperproperties-with-the-client-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { setSuperProperties } from &quot;@workleap/mixpanel&quot;;
 
 setSuperProperties({
@@ -461,7 +461,7 @@ setSuperProperties({
 });</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-setsuperproperty-and-setsuperproperties-with-the-client-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3,5,7-9"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/telemetry/react&quot;;
 
 const client = useMixpanelClient();
@@ -480,7 +480,7 @@ client.setGlobalEventProperties({
 </doc-anchor-target>
 <p>The <code translate="no" v-pre>createTrackingFunction</code> standalone function is not exported anymore. Use the client <a href="../../reference/telemetry/mixpanelclient/#methods">createTrackingFunction</a> method instead.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-createtrackingfunction-with-the-client-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { createTrackingFunction } from &quot;@workleap/mixpanel&quot;;
 
 const track = createTrackingFunction();
@@ -488,7 +488,7 @@ const track = createTrackingFunction();
 track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &quot;Location&quot;: &quot;Header&quot; });</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-createtrackingfunction-with-the-client-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3,5,7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/telemetry/react&quot;;
 
 const client = useMixpanelClient();

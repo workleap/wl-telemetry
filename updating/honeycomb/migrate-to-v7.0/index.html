@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Migrate to v7.0 - Honeycomb</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -355,7 +355,7 @@
 </doc-anchor-target>
 <p>The <a href="../../../standalone-libraries/honeycomb/reference/#registerhoneycombinstrumentation">registerHoneycombInstrumentation</a> function now returns a <a href="../../../reference/telemetry/honeycombinstrumentationclient/">client</a> that must be forwarded to the <a href="../../../standalone-libraries/honeycomb/reference/#honeycombinstrumentationprovider">HoneycombInstrumentationProvider</a>. In addition, a <a href="../../../reference/telemetry/telemetrycontext/">TelemetryContext</a> instance must be manually provided to the registration function to ensure correlation ids continue being attached to Honeycomb traces.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="update-the-initialization-code-indexts" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.ts</div>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb&quot;;
 import { StrictMode } from &quot;react&quot;;
@@ -375,7 +375,7 @@ root.render(
 );</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="update-the-initialization-code-indexts-1" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.ts</div>
 <pre translate="no" class="language-tsx" data-line="7,11,12,19,21"><code v-pre class="language-tsx">import { registerHoneycombInstrumentation, HoneycombInstrumentationProvider, createTelemetryContext } from &quot;@workleap/honeycomb/react&quot;;
 import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
@@ -409,13 +409,13 @@ root.render(
 </doc-anchor-target>
 <p>The <code translate="no" v-pre>setGlobalSpanAttribute</code> and <code translate="no" v-pre>setGlobalSpanAttributes</code> standalone functions are not exported anymore. Use the client <a href="../../../reference/telemetry/honeycombinstrumentationclient/#methods">setGlobalSpanAttribute</a> and <a href="../../../reference/telemetry/honeycombinstrumentationclient/#methods">setGlobalSpanAttributes</a> methods instead.</p>
 <p>Before:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-setglobalspanattribute-and-setglobalspanattributes-with-the-client-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { setGlobalSpanAttributes } from &quot;@workleap/honeycomb&quot;;
 
 setGlobalSpanAttribute(&quot;app.user_id&quot;, &quot;123&quot;);</code></pre>
 </doc-codeblock></div>
 <p>Now:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="replace-setglobalspanattribute-and-setglobalspanattributes-with-the-client-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3,5,7-9"><code v-pre class="language-typescript">import { useHoneycombInstrumentationClient } from &quot;@workleap/honeycomb/react&quot;;
 
 const client = useHoneycombInstrumentationClient();

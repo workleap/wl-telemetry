@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Reference - Mixpanel</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -317,7 +317,7 @@
     </h2>
 </doc-anchor-target>
 <p>Initialize <a href="https://mixpanel.com" class="outbound" target="_blank">Mixpanel</a> with Workleap&#x27;s default settings.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="initializemixpanel-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { 
     trackingEndpoint?,
     telemetryContext?,
@@ -373,7 +373,7 @@
     </h3>
 </doc-anchor-target>
 <p>Mixpanel can be initialized for any of the following predefined environments:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="initialize-with-a-predefined-environment-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = initializeMixpanel(&quot;development&quot;);</code></pre>
@@ -384,7 +384,7 @@ const client = initializeMixpanel(&quot;development&quot;);</code></pre>
         <span>Initialize with a base url</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="initialize-with-a-base-url-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = initializeMixpanel(&quot;https://my-tracking-api&quot;);</code></pre>
@@ -395,7 +395,7 @@ const client = initializeMixpanel(&quot;https://my-tracking-api&quot;);</code></
         <span>Initialize with a product id</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="initialize-with-a-product-id-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = initializeMixpanel(&quot;development&quot;, {
@@ -408,7 +408,7 @@ const client = initializeMixpanel(&quot;development&quot;, {
         <span>Use a custom tracking endpoint</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="use-a-custom-tracking-endpoint-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = initializeMixpanel(&quot;development&quot;, {
@@ -421,7 +421,7 @@ const client = initializeMixpanel(&quot;development&quot;, {
         <span>Initialize with a telemetry context</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="initialize-with-a-telemetry-context-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel, createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
 const telemetryContext = createTelemetryContext();
@@ -436,7 +436,7 @@ const client = initializeMixpanel(&quot;development&quot;, {
         <span>Integrate with LogRocket</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="integrate-with-logrocket-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4,7"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
 
@@ -452,7 +452,7 @@ const client = initializeMixpanel(&quot;development&quot;, {
         <span>Verbose mode</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="verbose-mode-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = initializeMixpanel(&quot;development&quot;, {
@@ -465,7 +465,7 @@ const client = initializeMixpanel(&quot;development&quot;, {
         <span>Use loggers</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="use-loggers-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
 import { LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
@@ -481,7 +481,7 @@ const client = initializeMixpanel(&quot;development&quot;, {
     </h2>
 </doc-anchor-target>
 <p>A lightweight client providing access to Mixpanel utilities.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="mixpanelclient-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = new MixpanelClient(endpoint, superProperties, logger, options?);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-1">
@@ -549,7 +549,7 @@ const client = initializeMixpanel(&quot;development&quot;, {
         <span>Track events</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="track-events-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5,7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = useMixpanelClient();
@@ -565,7 +565,7 @@ track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, 
     </h3>
 </doc-anchor-target>
 <p>To track an action targeting a specific product, use the <code translate="no" v-pre>productId</code> option:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="specify-a-product-id-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = useMixpanelClient();
@@ -583,7 +583,7 @@ track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, 
     </h3>
 </doc-anchor-target>
 <p>To track an action targeting another product, use the <code translate="no" v-pre>targetProductId</code> option:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="specify-a-target-product-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = useMixpanelClient();
@@ -601,7 +601,7 @@ track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, 
     </h3>
 </doc-anchor-target>
 <p>To track a link click, use the <code translate="no" v-pre>keepAlive</code> option to keep the page alive while the tracking request is being processed:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="track-a-link-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="8"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = useMixpanelClient();
@@ -618,7 +618,7 @@ track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &q
         <span>Register global properties</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="register-global-properties-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5-7"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = useMixpanelClient();
@@ -634,7 +634,7 @@ client.setGlobalEventProperties({
     </h2>
 </doc-anchor-target>
 <p>A fake implementation of <doc-anchor-trigger to="#mixpanelclient">NoopMixpanelClient</doc-anchor-trigger> for use in non-standard contexts such as unit tests and Storybook.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="noopmixpanelclient-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { NoopMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = new NoopMixpanelClient();</code></pre>
@@ -646,7 +646,7 @@ const client = new NoopMixpanelClient();</code></pre>
     </h2>
 </doc-anchor-target>
 <p>React provider to share a <code translate="no" v-pre>MixpanelClient</code> instance with the application code.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="mixpanelprovider-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">&lt;MixpanelProvider client={client}&gt;
     &lt;App /&gt;
 &lt;/MixpanelProvider&gt;</code></pre>
@@ -666,7 +666,7 @@ const client = new NoopMixpanelClient();</code></pre>
         <span>Provide a client instance</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="provide-a-client-instance-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx" data-line="10-12"><code v-pre class="language-tsx">import { initializeMixpanel, MixpanelProvider } from &quot;@workleap/mixpanel/react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
@@ -687,7 +687,7 @@ root.render(
         <span>Retrieve a client instance</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="retrieve-a-client-instance-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = initializeMixpanel(&quot;development&quot;);
@@ -703,7 +703,7 @@ client.setGlobalEventProperties({
     </h2>
 </doc-anchor-target>
 <p>Retrieve a <code translate="no" v-pre>MixpanelClient</code> instance.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="usemixpanelclient-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useMixpanelClient(options?: { throwOnUndefined? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-2">
@@ -732,7 +732,7 @@ client.setGlobalEventProperties({
         <span>Usage</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="usage-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useMixpanelClient } from &quot;@workleap/mixpanel/react&quot;;
 
 const client = useMixpanelClient();
@@ -748,7 +748,7 @@ client.setGlobalEventProperties({
     </h2>
 </doc-anchor-target>
 <p>Returns a function sending <code translate="no" v-pre>POST</code> requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="usetrackingfunction-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const track = useTrackingFunction(options?: { productId?, targetProductId? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-3">
@@ -802,7 +802,7 @@ client.setGlobalEventProperties({
         <span>Track events</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="track-events-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3,5"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
 
 const track = useTrackingFunction();
@@ -816,7 +816,7 @@ track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, 
     </h3>
 </doc-anchor-target>
 <p>To track an action targeting a specific product, use the <code translate="no" v-pre>productId</code> option:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="specify-a-product-id-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
 
 const track = useTrackingFunction({
@@ -832,7 +832,7 @@ track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, 
     </h3>
 </doc-anchor-target>
 <p>To track an action targeting another product, use the <code translate="no" v-pre>targetProductId</code> option:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="specify-a-target-product-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
 
 const track = useTrackingFunction({
@@ -848,7 +848,7 @@ track(&quot;ButtonClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, 
     </h3>
 </doc-anchor-target>
 <p>To track a link click, use the <code translate="no" v-pre>keepAlive</code> option to keep the page alive while the tracking request is being processed:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="track-a-link-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6"><code v-pre class="language-typescript">import { useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
 
 const track = useTrackingFunction();
@@ -894,7 +894,7 @@ track(&quot;LinkClicked&quot;, { &quot;Trigger&quot;: &quot;ChangePlan&quot;, &q
         <span>Define a provider</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="define-a-provider-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx" data-line="9,11"><code v-pre class="language-tsx">import { MixpanelPropertiesProvider } from &quot;@workleap/mixpanel/react&quot;;
 
 const MixpanelProperties = {
@@ -915,7 +915,7 @@ function App() {
         <span>Track an event with additional properties</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="track-an-event-with-additional-properties-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx" data-line="9,13,19-21"><code v-pre class="language-tsx">import { MixpanelPropertiesProvider, useTrackingFunction } from &quot;@workleap/mixpanel/react&quot;;
 import { useEffect } from &quot;react&quot;;
 
@@ -946,7 +946,7 @@ function App() {
         <span>Retrieve the provider properties</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="retrieve-the-provider-properties-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useMixpanelProviderProperties } from &quot;@workleap/mixpanel/react&quot;;
 
 const props = useMixpanelProviderProperties();</code></pre>
@@ -958,7 +958,7 @@ const props = useMixpanelProviderProperties();</code></pre>
     </h2>
 </doc-anchor-target>
 <p>Creates a <code translate="no" v-pre>TelemetryContext</code> instance containing the telemetry correlation ids.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="createtelemetrycontext-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const telemetryContext = createTelemetryContext(productFamily, options?: { identityCookieExpiration?, verbose?, loggers? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-4">
@@ -990,7 +990,7 @@ const props = useMixpanelProviderProperties();</code></pre>
         <span>Create a telemetry context</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="create-a-telemetry-context-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
 const context = createTelemetryContext(&quot;sg&quot;);</code></pre>
@@ -1001,7 +1001,7 @@ const context = createTelemetryContext(&quot;sg&quot;);</code></pre>
         <span>Set a custom cookie expiration</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="set-a-custom-cookie-expiration-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
 const context = createTelemetryContext(&quot;wlp&quot;, {
@@ -1014,7 +1014,7 @@ const context = createTelemetryContext(&quot;wlp&quot;, {
         <span>Verbose mode</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="verbose-mode-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/mixpanel/react&quot;;
 
 const context = createTelemetryContext(&quot;sg&quot;, {
@@ -1027,7 +1027,7 @@ const context = createTelemetryContext(&quot;sg&quot;, {
         <span>Loggers</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="loggers-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { createTelemetryContext, LogRocketLogger } from &quot;@workleap/mixpanel/react&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 

@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.0.1.825531345468">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.1.0.825794698215">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.0.1">
+    <meta name="generator" content="Retype 4.1.0">
 
     <!-- Primary Meta Tags -->
     <title>Reference - LogRocket</title>
@@ -29,12 +29,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.0.1.825531345468" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.1.0.825794698215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.0.1" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.0.1.825531345468" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.0.1.825531345468" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.1.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.1.0.825794698215" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.1.0.825794698215" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -317,7 +317,7 @@
     </h2>
 </doc-anchor-target>
 <p>Initializes <a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a> instrumentation with Workleap&#x27;s default settings.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="registerlogrocketinstrumentation-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = registerLogRocketInstrumentation(appId, options?: { 
     rootHostname?,
     privateFieldNames?,
@@ -361,7 +361,7 @@
         <span>Set a root hostname</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="set-a-root-hostname-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
 
 const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
@@ -374,7 +374,7 @@ const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
         <span>Remove custom private fields</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="remove-custom-private-fields-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
 
 const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
@@ -388,7 +388,7 @@ const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
         <span>Remove custom query parameters</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="remove-custom-query-parameters-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
 
 const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
@@ -402,7 +402,7 @@ const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
         <span>Use a telemetry context</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="use-a-telemetry-context-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3,6"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation, createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 
 const telemetryContext = createTelemetryContext();
@@ -417,7 +417,7 @@ const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
         <span>Verbose mode</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="verbose-mode-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation } from &quot;@workleap/logrocket/react&quot;;
 
 const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
@@ -430,7 +430,7 @@ const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
         <span>Use loggers</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="use-loggers-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation, LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 
@@ -446,7 +446,7 @@ const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
 </doc-anchor-target>
 <p>The predefined options are useful to quickly customize the default configuration of the <a href="https://docs.logrocket.com/reference/init" class="outbound" target="_blank">LogRocket SDK</a>, but only covers a subset of the options. If you need full control over the configuration, you can provide configuration transformer functions through the <code translate="no" v-pre>transformers</code> option of the <doc-anchor-trigger to="#registerlogrocketinstrumentation">registerLogRocketInstrumentation</doc-anchor-trigger> function. Remember, <strong>no locked in</strong> <span class="docs-emoji">&#x2764;&#xFE0F;</span><span class="docs-emoji">&#x270C;&#xFE0F;</span>.</p>
 <p>To view the default configuration of <code translate="no" v-pre>registerLogRocketInstrumentation</code>, have a look at the <a href="https://github.com/workleap/wl-telemetry/blob/main/packages/logrocket/src/registerLogRocketInstrumentation.ts" class="outbound" target="_blank">registerLogRocketInstrumentation.ts</a> file on GitHub.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="use-transformer-functions-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3-8,11"><code v-pre class="language-typescript">import { registerLogRocketInstrumentation, type LogRocketSdkOptionsTransformer } from &quot;@workleap/logrocket/react&quot;;
 
 const disableConsoleLogging: LogRocketSdkOptionsTransformer = config =&gt; {
@@ -461,7 +461,7 @@ const client = registerLogRocketInstrumentation(&quot;my-app-id&quot;, {
 });</code></pre>
 </doc-codeblock></div>
 <p>Generic transformers can use the <code translate="no" v-pre>context</code> argument to gather additional information about their execution context:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="use-transformer-functions-transformerts" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">transformer.ts</div>
 <pre translate="no" class="language-typescript" data-line="4,8"><code v-pre class="language-typescript">import type { LogRocketSdkOptionsTransformer } from &quot;@workleap/logrocket/react&quot;;
 
@@ -483,7 +483,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) 
     </h2>
 </doc-anchor-target>
 <p>A lightweight client providing access to LogRocket instrumentation utilities.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="logrocketinstrumentationclient-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = new LogRocketInstrumentationClientImpl(telemetryContext?)</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-1">
@@ -512,7 +512,7 @@ const disableConsoleLogging: LogRocketSdkOptionsTransformer = (config, context) 
         <span>Get default user traits for the Workleap platform</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="get-default-user-traits-for-the-workleap-platform-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-13"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -535,7 +535,7 @@ Logrocket.identify(traits.userId, traits);</code></pre>
         <span>Get default user traits for ShareGate</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="get-default-user-traits-for-sharegate-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-11"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -556,7 +556,7 @@ Logrocket.identify(traits.shareGateAccountId, traits);</code></pre>
         <span>Send additional traits</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="send-additional-traits-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="15"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -582,7 +582,7 @@ Logrocket.identify(allTraits.userId, allTraits);</code></pre>
         <span>Register a session URL listener</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="register-a-session-url-listener-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-8"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 import LogRocket from &quot;logrocket&quot;;
 
@@ -599,7 +599,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
     </h2>
 </doc-anchor-target>
 <p>React provider to share a <doc-anchor-trigger to="#logrocketinstrumentationclient">LogRocketInstrumentationClient</doc-anchor-trigger> instance with the application code.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="logrocketinstrumentationprovider-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">&lt;LogRocketInstrumentationProvider client={client}&gt;
     &lt;App /&gt;
 &lt;/LogRocketInstrumentationProvider&gt;</code></pre>
@@ -619,7 +619,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
         <span>Provide a client instance</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="provide-a-client-instance-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx" data-line="10-12"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider } from &quot;@workleap/logrocket/react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
@@ -640,7 +640,7 @@ root.render(
         <span>Retrieve a client instance</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="retrieve-a-client-instance-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 
 const client = useLogRocketInstrumentationClient();
@@ -656,7 +656,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
     </h2>
 </doc-anchor-target>
 <p>A fake implementation of <doc-anchor-trigger to="#logrocketinstrumentationclient">NoopLogRocketInstrumentationClient</doc-anchor-trigger> for use in non-standard contexts such as unit tests and Storybook.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="nooplogrocketinstrumentationclient-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">import { NoopLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 
 const client = new NoopLogRocketInstrumentationClient();</code></pre>
@@ -668,7 +668,7 @@ const client = new NoopLogRocketInstrumentationClient();</code></pre>
     </h2>
 </doc-anchor-target>
 <p>React provider to share a <code translate="no" v-pre>LogRocketInstrumentationProvider</code> instance with the application code.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="logrocketinstrumentationprovider-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx"><code v-pre class="language-tsx">&lt;LogRocketInstrumentationProvider client={client}&gt;
     &lt;App /&gt;
 &lt;/LogRocketInstrumentationProvider&gt;</code></pre>
@@ -688,7 +688,7 @@ const client = new NoopLogRocketInstrumentationClient();</code></pre>
         <span>Provide a client instance</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="provide-a-client-instance-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-tsx" data-line="12-14"><code v-pre class="language-tsx">import { registerLogRocketInstrumentation, LogRocketInstrumentationProvider } from &quot;@workleap/logrocket/react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
@@ -711,7 +711,7 @@ root.render(
         <span>Retrieve a client instance</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="retrieve-a-client-instance-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 
 const client = useLogRocketInstrumentationClient();
@@ -727,7 +727,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
     </h2>
 </doc-anchor-target>
 <p>Retrieve a <code translate="no" v-pre>LogRocketInstrumentationClient</code> instance.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="uselogrocketinstrumentationclient-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useLogRocketInstrumentationClient(options?: { throwOnUndefined? })</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-2">
@@ -756,7 +756,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
         <span>Usage</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="usage-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 
 const client = useLogRocketInstrumentationClient();
@@ -772,7 +772,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
     </h2>
 </doc-anchor-target>
 <p>Retrieve a <doc-anchor-trigger to="#logrocketinstrumentationclient">LogRocketInstrumentationClient</doc-anchor-trigger> instance.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="uselogrocketinstrumentationclient-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = useLogRocketInstrumentationClient();</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-3">
@@ -795,7 +795,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
         <span>Usage</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="usage-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/logrocket/react&quot;;
 
 const client = useLogRocketInstrumentationClient();
@@ -811,7 +811,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
     </h2>
 </doc-anchor-target>
 <p>Creates a <code translate="no" v-pre>TelemetryContext</code> instance containing the telemetry correlation ids.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="createtelemetrycontext-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const telemetryContext = createTelemetryContext(productFamily, options?: { identityCookieExpiration?, verbose?, loggers? });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="parameters-4">
@@ -843,7 +843,7 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
         <span>Create a telemetry context</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="create-a-telemetry-context-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="3"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 
 const context = createTelemetryContext(&quot;sg&quot;);</code></pre>
@@ -854,7 +854,7 @@ const context = createTelemetryContext(&quot;sg&quot;);</code></pre>
         <span>Set a custom cookie expiration</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="set-a-custom-cookie-expiration-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 
 const context = createTelemetryContext(&quot;wlp&quot;, {
@@ -867,7 +867,7 @@ const context = createTelemetryContext(&quot;wlp&quot;, {
         <span>Verbose mode</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="verbose-mode-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { createTelemetryContext } from &quot;@workleap/logrocket/react&quot;;
 
 const context = createTelemetryContext(&quot;sg&quot;, {
@@ -880,7 +880,7 @@ const context = createTelemetryContext(&quot;sg&quot;, {
         <span>Loggers</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
+<div id="loggers-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { createTelemetryContext, LogRocketLogger } from &quot;@workleap/logrocket/react&quot;;
 import { BrowserConsoleLogger, LogLevel } from &quot;@workleap/logging&quot;;
 
