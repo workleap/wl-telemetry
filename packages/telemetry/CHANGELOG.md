@@ -1,5 +1,14 @@
 # @workleap/telemetry
 
+## 3.0.2
+
+### Patch Changes
+
+- [#167](https://github.com/workleap/wl-telemetry/pull/167) [`07a1117`](https://github.com/workleap/wl-telemetry/commit/07a111712dda9d5c651ba959a5644ed619439bab) Thanks [@claude](https://github.com/apps/claude)! - Updated dependencies to their latest versions.
+
+- Updated dependencies [[`07a1117`](https://github.com/workleap/wl-telemetry/commit/07a111712dda9d5c651ba959a5644ed619439bab)]:
+  - @workleap/honeycomb@8.0.2
+
 ## 3.0.1
 
 ### Patch Changes
