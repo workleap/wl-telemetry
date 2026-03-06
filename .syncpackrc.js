@@ -54,6 +54,7 @@ export default {
             // Ignore this expected mismatch.
             "packages": ["@all-platforms/*"],
             "dependencies": ["@workleap/telemetry", "@workleap/common-room"],
+            "dependencyTypes": ["prod"],
             "isIgnored": true
         },
         {
@@ -61,6 +62,7 @@ export default {
             // Ignore this expected mismatch.
             "packages": ["@honeycomb-api-key/*", "@honeycomb-proxy/*"],
             "dependencies": ["@workleap/honeycomb"],
+            "dependencyTypes": ["prod"],
             "isIgnored": true
         },
         {
