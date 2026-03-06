@@ -5,7 +5,7 @@ description: |
 
   Use when initializing @workleap/telemetry, instrumenting Honeycomb traces/spans, configuring LogRocket replay or privacy, tracking Mixpanel events, setting up Noop clients for Storybook/tests, or troubleshooting telemetry correlation. Also activate when someone mentions observability, session replay, or analytics in a Workleap frontend context.
 metadata:
-  version: 3.2
+  version: 3.3
 ---
 
 # Workleap Telemetry (wl-telemetry)

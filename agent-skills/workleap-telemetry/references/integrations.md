@@ -46,8 +46,8 @@ honeycomb: {
     fetchInstrumentation: (config) => config,                // Customize fetch instrumentation
     documentLoadInstrumentation: (config) => config,         // Customize document load instrumentation
 
-    // Disabled by default. Use `true` to enable with defaults, or a function to enable and customize.
-    xmlHttpRequestInstrumentation: true,                     // Enable XHR instrumentation
+    // Disabled by default. Provide a function to enable and customize.
+    xmlHttpRequestInstrumentation: (config) => config,       // Enable and customize XHR instrumentation
     userInteractionInstrumentation: (config) => config,      // Enable and customize user interactions
 
     transformers: []                  // SDK-level configuration transformers
