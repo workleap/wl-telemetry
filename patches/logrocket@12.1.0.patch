@@ -1,0 +1,13 @@
+diff --git a/dist/types.d.ts b/dist/types.d.ts
+index 356d909fb0698179ad5eabaf7e6c6d3cebe915e1..7c6c93c4cd8364f63cdd23e51b36b952ba470917 100644
+--- a/dist/types.d.ts
++++ b/dist/types.d.ts
+@@ -6,7 +6,7 @@ declare let LogRocket: LR.LogRocket;
+
+ export = LogRocket;
+
+-declare module LR {
++declare namespace LR {
+   interface IRequest {
+     reqId: string;
+     url: string;
