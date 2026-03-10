@@ -1,5 +1,11 @@
 # @workleap/honeycomb
 
+## 8.0.3
+
+### Patch Changes
+
+- [#171](https://github.com/workleap/wl-telemetry/pull/171) [`cc9042f`](https://github.com/workleap/wl-telemetry/commit/cc9042f47ba4726c09fe9c5f12a7523954181f1d) Thanks [@claude](https://github.com/apps/claude)! - Updated dependencies to their latest versions.
+
 ## 8.0.2
 
 ### Patch Changes
