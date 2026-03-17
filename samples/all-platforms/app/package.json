@@ -28,11 +28,11 @@
     "devDependencies": {
         "@eslint/js": "9.39.2",
         "@rsbuild/core": "1.7.3",
-        "@rspack/core": "1.7.8",
+        "@rspack/core": "1.7.9",
         "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
-        "@typescript-eslint/parser": "8.57.0",
-        "@typescript/native-preview": "7.0.0-dev.20260310.1",
+        "@typescript-eslint/parser": "8.57.1",
+        "@typescript/native-preview": "7.0.0-dev.20260317.1",
         "@workleap/browserslist-config": "2.1.7",
         "@workleap/eslint-configs": "1.1.14",
         "@workleap/rsbuild-configs": "3.2.3",
@@ -42,6 +42,6 @@
         "eslint": "9.39.2",
         "http-server": "14.1.1",
         "typescript": "5.9.3",
-        "typescript-eslint": "8.57.0"
+        "typescript-eslint": "8.57.1"
     }
 }
