@@ -16,32 +16,32 @@
         "typecheck": "tsgo"
     },
     "dependencies": {
-        "@tanstack/react-query": "5.90.21",
+        "@tanstack/react-query": "5.95.2",
         "@workleap/common-room": "workspace:*",
         "@workleap/logging": "1.3.6",
         "@workleap/telemetry": "workspace:*",
         "logrocket": "12.1.0",
         "react": "19.2.4",
         "react-dom": "19.2.4",
-        "react-router-dom": "7.13.1"
+        "react-router-dom": "7.13.2"
     },
     "devDependencies": {
         "@eslint/js": "9.39.2",
         "@rsbuild/core": "1.7.3",
-        "@rspack/core": "1.7.9",
+        "@rspack/core": "1.7.10",
         "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
-        "@typescript-eslint/parser": "8.57.1",
-        "@typescript/native-preview": "7.0.0-dev.20260317.1",
+        "@typescript-eslint/parser": "8.57.2",
+        "@typescript/native-preview": "7.0.0-dev.20260324.1",
         "@workleap/browserslist-config": "2.1.7",
-        "@workleap/eslint-configs": "1.1.14",
-        "@workleap/rsbuild-configs": "3.2.3",
+        "@workleap/eslint-configs": "1.1.15",
+        "@workleap/rsbuild-configs": "3.2.4",
         "@workleap/typescript-configs": "3.0.7",
         "browserslist": "4.28.1",
         "copyfiles": "2.4.1",
         "eslint": "9.39.2",
         "http-server": "14.1.1",
-        "typescript": "5.9.3",
-        "typescript-eslint": "8.57.1"
+        "typescript": "6.0.2",
+        "typescript-eslint": "8.57.2"
     }
 }
