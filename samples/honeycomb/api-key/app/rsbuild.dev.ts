@@ -7,5 +7,8 @@ const { parsed } = loadEnv({
 });
 
 export default defineDevConfig({
-    environmentVariables: parsed
+    environmentVariables: {
+        ...parsed,
+        HONEYCOMB_API_KEY: process.env.HONEYCOMB_API_KEY
+    }
 });
