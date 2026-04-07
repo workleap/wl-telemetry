@@ -1,0 +1,109 @@
+﻿
+- [Guides](https://workleap.github.io/wl-telemetry/guides/index.md): Setup loggers
+- [Reference](https://workleap.github.io/wl-telemetry/reference/index.md): initializeTelemetry
+- [Standalone libraries](https://workleap.github.io/wl-telemetry/standalone-libraries/index.md): Getting started
+- [Updating](https://workleap.github.io/wl-telemetry/updating/index.md): Migrate to umbrella package
+- [About](https://workleap.github.io/wl-telemetry/about.md): To ask a question or propose an idea, feel free to start a new discussion on Github. If you found a bug, please open an issue on Github.
+- [Samples](https://workleap.github.io/wl-telemetry/samples.md): All platforms sample
+
+## Introduction
+
+- [Getting started](https://workleap.github.io/wl-telemetry/introduction/getting-started.md): Welcome to @workleap/telemetry, a collection of telemetry packages for building web applications at Workleap. On this getting started page, you'll find an overview of the project and a list of supported platforms.
+- [Setup a project](https://workleap.github.io/wl-telemetry/introduction/setup-project.md): Let's set up an application with all four Workleap's supported telemetry platforms.
+
+### Learn LogRocket
+
+- [LogRocket features](https://workleap.github.io/wl-telemetry/introduction/learn-logrocket/features.md): If telemetry hasn't been set up for your project yet, please refer to the setup guide before continuing.
+- [Privacy](https://workleap.github.io/wl-telemetry/introduction/learn-logrocket/privacy.md): By default, this package instrumentation hides a wide range of Personally Identifiable Information (PII) from session replays to protect user privacy:
+- [Best practices](https://workleap.github.io/wl-telemetry/introduction/learn-logrocket/best-practices.md): Follow privacy best practices to reduce the risk of exposing Personally Identifiable Information (PII) in LogRocket session replays.
+
+### Learn Honeycomb
+
+- [Honeycomb features](https://workleap.github.io/wl-telemetry/introduction/learn-honeycomb/features.md): If telemetry hasn't been set up for your project yet, please refer to the setup guide before continuing.
+- [Custom traces](https://workleap.github.io/wl-telemetry/introduction/learn-honeycomb/custom-traces.md): Applications are expected to use the OpenTelemetry API to send custom traces to Honeycomb:
+
+### Learn Mixpanel
+
+- [Mixpanel features](https://workleap.github.io/wl-telemetry/introduction/learn-mixpanel/features.md): If telemetry hasn't been set up for your project yet, please refer to the setup guide before continuing.
+- [Use correlation values](https://workleap.github.io/wl-telemetry/introduction/use-correlation-values.md): Every telemetry platform automatically receives the same two correlation id values, in its own platform-specific naming conventions:
+- [Use with agents](https://workleap.github.io/wl-telemetry/introduction/use-with-agents.md): Information about the telemetry libraries can be shared with different agents using the workleap-telemetry agent skill.
+
+## Guides
+
+- [Setup loggers](https://workleap.github.io/wl-telemetry/guides/setup-loggers.md): Providing loggers to the initialization or registration functions is optional but recommended, as it helps simplify troubleshooting.
+- [Use LogRocket logger](https://workleap.github.io/wl-telemetry/guides/use-logrocket-logger.md): By default, LogRocket session replays can display logs captured during a user session. To prevent exposure of Personally Identifiable Information (PII), Workleap's default LogRocket instrumentation disables automatic forwarding of console.log messages to LogRocket.
+- [Use with Storybook](https://workleap.github.io/wl-telemetry/guides/use-with-storybook.md): When working with third-party tools like Storybook, developpers typically don't want to send real telemetry data to external platforms. However, the code may still depend on having an instance of the telemetry clients available.
+
+## Reference
+
+### Telemetry
+
+- [initializeTelemetry](https://workleap.github.io/wl-telemetry/reference/telemetry/initializetelemetry.md): productFamily: wlp or sg.
+- [TelemetryClient](https://workleap.github.io/wl-telemetry/reference/telemetry/telemetryclient.md): Don't create your own instance of TelemetryClient, use the initializeTelemetry function instead.
+- [NoopTelemetryClient](https://workleap.github.io/wl-telemetry/reference/telemetry/nooptelemetryclient.md): A fake implementation of TelemetryClient for use in non-standard contexts such as unit tests and Storybook.
+- [TelemetryProvider](https://workleap.github.io/wl-telemetry/reference/telemetry/telemetryprovider.md): React provider to share a TelemetryClient instance with the application code.
+- [useTelemetryClient](https://workleap.github.io/wl-telemetry/reference/telemetry/usetelemetryclient.md): Retrieve a TelemetryClient instance.
+- [TelemetryContext](https://workleap.github.io/wl-telemetry/reference/telemetry/telemetrycontext.md): Don't create your own instance of TelemetryContext, use the createTelemetryContext function instead.
+- [LogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/telemetry/logrocketinstrumentationclient.md): A lightweight client providing access to LogRocket instrumentation utilities.
+- [useLogRocketInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/telemetry/uselogrocketinstrumentationclient.md): Retrieve a LogRocketInstrumentationClient instance.
+- [HoneycombInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/telemetry/honeycombinstrumentationclient.md): A lightweight client providing access to Honeycomb instrumentation utilities.
+- [useHoneycombInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/telemetry/usehoneycombinstrumentationclient.md): Retrieve a HoneycombInstrumentationClient instance.
+- [MixpanelClient](https://workleap.github.io/wl-telemetry/reference/telemetry/mixpanelclient.md): A lightweight client providing access to Mixpanel utilities.
+- [useMixpanelClient](https://workleap.github.io/wl-telemetry/reference/telemetry/usemixpanelclient.md): Retrieve a MixpanelClient instance.
+- [useMixpanelTrackingFunction](https://workleap.github.io/wl-telemetry/reference/telemetry/usemixpaneltrackingfunction.md): Returns a function sending POST requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
+- [MixpanelPropertiesProvider](https://workleap.github.io/wl-telemetry/reference/telemetry/mixpanelpropertiesprovider.md): A React provider used to define Mixpanel properties for nested components. These properties are automatically included in events tracked by nested components, provided the events are tracked using functions created with the useMixpanelTrackingFunction hook.
+
+### Common Room
+
+- [registerCommonRoomInstrumentation](https://workleap.github.io/wl-telemetry/reference/common-room/registercommonroominstrumentation.md): Initialize Common Room instrumentation.
+- [CommonRoomInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/common-room/commonroominstrumentationclient.md): Don't create your own instance of CommonRoomInstrumentationClient, use the registerCommonRoomInstrumentation function instead.
+- [NoopCommonRoomInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/common-room/noopcommonroominstrumentationclient.md): A fake implementation of CommonRoomInstrumentationClient for use in non-standard contexts such as unit tests and Storybook.
+- [CommonRoomInstrumentationProvider](https://workleap.github.io/wl-telemetry/reference/common-room/commonroominstrumentationprovider.md): React provider to share a CommonRoomInstrumentationProvider instance with the application code.
+- [useCommonRoomInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/common-room/usecommonroominstrumentationclient.md): Retrieve a CommonRoomInstrumentationClient instance.
+- [LogRocketLogger](https://workleap.github.io/wl-telemetry/reference/logrocketlogger.md): A logger outputting messages to a LogRocket session replay.
+
+## Standalone libraries
+
+### LogRocket
+
+- [Getting started - LogRocket](https://workleap.github.io/wl-telemetry/standalone-libraries/logrocket/getting-started.md): Prefer using the @workleap/telemetry umbrella package over this standalone library.
+- [Reference - LogRocket](https://workleap.github.io/wl-telemetry/standalone-libraries/logrocket/reference.md): Initializes LogRocket instrumentation with Workleap's default settings.
+
+### Honeycomb
+
+- [Getting started - Honeycomb](https://workleap.github.io/wl-telemetry/standalone-libraries/honeycomb/getting-started.md): Prefer using the @workleap/telemetry umbrella package over this standalone library.
+- [Reference - Honeycomb](https://workleap.github.io/wl-telemetry/standalone-libraries/honeycomb/reference.md): Initializes an instance of Honeycomb Web SDK with Workleap's default settings.
+
+### Mixpanel
+
+- [Getting started - Mixpanel](https://workleap.github.io/wl-telemetry/standalone-libraries/mixpanel/getting-started.md): Prefer using the @workleap/telemetry umbrella package over this standalone library.
+- [Reference - Mixpanel](https://workleap.github.io/wl-telemetry/standalone-libraries/mixpanel/reference.md): Initialize Mixpanel with Workleap's default settings.
+
+### CommonRoom
+
+- [Getting started - Common Room](https://workleap.github.io/wl-telemetry/standalone-libraries/common-room/getting-started.md): To connect user activity across platforms and provide insight into community engagement and behavior, Workleap has adopted Common Room, a marketers platform that aggregates data from sources like social media, forums, and product tools to build unified user profiles.
+- [Reference - Common Room](https://workleap.github.io/wl-telemetry/standalone-libraries/common-room/reference.md): Refer to reference documentation.
+
+## Updating
+
+- [Migrate to the umbrella package](https://workleap.github.io/wl-telemetry/updating/migrate-to-umbrella-package.md): To migrate to the new @workleap/telemetry umbrella package, follow these steps 👇
+- [Migrate to umbrella v3.0](https://workleap.github.io/wl-telemetry/updating/migrate-to-umbrella-v3.0.md): This major version remove the global variables deprecated in the previous versions of the standalone libraries and introduce a productFamily argument.
+
+### LogRocket
+
+- [Migrate to v1.0](https://workleap.github.io/wl-telemetry/updating/logrocket/migrate-to-v1.0.md): This rewrite of Workleap's LogRocket instrumentation focuses on leveraging the native LogRocket library directly, rather than abstracting it away and on adding two correlation ids, telemetryId and deviceId, to help unify and correlate data across LogRocket, Honeycomb and Mixpanel.
+- [Migrate to v2.0](https://workleap.github.io/wl-telemetry/updating/logrocket/migrate-to-v2.0.md): This major version introduces several important changes. registerLogRocketInstrumentation now returns a client instance. The standalone createUserTraits
+- [Migrate to v3.0](https://workleap.github.io/wl-telemetry/updating/logrocket/migrate-to-v3.0.md): This major version remove the global variables deprecated in v2.0.
+
+### Honeycomb
+
+- [Migrate to v6.0](https://workleap.github.io/wl-telemetry/updating/honeycomb/migrate-to-v6.0.md): This new version introduces two correlation ids, telemetryId and deviceId, to help unify and correlate data across LogRocket, Honeycomb and Mixpanel and a new automatic enrichment of the traces with the LogRocket session url if the LogRocket instrumentation is registered.
+- [Migrate to v7.0](https://workleap.github.io/wl-telemetry/updating/honeycomb/migrate-to-v7.0.md): This major version introduces several important changes. registerHoneycombInstrumentation now returns a client instance. The standalone
+- [Migrate to v8.0](https://workleap.github.io/wl-telemetry/updating/honeycomb/migrate-to-v8.0.md): This major version remove the global variables deprecated in v7.0.
+
+### Mixpanel
+
+- [Migrate to v1.0](https://workleap.github.io/wl-telemetry/updating/mixpanel/migrate-to-v1.0.md): Follow this guide to migrate from @workleap-tracking/mixpanel 👇
+- [Migrate to v2.0](https://workleap.github.io/wl-telemetry/updating/mixpanel/migrate-to-v2.0.md): This new version introduces two correlation ids, telemetryId and deviceId, to help unify and correlate data across LogRocket, Honeycomb and Mixpanel and a new automatic enrichment of the events with the LogRocket session url if the LogRocket instrumentation is registered.
+- [Migrate to v3.0](https://workleap.github.io/wl-telemetry/updating/mixpanel/migrate-to-v3.0.md): This major version introduces several important changes. initializeMixpanel now returns a client instance. The standalone createTrackingFunction and
+- [Migrate to v4.0](https://workleap.github.io/wl-telemetry/updating/mixpanel/migrate-to-v4.0.md): This major version remove the global variables deprecated in v3.0.

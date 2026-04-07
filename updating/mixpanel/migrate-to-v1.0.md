@@ -1,0 +1,23 @@
+# Migrate to v1.0
+
+Follow this guide to migrate from `@workleap-tracking/mixpanel` :point_down:
+
+## Breaking changes
+
+- The `buildTrackingFunction` function has been renamed to `createTrackingFunction`.
+- The `buildTrackingFunction` function had multiple overloads, the new `createTrackingFunction` function has a single signature with an options object.
+- The `createTrackingFunction` function now accepts a new sets of arguments.
+
+Before:
+
+```ts
+const track = buildTrackingFunction(productId, targetProductIdentifier, environmentVariables.navigationApiBaseUrl);
+```
+
+Now:
+
+```ts
+const track = createTrackingFunction(productId, "development", {
+    targetProductId
+});
+```
