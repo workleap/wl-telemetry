@@ -42,8 +42,8 @@ const telemetryClient = initializeTelemetry(productFamily, {
       spanProcessors?: SpanProcessor[];
       fetchInstrumentation?: false | ((defaults) => FetchInstrumentationOptions);
       documentLoadInstrumentation?: false | ((defaults) => DocumentLoadInstrumentationOptions);
-      xmlHttpRequestInstrumentation?: false | ((defaults) => XHRInstrumentationOptions);       // Disabled by default; provide a function to enable and customize
-      userInteractionInstrumentation?: false | ((defaults) => UserInteractionOptions);          // Disabled by default; provide a function to enable and customize
+      xmlHttpRequestInstrumentation?: true | ((defaults) => XHRInstrumentationOptions);        // Disabled by default; set to true or provide a function to enable
+      userInteractionInstrumentation?: true | ((defaults) => UserInteractionOptions);          // Disabled by default; set to true or provide a function to enable
       transformers?: HoneycombSdkOptionsTransformer[];
     }
   },
