@@ -2,13 +2,13 @@ packages:
   - packages/*
   - samples/**
 
-onlyBuiltDependencies:
-  - agent-browser
-  - core-js
-  - edgedriver
-  - esbuild
-  - geckodriver
-  - protobufjs
+allowBuilds:
+  agent-browser: true
+  core-js: true
+  edgedriver: true
+  esbuild: true
+  geckodriver: true
+  protobufjs: true
 
 patchedDependencies:
   logrocket@12.1.0: patches/logrocket@12.1.0.patch
