@@ -32,10 +32,10 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
             - `userInteractionInstrumentation`: By default, [@opentelemetryinstrumentation-user-interaction](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-user-interaction) is disabled. To enable this instrumentation, provide a function that returns an object literal with the desired options. This function will receive an object literal of default options, which you can extend or replace as needed.
             - `transformers`: An array of transformer functions to update the default Honeycomb options.
     - `mixpanel`: An optional Mixpanel initialization options object. If provided, Mixpanel is initialized, if omitted, it is skipped.
-        - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL.
+        - `envOrTrackingApiBaseUrl`: The environment to get the navigation url from or a base URL. The base URL inferred from the provided environment, or the provided base URL will be appended by the tracking endpoint.
         - `options`: An optional object literal of options:
             - `productId`: The product id.
-            - `trackingEndpoint`: An optional tracking endpoint.
+            - `trackingEndpoint`: An optional tracking endpoint. The default value is `tracking/track`.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.
 
