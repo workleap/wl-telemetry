@@ -2,6 +2,10 @@ packages:
   - packages/*
   - samples/**
 
+minimumReleaseAgeExclude:
+  - '@workleap/*'
+  - '@typescript/native-preview*'
+
 allowBuilds:
   agent-browser: true
   core-js: true
@@ -9,6 +13,3 @@ allowBuilds:
   esbuild: true
   geckodriver: true
   protobufjs: true
-
-patchedDependencies:
-  logrocket@12.1.0: patches/logrocket@12.1.0.patch
