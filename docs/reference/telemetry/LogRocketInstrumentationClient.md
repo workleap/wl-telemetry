@@ -34,7 +34,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-Logrocket.identify(traits.userId, traits);
+LogRocket.identify(traits.userId, traits);
 ```
 
 #### Parameters
@@ -109,7 +109,7 @@ const traits = client.createShareGateDefaultUserTraits({
     workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
 });
 
-Logrocket.identify(traits.shareGateAccountId, traits);
+LogRocket.identify(traits.shareGateAccountId, traits);
 ```
 
 #### Parameters
@@ -156,7 +156,7 @@ const allTraits = {
     "Additional Trait": "Trait Value"
 };
 
-Logrocket.identify(allTraits.userId, allTraits);
+LogRocket.identify(allTraits.userId, allTraits);
 ```
 
 !!!info
@@ -165,9 +165,8 @@ Additional user trait names should align with [Mixpanel](https://mixpanel.com/) 
 
 ### Register a session URL listener
 
-```ts !#6-8
+```ts !#5-7
 import { useLogRocketInstrumentationClient } from "@workleap/telemetry/react";
-import LogRocket from "logrocket";
 
 const client = useLogRocketInstrumentationClient();
 
