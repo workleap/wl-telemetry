@@ -9,6 +9,3 @@ onlyBuiltDependencies:
   - esbuild
   - geckodriver
   - protobufjs
-
-patchedDependencies:
-  logrocket@12.1.0: patches/logrocket@12.1.0.patch
