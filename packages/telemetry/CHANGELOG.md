@@ -1,5 +1,17 @@
 # @workleap/telemetry
 
+## 3.0.5
+
+### Patch Changes
+
+- [#189](https://github.com/workleap/wl-telemetry/pull/189) [`f009896`](https://github.com/workleap/wl-telemetry/commit/f0098965209846a04933c890ba77cf4f645c916c) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Updated dependencies.
+
+- Updated dependencies [[`f009896`](https://github.com/workleap/wl-telemetry/commit/f0098965209846a04933c890ba77cf4f645c916c)]:
+  - @workleap-telemetry/core@2.0.2
+  - @workleap/honeycomb@8.0.5
+  - @workleap/logrocket@3.0.4
+  - @workleap/mixpanel@5.0.3
+
 ## 3.0.4
 
 ### Patch Changes
