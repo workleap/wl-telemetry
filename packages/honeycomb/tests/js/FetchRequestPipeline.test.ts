@@ -1,5 +1,5 @@
 import { afterEach, test, vi } from "vitest";
-import { FetchRequestPipeline, type FetchRequestHookFunction } from "../../src/js/FetchRequestPipeline.ts";
+import { FetchRequestPipeline } from "../../src/js/FetchRequestPipeline.ts";
 import { DummySpan } from "../utils.ts";
 
 afterEach(() => {
@@ -29,7 +29,7 @@ test.concurrent("when a request is dispatched, all the hooks are executed", ({ e
 test.concurrent("when a hook returns true, subsequent hooks are not executed", ({ expect }) => {
     const pipeline = new FetchRequestPipeline();
 
-    const hook1 = vi.fn((() => true) as FetchRequestHookFunction);
+    const hook1 = vi.fn(() => true as const);
     const hook2 = vi.fn();
     const hook3 = vi.fn();
 
