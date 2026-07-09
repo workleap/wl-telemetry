@@ -1,5 +1,14 @@
 # @workleap/common-room
 
+## 2.0.15
+
+### Patch Changes
+
+- [#200](https://github.com/workleap/wl-telemetry/pull/200) [`b701dfc`](https://github.com/workleap/wl-telemetry/commit/b701dfc76e24d0da147be8662291e71dc6945fad) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Updated dependencies to their latest versions.
+
+- Updated dependencies [[`b701dfc`](https://github.com/workleap/wl-telemetry/commit/b701dfc76e24d0da147be8662291e71dc6945fad)]:
+  - @workleap-telemetry/core@2.0.3
+
 ## 2.0.14
 
 ### Patch Changes
