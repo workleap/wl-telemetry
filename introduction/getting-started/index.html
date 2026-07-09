@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.831931051178">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.836949324716">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.5.3">
+    <meta name="generator" content="Retype 4.6.0">
 
     <!-- Primary Meta Tags -->
     <title>Getting started</title>
@@ -45,11 +45,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.831931051178" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.836949324716" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.831931051178" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.831931051178" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.836949324716" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.836949324716" data-turbo-eval="false" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -296,6 +296,12 @@
 <h2 id="a-new-umbrella-package">A new umbrella package</h2>
 <p>Although Workleap provides a standalone package for each platform, <strong>we recommend</strong> going forward <strong>using</strong> the <code translate="no" v-pre>@workleap/telemetry</code> umbrella package for LogRocket, Honeycomb, and Mixpanel. This simplifies the integration, compared to relying on the individual standalone packages for these. To migrate to the <code translate="no" v-pre>@workleap/telemetry</code> umbrella package, refer to the <a href="../../updating/migrate-to-umbrella-package/">migration guide</a>.</p>
 <h2 id="supported-platforms">Supported platforms</h2>
+<retype-table copy-text="| Name | Description | Documentation |
+| --- | --- | --- |
+| ![](../static/logos/logrocket.svg){ class=&quot;h-5 w-5 mr-2 -mt-1&quot; }[LogRocket](https://logrocket.com/) | Records frontend sessions and logs to help debug and resolve issues in production and surface critical issues. | [Learn more](./learn-logrocket/features.md) |
+| ![](../static/logos/honeycomb.svg){ class=&quot;h-5 w-5 mr-2 -mt-1&quot; }[Honeycomb](https://www.honeycomb.io/) | Captures and analyzes distributed traces and metrics to understand and monitor complex systems, application behaviors, and performance. | [Learn more](./learn-honeycomb/features.md) |
+| ![](../static/logos/mixpanel.svg){ class=&quot;h-5 w-5 mr-2 -mt-1&quot; }[Mixpanel](https://mixpanel.com/) | Tracks user interactions to analyze behavior and measure product impact. | [Learn more](./learn-mixpanel/features.md) |
+| ![](../static/logos/common-room.svg){ class=&quot;h-5 w-5 mr-2 -mt-1&quot; }[Common Room](https://www.commonroom.io/) | Connects user activity across platforms to provide insight into community engagement and behavior.&lt;br/&gt;&lt;br/&gt;_(Common Room is not part of the integrated experience, as it is a standalone tool used by marketers for a completely different purpose.)_ | [Getting started](../standalone-libraries/common-room/getting-started.md) |">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable supported-platforms-table">
 <thead>
@@ -307,28 +313,29 @@
 </thead>
 <tbody>
 <tr>
-<td><img src="../../static/logos/logrocket.svg" alt="" class="max-w-full h-auto" class="h-5 w-5 mr-2 -mt-1" width="1875" height="1875" /><a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a></td>
+<td><img src="../../static/logos/logrocket.svg" alt="" class="max-w-full h-auto h-5 w-5 mr-2 -mt-1" width="1875" height="1875" /><a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a></td>
 <td>Records frontend sessions and logs to help debug and resolve issues in production and surface critical issues.</td>
 <td><a href="../learn-logrocket/features/">Learn more</a></td>
 </tr>
 <tr>
-<td><img src="../../static/logos/honeycomb.svg" alt="" class="max-w-full h-auto" class="h-5 w-5 mr-2 -mt-1" width="116" height="111" /><a href="https://www.honeycomb.io/" class="outbound" target="_blank">Honeycomb</a></td>
+<td><img src="../../static/logos/honeycomb.svg" alt="" class="max-w-full h-auto h-5 w-5 mr-2 -mt-1" width="116" height="111" /><a href="https://www.honeycomb.io/" class="outbound" target="_blank">Honeycomb</a></td>
 <td>Captures and analyzes distributed traces and metrics to understand and monitor complex systems, application behaviors, and performance.</td>
 <td><a href="../learn-honeycomb/features/">Learn more</a></td>
 </tr>
 <tr>
-<td><img src="../../static/logos/mixpanel.svg" alt="" class="max-w-full h-auto" class="h-5 w-5 mr-2 -mt-1" width="32" height="32" /><a href="https://mixpanel.com/" class="outbound" target="_blank">Mixpanel</a></td>
+<td><img src="../../static/logos/mixpanel.svg" alt="" class="max-w-full h-auto h-5 w-5 mr-2 -mt-1" width="32" height="32" /><a href="https://mixpanel.com/" class="outbound" target="_blank">Mixpanel</a></td>
 <td>Tracks user interactions to analyze behavior and measure product impact.</td>
 <td><a href="../learn-mixpanel/features/">Learn more</a></td>
 </tr>
 <tr>
-<td><img src="../../static/logos/common-room.svg" alt="" class="max-w-full h-auto" class="h-5 w-5 mr-2 -mt-1" width="34" height="34" /><a href="https://www.commonroom.io/" class="outbound" target="_blank">Common Room</a></td>
+<td><img src="../../static/logos/common-room.svg" alt="" class="max-w-full h-auto h-5 w-5 mr-2 -mt-1" width="34" height="34" /><a href="https://www.commonroom.io/" class="outbound" target="_blank">Common Room</a></td>
 <td>Connects user activity across platforms to provide insight into community engagement and behavior.<br/><br/><em>(Common Room is not part of the integrated experience, as it is a standalone tool used by marketers for a completely different purpose.)</em></td>
 <td><a href="../../standalone-libraries/common-room/getting-started/">Getting started</a></td>
 </tr>
 </tbody>
 </table>
 </div>
+</retype-table>
 <h2 id="setup-your-project">Setup your project</h2>
 <p><span class="docs-emoji">&#x1F449;</span> To get started, follow the <a href="../setup-project/">quick start</a> guide to set up your project with Workleap&#x27;s supported telemetry platforms.</p>
 <div id="retype-backlinks">

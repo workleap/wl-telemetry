@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.831931051178">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.836949324716">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.5.3">
+    <meta name="generator" content="Retype 4.6.0">
 
     <!-- Primary Meta Tags -->
     <title>LogRocketInstrumentationClient</title>
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.5.3.831931051178" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.836949324716" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.5.3.831931051178" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.5.3.831931051178" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.5.3.831931051178" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.836949324716" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.836949324716" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.836949324716" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -368,6 +368,21 @@ LogRocket.identify(traits.userId, traits);</code></pre>
 </ul>
 <h4 id="returns">Returns</h4>
 <p>An object including the default user traits matching the provided identification values:</p>
+<retype-table copy-text="User Trait Name | Description
+---  | ---
+User Id | &lt;p&gt;A value that uniquely identifies the current user.&lt;br/&gt;(in case of multiple workspaces, this id would be different per workspace)&lt;/p&gt;&lt;p&gt;ex. `fa88ed6b-9ff4-48a0-b3a6-cee17b4855e9`&lt;/p&gt;
+Organization Id | &lt;p&gt;The organization's id.&lt;br /&gt;(in case of multiple workspaces, this id would be different per workspace)&lt;/p&gt;&lt;p&gt;ex. `6a3f4a88-b4bd-42cf-b404-7fd83ec1808d`&lt;/p&gt;
+Organization Name | The organization's name.
+Is Migrated To Workleap | `true` if this user's organization has been migrated to use the WLP, or if the user has signed up to the new experience directly.
+Is Admin | `true` if the user is an administrator in the current workspace.
+Is Organization Creator | `true` if the user originally signed up to create the workspace.
+Is Reporting Manager | `true` if this user is a reporting manager in the current workspace.
+Is Team Manager | `true` if this user is a team manager in the current workspace.
+Is Executive | `true` if this user is an executive in any product  in the current workspace.
+Is Executive - Officevibe&lt;br/&gt;Is Executive - LMS&lt;br/&gt;Is Executive - Onboarding&lt;br/&gt;Is Executive - Pingboard&lt;br/&gt;Is Executive - Skills&lt;br/&gt;Is Executive - Performance | `true` if this user is an executive of the corresponding product in the current workspace.
+Is Collaborator | `true` if this user is a collaborator in any product in the current workspace.
+Is Collaborator - Officevibe&lt;br/&gt;Is Collaborator - LMS&lt;br /&gt;Is Collaborator - Onboarding&lt;br/&gt;Is Collaborator - Pingboard&lt;br/&gt;Is Collaborator - Skills&lt;br/&gt;Is Collaborator - Performance | `true` if this user is a collaborator in the corresponding product in the current workspace.
+Plan Code - Officevibe&lt;br/&gt;Plan Code - LMS&lt;br/&gt;Plan Code - Onboarding&lt;br/&gt;Plan Code - Pingboard&lt;br/&gt;Plan Code - Skills&lt;br/&gt;Plan Code - Performance | &lt;p&gt;Indicates the plan code for the corresponding product in the workspace.&lt;/p&gt;&lt;p&gt;ex. `wov-essential-monthly-std`&lt;/p&gt;">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable user-traits-table">
 <thead>
@@ -432,6 +447,7 @@ LogRocket.identify(traits.userId, traits);</code></pre>
 </tbody>
 </table>
 </div>
+</retype-table>
 <h3 id="get-default-user-traits-for-sharegate">Get default user traits for ShareGate</h3>
 <div id="get-default-user-traits-for-sharegate-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="6-11"><code v-pre class="language-typescript">import { useLogRocketInstrumentationClient } from &quot;@workleap/telemetry/react&quot;;
@@ -462,6 +478,13 @@ LogRocket.identify(traits.shareGateAccountId, traits);</code></pre>
 </ul>
 <h4 id="returns-1">Returns</h4>
 <p>An object including the default user traits matching the provided identification values:</p>
+<retype-table copy-text="User Trait Name | Description
+---  | ---
+ShareGate Account Id | A value that uniquely identifies the current ShareGate account.
+Microsoft User Id | The id of the user Microsoft account.
+Microsoft Tenant Id | The id of the user Microsoft tenant.
+Workspace Id | The id of the workspace the user belongs to.
+Is In Partner Program | `true` if this user is in ShareGate partner program.">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable user-traits-table">
 <thead>
@@ -494,6 +517,7 @@ LogRocket.identify(traits.shareGateAccountId, traits);</code></pre>
 </tbody>
 </table>
 </div>
+</retype-table>
 <h3 id="send-additional-traits">Send additional traits</h3>
 <p>You can send custom user traits to improve filtering in <a href="https://app.logrocket.com" class="outbound" target="_blank">LogRocket</a>. To do so, merge the default user traits with your additional traits before sending them:</p>
 <div id="send-additional-traits-code-1" class="codeblock-wrapper"><doc-codeblock>

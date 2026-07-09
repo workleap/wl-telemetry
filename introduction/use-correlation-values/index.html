@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.831931051178">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.836949324716">
 
     <!-- See retype.com -->
-    <meta name="generator" content="Retype 4.5.3">
+    <meta name="generator" content="Retype 4.6.0">
 
     <!-- Primary Meta Tags -->
     <title>Use correlation values</title>
@@ -39,11 +39,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.5.3.831931051178" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.836949324716" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.831931051178" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.831931051178" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.836949324716" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.836949324716" data-turbo-eval="false" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -285,6 +285,10 @@
 <h1 id="use-correlation-values">Use correlation values</h1>
 <h2 id="correlation-ids">Correlation ids</h2>
 <p>Every telemetry platform automatically receives the same two correlation id values, in its own platform-specific naming conventions:</p>
+<retype-table copy-text="| Correlation id | Description | LogRocket | Honeycomb | Mixpanel |
+| --- | --- | --- | --- | --- |
+| Telemetry id | Identifies a single application load. It's primarily used to correlate all telemetry platforms with Honeycomb traces. | `Telemetry Id` | `app.telemetry_id` | `Telemetry Id` |
+| Device id | Identifies the user's device across sessions. | `Device Id` | `app.device_id` | `Device Id` |">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable correlation-ids-table">
 <thead>
@@ -314,6 +318,7 @@
 </tbody>
 </table>
 </div>
+</retype-table>
 <p>Those correlation ids brings together <a href="https://logrocket.com/" class="outbound" target="_blank">LogRocket</a>, <a href="https://www.honeycomb.io/" class="outbound" target="_blank">Honeycomb</a>, and <a href="https://mixpanel.com/" class="outbound" target="_blank">Mixpanel</a>. By linking session data, performance traces, and user interactions through consistent identifiers, it becomes possible to <strong>trace</strong> a <strong>single</strong> application <strong>event across systems</strong>, from backend performance to frontend behavior to product impact.</p>
 <h3 id="troubleshooting-example">Troubleshooting example</h3>
 <p>The following is an example of a troubleshooting workflow using the telemetry correlation ids:</p>
@@ -324,6 +329,9 @@
 </ul>
 <h2 id="logrocket-session-url">LogRocket session URL</h2>
 <p>If LogRocket instrumentation is enabled, the Honeycomb and Mixpanel libraries will automatically attach the LogRocket session URL to their traces/events once it&#x27;s available:</p>
+<retype-table copy-text="| Honeycomb | Mixpanel |
+| --- | --- |
+| `app.logrocket_session_url` | `LogRocket Session URL` |">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -340,6 +348,7 @@
 </tbody>
 </table>
 </div>
+</retype-table>
 <h3 id="troubleshooting-example-1">Troubleshooting example</h3>
 <p>The following example illustrates a troubleshooting workflow using the LogRocket session URL:</p>
 <ul>
