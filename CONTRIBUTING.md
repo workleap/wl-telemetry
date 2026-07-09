@@ -222,7 +222,7 @@ Make sure GitHub Action has **write access** to the selected npm packages.
 If the packages failed to compile, it's easier to debug without executing the full release flow every time. To do so, instead, execute the following command:
 
 ```bash
-pnpm build
+pnpm build-pkg
 ```
 
 By default, packages compilation output will be in their respective *dist* directory.
