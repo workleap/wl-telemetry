@@ -115,39 +115,6 @@ describe.concurrent("createShareGateDefaultUserTraits", () => {
         expect(result["Device Id"]).toEqual(telemetryContext.deviceId);
         expect(result["Telemetry Id"]).toEqual(telemetryContext.telemetryId);
     });
-
-    test.concurrent("optional user traits with no value provided are skipped", ({ expect }) => {
-        const identification = {
-            shareGateAccountId: "123",
-            microsoftUserId: "456",
-            microsoftTenantId: "789",
-            workspaceId: "ws-123"
-        };
-
-        const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
-
-        const result = client.createShareGateDefaultUserTraits(identification);
-
-        expect(result).not.toHaveProperty("Is In Partner Program");
-    });
-
-    test.concurrent("optional user traits with values provided are returned", ({ expect }) => {
-        const identification = {
-            shareGateAccountId: "123",
-            microsoftUserId: "456",
-            microsoftTenantId: "789",
-            workspaceId: "ws-123",
-            isInPartnerProgram: true
-        };
-
-        const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
-
-        const result = client.createShareGateDefaultUserTraits(identification);
-
-        expect(result["Is In Partner Program"]).toBeTruthy();
-    });
 });
 
 describe.concurrent("user traits are compatible with LogRocket.identify", () => {

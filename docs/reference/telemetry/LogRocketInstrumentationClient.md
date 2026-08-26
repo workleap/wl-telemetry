@@ -119,7 +119,6 @@ LogRocket.identify(traits["ShareGate Account Id"], traits);
     - `microsoftUserId`: The id of the user Microsoft account.
     - `microsoftTenantId`: The id of the user Microsoft tenant.
     - `workspaceId`: The id of the workspace the user belongs to.
-    - `isInPartnerProgram`: An optional value indicating whether or not the user is in ShareGate partner program.
 
 #### Returns
 
@@ -132,7 +131,6 @@ ShareGate Account Id | A value that uniquely identifies the current ShareGate ac
 Microsoft User Id | The id of the user Microsoft account.
 Microsoft Tenant Id | The id of the user Microsoft tenant.
 Workspace Id | The id of the workspace the user belongs to.
-Is In Partner Program | `true` if this user is in ShareGate partner program.
 
 ### Send additional traits
 

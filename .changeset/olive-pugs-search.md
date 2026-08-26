@@ -1,9 +1,15 @@
 ---
-"@workleap/logrocket": minor
+"@workleap/logrocket": major
+"@workleap/telemetry": major
 ---
 
-Fixed the default user traits so they can be forwarded to `LogRocket.identify` as documented.
+Fixed the default user traits so they can be forwarded to `LogRocket.identify` as documented, and removed the ShareGate partner program trait.
 
+## Breaking changes
+
+- The `isInPartnerProgram` option of `LogRocketShareGateIdentification` and the `Is In Partner Program` trait it produced have been removed.
 - `LogRocketWorkleapPlatformUserTraits` and `LogRocketShareGateUserTraits` are no longer extending `Record<string, unknown>`. The `unknown` index signature made them incompatible with LogRocket `IUserTraits` type, causing a `TS2345` error when the traits were passed to `LogRocket.identify`. They are now declared as type aliases, which means accessing an unknown trait is a compilation error rather than an `unknown` value.
-- `createShareGateDefaultUserTraits` no longer returns an `Is In Partner Program` trait set to `undefined` when `isInPartnerProgram` is omitted. The trait is now omitted, as it already was for the optional Workleap Platform traits.
+
+## Improvements
+
 - `LogRocketWorkleapPlatformUserTraits` now includes the `Is Executive - Compensation`, `Is Collaborator - Compensation` and `Plan Code - Compensation` traits, which `createWorkleapPlatformDefaultUserTraits` was already returning.

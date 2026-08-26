@@ -8,12 +8,14 @@ order: 70
 
 - [Migrate to umbrella package](./migrate-to-umbrella-package.md)
 - [Migrate to umbrella v3.0](./migrate-to-umbrella-v3.0.md)
+- [Migrate to umbrella v4.0](./migrate-to-umbrella-v4.0.md)
 
 ## LogRocket
 
 - [Migrate to v1.0](./logrocket/migrate-to-v1.0.md) [!badge variant="secondary" size="s" text="migrate from @workleap-tracking/logrocket"]
 - [Migrate to v2.0](./logrocket/migrate-to-v2.0.md)
 - [Migrate to v3.0](./logrocket/migrate-to-v3.0.md)
+- [Migrate to v4.0](./logrocket/migrate-to-v4.0.md)
 
 ## Honeycomb
 

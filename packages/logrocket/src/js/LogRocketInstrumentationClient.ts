@@ -102,7 +102,6 @@ export interface LogRocketShareGateIdentification {
     microsoftUserId: string;
     microsoftTenantId: string;
     workspaceId: string;
-    isInPartnerProgram?: boolean;
 }
 
 /**
@@ -115,7 +114,6 @@ export type LogRocketShareGateUserTraits = {
     "Workspace Id": string;
     "Device Id": string;
     "Telemetry Id": string;
-    "Is In Partner Program"?: boolean;
 };
 
 ///////////////////////////
@@ -241,8 +239,7 @@ export class LogRocketInstrumentationClientImpl implements LogRocketInstrumentat
             "Microsoft Tenant Id": identification.microsoftTenantId,
             "Workspace Id": identification.workspaceId,
             [DeviceIdTrait]: this.#telemetryContext?.deviceId ?? "N/A",
-            [TelemetryIdTrait]: this.#telemetryContext?.telemetryId ?? "N/A",
-            ...(isDefined(identification.isInPartnerProgram) && { "Is In Partner Program": identification.isInPartnerProgram })
+            [TelemetryIdTrait]: this.#telemetryContext?.telemetryId ?? "N/A"
         } satisfies LogRocketShareGateUserTraits;
     }
 }
