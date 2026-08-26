@@ -3,6 +3,11 @@ import type LogRocket from "logrocket";
 // Typings are not exposed by the library.
 export type LogRocketSdkOptions = NonNullable<Parameters<(typeof LogRocket)["init"]>[1]>;
 
+// Typings are not exposed by the library, copied from the LogRocket package (IUserTraits).
+export interface LogRocketUserTraits {
+    [key: string]: string | number | boolean;
+}
+
 // Typings are not exposed by the library, copied from the LogRocket package.
 export interface LogRocketRequest {
     reqId: string;

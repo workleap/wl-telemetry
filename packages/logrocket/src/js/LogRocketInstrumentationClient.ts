@@ -50,10 +50,13 @@ export interface LogRocketWorkleapPlatformIdentification {
     };
 }
 
+// Must remain assignable to LogRocket "IUserTraits" (see LogRocketUserTraits), otherwise the traits cannot be
+// forwarded to LogRocket.identify. Hence the type alias: an index signature would either widen the trait values
+// beyond what LogRocket accepts or forbid optional traits, while a plain interface has no implicit index signature.
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unknown> {
+export type LogRocketWorkleapPlatformUserTraits = {
     "User Id": string;
     "Organization Id": string;
     "Organization Name": string;
@@ -69,6 +72,7 @@ export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unkn
     "Is Executive - Skills"?: boolean;
     "Is Executive - Performance"?: boolean;
     "Is Executive - Pingboard"?: boolean;
+    "Is Executive - Compensation"?: boolean;
     "Is Collaborator"?: boolean;
     "Is Collaborator - Officevibe"?: boolean;
     "Is Collaborator - LMS"?: boolean;
@@ -76,6 +80,7 @@ export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unkn
     "Is Collaborator - Skills"?: boolean;
     "Is Collaborator - Performance"?: boolean;
     "Is Collaborator - Pingboard"?: boolean;
+    "Is Collaborator - Compensation"?: boolean;
     "Is Reporting Manager"?: boolean;
     "Is Team Manager"?: boolean;
     "Plan Code - Officevibe"?: string;
@@ -84,7 +89,8 @@ export interface LogRocketWorkleapPlatformUserTraits extends Record<string, unkn
     "Plan Code - Skills"?: string;
     "Plan Code - Performance"?: string;
     "Plan Code - Pingboard"?: string;
-}
+    "Plan Code - Compensation"?: string;
+};
 
 ///////////////////////////
 
@@ -102,7 +108,7 @@ export interface LogRocketShareGateIdentification {
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export interface LogRocketShareGateUserTraits extends Record<string, unknown> {
+export type LogRocketShareGateUserTraits = {
     "ShareGate Account Id": string;
     "Microsoft User Id": string;
     "Microsoft Tenant Id": string;
@@ -110,7 +116,7 @@ export interface LogRocketShareGateUserTraits extends Record<string, unknown> {
     "Device Id": string;
     "Telemetry Id": string;
     "Is In Partner Program"?: boolean;
-}
+};
 
 ///////////////////////////
 
@@ -236,7 +242,7 @@ export class LogRocketInstrumentationClientImpl implements LogRocketInstrumentat
             "Workspace Id": identification.workspaceId,
             [DeviceIdTrait]: this.#telemetryContext?.deviceId ?? "N/A",
             [TelemetryIdTrait]: this.#telemetryContext?.telemetryId ?? "N/A",
-            "Is In Partner Program": identification.isInPartnerProgram
+            ...(isDefined(identification.isInPartnerProgram) && { "Is In Partner Program": identification.isInPartnerProgram })
         } satisfies LogRocketShareGateUserTraits;
     }
 }

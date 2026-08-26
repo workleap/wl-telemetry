@@ -125,7 +125,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-LogRocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 ### ShareGate
@@ -143,7 +143,7 @@ const traits = client.createShareGateDefaultUserTraits({
     workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
 });
 
-LogRocket.identify(traits.shareGateAccountId, traits);
+LogRocket.identify(traits["ShareGate Account Id"], traits);
 ```
 
 ## Get the session URL

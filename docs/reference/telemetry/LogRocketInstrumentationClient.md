@@ -34,7 +34,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-LogRocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 #### Parameters
@@ -89,10 +89,10 @@ Is Organization Creator | `true` if the user originally signed up to create the 
 Is Reporting Manager | `true` if this user is a reporting manager in the current workspace.
 Is Team Manager | `true` if this user is a team manager in the current workspace.
 Is Executive | `true` if this user is an executive in any product  in the current workspace.
-Is Executive - Officevibe<br/>Is Executive - LMS<br/>Is Executive - Onboarding<br/>Is Executive - Pingboard<br/>Is Executive - Skills<br/>Is Executive - Performance | `true` if this user is an executive of the corresponding product in the current workspace.
+Is Executive - Officevibe<br/>Is Executive - LMS<br/>Is Executive - Onboarding<br/>Is Executive - Pingboard<br/>Is Executive - Skills<br/>Is Executive - Performance<br/>Is Executive - Compensation | `true` if this user is an executive of the corresponding product in the current workspace.
 Is Collaborator | `true` if this user is a collaborator in any product in the current workspace.
-Is Collaborator - Officevibe<br/>Is Collaborator - LMS<br />Is Collaborator - Onboarding<br/>Is Collaborator - Pingboard<br/>Is Collaborator - Skills<br/>Is Collaborator - Performance | `true` if this user is a collaborator in the corresponding product in the current workspace.
-Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan Code - Pingboard<br/>Plan Code - Skills<br/>Plan Code - Performance | <p>Indicates the plan code for the corresponding product in the workspace.</p><p>ex. `wov-essential-monthly-std`</p>
+Is Collaborator - Officevibe<br/>Is Collaborator - LMS<br />Is Collaborator - Onboarding<br/>Is Collaborator - Pingboard<br/>Is Collaborator - Skills<br/>Is Collaborator - Performance<br/>Is Collaborator - Compensation | `true` if this user is a collaborator in the corresponding product in the current workspace.
+Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan Code - Pingboard<br/>Plan Code - Skills<br/>Plan Code - Performance<br/>Plan Code - Compensation | <p>Indicates the plan code for the corresponding product in the workspace.</p><p>ex. `wov-essential-monthly-std`</p>
 
 ### Get default user traits for ShareGate
 
@@ -109,7 +109,7 @@ const traits = client.createShareGateDefaultUserTraits({
     workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
 });
 
-LogRocket.identify(traits.shareGateAccountId, traits);
+LogRocket.identify(traits["ShareGate Account Id"], traits);
 ```
 
 #### Parameters
@@ -156,7 +156,7 @@ const allTraits = {
     "Additional Trait": "Trait Value"
 };
 
-LogRocket.identify(allTraits.userId, allTraits);
+LogRocket.identify(allTraits["User Id"], allTraits);
 ```
 
 !!!info

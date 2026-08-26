@@ -1,6 +1,7 @@
 import { TelemetryContext } from "@workleap-telemetry/core";
 import { describe, test } from "vitest";
-import { LogRocketInstrumentationClientImpl } from "../../src/js/LogRocketInstrumentationClient.ts";
+import { LogRocketInstrumentationClientImpl, type LogRocketInstrumentationClient } from "../../src/js/LogRocketInstrumentationClient.ts";
+import type { LogRocketUserTraits } from "../../src/js/logRocketTypes.ts";
 
 describe.concurrent("createWorkleapPlatformDefaultUserTraits", () => {
     test.concurrent("required user traits are returned", ({ expect }) => {
@@ -128,7 +129,7 @@ describe.concurrent("createShareGateDefaultUserTraits", () => {
 
         const result = client.createShareGateDefaultUserTraits(identification);
 
-        expect(Object.keys(result)).not.toContain(["Is In Partner Program"]);
+        expect(result).not.toHaveProperty("Is In Partner Program");
     });
 
     test.concurrent("optional user traits with values provided are returned", ({ expect }) => {
@@ -146,5 +147,34 @@ describe.concurrent("createShareGateDefaultUserTraits", () => {
         const result = client.createShareGateDefaultUserTraits(identification);
 
         expect(result["Is In Partner Program"]).toBeTruthy();
+    });
+});
+
+describe.concurrent("user traits are compatible with LogRocket.identify", () => {
+    test.concurrent("Workleap Platform user traits", ({ expect }) => {
+        const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
+
+        const traits: LogRocketUserTraits = client.createWorkleapPlatformDefaultUserTraits({
+            userId: "123",
+            organizationId: "456",
+            organizationName: "Test Organization",
+            isMigratedToWorkleap: true,
+            isAdmin: false
+        });
+
+        expect(traits["User Id"]).toEqual("123");
+    });
+
+    test.concurrent("ShareGate user traits", ({ expect }) => {
+        const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
+
+        const traits: LogRocketUserTraits = client.createShareGateDefaultUserTraits({
+            shareGateAccountId: "123",
+            microsoftUserId: "456",
+            microsoftTenantId: "789",
+            workspaceId: "ws-123"
+        });
+
+        expect(traits["ShareGate Account Id"]).toEqual("123");
     });
 });

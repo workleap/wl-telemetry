@@ -94,7 +94,7 @@ const traits = createDefaultUserTraits({
 registerLogRocketInstrumentation(appId);
 
 LogRocket.getSessionURL((sessionUrl) => sendSessionUrlToTrackingService(sessionUrl));
-LogRocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 ### Removed `registerAnonymousLogRocketInstrumentation`
