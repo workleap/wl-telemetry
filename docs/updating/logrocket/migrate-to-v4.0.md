@@ -17,7 +17,7 @@ This major version removes the ShareGate partner program trait and makes the def
 
 - The `isInPartnerProgram` option of the [createShareGateDefaultUserTraits](../../standalone-libraries/logrocket/reference.md#logrocketinstrumentationclient) `identification` argument has been removed, along with the `Is In Partner Program` user trait it produced. Remove the option from your identification object:
 
-```ts !#5
+```ts
 const traits = client.createShareGateDefaultUserTraits({
     shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
     microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
