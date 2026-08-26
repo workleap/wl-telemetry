@@ -50,9 +50,9 @@ export interface LogRocketWorkleapPlatformIdentification {
     };
 }
 
-// Must remain assignable to LogRocket "IUserTraits" (see LogRocketUserTraits), otherwise the traits cannot be
-// forwarded to LogRocket.identify. Hence the type alias: an index signature would either widen the trait values
-// beyond what LogRocket accepts or forbid optional traits, while a plain interface has no implicit index signature.
+// Must remain assignable to the LogRocket "IUserTraits" type, otherwise the traits cannot be forwarded to
+// LogRocket.identify. Hence the type alias: an index signature would either widen the trait values beyond what
+// LogRocket accepts or forbid optional traits, while a plain interface has no implicit index signature.
 /**
  * @see {@link https://workleap.github.io/wl-telemetry}
  */

@@ -1,7 +1,13 @@
 import { TelemetryContext } from "@workleap-telemetry/core";
-import { describe, test } from "vitest";
+import LogRocket from "logrocket";
+import { describe, test, vi } from "vitest";
 import { LogRocketInstrumentationClientImpl, type LogRocketInstrumentationClient } from "../../src/js/LogRocketInstrumentationClient.ts";
-import type { LogRocketUserTraits } from "../../src/js/logRocketTypes.ts";
+
+vi.mock("logrocket", () => ({
+    default: {
+        identify: vi.fn()
+    }
+}));
 
 describe.concurrent("createWorkleapPlatformDefaultUserTraits", () => {
     test.concurrent("required user traits are returned", ({ expect }) => {
@@ -117,11 +123,13 @@ describe.concurrent("createShareGateDefaultUserTraits", () => {
     });
 });
 
-describe.concurrent("user traits are compatible with LogRocket.identify", () => {
+// These tests fail to compile, rather than to run, if the user traits stop being assignable to the LogRocket
+// "IUserTraits" type. Mocking the module keeps the real identify signature, which a hand-written copy wouldn't.
+describe.concurrent("user traits are accepted by LogRocket.identify", () => {
     test.concurrent("Workleap Platform user traits", ({ expect }) => {
         const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
 
-        const traits: LogRocketUserTraits = client.createWorkleapPlatformDefaultUserTraits({
+        const traits = client.createWorkleapPlatformDefaultUserTraits({
             userId: "123",
             organizationId: "456",
             organizationName: "Test Organization",
@@ -129,19 +137,23 @@ describe.concurrent("user traits are compatible with LogRocket.identify", () => 
             isAdmin: false
         });
 
-        expect(traits["User Id"]).toEqual("123");
+        LogRocket.identify(traits["User Id"], traits);
+
+        expect(LogRocket.identify).toHaveBeenCalledWith("123", traits);
     });
 
     test.concurrent("ShareGate user traits", ({ expect }) => {
         const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
 
-        const traits: LogRocketUserTraits = client.createShareGateDefaultUserTraits({
+        const traits = client.createShareGateDefaultUserTraits({
             shareGateAccountId: "123",
             microsoftUserId: "456",
             microsoftTenantId: "789",
             workspaceId: "ws-123"
         });
 
-        expect(traits["ShareGate Account Id"]).toEqual("123");
+        LogRocket.identify(traits["ShareGate Account Id"], traits);
+
+        expect(LogRocket.identify).toHaveBeenCalledWith("123", traits);
     });
 });
