@@ -37,7 +37,7 @@ They are now type aliases declaring only the traits they return. Reading a trait
 Before:
 
 ```ts
-// Compiles, but the trait name is wrong and the value is undefined at runtime.
+// Never compiled: "userId" is not a trait name, it resolved to "unknown".
 LogRocket.identify(traits.userId, traits);
 ```
 
