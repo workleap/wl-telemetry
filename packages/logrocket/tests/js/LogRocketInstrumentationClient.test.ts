@@ -121,6 +121,22 @@ describe.concurrent("createShareGateDefaultUserTraits", () => {
         expect(result["Device Id"]).toEqual(telemetryContext.deviceId);
         expect(result["Telemetry Id"]).toEqual(telemetryContext.telemetryId);
     });
+
+    test.concurrent("optional user traits with no value provided fallback to N/A", ({ expect }) => {
+        const identification = {
+            shareGateAccountId: "123"
+        };
+
+        const telemetryContext = new TelemetryContext("789", "device-1");
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
+
+        const result = client.createShareGateDefaultUserTraits(identification);
+
+        expect(result["ShareGate Account Id"]).toEqual(identification.shareGateAccountId);
+        expect(result["Microsoft User Id"]).toEqual("N/A");
+        expect(result["Microsoft Tenant Id"]).toEqual("N/A");
+        expect(result["Workspace Id"]).toEqual("N/A");
+    });
 });
 
 // These tests fail to compile, rather than to run, if the user traits stop being assignable to the LogRocket

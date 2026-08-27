@@ -183,9 +183,10 @@ span.end();
 ```typescript
 {
   shareGateAccountId: string;
-  microsoftUserId: string;
-  microsoftTenantId: string;
-  workspaceId: string;
+  // Optional fields, defaulting to "N/A"
+  microsoftUserId?: string;
+  microsoftTenantId?: string;
+  workspaceId?: string;
 }
 ```
 

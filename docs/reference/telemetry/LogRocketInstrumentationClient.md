@@ -116,9 +116,9 @@ LogRocket.identify(traits["ShareGate Account Id"], traits);
 
 - `identification`: tbd
     - `shareGateAccountId`: A value that uniquely identifies the current ShareGate account.
-    - `microsoftUserId`: The id of the user Microsoft account.
-    - `microsoftTenantId`: The id of the user Microsoft tenant.
-    - `workspaceId`: The id of the workspace the user belongs to.
+    - `microsoftUserId`: An optional value indicating the id of the user Microsoft account.
+    - `microsoftTenantId`: An optional value indicating the id of the user Microsoft tenant.
+    - `workspaceId`: An optional value indicating the id of the workspace the user belongs to.
 
 #### Returns
 
@@ -128,9 +128,9 @@ An object including the default user traits matching the provided identification
 User Trait Name | Description
 ---  | ---
 ShareGate Account Id | A value that uniquely identifies the current ShareGate account.
-Microsoft User Id | The id of the user Microsoft account.
-Microsoft Tenant Id | The id of the user Microsoft tenant.
-Workspace Id | The id of the workspace the user belongs to.
+Microsoft User Id | The id of the user Microsoft account, or `N/A` when no value is provided.
+Microsoft Tenant Id | The id of the user Microsoft tenant, or `N/A` when no value is provided.
+Workspace Id | The id of the workspace the user belongs to, or `N/A` when no value is provided.
 
 ### Send additional traits
 

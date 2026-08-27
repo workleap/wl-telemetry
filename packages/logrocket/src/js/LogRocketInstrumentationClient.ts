@@ -99,9 +99,9 @@ export type LogRocketWorkleapPlatformUserTraits = {
  */
 export interface LogRocketShareGateIdentification {
     shareGateAccountId: string;
-    microsoftUserId: string;
-    microsoftTenantId: string;
-    workspaceId: string;
+    microsoftUserId?: string;
+    microsoftTenantId?: string;
+    workspaceId?: string;
 }
 
 /**
@@ -235,9 +235,9 @@ export class LogRocketInstrumentationClientImpl implements LogRocketInstrumentat
     createShareGateDefaultUserTraits(identification: LogRocketShareGateIdentification) {
         return {
             "ShareGate Account Id": identification.shareGateAccountId,
-            "Microsoft User Id": identification.microsoftUserId,
-            "Microsoft Tenant Id": identification.microsoftTenantId,
-            "Workspace Id": identification.workspaceId,
+            "Microsoft User Id": identification.microsoftUserId ?? "N/A",
+            "Microsoft Tenant Id": identification.microsoftTenantId ?? "N/A",
+            "Workspace Id": identification.workspaceId ?? "N/A",
             [DeviceIdTrait]: this.#telemetryContext?.deviceId ?? "N/A",
             [TelemetryIdTrait]: this.#telemetryContext?.telemetryId ?? "N/A"
         } satisfies LogRocketShareGateUserTraits;

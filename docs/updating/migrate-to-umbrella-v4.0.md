@@ -51,6 +51,19 @@ Merging [additional traits](../reference/telemetry/LogRocketInstrumentationClien
 
 ## Improvements
 
+### Most of the ShareGate identification values are now optional
+
+`microsoftUserId`, `microsoftTenantId` and `workspaceId` are now optional, for users who aren't linked to a Microsoft account or don't belong to a workspace yet. The matching traits fall back to `N/A`, as the correlation ids already do, so every session keeps the same set of trait names:
+
+```ts
+const traits = client.createShareGateDefaultUserTraits({
+    shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242"
+});
+
+traits["Workspace Id"];
+// "N/A"
+```
+
 ### New Compensation user traits
 
 `LogRocketWorkleapPlatformUserTraits` now declares the `Is Executive - Compensation`, `Is Collaborator - Compensation` and `Plan Code - Compensation` traits. [createWorkleapPlatformDefaultUserTraits](../reference/telemetry/LogRocketInstrumentationClient.md#methods) was already returning them from the `isExecutive.cmp`, `isCollaborator.cmp` and `planCode.cmp` identification values.

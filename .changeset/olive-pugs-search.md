@@ -12,4 +12,5 @@ Fixed the default user traits so they can be forwarded to `LogRocket.identify` a
 
 ## Improvements
 
+- The `microsoftUserId`, `microsoftTenantId` and `workspaceId` options of `LogRocketShareGateIdentification` are now optional. The matching traits fall back to `N/A` when no value is provided, as the correlation ids already do.
 - `LogRocketWorkleapPlatformUserTraits` now includes the `Is Executive - Compensation`, `Is Collaborator - Compensation` and `Plan Code - Compensation` traits, which `createWorkleapPlatformDefaultUserTraits` was already returning.
