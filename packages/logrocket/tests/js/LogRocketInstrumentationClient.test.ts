@@ -1,6 +1,6 @@
 import { TelemetryContext } from "@workleap-telemetry/core";
 import LogRocket from "logrocket";
-import { describe, test, vi } from "vitest";
+import { afterEach, describe, test, vi } from "vitest";
 import { LogRocketInstrumentationClientImpl, type LogRocketInstrumentationClient } from "../../src/js/LogRocketInstrumentationClient.ts";
 
 vi.mock("logrocket", () => ({
@@ -141,8 +141,13 @@ describe.concurrent("createShareGateDefaultUserTraits", () => {
 
 // These tests fail to compile, rather than to run, if the user traits stop being assignable to the LogRocket
 // "IUserTraits" type. Mocking the module keeps the real identify signature, which a hand-written copy wouldn't.
-describe.concurrent("user traits are accepted by LogRocket.identify", () => {
-    test.concurrent("Workleap Platform user traits", ({ expect }) => {
+// They cannot be concurrent because of the global mock on LogRocket.
+describe("user traits are accepted by LogRocket.identify", () => {
+    afterEach(() => {
+        vi.clearAllMocks();
+    });
+
+    test("Workleap Platform user traits", ({ expect }) => {
         const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
 
         const traits = client.createWorkleapPlatformDefaultUserTraits({
@@ -155,10 +160,10 @@ describe.concurrent("user traits are accepted by LogRocket.identify", () => {
 
         LogRocket.identify(traits["User Id"], traits);
 
-        expect(LogRocket.identify).toHaveBeenCalledWith("123", traits);
+        expect(LogRocket.identify).toHaveBeenCalledExactlyOnceWith("123", traits);
     });
 
-    test.concurrent("ShareGate user traits", ({ expect }) => {
+    test("ShareGate user traits", ({ expect }) => {
         const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
 
         const traits = client.createShareGateDefaultUserTraits({
@@ -170,6 +175,6 @@ describe.concurrent("user traits are accepted by LogRocket.identify", () => {
 
         LogRocket.identify(traits["ShareGate Account Id"], traits);
 
-        expect(LogRocket.identify).toHaveBeenCalledWith("123", traits);
+        expect(LogRocket.identify).toHaveBeenCalledExactlyOnceWith("123", traits);
     });
 });
