@@ -27,7 +27,7 @@
             "outputs": ["node_modules/.cache/eslint"]
         },
         "//#typecheck": {
-            "inputs": ["src/**/*.ts", "src/**/*.tsx", "test/**/*.ts", "test/**/*.tsx", "tsconfig.json", "!packages", "!samples", "!docs"],
+            "inputs": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx", "*.ts", "tsconfig.json", "!packages", "!samples", "!docs"],
             "outputs": ["node_modules/.cache/tsbuildinfo.json"]
         },
         "typecheck": {
