@@ -1,5 +1,12 @@
 # @workleap/mixpanel
 
+## 6.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`63681db`](https://github.com/workleap/wl-telemetry/commit/63681db29d72515f435df680acb0946ee7ff9625)]:
+  - @workleap/logrocket@4.0.0
+
 ## 5.0.4
 
 ### Patch Changes
