@@ -186,7 +186,6 @@ span.end();
   microsoftUserId: string;
   microsoftTenantId: string;
   workspaceId: string;
-  isInPartnerProgram?: boolean;
 }
 ```
 
@@ -217,7 +216,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
   isAdmin: false
 });
 
-LogRocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 ### Privacy Controls

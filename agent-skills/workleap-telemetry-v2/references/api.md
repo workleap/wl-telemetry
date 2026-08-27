@@ -192,7 +192,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
   isOrganizationCreator: false
 });
 
-LogRocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 ### Privacy Attributes
