@@ -180,7 +180,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-Logrocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 ### Get default user traits for ShareGate
@@ -198,7 +198,7 @@ const traits = client.createShareGateDefaultUserTraits({
     workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
 });
 
-Logrocket.identify(traits.shareGateAccountId, traits);
+LogRocket.identify(traits["ShareGate Account Id"], traits);
 ```
 
 ### Send additional traits
@@ -221,7 +221,7 @@ const allTraits = {
     "Additional Trait": "Trait Value"
 };
 
-Logrocket.identify(allTraits.userId, allTraits);
+LogRocket.identify(allTraits["User Id"], allTraits);
 ```
 
 ### Register a session URL listener

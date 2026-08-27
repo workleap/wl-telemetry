@@ -1,6 +1,13 @@
 import { TelemetryContext } from "@workleap-telemetry/core";
-import { describe, test } from "vitest";
-import { LogRocketInstrumentationClientImpl } from "../../src/js/LogRocketInstrumentationClient.ts";
+import LogRocket from "logrocket";
+import { afterEach, describe, test, vi } from "vitest";
+import { LogRocketInstrumentationClientImpl, type LogRocketInstrumentationClient } from "../../src/js/LogRocketInstrumentationClient.ts";
+
+vi.mock("logrocket", () => ({
+    default: {
+        identify: vi.fn()
+    }
+}));
 
 describe.concurrent("createWorkleapPlatformDefaultUserTraits", () => {
     test.concurrent("required user traits are returned", ({ expect }) => {
@@ -115,36 +122,59 @@ describe.concurrent("createShareGateDefaultUserTraits", () => {
         expect(result["Telemetry Id"]).toEqual(telemetryContext.telemetryId);
     });
 
-    test.concurrent("optional user traits with no value provided are skipped", ({ expect }) => {
+    test.concurrent("optional user traits with no value provided fallback to N/A", ({ expect }) => {
         const identification = {
+            shareGateAccountId: "123"
+        };
+
+        const telemetryContext = new TelemetryContext("789", "device-1");
+        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
+
+        const result = client.createShareGateDefaultUserTraits(identification);
+
+        expect(result["ShareGate Account Id"]).toEqual(identification.shareGateAccountId);
+        expect(result["Microsoft User Id"]).toEqual("N/A");
+        expect(result["Microsoft Tenant Id"]).toEqual("N/A");
+        expect(result["Workspace Id"]).toEqual("N/A");
+    });
+});
+
+// These tests fail to compile, rather than to run, if the user traits stop being assignable to the LogRocket
+// "IUserTraits" type. Mocking the module keeps the real identify signature, which a hand-written copy wouldn't.
+// They cannot be concurrent because of the global mock on LogRocket.
+describe("user traits are accepted by LogRocket.identify", () => {
+    afterEach(() => {
+        vi.clearAllMocks();
+    });
+
+    test("Workleap Platform user traits", ({ expect }) => {
+        const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
+
+        const traits = client.createWorkleapPlatformDefaultUserTraits({
+            userId: "123",
+            organizationId: "456",
+            organizationName: "Test Organization",
+            isMigratedToWorkleap: true,
+            isAdmin: false
+        });
+
+        LogRocket.identify(traits["User Id"], traits);
+
+        expect(LogRocket.identify).toHaveBeenCalledExactlyOnceWith("123", traits);
+    });
+
+    test("ShareGate user traits", ({ expect }) => {
+        const client: LogRocketInstrumentationClient = new LogRocketInstrumentationClientImpl(new TelemetryContext("789", "device-1"));
+
+        const traits = client.createShareGateDefaultUserTraits({
             shareGateAccountId: "123",
             microsoftUserId: "456",
             microsoftTenantId: "789",
             workspaceId: "ws-123"
-        };
+        });
 
-        const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
+        LogRocket.identify(traits["ShareGate Account Id"], traits);
 
-        const result = client.createShareGateDefaultUserTraits(identification);
-
-        expect(Object.keys(result)).not.toContain(["Is In Partner Program"]);
-    });
-
-    test.concurrent("optional user traits with values provided are returned", ({ expect }) => {
-        const identification = {
-            shareGateAccountId: "123",
-            microsoftUserId: "456",
-            microsoftTenantId: "789",
-            workspaceId: "ws-123",
-            isInPartnerProgram: true
-        };
-
-        const telemetryContext = new TelemetryContext("789", "device-1");
-        const client = new LogRocketInstrumentationClientImpl(telemetryContext);
-
-        const result = client.createShareGateDefaultUserTraits(identification);
-
-        expect(result["Is In Partner Program"]).toBeTruthy();
+        expect(LogRocket.identify).toHaveBeenCalledExactlyOnceWith("123", traits);
     });
 });

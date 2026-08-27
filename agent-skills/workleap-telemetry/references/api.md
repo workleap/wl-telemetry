@@ -183,10 +183,10 @@ span.end();
 ```typescript
 {
   shareGateAccountId: string;
-  microsoftUserId: string;
-  microsoftTenantId: string;
-  workspaceId: string;
-  isInPartnerProgram?: boolean;
+  // Optional fields, defaulting to "N/A"
+  microsoftUserId?: string;
+  microsoftTenantId?: string;
+  workspaceId?: string;
 }
 ```
 
@@ -217,7 +217,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
   isAdmin: false
 });
 
-LogRocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 ### Privacy Controls
