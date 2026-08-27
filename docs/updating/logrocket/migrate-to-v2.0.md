@@ -92,7 +92,7 @@ const traits = createDefaultUserTraits({
     isAdmin: false
 });
 
-LogRocket.identify(traits["User Id"], traits);
+LogRocket.identify(traits.userId, traits);
 ```
 
 Now:
@@ -112,7 +112,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-LogRocket.identify(traits["User Id"], traits);
+LogRocket.identify(traits.userId, traits);
 ```
 
 ## New React context
