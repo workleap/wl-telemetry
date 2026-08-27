@@ -194,7 +194,7 @@ function useIdentifyUser(user: User | null) {
       isOrganizationCreator: user.isCreator
     });
 
-    LogRocket.identify(traits["User Id"], traits);
+    LogRocket.identify(traits.userId, traits);
   }, [user, logRocketClient]);
 }
 ```
@@ -225,7 +225,7 @@ function useIdentifyUser(user: User | null) {
         isAdmin: user.isAdmin,
         isOrganizationCreator: user.isCreator
       });
-      LogRocket.identify(traits["User Id"], traits);
+      LogRocket.identify(traits.userId, traits);
     }
 
     // Honeycomb attributes

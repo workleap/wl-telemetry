@@ -198,7 +198,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
 });
 
 // Identify user
-LogRocket.identify(traits["User Id"], traits);
+LogRocket.identify(traits.userId, traits);
 ```
 
 ### Session URL Access
