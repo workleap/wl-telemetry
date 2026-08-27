@@ -16,6 +16,12 @@
 
 ## Full Application Setup
 
+### Install the packages
+
+```bash
+pnpm add @workleap/telemetry @opentelemetry/api logrocket
+```
+
 ### Basic Setup (All Platforms)
 
 ```typescript

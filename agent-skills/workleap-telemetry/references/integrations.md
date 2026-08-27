@@ -30,7 +30,7 @@ When Honeycomb is configured, wl-telemetry automatically instruments:
 
 ```typescript
 honeycomb: {
-  namespace: "your-namespace",     // Required: Trace namespace
+  namespace: "your-namespace",     // Required: Service namespace, added to traces as a `service.namespace` attribute
   serviceName: "your-service",     // Required: Service name in traces
   apiServiceUrls: [/.+/g],         // Required: URLs to instrument
   options: {
@@ -160,7 +160,7 @@ LogRocket provides session replay for debugging frontend issues and understandin
 logRocket: {
   appId: "your-app-id",           // Required: LogRocket app ID
   options: {
-    rootHostname: ".workleap.com",           // Cookie domain
+    rootHostname: "workleap.com",            // Root hostname to track sessions across subdomains
     privateFieldNames: ["secret"],           // Additional private form fields
     privateQueryParameterNames: ["token"],   // Additional private URL params
     transformers: []                         // SDK-level configuration transformers
@@ -227,6 +227,8 @@ const allTraits = {
 LogRocket.identify(allTraits["User Id"], allTraits);
 ```
 
+Additional user trait names should align with Mixpanel property conventions: use human-readable names and append a `- {ProductName}` suffix for product-specific traits, for example `Plan Code - Officevibe`.
+
 ### Session URL Access
 
 ```typescript
@@ -261,8 +263,8 @@ Mixpanel provides product analytics for tracking user behavior and measuring fea
 mixpanel: {
   envOrTrackingApiBaseUrl: "production",  // Required: Environment or base URL
   options: {
-    productId: "wlp",              // Optional: Product identifier
-    trackingEndpoint: "/track"     // Optional: Custom tracking endpoint path
+    productId: "wlp",                            // Optional: Product identifier
+    trackingEndpoint: "custom/tracking/track"    // Optional: Custom tracking endpoint path, defaults to "tracking/track"
   }
 }
 ```
