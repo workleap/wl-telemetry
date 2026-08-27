@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.836951099137">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841176172624">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.836951099137" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.841176172624" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.836951099137" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.841176172624" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.836951099137" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.836951099137" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.841176172624" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.841176172624" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -439,7 +439,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-Logrocket.identify(traits.userId, traits);</code></pre>
+LogRocket.identify(traits[&quot;User Id&quot;], traits);</code></pre>
 </doc-codeblock></div>
 <h3 id="get-default-user-traits-for-sharegate">Get default user traits for ShareGate</h3>
 <div id="get-default-user-traits-for-sharegate-code-1" class="codeblock-wrapper"><doc-codeblock>
@@ -455,7 +455,7 @@ const traits = client.createShareGateDefaultUserTraits({
     workspaceId: &quot;225e6494-c008-4086-ac80-3770aa47085b&quot;
 });
 
-Logrocket.identify(traits.shareGateAccountId, traits);</code></pre>
+LogRocket.identify(traits[&quot;ShareGate Account Id&quot;], traits);</code></pre>
 </doc-codeblock></div>
 <h3 id="send-additional-traits">Send additional traits</h3>
 <div id="send-additional-traits-code-1" class="codeblock-wrapper"><doc-codeblock>
@@ -476,7 +476,7 @@ const allTraits = {
     &quot;Additional Trait&quot;: &quot;Trait Value&quot;
 };
 
-Logrocket.identify(allTraits.userId, allTraits);</code></pre>
+LogRocket.identify(allTraits[&quot;User Id&quot;], allTraits);</code></pre>
 </doc-codeblock></div>
 <h3 id="register-a-session-url-listener">Register a session URL listener</h3>
 <div id="register-a-session-url-listener-code-1" class="codeblock-wrapper"><doc-codeblock>
@@ -695,6 +695,16 @@ const context = createTelemetryContext(&quot;wlp&quot;, {
                 <span class="card-compact-title">Migrate to v3.0</span>
             </div>
             <p class="card-compact-description">This major version remove the global variables deprecated in v2.0.</p>
+        </div>
+    </a>
+</div>
+<div class="card-compact-container">
+    <a href="/wl-telemetry/updating/logrocket/migrate-to-v4.0/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-title">Migrate to v4.0</span>
+            </div>
+            <p class="card-compact-description">This major version removes the ShareGate partner program trait and makes the default user traits assignable to LogRocket.identify.</p>
         </div>
     </a>
 </div>

@@ -88,12 +88,14 @@
 
 - [Migrate to the umbrella package](https://workleap.github.io/wl-telemetry/updating/migrate-to-umbrella-package.md): To migrate to the new @workleap/telemetry umbrella package, follow these steps 👇
 - [Migrate to umbrella v3.0](https://workleap.github.io/wl-telemetry/updating/migrate-to-umbrella-v3.0.md): This major version remove the global variables deprecated in the previous versions of the standalone libraries and introduce a productFamily argument.
+- [Migrate to umbrella v4.0](https://workleap.github.io/wl-telemetry/updating/migrate-to-umbrella-v4.0.md): This major version removes the ShareGate partner program trait and makes the default user traits assignable to LogRocket.identify.
 
 ### LogRocket
 
 - [Migrate to v1.0](https://workleap.github.io/wl-telemetry/updating/logrocket/migrate-to-v1.0.md): This rewrite of Workleap's LogRocket instrumentation focuses on leveraging the native LogRocket library directly, rather than abstracting it away and on adding two correlation ids, telemetryId and deviceId, to help unify and correlate data across LogRocket, Honeycomb and Mixpanel.
 - [Migrate to v2.0](https://workleap.github.io/wl-telemetry/updating/logrocket/migrate-to-v2.0.md): This major version introduces several important changes. registerLogRocketInstrumentation now returns a client instance. The standalone createUserTraits
 - [Migrate to v3.0](https://workleap.github.io/wl-telemetry/updating/logrocket/migrate-to-v3.0.md): This major version remove the global variables deprecated in v2.0.
+- [Migrate to v4.0](https://workleap.github.io/wl-telemetry/updating/logrocket/migrate-to-v4.0.md): This major version removes the ShareGate partner program trait and makes the default user traits assignable to LogRocket.identify.
 
 ### Honeycomb
 

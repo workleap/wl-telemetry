@@ -81,7 +81,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-LogRocket.identify(traits.userId, traits);
+LogRocket.identify(traits["User Id"], traits);
 ```
 
 ## Identify a ShareGate user
@@ -115,14 +115,14 @@ import LogRocket from "logrocket";
 
 const client = useLogRocketInstrumentationClient();
 
-const traits = client.createWorkleapPlatformDefaultUserTraits({
+const traits = client.createShareGateDefaultUserTraits({
     shareGateAccountId: "cd7fb5ca-f13d-420f-9a87-637b3419d242",
     microsoftUserId: "e9bb1688-a68b-4235-b514-95a59a7bf8bc",
     microsoftTenantId: "86bea6e5-5dbb-43c9-93a4-b10bf91cc6db",
     workspaceId: "225e6494-c008-4086-ac80-3770aa47085b"
 });
 
-LogRocket.identify(traits.shareGateAccountId, traits);
+LogRocket.identify(traits["ShareGate Account Id"], traits);
 ```
 
 ## Get the session URL

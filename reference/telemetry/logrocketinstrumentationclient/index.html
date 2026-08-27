@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.836951099137">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841176172624">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.836951099137" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.841176172624" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.836951099137" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.841176172624" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.836951099137" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.836951099137" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.841176172624" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.841176172624" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -316,7 +316,7 @@ const traits = client.createWorkleapPlatformDefaultUserTraits({
     isAdmin: false
 });
 
-LogRocket.identify(traits.userId, traits);</code></pre>
+LogRocket.identify(traits[&quot;User Id&quot;], traits);</code></pre>
 </doc-codeblock></div>
 <h4 id="parameters">Parameters</h4>
 <ul>
@@ -379,10 +379,10 @@ Is Organization Creator | `true` if the user originally signed up to create the 
 Is Reporting Manager | `true` if this user is a reporting manager in the current workspace.
 Is Team Manager | `true` if this user is a team manager in the current workspace.
 Is Executive | `true` if this user is an executive in any product  in the current workspace.
-Is Executive - Officevibe&lt;br/&gt;Is Executive - LMS&lt;br/&gt;Is Executive - Onboarding&lt;br/&gt;Is Executive - Pingboard&lt;br/&gt;Is Executive - Skills&lt;br/&gt;Is Executive - Performance | `true` if this user is an executive of the corresponding product in the current workspace.
+Is Executive - Officevibe&lt;br/&gt;Is Executive - LMS&lt;br/&gt;Is Executive - Onboarding&lt;br/&gt;Is Executive - Pingboard&lt;br/&gt;Is Executive - Skills&lt;br/&gt;Is Executive - Performance&lt;br/&gt;Is Executive - Compensation | `true` if this user is an executive of the corresponding product in the current workspace.
 Is Collaborator | `true` if this user is a collaborator in any product in the current workspace.
-Is Collaborator - Officevibe&lt;br/&gt;Is Collaborator - LMS&lt;br /&gt;Is Collaborator - Onboarding&lt;br/&gt;Is Collaborator - Pingboard&lt;br/&gt;Is Collaborator - Skills&lt;br/&gt;Is Collaborator - Performance | `true` if this user is a collaborator in the corresponding product in the current workspace.
-Plan Code - Officevibe&lt;br/&gt;Plan Code - LMS&lt;br/&gt;Plan Code - Onboarding&lt;br/&gt;Plan Code - Pingboard&lt;br/&gt;Plan Code - Skills&lt;br/&gt;Plan Code - Performance | &lt;p&gt;Indicates the plan code for the corresponding product in the workspace.&lt;/p&gt;&lt;p&gt;ex. `wov-essential-monthly-std`&lt;/p&gt;">
+Is Collaborator - Officevibe&lt;br/&gt;Is Collaborator - LMS&lt;br /&gt;Is Collaborator - Onboarding&lt;br/&gt;Is Collaborator - Pingboard&lt;br/&gt;Is Collaborator - Skills&lt;br/&gt;Is Collaborator - Performance&lt;br/&gt;Is Collaborator - Compensation | `true` if this user is a collaborator in the corresponding product in the current workspace.
+Plan Code - Officevibe&lt;br/&gt;Plan Code - LMS&lt;br/&gt;Plan Code - Onboarding&lt;br/&gt;Plan Code - Pingboard&lt;br/&gt;Plan Code - Skills&lt;br/&gt;Plan Code - Performance&lt;br/&gt;Plan Code - Compensation | &lt;p&gt;Indicates the plan code for the corresponding product in the workspace.&lt;/p&gt;&lt;p&gt;ex. `wov-essential-monthly-std`&lt;/p&gt;">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable user-traits-table">
 <thead>
@@ -429,7 +429,7 @@ Plan Code - Officevibe&lt;br/&gt;Plan Code - LMS&lt;br/&gt;Plan Code - Onboardin
 <td><code translate="no" v-pre>true</code> if this user is an executive in any product  in the current workspace.</td>
 </tr>
 <tr>
-<td>Is Executive - Officevibe<br/>Is Executive - LMS<br/>Is Executive - Onboarding<br/>Is Executive - Pingboard<br/>Is Executive - Skills<br/>Is Executive - Performance</td>
+<td>Is Executive - Officevibe<br/>Is Executive - LMS<br/>Is Executive - Onboarding<br/>Is Executive - Pingboard<br/>Is Executive - Skills<br/>Is Executive - Performance<br/>Is Executive - Compensation</td>
 <td><code translate="no" v-pre>true</code> if this user is an executive of the corresponding product in the current workspace.</td>
 </tr>
 <tr>
@@ -437,11 +437,11 @@ Plan Code - Officevibe&lt;br/&gt;Plan Code - LMS&lt;br/&gt;Plan Code - Onboardin
 <td><code translate="no" v-pre>true</code> if this user is a collaborator in any product in the current workspace.</td>
 </tr>
 <tr>
-<td>Is Collaborator - Officevibe<br/>Is Collaborator - LMS<br />Is Collaborator - Onboarding<br/>Is Collaborator - Pingboard<br/>Is Collaborator - Skills<br/>Is Collaborator - Performance</td>
+<td>Is Collaborator - Officevibe<br/>Is Collaborator - LMS<br />Is Collaborator - Onboarding<br/>Is Collaborator - Pingboard<br/>Is Collaborator - Skills<br/>Is Collaborator - Performance<br/>Is Collaborator - Compensation</td>
 <td><code translate="no" v-pre>true</code> if this user is a collaborator in the corresponding product in the current workspace.</td>
 </tr>
 <tr>
-<td>Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan Code - Pingboard<br/>Plan Code - Skills<br/>Plan Code - Performance</td>
+<td>Plan Code - Officevibe<br/>Plan Code - LMS<br/>Plan Code - Onboarding<br/>Plan Code - Pingboard<br/>Plan Code - Skills<br/>Plan Code - Performance<br/>Plan Code - Compensation</td>
 <td><p>Indicates the plan code for the corresponding product in the workspace.</p><p>ex. <code translate="no" v-pre>wov-essential-monthly-std</code></p></td>
 </tr>
 </tbody>
@@ -462,17 +462,16 @@ const traits = client.createShareGateDefaultUserTraits({
     workspaceId: &quot;225e6494-c008-4086-ac80-3770aa47085b&quot;
 });
 
-LogRocket.identify(traits.shareGateAccountId, traits);</code></pre>
+LogRocket.identify(traits[&quot;ShareGate Account Id&quot;], traits);</code></pre>
 </doc-codeblock></div>
 <h4 id="parameters-1">Parameters</h4>
 <ul>
 <li><code translate="no" v-pre>identification</code>: tbd
 <ul>
 <li><code translate="no" v-pre>shareGateAccountId</code>: A value that uniquely identifies the current ShareGate account.</li>
-<li><code translate="no" v-pre>microsoftUserId</code>: The id of the user Microsoft account.</li>
-<li><code translate="no" v-pre>microsoftTenantId</code>: The id of the user Microsoft tenant.</li>
-<li><code translate="no" v-pre>workspaceId</code>: The id of the workspace the user belongs to.</li>
-<li><code translate="no" v-pre>isInPartnerProgram</code>: An optional value indicating whether or not the user is in ShareGate partner program.</li>
+<li><code translate="no" v-pre>microsoftUserId</code>: An optional value indicating the id of the user Microsoft account.</li>
+<li><code translate="no" v-pre>microsoftTenantId</code>: An optional value indicating the id of the user Microsoft tenant.</li>
+<li><code translate="no" v-pre>workspaceId</code>: An optional value indicating the id of the workspace the user belongs to.</li>
 </ul>
 </li>
 </ul>
@@ -481,10 +480,9 @@ LogRocket.identify(traits.shareGateAccountId, traits);</code></pre>
 <retype-table copy-text="User Trait Name | Description
 ---  | ---
 ShareGate Account Id | A value that uniquely identifies the current ShareGate account.
-Microsoft User Id | The id of the user Microsoft account.
-Microsoft Tenant Id | The id of the user Microsoft tenant.
-Workspace Id | The id of the workspace the user belongs to.
-Is In Partner Program | `true` if this user is in ShareGate partner program.">
+Microsoft User Id | The id of the user Microsoft account, or `N/A` when no value is provided.
+Microsoft Tenant Id | The id of the user Microsoft tenant, or `N/A` when no value is provided.
+Workspace Id | The id of the workspace the user belongs to, or `N/A` when no value is provided.">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable user-traits-table">
 <thead>
@@ -500,19 +498,15 @@ Is In Partner Program | `true` if this user is in ShareGate partner program.">
 </tr>
 <tr>
 <td>Microsoft User Id</td>
-<td>The id of the user Microsoft account.</td>
+<td>The id of the user Microsoft account, or <code translate="no" v-pre>N/A</code> when no value is provided.</td>
 </tr>
 <tr>
 <td>Microsoft Tenant Id</td>
-<td>The id of the user Microsoft tenant.</td>
+<td>The id of the user Microsoft tenant, or <code translate="no" v-pre>N/A</code> when no value is provided.</td>
 </tr>
 <tr>
 <td>Workspace Id</td>
-<td>The id of the workspace the user belongs to.</td>
-</tr>
-<tr>
-<td>Is In Partner Program</td>
-<td><code translate="no" v-pre>true</code> if this user is in ShareGate partner program.</td>
+<td>The id of the workspace the user belongs to, or <code translate="no" v-pre>N/A</code> when no value is provided.</td>
 </tr>
 </tbody>
 </table>
@@ -538,7 +532,7 @@ const allTraits = {
     &quot;Additional Trait&quot;: &quot;Trait Value&quot;
 };
 
-LogRocket.identify(allTraits.userId, allTraits);</code></pre>
+LogRocket.identify(allTraits[&quot;User Id&quot;], allTraits);</code></pre>
 </doc-codeblock></div>
 <div class="flex mb-6">
     <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-info"></div>
@@ -597,6 +591,16 @@ client.registerGetSessionUrlListener(sessionUrl =&gt; {
                 <span class="card-compact-title">Migrate to umbrella v3.0</span>
             </div>
             <p class="card-compact-description">This major version remove the global variables deprecated in the previous versions of the standalone libraries and introduce a productFamily argument.</p>
+        </div>
+    </a>
+</div>
+<div class="card-compact-container">
+    <a href="/wl-telemetry/updating/migrate-to-umbrella-v4.0/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-title">Migrate to umbrella v4.0</span>
+            </div>
+            <p class="card-compact-description">This major version removes the ShareGate partner program trait and makes the default user traits assignable to LogRocket.identify.</p>
         </div>
     </a>
 </div>
