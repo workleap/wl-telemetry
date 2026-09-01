@@ -154,7 +154,13 @@ If build/lint/test/browser validation fails after the update:
 
 - **`typescript` must stay on `6.x` (currently `6.0.3`).** `typescript-eslint` does not support the native TS 7 compiler yet, which crashes ESLint. This is now enforced by the `!typescript` exclusion on `update-outdated-deps:update-version` in the root `package.json`, so `--latest` no longer re-bumps it and there is nothing to revert by hand.
   (`@typescript/native-preview` / `tsgo` is what actually typechecks — it is fine to bump.)
-- `list-outdated-deps` deliberately does **not** carry the `!typescript` filter, so a new TypeScript release still shows up in the report. That is the signal to re-check whether `typescript-eslint` has gained TS 7 support and the hold can be lifted. Tracked in [#220](https://github.com/workleap/wl-telemetry/issues/220).
+- `list-outdated-deps` carries the same `!typescript` filter, so TypeScript no longer appears in the report either — matching `wl-logging` and `wl-web-configs`. Re-check [#220](https://github.com/workleap/wl-telemetry/issues/220) as `typescript-eslint` gains TS 7 support; lifting the hold means removing `!typescript` from both scripts.
+
+## pnpm 12 release-age gate
+
+`pnpm-workspace.yaml` sets no `minimumReleaseAge`, so pnpm 12's 24h default applies (pnpm 11 had no such gate). It verifies the **whole** lockfile and runs before every `pnpm run`, so `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` stops Steps 3–5 from starting rather than failing them.
+
+If an update pulls in a package published less than 24h ago, the run cannot proceed. There is no CLI flag — the setting only reads from `pnpm-workspace.yaml`. Either wait for the entries to age out (the error prints each publish timestamp) or revert those specific packages to their previous versions and let the next run pick them up. Do **not** commit a lower `minimumReleaseAge`: the sibling repos run the default and this one matches them.
 
 ## Report
 

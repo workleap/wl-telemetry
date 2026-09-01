@@ -134,8 +134,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(typescript@6.0.3)
       agent-browser:
-        specifier: 0.36.0
-        version: 0.36.0
+        specifier: 0.35.2
+        version: 0.35.2
       eslint:
         specifier: 9.39.2
         version: 9.39.2(jiti@2.7.0)
@@ -3220,8 +3220,8 @@ packages:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
 
-  agent-browser@0.36.0:
-    resolution: {integrity: sha512-Ljjj4nRKUEqtrFF0pgev8lxTfC79tNgPj67sNi6BLnUAWIG8y9Cu2VQIeZ0MY3N2fTQagoBlfQ/pUY/4NWPD3w==}
+  agent-browser@0.35.2:
+    resolution: {integrity: sha512-1JvgqC1NZrCTcIsdPB5T51XgVtF70WEgH46XszhRJdCBwuab0jV4mySLgtoNKvlb/X8PR5dce/8Regd0aUANZA==}
     engines: {node: '>=24.0.0', pnpm: '>=11.0.0'}
     hasBin: true
 
@@ -8865,7 +8865,7 @@ snapshots:
 
   agent-base@7.1.4: {}
 
-  agent-browser@0.36.0: {}
+  agent-browser@0.35.2: {}
 
   ajv@6.15.0:
     dependencies:
