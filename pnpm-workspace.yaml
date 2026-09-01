@@ -2,10 +2,10 @@ packages:
   - packages/*
   - samples/**
 
-# pnpm 12 defaults this to 24h; pnpm 11 had no gate at all. Pinned explicitly so
-# CI behaviour does not shift with the pinned pnpm version, and so a script that
-# refuses to start is traceable to something committed in the repo.
-minimumReleaseAge: 1440
+# pnpm 11 had no release-age gate; pnpm 12 defaults it to 24h. Pinned to 0 so this
+# upgrade is behaviour-neutral — adopting the gate is a deliberate change, not a
+# side effect of bumping packageManager. Tracked in #226.
+minimumReleaseAge: 0
 
 minimumReleaseAgeExclude:
   - '@workleap/*'
