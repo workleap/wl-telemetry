@@ -30,11 +30,9 @@ Run the full dependency-update workflow on the developer's machine and prove tha
 pnpm update-outdated-deps
 ```
 
-This runs three sub-steps in order: `pnpm update -r --latest` (respecting the `!eslint !@eslint/js !logrocket-fuzzy-search-sanitizer` exclusions), `syncpack fix`, then `eslint --fix` on the `package.json` files.
+This runs three sub-steps in order: `pnpm update -r --latest` (respecting the `!eslint !@eslint/js !logrocket-fuzzy-search-sanitizer !typescript` exclusions), `syncpack fix`, then `eslint --fix` on the `package.json` files.
 
-> **Known gotcha — the last sub-step (`eslint --fix` on package.json) can crash.** `pnpm update --latest` bumps `typescript` from `6.x` to `7.x` (the native/Go compiler). `typescript-eslint` (currently 8.6x) does not yet support the TS 7 API, so ESLint config loading crashes with `TypeError: Cannot read properties of undefined (reading 'Cjs')`. This also breaks `pnpm lint` later.
->
-> **Fix:** revert `typescript` to `6.0.3` across all `package.json` files now (see "Known pins" below), but do **not** try to re-run the eslint step yet — `node_modules` still has TS 7, and typescript-eslint resolves `typescript` from `node_modules` at config-load time, so it would still crash. The revert only takes effect after the clean reinstall in Step 2. Complete the crashed formatting step there.
+> **Why `typescript` is excluded.** `--latest` used to bump it from `6.x` to `7.x` (the native/Go compiler) every run. `typescript-eslint` does not support the TS 7 API, so ESLint config loading crashed with `TypeError: Cannot read properties of undefined (reading 'Cjs')`, taking out the `eslint --fix` sub-step and `pnpm lint` with it, and the bump had to be reverted by hand each time. The exclusion in the root `package.json` prevents the bump, so that crash no longer occurs through this script. See "Known pins" below.
 
 Check whether anything actually changed:
 
@@ -53,7 +51,7 @@ pnpm reset      # deletes dist, caches, node_modules, and pnpm-lock.yaml
 pnpm install
 ```
 
-If the `eslint --fix` sub-step crashed in Step 1 (the TS 7 gotcha), complete it now that `node_modules` holds TS 6 — this formats the `package.json` files that the crash skipped, so `pnpm lint` won't fail on formatting:
+If the `eslint --fix` sub-step crashed in Step 1 for any reason, complete it now — this formats the `package.json` files that the crash skipped, so `pnpm lint` won't fail on formatting:
 
 ```bash
 pnpm run update-outdated-deps:fix-pkg-json
@@ -154,14 +152,9 @@ If build/lint/test/browser validation fails after the update:
 
 ## Known pins / recurring reverts
 
-- **`typescript` must stay on `6.x` (currently `6.0.3`).** `--latest` re-bumps it to `7.x` every run; `typescript-eslint` does not support the native TS 7 compiler yet, which crashes ESLint. Revert it everywhere after each update:
-  ```bash
-  for f in $(git ls-files '*package.json' | grep -v node_modules); do
-    grep -q '"typescript": "7' "$f" && sed -i 's/"typescript": "7\.[0-9.]*"/"typescript": "6.0.3"/' "$f"
-  done
-  ```
+- **`typescript` must stay on `6.x` (currently `6.0.3`).** `typescript-eslint` does not support the native TS 7 compiler yet, which crashes ESLint. This is now enforced by the `!typescript` exclusion on `update-outdated-deps:update-version` in the root `package.json`, so `--latest` no longer re-bumps it and there is nothing to revert by hand.
   (`@typescript/native-preview` / `tsgo` is what actually typechecks — it is fine to bump.)
-- Re-check this section as `typescript-eslint` gains TS 7 support; the pin can be lifted then.
+- `list-outdated-deps` deliberately does **not** carry the `!typescript` filter, so a new TypeScript release still shows up in the report. That is the signal to re-check whether `typescript-eslint` has gained TS 7 support and the hold can be lifted. Tracked in [#220](https://github.com/workleap/wl-telemetry/issues/220).
 
 ## Report
 
