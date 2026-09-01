@@ -2,6 +2,11 @@ packages:
   - packages/*
   - samples/**
 
+# pnpm 12 defaults this to 24h; pnpm 11 had no gate at all. Pinned explicitly so
+# CI behaviour does not shift with the pinned pnpm version, and so a script that
+# refuses to start is traceable to something committed in the repo.
+minimumReleaseAge: 1440
+
 minimumReleaseAgeExclude:
   - '@workleap/*'
   - '@typescript/native-preview*'
