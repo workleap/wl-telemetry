@@ -25,14 +25,14 @@ const telemetryClient = initializeTelemetry(productFamily, {
   logRocket?: {
     appId: string;                    // Required: LogRocket app ID
     options?: {
-      rootHostname?: string;          // Cookie domain
+      rootHostname?: string;          // Root hostname to track sessions across subdomains, defaults to "workleap.com"
       privateFieldNames?: string[];   // Additional private form fields
       privateQueryParameterNames?: string[];  // Additional private URL params
       transformers?: LogRocketSdkOptionsTransformer[];
     }
   },
   honeycomb?: {
-    namespace: string;                // Required: Trace namespace
+    namespace: string;                // Required: Service namespace, added to traces as a `service.namespace` attribute
     serviceName: string;              // Required: Service name in traces
     apiServiceUrls: string | RegExp | (string | RegExp)[];  // Required: URLs to instrument
     options?: {
@@ -51,7 +51,7 @@ const telemetryClient = initializeTelemetry(productFamily, {
     envOrTrackingApiBaseUrl: string;  // Required: 'production' | 'staging' | 'development' | 'local' | 'msw' | base URL
     options?: {
       productId?: string;             // Product identifier (e.g., "wlp")
-      trackingEndpoint?: string;      // Custom tracking endpoint path
+      trackingEndpoint?: string;      // Custom tracking endpoint path, defaults to "tracking/track"
     }
   },
   verbose?: boolean;                  // Enable debug logging
@@ -157,7 +157,7 @@ span.end();
 |---|---|
 | `createWorkleapPlatformDefaultUserTraits(identification)` | Create standard Workleap Platform user traits object |
 | `createShareGateDefaultUserTraits(identification)` | Create standard ShareGate user traits object |
-| `registerGetSessionUrlListener(listener: (url: string) => void)` | Register callback for session URL |
+| `registerGetSessionUrlListener(listener: (url: string) => void)` | Register callback for session URL. Host applications should use `LogRocket.getSessionURL` instead of this method |
 
 ### `createWorkleapPlatformDefaultUserTraits` Parameters
 
@@ -249,6 +249,8 @@ By default, all user-provided text inputs and content are sanitized.
   targetProductId?: string;  // For cross-product events
 }
 ```
+
+When a `productId` is provided both to `initializeTelemetry` and as an option to `createTrackingFunction`, the value passed to `createTrackingFunction` takes precedence.
 
 ### Tracking Function Signature
 
