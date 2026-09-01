@@ -387,6 +387,16 @@ Updated outdated dependencies to their latest version. For more information, vie
 pnpm update-outdated-deps
 ```
 
+Some packages are deliberately excluded from the update, because a newer version is known to break the repository:
+
+| Package | Why |
+| --- | --- |
+| `eslint`, `@eslint/js` | Pinned by `@workleap/eslint-configs`. |
+| `logrocket-fuzzy-search-sanitizer` | Pinned by `@workleap/logrocket`. |
+| `typescript` | typescript-eslint does not support the TypeScript 7 compiler API, so a 7.x bump breaks `pnpm lint` repo-wide. Tracked in [#220](https://github.com/workleap/wl-telemetry/issues/220). |
+
+`list-outdated-deps` intentionally does **not** share these exclusions — it only reports and never edits a `package.json`, so keeping it honest is what tells us when a hold can be lifted.
+
 ## Workflows
 
 The following workflows are available with GitHub:
