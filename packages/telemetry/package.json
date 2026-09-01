@@ -61,7 +61,7 @@
         }
     },
     "dependencies": {
-        "@opentelemetry/sdk-trace-web": "^2.10.0",
+        "@opentelemetry/sdk-trace-web": "^2.11.0",
         "@workleap-telemetry/core": "workspace:^",
         "@workleap/honeycomb": "workspace:^",
         "@workleap/logging": "^2.0.0",

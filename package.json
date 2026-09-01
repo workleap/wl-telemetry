@@ -33,9 +33,9 @@
         "clean": "pnpm -r --parallel --include-workspace-root exec pnpm dlx rimraf dist .turbo .rslib node_modules/.cache",
         "reset": "pnpm clean && pnpm reset:modules",
         "reset:modules": "pnpm -r --parallel --include-workspace-root exec pnpm dlx rimraf node_modules pnpm-lock.yaml",
-        "list-outdated-deps": "pnpm outdated -r --format list !eslint !@eslint/js !logrocket-fuzzy-search-sanitizer",
+        "list-outdated-deps": "pnpm outdated -r --format list !eslint !@eslint/js !logrocket-fuzzy-search-sanitizer !typescript",
         "update-outdated-deps": "pnpm run --sequential \"/^update-outdated-deps:.*/\"",
-        "update-outdated-deps:update-version": "pnpm update -r --latest !eslint !@eslint/js !logrocket-fuzzy-search-sanitizer",
+        "update-outdated-deps:update-version": "pnpm update -r --latest !eslint !@eslint/js !logrocket-fuzzy-search-sanitizer !typescript",
         "update-outdated-deps:update-peers": "syncpack fix",
         "update-outdated-deps:fix-pkg-json": "eslint --fix --no-cache --no-ignore package.json **/package.json"
     },
@@ -61,7 +61,7 @@
     },
     "engines": {
         "node": ">=24.0.0",
-        "pnpm": ">=11"
+        "pnpm": ">=12"
     },
-    "packageManager": "pnpm@11.0.8"
+    "packageManager": "pnpm@12.2.1"
 }
