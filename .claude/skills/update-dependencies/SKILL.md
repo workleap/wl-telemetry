@@ -21,7 +21,7 @@ Run the full dependency-update workflow on the developer's machine and prove tha
 
 - Clean-ish git tree (`git status --short`). Warn if there are unrelated pending changes.
 - `.env.local` exists at the repo root with `LOGROCKET_APP_ID`, `HONEYCOMB_API_KEY`, `MIXPANEL_PROJECT_TOKEN` set. `COMMON_ROOM_SITE_ID` is normally **empty** (no sandbox) — that is expected.
-- Node `>=24`, pnpm `11.x`.
+- Node `>=24`, pnpm `12.x`.
 - For the `all-platforms` sample only: `127.0.0.1 local.workleap.com` in the hosts file, a trusted mkcert CA, and `samples/all-platforms/local.workleap.com*.pem`. If missing, skip all-platforms browser validation and say so (build still validates it).
 
 ## Step 1 — Update dependencies
