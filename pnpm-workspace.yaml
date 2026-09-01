@@ -2,15 +2,6 @@ packages:
   - packages/*
   - samples/**
 
-# pnpm 11 had no release-age gate; pnpm 12 defaults it to 24h. Pinned to 0 so this
-# upgrade is behaviour-neutral — adopting the gate is a deliberate change, not a
-# side effect of bumping packageManager. Tracked in #226.
-#
-# While this is 0 the minimumReleaseAgeExclude list below has no effect — it was
-# equally inert under pnpm 11, which had no gate at all. It is kept so it is ready
-# when #226 settles on a non-zero value.
-minimumReleaseAge: 0
-
 minimumReleaseAgeExclude:
   - '@workleap/*'
   - '@typescript/native-preview*'
