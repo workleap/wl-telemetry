@@ -2,6 +2,8 @@ packages:
   - packages/*
   - samples/**
 
+minimumReleaseAge: 0
+
 minimumReleaseAgeExclude:
   - '@workleap/*'
   - '@typescript/native-preview*'
