@@ -102,14 +102,16 @@ export function resolveUrl(url: string) {
 }
 
 function getRequestMode(url: URL): RequestMode {
+    // Without a document location, the upstream transport falls back to "no-cors". That mode strips the content type
+    // header and returns an opaque response with a status of 0, which would be reported as a failed export.
     if (!globalThis.location) {
-        return "no-cors";
+        return "cors";
     }
 
     return globalThis.location.origin === url.origin ? "same-origin" : "cors";
 }
 
-// In browsers, a network error (DNS failure, connection refused, CORS rejection, etc..) is a "TypeError" without a cause.
+// In browsers, a network error (DNS failure, connection refused, CORS rejection, etc.) is a "TypeError" without a cause.
 function isNetworkError(error: unknown): error is TypeError {
     return error instanceof TypeError && !error.cause;
 }
@@ -244,10 +246,14 @@ export class RetryingTransport implements IExporterTransport {
         this.#transport = transport;
     }
 
-    #retry(data: Uint8Array, timeoutMillis: number, inMillis: number) {
+    #retry(data: Uint8Array, deadline: number, inMillis: number) {
         return new Promise<ExportResponse>((resolve, reject) => {
             setTimeout(() => {
-                this.#transport.send(data, timeoutMillis).then(resolve, reject);
+                // The remaining time is computed once the delay has elapsed so the retries never run past the export deadline.
+                // This differs from the upstream implementation, which lets a retry run for the time remaining before the delay.
+                const remainingTimeoutMillis = Math.max(deadline - Date.now(), 0);
+
+                this.#transport.send(data, remainingTimeoutMillis).then(resolve, reject);
             }, inMillis);
         });
     }
@@ -279,7 +285,7 @@ export class RetryingTransport implements IExporterTransport {
 
             logger.verbose(`Scheduling export retry in ${Math.round(retryInMillis)}ms.`);
 
-            result = await this.#retry(data, remainingTimeoutMillis, retryInMillis);
+            result = await this.#retry(data, deadline, retryInMillis);
         }
 
         if (result.status === "success") {
@@ -375,7 +381,17 @@ export class ProxyTraceExporter extends OTLPExporterBase<ReadableSpan[]> impleme
 
 ///////////////////////////
 
+export const ContentTypeHeaderName = "Content-Type";
 export const HoneycombTeamHeaderName = "x-honeycomb-team";
+
+// Header names are case-insensitive.
+function hasHeader(headers: Record<string, string>, name: string) {
+    return Object.keys(headers).some(x => x.toLowerCase() === name.toLowerCase());
+}
+
+function omitHeader(headers: Record<string, string>, name: string) {
+    return Object.fromEntries(Object.entries(headers).filter(([key]) => key.toLowerCase() !== name.toLowerCase()));
+}
 
 // Derives the exporter configuration from the Honeycomb SDK options the same way the SDK derives its default trace exporter.
 export function createProxyTraceExporter(sdkOptions: HoneycombSdkOptions, credentials?: RequestCredentials) {
@@ -396,16 +412,15 @@ export function createProxyTraceExporter(sdkOptions: HoneycombSdkOptions, creden
         throw new Error("[honeycomb] Cannot create the proxy trace exporter, the Honeycomb SDK options have no \"endpoint\" or \"tracesEndpoint\".");
     }
 
+    // The payload is always JSON, the content type cannot be overridden.
     const resolvedHeaders: Record<string, string> = {
-        ...headers,
-        ...tracesHeaders,
-        // The payload is always JSON, the content type cannot be overridden.
-        "Content-Type": "application/json"
+        ...omitHeader({ ...headers, ...tracesHeaders }, ContentTypeHeaderName),
+        [ContentTypeHeaderName]: "application/json"
     };
 
     const resolvedApiKey = tracesApiKey ?? apiKey;
 
-    if (resolvedApiKey && !resolvedHeaders[HoneycombTeamHeaderName]) {
+    if (resolvedApiKey && !hasHeader(resolvedHeaders, HoneycombTeamHeaderName)) {
         resolvedHeaders[HoneycombTeamHeaderName] = resolvedApiKey;
     }
 

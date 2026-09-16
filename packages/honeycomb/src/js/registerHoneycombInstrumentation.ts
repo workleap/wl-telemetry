@@ -2,6 +2,7 @@ import { type HoneycombOptions, HoneycombWebSDK } from "@honeycombio/opentelemet
 import type { Span } from "@opentelemetry/api";
 import { getWebAutoInstrumentations, type InstrumentationConfigMap } from "@opentelemetry/auto-instrumentations-web";
 import type { DocumentLoadInstrumentationConfig } from "@opentelemetry/instrumentation-document-load";
+import type { Instrumentation } from "@opentelemetry/instrumentation";
 import type { FetchInstrumentationConfig, FetchRequestHookFunction as OpenTelemetryFetchRequestHookFunction } from "@opentelemetry/instrumentation-fetch";
 import type { UserInteractionInstrumentationConfig } from "@opentelemetry/instrumentation-user-interaction";
 import type { XMLHttpRequestInstrumentationConfig } from "@opentelemetry/instrumentation-xml-http-request";
@@ -128,14 +129,38 @@ export interface RegisterHoneycombInstrumentationOptions {
 
 }
 
-// The fetch instrumentation compares the ignored URLs with the normalized URL of the requests.
-function getProxyTracesUrlToIgnore(proxy: string) {
-    const tracesUrl = appendTracesPath(proxy);
-
+// The network instrumentations compare the ignored URLs with the normalized URL of the requests.
+function normalizeUrlToIgnore(url: string) {
     try {
-        return resolveUrl(tracesUrl).href;
+        return resolveUrl(url).href;
     } catch {
-        return tracesUrl;
+        return url;
+    }
+}
+
+const NetworkInstrumentationNames = [
+    "@opentelemetry/instrumentation-fetch",
+    "@opentelemetry/instrumentation-xml-http-request"
+];
+
+// A transformer can change the traces endpoint after the instrumentations have been created. The URL the exporter
+// actually sends the requests to must be ignored by the network instrumentations, otherwise the export requests
+// would be traced, resulting in an endless loop of export -> span -> export.
+function ignoreUrlInNetworkInstrumentations(instrumentations: (Instrumentation | Instrumentation[])[], url: string) {
+    for (const instrumentation of instrumentations.flat()) {
+        if (NetworkInstrumentationNames.includes(instrumentation.instrumentationName)) {
+            const config = instrumentation.getConfig() as FetchInstrumentationConfig;
+            const ignoreUrls = config.ignoreUrls ?? [];
+
+            if (!ignoreUrls.includes(url)) {
+                const newConfig: FetchInstrumentationConfig = {
+                    ...config,
+                    ignoreUrls: [...ignoreUrls, url]
+                };
+
+                instrumentation.setConfig(newConfig);
+            }
+        }
     }
 }
 
@@ -183,7 +208,7 @@ export function getHoneycombSdkOptions(
         ignoreNetworkEvents: true,
         propagateTraceHeaderCorsUrls: apiServiceUrls,
         // Prevent the trace export requests from being traced, which would result in an endless loop of export -> span -> export.
-        ...(proxy ? { ignoreUrls: [getProxyTracesUrlToIgnore(proxy)] } : {})
+        ...(proxy ? { ignoreUrls: [normalizeUrlToIgnore(appendTracesPath(proxy))] } : {})
     };
 
     const autoInstrumentations: InstrumentationConfigMap = {};
@@ -254,10 +279,14 @@ export function getHoneycombSdkOptions(
         transformedSdkOptions.disableDefaultTraceExporter ??= true;
 
         if (transformedSdkOptions.disableDefaultTraceExporter) {
+            const proxyTraceExporter = createProxyTraceExporter(transformedSdkOptions, credentials);
+
             transformedSdkOptions.traceExporters = [
                 ...(transformedSdkOptions.traceExporters ?? []),
-                createProxyTraceExporter(transformedSdkOptions, credentials)
+                proxyTraceExporter
             ];
+
+            ignoreUrlInNetworkInstrumentations(transformedSdkOptions.instrumentations ?? [], normalizeUrlToIgnore(proxyTraceExporter.url));
         } else {
             logger.warning("[honeycomb] The default trace exporter of the Honeycomb SDK has been enabled by a transformer. The trace requests will be sent to the proxy without the session credentials.");
         }

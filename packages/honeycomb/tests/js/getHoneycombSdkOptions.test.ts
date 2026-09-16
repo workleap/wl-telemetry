@@ -443,6 +443,27 @@ test.concurrent("when a transformer changes the endpoint, the proxy trace export
     expect(exporter.headers["x-foo"]).toBe("bar");
 });
 
+test.concurrent("when a transformer changes the endpoint, the fetch instrumentation ignores the transformed url", ({ expect }) => {
+    const globalAttributeSpanProcessor = new GlobalAttributeSpanProcessor();
+    const fetchRequestPipeline = new FetchRequestPipeline();
+
+    const result = getHoneycombSdkOptions("foo", ["/foo"], globalAttributeSpanProcessor, fetchRequestPipeline, {
+        proxy: "https://my-proxy.com",
+        transformers: [
+            options => {
+                options.tracesEndpoint = "https://my-other-proxy.com/otlp";
+
+                return options;
+            }
+        ]
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const fetchInstrumentation = (result.instrumentations as any[]).find(x => x.instrumentationName === "@opentelemetry/instrumentation-fetch");
+
+    expect(fetchInstrumentation.getConfig().ignoreUrls).toEqual(["https://my-proxy.com/v1/traces", "https://my-other-proxy.com/otlp"]);
+});
+
 test.concurrent("when a transformer adds trace exporters, they are preserved", ({ expect }) => {
     const globalAttributeSpanProcessor = new GlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();

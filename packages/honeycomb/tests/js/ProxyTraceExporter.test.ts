@@ -146,6 +146,30 @@ describe("createProxyTraceExporter", () => {
         expect(exporter.headers["Content-Type"]).toBe("application/json");
     });
 
+    test.concurrent("the json content type header cannot be overridden with another casing", ({ expect }) => {
+        const exporter = createProxyTraceExporter({
+            endpoint: "https://my-proxy.com",
+            headers: { "content-type": "text/plain" },
+            tracesHeaders: { "CONTENT-TYPE": "text/plain" }
+        });
+
+        const contentTypeHeaders = Object.keys(exporter.headers).filter(x => x.toLowerCase() === "content-type");
+
+        expect(contentTypeHeaders).toEqual(["Content-Type"]);
+        expect(exporter.headers["Content-Type"]).toBe("application/json");
+    });
+
+    test.concurrent("do not add the honeycomb team header when it is provided with another casing", ({ expect }) => {
+        const exporter = createProxyTraceExporter({
+            endpoint: "https://my-proxy.com",
+            apiKey: "123",
+            headers: { "X-Honeycomb-Team": "456" }
+        });
+
+        expect(exporter.headers["X-Honeycomb-Team"]).toBe("456");
+        expect(exporter.headers["x-honeycomb-team"]).toBeUndefined();
+    });
+
     test.concurrent("add the honeycomb team header when an api key is provided", ({ expect }) => {
         const exporter = createProxyTraceExporter({ endpoint: "https://my-proxy.com", apiKey: "123" });
 
@@ -209,6 +233,18 @@ describe("ProxyTraceExporter", () => {
         await exportSpans(exporter, createSpans());
 
         expect(getRequest(fetchMock).init.mode).toBe("same-origin");
+    });
+
+    test("use the cors mode when there is no document location", async ({ expect }) => {
+        const fetchMock = vi.fn().mockResolvedValue(createResponse(200));
+        vi.stubGlobal("fetch", fetchMock);
+        vi.stubGlobal("location", undefined);
+
+        const exporter = createProxyTraceExporter({ endpoint: "https://my-proxy.com" });
+        const result = await exportSpans(exporter, createSpans());
+
+        expect(result.code).toBe(ExportResultCode.SUCCESS);
+        expect(getRequest(fetchMock).init.mode).toBe("cors");
     });
 
     test("resolve a relative url against the document url", async ({ expect }) => {
@@ -324,6 +360,49 @@ describe("ProxyTraceExporter", () => {
 
         expect(result.code).toBe(ExportResultCode.FAILED);
         expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+
+    test("the retries never run past the export timeout", async ({ expect }) => {
+        vi.useFakeTimers();
+
+        let settled = false;
+
+        const fetchMock = vi.fn()
+            .mockResolvedValueOnce(createResponse(503, { "Retry-After": "2" }))
+            .mockImplementationOnce((_url: string, init: RequestInit) => {
+                return new Promise((_resolve, reject) => {
+                    init.signal!.addEventListener("abort", () => {
+                        reject(new DOMException("The operation was aborted.", "AbortError"));
+                    });
+                });
+            });
+
+        vi.stubGlobal("fetch", fetchMock);
+
+        const exporter = new ProxyTraceExporter({ url: "https://my-proxy.com/v1/traces", timeoutMillis: 3000 });
+
+        const promise = exportSpans(exporter, createSpans()).then(x => {
+            settled = true;
+
+            return x;
+        });
+
+        // The retry is scheduled in 2s, which leaves 1s to the second attempt.
+        await vi.advanceTimersByTimeAsync(2000);
+
+        expect(fetchMock).toHaveBeenCalledTimes(2);
+
+        await vi.advanceTimersByTimeAsync(900);
+
+        expect(settled).toBe(false);
+
+        await vi.advanceTimersByTimeAsync(200);
+
+        expect(settled).toBe(true);
+
+        const result = await promise;
+
+        expect(result.code).toBe(ExportResultCode.FAILED);
     });
 
     test("retry when a network error occurs", async ({ expect }) => {

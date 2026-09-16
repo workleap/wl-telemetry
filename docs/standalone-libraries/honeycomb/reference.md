@@ -82,7 +82,7 @@ When the proxy is hosted on a different origin than the application, the browser
 - `Access-Control-Allow-Origin` set to the application origin. A wildcard (`*`) is refused for credentialed requests.
 - `Access-Control-Allow-Credentials: true`
 
-Since the trace requests are sent with a `Content-Type: application/json` header, the proxy must also answer the CORS preflight (`OPTIONS`) requests.
+Since the trace requests are sent with a `Content-Type: application/json` header, the proxy must also answer the CORS preflight (`OPTIONS`) requests. To let the exporter honor the `Retry-After` header of the `429` and `503` responses, the proxy must also expose it with `Access-Control-Expose-Headers: Retry-After`, otherwise the retries fall back to an exponential backoff.
 
 The credentials mode can be changed with the `credentials` option:
 
