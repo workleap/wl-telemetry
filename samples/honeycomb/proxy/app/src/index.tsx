@@ -3,6 +3,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
+// The sample proxy rejects the trace requests without this cookie. The browser sends it to the proxy because
+// the Honeycomb instrumentation sends the trace requests with the session credentials.
+document.cookie = "wl-sample-session=1; path=/";
+
 const honeycombClient = registerHoneycombInstrumentation("sample", "honeycomb-proxy-sample", [/http:\/\/localhost:1234\.*/], {
     proxy: "http://localhost:5678/v1/traces",
     telemetryContext: createTelemetryContext("wlp", { verbose: true }),

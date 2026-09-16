@@ -14,7 +14,7 @@ import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts"
 import { type HoneycombInstrumentationClient, HoneycombInstrumentationClientImpl } from "./HoneycombInstrumentationClient.ts";
 import type { HoneycombSdkInstrumentations, HoneycombSdkOptions } from "./honeycombTypes.ts";
 import { NormalizeAttributesSpanProcessor } from "./NormalizeAttributesSpanProcessor.ts";
-import { patchXmlHttpRequest } from "./patchXmlHttpRequest.ts";
+import { appendTracesPath, createProxyTraceExporter, resolveUrl } from "./ProxyTraceExporter.ts";
 
 export const ServiceNamespaceAttributeName = "service.namespace";
 export const TelemetryIdAttributeName = "app.telemetry_id";
@@ -59,6 +59,12 @@ export interface RegisterHoneycombInstrumentationOptions {
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     proxy?: string;
+    /**
+     * The credentials mode of the trace requests sent to the proxy. Only used when a proxy is provided.
+     * @default "include"
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    credentials?: RequestCredentials;
     /**
      * Honeycomb Ingest API Key.
      * @see {@link https://workleap.github.io/wl-telemetry}
@@ -122,6 +128,17 @@ export interface RegisterHoneycombInstrumentationOptions {
 
 }
 
+// The fetch instrumentation compares the ignored URLs with the normalized URL of the requests.
+function getProxyTracesUrlToIgnore(proxy: string) {
+    const tracesUrl = appendTracesPath(proxy);
+
+    try {
+        return resolveUrl(tracesUrl).href;
+    } catch {
+        return tracesUrl;
+    }
+}
+
 function augmentFetchInstrumentationOptionsWithFetchRequestPipeline(options: FetchInstrumentationConfig, fetchRequestPipeline: FetchRequestPipeline) {
     if (options.requestHook) {
         fetchRequestPipeline.registerHook(options.requestHook);
@@ -143,6 +160,7 @@ export function getHoneycombSdkOptions(
 ) {
     const {
         proxy,
+        credentials,
         apiKey,
         verbose = false,
         loggers = [],
@@ -163,7 +181,9 @@ export function getHoneycombSdkOptions(
 
     const instrumentationOptions = {
         ignoreNetworkEvents: true,
-        propagateTraceHeaderCorsUrls: apiServiceUrls
+        propagateTraceHeaderCorsUrls: apiServiceUrls,
+        // Prevent the trace export requests from being traced, which would result in an endless loop of export -> span -> export.
+        ...(proxy ? { ignoreUrls: [getProxyTracesUrlToIgnore(proxy)] } : {})
     };
 
     const autoInstrumentations: InstrumentationConfigMap = {};
@@ -220,10 +240,33 @@ export function getHoneycombSdkOptions(
         spanProcessors: [globalAttributeSpanProcessor, new NormalizeAttributesSpanProcessor(), ...spanProcessors]
     } satisfies HoneycombSdkOptions;
 
-    return applyTransformers(sdkOptions, transformers, {
+    const transformedSdkOptions = applyTransformers(sdkOptions, transformers, {
         verbose,
         logger
     });
+
+    if (proxy) {
+        // The default exporters of the Honeycomb SDK send the requests without the session credentials, which the proxy
+        // needs to authenticate the requests. The default trace exporter is replaced by an exporter sending the credentials.
+        // The default metric and log exporters are disabled because the proxies only accept traces.
+        // The exporter is created after the transformers have been applied so a transformer can still update
+        // the endpoint, the headers or the timeout, and the flags are only set when a transformer has not already set them.
+        transformedSdkOptions.disableDefaultTraceExporter ??= true;
+
+        if (transformedSdkOptions.disableDefaultTraceExporter) {
+            transformedSdkOptions.traceExporters = [
+                ...(transformedSdkOptions.traceExporters ?? []),
+                createProxyTraceExporter(transformedSdkOptions, credentials)
+            ];
+        } else {
+            logger.warning("[honeycomb] The default trace exporter of the Honeycomb SDK has been enabled by a transformer. The trace requests will be sent to the proxy without the session credentials.");
+        }
+
+        transformedSdkOptions.disableDefaultMetricExporter ??= true;
+        transformedSdkOptions.disableDefaultLogExporter ??= true;
+    }
+
+    return transformedSdkOptions;
 }
 
 ///////////////////////////
@@ -273,7 +316,6 @@ export class HoneycombInstrumentationRegistrator {
         options: RegisterHoneycombInstrumentationOptions = {}
     ) {
         const {
-            proxy,
             telemetryContext,
             logRocketInstrumentationClient,
             verbose = false,
@@ -281,10 +323,6 @@ export class HoneycombInstrumentationRegistrator {
         } = options;
 
         const logger = createCompositeLogger(verbose, loggers);
-
-        if (proxy) {
-            patchXmlHttpRequest(proxy);
-        }
 
         const sdkOptions = getHoneycombSdkOptions(serviceName, apiServiceUrls, this.#globalAttributeSpanProcessor, this.#fetchRequestPipeline, options);
         const sdkInstance = this.#createHoneycombSdkInstance(sdkOptions);
