@@ -503,6 +503,12 @@ function App() {
 
 ## Logging Configuration
 
+### Install the package
+
+```bash
+pnpm add @workleap/logging
+```
+
 ### Development vs Production Logging
 
 ```typescript
@@ -584,6 +590,20 @@ const telemetryClient = initializeTelemetry("wlp", {
   verbose: true
 });
 ```
+
+### Check the Console Logs
+
+With verbose mode enabled, open the DevTools console and look for the registration entries of each platform:
+
+- `[logrocket] LogRocket instrumentation is registered.`
+- `[honeycomb] Honeycomb instrumentation is registered.`
+- `[mixpanel] Mixpanel is initialized.`
+
+If a platform's entry is missing, its options were not provided to `initializeTelemetry`.
+
+For Honeycomb, you should also see a log entry for every trace:
+
+- `honeycombio/opentelemetry-web: Honeycomb link: https://ui.honeycomb.io/...`
 
 ### Debug Production Issues
 
