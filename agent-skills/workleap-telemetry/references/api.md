@@ -36,7 +36,8 @@ const telemetryClient = initializeTelemetry(productFamily, {
     serviceName: string;              // Required: Service name in traces
     apiServiceUrls: string | RegExp | (string | RegExp)[];  // Required: URLs to instrument
     options?: {
-      proxy?: string;                 // Required if no apiKey: OTEL collector URL
+      proxy?: string;                 // Required if no apiKey: OTEL collector URL. Trace requests are sent with the session credentials, the default metric/log exporters are disabled
+      credentials?: RequestCredentials;  // Credentials mode of the proxy trace requests, defaults to "include"
       apiKey?: string;                // Required if no proxy: Honeycomb API key
       instrumentations?: OpenTelemetryInstrumentation[];
       spanProcessors?: SpanProcessor[];
