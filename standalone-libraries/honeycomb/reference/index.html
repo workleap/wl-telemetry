@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841622834991">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.842904093495">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.841622834991" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.842904093495" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.841622834991" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.842904093495" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.841622834991" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.841622834991" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.842904093495" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.842904093495" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -297,6 +297,7 @@
 <div id="registerhoneycombinstrumentation-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = registerHoneycombInstrumentation(namespace, serviceName, apiServiceUrls: [string | Regex], options?: {
     proxy?,
+    credentials?,
     apiKey?,
     instrumentations?,
     spanProcessors?,
@@ -319,6 +320,7 @@
 <li><code translate="no" v-pre>options</code>: An optional object literal of options:
 <ul>
 <li><code translate="no" v-pre>proxy</code>: Set the URL to an <a href="https://docs.honeycomb.io/send-data/opentelemetry/collector/" class="outbound" target="_blank">OpenTelemetry collector</a> proxy. Either <code translate="no" v-pre>proxy</code> or <code translate="no" v-pre>apiKey</code> option must be provided.</li>
+<li><code translate="no" v-pre>credentials</code>: The <a href="https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#credentials" class="outbound" target="_blank">credentials mode</a> of the trace requests sent to the <code translate="no" v-pre>proxy</code>. The default value is <code translate="no" v-pre>&quot;include&quot;</code>.</li>
 <li><code translate="no" v-pre>apiKey</code>: Set an Honeycomb ingestion <a href="https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key" class="outbound" target="_blank">API key</a>. Either <code translate="no" v-pre>proxy</code> or <code translate="no" v-pre>apiKey</code> option must be provided.</li>
 <li><code translate="no" v-pre>instrumentations</code>: Append the provided <a href="https://opentelemetry.io/docs/languages/js/instrumentation/" class="outbound" target="_blank">instrumentation</a> instances to the configuration.</li>
 <li><code translate="no" v-pre>spanProcessors</code>: Append the provided <a href="https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#custom-span-processing" class="outbound" target="_blank">span processor</a> instances to the configuration.</li>
@@ -351,7 +353,39 @@ const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app
     proxy: &quot;https://sample-proxy&quot;
 });</code></pre>
 </doc-codeblock></div>
-<p>When a <code translate="no" v-pre>proxy</code> option is provided, the current session credentials are automatically sent with the OTel trace requests.</p>
+<p>When a <code translate="no" v-pre>proxy</code> option is provided, the trace requests are sent with the current session credentials (<code translate="no" v-pre>credentials: &quot;include&quot;</code>), which allows the proxy to authenticate the requests with the session cookies.</p>
+<p>When the proxy is hosted on a different origin than the application, the browser only accepts the responses to credentialed requests if they include the following <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS" class="outbound" target="_blank">CORS</a> headers:</p>
+<ul>
+<li><code translate="no" v-pre>Access-Control-Allow-Origin</code> set to the application origin. A wildcard (<code translate="no" v-pre>*</code>) is refused for credentialed requests.</li>
+<li><code translate="no" v-pre>Access-Control-Allow-Credentials: true</code></li>
+</ul>
+<p>Since the trace requests are sent with a <code translate="no" v-pre>Content-Type: application/json</code> header, the proxy must also answer the CORS preflight (<code translate="no" v-pre>OPTIONS</code>) requests. To let the exporter honor the <code translate="no" v-pre>Retry-After</code> header of the <code translate="no" v-pre>429</code> and <code translate="no" v-pre>503</code> responses, the proxy must also expose it with <code translate="no" v-pre>Access-Control-Expose-Headers: Retry-After</code>, otherwise the retries fall back to an exponential backoff.</p>
+<p>The credentials mode can be changed with the <code translate="no" v-pre>credentials</code> option:</p>
+<div id="use-a-proxy-code-2" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="5"><code v-pre class="language-typescript">import { registerHoneycombInstrumentation } from &quot;@workleap/honeycomb/react&quot;;
+
+const client = registerHoneycombInstrumentation(&quot;sample&quot;, &quot;my-app&quot;, [/.+/g,], {
+    proxy: &quot;https://sample-proxy&quot;,
+    credentials: &quot;same-origin&quot;
+});</code></pre>
+</doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-info"></div>
+    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="block text-callout-info" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>In proxy mode, only traces are sent to the proxy. The default metric and log exporters of the Honeycomb SDK are disabled. To send metrics or logs through a proxy, provide your own exporters with a <doc-anchor-trigger to="#use-transformer-functions">transformer function</doc-anchor-trigger>.</p>
+        </div>
+    </div>
+</div>
 <h3 id="use-an-api-key">Use an API key</h3>
 <div class="flex mb-6">
     <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-warning"></div>

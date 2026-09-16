@@ -23,6 +23,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
         - `apiServiceUrls`: A `RegExp` or `string` that matches the URLs of the application's backend services. If unsure, start with the temporary regex `/.+/g,` to match all URLs.
         - `options`: An optional object literal of options:
             - `proxy`: Set the URL to an [OpenTelemetry collector](https://docs.honeycomb.io/send-data/opentelemetry/collector/) proxy. Either `proxy` or `apiKey` option must be provided.
+            - `credentials`: The [credentials mode](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#credentials) of the trace requests sent to the `proxy`. The default value is `"include"`.
             - `apiKey`: Set an Honeycomb ingestion [API key](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key). Either `proxy` or `apiKey` option must be provided.
             - `instrumentations`: Append the provided [instrumentation](https://opentelemetry.io/docs/languages/js/instrumentation/) instances to the configuration.
             - `spanProcessors`: Append the provided [span processor](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#custom-span-processing) instances to the configuration.
@@ -179,7 +180,36 @@ const client = initializeTelemetry("wlp", {
 });
 ```
 
-When a `proxy` option is provided, the current session credentials are automatically sent with the OTel trace requests.
+When a `proxy` option is provided, the trace requests are sent with the current session credentials (`credentials: "include"`), which allows the proxy to authenticate the requests with the session cookies.
+
+When the proxy is hosted on a different origin than the application, the browser only accepts the responses to credentialed requests if they include the following [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS) headers:
+
+- `Access-Control-Allow-Origin` set to the application origin. A wildcard (`*`) is refused for credentialed requests.
+- `Access-Control-Allow-Credentials: true`
+
+Since the trace requests are sent with a `Content-Type: application/json` header, the proxy must also answer the CORS preflight (`OPTIONS`) requests. To let the exporter honor the `Retry-After` header of the `429` and `503` responses, the proxy must also expose it with `Access-Control-Expose-Headers: Retry-After`, otherwise the retries fall back to an exponential backoff.
+
+The credentials mode can be changed with the `credentials` option:
+
+```ts !#10
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry("wlp", {
+    honeycomb: {
+        namespace: "sample",
+        serviceName: "my-app-name",
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: "https://sample-proxy",
+            credentials: "same-origin"
+        }
+    }
+});
+```
+
+!!!info
+In proxy mode, only traces are sent to the proxy. The default metric and log exporters of the Honeycomb SDK are disabled. To send metrics or logs through a proxy, provide your own exporters with a transformer function.
+!!!
 
 ### Use an API key
 
