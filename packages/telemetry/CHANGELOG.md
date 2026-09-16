@@ -1,5 +1,11 @@
 # @workleap/telemetry
 
+## 4.0.3
+
+### Patch Changes
+
+- [#234](https://github.com/workleap/wl-telemetry/pull/234) [`1da20b8`](https://github.com/workleap/wl-telemetry/commit/1da20b881d9d17232edaca461863cd4a6c572611) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Updated the `@workleap/honeycomb` dependency to `8.1.0`, which sends the trace requests to a `proxy` with the session credentials again and adds the `credentials` option. See [#230](https://github.com/workleap/wl-telemetry/issues/230).
+
 ## 4.0.2
 
 ### Patch Changes
