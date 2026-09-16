@@ -38,6 +38,8 @@ honeycomb: {
     proxy: "https://otel-collector",  // Recommended: OTEL collector URL
     apiKey: "hcaik_...",              // Alternative: Direct API key (less secure)
 
+    credentials: "include",           // Credentials mode of the proxy trace requests, defaults to "include"
+
     // Custom instrumentation
     instrumentations: [],             // Additional OpenTelemetry instrumentations
     spanProcessors: [],               // Custom span processors
@@ -46,7 +48,7 @@ honeycomb: {
     fetchInstrumentation: (config) => config,                // Customize fetch instrumentation
     documentLoadInstrumentation: (config) => config,         // Customize document load instrumentation
 
-    // Disabled by default. Set to `true` to enable with defaults, or provide a function to enable and customize.
+    // Disabled by default. Provide a function to enable and customize the instrumentation.
     xmlHttpRequestInstrumentation: (config) => config,       // Enable and customize XHR instrumentation
     userInteractionInstrumentation: (config) => config,      // Enable and customize user interactions
 
@@ -54,6 +56,22 @@ honeycomb: {
   }
 }
 ```
+
+### Proxy Mode
+
+When a `proxy` option is provided, the trace requests are sent with the current session credentials (`credentials: "include"`), which allows the proxy to authenticate the requests with the session cookies. The credentials mode can be changed with the `credentials` option.
+
+When the proxy is hosted on a different origin than the application, the browser only accepts the responses to credentialed requests if they include the following CORS headers:
+
+| Header | Requirement |
+|---|---|
+| `Access-Control-Allow-Origin` | Set to the application origin. A wildcard (`*`) is refused for credentialed requests |
+| `Access-Control-Allow-Credentials` | Set to `true` |
+| `Access-Control-Expose-Headers` | Expose `Retry-After` so the exporter honors it on `429` and `503` responses, otherwise the retries fall back to an exponential backoff |
+
+Since the trace requests are sent with a `Content-Type: application/json` header, the proxy must also answer the CORS preflight (`OPTIONS`) requests.
+
+In proxy mode, only traces are sent to the proxy. The default metric and log exporters of the Honeycomb SDK are disabled. To send metrics or logs through a proxy, provide your own exporters with a transformer function.
 
 ### Setting Custom Attributes
 
@@ -161,8 +179,8 @@ logRocket: {
   appId: "your-app-id",           // Required: LogRocket app ID
   options: {
     rootHostname: "workleap.com",            // Root hostname to track sessions across subdomains
-    privateFieldNames: ["secret"],           // Additional private form fields
-    privateQueryParameterNames: ["token"],   // Additional private URL params
+    privateFieldNames: ["secret"],           // Additional fields removed from network requests/responses via fuzzy matching
+    privateQueryParameterNames: ["token"],   // Additional query parameters removed from URLs via fuzzy matching
     transformers: []                         // SDK-level configuration transformers
   }
 }
@@ -170,7 +188,15 @@ logRocket: {
 
 ### Privacy Controls
 
-By default, all user-provided text inputs and content are sanitized. Use `data-public` to explicitly allow recording:
+By default, the instrumentation hides a wide range of Personally Identifiable Information (PII) from session replays:
+
+| Sanitization | Description |
+|---|---|
+| DOM | Hides sensitive text elements from session replays |
+| Network data | Strips sensitive information from request/response headers and body |
+| URLs | Strips sensitive information from URL query parameters |
+
+Sanitized DOM content includes form fields (like `<input>`, `<textarea>`), text content inside HTML elements, and dynamic DOM mutations containing text. Use `data-public` to explicitly allow recording:
 
 **HTML Attributes:**
 - `data-public`: Explicitly allow recording of this element

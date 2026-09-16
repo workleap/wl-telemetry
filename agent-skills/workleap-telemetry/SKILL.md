@@ -5,7 +5,7 @@ description: |
 
   Use when initializing @workleap/telemetry, instrumenting Honeycomb traces/spans, configuring LogRocket replay or privacy, tracking Mixpanel events, setting up Noop clients for Storybook/tests, or troubleshooting telemetry correlation. Also activate when someone mentions observability, session replay, or analytics in a Workleap frontend context.
 metadata:
-  version: 3.6
+  version: 3.7
 ---
 
 # Workleap Telemetry (wl-telemetry)
@@ -48,7 +48,7 @@ const telemetryClient = initializeTelemetry("wlp", {
 3. **Let correlation happen automatically** — Never manually set Telemetry Id or Device Id, and never create your own `TelemetryContext` instances. The SDK manages the lifecycle and cross-tool propagation; manual overrides break the correlation chain.
 4. **Use Noop clients outside production** — Use `NoopTelemetryClient` in Storybook and tests to avoid sending real telemetry data and to prevent initialization errors in non-browser environments.
 5. **Protect user privacy** — Never log PII to LogRocket. Session replays are shared across teams and may be reviewed broadly; use `data-public`/`data-private` HTML attributes to control what gets recorded.
-6. **productFamily is required** — `initializeTelemetry` requires `"wlp"` (Workleap Platform) or `"sg"` (ShareGate) as the first argument. This determines platform-specific defaults and routing.
+6. **productFamily is required** — `initializeTelemetry` requires `"wlp"` (Workleap Platform) or `"sg"` (ShareGate) as the first argument. This selects the domain of the shared `wl-identity` cookie that carries the Device Id.
 
 ## Reference Guide
 
