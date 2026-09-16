@@ -405,6 +405,25 @@ describe("ProxyTraceExporter", () => {
         expect(result.code).toBe(ExportResultCode.FAILED);
     });
 
+    test("do not retry when the retry delay leaves no time for the attempt", async ({ expect }) => {
+        vi.useFakeTimers();
+
+        const fetchMock = vi.fn().mockResolvedValue(createResponse(503, { "Retry-After": "3" }));
+        vi.stubGlobal("fetch", fetchMock);
+
+        const exporter = new ProxyTraceExporter({ url: "https://my-proxy.com/v1/traces", timeoutMillis: 3000 });
+        const promise = exportSpans(exporter, createSpans());
+
+        await vi.advanceTimersByTimeAsync(5000);
+
+        const result = await promise;
+
+        // The failure is reported as retryable rather than as an aborted request.
+        expect(result.code).toBe(ExportResultCode.FAILED);
+        expect(result.error?.message).toContain("retryable");
+        expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+
     test("retry when a network error occurs", async ({ expect }) => {
         vi.useFakeTimers();
 

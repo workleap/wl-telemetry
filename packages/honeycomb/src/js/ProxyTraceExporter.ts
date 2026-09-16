@@ -234,6 +234,10 @@ const MaxBackoffMillis = 5000;
 const BackoffMultiplier = 1.5;
 const Jitter = 0.2;
 
+// A retry is only scheduled when at least this much of the export timeout remains once the delay has elapsed,
+// otherwise the request would be aborted right after being sent.
+export const MinAttemptTimeoutMillis = 100;
+
 // A pseudo-random jitter in the range of [-Jitter, +Jitter].
 function getJitter() {
     return Math.random() * (2 * Jitter) - Jitter;
@@ -276,9 +280,9 @@ export class RetryingTransport implements IExporterTransport {
             const retryInMillis = result.retryInMillis ?? backoff;
             const remainingTimeoutMillis = deadline - Date.now();
 
-            // Give up when the expected retry time is after the export deadline.
-            if (retryInMillis > remainingTimeoutMillis) {
-                logger.info(`Export retry time ${Math.round(retryInMillis)}ms exceeds remaining timeout ${Math.round(remainingTimeoutMillis)}ms, not retrying further.`);
+            // Give up when the retry would not have enough time left to complete before the export deadline.
+            if (retryInMillis + MinAttemptTimeoutMillis > remainingTimeoutMillis) {
+                logger.info(`Export retry time ${Math.round(retryInMillis)}ms leaves less than ${MinAttemptTimeoutMillis}ms of the remaining timeout ${Math.round(remainingTimeoutMillis)}ms, not retrying further.`);
 
                 return result;
             }
