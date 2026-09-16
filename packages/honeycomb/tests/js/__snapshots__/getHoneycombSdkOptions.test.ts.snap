@@ -1,5 +1,100 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`when a proxy is provided 1`] = `
+{
+  "apiKey": undefined,
+  "disableDefaultLogExporter": true,
+  "disableDefaultMetricExporter": true,
+  "disableDefaultTraceExporter": true,
+  "endpoint": "https://my-proxy.com",
+  "instrumentations": [
+    DocumentLoadInstrumentation {
+      "_config": {
+        "enabled": true,
+        "ignoreNetworkEvents": true,
+        "ignoreUrls": [
+          "https://my-proxy.com/v1/traces",
+        ],
+        "propagateTraceHeaderCorsUrls": [
+          "/foo",
+        ],
+        "requestHook": [Function],
+      },
+      "_diag": DiagComponentLogger {
+        "_namespace": "@opentelemetry/instrumentation-document-load",
+      },
+      "_logger": ProxyLogger {
+        "_provider": ProxyLoggerProvider {},
+        "name": "@opentelemetry/instrumentation-document-load",
+        "options": undefined,
+      },
+      "_massUnwrap": [Function],
+      "_massWrap": [Function],
+      "_meter": NoopMeter {},
+      "_tracer": ProxyTracer {
+        "_provider": ProxyTracerProvider {},
+        "name": "@opentelemetry/instrumentation-document-load",
+        "options": undefined,
+      },
+      "_unwrap": [Function],
+      "_wrap": [Function],
+      "component": "document-load",
+      "instrumentationName": "@opentelemetry/instrumentation-document-load",
+      "moduleName": "document-load",
+    },
+    FetchInstrumentation {
+      "_config": {
+        "enabled": true,
+        "ignoreNetworkEvents": true,
+        "ignoreUrls": [
+          "https://my-proxy.com/v1/traces",
+        ],
+        "propagateTraceHeaderCorsUrls": [
+          "/foo",
+        ],
+        "requestHook": [Function],
+      },
+      "_diag": DiagComponentLogger {
+        "_namespace": "@opentelemetry/instrumentation-fetch",
+      },
+      "_isEnabled": true,
+      "_isFetchPatched": true,
+      "_logger": ProxyLogger {
+        "_provider": ProxyLoggerProvider {},
+        "name": "@opentelemetry/instrumentation-fetch",
+        "options": undefined,
+      },
+      "_massUnwrap": [Function],
+      "_massWrap": [Function],
+      "_meter": NoopMeter {},
+      "_tasksCount": 0,
+      "_tracer": ProxyTracer {
+        "_provider": ProxyTracerProvider {},
+        "name": "@opentelemetry/instrumentation-fetch",
+        "options": undefined,
+      },
+      "_unwrap": [Function],
+      "_usedResources": WeakSet {},
+      "_wrap": [Function],
+      "component": "fetch",
+      "instrumentationName": "@opentelemetry/instrumentation-fetch",
+      "moduleName": "fetch",
+    },
+  ],
+  "localVisualizations": false,
+  "serviceName": "foo",
+  "spanProcessors": [
+    GlobalAttributeSpanProcessor {
+      "_attributes": {},
+    },
+    NormalizeAttributesSpanProcessor {},
+  ],
+  "traceExporters": [
+    "ProxyTraceExporter",
+  ],
+}
+`;
+
 exports[`when document load instrumentation is a custom function 1`] = `
 {
   "apiKey": "123",
@@ -17,8 +112,6 @@ exports[`when document load instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -27,16 +120,6 @@ exports[`when document load instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -60,8 +143,6 @@ exports[`when document load instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -72,16 +153,6 @@ exports[`when document load instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -124,8 +195,6 @@ exports[`when document load instrumentation is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -136,16 +205,6 @@ exports[`when document load instrumentation is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -187,8 +246,6 @@ exports[`when fetch instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -197,16 +254,6 @@ exports[`when fetch instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -230,8 +277,6 @@ exports[`when fetch instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -242,16 +287,6 @@ exports[`when fetch instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -293,8 +328,6 @@ exports[`when fetch instrumentation is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -303,16 +336,6 @@ exports[`when fetch instrumentation is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -353,8 +376,6 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -363,16 +384,6 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -396,8 +407,6 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -408,16 +417,6 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -439,12 +438,10 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-user-interaction",
       },
-      "_enabled": false,
       "_eventNames": Set {
         "click",
       },
       "_eventsSpanMap": WeakMap {},
-      "_hooks": [],
       "_isEnabled": true,
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
@@ -454,16 +451,6 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_shouldPreventSpanCreation": [Function],
       "_spansData": WeakMap {},
       "_tracer": ProxyTracer {
@@ -507,8 +494,6 @@ exports[`when user interaction instrumentation is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -517,16 +502,6 @@ exports[`when user interaction instrumentation is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -550,8 +525,6 @@ exports[`when user interaction instrumentation is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -562,16 +535,6 @@ exports[`when user interaction instrumentation is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -614,8 +577,6 @@ exports[`when verbose is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -624,16 +585,6 @@ exports[`when verbose is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -657,8 +608,6 @@ exports[`when verbose is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -669,16 +618,6 @@ exports[`when verbose is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -721,8 +660,6 @@ exports[`when verbose is true 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -731,16 +668,6 @@ exports[`when verbose is true 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -764,8 +691,6 @@ exports[`when verbose is true 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -776,16 +701,6 @@ exports[`when verbose is true 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -828,8 +743,6 @@ exports[`when xml http instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -838,16 +751,6 @@ exports[`when xml http instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -871,8 +774,6 @@ exports[`when xml http instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -883,16 +784,6 @@ exports[`when xml http instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -918,8 +809,6 @@ exports[`when xml http instrumentation is a custom function 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-xml-http-request",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isXhrPatched": true,
       "_logger": ProxyLogger {
@@ -930,16 +819,6 @@ exports[`when xml http instrumentation is a custom function 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -983,8 +862,6 @@ exports[`when xml http instrumentation is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -993,16 +870,6 @@ exports[`when xml http instrumentation is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1026,8 +893,6 @@ exports[`when xml http instrumentation is false 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -1038,16 +903,6 @@ exports[`when xml http instrumentation is false 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -1090,8 +945,6 @@ exports[`with a single transformer 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1100,16 +953,6 @@ exports[`with a single transformer 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1133,8 +976,6 @@ exports[`with a single transformer 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -1145,16 +986,6 @@ exports[`with a single transformer 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -1197,8 +1028,6 @@ exports[`with custom instrumentations 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1207,16 +1036,6 @@ exports[`with custom instrumentations 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1240,8 +1059,6 @@ exports[`with custom instrumentations 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -1252,16 +1069,6 @@ exports[`with custom instrumentations 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -1307,8 +1114,6 @@ exports[`with custom span processors 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1317,16 +1122,6 @@ exports[`with custom span processors 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1350,8 +1145,6 @@ exports[`with custom span processors 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -1362,16 +1155,6 @@ exports[`with custom span processors 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
@@ -1415,8 +1198,6 @@ exports[`with multiple transformers 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-document-load",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_logger": ProxyLogger {
         "_provider": ProxyLoggerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1425,16 +1206,6 @@ exports[`with multiple transformers 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},
         "name": "@opentelemetry/instrumentation-document-load",
@@ -1458,8 +1229,6 @@ exports[`with multiple transformers 1`] = `
       "_diag": DiagComponentLogger {
         "_namespace": "@opentelemetry/instrumentation-fetch",
       },
-      "_enabled": false,
-      "_hooks": [],
       "_isEnabled": true,
       "_isFetchPatched": true,
       "_logger": ProxyLogger {
@@ -1470,16 +1239,6 @@ exports[`with multiple transformers 1`] = `
       "_massUnwrap": [Function],
       "_massWrap": [Function],
       "_meter": NoopMeter {},
-      "_modules": [],
-      "_requireInTheMiddleSingleton": RequireInTheMiddleSingleton {
-        "_moduleNameTrie": ModuleNameTrie {
-          "_counter": 0,
-          "_trie": ModuleNameTrieNode {
-            "children": Map {},
-            "hooks": [],
-          },
-        },
-      },
       "_tasksCount": 0,
       "_tracer": ProxyTracer {
         "_provider": ProxyTracerProvider {},

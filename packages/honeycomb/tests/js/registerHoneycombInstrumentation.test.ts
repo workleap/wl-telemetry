@@ -1,6 +1,6 @@
 import { HoneycombWebSDK } from "@honeycombio/opentelemetry-web";
 import { type LogRocketInstrumentationPartialClient, TelemetryContext } from "@workleap-telemetry/core";
-import { afterEach, test, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, test, vi } from "vitest";
 import { FetchRequestPipeline } from "../../src/js/FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "../../src/js/GlobalAttributeSpanProcessor.ts";
 import {
@@ -35,6 +35,15 @@ class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPar
         return this.#listeners.length;
     }
 }
+
+beforeAll(() => {
+    // The real Honeycomb SDK is started by the tests using the "registerHoneycombInstrumentation" function, the trace requests must not leave the test process.
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(null, { status: 200 })));
+});
+
+afterAll(() => {
+    vi.unstubAllGlobals();
+});
 
 afterEach(() => {
     vi.clearAllMocks();
