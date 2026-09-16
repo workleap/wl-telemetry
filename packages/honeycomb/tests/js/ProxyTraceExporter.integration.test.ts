@@ -20,6 +20,9 @@ interface ReceivedRequest {
 
 const SessionCookieName = "wl-session";
 
+// Like a real proxy, only the application origin is allowed. Reflecting the request origin with credentials would be a CORS misconfiguration.
+const AllowedOrigin = globalThis.location.origin;
+
 let server: Server;
 let serverUrl: string;
 let receivedRequests: ReceivedRequest[] = [];
@@ -52,7 +55,7 @@ beforeAll(async () => {
 
         // A credentialed cross-origin request requires a specific origin and "Access-Control-Allow-Credentials".
         const corsHeaders = {
-            "Access-Control-Allow-Origin": request.headers.origin ?? "",
+            "Access-Control-Allow-Origin": AllowedOrigin,
             "Access-Control-Allow-Credentials": "true",
             "Access-Control-Allow-Methods": "POST",
             "Access-Control-Allow-Headers": request.headers["access-control-request-headers"] ?? "content-type",
