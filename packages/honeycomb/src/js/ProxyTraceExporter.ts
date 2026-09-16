@@ -52,6 +52,9 @@ export function isRetryableHttpStatus(status: number) {
     return status === 429 || status === 502 || status === 503 || status === 504;
 }
 
+// Returns the delay requested by the "Retry-After" header, or undefined when there is none or it is not usable.
+// A non-positive delay falls back to the exponential backoff rather than retrying immediately, which differs from
+// the upstream implementation and prevents a burst of retries when a proxy answers "Retry-After: 0".
 export function parseRetryAfterHeader(retryAfter: string | null | undefined) {
     if (retryAfter == null) {
         return undefined;
@@ -60,13 +63,13 @@ export function parseRetryAfterHeader(retryAfter: string | null | undefined) {
     const seconds = Number.parseInt(retryAfter, 10);
 
     if (Number.isInteger(seconds)) {
-        return seconds > 0 ? seconds * 1000 : -1;
+        return seconds > 0 ? seconds * 1000 : undefined;
     }
 
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After#directives
     const delay = new Date(retryAfter).getTime() - Date.now();
 
-    return delay >= 0 ? delay : 0;
+    return delay > 0 ? delay : undefined;
 }
 
 ///////////////////////////

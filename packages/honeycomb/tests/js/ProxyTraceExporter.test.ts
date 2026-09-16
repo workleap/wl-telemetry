@@ -72,8 +72,13 @@ describe("parseRetryAfterHeader", () => {
         expect(parseRetryAfterHeader("5")).toBe(5000);
     });
 
-    test.concurrent("return -1 when the header is 0 seconds", ({ expect }) => {
-        expect(parseRetryAfterHeader("0")).toBe(-1);
+    test.concurrent("return undefined when the header is not a positive number of seconds", ({ expect }) => {
+        expect(parseRetryAfterHeader("0")).toBeUndefined();
+        expect(parseRetryAfterHeader("-5")).toBeUndefined();
+    });
+
+    test.concurrent("return undefined when the header is not a number nor a date", ({ expect }) => {
+        expect(parseRetryAfterHeader("soon")).toBeUndefined();
     });
 
     test.concurrent("compute the delay from an http date", ({ expect }) => {
@@ -83,8 +88,8 @@ describe("parseRetryAfterHeader", () => {
         expect(delay).toBeLessThanOrEqual(10_000);
     });
 
-    test.concurrent("return 0 when the http date is in the past", ({ expect }) => {
-        expect(parseRetryAfterHeader(new Date(Date.now() - 10_000).toUTCString())).toBe(0);
+    test.concurrent("return undefined when the http date is in the past", ({ expect }) => {
+        expect(parseRetryAfterHeader(new Date(Date.now() - 10_000).toUTCString())).toBeUndefined();
     });
 });
 
@@ -320,6 +325,31 @@ describe("ProxyTraceExporter", () => {
         expect(fetchMock).toHaveBeenCalledTimes(1);
 
         await vi.advanceTimersByTimeAsync(200);
+
+        const result = await promise;
+
+        expect(result.code).toBe(ExportResultCode.SUCCESS);
+        expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
+    test("back off when the retry-after header is 0", async ({ expect }) => {
+        vi.useFakeTimers();
+
+        const fetchMock = vi.fn()
+            .mockResolvedValueOnce(createResponse(503, { "Retry-After": "0" }))
+            .mockResolvedValueOnce(createResponse(200));
+
+        vi.stubGlobal("fetch", fetchMock);
+
+        const exporter = createProxyTraceExporter({ endpoint: "https://my-proxy.com" });
+        const promise = exportSpans(exporter, createSpans());
+
+        // The initial backoff is 1s with a 20% jitter, the retry must not fire before that.
+        await vi.advanceTimersByTimeAsync(700);
+
+        expect(fetchMock).toHaveBeenCalledTimes(1);
+
+        await vi.advanceTimersByTimeAsync(600);
 
         const result = await promise;
 
