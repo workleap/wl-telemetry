@@ -9,7 +9,7 @@ import {
     OTLPExporterBase
 } from "@opentelemetry/otlp-exporter-base";
 import { JsonTraceSerializer, TraceExporterMetricsHelper } from "@opentelemetry/otlp-transformer";
-import type { ReadableSpan, SpanExporter } from "@opentelemetry/sdk-trace-web";
+import type { ReadableSpan, SpanExporter } from "@opentelemetry/sdk-trace";
 import type { HoneycombSdkOptions } from "./honeycombTypes.ts";
 
 // Why this file exists:

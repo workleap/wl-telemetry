@@ -6,14 +6,14 @@ import type { Instrumentation } from "@opentelemetry/instrumentation";
 import type { FetchInstrumentationConfig, FetchRequestHookFunction as OpenTelemetryFetchRequestHookFunction } from "@opentelemetry/instrumentation-fetch";
 import type { UserInteractionInstrumentationConfig } from "@opentelemetry/instrumentation-user-interaction";
 import type { XMLHttpRequestInstrumentationConfig } from "@opentelemetry/instrumentation-xml-http-request";
-import type { PropagateTraceHeaderCorsUrls, SpanProcessor } from "@opentelemetry/sdk-trace-web";
+import type { SpanProcessor } from "@opentelemetry/sdk-trace";
 import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 import { FetchRequestPipeline } from "./FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "./GlobalAttributeSpanProcessor.ts";
 import { type HoneycombInstrumentationClient, HoneycombInstrumentationClientImpl } from "./HoneycombInstrumentationClient.ts";
-import type { HoneycombSdkInstrumentations, HoneycombSdkOptions } from "./honeycombTypes.ts";
+import type { HoneycombSdkInstrumentations, HoneycombSdkOptions, PropagateTraceHeaderCorsUrls } from "./honeycombTypes.ts";
 import { NormalizeAttributesSpanProcessor } from "./NormalizeAttributesSpanProcessor.ts";
 import { appendTracesPath, createProxyTraceExporter, resolveUrl } from "./ProxyTraceExporter.ts";
 

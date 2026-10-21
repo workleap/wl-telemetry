@@ -1,4 +1,4 @@
-import type { ReadableSpan, SpanProcessor } from "@opentelemetry/sdk-trace-web";
+import type { ReadableSpan, SpanProcessor } from "@opentelemetry/sdk-trace";
 import { removeIdsFromUrl } from "./removeIdsFromUrl.ts";
 
 // Based on: https://opentelemetry.io/docs/specs/semconv/registry/attributes/http.

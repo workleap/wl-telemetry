@@ -154,6 +154,13 @@ If build/lint/test/browser validation fails after the update:
 
 - **`typescript` must stay on `6.x` (currently `6.0.3`).** `typescript-eslint` does not support the native TS 7 compiler yet, which crashes ESLint. This is now enforced by the `!typescript` exclusion on `update-outdated-deps:update-version` in the root `package.json`, so `--latest` no longer re-bumps it and there is nothing to revert by hand.
   (`@typescript/native-preview` / `tsgo` is what actually typechecks — it is fine to bump.)
+- **`@opentelemetry/*` must stay on the 2.x / 0.2xx line (stable `2.12.0`, experimental `0.223.0`, `@opentelemetry/api` `1.9.x`).** OpenTelemetry JS 3.0 / `0.300.0` (2026-10-20) requires `@opentelemetry/api >=1.10.0 <1.11.0`, but `@honeycombio/opentelemetry-web` (`1.5.1`) still pins `sdk-trace-base`/`sdk-trace-web ~2.9.0` on `api 1.9.x`. Mixing both lines would break peer ranges and duplicate the SDK. This is enforced by the `!@opentelemetry/*` exclusion on both `list-outdated-deps` and `update-outdated-deps:update-version` in the root `package.json`.
+  **Lift the hold only once `@honeycombio/opentelemetry-web` ships a release built on OpenTelemetry 3.x.** It is a breaking change (major for `@workleap/honeycomb` and `@workleap/telemetry`). Checklist:
+  1. Remove `!@opentelemetry/*` from both scripts and bump `@honeycombio/opentelemetry-web` plus every `@opentelemetry/*` package together.
+  2. Raise the `@opentelemetry/api` peer range in `packages/honeycomb/package.json` and `packages/telemetry/package.json` to `^1.10.0` (match the new SDK's peer).
+  3. `@opentelemetry/sdk-trace-web` and `sdk-trace-base` are deprecated — this repo already imports from `@opentelemetry/sdk-trace` instead. Do not re-add them. `@opentelemetry/sdk-trace@3` no longer exports `WebTracerProvider` (use `TracerProvider`, already done in the tests) nor `PropagateTraceHeaderCorsUrls` (kept as a local type in `packages/honeycomb/src/js/honeycombTypes.ts` — leave it there).
+  4. `sdk-trace@3` ships `.mjs`/`.cjs` from `dist/` with renamed option types (e.g. `TracerProviderOptions`); re-check the `SpanProcessor`/`ReadableSpan`/`SpanExporter` imports in `packages/honeycomb/src/js/*` against its changelog.
+  5. Once nothing in `pnpm-lock.yaml` resolves `@opentelemetry/sdk-trace-web` or `sdk-trace-base` any more, delete this bullet and the pointer in `.github/prompts/update-dependencies.md`.
 - `list-outdated-deps` carries the same `!typescript` filter, so TypeScript no longer appears in the report either — matching `wl-logging` and `wl-web-configs`. Re-check [#220](https://github.com/workleap/wl-telemetry/issues/220) as `typescript-eslint` gains TS 7 support; lifting the hold means removing `!typescript` from both scripts.
 
 ## pnpm 12 release-age gate
