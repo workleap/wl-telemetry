@@ -1,5 +1,17 @@
 # @workleap/honeycomb
 
+## 8.2.0
+
+### Minor Changes
+
+- [#243](https://github.com/workleap/wl-telemetry/pull/243) [`48818ad`](https://github.com/workleap/wl-telemetry/commit/48818ad89999ad2a9aae75f9516da04a3341c4a2) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Replaced the deprecated `@opentelemetry/sdk-trace-web` dependency with `@opentelemetry/sdk-trace`. The `PropagateTraceHeaderCorsUrls` type of the `apiServiceUrls` option is now exported by `@workleap/honeycomb`.
+
+### Patch Changes
+
+- [#243](https://github.com/workleap/wl-telemetry/pull/243) [`48818ad`](https://github.com/workleap/wl-telemetry/commit/48818ad89999ad2a9aae75f9516da04a3341c4a2) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Updated dependencies to their latest versions.
+- Updated dependencies [[`48818ad`](https://github.com/workleap/wl-telemetry/commit/48818ad89999ad2a9aae75f9516da04a3341c4a2)]:
+  - @workleap-telemetry/core@2.0.6
+
 ## 8.1.1
 
 ### Patch Changes
