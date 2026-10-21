@@ -1,5 +1,5 @@
 import { ExportResultCode, type ExportResult } from "@opentelemetry/core";
-import { InMemorySpanExporter, type ReadableSpan, SimpleSpanProcessor, WebTracerProvider } from "@opentelemetry/sdk-trace-web";
+import { InMemorySpanExporter, type ReadableSpan, SimpleSpanProcessor, TracerProvider } from "@opentelemetry/sdk-trace";
 import { afterEach, describe, test, vi } from "vitest";
 import {
     appendTracesPath,
@@ -11,8 +11,8 @@ import {
 function createSpans(count = 1, attributes: Record<string, string> = {}) {
     const memoryExporter = new InMemorySpanExporter();
 
-    const provider = new WebTracerProvider({
-        spanProcessors: [new SimpleSpanProcessor(memoryExporter)]
+    const provider = new TracerProvider({
+        spanProcessors: [new SimpleSpanProcessor({ exporter: memoryExporter })]
     });
 
     const tracer = provider.getTracer("test");

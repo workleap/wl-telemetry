@@ -1,5 +1,5 @@
 import type { Instrumentation, InstrumentationConfig } from "@opentelemetry/instrumentation";
-import { InMemorySpanExporter, type SpanProcessor } from "@opentelemetry/sdk-trace-web";
+import { InMemorySpanExporter, type SpanProcessor } from "@opentelemetry/sdk-trace";
 import { test } from "vitest";
 import { FetchRequestPipeline } from "../../src/js/FetchRequestPipeline.ts";
 import { GlobalAttributeSpanProcessor } from "../../src/js/GlobalAttributeSpanProcessor.ts";

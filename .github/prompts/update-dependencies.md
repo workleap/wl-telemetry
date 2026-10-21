@@ -8,6 +8,7 @@ You are an automated agent responsible for updating the dependencies of this mon
 - You MUST execute every validation step (2a, 2b, 2c, 2d) in order. Do NOT skip any step.
 - Do NOT create new source files as part of a dependency update. Only modify existing files when migrating to a newer API.
 - Do NOT read `AGENTS.md` or `agent-docs/`.
+- Do NOT bump `@opentelemetry/*` packages to OpenTelemetry JS 3.x / `0.300.x` (or `@opentelemetry/api` to `1.10.x`). They are excluded from `update-outdated-deps` until `@honeycombio/opentelemetry-web` supports them; the full lift checklist is under "Known pins" in `.claude/skills/update-dependencies/SKILL.md`.
 - **Avoid rabbit holes**: If you spend more than 3 attempts or 10 tool calls investigating a single issue without progress, stop. Revert the problematic package to its previous version, open an issue, and move on.
 
 ---

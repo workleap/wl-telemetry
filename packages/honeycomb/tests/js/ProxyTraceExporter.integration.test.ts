@@ -1,5 +1,5 @@
 import { ExportResultCode, type ExportResult } from "@opentelemetry/core";
-import { InMemorySpanExporter, type ReadableSpan, SimpleSpanProcessor, WebTracerProvider } from "@opentelemetry/sdk-trace-web";
+import { InMemorySpanExporter, type ReadableSpan, SimpleSpanProcessor, TracerProvider } from "@opentelemetry/sdk-trace";
 import { createServer, type IncomingMessage, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
 import { afterAll, afterEach, beforeAll, beforeEach, test } from "vitest";
@@ -102,8 +102,8 @@ afterEach(() => {
 function createSpans() {
     const memoryExporter = new InMemorySpanExporter();
 
-    const provider = new WebTracerProvider({
-        spanProcessors: [new SimpleSpanProcessor(memoryExporter)]
+    const provider = new TracerProvider({
+        spanProcessors: [new SimpleSpanProcessor({ exporter: memoryExporter })]
     });
 
     provider.getTracer("integration").startSpan("integration-span").end();

@@ -1,5 +1,5 @@
 import type { Attributes, AttributeValue, Span } from "@opentelemetry/api";
-import type { SpanProcessor } from "@opentelemetry/sdk-trace-web";
+import type { SpanProcessor } from "@opentelemetry/sdk-trace";
 
 export class GlobalAttributeSpanProcessor implements SpanProcessor {
     // This member is protected so it can be accessed when this class is extended.
