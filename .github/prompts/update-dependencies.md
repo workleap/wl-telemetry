@@ -145,7 +145,7 @@ Updated dependencies to their latest versions.
 
 ### 4b: Commit and create pull request
 
-Close any existing open dependency-update PRs before creating a new one:
+Close any existing open dependency-update PRs before creating a new one — skip this when Step 1 produced no dependency changes (skills-only or failed update), since an open dependency PR still holds updates this run doesn't:
 
 ```bash
 gh pr list --search "chore: update dependencies" --state open --json number --jq '.[].number' | xargs -I{} gh pr close {} --comment "Superseded by a newer dependency update run."
