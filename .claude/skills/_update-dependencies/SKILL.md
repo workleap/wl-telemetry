@@ -33,7 +33,7 @@ Then check the git tree (`git status --short`) and warn if there are unrelated p
 pnpm list-outdated-deps
 ```
 
-Report the outdated packages and any peer-version mismatches before changing anything.
+Report the outdated packages and any peer-version mismatches before changing anything. `pnpm outdated` exits with code 1 whenever it finds outdated packages — that's the expected result here, not a failure; continue to step 3.
 
 ## 3. Update the dependencies
 
