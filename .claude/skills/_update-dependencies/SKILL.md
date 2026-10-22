@@ -1,36 +1,48 @@
 ---
 name: update-dependencies
 description: |
-  Update this monorepo's npm dependencies to their latest versions and validate the update locally before it goes to a PR.
+  Update this monorepo's outdated npm dependencies to their latest versions, peer ranges fixed, tree left dirty for review. Can reset + reinstall and validate the update (build, lint, test, all three sample apps in a real browser) afterward, opt-in up front.
 
   Use when the user asks to:
   (1) "update the dependencies", "bump deps", "update outdated deps", or run `update-outdated-deps`
   (2) validate a dependency update locally (build, lint, run the sample apps in a browser)
   (3) reproduce/debug the weekly "Update dependencies" workflow on their machine
 
-  This is the LOCAL, interactive counterpart to the CI automation in `.github/prompts/update-dependencies.md`. It does NOT open a PR — it updates, rebuilds from a clean slate, lints, and verifies all three sample apps in a real browser using the developer's `.env.local` credentials.
-metadata:
-  version: "1.0"
+  Scoped to npm packages only — agent skills are refreshed by `_update-skills` (or both together via `/_update-third-parties`). This is the LOCAL counterpart to the CI automation in `.github/prompts/update-dependencies.md`. It does NOT open a PR.
 ---
 
-# Update dependencies (local validation)
+# Update dependencies
 
-Run the full dependency-update workflow on the developer's machine and prove that the packages and all three sample apps still work. Stop and report; do not create a changeset or PR unless explicitly asked.
+Bring the repo's npm dependencies up to date and, when asked, prove that the packages and all three sample apps still work. Do the steps in order; stop and surface any failure. Do not create a changeset or PR unless explicitly asked.
 
-## Prerequisites (verify, don't assume)
+## 1. Ask what to run afterward
 
-- Clean-ish git tree (`git status --short`). Warn if there are unrelated pending changes.
-- `.env.local` exists at the repo root with `LOGROCKET_APP_ID`, `HONEYCOMB_API_KEY`, `MIXPANEL_PROJECT_TOKEN` set. `COMMON_ROOM_SITE_ID` is normally **empty** (no sandbox) — that is expected.
-- Node `>=24`, pnpm `12.x`.
-- For the `all-platforms` sample only: `127.0.0.1 local.workleap.com` in the hosts file, a trusted mkcert CA, and `samples/all-platforms/local.workleap.com*.pem`. If missing, skip all-platforms browser validation and say so (build still validates it).
+Ask this **first**, before touching anything, so the rest of the run is unattended — the user answers, then walks away. Present both follow-ups in a **single multi-select prompt**; both checkable, neither pre-selected:
 
-## Step 1 — Update dependencies
+| Action          | Runs                                       | Purpose                                                                 |
+| --------------- | ------------------------------------------ | ----------------------------------------------------------------------- |
+| Reset + install | step 4: `pnpm reset` then `pnpm install`   | Wipes `dist`, caches, `node_modules` + `pnpm-lock.yaml`, rebuilds from `package.json` |
+| Validate        | step 5: build, lint, test, browser checks  | Proves the packages and all three sample apps still work               |
+
+Remember the selection; it runs after the update, not now. Neither checked -> nothing runs after the update.
+
+Then check the git tree (`git status --short`) and warn if there are unrelated pending changes.
+
+## 2. List what's outdated
+
+```bash
+pnpm list-outdated-deps
+```
+
+Report the outdated packages and any peer-version mismatches before changing anything.
+
+## 3. Update the dependencies
 
 ```bash
 pnpm update-outdated-deps
 ```
 
-This runs three sub-steps in order: `pnpm update -r --latest` (respecting the `!eslint !@eslint/js !logrocket-fuzzy-search-sanitizer !typescript` exclusions), `syncpack fix`, then `eslint --fix` on the `package.json` files.
+This runs three sub-steps in order: `pnpm update -r --latest` (respecting the `!eslint !@eslint/js !logrocket-fuzzy-search-sanitizer !typescript !@opentelemetry/*` exclusions), `syncpack fix`, then `eslint --fix` on the `package.json` files.
 
 > **Why `typescript` is excluded.** `--latest` used to bump it from `6.x` to `7.x` (the native/Go compiler) every run. `typescript-eslint` does not support the TS 7 API, so ESLint config loading crashed with `TypeError: Cannot read properties of undefined (reading 'Cjs')`, taking out the `eslint --fix` sub-step and `pnpm lint` with it, and the bump had to be reverted by hand each time. The exclusion in the root `package.json` prevents the bump, so that crash no longer occurs through this script. See "Known pins" below.
 
@@ -40,9 +52,15 @@ Check whether anything actually changed:
 git diff --name-only -- '**/package.json' package.json
 ```
 
-If empty, there are no updates — STOP and report "already up to date".
+If the `eslint --fix` sub-step (`update-outdated-deps:fix-pkg-json`) crashed for any reason, complete it now — this formats the `package.json` files that the crash skipped, so `pnpm lint` won't fail on formatting:
 
-## Step 2 — Clean reinstall
+```bash
+pnpm run update-outdated-deps:fix-pkg-json
+```
+
+Nothing changed, or the `update-version` sub-step itself failed -> skip the follow-ups, STOP and report ("already up to date" or the failure).
+
+## 4. Reset + install (if selected)
 
 The developer's flow is a **full reset**, not an in-place install, so the lockfile is regenerated from scratch:
 
@@ -51,13 +69,19 @@ pnpm reset      # deletes dist, caches, node_modules, and pnpm-lock.yaml
 pnpm install
 ```
 
-If the `eslint --fix` sub-step crashed in Step 1 for any reason, complete it now — this formats the `package.json` files that the crash skipped, so `pnpm lint` won't fail on formatting:
+Not selected -> skip; `pnpm update` already installed in place.
 
-```bash
-pnpm run update-outdated-deps:fix-pkg-json
-```
+## 5. Validate (if selected)
 
-## Step 3 — Build
+Run 5a through 5d in order. Not selected -> skip to the report.
+
+### Prerequisites (verify, don't assume)
+
+- `.env.local` exists at the repo root with `LOGROCKET_APP_ID`, `HONEYCOMB_API_KEY`, `MIXPANEL_PROJECT_TOKEN` set. `COMMON_ROOM_SITE_ID` is normally **empty** (no sandbox) — that is expected.
+- Node `>=24`, pnpm `12.x`.
+- For the `all-platforms` sample only: `127.0.0.1 local.workleap.com` in the hosts file, a trusted mkcert CA, and `samples/all-platforms/local.workleap.com*.pem`. If missing, skip all-platforms browser validation and say so (build still validates it).
+
+### 5a. Build
 
 There is **no root `build` script** — `pnpm build` fails. Use:
 
@@ -67,7 +91,7 @@ pnpm build-pkg   # turbo run build — builds every package AND every sample app
 
 All tasks must succeed.
 
-## Step 4 — Lint
+### 5b. Lint
 
 ```bash
 pnpm lint        # turbo: eslint + typecheck (tsgo) + syncpack across the monorepo
@@ -75,7 +99,7 @@ pnpm lint        # turbo: eslint + typecheck (tsgo) + syncpack across the monore
 
 Must be green. Ignore the benign `React version was set to "detect" ... "react" package is not installed` warnings from the Express/proxy backend packages.
 
-## Step 5 — Test
+### 5c. Test
 
 ```bash
 pnpm test        # turbo run test --continue
@@ -83,7 +107,7 @@ pnpm test        # turbo run test --continue
 
 All tests must pass. This is a CI gate — skipping it lets a local run go green and then fail CI. If a package fails, run it directly for clearer output: `pnpm --filter <package> test`.
 
-## Step 6 — Validate the sample apps in a browser
+### 5d. Validate the sample apps in a browser
 
 Use `agent-browser` (installed as a workspace devDependency). Add `node_modules/.bin` to PATH so `agent-browser` is a bare command, or prefix with `pnpm exec`. Learn commands from its own skill: `agent-browser skills get core --full`. Use `snapshot` (DOM) + `console`; do **not** rely on screenshots.
 
@@ -121,7 +145,7 @@ Confirm each page renders its heading and content (movies list, subscription det
 <!-- Keep the ports/routes table and the ignorable-message list below in sync with
      `.github/prompts/update-dependencies.md` (the CI counterpart) if either changes. -->
 
-### Expected / ignorable console messages (NOT failures)
+#### Expected / ignorable console messages (NOT failures)
 
 - `[common-room] Failed to load Common Room script at ".../v1/site//signals.js"` — `COMMON_ROOM_SITE_ID` is empty by design; the empty site id yields a bad URL. Pre-existing, not a regression.
 - Network/export errors to `api.honeycomb.io` and OpenTelemetry "dropped span"/"failed export" warnings.
@@ -129,7 +153,7 @@ Confirm each page renders its heading and content (movies list, subscription det
 
 Treat **any other** `[error]`/uncaught exception as a real failure to diagnose.
 
-### Stop the dev server (Windows)
+#### Stop the dev server (Windows)
 
 `lsof`/`fuser` are not available; kill by port with PowerShell:
 
@@ -142,7 +166,7 @@ foreach ($port in 8080,1234,5678,443) {
 
 Then `agent-browser close --all`.
 
-## Handling breaking changes
+### Handling breaking changes
 
 If build/lint/test/browser validation fails after the update:
 
@@ -165,10 +189,10 @@ If build/lint/test/browser validation fails after the update:
 
 ## pnpm 12 release-age gate
 
-`pnpm-workspace.yaml` sets no `minimumReleaseAge`, so pnpm 12's 24h default applies (pnpm 11 had no such gate). It verifies the **whole** lockfile and runs before every `pnpm run`, so `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` stops Steps 3–5 from starting rather than failing them.
+`pnpm-workspace.yaml` sets no `minimumReleaseAge`, so pnpm 12's 24h default applies (pnpm 11 had no such gate). It verifies the **whole** lockfile and runs before every `pnpm run`, so `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` stops the validation steps from starting rather than failing them.
 
 If an update pulls in a package published less than 24h ago, the run cannot proceed. There is no CLI flag — the setting only reads from `pnpm-workspace.yaml`. Either wait for the entries to age out (the error prints each publish timestamp) or revert those specific packages to their previous versions and let the next run pick them up. Do **not** commit a lower `minimumReleaseAge`: the sibling repos run the default and this one matches them.
 
 ## Report
 
-Summarize: the deduped list of `name: old → new` version changes (`git diff -- '**/package.json'`), any reverts/pins applied, build/lint (and test) results, and the browser validation outcome per sample (routes checked + console clean aside from the expected messages).
+Summarize: the deduped list of `name: old → new` version changes (`git diff -- '**/package.json'`), peer fixes applied, any reverts/pins applied, and which follow-ups ran (reset + install, validate, or none) with their result — build/lint/test results and the browser validation outcome per sample (routes checked + console clean aside from the expected messages). Flag any major-version jumps — those are the likely breakage points; when validation didn't run, recommend `pnpm build-pkg` + `pnpm lint` + `pnpm test` before committing.
