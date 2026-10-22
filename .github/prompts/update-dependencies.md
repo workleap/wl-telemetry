@@ -25,9 +25,7 @@ git diff --name-only -- '**/package.json' ':!node_modules'
 
 If the output is empty, there are no dependency updates. Skip Step 2 and go to Step 3.
 
-If the skill reported a failure but `package.json` files did change (a partial update, or a pnpm release-age violation), continue to Step 2 anyway: the validation loop decides what to fix or revert.
-
-Otherwise, install the updated dependencies:
+Otherwise — including when the skill reported a failure but `package.json` files did change (a partial update, or a pnpm release-age violation) — install the updated dependencies, then continue to Step 2; the validation loop decides what to fix or revert:
 
 ```bash
 pnpm install --no-frozen-lockfile
