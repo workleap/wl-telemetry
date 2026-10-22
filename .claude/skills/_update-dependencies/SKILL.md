@@ -1,5 +1,4 @@
 ---
-name: update-dependencies
 description: |
   Update this monorepo's outdated npm dependencies to their latest versions, peer ranges fixed, tree left dirty for review. Can reset + reinstall and validate the update (build, lint, test, all three sample apps in a real browser) afterward, opt-in up front.
 
