@@ -23,7 +23,7 @@ Then, check if any `package.json` files were modified:
 git diff --name-only -- '**/package.json' ':!node_modules'
 ```
 
-If the output is empty, there are no dependency updates. Skip Step 2 and go to Step 3.
+If the output is empty, there are no dependency updates. Discard any lockfile re-resolution the update made (`git checkout -- pnpm-lock.yaml`) — it would otherwise reach the PR without being validated. Skip Step 2 and go to Step 3.
 
 Otherwise — including when the skill reported a failure but `package.json` files did change (a partial update, or a pnpm release-age violation) — install the updated dependencies, then continue to Step 2; the validation loop decides what to fix or revert:
 
