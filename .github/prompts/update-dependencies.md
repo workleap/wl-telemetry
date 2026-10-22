@@ -145,11 +145,20 @@ Updated dependencies to their latest versions.
 
 ### 4b: Commit and create pull request
 
-Close any existing open dependency-update PRs before creating a new one — skip this when Step 1 produced no dependency changes (skills-only or failed update), since an open dependency PR still holds updates this run doesn't:
+When Step 1 produced dependency changes, close every existing open dependency-update PR before creating a new one:
 
 ```bash
 gh pr list --search "chore: update dependencies" --state open --json number --jq '.[].number' | xargs -I{} gh pr close {} --comment "Superseded by a newer dependency update run."
 ```
+
+When Step 1 produced no dependency changes (skills-only or failed update), an open PR that carries dependency updates must survive. List the open PRs and tell them apart by their Summary section:
+
+```bash
+gh pr list --search "chore: update dependencies" --state open --json number,body
+```
+
+- An open PR whose body contains neither "No dependency updates." nor "Dependency update failed:" holds dependency updates → do NOT open a new PR. Skills will be refreshed by that PR's successor. STOP (open the Step 3 issue first if Step 1's update failed).
+- Otherwise, close the previous skills-only PRs with the same `gh pr close` comment, then create the new PR.
 
 Then create the new PR with the body described below.
 
