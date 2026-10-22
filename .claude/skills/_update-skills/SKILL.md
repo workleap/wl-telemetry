@@ -68,9 +68,9 @@ accessibility                  | UPDATE  | no package gate
 
 Run the matching command from the table for each `UPDATE` row, sequentially — the skill installer mutates `skills-lock.json` and a shared store. The CLI rewrites `skills-lock.json` (2-space indent, adds `skillPath`); that's expected — the file is ESLint-ignored.
 
-After each pull:
+Before each pull, capture `git status --porcelain` as a baseline — the tree may already hold dependency edits or earlier skill pulls. After each pull:
 
-- Check `git status --short` for paths outside the skill's folders and `skills-lock.json` (e.g. a new `.claude/skills/<name>` symlink) — flag them in the report; never delete them yourself.
+- Diff `git status --porcelain` against that baseline; any path the pull introduced outside the skill's folders and `skills-lock.json` (e.g. a new `.claude/skills/<name>` symlink) is unexpected — flag it in the report; never delete it yourself. Paths already in the baseline are never unexpected.
 - Grep the skill's new `SKILL.md` frontmatter for `model:`. An upstream-added override switches the conversation model mid-turn for whatever invokes the skill — flag it in the report; never strip it yourself.
 
 ### 6. Report

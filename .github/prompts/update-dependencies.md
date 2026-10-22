@@ -112,7 +112,7 @@ Use the `Agent` tool to dispatch a subagent with this brief:
 
 Keep the skill's report for the PR body. A stop or a failed skill pull does NOT block the dependency PR — report it there instead. Skill files are documentation for agents and need no validation.
 
-If the report lists unexpected paths touched by the installer, discard them (`git checkout -- <path>` for tracked files, `git clean -fd -- <path>` for untracked ones) so they don't land in the PR; mention them in the PR body.
+If the report lists unexpected paths touched by the installer, discard them (`git checkout -- <path>` for tracked files, `git clean -fd -- <path>` for untracked ones) so they don't land in the PR; mention them in the PR body. Only discard paths under `.agents/` or `.claude/` — never a `package.json`, `pnpm-lock.yaml`, or source file changed in Steps 1–2.
 
 Then check whether anything changed at all:
 
