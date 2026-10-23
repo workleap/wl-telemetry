@@ -1,0 +1,25 @@
+{
+    "name": "wl-telemetry",
+    "owner": {
+        "name": "Workleap"
+    },
+    "metadata": {
+        "description": "Agent skills for Workleap's telemetry libraries."
+    },
+    "plugins": [
+        {
+            "name": "workleap-telemetry",
+            "description": "Agent skill for @workleap/telemetry, matching the latest version of the library.",
+            "source": "./",
+            "strict": false,
+            "skills": ["./agent-skills/workleap-telemetry"]
+        },
+        {
+            "name": "workleap-telemetry-v2",
+            "description": "Agent skill for @workleap/telemetry, matching the latest 2.* version of the library.",
+            "source": "./",
+            "strict": false,
+            "skills": ["./agent-skills/workleap-telemetry-v2"]
+        }
+    ]
+}
