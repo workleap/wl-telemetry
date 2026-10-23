@@ -1,5 +1,11 @@
 # @workleap/telemetry
 
+## 4.1.0
+
+### Minor Changes
+
+- [#246](https://github.com/workleap/wl-telemetry/pull/246) [`778b432`](https://github.com/workleap/wl-telemetry/commit/778b432f1a2b9f7f7569a9ce8617912601258d1e) Thanks [@patricklafrance](https://github.com/patricklafrance)! - The `workleap-telemetry` agent skill is now shipped with the package. Starting with pnpm `12.11`, approve it with `pnpm approve` to link it into your project agent skill directories.
+
 ## 4.0.5
 
 ### Patch Changes
