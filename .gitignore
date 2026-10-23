@@ -8,6 +8,7 @@ storybook-static
 .retype
 .claude/settings.local.json
 *.env.local
+packages/telemetry/skills
 
 # Mac
 .DS_Store
