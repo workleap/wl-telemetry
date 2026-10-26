@@ -1,13 +1,10 @@
 ---
-description: |
-  Update this monorepo's outdated npm dependencies to their latest versions, peer ranges fixed, tree left dirty for review. Can reset + reinstall and validate the update (build, lint, test, all three sample apps in a real browser) afterward, opt-in up front.
-
-  Use when the user asks to:
-  (1) "update the dependencies", "bump deps", "update outdated deps", or run `update-outdated-deps`
-  (2) validate a dependency update locally (build, lint, run the sample apps in a browser)
-  (3) reproduce/debug the weekly "Update dependencies" workflow on their machine
-
-  Scoped to npm packages only — agent skills are refreshed by `_update-skills` (or both together via `/_update-third-parties`). This is the LOCAL counterpart to the CI automation in `.github/prompts/update-dependencies.md`. It does NOT open a PR.
+name: update-dependencies
+description: Update the repo's outdated npm dependencies — every workspace package to latest, peer ranges fixed, tree left dirty for review. Can reset + reinstall and run lint + tests afterward, opt-in up front. Scoped to npm packages only — agent skills are updated by `_update-skills` (or both together via `_update-third-parties`). Use as "/update-dependencies" or when asked to update, bump, or refresh the project's npm dependencies.
+model: sonnet
+effort: medium
+metadata:
+  internal: true
 ---
 
 # Update dependencies
@@ -77,7 +74,7 @@ Run 5a through 5d in order. Not selected -> skip to the report.
 ### Prerequisites (verify, don't assume)
 
 - `.env.local` exists at the repo root with `LOGROCKET_APP_ID`, `HONEYCOMB_API_KEY`, `MIXPANEL_PROJECT_TOKEN` set. `COMMON_ROOM_SITE_ID` is normally **empty** (no sandbox) — that is expected.
-- Node `>=24`, pnpm `12.x`.
+- Node `>=26`, pnpm `12.x`.
 - For the `all-platforms` sample only: `127.0.0.1 local.workleap.com` in the hosts file, a trusted mkcert CA, and `samples/all-platforms/local.workleap.com*.pem`. If missing, skip all-platforms browser validation and say so (build still validates it).
 
 ### 5a. Build
