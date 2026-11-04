@@ -2,7 +2,7 @@ packages:
   - packages/*
   - samples/**
 
-minimumReleaseAge: 0
+minimumReleaseAge: 10080 # 7 days, in minutes
 
 minimumReleaseAgeExclude:
   - '@workleap/*'
