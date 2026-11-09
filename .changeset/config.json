@@ -1,10 +1,8 @@
 {
     "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
-    "changelog": [
-        "@changesets/changelog-github",
-        { "repo": "workleap/wl-telemetry" }
-    ],
+    "changelog": ["@changesets/changelog-github", { "repo": "workleap/wl-telemetry" }],
     "commit": false,
+    "format": false,
     "fixed": [],
     "linked": [],
     "access": "restricted",

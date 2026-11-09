@@ -161,39 +161,11 @@ export class LogRocketInstrumentationClientImpl implements LogRocketInstrumentat
     }
 
     createWorkleapPlatformDefaultUserTraits(identification: LogRocketWorkleapPlatformIdentification) {
-        const {
-            userId,
-            organizationId,
-            organizationName,
-            isMigratedToWorkleap,
-            isOrganizationCreator,
-            isAdmin,
-            isExecutive,
-            isCollaborator,
-            isReportingManager,
-            isTeamManager,
-            planCode
-        } = identification;
+        const { userId, organizationId, organizationName, isMigratedToWorkleap, isOrganizationCreator, isAdmin, isExecutive, isCollaborator, isReportingManager, isTeamManager, planCode } = identification;
 
-        const isExecutiveInAnyProduct = Boolean(
-            isExecutive?.wov ||
-            isExecutive?.lms ||
-            isExecutive?.onb ||
-            isExecutive?.sks ||
-            isExecutive?.wpm ||
-            isExecutive?.pbd ||
-            isExecutive?.cmp
-        );
+        const isExecutiveInAnyProduct = Boolean(isExecutive?.wov || isExecutive?.lms || isExecutive?.onb || isExecutive?.sks || isExecutive?.wpm || isExecutive?.pbd || isExecutive?.cmp);
 
-        const isCollaboratorInAnyProduct = Boolean(
-            isCollaborator?.wov ||
-            isCollaborator?.lms ||
-            isCollaborator?.onb ||
-            isCollaborator?.sks ||
-            isCollaborator?.wpm ||
-            isCollaborator?.pbd ||
-            isCollaborator?.cmp
-        );
+        const isCollaboratorInAnyProduct = Boolean(isCollaborator?.wov || isCollaborator?.lms || isCollaborator?.onb || isCollaborator?.sks || isCollaborator?.wpm || isCollaborator?.pbd || isCollaborator?.cmp);
 
         return {
             "User Id": userId,

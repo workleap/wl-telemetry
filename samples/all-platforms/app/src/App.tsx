@@ -49,15 +49,11 @@ export function App() {
                                 },
                                 {
                                     path: "identify",
-                                    element: (
-                                        <IdentifyPage />
-                                    )
+                                    element: <IdentifyPage />
                                 },
                                 {
                                     path: "mixpanel",
-                                    element: (
-                                        <MixpanelPage />
-                                    )
+                                    element: <MixpanelPage />
                                 },
                                 {
                                     path: "failing",
@@ -69,15 +65,12 @@ export function App() {
                                 },
                                 {
                                     path: "throwing",
-                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                     // @ts-ignore
                                     element: <ThrowingPage />
                                 },
                                 {
                                     path: "logrocket-logger",
-                                    element: (
-                                        <LogRocketLoggerPage />
-                                    )
+                                    element: <LogRocketLoggerPage />
                                 }
                             ]
                         }

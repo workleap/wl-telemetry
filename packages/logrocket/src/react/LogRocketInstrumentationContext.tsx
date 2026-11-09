@@ -14,16 +14,9 @@ export interface LogRocketInstrumentationProviderProps extends PropsWithChildren
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function LogRocketInstrumentationProvider(props: LogRocketInstrumentationProviderProps) {
-    const {
-        client,
-        children
-    } = props;
+    const { client, children } = props;
 
-    return (
-        <LogRocketInstrumentationContext.Provider value={client}>
-            {children}
-        </LogRocketInstrumentationContext.Provider>
-    );
+    return <LogRocketInstrumentationContext.Provider value={client}>{children}</LogRocketInstrumentationContext.Provider>;
 }
 
 export interface UseLogRocketInstrumentationClientOptions {
@@ -41,9 +34,7 @@ export function useLogRocketInstrumentationClient(options: { throwOnUndefined: f
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function useLogRocketInstrumentationClient(options: UseLogRocketInstrumentationClientOptions = {}) {
-    const {
-        throwOnUndefined = true
-    } = options;
+    const { throwOnUndefined = true } = options;
 
     const client = useContext(LogRocketInstrumentationContext);
 

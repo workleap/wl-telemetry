@@ -19,11 +19,7 @@ export default defineConfig({
                 // Dependencies loaded by Node instead of Vite ignore the "browser" condition above. The Honeycomb Web SDK
                 // and the OTLP exporters it depends on are inlined so their browser builds are used. Otherwise, the SDK
                 // uses the Node exporters, which cannot be stubbed with the Fetch API and send real requests.
-                inline: [
-                    "@honeycombio/opentelemetry-web",
-                    /@opentelemetry\/exporter-(logs|metrics|trace)-otlp-http/,
-                    /@opentelemetry\/otlp-exporter-base/
-                ]
+                inline: ["@honeycombio/opentelemetry-web", /@opentelemetry\/exporter-(logs|metrics|trace)-otlp-http/, /@opentelemetry\/otlp-exporter-base/]
             }
         }
     },

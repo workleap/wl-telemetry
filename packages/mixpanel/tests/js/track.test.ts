@@ -6,10 +6,8 @@ import { MixpanelInitializer } from "../../src/js/initializeMixpanel.ts";
 import { BaseProperties, OtherProperties, TelemetryProperties } from "../../src/js/properties.ts";
 
 class DummyLogRocketInstrumentationClient implements LogRocketInstrumentationPartialClient {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     readonly #listeners: any[] = [];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     registerGetSessionUrlListener(listener: any) {
         this.#listeners.push(listener);
     }
@@ -43,9 +41,7 @@ afterEach(() => {
 });
 
 test("the custom properties are sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation");
@@ -64,9 +60,7 @@ test("the custom properties are sent", async ({ expect }) => {
 });
 
 test("when a telemetry context is provided at initialization, the telemetry context values are sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const telemetryContext = new TelemetryContext("123", "456");
     const initializer = new MixpanelInitializer();
@@ -87,9 +81,7 @@ test("when a telemetry context is provided at initialization, the telemetry cont
 });
 
 test("when a product id is provided at initialization, the product id is sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
 
@@ -107,9 +99,7 @@ test("when a product id is provided at initialization, the product id is sent", 
 });
 
 test("when a logrocket instrumentation client is provided, the logrocket session url is sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const logRocketInstrumentationClient = new DummyLogRocketInstrumentationClient();
     const initializer = new MixpanelInitializer();
@@ -133,9 +123,7 @@ test("when a logrocket instrumentation client is provided, the logrocket session
 });
 
 test("the request body include the event name", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation");
@@ -149,10 +137,8 @@ test("the request body include the event name", async ({ expect }) => {
     expect(request.body.eventName).toBe("customEvent");
 });
 
-test("when the keep alive option is provided, the fetch options include the \"keepAlive\" option", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+test('when the keep alive option is provided, the fetch options include the "keepAlive" option', async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation");
@@ -167,9 +153,7 @@ test("when the keep alive option is provided, the fetch options include the \"ke
 });
 
 test("when a product id is provided at initialization and a scoped product is provided, the scoped product id is sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
 
@@ -189,9 +173,7 @@ test("when a product id is provided at initialization and a scoped product is pr
 });
 
 test("when no product id is provided at initialization and a scoped product is provided, the scoped product id is sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
 
@@ -209,9 +191,7 @@ test("when no product id is provided at initialization and a scoped product is p
 });
 
 test("when a target product id is provided, the provided id is sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation");
@@ -228,9 +208,7 @@ test("when a target product id is provided, the provided id is sent", async ({ e
 });
 
 test("when a target product id is not provided, a null value is sent", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation");
@@ -245,9 +223,7 @@ test("when a target product id is not provided, a null value is sent", async ({ 
 });
 
 test("when a base URL is provided, the endpoint include the provided base URL", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation");
@@ -262,9 +238,7 @@ test("when a base URL is provided, the endpoint include the provided base URL", 
 });
 
 test("when the provided base URL end with a slash is provided, the ending slash is escaped", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation/");
@@ -279,9 +253,7 @@ test("when the provided base URL end with a slash is provided, the ending slash 
 });
 
 test("when an environment is provided, the resolved endpoint URL match the provided environment", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("development");
@@ -296,9 +268,7 @@ test("when an environment is provided, the resolved endpoint URL match the provi
 });
 
 test("when a custom tracking endpoint is provided, use the provided custom endpoint", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
 
@@ -316,9 +286,7 @@ test("when a custom tracking endpoint is provided, use the provided custom endpo
 });
 
 test("when a custom tracking endpoint starts with slash, remove the leading slash from the provided custom tracking endpoint", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
 
@@ -335,10 +303,8 @@ test("when a custom tracking endpoint starts with slash, remove the leading slas
     expect(request.url).toBe("http://api/navigation/custom/endpoint");
 });
 
-test("when no tracking endpoint is provided, use the default \"tracking/track\" endpoint", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+test('when no tracking endpoint is provided, use the default "tracking/track" endpoint', async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
     const client = initializer.initialize("http://api/navigation");
@@ -353,9 +319,7 @@ test("when no tracking endpoint is provided, use the default \"tracking/track\" 
 });
 
 test("when a custom tracking endpoint is provided with an environment, use the provided custom endpoint", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
 
@@ -373,9 +337,7 @@ test("when a custom tracking endpoint is provided with an environment, use the p
 });
 
 test("when a custom tracking endpoint starts with slash and an environment is provided, remove the custom tracking endpoint leading slash", async ({ expect }) => {
-    const fetchMock = vi
-        .spyOn(globalThis, "fetch")
-        .mockResolvedValue(new Response(null, { status: 200 }));
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
 
     const initializer = new MixpanelInitializer();
 
@@ -391,4 +353,3 @@ test("when a custom tracking endpoint starts with slash and an environment is pr
 
     expect(request.url).toBe("https://api.platform.workleap-stg.com/shell/navigation/custom/endpoint");
 });
-

@@ -3,8 +3,8 @@ import { useMixpanelTrackingFunction } from "@workleap/telemetry/react";
 export function HomePage() {
     const track = useMixpanelTrackingFunction();
 
-    track("Page View", {
-        "Page": "Home Page"
+    void track("Page View", {
+        Page: "Home Page"
     });
 
     return (

@@ -1,13 +1,13 @@
 const EnvironmentList = ["development", "staging", "production", "local", "msw"] as const;
 
-export type MixpanelEnvironment = typeof EnvironmentList[number];
+export type MixpanelEnvironment = (typeof EnvironmentList)[number];
 
 const NavigationApiBaseUrl: Record<MixpanelEnvironment, string> = {
-    "production": "https://api.platform.workleap.com/shell/navigation/",
-    "staging": "https://api.platform.workleap-stg.com/shell/navigation/",
-    "development": "https://api.platform.workleap-dev.com/shell/navigation/",
-    "local": "https://api.platform.workleap-dev.com/shell/navigation/",
-    "msw": "/api/shell/navigation/"
+    production: "https://api.platform.workleap.com/shell/navigation/",
+    staging: "https://api.platform.workleap-stg.com/shell/navigation/",
+    development: "https://api.platform.workleap-dev.com/shell/navigation/",
+    local: "https://api.platform.workleap-dev.com/shell/navigation/",
+    msw: "/api/shell/navigation/"
 };
 
 // Cannot use URL() because it doesn't support relative base url: https://github.com/whatwg/url/issues/531.

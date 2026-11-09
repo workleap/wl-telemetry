@@ -37,9 +37,7 @@ export class MixpanelClientImpl implements MixpanelClient {
     readonly #productId?: string;
 
     constructor(endpoint: string, logger: Logger, options: MixpanelClientOptions = {}) {
-        const {
-            productId
-        } = options;
+        const { productId } = options;
 
         this.#endpoint = endpoint;
         this.#logger = logger;
@@ -49,17 +47,11 @@ export class MixpanelClientImpl implements MixpanelClient {
     // IMPORTANT: If you update this method, make sure to update the MixpanelPartialClient
     // interface as well in @workleap-telemetry/core.
     createTrackingFunction(options: CreateMixpanelTrackingFunctionOptions = {}) {
-        const {
-            productId,
-            targetProductId,
-            additionalProperties = {}
-        } = options;
+        const { productId, targetProductId, additionalProperties = {} } = options;
 
         const trackFunction: MixpanelTrackingFunction = async (eventName, properties, _options = {}) => {
             try {
-                const {
-                    keepAlive = false
-                } = _options;
+                const { keepAlive = false } = _options;
 
                 const baseProperties = getBaseProperties();
 

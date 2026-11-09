@@ -16,15 +16,13 @@
             "persistent": true
         },
         "lint": {
-            "dependsOn": ["eslint", "//#eslint", "typecheck", "//#typecheck", "//#syncpack"]
+            "dependsOn": ["//#oxlint", "//#oxfmt:check", "typecheck", "//#typecheck", "//#syncpack"]
         },
-        "//#eslint": {
-            "inputs": ["$TURBO_DEFAULT$", "!packages", "!samples", "!docs", "!README.md", "!CONTRIBUTING.md"],
-            "outputs": ["node_modules/.cache/eslint"]
+        "//#oxlint": {
+            "cache": false
         },
-        "eslint": {
-            "inputs": ["$TURBO_DEFAULT$", "!README.md"],
-            "outputs": ["node_modules/.cache/eslint"]
+        "//#oxfmt:check": {
+            "cache": false
         },
         "//#typecheck": {
             "inputs": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx", "*.ts", "tsconfig.json", "!packages", "!samples", "!docs"],

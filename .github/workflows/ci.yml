@@ -34,10 +34,10 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v7
         with:
-            node-version: ">=26.0.0"
-            check-latest: true
-            cache: pnpm
-            cache-dependency-path: pnpm-lock.yaml
+          node-version: ">=26.0.0"
+          check-latest: true
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -58,56 +58,54 @@ jobs:
       - name: Build packages
         # For a PR, only build the packages that are diverging from the pull request original baseline.
         run: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
-                pnpm turbo run build --filter={./packages/*}...[${{ github.event.pull_request.base.sha }}]
-            else
-                pnpm build-pkg
-            fi
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+              pnpm turbo run build --filter={./packages/*}...[${{ github.event.pull_request.base.sha }}]
+          else
+              pnpm build-pkg
+          fi
 
       - name: Build all platforms sample
         # For a PR, only build the sample if it's diverging from the pull request original baseline.
         run: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
-                pnpm turbo run build --filter={./samples/all-platforms/**}...[${{ github.event.pull_request.base.sha }}]
-            else
-                pnpm build-all-platforms
-            fi
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+              pnpm turbo run build --filter={./samples/all-platforms/**}...[${{ github.event.pull_request.base.sha }}]
+          else
+              pnpm build-all-platforms
+          fi
 
       - name: Build honeycomb api-key sample
         # For a PR, only build the sample if it's diverging from the pull request original baseline.
         run: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
-                pnpm turbo run build --filter={./samples/honeycomb/api-key/**}...[${{ github.event.pull_request.base.sha }}]
-            else
-                pnpm build-honeycomb-api-key
-            fi
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+              pnpm turbo run build --filter={./samples/honeycomb/api-key/**}...[${{ github.event.pull_request.base.sha }}]
+          else
+              pnpm build-honeycomb-api-key
+          fi
 
       - name: Build honeycomb proxy sample
         # For a PR, only build the sample if it's diverging from the pull request original baseline.
         run: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
-                pnpm turbo run build --filter={./samples/honeycomb/proxy/**}...[${{ github.event.pull_request.base.sha }}]
-            else
-                pnpm build-honeycomb-proxy
-            fi
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+              pnpm turbo run build --filter={./samples/honeycomb/proxy/**}...[${{ github.event.pull_request.base.sha }}]
+          else
+              pnpm build-honeycomb-proxy
+          fi
 
-      - name: ESLint
-        # For a PR, only lint the projects that are diverging from the pull request original baseline.
-        run: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
-                pnpm turbo run eslint --filter=...[${{ github.event.pull_request.base.sha }}]
-            else
-                pnpm turbo run eslint
-            fi
+      - name: Oxlint
+        # Lints the whole repository: oxlint is fast enough that filtering on affected projects isn't worth it.
+        run: pnpm oxlint
+
+      - name: Oxfmt
+        run: pnpm oxfmt:check
 
       - name: Typecheck
         # For a PR, only typecheck the projects that are diverging from the pull request original baseline.
         run: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
-                pnpm turbo run typecheck --filter=...[${{ github.event.pull_request.base.sha }}]
-            else
-                pnpm turbo run typecheck
-            fi
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+              pnpm turbo run typecheck --filter=...[${{ github.event.pull_request.base.sha }}]
+          else
+              pnpm turbo run typecheck
+          fi
 
       - name: Syncpack
         run: pnpm turbo run syncpack
@@ -115,11 +113,11 @@ jobs:
       - name: Test packages
         # For a PR, only test the projects that are diverging from the pull request original baseline.
         run: |
-            if [ "${{ github.event_name }}" == "pull_request" ]; then
-                pnpm test --filter=...[${{ github.event.pull_request.base.sha }}]
-            else
-                pnpm test
-            fi
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+              pnpm test --filter=...[${{ github.event.pull_request.base.sha }}]
+          else
+              pnpm test
+          fi
 
       - name: Save Turborepo cache
         id: cache-turborepo-save

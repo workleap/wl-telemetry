@@ -1,18 +1,27 @@
 {
     "name": "@workleap/telemetry",
-    "author": "Workleap",
     "version": "4.1.1",
     "description": "A telemetry library for Workleap's web applications.",
     "license": "Apache-2.0",
+    "author": "Workleap",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/workleap/wl-telemetry.git",
         "directory": "packages/telemetry"
     },
+    "files": [
+        "src",
+        "dist",
+        "skills",
+        "CHANGELOG.md"
+    ],
     "type": "module",
+    "sideEffects": false,
+    "exports": {
+        ".": "./src/js/index.ts",
+        "./react": "./src/react/index.ts"
+    },
     "publishConfig": {
-        "access": "public",
-        "provenance": true,
         "exports": {
             ".": {
                 "types": "./dist/js/index.d.ts",
@@ -24,24 +33,33 @@
                 "import": "./dist/react/index.js",
                 "default": "./dist/react/index.js"
             }
-        }
+        },
+        "access": "public",
+        "provenance": true
     },
-    "exports": {
-        ".": "./src/js/index.ts",
-        "./react": "./src/react/index.ts"
-    },
-    "files": [
-        "src",
-        "dist",
-        "skills",
-        "CHANGELOG.md"
-    ],
     "scripts": {
         "prepack": "node ./scripts/agent-skill.mjs copy",
         "postpack": "node ./scripts/agent-skill.mjs clean",
         "build": "rslib build --config ./rslib.build.ts",
-        "eslint": "eslint . --max-warnings=0 --cache --cache-location node_modules/.cache/eslint",
         "typecheck": "tsgo"
+    },
+    "dependencies": {
+        "@workleap-telemetry/core": "workspace:^",
+        "@workleap/honeycomb": "workspace:^",
+        "@workleap/logging": "^2.0.1",
+        "@workleap/logrocket": "workspace:^",
+        "@workleap/mixpanel": "workspace:^"
+    },
+    "devDependencies": {
+        "@rsbuild/core": "2.2.14",
+        "@rslib/core": "1.0.3",
+        "@types/js-cookie": "3.0.6",
+        "@types/node": "26.6.5",
+        "@types/react": "19.3.0",
+        "@typescript/native-preview": "7.0.0-dev.20260707.2",
+        "@workleap/rslib-configs": "2.0.0",
+        "@workleap/typescript-configs": "5.0.0",
+        "typescript": "6.0.3"
     },
     "peerDependencies": {
         "@opentelemetry/api": "^1.9.1",
@@ -66,29 +84,5 @@
         "react-dom": {
             "optional": true
         }
-    },
-    "dependencies": {
-        "@workleap-telemetry/core": "workspace:^",
-        "@workleap/honeycomb": "workspace:^",
-        "@workleap/logging": "^2.0.1",
-        "@workleap/logrocket": "workspace:^",
-        "@workleap/mixpanel": "workspace:^"
-    },
-    "devDependencies": {
-        "@eslint/js": "9.39.2",
-        "@rsbuild/core": "2.2.14",
-        "@rslib/core": "1.0.3",
-        "@types/js-cookie": "3.0.6",
-        "@types/node": "26.6.5",
-        "@types/react": "19.3.0",
-        "@typescript-eslint/parser": "8.72.0",
-        "@typescript/native-preview": "7.0.0-dev.20260707.2",
-        "@workleap/eslint-configs": "2.0.6",
-        "@workleap/rslib-configs": "2.0.0",
-        "@workleap/typescript-configs": "5.0.0",
-        "eslint": "9.39.2",
-        "typescript": "6.0.3",
-        "typescript-eslint": "8.72.0"
-    },
-    "sideEffects": false
+    }
 }

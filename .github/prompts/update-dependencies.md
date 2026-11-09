@@ -96,9 +96,9 @@ Use `agent-browser` for all browser interactions in this step. It is installed a
 1. Start the dev server in the background using the shell `&` operator (do NOT use `run_in_background: true`): `pnpm dev-honeycomb-api-key > /tmp/honeycomb-dev.log 2>&1 &`
 2. The app listens on port **8080** and the Express server on port **1234**. Wait for both to be ready — do NOT use `sleep`, do NOT write polling loops, do NOT parse the log file for a URL. Instead, immediately run: `curl --retry 30 --retry-delay 5 --retry-connrefused --silent --output /dev/null http://localhost:8080 && curl --retry 30 --retry-delay 5 --retry-connrefused --silent --output /dev/null http://localhost:1234/api/subscription`
 3. Navigate to the following pages and check that each renders without errors:
-   - `/` (Home page)
-   - `/movies`
-   - `/subscription`
+    - `/` (Home page)
+    - `/movies`
+    - `/subscription`
 4. For each page, use `agent-browser snapshot` to verify the page rendered content, and use `agent-browser console` to check for console errors. Ignore these specific console messages — they are expected in CI: (1) network errors to `api.honeycomb.io` (trace export failures with the CI dummy API key), (2) OpenTelemetry SDK warnings about dropped spans or failed exports, (3) `[honeycomb]` or `[telemetry]` verbose debug messages. Treat any OTHER console errors as real failures. Do NOT inspect the dev server log file (`/tmp/honeycomb-dev.log`) — only check the browser console.
 5. Stop the dev server processes when done: `kill $(lsof -t -i:8080) 2>/dev/null || true; kill $(lsof -t -i:1234) 2>/dev/null || true; fuser -k 8080/tcp 2>/dev/null || true; fuser -k 1234/tcp 2>/dev/null || true`
 
@@ -191,6 +191,7 @@ From the `_update-skills` report: list the updated skills, the skipped skills wi
 <summarize the skills update here, following the rules above>
 
 ## Validation checklist
+
 - [x] Step 2a: Linting
 - [x] Step 2b: Tests
 - [x] Step 2c: All-platforms sample app

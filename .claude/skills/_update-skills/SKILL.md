@@ -68,7 +68,7 @@ accessibility                  | UPDATE  | no package gate
 
 ### 5. Run updates
 
-Run the matching command from the table for each `UPDATE` row, sequentially — the skill installer mutates `skills-lock.json` and a shared store. The CLI rewrites `skills-lock.json` (2-space indent, adds `skillPath`); that's expected — the file is ESLint-ignored.
+Run the matching command from the table for each `UPDATE` row, sequentially — the skill installer mutates `skills-lock.json` and a shared store. The CLI rewrites `skills-lock.json` (2-space indent, adds `skillPath`); that's expected — the file is ignored by oxfmt.
 
 Before each pull, capture `git status --porcelain` as a baseline — the tree may already hold dependency edits or earlier skill pulls. After each pull:
 

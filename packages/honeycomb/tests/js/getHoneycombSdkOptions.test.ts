@@ -53,10 +53,8 @@ class DummySpanProcessor implements SpanProcessor {
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function removeInstrumentationVersionsForSnapshot(options: any) {
     if (Array.isArray(options.instrumentations)) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         options.instrumentations.forEach(x => {
             if (x["instrumentationVersion"]) {
@@ -84,18 +82,22 @@ test.concurrent("do not throw when an api key is provided", ({ expect }) => {
     const globalAttributeSpanProcessor = new GlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
 
-    expect(() => getHoneycombSdkOptions("foo", ["/foo"], globalAttributeSpanProcessor, fetchRequestPipeline, {
-        apiKey: "123"
-    })).not.toThrow();
+    expect(() =>
+        getHoneycombSdkOptions("foo", ["/foo"], globalAttributeSpanProcessor, fetchRequestPipeline, {
+            apiKey: "123"
+        })
+    ).not.toThrow();
 });
 
 test.concurrent("do not throw when a proxy is provided", ({ expect }) => {
     const globalAttributeSpanProcessor = new GlobalAttributeSpanProcessor();
     const fetchRequestPipeline = new FetchRequestPipeline();
 
-    expect(() => getHoneycombSdkOptions("foo", ["/foo"], globalAttributeSpanProcessor, fetchRequestPipeline, {
-        proxy: "https://my-proxy.com"
-    })).not.toThrow();
+    expect(() =>
+        getHoneycombSdkOptions("foo", ["/foo"], globalAttributeSpanProcessor, fetchRequestPipeline, {
+            proxy: "https://my-proxy.com"
+        })
+    ).not.toThrow();
 });
 
 test.concurrent("throw when both the api key and proxy options are not provided", ({ expect }) => {
@@ -336,10 +338,8 @@ test.concurrent("with multiple transformers", ({ expect }) => {
     expect(cleanedResult).toMatchSnapshot();
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function replaceTraceExportersForSnapshot(options: any) {
     if (Array.isArray(options.traceExporters)) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         options.traceExporters = options.traceExporters.map((x: any) => x.constructor.name);
     }
 
@@ -387,7 +387,6 @@ test.concurrent("when a proxy is provided, the fetch instrumentation ignores the
         proxy: "https://my-proxy.com"
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const fetchInstrumentation = (result.instrumentations as any[]).find(x => x.instrumentationName === "@opentelemetry/instrumentation-fetch");
 
     expect(fetchInstrumentation.getConfig().ignoreUrls).toEqual(["https://my-proxy.com/v1/traces"]);
@@ -458,7 +457,6 @@ test.concurrent("when a transformer changes the endpoint, the fetch instrumentat
         ]
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const fetchInstrumentation = (result.instrumentations as any[]).find(x => x.instrumentationName === "@opentelemetry/instrumentation-fetch");
 
     expect(fetchInstrumentation.getConfig().ignoreUrls).toEqual(["https://my-proxy.com/v1/traces", "https://my-other-proxy.com/otlp"]);

@@ -13,11 +13,13 @@ function NestedTrack({ buttonLabel }: { buttonLabel: string }) {
     const track = useMixpanelTrackingFunction();
 
     const handleTrack = useCallback(() => {
-        track("event", {});
+        void track("event", {});
     }, [track]);
 
     return (
-        <button type="button" onClick={handleTrack}>{buttonLabel}</button>
+        <button type="button" onClick={handleTrack}>
+            {buttonLabel}
+        </button>
     );
 }
 
@@ -36,24 +38,30 @@ export function MixpanelPage() {
     });
 
     const handleTrackWithProductId = useCallback(() => {
-        trackWithProductId("event", {});
+        void trackWithProductId("event", {});
     }, [trackWithProductId]);
 
     const handleTrackWithTargetProductId = useCallback(() => {
-        trackWithTargetProductId("event", {});
+        void trackWithTargetProductId("event", {});
     }, [trackWithTargetProductId]);
 
     const handleTrackWithBothIds = useCallback(() => {
-        trackWithBothIds("event", {});
+        void trackWithBothIds("event", {});
     }, [trackWithBothIds]);
 
     return (
         <>
-            <button type="button" onClick={handleTrackWithProductId}>Track with a scoped product id</button>
+            <button type="button" onClick={handleTrackWithProductId}>
+                Track with a scoped product id
+            </button>
             <br />
-            <button type="button" onClick={handleTrackWithTargetProductId}>Track with a target product id</button>
+            <button type="button" onClick={handleTrackWithTargetProductId}>
+                Track with a target product id
+            </button>
             <br />
-            <button type="button" onClick={handleTrackWithBothIds}>Track with both ids</button>
+            <button type="button" onClick={handleTrackWithBothIds}>
+                Track with both ids
+            </button>
             <br />
             <MixpanelPropertiesProvider value={FooProp}>
                 <NestedTrack buttonLabel="Track with Foo" />

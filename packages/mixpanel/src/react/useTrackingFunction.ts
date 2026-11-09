@@ -13,10 +13,7 @@ export type UseTrackingFunctionOptions = CreateMixpanelTrackingFunctionOptions;
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function useTrackingFunction(options: UseTrackingFunctionOptions = {}) {
-    const {
-        productId,
-        targetProductId
-    } = options;
+    const { productId, targetProductId } = options;
 
     const client = useMixpanelClient();
     const additionalProperties = useMixpanelProviderProperties();

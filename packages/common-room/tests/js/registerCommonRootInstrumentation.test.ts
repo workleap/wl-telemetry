@@ -37,5 +37,5 @@ test("when Common Room instrumentation has already been registered, throw an err
 
     registerCommonRoomInstrumentation("123");
 
-    expect(() => registerCommonRoomInstrumentation("123")).toThrow("[common-room] The Common Room instrumentation has already been registered. Did you call the \"registerCommonRoomInstrumentation\" function twice?");
+    expect(() => registerCommonRoomInstrumentation("123")).toThrow('[common-room] The Common Room instrumentation has already been registered. Did you call the "registerCommonRoomInstrumentation" function twice?');
 });

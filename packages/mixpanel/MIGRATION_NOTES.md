@@ -5,6 +5,7 @@
 `buildTrackingFunction` has been renamed to `createTrackingFunction`.
 
 createTrackingFunction now takes:
+
 - `productId` as the first argument
 - `baseUrl` as the second argument
 - `options` as the third argument

@@ -54,14 +54,12 @@ export function App() {
                                 },
                                 {
                                     path: "throwing",
-                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                     // @ts-ignore
                                     element: <ThrowingPage />
                                 }
                             ]
                         }
                     ]
-
                 }
             ])}
         />

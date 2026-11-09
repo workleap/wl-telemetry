@@ -10,7 +10,6 @@ dotenv.config({
     path: [path.resolve("../../../.env.local")]
 });
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const projectToken = process.env.MIXPANEL_PROJECT_TOKEN!;
 
@@ -26,10 +25,12 @@ const certificates = {
     cert: fs.readFileSync("../local.workleap.com.pem")
 };
 
-app.use(cors({
-    origin: "https://local.workleap.com",
-    credentials: true
-}));
+app.use(
+    cors({
+        origin: "https://local.workleap.com",
+        credentials: true
+    })
+);
 
 app.use(express.json());
 
@@ -51,10 +52,7 @@ process.on("SIGTERM", shutdown);
 // Local tracking service endpoint because the SSD tracking service only works
 // for products and requires an auth cookie.
 app.post("/api/shell/navigation/tracking/track", (req: Request, res: Response) => {
-    const {
-        eventName,
-        properties
-    } = req.body;
+    const { eventName, properties } = req.body;
 
     mixpanel.track(eventName, properties);
 

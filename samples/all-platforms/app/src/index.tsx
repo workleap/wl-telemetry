@@ -5,10 +5,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-const loggers: RootLogger[] = [
-    new BrowserConsoleLogger(),
-    new LogRocketLogger()
-];
+const loggers: RootLogger[] = [new BrowserConsoleLogger(), new LogRocketLogger()];
 
 const telemetryClient = initializeTelemetry("sg", {
     logRocket: {

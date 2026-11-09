@@ -1,35 +1,35 @@
 {
     "name": "@workleap-telemetry/core",
-    "author": "Workleap",
     "version": "2.0.6",
     "description": "A package including telemetry core utilities for Workleap web applications.",
     "license": "Apache-2.0",
+    "author": "Workleap",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/workleap/wl-telemetry.git",
         "directory": "packages/core"
     },
+    "files": [
+        "src",
+        "dist",
+        "CHANGELOG.md"
+    ],
     "type": "module",
+    "sideEffects": false,
+    "exports": "./src/index.ts",
     "publishConfig": {
-        "access": "public",
-        "provenance": true,
         "exports": {
             ".": {
                 "types": "./dist/index.d.ts",
                 "import": "./dist/index.js",
                 "default": "./dist/index.js"
             }
-        }
+        },
+        "access": "public",
+        "provenance": true
     },
-    "exports": "./src/index.ts",
-    "files": [
-        "src",
-        "dist",
-        "CHANGELOG.md"
-    ],
     "scripts": {
         "build": "rslib build --config ./rslib.build.ts",
-        "eslint": "eslint . --max-warnings=0 --cache --cache-location node_modules/.cache/eslint",
         "typecheck": "tsgo",
         "test": "vitest --config vitest.config.ts --no-watch"
     },
@@ -39,21 +39,15 @@
         "uuid": "^14.0.3"
     },
     "devDependencies": {
-        "@eslint/js": "9.39.2",
         "@rsbuild/core": "2.2.14",
         "@rslib/core": "1.0.3",
         "@types/js-cookie": "3.0.6",
         "@types/node": "26.6.5",
-        "@typescript-eslint/parser": "8.72.0",
         "@typescript/native-preview": "7.0.0-dev.20260707.2",
-        "@workleap/eslint-configs": "2.0.6",
         "@workleap/rslib-configs": "2.0.0",
         "@workleap/typescript-configs": "5.0.0",
-        "eslint": "9.39.2",
         "happy-dom": "21.0.4",
         "typescript": "6.0.3",
-        "typescript-eslint": "8.72.0",
         "vitest": "5.0.5"
-    },
-    "sideEffects": false
+    }
 }

@@ -9,14 +9,17 @@ interface Movie {
 }
 
 export function MoviesPage() {
-    const { data: movies } = useSuspenseQuery({ queryKey: ["api/movies"], queryFn: () => {
-        return fetchJson("http://localhost:1234/api/movies");
-    } });
+    const { data: movies } = useSuspenseQuery({
+        queryKey: ["api/movies"],
+        queryFn: () => {
+            return fetchJson("http://localhost:1234/api/movies");
+        }
+    });
 
     const track = useMixpanelTrackingFunction();
 
-    track("Page View", {
-        "Page": "Movies Page"
+    void track("Page View", {
+        Page: "Movies Page"
     });
 
     return (

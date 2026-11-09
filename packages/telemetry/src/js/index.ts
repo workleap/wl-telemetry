@@ -23,16 +23,7 @@ export {
     type LogRocketWorkleapPlatformUserTraits,
     type RegisterLogRocketInstrumentationOptions
 } from "@workleap/logrocket";
-export {
-    NoopMixpanelClient,
-    type CreateMixpanelTrackingFunctionOptions,
-    type InitializeMixpanelOptions,
-    type MixpanelClient,
-    type MixpanelEventProperties,
-    type MixpanelTrackingFunction,
-    type MixpanelTrackingFunctionOptions
-} from "@workleap/mixpanel";
+export { NoopMixpanelClient, type CreateMixpanelTrackingFunctionOptions, type InitializeMixpanelOptions, type MixpanelClient, type MixpanelEventProperties, type MixpanelTrackingFunction, type MixpanelTrackingFunctionOptions } from "@workleap/mixpanel";
 export { initializeTelemetry, type InitializeTelemetryOptions } from "./initializeTelemetry.ts";
 export { NoopTelemetryClient } from "./NoopTelemetryClient.ts";
 export type { TelemetryClient } from "./TelemetryClient.ts";
-

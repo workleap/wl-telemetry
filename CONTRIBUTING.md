@@ -202,6 +202,7 @@ To view the data, go the `Activity` page, remove all the default filters and loo
 ## Release the packages
 
 When you are ready to release the packages, you must follow the following steps:
+
 1. Run `pnpm changeset` and follow the prompt. For versioning, always follow the [SemVer standard](https://semver.org/).
 2. Commit the newly generated file in your branch and submit a new Pull Request(PR). Changesets will automatically detect the changes and post a message in your pull request telling you that once the PR closes, the versions will be released.
 3. Find someone to review your PR.
@@ -225,7 +226,7 @@ If the packages failed to compile, it's easier to debug without executing the fu
 pnpm build-pkg
 ```
 
-By default, packages compilation output will be in their respective *dist* directory.
+By default, packages compilation output will be in their respective _dist_ directory.
 
 ## Update the agent skill
 
@@ -337,10 +338,18 @@ pnpm serve-honeycomb-proxy
 
 ### lint
 
-Lint the packages files.
+Lint (oxlint), check the formatting (oxfmt), typecheck and validate the dependencies (syncpack) of the repository files.
 
 ```bash
 pnpm lint
+```
+
+### oxfmt
+
+Format the repository files with oxfmt.
+
+```bash
+pnpm oxfmt
 ```
 
 ### test
@@ -395,16 +404,16 @@ pnpm update-outdated-deps
 
 The following workflows are available with GitHub:
 
-| Workflow | File | Trigger | Purpose |
-|----------|------|---------|---------|
-| CI | `.github/workflows/ci.yml` | Push to main, PRs | Build, lint, typecheck, test |
-| Changeset | `.github/workflows/changeset.yml` | Push to main | Version bumps and npm publish |
-| PR packages | `.github/workflows/pr-pkg.yml` | PRs | Publish preview packages |
+| Workflow            | File                                        | Trigger                | Purpose                                      |
+| ------------------- | ------------------------------------------- | ---------------------- | -------------------------------------------- |
+| CI                  | `.github/workflows/ci.yml`                  | Push to main, PRs      | Build, lint, typecheck, test                 |
+| Changeset           | `.github/workflows/changeset.yml`           | Push to main           | Version bumps and npm publish                |
+| PR packages         | `.github/workflows/pr-pkg.yml`              | PRs                    | Publish preview packages                     |
 | Update dependencies | `.github/workflows/update-dependencies.yml` | Weekly (Tue 14:00 UTC) | Automated dependency and agent skill updates |
-| Code review | `.github/workflows/code-review.yml` | PRs | Automated code review |
-| Claude | `.github/workflows/claude.yml` | @claude mentions | Interactive AI assistance |
-| Sync agent skill | `.github/workflows/sync-agent-skill.yml` | Push to main (docs/) | Sync telemetry skill with docs |
-| Retype | `.github/workflows/retype-action.yml` | Push to main, PRs | Build and deploy documentation site |
+| Code review         | `.github/workflows/code-review.yml`         | PRs                    | Automated code review                        |
+| Claude              | `.github/workflows/claude.yml`              | @claude mentions       | Interactive AI assistance                    |
+| Sync agent skill    | `.github/workflows/sync-agent-skill.yml`    | Push to main (docs/)   | Sync telemetry skill with docs               |
+| Retype              | `.github/workflows/retype-action.yml`       | Push to main, PRs      | Build and deploy documentation site          |
 
 ## CI
 
@@ -444,20 +453,20 @@ pnpm init
 
 Answer the CLI questions.
 
-Once the *package.json* is generated, please read again the [Workleap GitHub guidelines](https://github.com/workleap/github-guidelines#npm-package-name) and make sure the package name, author and license are valid.
+Once the _package.json_ is generated, please read again the [Workleap GitHub guidelines](https://github.com/workleap/github-guidelines#npm-package-name) and make sure the package name, author and license are valid.
 
-Don't forget to add the [npm scope](https://docs.npmjs.com/about-scopes) *"@workleap"* before the package name. For example, if the project name is "foo", your package name should be "@workleap/foo".
+Don't forget to add the [npm scope](https://docs.npmjs.com/about-scopes) _"@workleap"_ before the package name. For example, if the project name is "foo", your package name should be "@workleap/foo".
 
-Make sure the package publish access is *public* by adding the following to the *package.json* file:
+Make sure the package publish access is _public_ by adding the following to the _package.json_ file:
 
 ```json
 {
-  "publishConfig": {
-    "access": "public"
-  }
+    "publishConfig": {
+        "access": "public"
+    }
 }
 ```
 
 ### Dependencies
 
-npm *dependencies* and *peerDependencies* must be added to the package own *package.json* file.
+npm _dependencies_ and _peerDependencies_ must be added to the package own _package.json_ file.

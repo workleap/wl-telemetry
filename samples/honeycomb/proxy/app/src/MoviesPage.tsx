@@ -8,9 +8,12 @@ interface Movie {
 }
 
 export function MoviesPage() {
-    const { data: movies } = useSuspenseQuery({ queryKey: ["api/movies"], queryFn: () => {
-        return fetchJson("http://localhost:1234/api/movies");
-    } });
+    const { data: movies } = useSuspenseQuery({
+        queryKey: ["api/movies"],
+        queryFn: () => {
+            return fetchJson("http://localhost:1234/api/movies");
+        }
+    });
 
     return (
         <>

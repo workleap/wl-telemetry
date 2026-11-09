@@ -41,6 +41,8 @@ function hasSessionCookie(cookieHeader: string | undefined) {
 }
 
 beforeAll(async () => {
+    // Node's HTTP server ignores the promise returned by the request listener.
+    // oxlint-disable-next-line typescript/no-misused-promises
     server = createServer(async (request, response) => {
         const body = await readBody(request);
 
@@ -59,7 +61,7 @@ beforeAll(async () => {
             "Access-Control-Allow-Credentials": "true",
             "Access-Control-Allow-Methods": "POST",
             "Access-Control-Allow-Headers": request.headers["access-control-request-headers"] ?? "content-type",
-            "Vary": "Origin"
+            Vary: "Origin"
         };
 
         // The JSON content type triggers a CORS preflight request.
@@ -88,7 +90,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-    await new Promise<void>((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+    await new Promise<void>((resolve, reject) => server.close(error => (error ? reject(error) : resolve())));
 });
 
 beforeEach(() => {

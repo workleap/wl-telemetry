@@ -1,7 +1,7 @@
 import { test } from "vitest";
 import { HasExecutedGuard } from "../src/HasExecutedGuard.ts";
 
-test.concurrent("when the \"throw\" function is called once, do nothing", ({ expect }) => {
+test.concurrent('when the "throw" function is called once, do nothing', ({ expect }) => {
     const guard = new HasExecutedGuard();
 
     expect(guard.hasExecuted).toBeFalsy();
@@ -11,7 +11,7 @@ test.concurrent("when the \"throw\" function is called once, do nothing", ({ exp
     expect(guard.hasExecuted).toBeTruthy();
 });
 
-test.concurrent("when the \"throw\" function is called twice, throw an error", ({ expect }) => {
+test.concurrent('when the "throw" function is called twice, throw an error', ({ expect }) => {
     const guard = new HasExecutedGuard();
 
     guard.throw("foo");

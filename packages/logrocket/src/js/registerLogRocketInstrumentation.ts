@@ -9,25 +9,9 @@ import { createUrlSanitizer } from "./createUrlSanitizer.ts";
 import { DeviceIdTrait, type LogRocketInstrumentationClient, LogRocketInstrumentationClientImpl, TelemetryIdTrait } from "./LogRocketInstrumentationClient.ts";
 import type { LogRocketSdkOptions } from "./logRocketTypes.ts";
 
-const DefaultPrivateFieldNames = [
-    "email",
-    "personalEmail",
-    "phoneNumber",
-    "password",
-    "firstName",
-    "lastName",
-    "givenName",
-    "fullName",
-    "gender",
-    "timeZone",
-    "birthday"
-];
+const DefaultPrivateFieldNames = ["email", "personalEmail", "phoneNumber", "password", "firstName", "lastName", "givenName", "fullName", "gender", "timeZone", "birthday"];
 
-const DefaultPrivateQueryParameterNames = [
-    "token",
-    "email",
-    "password"
-];
+const DefaultPrivateQueryParameterNames = ["token", "email", "password"];
 
 ///////////////////////////
 
@@ -74,13 +58,7 @@ export interface RegisterLogRocketInstrumentationOptions {
 
 // The function return type is mandatory, otherwise we got an error TS4058.
 export function getLogRocketSdkOptions(userOptions: RegisterLogRocketInstrumentationOptions, logger: RootLogger): LogRocketSdkOptions {
-    const {
-        rootHostname = "workleap.com",
-        privateFieldNames = [],
-        privateQueryParameterNames = [],
-        verbose = false,
-        transformers = []
-    } = userOptions;
+    const { rootHostname = "workleap.com", privateFieldNames = [], privateQueryParameterNames = [], verbose = false, transformers = [] } = userOptions;
 
     const mergedPrivateFieldNames = DefaultPrivateFieldNames.concat(privateFieldNames);
     const mergedPrivateQueryParameterNames = DefaultPrivateQueryParameterNames.concat(privateQueryParameterNames);
@@ -88,7 +66,6 @@ export function getLogRocketSdkOptions(userOptions: RegisterLogRocketInstrumenta
     // The "LogrocketFuzzySearch.setup" code is awkward. For now, we prefer to play it safe and call it once here, then forward the sanitize functions
     // to the appropriate factories.
     // No clue why the "setup" method is not available. This package is shady.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const { requestSanitizer: fuzzyRequestSanitizer, responseSanitizer: fuzzyResponseSanitizer } = LogrocketFuzzySanitizer.setup(mergedPrivateFieldNames);
 
@@ -143,15 +120,8 @@ export function __resetRegistrationGuard() {
 ///////////////////////////
 
 export class LogRocketInstrumentationRegistrator {
-    register(
-        appId: string,
-        options: RegisterLogRocketInstrumentationOptions = {}
-    ) {
-        const {
-            telemetryContext,
-            verbose = false,
-            loggers = []
-        } = options;
+    register(appId: string, options: RegisterLogRocketInstrumentationOptions = {}) {
+        const { telemetryContext, verbose = false, loggers = [] } = options;
 
         const logger = createCompositeLogger(verbose, loggers);
         const sdkOptions = getLogRocketSdkOptions(options, logger);
@@ -170,10 +140,7 @@ export class LogRocketInstrumentationRegistrator {
         }
 
         LogRocket.getSessionURL(url => {
-            logger
-                .withText("[logrocket] Session replay URL is now available:")
-                .withText(url)
-                .debug();
+            logger.withText("[logrocket] Session replay URL is now available:").withText(url).debug();
         });
 
         logger.information("[logrocket] LogRocket instrumentation is registered.");
@@ -192,11 +159,8 @@ export class LogRocketInstrumentationRegistrator {
  * @returns {LogRocketInstrumentationClient} A LogRocket instrumentation client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function registerLogRocketInstrumentation(
-    appId: string,
-    options?: RegisterLogRocketInstrumentationOptions
-) {
-    getRegistrationGuard().throw("[logrocket] The LogRocket instrumentation has already been registered. Did you call the \"registerLogRocketInstrumentation\" function twice?");
+export function registerLogRocketInstrumentation(appId: string, options?: RegisterLogRocketInstrumentationOptions) {
+    getRegistrationGuard().throw('[logrocket] The LogRocket instrumentation has already been registered. Did you call the "registerLogRocketInstrumentation" function twice?');
 
     return new LogRocketInstrumentationRegistrator().register(appId, options);
 }

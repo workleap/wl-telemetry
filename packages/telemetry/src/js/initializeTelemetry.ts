@@ -1,4 +1,5 @@
-import { createTelemetryContext, ProductFamily } from "@workleap-telemetry/core";
+import type { ProductFamily } from "@workleap-telemetry/core";
+import { createTelemetryContext } from "@workleap-telemetry/core";
 import { registerHoneycombInstrumentation, type HoneycombInstrumentationClient, type HoneycombSdkOptions, type PropagateTraceHeaderCorsUrls, type RegisterHoneycombInstrumentationOptions } from "@workleap/honeycomb";
 import type { RootLogger } from "@workleap/logging";
 import { registerLogRocketInstrumentation, type LogRocketInstrumentationClient, type RegisterLogRocketInstrumentationOptions } from "@workleap/logrocket";
@@ -88,13 +89,7 @@ export interface InitializeTelemetryOptions {
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function initializeTelemetry(productFamily: ProductFamily, options: InitializeTelemetryOptions = {}) {
-    const {
-        logRocket,
-        honeycomb,
-        mixpanel,
-        verbose,
-        loggers
-    } = options;
+    const { logRocket, honeycomb, mixpanel, verbose, loggers } = options;
 
     const telemetryContext = createTelemetryContext(productFamily, {
         verbose,
@@ -106,43 +101,32 @@ export function initializeTelemetry(productFamily: ProductFamily, options: Initi
     let mixpanelClient: MixpanelClient | undefined;
 
     if (logRocket) {
-        logRocketClient = registerLogRocketInstrumentation(
-            logRocket.appId,
-            {
-                ...(logRocket.options ?? {}),
-                telemetryContext,
-                verbose,
-                loggers
-            }
-        );
+        logRocketClient = registerLogRocketInstrumentation(logRocket.appId, {
+            ...logRocket.options,
+            telemetryContext,
+            verbose,
+            loggers
+        });
     }
 
     if (honeycomb) {
-        honeycombClient = registerHoneycombInstrumentation(
-            honeycomb.namespace,
-            honeycomb.serviceName,
-            honeycomb.apiServiceUrls,
-            {
-                ...(honeycomb.options ?? {}),
-                logRocketInstrumentationClient: logRocketClient,
-                telemetryContext,
-                verbose,
-                loggers
-            }
-        );
+        honeycombClient = registerHoneycombInstrumentation(honeycomb.namespace, honeycomb.serviceName, honeycomb.apiServiceUrls, {
+            ...honeycomb.options,
+            logRocketInstrumentationClient: logRocketClient,
+            telemetryContext,
+            verbose,
+            loggers
+        });
     }
 
     if (mixpanel) {
-        mixpanelClient = initializeMixpanel(
-            mixpanel.envOrTrackingApiBaseUrl,
-            {
-                ...(mixpanel.options ?? {}),
-                telemetryContext,
-                logRocketInstrumentationClient: logRocketClient,
-                verbose,
-                loggers
-            }
-        );
+        mixpanelClient = initializeMixpanel(mixpanel.envOrTrackingApiBaseUrl, {
+            ...mixpanel.options,
+            telemetryContext,
+            logRocketInstrumentationClient: logRocketClient,
+            verbose,
+            loggers
+        });
     }
 
     return new TelemetryClientImpl(logRocketClient, honeycombClient, mixpanelClient);
