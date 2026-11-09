@@ -1,5 +1,11 @@
 # @workleap/mixpanel
 
+## 6.0.2
+
+### Patch Changes
+
+- [#255](https://github.com/workleap/wl-telemetry/pull/255) [`ffb23a6`](https://github.com/workleap/wl-telemetry/commit/ffb23a6ee93eae1c9c4ccc5f763e09e9717a563c) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Declare `@types/react` as an optional peer dependency, so the React types in the package declarations resolve under installs that link packages from outside the project, such as pnpm's global virtual store.
+
 ## 6.0.1
 
 ### Patch Changes
