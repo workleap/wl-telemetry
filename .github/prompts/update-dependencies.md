@@ -27,7 +27,7 @@ If the output is empty but the skill reported that the `update-version` sub-step
 
 If the output is empty otherwise, there are no dependency updates. Discard any lockfile re-resolution the update made (`git checkout -- pnpm-lock.yaml`) — it would otherwise reach the PR without being validated. Skip Step 2 and go to Step 3.
 
-Otherwise — including when the skill reported a failure but `package.json` files did change (a partial update, or a pnpm release-age violation) — install the updated dependencies, then continue to Step 2; the validation loop decides what to fix or revert:
+Otherwise — including when the skill reported a failure but `package.json` files did change (a partial update) — install the updated dependencies, then continue to Step 2; the validation loop decides what to fix or revert:
 
 ```bash
 pnpm install --no-frozen-lockfile
