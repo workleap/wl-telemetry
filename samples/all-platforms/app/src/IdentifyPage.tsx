@@ -1,4 +1,3 @@
-import { useCommonRoomInstrumentationClient } from "@workleap/common-room/react";
 import { useHoneycombInstrumentationClient, useLogRocketInstrumentationClient, useMixpanelClient, useMixpanelTrackingFunction, type LogRocketWorkleapPlatformIdentification } from "@workleap/telemetry/react";
 import LogRocket from "logrocket";
 import { useState, type ChangeEvent, type FormEvent } from "react";
@@ -60,7 +59,6 @@ export function IdentifyPage() {
     const logRocketClient = useLogRocketInstrumentationClient();
     const honeycombClient = useHoneycombInstrumentationClient();
     const mixpanelClient = useMixpanelClient();
-    const commonRoomClient = useCommonRoomInstrumentationClient();
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -74,7 +72,6 @@ export function IdentifyPage() {
 
         honeycombClient.setGlobalSpanAttribute("app.user", JSON.stringify(form));
         mixpanelClient.setGlobalEventProperty("User", JSON.stringify(form));
-        commonRoomClient.identify("pat-2025-08-05-v10@gmail.com");
     };
 
     return (

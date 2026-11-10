@@ -22,7 +22,6 @@ The following docs are **not** part of the skill and must be ignored:
 
 - `docs/updating/` — migration guides
 - `docs/standalone-libraries/` — standalone packages (skill covers the umbrella package only)
-- `docs/reference/common-room/` — separate tool not part of the umbrella package
 - `docs/introduction/use-with-agents.md` — meta-doc about using the skill itself
 - `docs/static/` — images and assets
 - Site configuration files: `index.yml`, `default.md`, `about.md`, `samples.md`

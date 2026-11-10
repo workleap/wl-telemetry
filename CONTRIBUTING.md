@@ -121,14 +121,13 @@ Then, add the following key/values to the newly created `.env.local` file:
 - `LOGROCKET_APP_ID`: The application id of the `frontend-platform-team-dev` LogRocket project.
 - `HONEYCOMB_API_KEY`: The API key of the `frontend-platform-team-dev` Honeycomb environment.
 - `MIXPANEL_PROJECT_TOKEN`: The token of the `Frontend-Platform-Team-Dev` Mixpanel project.
-- `COMMON_ROOM_SITE_ID`: The site id of the `Workleap` room. We don't have any sandbox environment at the moment.
 
 > [!NOTE]
 > The `.env.local` file is configured to be ignored by Git and will not be pushed to the remote repository.
 
 ### Setup hostname and SSL certificates
 
-Because [Common Room](https://www.commonroom.io/) filters out traces that are not bound to `*.workleap.com`, the [all-platforms](./samples/all-platforms/) sample app and servers are set up with a custom hostname and are on "https".
+Because LogRocket is configured with a `workleap.com` root hostname and the Mixpanel proxy only accepts requests from `https://local.workleap.com`, the [all-platforms](./samples/all-platforms/) sample app and servers are set up with a custom hostname and are on "https".
 
 #### Windows
 
@@ -239,15 +238,6 @@ Depending on the sample application, traces are sent to the corresponding projec
 ### Mixpanel
 
 The sample applications' telemetry data is sent to the `Frontend-Platform-Team-Dev` project in Mixpanel.
-
-### Common Room
-
-The sample applications' data is sent to the `Workleap` room in Common Room.
-
-To view the data, go the `Activity` page, remove all the default filters and look for any entry matching the email address or name you used to identified the session.
-
-> [!WARNING]  
-> It can take up to 10 minutes before the activity data is visible in Common Room.
 
 ## Release the packages
 

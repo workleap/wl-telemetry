@@ -71,7 +71,7 @@ Run 5a through 5d in order. Not selected -> skip to the report.
 
 ### Prerequisites (verify, don't assume)
 
-- `.env.local` exists at the repo root with `LOGROCKET_APP_ID`, `HONEYCOMB_API_KEY`, `MIXPANEL_PROJECT_TOKEN` set. `COMMON_ROOM_SITE_ID` is normally **empty** (no sandbox) — that is expected.
+- `.env.local` exists at the repo root with `LOGROCKET_APP_ID`, `HONEYCOMB_API_KEY`, `MIXPANEL_PROJECT_TOKEN` set.
 - Node `>=26`, pnpm `12.x`.
 - For the `all-platforms` sample only: `127.0.0.1 local.workleap.com` in the hosts file, a trusted mkcert CA, and `samples/all-platforms/local.workleap.com*.pem`. If missing, skip all-platforms browser validation and say so (build still validates it).
 
@@ -141,7 +141,6 @@ Confirm each page renders its heading and content (movies list, subscription det
 
 #### Expected / ignorable console messages (NOT failures)
 
-- `[common-room] Failed to load Common Room script at ".../v1/site//signals.js"` — `COMMON_ROOM_SITE_ID` is empty by design; the empty site id yields a bad URL. Pre-existing, not a regression.
 - Network/export errors to `api.honeycomb.io` and OpenTelemetry "dropped span"/"failed export" warnings.
 - `[telemetry]`, `[honeycomb]`, `[logrocket]`, `[mixpanel]` verbose logs; rsbuild WebSocket messages; the React DevTools tip.
 

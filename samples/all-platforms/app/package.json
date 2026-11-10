@@ -16,7 +16,6 @@
     },
     "dependencies": {
         "@tanstack/react-query": "5.104.5",
-        "@workleap/common-room": "workspace:*",
         "@workleap/logging": "2.0.1",
         "@workleap/telemetry": "workspace:*",
         "logrocket": "12.4.0",

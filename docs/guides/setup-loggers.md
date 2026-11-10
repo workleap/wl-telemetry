@@ -19,10 +19,9 @@ pnpm add @workleap/logging
 
 Then update the application bootstrapping code to configure the loggers:
 
-```tsx !#12,29-30,34-35 index.tsx
+```tsx !#11,28-29 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -52,19 +51,12 @@ const telemetryClient = initializeTelemetry("sg", {
     loggers
 });
 
-const commonRoomClient = registerCommonRoomInstrumentation("my-site-id", {
-    verbose: isDev,
-    loggers
-});
-
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
         <TelemetryProvider client={telemetryClient}>
-            <CommonRoomInstrumentationProvider client={commonRoomClient}>
-                <App />
-            </CommonRoomInstrumentationProvider>
+            <App />
         </TelemetryProvider>
     </StrictMode>
 );
@@ -74,10 +66,9 @@ root.render(
 
 To troubleshoot production issues, remove the `LogLevel` from the `LogRocketLogger` constructor options and set the `verbose` option to `true`:
 
-```tsx !#12,29,34 index.tsx
+```tsx !#11,28 index.tsx
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { BrowserConsoleLogger, LogLevel, type RootLogger } from "@workleap/logging";
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -107,19 +98,12 @@ const telemetryClient = initializeTelemetry("sg", {
     loggers
 });
 
-const commonRoomClient = registerCommonRoomInstrumentation("my-site-id", {
-    verbose: true,
-    loggers
-});
-
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
         <TelemetryProvider client={telemetryClient}>
-            <CommonRoomInstrumentationProvider client={commonRoomClient}>
-                <App />
-            </CommonRoomInstrumentationProvider>
+            <App />
         </TelemetryProvider>
     </StrictMode>
 );
@@ -132,4 +116,3 @@ Start the application in a development environment. Open the [DevTools](https://
 - `[logrocket] LogRocket instrumentation is registered.`
 - `[honeycomb] Honeycomb instrumentation is registered.`
 - `[mixpanel] Mixpanel is initialized.`
-- `[common-room] Common Room instrumentation is registered.`
