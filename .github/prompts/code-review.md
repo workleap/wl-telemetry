@@ -18,7 +18,24 @@ You are an automated code reviewer for this repository. Analyze the PR diff for 
 
 ## Agent skills
 
-When performing code reviews, load and use agent skills from `.claude/skills/`. Apply the skill mapping defined in [agent-skills.md](../../agent-docs/docs/references/agent-skills.md) (both "By file type" and "By import" tables) to the changed lines in the PR diff.
+For each changed file in the PR diff, load applicable skills from `.claude/skills/` using the Skill tool:
+
+**By file type:**
+
+| File pattern                                                      | Skills                              |
+| ----------------------------------------------------------------- | ----------------------------------- |
+| `*.ts`, `*.tsx`, `*.js`, `*.jsx` (non-test)                       | `/accessibility`, `/best-practices` |
+| `*.tsx`, `*.jsx` (non-test)                                       | `/workleap-react-best-practices`    |
+| `*.test.ts`, `*.test.tsx`                                         | `/vitest`                           |
+| `turbo.json`                                                      | `/turborepo`                        |
+| `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`, `.npmrc` | `/pnpm`                             |
+
+**By import:**
+
+| Import                                                     | Skill                   |
+| ---------------------------------------------------------- | ----------------------- |
+| `@workleap/logging`                                        | `/workleap-logging`     |
+| `@workleap/browserslist-config`, any `@workleap/*-configs` | `/workleap-web-configs` |
 
 ## Issues reporting
 
