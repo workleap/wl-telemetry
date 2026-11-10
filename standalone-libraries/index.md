@@ -14,8 +14,3 @@
 
 - [Getting started](./mixpanel/getting-started.md)
 - [Reference](./mixpanel/reference.md)
-
-## Common Room
-
-- [Getting started](./common-room/getting-started.md)
-- [Reference](./common-room/reference.md)

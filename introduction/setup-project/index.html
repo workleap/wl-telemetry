@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847604939008">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847642717593">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -13,7 +13,7 @@
     <!-- Primary Meta Tags -->
     <title>Setup a project</title>
     <meta name="title" content="Setup a project">
-    <meta name="description" content="Let's set up an application with all four Workleap's supported telemetry platforms.">
+    <meta name="description" content="Let's set up an application with all three Workleap's supported telemetry platforms.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://workleap.github.io/wl-telemetry/introduction/setup-project/">
@@ -23,11 +23,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://workleap.github.io/wl-telemetry/introduction/setup-project/">
     <meta property="og:title" content="Setup a project">
-    <meta property="og:description" content="Let's set up an application with all four Workleap's supported telemetry platforms.">
-    <meta property="og:image" content="https://workleap.github.io/wl-telemetry/static/common-room/common-room-activity-entry.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Setup a project">
+    <meta property="og:description" content="Let's set up an application with all three Workleap's supported telemetry platforms.">
     <meta property="og:site_name" content="Telemetry">
     <meta property="og:locale" content="en_US">
 
@@ -35,9 +31,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://workleap.github.io/wl-telemetry/introduction/setup-project/">
     <meta name="twitter:title" content="Setup a project">
-    <meta name="twitter:description" content="Let's set up an application with all four Workleap's supported telemetry platforms.">
-    <meta name="twitter:image" content="https://workleap.github.io/wl-telemetry/static/common-room/common-room-activity-entry.png">
-    <meta name="twitter:image:alt" content="Setup a project">
+    <meta name="twitter:description" content="Let's set up an application with all three Workleap's supported telemetry platforms.">
 
     <!-- Alternate Markdown -->
     <link rel="alternate" type="text/markdown" href="https://workleap.github.io/wl-telemetry/introduction/setup-project.md">
@@ -45,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.847604939008" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.847642717593" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.847604939008" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.847642717593" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.847604939008" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.847604939008" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.847642717593" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.847642717593" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -290,18 +284,17 @@
 
                 <!-- Page content  -->
 <h1 id="setup-a-project">Setup a project</h1>
-<p>Let&#x27;s set up an application with all four Workleap&#x27;s supported telemetry platforms.</p>
+<p>Let&#x27;s set up an application with all three Workleap&#x27;s supported telemetry platforms.</p>
 <h2 id="install-the-packages">Install the packages</h2>
 <p>First, open a terminal at the root of the application and install the packages:</p>
 <div id="install-the-packages-code-1" class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/telemetry @workleap/common-room @opentelemetry/api logrocket</code></pre>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash">pnpm add @workleap/telemetry @opentelemetry/api logrocket</code></pre>
 </doc-codeblock></div>
 <h2 id="initialize-telemetry-libraries">Initialize telemetry libraries</h2>
-<p>And, update the application bootstrapping code to initialize the libraries with the <a href="../../reference/telemetry/initializetelemetry/">initializeTelemetry</a> and <a href="../../reference/common-room/registercommonroominstrumentation/">registerCommonRoomInstrumentation</a> functions:</p>
+<p>And, update the application bootstrapping code to initialize the libraries with the <a href="../../reference/telemetry/initializetelemetry/">initializeTelemetry</a> function:</p>
 <div id="initialize-telemetry-libraries-indextsx" class="codeblock-wrapper"><doc-codeblock>
 <div class="codeblock-title">index.tsx</div>
-<pre translate="no" class="language-tsx" data-line="7-22,24,30-31,33-34"><code v-pre class="language-tsx">import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from &quot;@workleap/common-room/react&quot;;
+<pre translate="no" class="language-tsx" data-line="6-21,27,29"><code v-pre class="language-tsx">import { initializeTelemetry, TelemetryProvider } from &quot;@workleap/telemetry/react&quot;;
 import { StrictMode } from &quot;react&quot;;
 import { createRoot } from &quot;react-dom/client&quot;;
 import { App } from &quot;./App.tsx&quot;;
@@ -323,16 +316,12 @@ const telemetryClient = initializeTelemetry(&quot;sg&quot;, {
     }
 });
 
-const commonRoomClient = registerCommonRoomInstrumentation(&quot;my-site-id&quot;);
-
 const root = createRoot(document.getElementById(&quot;root&quot;)!);
 
 root.render(
     &lt;StrictMode&gt;
         &lt;TelemetryProvider client={telemetryClient}&gt;
-            &lt;CommonRoomInstrumentationProvider client={commonRoomClient}&gt;
-                &lt;App /&gt;
-            &lt;/CommonRoomInstrumentationProvider&gt;
+            &lt;App /&gt;
         &lt;/TelemetryProvider&gt;
     &lt;/StrictMode&gt;
 );</code></pre>
@@ -400,20 +389,6 @@ root.render(
 <li>Open the <a href="https://developer.chrome.com/docs/devtools/" class="outbound" target="_blank">DevTools</a> console and look for logs starting with <code translate="no" v-pre>[mixpanel]</code>.</li>
 <li>Refer to the sample on <a href="https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms" class="outbound" target="_blank">GitHub</a>.</li>
 </ul>
-<h3 id="common-room">Common Room</h3>
-<p>Go to the &quot;Identify&quot; page and press the button to identify the current user. Then navigate to your <a href="https://app.commonroom.io/" class="outbound" target="_blank">Common Room</a> instance and go to the &quot;Activity&quot; page, you should see new data appear in the <strong>next 10 minutes</strong>.</p>
-<div class="align-image-left">
-<figure class="content-center">
-    <img src="../../static/common-room/common-room-activity-entry.png" alt="Common Room activity entry" class="max-w-full h-auto rounded-image-rounded border-image-border border-image-border-width" width="558" />
-    <figcaption class="caption">Common Room activity entry</figcaption>
-</figure>
-</div>
-<p>Troubleshoot issues:</p>
-<ul>
-<li>Set the <a href="../../reference/telemetry/initializetelemetry/#verbose-mode">verbose</a> predefined option to <code translate="no" v-pre>true</code>.</li>
-<li>Open the <a href="https://developer.chrome.com/docs/devtools/" class="outbound" target="_blank">DevTools</a> console and look for logs starting with <code translate="no" v-pre>[common-room]</code>.</li>
-<li>Refer to the sample on <a href="https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms" class="outbound" target="_blank">GitHub</a>.</li>
-</ul>
 <h3 id="correlation-ids">Correlation ids</h3>
 <p>Two correlation ids are attached to every session replay, event, and trace to <strong>unify</strong> the telemetry platforms. To verify they are attached correctly, try the correlation ids <a href="../use-correlation-values/#troubleshooting-example">troubleshooting example</a>.</p>
 <h3 id="logrocket-session-url">LogRocket session URL</h3>
@@ -424,7 +399,6 @@ root.render(
 <li><a href="../learn-logrocket/features/">LogRocket</a></li>
 <li><a href="../learn-honeycomb/features/">Honeycomb</a></li>
 <li><a href="../learn-mixpanel/features/">Mixpanel</a></li>
-<li><a href="../../standalone-libraries/common-room/getting-started/">Common Room</a></li>
 </ul>
 <h2 id="setup-loggers">Setup loggers</h2>
 <p><span class="docs-emoji">&#x1F449;</span> Providing loggers to the initialization or registration functions is optional, but recommended to simplify troubleshooting. To set up loggers, follow the <a href="../../guides/setup-loggers/">guide</a>.</p>

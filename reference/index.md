@@ -17,14 +17,6 @@
 - [useMixpanelTrackingFunction](./telemetry/useMixpanelTrackingFunction.md)
 - [MixpanelPropertiesProvider](./telemetry/MixpanelPropertiesProvider.md)
 
-## Common Room
-
-- [registerCommonRoomInstrumentation](./common-room/registerCommonRoomInstrumentation.md)
-- [CommonRoomInstrumentationClient](./common-room/CommonRoomInstrumentationClient.md)
-- [NoopCommonRoomInstrumentationClient](./common-room/NoopCommonRoomInstrumentationClient.md)
-- [CommonRoomInstrumentationProvider](./common-room/CommonRoomInstrumentationProvider.md)
-- [useCommonRoomInstrumentationClient](./common-room/useCommonRoomInstrumentationClient.md)
-
 ## Others
 
 - [LogRocketLogger](./LogRocketLogger.md)

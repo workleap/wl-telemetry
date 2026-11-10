@@ -9,7 +9,7 @@
 ## Introduction
 
 - [Getting started](https://workleap.github.io/wl-telemetry/introduction/getting-started.md): Welcome to @workleap/telemetry, a collection of telemetry packages for building web applications at Workleap. On this getting started page, you'll find an overview of the project and a list of supported platforms.
-- [Setup a project](https://workleap.github.io/wl-telemetry/introduction/setup-project.md): Let's set up an application with all four Workleap's supported telemetry platforms.
+- [Setup a project](https://workleap.github.io/wl-telemetry/introduction/setup-project.md): Let's set up an application with all three Workleap's supported telemetry platforms.
 
 ### Learn LogRocket
 
@@ -52,14 +52,6 @@
 - [useMixpanelClient](https://workleap.github.io/wl-telemetry/reference/telemetry/usemixpanelclient.md): Retrieve a MixpanelClient instance.
 - [useMixpanelTrackingFunction](https://workleap.github.io/wl-telemetry/reference/telemetry/usemixpaneltrackingfunction.md): Returns a function sending POST requests to a dedicated tracking endpoint fully compliant with the Workleap platform tracking API.
 - [MixpanelPropertiesProvider](https://workleap.github.io/wl-telemetry/reference/telemetry/mixpanelpropertiesprovider.md): A React provider used to define Mixpanel properties for nested components. These properties are automatically included in events tracked by nested components, provided the events are tracked using functions created with the useMixpanelTrackingFunction hook.
-
-### Common Room
-
-- [registerCommonRoomInstrumentation](https://workleap.github.io/wl-telemetry/reference/common-room/registercommonroominstrumentation.md): Initialize Common Room instrumentation.
-- [CommonRoomInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/common-room/commonroominstrumentationclient.md): Don't create your own instance of CommonRoomInstrumentationClient, use the registerCommonRoomInstrumentation function instead.
-- [NoopCommonRoomInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/common-room/noopcommonroominstrumentationclient.md): A fake implementation of CommonRoomInstrumentationClient for use in non-standard contexts such as unit tests and Storybook.
-- [CommonRoomInstrumentationProvider](https://workleap.github.io/wl-telemetry/reference/common-room/commonroominstrumentationprovider.md): React provider to share a CommonRoomInstrumentationProvider instance with the application code.
-- [useCommonRoomInstrumentationClient](https://workleap.github.io/wl-telemetry/reference/common-room/usecommonroominstrumentationclient.md): Retrieve a CommonRoomInstrumentationClient instance.
 - [LogRocketLogger](https://workleap.github.io/wl-telemetry/reference/logrocketlogger.md): A logger outputting messages to a LogRocket session replay.
 
 ## Standalone libraries
@@ -78,11 +70,6 @@
 
 - [Getting started - Mixpanel](https://workleap.github.io/wl-telemetry/standalone-libraries/mixpanel/getting-started.md): Prefer using the @workleap/telemetry umbrella package over this standalone library.
 - [Reference - Mixpanel](https://workleap.github.io/wl-telemetry/standalone-libraries/mixpanel/reference.md): Initialize Mixpanel with Workleap's default settings.
-
-### CommonRoom
-
-- [Getting started - Common Room](https://workleap.github.io/wl-telemetry/standalone-libraries/common-room/getting-started.md): To connect user activity across platforms and provide insight into community engagement and behavior, Workleap has adopted Common Room, a marketers platform that aggregates data from sources like social media, forums, and product tools to build unified user profiles.
-- [Reference - Common Room](https://workleap.github.io/wl-telemetry/standalone-libraries/common-room/reference.md): Refer to reference documentation.
 
 ## Updating
 

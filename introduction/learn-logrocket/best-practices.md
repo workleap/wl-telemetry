@@ -47,20 +47,6 @@ const client = initializeTelemetry("sg", {
 });
 ```
 
-### Common Room
-
-Initialize Common Room with a [LogRocketLogger](../../reference/LogRocketLogger.md) instance:
-
-```ts !#6
-import { registerCommonRoomInstrumentation } from "@workleap/common-room/react";
-import { LogLevel } from "@workleap/logging";
-import { LogRocketLogger } from "@workleap/telemetry/react"; // or from "@workleap/logrocket/react";
-
-const client = registerCommonRoomInstrumentation("my-site-id", {
-    loggers: [new LogRocketLogger({ logLevel: LogLevel.information })]
-});
-```
-
 ### Squide firefly
 
 Initialize Squide firefly with a [LogRocketLogger](../../reference/LogRocketLogger.md) instance:

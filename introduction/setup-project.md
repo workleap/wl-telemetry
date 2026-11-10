@@ -1,22 +1,21 @@
 # Setup a project
 
-Let's set up an application with all four Workleap's supported telemetry platforms.
+Let's set up an application with all three Workleap's supported telemetry platforms.
 
 ## Install the packages
 
 First, open a terminal at the root of the application and install the packages:
 
 ```bash
-pnpm add @workleap/telemetry @workleap/common-room @opentelemetry/api logrocket
+pnpm add @workleap/telemetry @opentelemetry/api logrocket
 ```
 
 ## Initialize telemetry libraries
 
-And, update the application bootstrapping code to initialize the libraries with the [initializeTelemetry](../reference/telemetry/initializeTelemetry.md) and [registerCommonRoomInstrumentation](../reference/common-room/registerCommonRoomInstrumentation.md) functions:
+And, update the application bootstrapping code to initialize the libraries with the [initializeTelemetry](../reference/telemetry/initializeTelemetry.md) function:
 
-```tsx !#7-22,24,30-31,33-34 index.tsx
+```tsx !#6-21,27,29 index.tsx
 import { initializeTelemetry, TelemetryProvider } from "@workleap/telemetry/react";
-import { registerCommonRoomInstrumentation, CommonRoomInstrumentationProvider } from "@workleap/common-room/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
@@ -38,16 +37,12 @@ const telemetryClient = initializeTelemetry("sg", {
     }
 });
 
-const commonRoomClient = registerCommonRoomInstrumentation("my-site-id");
-
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
         <TelemetryProvider client={telemetryClient}>
-            <CommonRoomInstrumentationProvider client={commonRoomClient}>
-                <App />
-            </CommonRoomInstrumentationProvider>
+            <App />
         </TelemetryProvider>
     </StrictMode>
 );
@@ -97,20 +92,6 @@ Troubleshoot issues:
 - Open the [DevTools](https://developer.chrome.com/docs/devtools/) console and look for logs starting with `[mixpanel]`.
 - Refer to the sample on [GitHub](https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms).
 
-### Common Room
-
-Go to the "Identify" page and press the button to identify the current user. Then navigate to your [Common Room](https://app.commonroom.io/) instance and go to the "Activity" page, you should see new data appear in the **next 10 minutes**.
-
-:::align-image-left
-![Common Room activity entry|558](../static/common-room/common-room-activity-entry.png)
-:::
-
-Troubleshoot issues:
-
-- Set the [verbose](../reference/telemetry/initializeTelemetry.md#verbose-mode) predefined option to `true`.
-- Open the [DevTools](https://developer.chrome.com/docs/devtools/) console and look for logs starting with `[common-room]`.
-- Refer to the sample on [GitHub](https://github.com/workleap/wl-telemetry/tree/main/samples/all-platforms).
-
 ### Correlation ids
 
 Two correlation ids are attached to every session replay, event, and trace to **unify** the telemetry platforms. To verify they are attached correctly, try the correlation ids [troubleshooting example](./use-correlation-values.md#troubleshooting-example).
@@ -126,7 +107,6 @@ If LogRocket instrumentation is enabled, Honeycomb traces and Mixpanel events wi
 - [LogRocket](./learn-logrocket/features.md)
 - [Honeycomb](./learn-honeycomb/features.md)
 - [Mixpanel](./learn-mixpanel/features.md)
-- [Common Room](../standalone-libraries/common-room/getting-started.md)
 
 ## Setup loggers
 
