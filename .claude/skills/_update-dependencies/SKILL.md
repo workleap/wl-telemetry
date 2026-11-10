@@ -180,9 +180,7 @@ If build/lint/test/browser validation fails after the update:
 
 ## pnpm 12 release-age gate
 
-`pnpm-workspace.yaml` sets no `minimumReleaseAge`, so pnpm 12's 24h default applies (pnpm 11 had no such gate). It verifies the **whole** lockfile and runs before every `pnpm run`, so `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION` stops the validation steps from starting rather than failing them.
-
-If an update pulls in a package published less than 24h ago, the run cannot proceed. There is no CLI flag — the setting only reads from `pnpm-workspace.yaml`. Either wait for the entries to age out (the error prints each publish timestamp) or revert those specific packages to their previous versions and let the next run pick them up. Do **not** commit a lower `minimumReleaseAge`: the sibling repos run the default and this one matches them.
+`pnpm-workspace.yaml` sets `minimumReleaseAge: 0`, which disables pnpm 12's release-age gate (24h by default). Dependencies are installed through the `gsoft` GitHub package firewall (`.npmrc`) instead. Do **not** change `minimumReleaseAge`.
 
 ## Report
 
