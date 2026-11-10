@@ -4,6 +4,10 @@ packages:
 
 minimumReleaseAge: 0
 
+# Also loads .pnpmfile.cjs for pnpm dlx / pnpx, which ignore the project pnpmfile. The pnpmfile keeps
+# the package downloads on the GitHub package firewall, see CONTRIBUTING.md.
+globalPnpmfile: .pnpmfile.cjs
+
 allowBuilds:
   agent-browser: true
   core-js: true
