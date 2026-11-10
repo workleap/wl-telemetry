@@ -24,9 +24,6 @@
     "js/ts.preferences.useAliasesForRenames": false,
     // TypeScript 7 doesn't ship a tsserver, so the editor can't use the workspace version as its SDK.
 
-    // "typescript.experimental.useTsgo": true,
-    // "typescript.tsdk": "node_modules\\@typescript\\native-preview\\lib",
-
     "css.validate": false,
 
     // Settings for third parties that are frequently used

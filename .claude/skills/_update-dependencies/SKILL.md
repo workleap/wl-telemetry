@@ -88,7 +88,7 @@ All tasks must succeed.
 ### 5b. Lint
 
 ```bash
-pnpm lint        # turbo: oxlint + oxfmt --check + typecheck (tsgo) + syncpack across the monorepo
+pnpm lint        # turbo: oxlint + oxfmt --check + typecheck (tsc) + syncpack across the monorepo
 ```
 
 Must be green.
