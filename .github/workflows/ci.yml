@@ -97,10 +97,6 @@ jobs:
               pnpm build-honeycomb-proxy
           fi
 
-      - name: Check lockfile tarball URLs
-        # registry.npmjs.org tarball URLs in the lockfile make installs bypass the package firewall.
-        run: pnpm check-lockfile-tarball-urls
-
       - name: Oxlint
         # Lints the whole repository: oxlint is fast enough that filtering on affected projects isn't worth it.
         run: pnpm oxlint

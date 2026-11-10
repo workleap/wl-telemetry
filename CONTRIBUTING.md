@@ -88,9 +88,6 @@ The output should include a line like `//package-firewall.githubapp.com/npm/ente
 
 A `401` from the firewall means the token is missing, expired, or not SSO-authorized for your Workleap organizations. Check the organization access of the GitHub CLI app at https://github.com/settings/applications, then run `gh auth login` again and replace the line in your `~/.npmrc`.
 
-> [!NOTE]
-> The firewall's metadata points tarballs at `registry.npmjs.org`, so every lockfile update writes direct `registry.npmjs.org` tarball URLs into `pnpm-lock.yaml`, which would make installs bypass the firewall. The root `postinstall` script ([scripts/strip-lockfile-tarball-urls.mjs](./scripts/strip-lockfile-tarball-urls.mjs)) strips them after every install, and CI fails if the lockfile contains any. If you install with `--ignore-scripts`, run `node scripts/strip-lockfile-tarball-urls.mjs` afterward.
-
 ### Install the dependencies
 
 To install the project, open a terminal at the root of the workspace and execute the following command:
