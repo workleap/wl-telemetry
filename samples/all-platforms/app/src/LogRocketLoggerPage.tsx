@@ -14,13 +14,7 @@ function generateRandomObject() {
 }
 
 function generateRandomError(): Error {
-    const messages = [
-        "Something went wrong",
-        "Unexpected failure",
-        "Unknown error occurred",
-        "Operation timed out",
-        "Internal server error"
-    ];
+    const messages = ["Something went wrong", "Unexpected failure", "Unknown error occurred", "Operation timed out", "Internal server error"];
 
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
@@ -33,7 +27,6 @@ const logger = new CompositeLogger([new BrowserConsoleLogger(), new LogRocketLog
 
 function useLogCallback(level: string) {
     return useCallback(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         logger[level]();
     }, [level]);
@@ -41,7 +34,6 @@ function useLogCallback(level: string) {
 
 function useLogWithTextCallback(level: string) {
     return useCallback(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         logger[level](`Log: ${getShortId()}`);
     }, [level]);
@@ -75,31 +67,61 @@ function LoggerSection() {
             <h2>Logger</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={handleTextClick}>Text</button>
-                    <button type="button" onClick={handleObjectClick}>Object</button>
-                    <button type="button" onClick={handleErrorClick}>Error</button>
-                    <button type="button" onClick={handleNoLeadingSpaceText}>No leading space text</button>
-                    <button type="button" onClick={handleLineChange}>Line change</button>
+                    <button type="button" onClick={handleTextClick}>
+                        Text
+                    </button>
+                    <button type="button" onClick={handleObjectClick}>
+                        Object
+                    </button>
+                    <button type="button" onClick={handleErrorClick}>
+                        Error
+                    </button>
+                    <button type="button" onClick={handleNoLeadingSpaceText}>
+                        No leading space text
+                    </button>
+                    <button type="button" onClick={handleLineChange}>
+                        Line change
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogCallback("debug")}>Debug</button>
-                    <button type="button" onClick={useLogWithTextCallback("debug")}>Debug with text</button>
+                    <button type="button" onClick={useLogCallback("debug")}>
+                        Debug
+                    </button>
+                    <button type="button" onClick={useLogWithTextCallback("debug")}>
+                        Debug with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogCallback("information")}>Information</button>
-                    <button type="button" onClick={useLogWithTextCallback("information")}>Information with text</button>
+                    <button type="button" onClick={useLogCallback("information")}>
+                        Information
+                    </button>
+                    <button type="button" onClick={useLogWithTextCallback("information")}>
+                        Information with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogCallback("warning")}>Warning</button>
-                    <button type="button" onClick={useLogWithTextCallback("warning")}>Warning with text</button>
+                    <button type="button" onClick={useLogCallback("warning")}>
+                        Warning
+                    </button>
+                    <button type="button" onClick={useLogWithTextCallback("warning")}>
+                        Warning with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogCallback("error")}>Error</button>
-                    <button type="button" onClick={useLogWithTextCallback("error")}>Error with text</button>
+                    <button type="button" onClick={useLogCallback("error")}>
+                        Error
+                    </button>
+                    <button type="button" onClick={useLogWithTextCallback("error")}>
+                        Error with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogCallback("critical")}>Critical</button>
-                    <button type="button" onClick={useLogWithTextCallback("critical")}>Critical with text</button>
+                    <button type="button" onClick={useLogCallback("critical")}>
+                        Critical
+                    </button>
+                    <button type="button" onClick={useLogWithTextCallback("critical")}>
+                        Critical with text
+                    </button>
                 </div>
             </div>
         </>
@@ -110,7 +132,6 @@ function LoggerSection() {
 
 function useLogRocketScopeLogCallback(level: string, scope?: CompositeLoggerScope) {
     return useCallback(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         scope?.[level]();
     }, [scope, level]);
@@ -118,7 +139,6 @@ function useLogRocketScopeLogCallback(level: string, scope?: CompositeLoggerScop
 
 function useLogRocketScopeLogWithTextCallback(level: string, scope?: CompositeLoggerScope) {
     return useCallback(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         scope?.[level](`Log: ${getShortId()}`);
     }, [scope, level]);
@@ -157,33 +177,63 @@ function ScopeSection() {
             <h3>Scope</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={handleCreateScopeClick}>Create scope</button>
-                    <button type="button" onClick={handleEndScopeClick}>End scope</button>
+                    <button type="button" onClick={handleCreateScopeClick}>
+                        Create scope
+                    </button>
+                    <button type="button" onClick={handleEndScopeClick}>
+                        End scope
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={handleTextClick}>Text</button>
-                    <button type="button" onClick={handleObjectClick}>Object</button>
-                    <button type="button" onClick={handleErrorClick}>Error</button>
+                    <button type="button" onClick={handleTextClick}>
+                        Text
+                    </button>
+                    <button type="button" onClick={handleObjectClick}>
+                        Object
+                    </button>
+                    <button type="button" onClick={handleErrorClick}>
+                        Error
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogRocketScopeLogCallback("debug", scope)}>Debug</button>
-                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("debug", scope)}>Debug with text</button>
+                    <button type="button" onClick={useLogRocketScopeLogCallback("debug", scope)}>
+                        Debug
+                    </button>
+                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("debug", scope)}>
+                        Debug with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogRocketScopeLogCallback("information", scope)}>Information</button>
-                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("information", scope)}>Information with text</button>
+                    <button type="button" onClick={useLogRocketScopeLogCallback("information", scope)}>
+                        Information
+                    </button>
+                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("information", scope)}>
+                        Information with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogRocketScopeLogCallback("warning", scope)}>Warning</button>
-                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("warning", scope)}>Warning with text</button>
+                    <button type="button" onClick={useLogRocketScopeLogCallback("warning", scope)}>
+                        Warning
+                    </button>
+                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("warning", scope)}>
+                        Warning with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogRocketScopeLogCallback("error", scope)}>Error</button>
-                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("error", scope)}>Error with text</button>
+                    <button type="button" onClick={useLogRocketScopeLogCallback("error", scope)}>
+                        Error
+                    </button>
+                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("error", scope)}>
+                        Error with text
+                    </button>
                 </div>
                 <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="button" onClick={useLogRocketScopeLogCallback("critical", scope)}>Critical</button>
-                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("critical", scope)}>Critical with text</button>
+                    <button type="button" onClick={useLogRocketScopeLogCallback("critical", scope)}>
+                        Critical
+                    </button>
+                    <button type="button" onClick={useLogRocketScopeLogWithTextCallback("critical", scope)}>
+                        Critical with text
+                    </button>
                 </div>
             </div>
         </>
@@ -195,8 +245,8 @@ function ScopeSection() {
 export function LogRocketLoggerPage() {
     const track = useMixpanelTrackingFunction();
 
-    track("Page View", {
-        "Page": "LogRocket Logger"
+    void track("Page View", {
+        Page: "LogRocket Logger"
     });
 
     return (

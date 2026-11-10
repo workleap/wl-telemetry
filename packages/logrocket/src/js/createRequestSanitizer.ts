@@ -1,6 +1,6 @@
 import type { LogRocketRequest } from "./logRocketTypes.ts";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export type RequestSanitizerFunction = (req: LogRocketRequest) => any;
 
 export function createRequestSanitizer(fuzzyRequestSanitizer: RequestSanitizerFunction) {

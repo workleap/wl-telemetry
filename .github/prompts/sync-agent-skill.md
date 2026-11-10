@@ -33,12 +33,12 @@ All other `.md` files under `docs/` are in scope.
 
 Use this table to determine which skill file to update when a doc change is found:
 
-| Skill file | Docs |
-|---|---|
-| `SKILL.md` | `docs/introduction/getting-started.md`, `docs/introduction/use-correlation-values.md` |
-| `references/api.md` | `docs/reference/telemetry/*`, `docs/reference/LogRocketLogger.md` |
+| Skill file                   | Docs                                                                                                               |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `SKILL.md`                   | `docs/introduction/getting-started.md`, `docs/introduction/use-correlation-values.md`                              |
+| `references/api.md`          | `docs/reference/telemetry/*`, `docs/reference/LogRocketLogger.md`                                                  |
 | `references/integrations.md` | `docs/introduction/learn-honeycomb/*`, `docs/introduction/learn-logrocket/*`, `docs/introduction/learn-mixpanel/*` |
-| `references/examples.md` | `docs/introduction/setup-project.md`, `docs/guides/*` |
+| `references/examples.md`     | `docs/introduction/setup-project.md`, `docs/guides/*`                                                              |
 
 If a doc does not match any row above, use your best judgment to route it to the most relevant skill file. Always respect the "Excluded docs" section — never sync content from excluded paths.
 
@@ -97,6 +97,7 @@ Use the following prompt for the subagent:
 > ## Output
 >
 > End with:
+>
 > - `COVERAGE: X/18 PASSED`
 > - `ACCURACY: list of discrepancies (or "No discrepancies found")`
 

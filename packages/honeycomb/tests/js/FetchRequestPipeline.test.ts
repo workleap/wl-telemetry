@@ -54,7 +54,6 @@ test.concurrent("when a hook returns false, subsequent hooks are executed", ({ e
     const hook3 = vi.fn();
 
     // This is expected to test this case.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     pipeline.registerHook(hook1);
     pipeline.registerHook(hook2);
@@ -77,7 +76,6 @@ test.concurrent("when a hook return something else than true, subsequent hooks a
     const hook3 = vi.fn();
 
     // This is expected to test this case.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     pipeline.registerHook(hook1);
     pipeline.registerHook(hook2);

@@ -39,15 +39,14 @@ describe("LogRocketLogger", () => {
         ["warning", "warn", [true, true, true, false, false]],
         ["error", "error", [true, true, true, true, false]],
         ["critical", "error", [true, true, true, true, true]]
-    ] satisfies [keyof LogRocketLogger, keyof typeof LogRocket, boolean[]][]
-    )("can write a \"%s\" log", (loggerFunction, logRocketMethod, expectedResults) => {
+    ] satisfies [keyof LogRocketLogger, keyof typeof LogRocket, boolean[]][])('can write a "%s" log', (loggerFunction, logRocketMethod, expectedResults) => {
         test.for([
             ["debug", LogLevel.debug],
             ["information", LogLevel.information],
             ["warning", LogLevel.warning],
             ["error", LogLevel.error],
             ["critical", LogLevel.critical]
-        ] satisfies [keyof LogRocketLogger, LogLevel][])("when the log level is \"%s\"", ([, logLevel], { expect }) => {
+        ] satisfies [keyof LogRocketLogger, LogLevel][])('when the log level is "%s"', ([, logLevel], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const logger = new LogRocketLogger({ logLevel });
@@ -62,10 +61,8 @@ describe("LogRocketLogger", () => {
             }
 
             if (expectedResult) {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledExactlyOnceWith(logValue);
             } else {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).not.toHaveBeenCalled();
             }
         });
@@ -80,107 +77,61 @@ describe("LogRocketLogger", () => {
             ["critical", "error"]
         ] satisfies [keyof LogRocketLogger, keyof typeof LogRocket][];
 
-        test.for(pairs)("can build a \"%s\" log with text", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with text', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
-            logger
-                .withText("Hello")
-                .withText("World")
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withText("Hello").withText("World")[loggerFunction]();
 
             expect(logMock).toHaveBeenCalledExactlyOnceWith("Hello World");
         });
 
-        test.for(pairs)("can build a \"%s\" log with object", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with object', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
             const obj = { name: "John", age: 30 };
 
-            logger
-                .withText("User:")
-                .withObject(obj)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withText("User:").withObject(obj)[loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "User:",
-                obj
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("User:", obj);
         });
 
-        test.for(pairs)("can build a \"%s\" log with error", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with error', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
             const error = new Error("Test error");
 
-            logger
-                .withText("Error occurred:")
-                .withError(error)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withText("Error occurred:").withError(error)[loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "Error occurred:",
-                error
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("Error occurred:", error);
         });
 
-        test.for(pairs)("can build a \"%s\" log with line changes", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with line changes', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
             const obj = { name: "John", age: 30 };
             const error = new Error("Test error");
 
-            logger
-                .withText("Processing segment")
-                .withLineChange()
-                .withText("on multiple lines")
-                .withObject(obj)
-                .withLineChange()
-                .withText("failed with error")
-                .withError(error)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withText("Processing segment").withLineChange().withText("on multiple lines").withObject(obj).withLineChange().withText("failed with error").withError(error)[loggerFunction]();
 
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "Processing segment",
-                "\r\n",
-                "on multiple lines",
-                obj,
-                "\r\n",
-                "failed with error",
-                error
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("Processing segment", "\r\n", "on multiple lines", obj, "\r\n", "failed with error", error);
         });
 
-        test.for(pairs)("can build a \"%s\" log with mixed segments", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with mixed segments', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
             const obj = { id: 1 };
             const error = new Error("Test error");
 
-            logger
-                .withText("Processing segment")
-                .withObject(obj)
-                .withText("failed with error")
-                .withError(error)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withText("Processing segment").withObject(obj).withText("failed with error").withError(error)[loggerFunction]();
 
             // The sequencing has been preserved because there's no styling.
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "Processing segment",
-                obj,
-                "failed with error",
-                error
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("Processing segment", obj, "failed with error", error);
         });
 
         test.for(pairs)("when the text is undefined, do not log a %s entry", ([loggerFunction, logRocketMethod], { expect }) => {
@@ -188,10 +139,7 @@ describe("LogRocketLogger", () => {
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
-            logger
-                .withText()
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withText()[loggerFunction]();
 
             expect(logMock).not.toHaveBeenCalled();
         });
@@ -201,10 +149,7 @@ describe("LogRocketLogger", () => {
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
-            logger
-                .withObject()
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withObject()[loggerFunction]();
 
             expect(logMock).not.toHaveBeenCalled();
         });
@@ -214,10 +159,7 @@ describe("LogRocketLogger", () => {
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
-            logger
-                .withError()
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            logger.withError()[loggerFunction]();
 
             expect(logMock).not.toHaveBeenCalled();
         });
@@ -264,17 +206,9 @@ describe("LogRocketLogger", () => {
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
-            logger
-                .withText("First line")
-                .withLineChange()
-                .withText("Second line")
-                .debug();
+            logger.withText("First line").withLineChange().withText("Second line").debug();
 
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "First line",
-                "\r\n",
-                "Second line"
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("First line", "\r\n", "Second line");
         });
 
         test("can add multiple line changes", ({ expect }) => {
@@ -282,21 +216,9 @@ describe("LogRocketLogger", () => {
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
-            logger
-                .withText("First line")
-                .withLineChange()
-                .withLineChange()
-                .withLineChange()
-                .withText("Last line")
-                .debug();
+            logger.withText("First line").withLineChange().withLineChange().withLineChange().withText("Last line").debug();
 
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "First line",
-                "\r\n",
-                "\r\n",
-                "\r\n",
-                "Last line"
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("First line", "\r\n", "\r\n", "\r\n", "Last line");
         });
 
         test("can add multiple lines with text followed by an object", ({ expect }) => {
@@ -307,27 +229,9 @@ describe("LogRocketLogger", () => {
             const obj2 = { id: 2 };
             const obj3 = { id: 3 };
 
-            logger
-                .withText("First line")
-                .withObject(obj1)
-                .withLineChange()
-                .withText("Second line")
-                .withObject(obj2)
-                .withLineChange()
-                .withText("Third line")
-                .withObject(obj3)
-                .debug();
+            logger.withText("First line").withObject(obj1).withLineChange().withText("Second line").withObject(obj2).withLineChange().withText("Third line").withObject(obj3).debug();
 
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "First line",
-                obj1,
-                "\r\n",
-                "Second line",
-                obj2,
-                "\r\n",
-                "Third line",
-                obj3
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("First line", obj1, "\r\n", "Second line", obj2, "\r\n", "Third line", obj3);
         });
     });
 
@@ -337,10 +241,7 @@ describe("LogRocketLogger", () => {
 
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
 
-            logger
-                .withText("First")
-                .withText("Second", { leadingSpace: false })
-                .debug();
+            logger.withText("First").withText("Second", { leadingSpace: false }).debug();
 
             expect(logMock).toHaveBeenCalledExactlyOnceWith("FirstSecond");
         });
@@ -351,23 +252,9 @@ describe("LogRocketLogger", () => {
             const logger = new LogRocketLogger({ logLevel: LogLevel.debug });
             const obj = { id: 1 };
 
-            logger
-                .withText("Text 1", { leadingSpace: false })
-                .withText("Text 2", { leadingSpace: false })
-                .withObject(obj)
-                .withText("Text 3", { leadingSpace: false })
-                .withText("Text 4", { leadingSpace: false })
-                .withLineChange()
-                .withText("Text 5", { leadingSpace: false })
-                .debug();
+            logger.withText("Text 1", { leadingSpace: false }).withText("Text 2", { leadingSpace: false }).withObject(obj).withText("Text 3", { leadingSpace: false }).withText("Text 4", { leadingSpace: false }).withLineChange().withText("Text 5", { leadingSpace: false }).debug();
 
-            expect(logMock).toHaveBeenCalledExactlyOnceWith(
-                "Text 1Text 2",
-                obj,
-                "Text 3Text 4",
-                "\r\n",
-                "Text 5"
-            );
+            expect(logMock).toHaveBeenCalledExactlyOnceWith("Text 1Text 2", obj, "Text 3Text 4", "\r\n", "Text 5");
         });
     });
 });
@@ -379,14 +266,14 @@ describe("LogRocketLoggerScope", () => {
         ["warning", "warn", [true, true, true, false, false]],
         ["error", "error", [true, true, true, true, false]],
         ["critical", "error", [true, true, true, true, true]]
-    ] satisfies [keyof LogRocketLoggerScope, keyof typeof LogRocket, boolean[]][])("can write a \"%s\" log", (loggerFunction, logRocketMethod, expectedResults) => {
+    ] satisfies [keyof LogRocketLoggerScope, keyof typeof LogRocket, boolean[]][])('can write a "%s" log', (loggerFunction, logRocketMethod, expectedResults) => {
         test.for([
             ["debug", LogLevel.debug],
             ["information", LogLevel.information],
             ["warning", LogLevel.warning],
             ["error", LogLevel.error],
             ["critical", LogLevel.critical]
-        ] satisfies [keyof LogRocketLoggerScope, LogLevel][])("when the log level is \"%s\"", ([, logLevel], { expect }) => {
+        ] satisfies [keyof LogRocketLoggerScope, LogLevel][])('when the log level is "%s"', ([, logLevel], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const scope = new LogRocketLoggerScope("foo", logLevel);
@@ -403,14 +290,11 @@ describe("LogRocketLoggerScope", () => {
 
             if (expectedResult) {
                 if ((loggerFunction === "debug" || loggerFunction === "information") && (logLevel === LogLevel.debug || logLevel === LogLevel.information)) {
-                    // eslint-disable-next-line vitest/no-conditional-expect
                     expect(logMock).toHaveBeenCalledTimes(2);
                 } else {
-                    // eslint-disable-next-line vitest/no-conditional-expect
                     expect(logMock).toHaveBeenCalledOnce();
                 }
             } else {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).not.toHaveBeenCalled();
             }
         });
@@ -425,193 +309,120 @@ describe("LogRocketLoggerScope", () => {
             ["critical", "error"]
         ] satisfies [keyof LogRocketLoggerScope, keyof typeof LogRocket][];
 
-        test.for(pairs)("can build a \"%s\" log with text", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with text', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
 
-            scope
-                .withText("Hello")
-                .withText("World")
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withText("Hello").withText("World")[loggerFunction]();
 
             scope.end();
 
             if (logRocketMethod === "log") {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "Hello World"
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "Hello World");
         });
 
-        test.for(pairs)("can build a \"%s\" log with object", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with object', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
             const obj = { name: "John", age: 30 };
 
-            scope
-                .withText("User:")
-                .withObject(obj)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withText("User:").withObject(obj)[loggerFunction]();
 
             scope.end();
 
             if (logRocketMethod === "log") {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "User:",
-                obj
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "User:", obj);
         });
 
-        test.for(pairs)("can build a \"%s\" log with error", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with error', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
             const error = new Error("Test error");
 
-            scope
-                .withText("Error occurred:")
-                .withError(error)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withText("Error occurred:").withError(error)[loggerFunction]();
 
             scope.end();
 
             if (logRocketMethod === "log") {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "Error occurred:",
-                error
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "Error occurred:", error);
         });
 
-        test.for(pairs)("can build a \"%s\" log with error", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with error', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
             const obj = { name: "John", age: 30 };
             const error = new Error("Test error");
 
-            scope
-                .withText("Processing segment")
-                .withLineChange()
-                .withText("on multiple lines")
-                .withObject(obj)
-                .withLineChange()
-                .withText("failed with error")
-                .withError(error)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withText("Processing segment").withLineChange().withText("on multiple lines").withObject(obj).withLineChange().withText("failed with error").withError(error)[loggerFunction]();
 
             scope.end();
 
             if (logRocketMethod === "log") {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "Processing segment",
-                "\r\n",
-                "on multiple lines",
-                obj,
-                "\r\n",
-                "failed with error",
-                error
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "Processing segment", "\r\n", "on multiple lines", obj, "\r\n", "failed with error", error);
         });
 
-        test.for(pairs)("can build a \"%s\" log with mixed segments", ([loggerFunction, logRocketMethod], { expect }) => {
+        test.for(pairs)('can build a "%s" log with mixed segments', ([loggerFunction, logRocketMethod], { expect }) => {
             const logMock = getMocks()[logRocketMethod];
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
             const obj = { id: 1 };
             const error = new Error("Test error");
 
-            scope
-                .withText("Processing segment")
-                .withObject(obj)
-                .withText("failed with error")
-                .withError(error)
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withText("Processing segment").withObject(obj).withText("failed with error").withError(error)[loggerFunction]();
 
             scope.end();
 
             if (logRocketMethod === "log") {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledTimes(2);
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledWith("foo");
             } else {
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(logMock).toHaveBeenCalledOnce();
 
-                // eslint-disable-next-line vitest/no-conditional-expect
                 expect(getMocks().log).toHaveBeenCalledExactlyOnceWith("foo");
             }
 
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "Processing segment",
-                obj,
-                "failed with error",
-                error
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "Processing segment", obj, "failed with error", error);
         });
 
         test.for(pairs)("when the text is undefined, do not log a %s entry", ([loggerFunction, logRocketMethod], { expect }) => {
@@ -619,10 +430,7 @@ describe("LogRocketLoggerScope", () => {
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
 
-            scope
-                .withText()
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withText()[loggerFunction]();
 
             scope.end();
 
@@ -634,10 +442,7 @@ describe("LogRocketLoggerScope", () => {
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
 
-            scope
-                .withObject()
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withObject()[loggerFunction]();
 
             scope.end();
 
@@ -649,10 +454,7 @@ describe("LogRocketLoggerScope", () => {
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
 
-            scope
-                .withError()
-                // eslint-disable-next-line no-unexpected-multiline
-                [loggerFunction]();
+            scope.withError()[loggerFunction]();
 
             scope.end();
 
@@ -679,21 +481,12 @@ describe("LogRocketLoggerScope", () => {
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
 
-            scope
-                .withText("First line")
-                .withLineChange()
-                .withText("Second line")
-                .debug();
+            scope.withText("First line").withLineChange().withText("Second line").debug();
 
             scope.end();
 
             expect(logMock).toHaveBeenCalledTimes(2);
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "First line",
-                "\r\n",
-                "Second line"
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "First line", "\r\n", "Second line");
         });
 
         test("can add multiple line changes", ({ expect }) => {
@@ -701,25 +494,12 @@ describe("LogRocketLoggerScope", () => {
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
 
-            scope
-                .withText("First line")
-                .withLineChange()
-                .withLineChange()
-                .withLineChange()
-                .withText("Last line")
-                .debug();
+            scope.withText("First line").withLineChange().withLineChange().withLineChange().withText("Last line").debug();
 
             scope.end();
 
             expect(logMock).toHaveBeenCalledTimes(2);
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "First line",
-                "\r\n",
-                "\r\n",
-                "\r\n",
-                "Last line"
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "First line", "\r\n", "\r\n", "\r\n", "Last line");
         });
 
         test("can add multiple lines with text followed by an object", ({ expect }) => {
@@ -730,31 +510,12 @@ describe("LogRocketLoggerScope", () => {
             const obj2 = { id: 2 };
             const obj3 = { id: 3 };
 
-            scope
-                .withText("First line")
-                .withObject(obj1)
-                .withLineChange()
-                .withText("Second line")
-                .withObject(obj2)
-                .withLineChange()
-                .withText("Third line")
-                .withObject(obj3)
-                .debug();
+            scope.withText("First line").withObject(obj1).withLineChange().withText("Second line").withObject(obj2).withLineChange().withText("Third line").withObject(obj3).debug();
 
             scope.end();
 
             expect(logMock).toHaveBeenCalledTimes(2);
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "First line",
-                obj1,
-                "\r\n",
-                "Second line",
-                obj2,
-                "\r\n",
-                "Third line",
-                obj3
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "First line", obj1, "\r\n", "Second line", obj2, "\r\n", "Third line", obj3);
         });
     });
 
@@ -764,18 +525,12 @@ describe("LogRocketLoggerScope", () => {
 
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
 
-            scope
-                .withText("First")
-                .withText("Second", { leadingSpace: false })
-                .debug();
+            scope.withText("First").withText("Second", { leadingSpace: false }).debug();
 
             scope.end();
 
             expect(logMock).toHaveBeenCalledTimes(2);
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "FirstSecond"
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "FirstSecond");
         });
 
         test("can remove the leading space from multiple mixed text segments", ({ expect }) => {
@@ -784,27 +539,12 @@ describe("LogRocketLoggerScope", () => {
             const scope = new LogRocketLoggerScope("foo", LogLevel.debug);
             const obj = { id: 1 };
 
-            scope
-                .withText("Text 1", { leadingSpace: false })
-                .withText("Text 2", { leadingSpace: false })
-                .withObject(obj)
-                .withText("Text 3", { leadingSpace: false })
-                .withText("Text 4", { leadingSpace: false })
-                .withLineChange()
-                .withText("Text 5", { leadingSpace: false })
-                .debug();
+            scope.withText("Text 1", { leadingSpace: false }).withText("Text 2", { leadingSpace: false }).withObject(obj).withText("Text 3", { leadingSpace: false }).withText("Text 4", { leadingSpace: false }).withLineChange().withText("Text 5", { leadingSpace: false }).debug();
 
             scope.end();
 
             expect(logMock).toHaveBeenCalledTimes(2);
-            expect(logMock).toHaveBeenCalledWith(
-                "    ",
-                "Text 1Text 2",
-                obj,
-                "Text 3Text 4",
-                "\r\n",
-                "Text 5"
-            );
+            expect(logMock).toHaveBeenCalledWith("    ", "Text 1Text 2", obj, "Text 3Text 4", "\r\n", "Text 5");
         });
     });
 });

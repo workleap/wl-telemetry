@@ -126,7 +126,6 @@ export interface RegisterHoneycombInstrumentationOptions {
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     loggers?: RootLogger[];
-
 }
 
 // The network instrumentations compare the ignored URLs with the normalized URL of the requests.
@@ -138,17 +137,14 @@ function normalizeUrlToIgnore(url: string) {
     }
 }
 
-const NetworkInstrumentationNames = [
-    "@opentelemetry/instrumentation-fetch",
-    "@opentelemetry/instrumentation-xml-http-request"
-];
+const NetworkInstrumentationNames = new Set(["@opentelemetry/instrumentation-fetch", "@opentelemetry/instrumentation-xml-http-request"]);
 
 // A transformer can change the traces endpoint after the instrumentations have been created. The URL the exporter
 // actually sends the requests to must be ignored by the network instrumentations, otherwise the export requests
 // would be traced, resulting in an endless loop of export -> span -> export.
 function ignoreUrlInNetworkInstrumentations(instrumentations: (Instrumentation | Instrumentation[])[], url: string) {
     for (const instrumentation of instrumentations.flat()) {
-        if (NetworkInstrumentationNames.includes(instrumentation.instrumentationName)) {
+        if (NetworkInstrumentationNames.has(instrumentation.instrumentationName)) {
             const config = instrumentation.getConfig() as FetchInstrumentationConfig;
             const ignoreUrls = config.ignoreUrls ?? [];
 
@@ -199,7 +195,7 @@ export function getHoneycombSdkOptions(
     } = options;
 
     if (!proxy && !apiKey) {
-        throw new Error("[honeycomb] Instrumentation must be initialized with either a \"proxy\" or \"apiKey\" option.");
+        throw new Error('[honeycomb] Instrumentation must be initialized with either a "proxy" or "apiKey" option.');
     }
 
     const logger = createCompositeLogger(verbose, loggers);
@@ -214,11 +210,7 @@ export function getHoneycombSdkOptions(
     const autoInstrumentations: InstrumentationConfigMap = {};
 
     if (fetchInstrumentation) {
-        autoInstrumentations["@opentelemetry/instrumentation-fetch"] =
-            augmentFetchInstrumentationOptionsWithFetchRequestPipeline(
-                fetchInstrumentation(instrumentationOptions),
-                fetchRequestPipeline
-            );
+        autoInstrumentations["@opentelemetry/instrumentation-fetch"] = augmentFetchInstrumentationOptionsWithFetchRequestPipeline(fetchInstrumentation(instrumentationOptions), fetchRequestPipeline);
     } else {
         autoInstrumentations["@opentelemetry/instrumentation-fetch"] = {
             enabled: false
@@ -258,10 +250,7 @@ export function getHoneycombSdkOptions(
         serviceName,
         // Watch out, getWebAutoInstrumentations enables by default all the supported instrumentations.
         // It's important to disabled those that we don't want.
-        instrumentations: [
-            ...getWebAutoInstrumentations(autoInstrumentations),
-            ...instrumentations
-        ],
+        instrumentations: [...getWebAutoInstrumentations(autoInstrumentations), ...instrumentations],
         spanProcessors: [globalAttributeSpanProcessor, new NormalizeAttributesSpanProcessor(), ...spanProcessors]
     } satisfies HoneycombSdkOptions;
 
@@ -281,10 +270,7 @@ export function getHoneycombSdkOptions(
         if (transformedSdkOptions.disableDefaultTraceExporter) {
             const proxyTraceExporter = createProxyTraceExporter(transformedSdkOptions, credentials);
 
-            transformedSdkOptions.traceExporters = [
-                ...(transformedSdkOptions.traceExporters ?? []),
-                proxyTraceExporter
-            ];
+            transformedSdkOptions.traceExporters = [...(transformedSdkOptions.traceExporters ?? []), proxyTraceExporter];
 
             ignoreUrlInNetworkInstrumentations(transformedSdkOptions.instrumentations ?? [], normalizeUrlToIgnore(proxyTraceExporter.url));
         } else {
@@ -328,28 +314,14 @@ export class HoneycombInstrumentationRegistrator {
     readonly #fetchRequestPipeline: FetchRequestPipeline;
     readonly #createHoneycombSdkInstance: HoneycombSdkFactory;
 
-    constructor(
-        globalAttributeSpanProcessor: GlobalAttributeSpanProcessor,
-        fetchRequestPipeline: FetchRequestPipeline,
-        createHoneycombSdkInstance: HoneycombSdkFactory
-    ) {
+    constructor(globalAttributeSpanProcessor: GlobalAttributeSpanProcessor, fetchRequestPipeline: FetchRequestPipeline, createHoneycombSdkInstance: HoneycombSdkFactory) {
         this.#globalAttributeSpanProcessor = globalAttributeSpanProcessor;
         this.#fetchRequestPipeline = fetchRequestPipeline;
         this.#createHoneycombSdkInstance = createHoneycombSdkInstance;
     }
 
-    register(
-        namespace: string,
-        serviceName: NonNullable<HoneycombSdkOptions["serviceName"]>,
-        apiServiceUrls: PropagateTraceHeaderCorsUrls,
-        options: RegisterHoneycombInstrumentationOptions = {}
-    ) {
-        const {
-            telemetryContext,
-            logRocketInstrumentationClient,
-            verbose = false,
-            loggers = []
-        } = options;
+    register(namespace: string, serviceName: NonNullable<HoneycombSdkOptions["serviceName"]>, apiServiceUrls: PropagateTraceHeaderCorsUrls, options: RegisterHoneycombInstrumentationOptions = {}) {
+        const { telemetryContext, logRocketInstrumentationClient, verbose = false, loggers = [] } = options;
 
         const logger = createCompositeLogger(verbose, loggers);
 
@@ -370,10 +342,7 @@ export class HoneycombInstrumentationRegistrator {
         // Add LogRocket session url to traces.
         if (logRocketInstrumentationClient) {
             logRocketInstrumentationClient.registerGetSessionUrlListener((sessionUrl: string) => {
-                logger
-                    .withText("[honeycomb] Received LogRocket session replay URL:")
-                    .withText(sessionUrl)
-                    .debug();
+                logger.withText("[honeycomb] Received LogRocket session replay URL:").withText(sessionUrl).debug();
 
                 this.#globalAttributeSpanProcessor.setAttribute("app.logrocket_session_url", sessionUrl);
             });
@@ -397,22 +366,8 @@ export class HoneycombInstrumentationRegistrator {
  * @returns {HoneycombInstrumentationClient} An Honeycomb instrumentation client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function registerHoneycombInstrumentation(
-    namespace: string,
-    serviceName: NonNullable<HoneycombSdkOptions["serviceName"]>,
-    apiServiceUrls: PropagateTraceHeaderCorsUrls,
-    options?: RegisterHoneycombInstrumentationOptions
-) {
-    getRegistrationGuard().throw("[honeycomb] The Honeycomb instrumentation has already been registered. Did you call the \"registerHoneycombInstrumentation\" function twice?");
+export function registerHoneycombInstrumentation(namespace: string, serviceName: NonNullable<HoneycombSdkOptions["serviceName"]>, apiServiceUrls: PropagateTraceHeaderCorsUrls, options?: RegisterHoneycombInstrumentationOptions) {
+    getRegistrationGuard().throw('[honeycomb] The Honeycomb instrumentation has already been registered. Did you call the "registerHoneycombInstrumentation" function twice?');
 
-    return new HoneycombInstrumentationRegistrator(
-        new GlobalAttributeSpanProcessor(),
-        new FetchRequestPipeline(),
-        x => new HoneycombWebSDK(x)
-    ).register(
-        namespace,
-        serviceName,
-        apiServiceUrls,
-        options
-    );
+    return new HoneycombInstrumentationRegistrator(new GlobalAttributeSpanProcessor(), new FetchRequestPipeline(), x => new HoneycombWebSDK(x)).register(namespace, serviceName, apiServiceUrls, options);
 }

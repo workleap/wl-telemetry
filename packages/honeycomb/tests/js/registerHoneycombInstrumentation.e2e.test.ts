@@ -13,15 +13,11 @@ import { HoneycombInstrumentationRegistrator, type RegisterHoneycombInstrumentat
 let sdk: HoneycombWebSDK | undefined;
 
 function register(options: RegisterHoneycombInstrumentationOptions) {
-    const registrator = new HoneycombInstrumentationRegistrator(
-        new GlobalAttributeSpanProcessor(),
-        new FetchRequestPipeline(),
-        x => {
-            sdk = new HoneycombWebSDK(x);
+    const registrator = new HoneycombInstrumentationRegistrator(new GlobalAttributeSpanProcessor(), new FetchRequestPipeline(), x => {
+        sdk = new HoneycombWebSDK(x);
 
-            return sdk;
-        }
-    );
+        return sdk;
+    });
 
     return registrator.register("foo", "bar", ["/bar"], {
         // The instrumentations are not needed for these tests and they patch the globals.
@@ -39,9 +35,7 @@ async function recordSpanAndFlush(name: string) {
 }
 
 function getRequests(fetchMock: ReturnType<typeof vi.fn>, path: string) {
-    return fetchMock.mock.calls
-        .filter(([url]) => String(url).includes(path))
-        .map(([url, init]) => ({ url: String(url), init: init as RequestInit }));
+    return fetchMock.mock.calls.filter(([url]) => String(url).includes(path)).map(([url, init]) => ({ url: String(url), init: init as RequestInit }));
 }
 
 function decodeBody(init: RequestInit) {

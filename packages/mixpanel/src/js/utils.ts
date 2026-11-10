@@ -1,7 +1,7 @@
 // This code is adapted from https://github.com/mixpanel/mixpanel-js/blob/master/src/utils.js
 export function browserName(userAgent: string, vendor?: string, opera?: object) {
     // vendor is undefined for at least IE9
-    vendor = vendor || ""; // eslint-disable-line no-param-reassign
+    vendor = vendor || ""; // oxlint-disable-line eslint/no-param-reassign
 
     if (opera || userAgent.includes(" OPR/")) {
         if (userAgent.includes("Mini")) {
@@ -56,19 +56,19 @@ export function browserVersion(userAgent: string, vendor?: string, opera?: objec
     const versionRegexs: { [key: string]: RegExp } = {
         "Internet Explorer Mobile": /rv:(\d+(\.\d+)?)/,
         "Microsoft Edge": /Edge\/(\d+(\.\d+)?)/,
-        "Chrome": /Chrome\/(\d+(\.\d+)?)/,
+        Chrome: /Chrome\/(\d+(\.\d+)?)/,
         "Chrome iOS": /CriOS\/(\d+(\.\d+)?)/,
         "UC Browser": /(UCBrowser|UCWEB)\/(\d+(\.\d+)?)/,
-        "Safari": /Version\/(\d+(\.\d+)?)/,
+        Safari: /Version\/(\d+(\.\d+)?)/,
         "Mobile Safari": /Version\/(\d+(\.\d+)?)/,
-        "Opera": /(Opera|OPR)\/(\d+(\.\d+)?)/,
-        "Firefox": /Firefox\/(\d+(\.\d+)?)/,
+        Opera: /(Opera|OPR)\/(\d+(\.\d+)?)/,
+        Firefox: /Firefox\/(\d+(\.\d+)?)/,
         "Firefox iOS": /FxiOS\/(\d+(\.\d+)?)/,
-        "Konqueror": /Konqueror:(\d+(\.\d+)?)/,
-        "BlackBerry": /BlackBerry (\d+(\.\d+)?)/,
+        Konqueror: /Konqueror:(\d+(\.\d+)?)/,
+        BlackBerry: /BlackBerry (\d+(\.\d+)?)/,
         "Android Mobile": /android\s(\d+(\.\d+)?)/,
         "Internet Explorer": /(rv:|MSIE )(\d+(\.\d+)?)/,
-        "Mozilla": /rv:(\d+(\.\d+)?)/
+        Mozilla: /rv:(\d+(\.\d+)?)/
     };
     const regex = versionRegexs[browser];
     if (regex === undefined) {
@@ -85,7 +85,6 @@ export function browserVersion(userAgent: string, vendor?: string, opera?: objec
 export function osName(userAgent: string) {
     const a = userAgent;
     if (/Windows/i.test(a)) {
-        // eslint-disable-next-line @typescript-eslint/prefer-includes
         if (/Phone/.test(a) || /WPDesktop/.test(a)) {
             return "Windows Phone";
         }
@@ -93,17 +92,14 @@ export function osName(userAgent: string) {
         return "Windows";
     } else if (/(iPhone|iPad|iPod)/.test(a)) {
         return "iOS";
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/Android/.test(a)) {
         return "Android";
     } else if (/(BlackBerry|PlayBook|BB10)/i.test(a)) {
         return "BlackBerry";
     } else if (/Mac/i.test(a)) {
         return "Mac OS X";
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/Linux/.test(a)) {
         return "Linux";
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/CrOS/.test(a)) {
         return "Chrome OS";
     }
@@ -112,21 +108,16 @@ export function osName(userAgent: string) {
 }
 
 export function deviceType(userAgent: string) {
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     if (/Windows Phone/i.test(userAgent) || /WPDesktop/.test(userAgent)) {
         return "Windows Phone";
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/iPad/.test(userAgent)) {
         return "iPad";
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/iPod/.test(userAgent)) {
         return "iPod Touch";
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/iPhone/.test(userAgent)) {
         return "iPhone";
     } else if (/(BlackBerry|PlayBook|BB10)/i.test(userAgent)) {
         return "BlackBerry";
-    // eslint-disable-next-line @typescript-eslint/prefer-includes
     } else if (/Android/.test(userAgent)) {
         return "Android";
     }

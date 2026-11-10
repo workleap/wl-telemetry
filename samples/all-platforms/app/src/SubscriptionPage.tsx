@@ -9,14 +9,17 @@ interface Subscription {
 }
 
 export function SubscriptionPage() {
-    const { data: subscription } = useSuspenseQuery({ queryKey: ["api/subscription"], queryFn: async () => {
-        return (await fetchJson("http://localhost:1234/api/subscription")) as Subscription;
-    } });
+    const { data: subscription } = useSuspenseQuery({
+        queryKey: ["api/subscription"],
+        queryFn: async () => {
+            return (await fetchJson("http://localhost:1234/api/subscription")) as Subscription;
+        }
+    });
 
     const track = useMixpanelTrackingFunction();
 
-    track("Page View", {
-        "Page": "Subscription Page"
+    void track("Page View", {
+        Page: "Subscription Page"
     });
 
     return (

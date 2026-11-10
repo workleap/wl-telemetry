@@ -14,16 +14,9 @@ export interface TelemetryProviderProps extends PropsWithChildren {
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function TelemetryProvider(props: TelemetryProviderProps) {
-    const {
-        client,
-        children
-    } = props;
+    const { client, children } = props;
 
-    return (
-        <TelemetryContext.Provider value={client}>
-            {children}
-        </TelemetryContext.Provider>
-    );
+    return <TelemetryContext.Provider value={client}>{children}</TelemetryContext.Provider>;
 }
 
 /**

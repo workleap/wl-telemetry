@@ -14,23 +14,19 @@ export interface MixpanelPropertiesProviderProps extends PropsWithChildren {
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function MixpanelPropertiesProvider(props: MixpanelPropertiesProviderProps) {
-    const {
-        value,
-        children
-    } = props;
+    const { value, children } = props;
 
     const parentContext = useContext(MixpanelPropertiesContext);
 
-    const contextValue = useMemo(() => ({
-        ...parentContext,
-        ...value
-    }), [parentContext, value]);
-
-    return (
-        <MixpanelPropertiesContext.Provider value={contextValue}>
-            {children}
-        </MixpanelPropertiesContext.Provider>
+    const contextValue = useMemo(
+        () => ({
+            ...parentContext,
+            ...value
+        }),
+        [parentContext, value]
     );
+
+    return <MixpanelPropertiesContext.Provider value={contextValue}>{children}</MixpanelPropertiesContext.Provider>;
 }
 
 /**

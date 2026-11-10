@@ -1,7 +1,7 @@
 import { createCompositeLogger, type Logger, type RootLogger } from "@workleap/logging";
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
-import { ProductFamily } from "./ProductFamily.ts";
+import type { ProductFamily } from "./ProductFamily.ts";
 
 export type IdentityCookieDomain = ".sharegate.com" | ".workleap.com";
 
@@ -18,16 +18,13 @@ export function getDeviceId(logger: Logger) {
         const cookie = Cookies.get(IdentityCookieName);
 
         if (cookie) {
-            logger
-                .withText("Found identity cookie:")
-                .withText(cookie)
-                .debug();
+            logger.withText("Found identity cookie:").withText(cookie).debug();
 
             const parsedCookie = JSON.parse(cookie) as IdentityCookie;
 
             return parsedCookie.deviceId;
         }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // oxlint-disable-next-line eslint/no-unused-vars
     } catch (error: unknown) {
         // Do nothing.
     }
@@ -45,8 +42,8 @@ export function setDeviceId(deviceId: string, cookieExpiration: Date, cookieDoma
             domain: cookieDomain
         });
 
-        logger.debug(`[telemetry] Set identity cookie with name: "${IdentityCookieName}", expiration: "${cookieExpiration}", domain: "${cookieDomain}".`);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        logger.debug(`[telemetry] Set identity cookie with name: "${IdentityCookieName}", expiration: "${String(cookieExpiration)}", domain: "${cookieDomain}".`);
+        // oxlint-disable-next-line eslint/no-unused-vars
     } catch (error: unknown) {
         // Do nothing.
     }
@@ -79,11 +76,7 @@ export interface CreateTelemetryContextOptions {
 }
 
 export function createTelemetryContext(productFamily: ProductFamily, options: CreateTelemetryContextOptions = {}) {
-    const {
-        identityCookieExpiration = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-        verbose = false,
-        loggers = []
-    } = options;
+    const { identityCookieExpiration = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), verbose = false, loggers = [] } = options;
 
     const logger = createCompositeLogger(verbose, loggers);
 
@@ -92,9 +85,7 @@ export function createTelemetryContext(productFamily: ProductFamily, options: Cr
     if (!deviceId) {
         deviceId = uuidv4();
 
-        const identityCookieDomain = productFamily === "sg"
-            ? ".sharegate.com"
-            : ".workleap.com";
+        const identityCookieDomain = productFamily === "sg" ? ".sharegate.com" : ".workleap.com";
 
         setDeviceId(deviceId, identityCookieExpiration, identityCookieDomain, logger);
     }

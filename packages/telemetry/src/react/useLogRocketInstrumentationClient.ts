@@ -16,14 +16,12 @@ export function useLogRocketInstrumentationClient(options: { throwOnUndefined: f
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function useLogRocketInstrumentationClient(options: UseLogRocketInstrumentationClientOptions = {}) {
-    const {
-        throwOnUndefined = true
-    } = options;
+    const { throwOnUndefined = true } = options;
 
     const telemetryClient = useTelemetryClient();
 
     if (!telemetryClient.logRocket && throwOnUndefined) {
-        throw new Error("[telemetry] The useLogRocketInstrumentationClient function is called but the TelemetryClient doesn't include a LogRocket client. Did you initialize LogRocket when you called the \"initializeTelemetry\" function?");
+        throw new Error('[telemetry] The useLogRocketInstrumentationClient function is called but the TelemetryClient doesn\'t include a LogRocket client. Did you initialize LogRocket when you called the "initializeTelemetry" function?');
     }
 
     return telemetryClient.logRocket;

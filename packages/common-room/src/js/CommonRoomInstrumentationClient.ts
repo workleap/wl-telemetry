@@ -19,12 +19,11 @@ export class CommonRoomInstrumentationClientImpl implements CommonRoomInstrument
     }
 
     identify(email: string) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const signals = globalThis.signals;
 
         if (!signals) {
-            this.#logger.error("[common-room] Cannot identify user because the signals scripts is not loaded. Did you initialize signals with the \"registerCommonRoomInstrumentation\" function?");
+            this.#logger.error('[common-room] Cannot identify user because the signals scripts is not loaded. Did you initialize signals with the "registerCommonRoomInstrumentation" function?');
 
             return;
         }

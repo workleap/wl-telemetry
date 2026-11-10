@@ -65,14 +65,7 @@ export interface InitializeMixpanelOptions {
 
 export class MixpanelInitializer {
     initialize(envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}), options: Omit<InitializeMixpanelOptions, "globalEventProperties"> = {}) {
-        const {
-            productId,
-            trackingEndpoint,
-            telemetryContext,
-            logRocketInstrumentationClient,
-            verbose = false,
-            loggers = []
-        } = options;
+        const { productId, trackingEndpoint, telemetryContext, logRocketInstrumentationClient, verbose = false, loggers = [] } = options;
 
         const logger = createCompositeLogger(verbose, loggers);
         const endpoint = getTrackingEndpoint(envOrTrackingApiBaseUrl, trackingEndpoint);
@@ -94,10 +87,7 @@ export class MixpanelInitializer {
         // once it's available to set it on every Mixpanel event.
         if (logRocketInstrumentationClient) {
             logRocketInstrumentationClient.registerGetSessionUrlListener((sessionUrl: string) => {
-                logger
-                    .withText("[mixpanel] Received LogRocket session replay URL:")
-                    .withText(sessionUrl)
-                    .debug();
+                logger.withText("[mixpanel] Received LogRocket session replay URL:").withText(sessionUrl).debug();
 
                 client.setGlobalEventProperty(OtherProperties.LogRocketSessionUrl, sessionUrl);
             });
@@ -115,14 +105,8 @@ export class MixpanelInitializer {
  * @returns {MixpanelClient} A Mixpanel client instance.
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
-export function initializeMixpanel(
-    envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}),
-    options?: InitializeMixpanelOptions
-) {
-    getRegistrationGuard().throw("[mixpanel] Mixpanel has already been initialized. Did you call the \"initializeMixpanel\" function twice?");
+export function initializeMixpanel(envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}), options?: InitializeMixpanelOptions) {
+    getRegistrationGuard().throw('[mixpanel] Mixpanel has already been initialized. Did you call the "initializeMixpanel" function twice?');
 
-    return new MixpanelInitializer().initialize(
-        envOrTrackingApiBaseUrl,
-        options
-    );
+    return new MixpanelInitializer().initialize(envOrTrackingApiBaseUrl, options);
 }

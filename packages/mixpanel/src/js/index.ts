@@ -4,4 +4,3 @@ export type { MixpanelEnvironment } from "./env.ts";
 export { initializeMixpanel, type InitializeMixpanelOptions } from "./initializeMixpanel.ts";
 export type { MixpanelClient } from "./MixpanelClient.ts";
 export { NoopMixpanelClient } from "./NoopMixpanelClient.ts";
-

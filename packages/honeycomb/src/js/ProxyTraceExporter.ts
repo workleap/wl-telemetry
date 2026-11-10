@@ -1,13 +1,5 @@
 import { diag } from "@opentelemetry/api";
-import {
-    createOtlpNetworkExportDelegate,
-    ExporterMetrics,
-    type ExportResponse,
-    getSharedConfigurationDefaults,
-    type IExporterTransport,
-    mergeOtlpSharedConfigurationWithDefaults,
-    OTLPExporterBase
-} from "@opentelemetry/otlp-exporter-base";
+import { createOtlpNetworkExportDelegate, ExporterMetrics, type ExportResponse, getSharedConfigurationDefaults, type IExporterTransport, mergeOtlpSharedConfigurationWithDefaults, OTLPExporterBase } from "@opentelemetry/otlp-exporter-base";
 import { JsonTraceSerializer, TraceExporterMetricsHelper } from "@opentelemetry/otlp-transformer";
 import type { ReadableSpan, SpanExporter } from "@opentelemetry/sdk-trace";
 import type { HoneycombSdkOptions } from "./honeycombTypes.ts";
@@ -91,7 +83,7 @@ let pendingKeepaliveRequestCount = 0;
 function getFetch(): typeof fetch {
     const fetchApi = globalThis.fetch;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // oxlint-disable-next-line typescript/no-explicit-any
     const original = (fetchApi as any).__original;
 
     return typeof original === "function" ? original : fetchApi;
@@ -208,7 +200,7 @@ export class FetchTransport implements IExporterTransport {
                 };
             }
 
-            logger.error(`export request failure (error: ${error}).`);
+            logger.error(`export request failure (error: ${String(error)}).`);
 
             return {
                 status: "failure",
@@ -292,6 +284,8 @@ export class RetryingTransport implements IExporterTransport {
 
             logger.verbose(`Scheduling export retry in ${Math.round(retryInMillis)}ms.`);
 
+            // Retries are sequential by design: each attempt depends on the result of the previous one.
+            // oxlint-disable-next-line eslint/no-await-in-loop
             result = await this.#retry(data, deadline, retryInMillis);
         }
 
@@ -343,12 +337,7 @@ export class ProxyTraceExporter extends OTLPExporterBase<ReadableSpan[]> impleme
     readonly #credentials: RequestCredentials;
 
     constructor(options: ProxyTraceExporterOptions) {
-        const {
-            url,
-            headers = {},
-            timeoutMillis,
-            credentials = "include"
-        } = options;
+        const { url, headers = {}, timeoutMillis, credentials = "include" } = options;
 
         const configuration = mergeOtlpSharedConfigurationWithDefaults({ timeoutMillis }, {}, getSharedConfigurationDefaults());
 
@@ -360,11 +349,13 @@ export class ProxyTraceExporter extends OTLPExporterBase<ReadableSpan[]> impleme
             responseAttributesFromError: () => ({})
         });
 
-        const transport = new RetryingTransport(new FetchTransport({
-            url,
-            headers,
-            credentials
-        }));
+        const transport = new RetryingTransport(
+            new FetchTransport({
+                url,
+                headers,
+                credentials
+            })
+        );
 
         super(createOtlpNetworkExportDelegate(configuration, JsonTraceSerializer, metrics, transport));
 
@@ -402,21 +393,12 @@ function omitHeader(headers: Record<string, string>, name: string) {
 
 // Derives the exporter configuration from the Honeycomb SDK options the same way the SDK derives its default trace exporter.
 export function createProxyTraceExporter(sdkOptions: HoneycombSdkOptions, credentials?: RequestCredentials) {
-    const {
-        endpoint,
-        tracesEndpoint,
-        apiKey,
-        tracesApiKey,
-        headers,
-        tracesHeaders,
-        timeout,
-        tracesTimeout
-    } = sdkOptions;
+    const { endpoint, tracesEndpoint, apiKey, tracesApiKey, headers, tracesHeaders, timeout, tracesTimeout } = sdkOptions;
 
     const url = tracesEndpoint ?? (endpoint ? appendTracesPath(endpoint) : undefined);
 
     if (!url) {
-        throw new Error("[honeycomb] Cannot create the proxy trace exporter, the Honeycomb SDK options have no \"endpoint\" or \"tracesEndpoint\".");
+        throw new Error('[honeycomb] Cannot create the proxy trace exporter, the Honeycomb SDK options have no "endpoint" or "tracesEndpoint".');
     }
 
     // The payload is always JSON, the content type cannot be overridden.

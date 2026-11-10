@@ -7,7 +7,7 @@ test.concurrent("the response body is redacted", ({ expect }) => {
         reqId: "123",
         url: "http://www.123.com",
         headers: {
-            "AnotherHeader": "Other stuff"
+            AnotherHeader: "Other stuff"
         },
         body: "456",
         method: "POST"

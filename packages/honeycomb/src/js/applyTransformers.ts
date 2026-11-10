@@ -18,4 +18,3 @@ export type HoneycombSdkOptionsTransformer = (options: HoneycombSdkOptions, cont
 export function applyTransformers(options: HoneycombSdkOptions, transformers: HoneycombSdkOptionsTransformer[], context: HoneycombSdkOptionsTransformerContext): HoneycombSdkOptions {
     return transformers.reduce((acc, transformer) => transformer(acc, context), options);
 }
-

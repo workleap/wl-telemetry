@@ -14,16 +14,9 @@ export interface CommonRoomInstrumentationProviderProps extends PropsWithChildre
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function CommonRoomInstrumentationProvider(props: CommonRoomInstrumentationProviderProps) {
-    const {
-        client,
-        children
-    } = props;
+    const { client, children } = props;
 
-    return (
-        <CommonRoomInstrumentationContext.Provider value={client}>
-            {children}
-        </CommonRoomInstrumentationContext.Provider>
-    );
+    return <CommonRoomInstrumentationContext.Provider value={client}>{children}</CommonRoomInstrumentationContext.Provider>;
 }
 
 export interface UseCommonRoomInstrumentationClientOptions {
@@ -41,9 +34,7 @@ export function useCommonRoomInstrumentationClient(options: { throwOnUndefined: 
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function useCommonRoomInstrumentationClient(options: UseCommonRoomInstrumentationClientOptions = {}) {
-    const {
-        throwOnUndefined = true
-    } = options;
+    const { throwOnUndefined = true } = options;
 
     const client = useContext(CommonRoomInstrumentationContext);
 

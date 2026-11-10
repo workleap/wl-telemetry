@@ -7,12 +7,12 @@ A set of telemetry packages for the Workleap platform.
 
 ### Packages
 
-| Name | NPM |
-| --- | --- |
-| [@workleap/telemetry](packages/telemetry/README.md) | [![npm version](https://img.shields.io/npm/v/@workleap/telemetry)](https://www.npmjs.com/package/@workleap/telemetry) |
-| [@workleap/logrocket](packages/logrocket/README.md) | [![npm version](https://img.shields.io/npm/v/@workleap/logrocket)](https://www.npmjs.com/package/@workleap/logrocket) |
-| [@workleap/honeycomb](packages/honeycomb/README.md) | [![npm version](https://img.shields.io/npm/v/@workleap/honeycomb)](https://www.npmjs.com/package/@workleap/honeycomb) |
-| [@workleap/mixpanel](packages/mixpanel/README.md) | [![npm version](https://img.shields.io/npm/v/@workleap/mixpanel)](https://www.npmjs.com/package/@workleap/mixpanel) |
+| Name                                                    | NPM                                                                                                                       |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| [@workleap/telemetry](packages/telemetry/README.md)     | [![npm version](https://img.shields.io/npm/v/@workleap/telemetry)](https://www.npmjs.com/package/@workleap/telemetry)     |
+| [@workleap/logrocket](packages/logrocket/README.md)     | [![npm version](https://img.shields.io/npm/v/@workleap/logrocket)](https://www.npmjs.com/package/@workleap/logrocket)     |
+| [@workleap/honeycomb](packages/honeycomb/README.md)     | [![npm version](https://img.shields.io/npm/v/@workleap/honeycomb)](https://www.npmjs.com/package/@workleap/honeycomb)     |
+| [@workleap/mixpanel](packages/mixpanel/README.md)       | [![npm version](https://img.shields.io/npm/v/@workleap/mixpanel)](https://www.npmjs.com/package/@workleap/mixpanel)       |
 | [@workleap/common-room](packages/common-room/README.md) | [![npm version](https://img.shields.io/npm/v/@workleap/common-room)](https://www.npmjs.com/package/@workleap/common-room) |
 
 ## Have a question or found an issue?
@@ -30,5 +30,3 @@ View the [contributor's documentation](./CONTRIBUTING.md).
 ## License
 
 Copyright © 2024, Workleap This code is licensed under the Apache License, Version 2.0. You may obtain a copy of this license at https://github.com/workleap/workleap-license/blob/master/LICENSE.
-
-

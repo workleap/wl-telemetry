@@ -14,16 +14,9 @@ export interface MixpanelProviderProps extends PropsWithChildren {
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function MixpanelProvider(props: MixpanelProviderProps) {
-    const {
-        client,
-        children
-    } = props;
+    const { client, children } = props;
 
-    return (
-        <MixpanelContext.Provider value={client}>
-            {children}
-        </MixpanelContext.Provider>
-    );
+    return <MixpanelContext.Provider value={client}>{children}</MixpanelContext.Provider>;
 }
 
 export interface UseMixpanelClientOptions {
@@ -41,9 +34,7 @@ export function useMixpanelClient(options: { throwOnUndefined: false }): Mixpane
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function useMixpanelClient(options: UseMixpanelClientOptions = {}) {
-    const {
-        throwOnUndefined = true
-    } = options;
+    const { throwOnUndefined = true } = options;
 
     const client = useContext(MixpanelContext);
 

@@ -8,9 +8,7 @@ interface Segment {
 }
 
 function appendText(currentText: string, newText: string, options: { leadingSpace?: boolean } = {}) {
-    const {
-        leadingSpace = true
-    } = options;
+    const { leadingSpace = true } = options;
 
     if (currentText.length > 0) {
         return `${currentText}${leadingSpace ? " " : ""}${newText}`;
@@ -172,7 +170,7 @@ export class LogRocketLoggerScope implements LoggerScope {
             });
         }
 
-        this.#log(LogRocket.log, LogLevel.debug);
+        this.#log((...args) => LogRocket.log(...args), LogLevel.debug);
     }
 
     /**
@@ -187,7 +185,7 @@ export class LogRocketLoggerScope implements LoggerScope {
             });
         }
 
-        this.#log(LogRocket.log, LogLevel.information);
+        this.#log((...args) => LogRocket.log(...args), LogLevel.information);
     }
 
     /**
@@ -202,7 +200,7 @@ export class LogRocketLoggerScope implements LoggerScope {
             });
         }
 
-        this.#log(LogRocket.warn, LogLevel.warning);
+        this.#log((...args) => LogRocket.warn(...args), LogLevel.warning);
     }
 
     /**
@@ -217,7 +215,7 @@ export class LogRocketLoggerScope implements LoggerScope {
             });
         }
 
-        this.#log(LogRocket.error, LogLevel.error);
+        this.#log((...args) => LogRocket.error(...args), LogLevel.error);
     }
 
     /**
@@ -232,16 +230,14 @@ export class LogRocketLoggerScope implements LoggerScope {
             });
         }
 
-        this.#log(LogRocket.error, LogLevel.critical);
+        this.#log((...args) => LogRocket.error(...args), LogLevel.critical);
     }
 
     /**
      * @see {@link https://workleap.github.io/wl-logging}
      */
     end(options: LoggerScopeEndOptions = {}) {
-        const {
-            dismiss = false
-        } = options;
+        const { dismiss = false } = options;
 
         if (!this.#hasEnded) {
             this.#hasEnded = true;
@@ -273,9 +269,7 @@ export class LogRocketLogger implements Logger {
      * @see {@link https://workleap.github.io/wl-logging}
      */
     constructor(options: LoggerOptions = {}) {
-        const {
-            logLevel = LogLevel.debug
-        } = options;
+        const { logLevel = LogLevel.debug } = options;
 
         this.#logLevel = logLevel;
     }
@@ -370,7 +364,7 @@ export class LogRocketLogger implements Logger {
             });
         }
 
-        this.#log(LogRocket.log, LogLevel.debug);
+        this.#log((...args) => LogRocket.log(...args), LogLevel.debug);
     }
 
     /**
@@ -385,7 +379,7 @@ export class LogRocketLogger implements Logger {
             });
         }
 
-        this.#log(LogRocket.log, LogLevel.information);
+        this.#log((...args) => LogRocket.log(...args), LogLevel.information);
     }
 
     /**
@@ -400,7 +394,7 @@ export class LogRocketLogger implements Logger {
             });
         }
 
-        this.#log(LogRocket.warn, LogLevel.warning);
+        this.#log((...args) => LogRocket.warn(...args), LogLevel.warning);
     }
 
     /**
@@ -415,7 +409,7 @@ export class LogRocketLogger implements Logger {
             });
         }
 
-        this.#log(LogRocket.error, LogLevel.error);
+        this.#log((...args) => LogRocket.error(...args), LogLevel.error);
     }
 
     /**
@@ -430,7 +424,7 @@ export class LogRocketLogger implements Logger {
             });
         }
 
-        this.#log(LogRocket.error, LogLevel.critical);
+        this.#log((...args) => LogRocket.error(...args), LogLevel.critical);
     }
 
     /**

@@ -13,66 +13,84 @@ vi.mock("logrocket", () => ({
 }));
 
 test.concurrent("when a rootHostname is provided", ({ expect }) => {
-    const result = getLogRocketSdkOptions({
-        rootHostname: "toto"
-    }, new NoopLogger());
+    const result = getLogRocketSdkOptions(
+        {
+            rootHostname: "toto"
+        },
+        new NoopLogger()
+    );
 
     expect(result).toMatchSnapshot();
 });
 
 test.concurrent("when privateFieldNames are provided", ({ expect }) => {
-    const result = getLogRocketSdkOptions({
-        privateFieldNames: ["foo", "bar"]
-    }, new NoopLogger());
+    const result = getLogRocketSdkOptions(
+        {
+            privateFieldNames: ["foo", "bar"]
+        },
+        new NoopLogger()
+    );
 
     expect(result).toMatchSnapshot();
 });
 
 test.concurrent("when privateQueryParameterNames are provided", ({ expect }) => {
-    const result = getLogRocketSdkOptions({
-        privateQueryParameterNames: ["foo", "bar"]
-    }, new NoopLogger());
+    const result = getLogRocketSdkOptions(
+        {
+            privateQueryParameterNames: ["foo", "bar"]
+        },
+        new NoopLogger()
+    );
 
     expect(result).toMatchSnapshot();
 });
 
 test.concurrent("when verbose is true", ({ expect }) => {
-    const result = getLogRocketSdkOptions({
-        verbose: true
-    }, new NoopLogger());
+    const result = getLogRocketSdkOptions(
+        {
+            verbose: true
+        },
+        new NoopLogger()
+    );
 
     expect(result).toMatchSnapshot();
 });
 
 test.concurrent("with a single transformer", ({ expect }) => {
-    const result = getLogRocketSdkOptions({
-        transformers: [
-            options => {
-                options.rootHostname = "toto";
+    const result = getLogRocketSdkOptions(
+        {
+            transformers: [
+                options => {
+                    options.rootHostname = "toto";
 
-                return options;
-            }
-        ]
-    }, new NoopLogger());
+                    return options;
+                }
+            ]
+        },
+        new NoopLogger()
+    );
 
     expect(result).toMatchSnapshot();
 });
 
 test.concurrent("with a multiple transformers", ({ expect }) => {
-    const result = getLogRocketSdkOptions({
-        transformers: [
-            options => {
-                options.rootHostname = "toto";
+    const result = getLogRocketSdkOptions(
+        {
+            transformers: [
+                options => {
+                    options.rootHostname = "toto";
 
-                return options;
-            },
-            options => {
-                options.serverURL = "foo";
+                    return options;
+                },
+                options => {
+                    options.serverURL = "foo";
 
-                return options;
-            }
-        ]
-    }, new NoopLogger());
+                    return options;
+                }
+            ]
+        },
+        new NoopLogger()
+    );
 
     expect(result).toMatchSnapshot();
 });

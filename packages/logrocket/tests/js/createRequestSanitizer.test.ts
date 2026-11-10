@@ -7,8 +7,8 @@ test.concurrent("the request authorization header is redacted", ({ expect }) => 
         reqId: "123",
         url: "http://www.123.com",
         headers: {
-            "Authorization": "Sensitive stuff",
-            "AnotherHeader": "Other stuff"
+            Authorization: "Sensitive stuff",
+            AnotherHeader: "Other stuff"
         },
         body: "456",
         method: "POST"
@@ -26,8 +26,8 @@ test.concurrent("the request body is redacted", ({ expect }) => {
         reqId: "123",
         url: "http://www.123.com",
         headers: {
-            "Authorization": "Sensitive stuff",
-            "AnotherHeader": "Other stuff"
+            Authorization: "Sensitive stuff",
+            AnotherHeader: "Other stuff"
         },
         body: "456",
         method: "POST"

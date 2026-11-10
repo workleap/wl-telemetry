@@ -21,7 +21,7 @@ afterEach(() => {
 test.concurrent("when honeycomb instrumentation has already been registered, throw an error", ({ expect }) => {
     registerLogRocketInstrumentation("my-app-id");
 
-    expect(() => registerLogRocketInstrumentation("my-app-id")).toThrow("[logrocket] The LogRocket instrumentation has already been registered. Did you call the \"registerLogRocketInstrumentation\" function twice?");
+    expect(() => registerLogRocketInstrumentation("my-app-id")).toThrow('[logrocket] The LogRocket instrumentation has already been registered. Did you call the "registerLogRocketInstrumentation" function twice?');
 });
 
 test.concurrent("when a telemetry context is provided, the session is identified with the telemetry context values", ({ expect }) => {

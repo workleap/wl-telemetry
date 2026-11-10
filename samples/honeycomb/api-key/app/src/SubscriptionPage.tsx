@@ -8,9 +8,12 @@ interface Subscription {
 }
 
 export function SubscriptionPage() {
-    const { data: subscription } = useSuspenseQuery({ queryKey: ["api/subscription"], queryFn: async () => {
-        return (await fetchJson("http://localhost:1234/api/subscription")) as Subscription;
-    } });
+    const { data: subscription } = useSuspenseQuery({
+        queryKey: ["api/subscription"],
+        queryFn: async () => {
+            return (await fetchJson("http://localhost:1234/api/subscription")) as Subscription;
+        }
+    });
 
     return (
         <>

@@ -16,14 +16,12 @@ export function useHoneycombInstrumentationClient(options: { throwOnUndefined: f
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function useHoneycombInstrumentationClient(options: UseHoneycombInstrumentationClientOptions = {}) {
-    const {
-        throwOnUndefined = true
-    } = options;
+    const { throwOnUndefined = true } = options;
 
     const telemetryClient = useTelemetryClient();
 
     if (!telemetryClient.honeycomb && throwOnUndefined) {
-        throw new Error("[telemetry] The useHoneycombInstrumentationClient function is called but the TelemetryClient doesn't include an Honeycomb client. Did you initialize Honeycomb when you called the \"initializeTelemetry\" function?");
+        throw new Error('[telemetry] The useHoneycombInstrumentationClient function is called but the TelemetryClient doesn\'t include an Honeycomb client. Did you initialize Honeycomb when you called the "initializeTelemetry" function?');
     }
 
     return telemetryClient.honeycomb;

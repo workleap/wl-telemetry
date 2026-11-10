@@ -1,12 +1,7 @@
 import { ExportResultCode, type ExportResult } from "@opentelemetry/core";
 import { InMemorySpanExporter, type ReadableSpan, SimpleSpanProcessor, TracerProvider } from "@opentelemetry/sdk-trace";
 import { afterEach, describe, test, vi } from "vitest";
-import {
-    appendTracesPath,
-    createProxyTraceExporter,
-    parseRetryAfterHeader,
-    ProxyTraceExporter
-} from "../../src/js/ProxyTraceExporter.ts";
+import { appendTracesPath, createProxyTraceExporter, parseRetryAfterHeader, ProxyTraceExporter } from "../../src/js/ProxyTraceExporter.ts";
 
 function createSpans(count = 1, attributes: Record<string, string> = {}) {
     const memoryExporter = new InMemorySpanExporter();
@@ -290,9 +285,7 @@ describe("ProxyTraceExporter", () => {
     test("retry when the proxy answers 503", async ({ expect }) => {
         vi.useFakeTimers();
 
-        const fetchMock = vi.fn()
-            .mockResolvedValueOnce(createResponse(503))
-            .mockResolvedValueOnce(createResponse(200));
+        const fetchMock = vi.fn().mockResolvedValueOnce(createResponse(503)).mockResolvedValueOnce(createResponse(200));
 
         vi.stubGlobal("fetch", fetchMock);
 
@@ -311,7 +304,8 @@ describe("ProxyTraceExporter", () => {
     test("honor the retry-after header", async ({ expect }) => {
         vi.useFakeTimers();
 
-        const fetchMock = vi.fn()
+        const fetchMock = vi
+            .fn()
             .mockResolvedValueOnce(createResponse(429, { "Retry-After": "3" }))
             .mockResolvedValueOnce(createResponse(200));
 
@@ -335,7 +329,8 @@ describe("ProxyTraceExporter", () => {
     test("back off when the retry-after header is 0", async ({ expect }) => {
         vi.useFakeTimers();
 
-        const fetchMock = vi.fn()
+        const fetchMock = vi
+            .fn()
             .mockResolvedValueOnce(createResponse(503, { "Retry-After": "0" }))
             .mockResolvedValueOnce(createResponse(200));
 
@@ -397,7 +392,8 @@ describe("ProxyTraceExporter", () => {
 
         let settled = false;
 
-        const fetchMock = vi.fn()
+        const fetchMock = vi
+            .fn()
             .mockResolvedValueOnce(createResponse(503, { "Retry-After": "2" }))
             .mockImplementationOnce((_url: string, init: RequestInit) => {
                 return new Promise((_resolve, reject) => {
@@ -457,9 +453,7 @@ describe("ProxyTraceExporter", () => {
     test("retry when a network error occurs", async ({ expect }) => {
         vi.useFakeTimers();
 
-        const fetchMock = vi.fn()
-            .mockRejectedValueOnce(new TypeError("Failed to fetch"))
-            .mockResolvedValueOnce(createResponse(200));
+        const fetchMock = vi.fn().mockRejectedValueOnce(new TypeError("Failed to fetch")).mockResolvedValueOnce(createResponse(200));
 
         vi.stubGlobal("fetch", fetchMock);
 

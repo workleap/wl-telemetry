@@ -13,4 +13,3 @@ export {
     type HoneycombSdkFactory,
     type RegisterHoneycombInstrumentationOptions
 } from "./registerHoneycombInstrumentation.ts";
-

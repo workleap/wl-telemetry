@@ -1,4 +1,3 @@
-
 import type { MixpanelEventProperties, TelemetryContext } from "@workleap-telemetry/core";
 import { browserName, browserVersion, deviceType, osName, referringDomain } from "./utils.ts";
 

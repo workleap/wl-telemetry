@@ -17,11 +17,13 @@ const port = 5678;
 app.use(json());
 
 // A credentialed cross-origin request requires a specific origin and "Access-Control-Allow-Credentials: true".
-app.use(cors({
-    origin: ["http://localhost:8080"],
-    methods: ["POST"],
-    credentials: true
-}));
+app.use(
+    cors({
+        origin: ["http://localhost:8080"],
+        methods: ["POST"],
+        credentials: true
+    })
+);
 
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);

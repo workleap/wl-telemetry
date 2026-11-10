@@ -18,15 +18,15 @@ export interface CreateMixpanelTrackingFunctionOptions {
  */
 export interface MixpanelTrackingFunctionOptions {
     /**
-   * Whether to keep the connection alive for the tracking request.
-   * It is mostly used for tracking links where the user might navigate away before the request is completed.
-   *
-   * Caution! The body size for keepalive requests is limited to 64 kibibytes.
-   *
-   * https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#keepalive
-   *
-   * @default false
-   */
+     * Whether to keep the connection alive for the tracking request.
+     * It is mostly used for tracking links where the user might navigate away before the request is completed.
+     *
+     * Caution! The body size for keepalive requests is limited to 64 kibibytes.
+     *
+     * https://developer.mozilla.org/en-US/docs/Web/API/RequestInit#keepalive
+     *
+     * @default false
+     */
     keepAlive?: boolean;
 }
 

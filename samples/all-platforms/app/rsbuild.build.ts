@@ -9,4 +9,3 @@ const { parsed } = loadEnv({
 export default defineBuildConfig({
     environmentVariables: parsed
 });
-

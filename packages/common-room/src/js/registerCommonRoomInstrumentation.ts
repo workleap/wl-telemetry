@@ -32,10 +32,13 @@ function loadSignals(siteId: string) {
         script.src = url;
         script.async = true;
 
+        // The unit tests trigger the "onload" and "onerror" handlers directly.
+        // oxlint-disable-next-line unicorn/prefer-add-event-listener
         script.onload = () => {
             resolve();
         };
 
+        // oxlint-disable-next-line unicorn/prefer-add-event-listener
         script.onerror = () => {
             reject(`Failed to load Common Room script at "${url}".`);
         };
@@ -67,19 +70,14 @@ export interface RegisterCommonRoomInstrumentationOptions {
 
 export class CommonRoomInstrumentationRegistrator {
     register(siteId: string, options: RegisterCommonRoomInstrumentationOptions = {}) {
-        const {
-            verbose = false,
-            loggers = []
-        } = options;
+        const { verbose = false, loggers = [] } = options;
 
         const logger = createCompositeLogger(verbose, loggers);
 
         loadSignals(siteId)
-            .then(() => {
-                logger.information("[common-room] Common Room instrumentation is registered.");
-            })
-            .catch((reason: string) => {
-                logger.error(`[common-room] ${reason}`);
+            .then(() => logger.information("[common-room] Common Room instrumentation is registered."))
+            .catch((reason: unknown) => {
+                logger.error(`[common-room] ${String(reason)}`);
             });
 
         const client = new CommonRoomInstrumentationClientImpl(logger);
@@ -97,7 +95,7 @@ export class CommonRoomInstrumentationRegistrator {
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function registerCommonRoomInstrumentation(siteId: string, options?: RegisterCommonRoomInstrumentationOptions) {
-    getRegistrationGuard().throw("[common-room] The Common Room instrumentation has already been registered. Did you call the \"registerCommonRoomInstrumentation\" function twice?");
+    getRegistrationGuard().throw('[common-room] The Common Room instrumentation has already been registered. Did you call the "registerCommonRoomInstrumentation" function twice?');
 
     return new CommonRoomInstrumentationRegistrator().register(siteId, options);
 }
