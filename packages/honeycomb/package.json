@@ -54,20 +54,20 @@
         "@opentelemetry/otlp-transformer": "^0.223.0",
         "@opentelemetry/sdk-trace": "^2.12.0",
         "@workleap-telemetry/core": "workspace:^",
-        "@workleap/logging": "^2.0.1"
+        "@workleap/logging": "^2.1.0"
     },
     "devDependencies": {
         "@opentelemetry/api-logs": "0.223.0",
         "@opentelemetry/core": "2.12.0",
-        "@rsbuild/core": "2.2.14",
-        "@rslib/core": "1.0.3",
-        "@types/node": "26.6.5",
+        "@rsbuild/core": "2.3.1",
+        "@rslib/core": "1.0.6",
+        "@types/node": "26.6.6",
         "@types/react": "19.3.0",
-        "@workleap/rslib-configs": "2.0.0",
-        "@workleap/typescript-configs": "5.0.0",
+        "@workleap/rslib-configs": "2.1.1",
+        "@workleap/typescript-configs": "5.1.0",
         "happy-dom": "21.0.4",
         "typescript": "7.0.2",
-        "vitest": "5.0.5"
+        "vitest": "5.1.0"
     },
     "peerDependencies": {
         "@opentelemetry/api": "^1.9.1",
