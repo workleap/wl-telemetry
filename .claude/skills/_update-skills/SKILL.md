@@ -13,30 +13,31 @@ Re-pull every skill listed in `skills-lock.json`, but only when the matching pac
 
 ## Skills
 
-Every skill lives in `.agents/skills/<name>` (the universal folder read by Codex, Copilot, OpenCode, ...); a few are also copied into `.claude/skills/<name>` for Claude Code — the `-a` flag in each command re-targets exactly the folders the skill is installed in today. Every command uses `--copy`: the CLI's default is a symlink with an absolute path, which breaks on every other machine. The CLI version is pinned so a change to its lock format or install defaults never lands unnoticed; bump it deliberately. Only `workleap-*` skills use `--full-depth`.
+Every skill lives in `.claude/skills/<name>` only; `.agents/` must not exist, because pnpm would also link package skills into it. Every command passes `-a claude-code`, so the CLI writes only that folder, and `--copy`: the CLI's default is a symlink with an absolute path, which breaks on every other machine. The CLI version is pinned so a change to its lock format or install defaults never lands unnoticed; bump it deliberately. Only `workleap-*` skills use `--full-depth`.
 
 | Skill | Package gate (grep all `package.json`) | Update command |
 |---|---|---|
-| `accessibility` | — | `pnpm dlx skills@1.7.4 add addyosmani/web-quality-skills --skill accessibility -a codex --copy -y` |
-| `agent-browser` | `agent-browser` | `pnpm dlx skills@1.7.4 add vercel-labs/agent-browser --skill agent-browser -a codex --copy -y` |
-| `best-practices` | — | `pnpm dlx skills@1.7.4 add addyosmani/web-quality-skills --skill best-practices -a codex --copy -y` |
-| `git-commit` | — | `pnpm dlx skills@1.7.4 add github/awesome-copilot --skill git-commit -a codex --copy -y` |
-| `pnpm` | — | `pnpm dlx skills@1.7.4 add antfu/skills --skill pnpm -a codex --copy -y` |
-| `turborepo` | `turbo` | `pnpm dlx skills@1.7.4 add vercel/turborepo --skill turborepo -a codex --copy -y` |
-| `vitest` | `vitest` | `pnpm dlx skills@1.7.4 add antfu/skills --skill vitest -a codex claude-code --copy -y` |
-| `workleap-logging` | `@workleap/logging` | `pnpm dlx skills@1.7.4 add workleap/wl-logging --skill workleap-logging -a codex --copy --full-depth -y` |
-| `workleap-react-best-practices` | — | `pnpm dlx skills@1.7.4 add workleap/wl-web-configs --skill workleap-react-best-practices -a codex --copy --full-depth -y` |
-| `workleap-web-configs` | every `@workleap/*-configs` and `@workleap/browserslist-config` present (discover via grep, don't hard-code) | `pnpm dlx skills@1.7.4 add workleap/wl-web-configs --skill workleap-web-configs -a codex claude-code --copy --full-depth -y` |
+| `accessibility` | — | `pnpm dlx skills@1.7.4 add addyosmani/web-quality-skills --skill accessibility -a claude-code --copy -y` |
+| `agent-browser` | `agent-browser` | `pnpm dlx skills@1.7.4 add vercel-labs/agent-browser --skill agent-browser -a claude-code --copy -y` |
+| `best-practices` | — | `pnpm dlx skills@1.7.4 add addyosmani/web-quality-skills --skill best-practices -a claude-code --copy -y` |
+| `git-commit` | — | `pnpm dlx skills@1.7.4 add github/awesome-copilot --skill git-commit -a claude-code --copy -y` |
+| `pnpm` | — | `pnpm dlx skills@1.7.4 add antfu/skills --skill pnpm -a claude-code --copy -y` |
+| `turborepo` | `turbo` | `pnpm dlx skills@1.7.4 add vercel/turborepo --skill turborepo -a claude-code --copy -y` |
+| `vitest` | `vitest` | `pnpm dlx skills@1.7.4 add antfu/skills --skill vitest -a claude-code --copy -y` |
+| `workleap-logging` | `@workleap/logging` | `pnpm dlx skills@1.7.4 add workleap/wl-logging --skill workleap-logging -a claude-code --copy --full-depth -y` |
+| `workleap-react-best-practices` | — | `pnpm dlx skills@1.7.4 add workleap/wl-web-configs --skill workleap-react-best-practices -a claude-code --copy --full-depth -y` |
+| `workleap-web-configs` | every `@workleap/*-configs` and `@workleap/browserslist-config` present (discover via grep, don't hard-code) | `pnpm dlx skills@1.7.4 add workleap/wl-web-configs --skill workleap-web-configs -a claude-code --copy --full-depth -y` |
 
 ## Process
 
 ### 0. Audit drift
 
-Compare three sets: the keys of `skills-lock.json`, the folders in `.agents/skills/`, and the `Skill` column above. Then list `.claude/skills/` and filter out `_`-prefixed folders (project-local skills, not `skills add` installs); every remaining folder must be a table row whose command targets `claude-code`.
+First, `.agents/` must not exist → otherwise **stop**. Print `.agents/ exists — move its skills to .claude/skills/ and delete it, then re-run.`
+
+Then compare three sets: the keys of `skills-lock.json`, the folders in `.claude/skills/`, and the `Skill` column above. Filter out of the folders the `_`-prefixed ones (project-local skills, not `skills add` installs) and the skills listed in the `# pnpm` block of `.claude/skills/.gitignore` (package skills linked by pnpm, if any).
 
 - Lock entry or folder present, no table row → **stop**. Print `unknown skill "<name>" — add a row to SKILL.md and re-run.`
 - Table row present, no lock entry or folder → **stop**. Print `stale row "<name>" — remove the row or reinstall the skill, then re-run.`
-- `.claude/skills/<name>` present but its row doesn't target `claude-code` (or the reverse) → **stop**. Print `agent mismatch "<name>" — fix the row's -a flag, then re-run.`
 
 Only proceed once the sets match exactly.
 
@@ -72,7 +73,7 @@ Run the matching command from the table for each `UPDATE` row, sequentially — 
 
 Before each pull, capture `git status --porcelain` as a baseline — the tree may already hold dependency edits or earlier skill pulls. After each pull:
 
-- Diff `git status --porcelain` against that baseline; any path the pull introduced outside the skill's folders and `skills-lock.json` (e.g. a new `.claude/skills/<name>` symlink) is unexpected — flag it in the report; never delete it yourself. Paths already in the baseline are never unexpected.
+- Diff `git status --porcelain` against that baseline; any path the pull introduced outside the skill's folders and `skills-lock.json` (e.g. a new `.agents/` folder) is unexpected — flag it in the report; never delete it yourself. Paths already in the baseline are never unexpected.
 - Grep the skill's new `SKILL.md` frontmatter for `model:`. An upstream-added override switches the conversation model mid-turn for whatever invokes the skill — flag it in the report; never strip it yourself.
 
 ### 6. Report

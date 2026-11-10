@@ -2,7 +2,7 @@ import { defineConfig } from "oxlint";
 
 export default defineConfig({
     // Vendored agent skills are replaced wholesale on update, and the Retype docs hold no lintable code.
-    ignorePatterns: [".agents/**", ".claude/**", "agent-skills/**", "docs/**", "**/dist/**"],
+    ignorePatterns: [".claude/**", "agent-skills/**", "docs/**", "**/dist/**"],
     // Setting `plugins` overwrites oxlint's default plugin set (eslint, typescript, unicorn, oxc),
     // so the defaults must be listed explicitly alongside the extras we want enabled.
     plugins: ["eslint", "typescript", "unicorn", "oxc", "react", "import", "jsx-a11y", "promise", "vitest"],
