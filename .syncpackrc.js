@@ -38,7 +38,7 @@ export default {
         {
             // "@types/react", "react" and "react-dom" declares ranges to support React 18 and 19.
             // It's messing up with syncpack.
-            packages: ["@workleap/telemetry", "@workleap/logrocket", "@workleap/honeycomb", "@workleap/mixpanel", "@workleap/common-room"],
+            packages: ["@workleap/telemetry", "@workleap/logrocket", "@workleap/honeycomb", "@workleap/mixpanel"],
             dependencies: ["@types/react", "react", "react-dom"],
             dependencyTypes: ["peer"],
             isIgnored: true
@@ -47,7 +47,7 @@ export default {
             // Sample apps use "workspace:*" (pinned) while packages use "workspace:^" (range).
             // Ignore this expected mismatch.
             packages: ["@all-platforms/*"],
-            dependencies: ["@workleap/telemetry", "@workleap/common-room"],
+            dependencies: ["@workleap/telemetry"],
             dependencyTypes: ["prod"],
             isIgnored: true
         },

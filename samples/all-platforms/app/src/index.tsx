@@ -1,4 +1,3 @@
-import { CommonRoomInstrumentationProvider, registerCommonRoomInstrumentation } from "@workleap/common-room/react";
 import { BrowserConsoleLogger, type RootLogger } from "@workleap/logging";
 import { initializeTelemetry, LogRocketLogger, TelemetryProvider } from "@workleap/telemetry/react";
 import { StrictMode } from "react";
@@ -32,19 +31,12 @@ const telemetryClient = initializeTelemetry("sg", {
     loggers
 });
 
-const commonRoomClient = registerCommonRoomInstrumentation(process.env.COMMON_ROOM_SITE_ID!, {
-    verbose: true,
-    loggers
-});
-
 const root = createRoot(document.getElementById("root")!);
 
 root.render(
     <StrictMode>
         <TelemetryProvider client={telemetryClient}>
-            <CommonRoomInstrumentationProvider client={commonRoomClient}>
-                <App />
-            </CommonRoomInstrumentationProvider>
+            <App />
         </TelemetryProvider>
     </StrictMode>
 );

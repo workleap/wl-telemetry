@@ -87,7 +87,7 @@ All tests must pass. If a test fails, run the failing package's tests directly (
 pnpm build-all-platforms
 ```
 
-The build must complete successfully with zero errors. This step validates that all publishable packages (`@workleap/telemetry`, `@workleap/honeycomb`, `@workleap/logrocket`, `@workleap/mixpanel`, `@workleap/common-room`) compile and integrate correctly. Running the dev server is NOT possible for this sample because it requires HTTPS certificates that are not available in CI.
+The build must complete successfully with zero errors. This step validates that all publishable packages (`@workleap/telemetry`, `@workleap/honeycomb`, `@workleap/logrocket`, `@workleap/mixpanel`) compile and integrate correctly. Running the dev server is NOT possible for this sample because it requires HTTPS certificates that are not available in CI.
 
 ### Step 2d: Validate the "honeycomb/api-key" sample app
 
