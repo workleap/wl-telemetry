@@ -39,7 +39,8 @@ jobs:
               echo "::error file=$publish::The publish workflow must install with --frozen-lockfile --ignore-scripts."
               exit 1
           fi
-          if grep -nE "^ +(cache|path:)" .github/workflows/claude.yml .github/workflows/update-dependencies.yml | grep -vE "path: \.turbo$"; then
+          agents=$(grep -lE "uses: +anthropics/claude-code-action" .github/workflows/*.yml)
+          if grep -nE "^ +(cache|path:)" $agents | grep -vE "path: \.turbo$"; then
               echo "::error::The agent workflows may only cache .turbo: the trusted jobs restore the pnpm store."
               exit 1
           fi
