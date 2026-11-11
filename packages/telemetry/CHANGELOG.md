@@ -1,5 +1,16 @@
 # @workleap/telemetry
 
+## 4.1.2
+
+### Patch Changes
+
+- [#269](https://github.com/workleap/wl-telemetry/pull/269) [`0a200c0`](https://github.com/workleap/wl-telemetry/commit/0a200c0dcbb3997a4cc3857836a4c4e269c41723) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Raise the minimum `@workleap/logging` version to `2.1.0`.
+- Updated dependencies [[`0a200c0`](https://github.com/workleap/wl-telemetry/commit/0a200c0dcbb3997a4cc3857836a4c4e269c41723)]:
+  - @workleap/honeycomb@8.2.2
+  - @workleap/logrocket@4.0.5
+  - @workleap/mixpanel@6.0.3
+  - @workleap-telemetry/core@2.0.7
+
 ## 4.1.1
 
 ### Patch Changes
