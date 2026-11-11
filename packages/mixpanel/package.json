@@ -1,6 +1,6 @@
 {
     "name": "@workleap/mixpanel",
-    "version": "6.0.2",
+    "version": "6.0.3",
     "description": "A package containing utilities for Mixpanel telemetry.",
     "license": "Apache-2.0",
     "author": "Workleap",
