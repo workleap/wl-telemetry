@@ -7,12 +7,6 @@
       "skillPath": "skills/accessibility/SKILL.md",
       "computedHash": "88c64dead9bb55925c7b983f5fd95cfecf30bd8c076fd384cdb17019d1becd87"
     },
-    "agent-browser": {
-      "source": "vercel-labs/agent-browser",
-      "sourceType": "github",
-      "skillPath": "skills/agent-browser/SKILL.md",
-      "computedHash": "c05aa7e4c980954eb67fd89757cff008c9987b0df6a1624338fcfcb4ca4b02d5"
-    },
     "best-practices": {
       "source": "addyosmani/web-quality-skills",
       "sourceType": "github",
@@ -40,24 +34,14 @@
     "vitest": {
       "source": "antfu/skills",
       "sourceType": "github",
-      "computedHash": "0efd9cf8c56aada060d418d009cfe621a7915d0c73a958fe611985bc0c2fa4b8"
-    },
-    "workleap-logging": {
-      "source": "workleap/wl-logging",
-      "sourceType": "github",
-      "skillPath": "agent-skills/workleap-logging/SKILL.md",
-      "computedHash": "f5fdf2121a766b0933493cd5a18b6f85b4bf2074f35c7903631daa455647570e"
+      "skillPath": "skills/vitest/SKILL.md",
+      "computedHash": "b26b7f8d10e860e944e0334c003207771707c4906514cb96c971faae13fba875"
     },
     "workleap-react-best-practices": {
       "source": "workleap/wl-web-configs",
       "sourceType": "github",
       "skillPath": "agent-skills/workleap-react-best-practices/SKILL.md",
       "computedHash": "9f42af7a0842f7174c9357e688b12fc02516bbd9f440f87496a195ab78cab536"
-    },
-    "workleap-web-configs": {
-      "source": "workleap/wl-web-configs",
-      "sourceType": "github",
-      "computedHash": "a6d35aad36edeb536708ac166d3b27cf93bb7ec781fa2845da25d92550313641"
     }
   }
 }
