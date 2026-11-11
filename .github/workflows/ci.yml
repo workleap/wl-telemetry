@@ -26,6 +26,24 @@ jobs:
           # Required for the Turborepo Git filters.
           fetch-depth: 0
 
+      - name: Check publish workflow hardening
+        # The publish job holds the npm publishing identity. It must install and build from the commit and the
+        # lockfile only, and the jobs running an agent must not save the pnpm store that trusted jobs restore.
+        run: |
+          publish=.github/workflows/changeset.yml
+          if grep -nE "^ +cache|actions/cache" "$publish"; then
+              echo "::error file=$publish::The publish workflow must not restore or save an Actions cache."
+              exit 1
+          fi
+          if ! grep -qF "pnpm install --frozen-lockfile --ignore-scripts" "$publish"; then
+              echo "::error file=$publish::The publish workflow must install with --frozen-lockfile --ignore-scripts."
+              exit 1
+          fi
+          if grep -nE "^ +cache" .github/workflows/claude.yml .github/workflows/update-dependencies.yml; then
+              echo "::error::The agent workflows must not cache the pnpm store."
+              exit 1
+          fi
+
       - name: Install pnpm
         uses: pnpm/action-setup@v6
         with:
