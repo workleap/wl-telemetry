@@ -22,13 +22,13 @@ For each changed file in the PR diff, load applicable skills from `.claude/skill
 
 **By file type:**
 
-| File pattern                                                      | Skills                              |
-| ----------------------------------------------------------------- | ----------------------------------- |
-| `*.ts`, `*.tsx`, `*.js`, `*.jsx` (non-test)                       | `/accessibility`, `/best-practices` |
-| `*.tsx`, `*.jsx` (non-test)                                       | `/workleap-react-best-practices`    |
-| `*.test.ts`, `*.test.tsx`                                         | `/vitest`                           |
-| `turbo.json`                                                      | `/turborepo`                        |
-| `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`, `.npmrc` | `/pnpm`                             |
+| File pattern                                            | Skills                              |
+| ------------------------------------------------------- | ----------------------------------- |
+| `*.ts`, `*.tsx`, `*.js`, `*.jsx` (non-test)             | `/accessibility`, `/best-practices` |
+| `*.tsx`, `*.jsx` (non-test)                             | `/workleap-react-best-practices`    |
+| `*.test.ts`, `*.test.tsx`                               | `/vitest`                           |
+| `turbo.json`                                            | `/turborepo`                        |
+| `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml` | `/pnpm`                             |
 
 The skills that dependencies ship through pnpm (listed in `.claude/skills/.gitignore`, such as `workleap-logging` and the `workleap-*-config(s)` skills) are not installed in this job, so they are not available here.
 
