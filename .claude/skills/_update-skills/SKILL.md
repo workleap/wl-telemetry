@@ -15,19 +15,17 @@ Re-pull every skill listed in `skills-lock.json`, but only when the matching pac
 
 Every skill lives in `.claude/skills/<name>` only; `.agents/` must not exist, because pnpm would also link package skills into it. Every command passes `-a claude-code`, so the CLI writes only that folder, and `--copy`: the CLI's default is a symlink with an absolute path, which breaks on every other machine. The CLI version is pinned so a change to its lock format or install defaults never lands unnoticed; bump it deliberately. Only `workleap-*` skills use `--full-depth`.
 
+Skills that a dependency ships for pnpm (approved under `permissions` in `pnpm-workspace.yaml`: `agent-browser`, `workleap-logging` and the `workleap-*-config(s)` skills) are linked into `.claude/skills/` by `pnpm install` and listed in the `# pnpm` block of `.claude/skills/.gitignore`. They are out of scope: never install them with the skills CLI.
+
 | Skill | Package gate (grep all `package.json`) | Update command |
 |---|---|---|
 | `accessibility` | — | `pnpm dlx skills@1.7.4 add addyosmani/web-quality-skills --skill accessibility -a claude-code --copy -y` |
-| `agent-browser` | `agent-browser` | `pnpm dlx skills@1.7.4 add vercel-labs/agent-browser --skill agent-browser -a claude-code --copy -y` |
 | `best-practices` | — | `pnpm dlx skills@1.7.4 add addyosmani/web-quality-skills --skill best-practices -a claude-code --copy -y` |
 | `git-commit` | — | `pnpm dlx skills@1.7.4 add github/awesome-copilot --skill git-commit -a claude-code --copy -y` |
 | `pnpm` | — | `pnpm dlx skills@1.7.4 add antfu/skills --skill pnpm -a claude-code --copy -y` |
 | `turborepo` | `turbo` | `pnpm dlx skills@1.7.4 add vercel/turborepo --skill turborepo -a claude-code --copy -y` |
 | `vitest` | `vitest` | `pnpm dlx skills@1.7.4 add antfu/skills --skill vitest -a claude-code --copy -y` |
-| `workleap-logging` | `@workleap/logging` | `pnpm dlx skills@1.7.4 add workleap/wl-logging --skill workleap-logging -a claude-code --copy --full-depth -y` |
 | `workleap-react-best-practices` | — | `pnpm dlx skills@1.7.4 add workleap/wl-web-configs --skill workleap-react-best-practices -a claude-code --copy --full-depth -y` |
-| `workleap-web-configs` | every `@workleap/*-configs` and `@workleap/browserslist-config` present (discover via grep, don't hard-code) | `pnpm dlx skills@1.7.4 add workleap/wl-web-configs --skill workleap-web-configs -a claude-code --copy --full-depth -y` |
-
 ## Process
 
 ### 0. Audit drift
@@ -61,8 +59,8 @@ Print before running anything. Use `UPDATE` or `SKIP` (gated package lagging).
 
 ```
 skill                          | status  | details
-workleap-logging               | UPDATE  | @workleap/logging 2.0.1 vs latest 2.0.3 (minor matches)
-workleap-web-configs           | SKIP    | @workleap/rslib-configs lagging: 2.0.0 vs latest 2.1.0
+turborepo                      | UPDATE  | turbo 2.11.9 vs latest 2.11.12 (minor matches)
+vitest                         | SKIP    | vitest lagging: 5.0.5 vs latest 5.1.0
 accessibility                  | UPDATE  | no package gate
 ...
 ```

@@ -91,7 +91,7 @@ The build must complete successfully with zero errors. This step validates that 
 
 ### Step 2d: Validate the "honeycomb/api-key" sample app
 
-Use `agent-browser` for all browser interactions in this step. It is installed as a workspace devDependency. Read the locally installed agent skill at `.claude/skills/agent-browser/` to learn the available commands. **Important**: Do NOT use `agent-browser screenshot` — screenshots are not used by this workflow. Use `agent-browser snapshot` (DOM snapshot) instead. Running a build is NOT sufficient — you must start the dev server and validate in a real browser.
+Use `agent-browser` for all browser interactions in this step. It is installed as a workspace devDependency. Read the locally installed agent skill at `.claude/skills/agent-browser/` (linked there by `pnpm install`) to learn the available commands. **Important**: Do NOT use `agent-browser screenshot` — screenshots are not used by this workflow. Use `agent-browser snapshot` (DOM snapshot) instead. Running a build is NOT sufficient — you must start the dev server and validate in a real browser.
 
 1. Start the dev server in the background using the shell `&` operator (do NOT use `run_in_background: true`): `pnpm dev-honeycomb-api-key > /tmp/honeycomb-dev.log 2>&1 &`
 2. The app listens on port **8080** and the Express server on port **1234**. Wait for both to be ready — do NOT use `sleep`, do NOT write polling loops, do NOT parse the log file for a URL. Instead, immediately run: `curl --retry 30 --retry-delay 5 --retry-connrefused --silent --output /dev/null http://localhost:8080 && curl --retry 30 --retry-delay 5 --retry-connrefused --silent --output /dev/null http://localhost:1234/api/subscription`
