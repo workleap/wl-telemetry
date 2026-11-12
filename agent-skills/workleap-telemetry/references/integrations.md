@@ -215,6 +215,8 @@ Sanitized DOM content includes form fields (like `<input>`, `<textarea>`), text 
 
 The body of a network request or response is never recorded.
 
+The private query parameters (the defaults and those provided with the `privateQueryParameterNames` option) are also redacted from the URL of the network requests.
+
 A request or response header is redacted when its name contains one of the following values, regardless of casing: `auth`, `cookie`, `token`, `session`, `secret`, `key`, `csrf`, `xsrf` or `x-honeycomb-team`. For example, `Authorization`, `Proxy-Authorization`, `Cookie`, `Set-Cookie`, `X-CSRF-Token` and `X-Api-Key` are all redacted. Because a header only has to contain one of those values, a few non-credential headers such as `WWW-Authenticate` or `Idempotency-Key` are redacted as well.
 
 To redact additional headers, wrap the network sanitizers with a LogRocket transformer function:
