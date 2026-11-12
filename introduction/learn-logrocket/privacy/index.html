@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847816485125">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847832677106">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.847816485125" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.847832677106" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847816485125" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847832677106" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847816485125" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847816485125" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847832677106" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847832677106" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -320,6 +320,7 @@
 </doc-codeblock></div>
 <h2 id="network-requests">Network requests</h2>
 <p>The body of a network request or response is never recorded.</p>
+<p>The <a href="../../../reference/telemetry/initializetelemetry/#remove-custom-query-parameters">private query parameters</a> are also redacted from the URL of the network requests.</p>
 <p>A request or response header is redacted when its name contains one of the following values, regardless of the casing: <code translate="no" v-pre>auth</code>, <code translate="no" v-pre>cookie</code>, <code translate="no" v-pre>token</code>, <code translate="no" v-pre>session</code>, <code translate="no" v-pre>secret</code>, <code translate="no" v-pre>key</code>, <code translate="no" v-pre>csrf</code>, <code translate="no" v-pre>xsrf</code> or <code translate="no" v-pre>x-honeycomb-team</code>. For example, the <code translate="no" v-pre>Authorization</code>, <code translate="no" v-pre>Proxy-Authorization</code>, <code translate="no" v-pre>Cookie</code>, <code translate="no" v-pre>Set-Cookie</code>, <code translate="no" v-pre>X-CSRF-Token</code> and <code translate="no" v-pre>X-Api-Key</code> headers are all redacted.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-info"></div>
