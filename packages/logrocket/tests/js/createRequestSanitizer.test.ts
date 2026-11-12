@@ -14,7 +14,10 @@ test.concurrent("the request authorization header is redacted", ({ expect }) => 
         method: "POST"
     } satisfies LogRocketRequest;
 
-    const requestSanitizer = createRequestSanitizer(x => x);
+    const requestSanitizer = createRequestSanitizer(
+        x => x,
+        x => x
+    );
     const result = requestSanitizer(request) as LogRocketRequest;
 
     expect(result.headers["Authorization"]).toBe("**redacted**");
@@ -35,7 +38,10 @@ test.concurrent("the request credential headers are redacted regardless of their
         method: "POST"
     } satisfies LogRocketRequest;
 
-    const requestSanitizer = createRequestSanitizer(x => x);
+    const requestSanitizer = createRequestSanitizer(
+        x => x,
+        x => x
+    );
     const result = requestSanitizer(request) as LogRocketRequest;
 
     expect(result.headers).toEqual({
@@ -54,7 +60,10 @@ test.concurrent("when the request has no headers, do not throw", ({ expect }) =>
         method: "POST"
     } as LogRocketRequest;
 
-    const requestSanitizer = createRequestSanitizer(x => x);
+    const requestSanitizer = createRequestSanitizer(
+        x => x,
+        x => x
+    );
     const result = requestSanitizer(request) as LogRocketRequest;
 
     expect(result.headers).toEqual({});
@@ -72,8 +81,29 @@ test.concurrent("the request body is redacted", ({ expect }) => {
         method: "POST"
     } satisfies LogRocketRequest;
 
-    const requestSanitizer = createRequestSanitizer(x => x);
+    const requestSanitizer = createRequestSanitizer(
+        x => x,
+        x => x
+    );
     const result = requestSanitizer(request) as LogRocketRequest;
 
     expect(result.body).toBe("**redacted**");
+});
+
+test.concurrent("the request url is sanitized", ({ expect }) => {
+    const request = {
+        reqId: "123",
+        url: "http://www.123.com?token=ABCDEF",
+        headers: {},
+        method: "GET"
+    } satisfies LogRocketRequest;
+
+    const requestSanitizer = createRequestSanitizer(
+        x => x,
+        url => url.replace("ABCDEF", "**redacted**")
+    );
+
+    const result = requestSanitizer(request) as LogRocketRequest;
+
+    expect(result.url).toBe("http://www.123.com?token=**redacted**");
 });
