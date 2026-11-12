@@ -41,6 +41,8 @@ To prevent an element and its child elements from being recorded, use the `data-
 
 The body of a network request or response is never recorded.
 
+The [private query parameters](../../reference/telemetry/initializeTelemetry.md#remove-custom-query-parameters) are also redacted from the URL of the network requests.
+
 A request or response header is redacted when its name contains one of the following values, regardless of the casing: `auth`, `cookie`, `token`, `session`, `secret`, `key`, `csrf`, `xsrf` or `x-honeycomb-team`. For example, the `Authorization`, `Proxy-Authorization`, `Cookie`, `Set-Cookie`, `X-CSRF-Token` and `X-Api-Key` headers are all redacted.
 
 !!!info

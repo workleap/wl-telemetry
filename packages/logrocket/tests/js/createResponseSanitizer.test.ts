@@ -15,7 +15,10 @@ test.concurrent("the response credential headers are redacted", ({ expect }) => 
         method: "POST"
     } satisfies LogRocketResponse;
 
-    const responseSanitizer = createResponseSanitizer(x => x);
+    const responseSanitizer = createResponseSanitizer(
+        x => x,
+        x => x
+    );
     const result = responseSanitizer(response) as LogRocketResponse;
 
     expect(result.headers).toEqual({
@@ -33,7 +36,10 @@ test.concurrent("when the response has no headers, do not throw", ({ expect }) =
         method: "POST"
     } as LogRocketResponse;
 
-    const responseSanitizer = createResponseSanitizer(x => x);
+    const responseSanitizer = createResponseSanitizer(
+        x => x,
+        x => x
+    );
     const result = responseSanitizer(response) as LogRocketResponse;
 
     expect(result.headers).toEqual({});
@@ -50,8 +56,46 @@ test.concurrent("the response body is redacted", ({ expect }) => {
         method: "POST"
     } satisfies LogRocketResponse;
 
-    const responseSanitizer = createResponseSanitizer(x => x);
+    const responseSanitizer = createResponseSanitizer(
+        x => x,
+        x => x
+    );
     const result = responseSanitizer(response) as LogRocketResponse;
 
     expect(result.body).toBe("**redacted**");
+});
+
+test.concurrent("the response url is sanitized", ({ expect }) => {
+    const response = {
+        reqId: "123",
+        url: "http://www.123.com?token=ABCDEF",
+        headers: {},
+        method: "GET"
+    } satisfies LogRocketResponse;
+
+    const responseSanitizer = createResponseSanitizer(
+        x => x,
+        url => url.replace("ABCDEF", "**redacted**")
+    );
+
+    const result = responseSanitizer(response) as LogRocketResponse;
+
+    expect(result.url).toBe("http://www.123.com?token=**redacted**");
+});
+
+test.concurrent("when the response has no url, do not throw", ({ expect }) => {
+    const response = {
+        reqId: "123",
+        headers: {},
+        method: "GET"
+    } satisfies LogRocketResponse;
+
+    const responseSanitizer = createResponseSanitizer(
+        x => x,
+        url => url.replace("ABCDEF", "**redacted**")
+    );
+
+    const result = responseSanitizer(response) as LogRocketResponse;
+
+    expect(result.url).toBeUndefined();
 });

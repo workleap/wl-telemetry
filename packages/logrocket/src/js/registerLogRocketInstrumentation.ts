@@ -69,6 +69,8 @@ export function getLogRocketSdkOptions(userOptions: RegisterLogRocketInstrumenta
     // @ts-ignore
     const { requestSanitizer: fuzzyRequestSanitizer, responseSanitizer: fuzzyResponseSanitizer } = LogrocketFuzzySanitizer.setup(mergedPrivateFieldNames);
 
+    const urlSanitizer = createUrlSanitizer(mergedPrivateQueryParameterNames);
+
     const sdkOptions = {
         console: {
             // Prevent console logs from being visible in LogRocket session replays and leaking PII.
@@ -81,11 +83,11 @@ export function getLogRocketSdkOptions(userOptions: RegisterLogRocketInstrumenta
             inputSanitizer: true
         },
         network: {
-            requestSanitizer: createRequestSanitizer(fuzzyRequestSanitizer),
-            responseSanitizer: createResponseSanitizer(fuzzyResponseSanitizer)
+            requestSanitizer: createRequestSanitizer(fuzzyRequestSanitizer, urlSanitizer),
+            responseSanitizer: createResponseSanitizer(fuzzyResponseSanitizer, urlSanitizer)
         },
         browser: {
-            urlSanitizer: createUrlSanitizer(mergedPrivateQueryParameterNames)
+            urlSanitizer
         },
         shouldDebugLog: verbose
     } satisfies LogRocketSdkOptions;

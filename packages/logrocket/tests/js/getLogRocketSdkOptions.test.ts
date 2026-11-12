@@ -154,3 +154,48 @@ test.concurrent("when a network request or response has no headers, do not throw
     expect((request as LogRocketRequest).headers).toEqual({});
     expect((response as LogRocketResponse).headers).toEqual({});
 });
+
+test.concurrent("the private query parameters of the network requests and responses urls are redacted", ({ expect }) => {
+    const result = getLogRocketSdkOptions(
+        {
+            privateQueryParameterNames: ["foo"]
+        },
+        new NoopLogger()
+    );
+
+    const url = "http://www.123.com/users?token=ABCDEF&email=test@email.com&password=correcthorsebatterystaple&foo=bar&page=2";
+
+    const request = result.network?.requestSanitizer?.({
+        reqId: "123",
+        url,
+        headers: {},
+        method: "GET"
+    });
+
+    const response = result.network?.responseSanitizer?.({
+        reqId: "123",
+        url,
+        headers: {},
+        method: "GET",
+        status: 200
+    });
+
+    const sanitizedUrl = "http://www.123.com/users?token=**redacted**&email=**redacted**&password=**redacted**&foo=**redacted**&page=2";
+
+    expect((request as LogRocketRequest).url).toBe(sanitizedUrl);
+    expect((response as LogRocketResponse).url).toBe(sanitizedUrl);
+});
+
+test.concurrent("when the url of a network request is a URL object, the private query parameters are redacted", ({ expect }) => {
+    const result = getLogRocketSdkOptions({}, new NoopLogger());
+
+    // A network request made with XMLHttpRequest can provide a URL object rather than a string.
+    const request = result.network?.requestSanitizer?.({
+        reqId: "123",
+        url: new URL("http://www.123.com/users?token=ABCDEF") as unknown as string,
+        headers: {},
+        method: "GET"
+    });
+
+    expect((request as LogRocketRequest).url).toBe("http://www.123.com/users?token=**redacted**");
+});
