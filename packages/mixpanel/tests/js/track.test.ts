@@ -447,3 +447,27 @@ test("when a custom private query parameter name includes regular expression spe
 
     expect(request.body.properties[BaseProperties.CurrentUrl]).toBe("https://app/onboarding?user[email]=**redacted**&foo=bar");
 });
+
+test("when a custom private query parameter name is percent-encoded in the current url, the query parameter is removed", async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
+
+    const url = new URL("https://app/onboarding");
+    url.searchParams.set("user[email]", "john.doe@workleap.com");
+    url.searchParams.set("foo", "bar");
+
+    vi.spyOn(window, "location", "get").mockReturnValue(url as unknown as Location);
+
+    const initializer = new MixpanelInitializer();
+
+    const client = initializer.initialize("http://api/navigation", {
+        privateQueryParameterNames: ["user[email]"]
+    });
+
+    const track = client.createTrackingFunction();
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.properties[BaseProperties.CurrentUrl]).toBe("https://app/onboarding?user[email]=**redacted**&foo=bar");
+});
