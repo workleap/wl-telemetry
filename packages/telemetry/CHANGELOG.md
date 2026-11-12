@@ -1,5 +1,13 @@
 # @workleap/telemetry
 
+## 4.1.4
+
+### Patch Changes
+
+- [#278](https://github.com/workleap/wl-telemetry/pull/278) [`c75b3cf`](https://github.com/workleap/wl-telemetry/commit/c75b3cfc89799f2cc76170066cfc512e1db7055a) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Redact the private query parameters from the URL of the network requests recorded in LogRocket session replays. Previously, the private query parameters were only redacted from the page URLs. Every occurrence of a private query parameter is now redacted, previously only the first occurrence was.
+- Updated dependencies [[`c75b3cf`](https://github.com/workleap/wl-telemetry/commit/c75b3cfc89799f2cc76170066cfc512e1db7055a)]:
+  - @workleap/logrocket@4.0.7
+
 ## 4.1.3
 
 ### Patch Changes
