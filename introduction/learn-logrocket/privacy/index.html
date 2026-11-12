@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847748382193">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847815955193">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.847748382193" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.847815955193" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847748382193" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847815955193" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847748382193" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847748382193" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847815955193" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847815955193" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -318,6 +318,59 @@
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 </doc-codeblock></div>
+<h2 id="network-requests">Network requests</h2>
+<p>The body of a network request or response is never recorded.</p>
+<p>A request or response header is redacted when its name contains one of the following values, regardless of the casing: <code translate="no" v-pre>auth</code>, <code translate="no" v-pre>cookie</code>, <code translate="no" v-pre>token</code>, <code translate="no" v-pre>session</code>, <code translate="no" v-pre>secret</code>, <code translate="no" v-pre>key</code>, <code translate="no" v-pre>csrf</code>, <code translate="no" v-pre>xsrf</code> or <code translate="no" v-pre>x-honeycomb-team</code>. For example, the <code translate="no" v-pre>Authorization</code>, <code translate="no" v-pre>Proxy-Authorization</code>, <code translate="no" v-pre>Cookie</code>, <code translate="no" v-pre>Set-Cookie</code>, <code translate="no" v-pre>X-CSRF-Token</code> and <code translate="no" v-pre>X-Api-Key</code> headers are all redacted.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-info"></div>
+    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="block text-callout-info" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>Since a header only has to contain one of those values, a few headers that are not credentials, such as <code translate="no" v-pre>WWW-Authenticate</code> or <code translate="no" v-pre>Idempotency-Key</code>, are redacted as well.</p>
+        </div>
+    </div>
+</div>
+<p>To redact additional headers, wrap the network sanitizers with a <a href="../../../reference/telemetry/initializetelemetry/#use-transformer-functions">transformer function</a>:</p>
+<div id="network-requests-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="3-20,26"><code v-pre class="language-typescript">import { initializeTelemetry, type LogRocketSdkOptionsTransformer } from &quot;@workleap/telemetry/react&quot;;
+
+const redactTenantHeader: LogRocketSdkOptionsTransformer = config =&gt; {
+    const requestSanitizer = config.network?.requestSanitizer;
+
+    config.network = {
+        ...config.network,
+        requestSanitizer: request =&gt; {
+            for (const name of Object.keys(request.headers ?? {})) {
+                if (name.toLowerCase() === &quot;x-tenant&quot;) {
+                    request.headers[name] = &quot;**redacted**&quot;;
+                }
+            }
+
+            return requestSanitizer ? requestSanitizer(request) : request;
+        }
+    };
+
+    return config;
+};
+
+const client = initializeTelemetry(&quot;wlp&quot;, {
+    logRocket: {
+        appId: &quot;my-app-id&quot;,
+        options: {
+            transformers: [redactTenantHeader]
+        }
+    }
+});</code></pre>
+</doc-codeblock></div>
+<p>Use the same technique with <code translate="no" v-pre>responseSanitizer</code> to redact additional response headers.</p>
 <div id="retype-backlinks">
     <h2>See also</h2>
 <div class="card-compact-group">
