@@ -1,5 +1,13 @@
 # @workleap/telemetry
 
+## 4.1.3
+
+### Patch Changes
+
+- [#275](https://github.com/workleap/wl-telemetry/pull/275) [`0128608`](https://github.com/workleap/wl-telemetry/commit/012860830e4e4a17dc6960c9e3d310e7aac98b8e) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Redact the credential headers of the network requests and responses recorded in LogRocket session replays, regardless of the casing of the header name. A header is now redacted when its name contains `auth`, `cookie`, `token`, `session`, `secret`, `key`, `csrf`, `xsrf` or `x-honeycomb-team`. Previously, only a request header named exactly `Authorization` was redacted.
+- Updated dependencies [[`0128608`](https://github.com/workleap/wl-telemetry/commit/012860830e4e4a17dc6960c9e3d310e7aac98b8e)]:
+  - @workleap/logrocket@4.0.6
+
 ## 4.1.2
 
 ### Patch Changes
