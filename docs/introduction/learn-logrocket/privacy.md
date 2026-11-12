@@ -49,7 +49,7 @@ Since a header only has to contain one of those values, a few headers that are n
 
 To redact additional headers, wrap the network sanitizers with a [transformer function](../../reference/telemetry/initializeTelemetry.md#use-transformer-functions):
 
-```ts !#3-21,27
+```ts !#3-20,26
 import { initializeTelemetry, type LogRocketSdkOptionsTransformer } from "@workleap/telemetry/react";
 
 const redactTenantHeader: LogRocketSdkOptionsTransformer = config => {
@@ -58,7 +58,7 @@ const redactTenantHeader: LogRocketSdkOptionsTransformer = config => {
     config.network = {
         ...config.network,
         requestSanitizer: request => {
-            for (const name of Object.keys(request.headers)) {
+            for (const name of Object.keys(request.headers ?? {})) {
                 if (name.toLowerCase() === "x-tenant") {
                     request.headers[name] = "**redacted**";
                 }
