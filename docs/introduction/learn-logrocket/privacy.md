@@ -36,3 +36,49 @@ To prevent an element and its child elements from being recorded, use the `data-
     </div>
 </div>
 ```
+
+## Network requests
+
+The body of a network request or response is never recorded.
+
+A request or response header is redacted when its name contains one of the following values, regardless of the casing: `auth`, `cookie`, `token`, `session`, `secret`, `key`, `csrf`, `xsrf` or `x-honeycomb-team`. For example, the `Authorization`, `Proxy-Authorization`, `Cookie`, `Set-Cookie`, `X-CSRF-Token` and `X-Api-Key` headers are all redacted.
+
+!!!info
+Since a header only has to contain one of those values, a few headers that are not credentials, such as `WWW-Authenticate` or `Idempotency-Key`, are redacted as well.
+!!!
+
+To redact additional headers, wrap the network sanitizers with a [transformer function](../../reference/telemetry/initializeTelemetry.md#use-transformer-functions):
+
+```ts !#3-21,27
+import { initializeTelemetry, type LogRocketSdkOptionsTransformer } from "@workleap/telemetry/react";
+
+const redactTenantHeader: LogRocketSdkOptionsTransformer = config => {
+    const requestSanitizer = config.network?.requestSanitizer;
+
+    config.network = {
+        ...config.network,
+        requestSanitizer: request => {
+            for (const name of Object.keys(request.headers)) {
+                if (name.toLowerCase() === "x-tenant") {
+                    request.headers[name] = "**redacted**";
+                }
+            }
+
+            return requestSanitizer ? requestSanitizer(request) : request;
+        }
+    };
+
+    return config;
+};
+
+const client = initializeTelemetry("wlp", {
+    logRocket: {
+        appId: "my-app-id",
+        options: {
+            transformers: [redactTenantHeader]
+        }
+    }
+});
+```
+
+Use the same technique with `responseSanitizer` to redact additional response headers.
