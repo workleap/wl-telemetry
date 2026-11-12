@@ -211,6 +211,48 @@ Sanitized DOM content includes form fields (like `<input>`, `<textarea>`), text 
 </div>
 ```
 
+### Network Requests Privacy
+
+The body of a network request or response is never recorded.
+
+A request or response header is redacted when its name contains one of the following values, regardless of casing: `auth`, `cookie`, `token`, `session`, `secret`, `key`, `csrf`, `xsrf` or `x-honeycomb-team`. For example, `Authorization`, `Proxy-Authorization`, `Cookie`, `Set-Cookie`, `X-CSRF-Token` and `X-Api-Key` are all redacted. Because a header only has to contain one of those values, a few non-credential headers such as `WWW-Authenticate` or `Idempotency-Key` are redacted as well.
+
+To redact additional headers, wrap the network sanitizers with a LogRocket transformer function:
+
+```typescript
+import { initializeTelemetry, type LogRocketSdkOptionsTransformer } from "@workleap/telemetry/react";
+
+const redactTenantHeader: LogRocketSdkOptionsTransformer = config => {
+  const requestSanitizer = config.network?.requestSanitizer;
+
+  config.network = {
+    ...config.network,
+    requestSanitizer: request => {
+      for (const name of Object.keys(request.headers ?? {})) {
+        if (name.toLowerCase() === "x-tenant") {
+          request.headers[name] = "**redacted**";
+        }
+      }
+
+      return requestSanitizer ? requestSanitizer(request) : request;
+    }
+  };
+
+  return config;
+};
+
+const client = initializeTelemetry("wlp", {
+  logRocket: {
+    appId: "my-app-id",
+    options: {
+      transformers: [redactTenantHeader]
+    }
+  }
+});
+```
+
+Use the same technique with `responseSanitizer` to redact additional response headers.
+
 ### User Identification
 
 ```typescript
