@@ -1,6 +1,6 @@
 {
     "name": "@workleap/logrocket",
-    "version": "4.0.6",
+    "version": "4.0.7",
     "description": "A package containing utilities for LogRocket.",
     "license": "Apache-2.0",
     "author": "Workleap",
