@@ -353,3 +353,97 @@ test("when a custom tracking endpoint starts with slash and an environment is pr
 
     expect(request.url).toBe("https://api.platform.workleap-stg.com/shell/navigation/custom/endpoint");
 });
+
+test("the private query parameters and the fragment are removed from the current url", async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
+
+    vi.spyOn(window, "location", "get").mockReturnValue(new URL("https://app/onboarding?token=ABCDEF&email=john.doe@workleap.com&password=123456&foo=bar#access_token=GHIJKL") as unknown as Location);
+
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
+
+    const track = client.createTrackingFunction();
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.properties[BaseProperties.CurrentUrl]).toBe("https://app/onboarding?token=**redacted**&email=**redacted**&password=**redacted**&foo=bar");
+});
+
+test("when the fragment of the current url doesn't include a private query parameter, the fragment is removed", async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
+
+    vi.spyOn(window, "location", "get").mockReturnValue(new URL("https://app/onboarding?foo=bar#code=ABCDEF") as unknown as Location);
+
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
+
+    const track = client.createTrackingFunction();
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.properties[BaseProperties.CurrentUrl]).toBe("https://app/onboarding?foo=bar");
+});
+
+test("the private query parameters are removed from the referrer", async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
+
+    vi.spyOn(document, "referrer", "get").mockReturnValue("https://app/login?token=ABCDEF&email=john.doe@workleap.com&password=123456&foo=bar");
+
+    const initializer = new MixpanelInitializer();
+    const client = initializer.initialize("http://api/navigation");
+
+    const track = client.createTrackingFunction();
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.properties[BaseProperties.Referrer]).toBe("https://app/login?token=**redacted**&email=**redacted**&password=**redacted**&foo=bar");
+    expect(request.body.properties[BaseProperties.ReferringDomain]).toBe("app");
+});
+
+test("when custom private query parameter names are provided, they are removed from the current url and the referrer", async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
+
+    vi.spyOn(window, "location", "get").mockReturnValue(new URL("https://app/onboarding?foo=bar&token=ABCDEF") as unknown as Location);
+    vi.spyOn(document, "referrer", "get").mockReturnValue("https://app/login?foo=bar&token=ABCDEF");
+
+    const initializer = new MixpanelInitializer();
+
+    const client = initializer.initialize("http://api/navigation", {
+        privateQueryParameterNames: ["foo"]
+    });
+
+    const track = client.createTrackingFunction();
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.properties[BaseProperties.CurrentUrl]).toBe("https://app/onboarding?foo=**redacted**&token=**redacted**");
+    expect(request.body.properties[BaseProperties.Referrer]).toBe("https://app/login?foo=**redacted**&token=**redacted**");
+});
+
+test("when a custom private query parameter name includes regular expression special characters, the query parameter is removed from the current url", async ({ expect }) => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(null, { status: 200 }));
+
+    vi.spyOn(window, "location", "get").mockReturnValue(new URL("https://app/onboarding?user[email]=john.doe@workleap.com&foo=bar") as unknown as Location);
+
+    const initializer = new MixpanelInitializer();
+
+    const client = initializer.initialize("http://api/navigation", {
+        privateQueryParameterNames: ["user[email]"]
+    });
+
+    const track = client.createTrackingFunction();
+
+    await track("event", {});
+
+    const request = await getFetchCall(fetchMock, expect);
+
+    expect(request.body.properties[BaseProperties.CurrentUrl]).toBe("https://app/onboarding?user[email]=**redacted**&foo=bar");
+});

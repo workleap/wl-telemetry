@@ -28,20 +28,28 @@ export interface MixpanelClientOptions {
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     productId?: string;
+    /**
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    privateQueryParameterNames?: string[];
 }
+
+const DefaultPrivateQueryParameterNames = ["token", "email", "password"];
 
 export class MixpanelClientImpl implements MixpanelClient {
     readonly #globalEventProperties = new Map<string, unknown>();
     readonly #endpoint: string;
     readonly #logger: Logger;
     readonly #productId?: string;
+    readonly #privateQueryParameterNames: string[];
 
     constructor(endpoint: string, logger: Logger, options: MixpanelClientOptions = {}) {
-        const { productId } = options;
+        const { productId, privateQueryParameterNames = [] } = options;
 
         this.#endpoint = endpoint;
         this.#logger = logger;
         this.#productId = productId;
+        this.#privateQueryParameterNames = DefaultPrivateQueryParameterNames.concat(privateQueryParameterNames);
     }
 
     // IMPORTANT: If you update this method, make sure to update the MixpanelPartialClient
@@ -53,7 +61,7 @@ export class MixpanelClientImpl implements MixpanelClient {
             try {
                 const { keepAlive = false } = _options;
 
-                const baseProperties = getBaseProperties();
+                const baseProperties = getBaseProperties(this.#privateQueryParameterNames);
 
                 const allProperties = {
                     ...baseProperties,

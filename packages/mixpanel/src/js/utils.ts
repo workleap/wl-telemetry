@@ -133,3 +133,16 @@ export function referringDomain(referrer: string) {
 
     return "";
 }
+
+export function redactQueryParameters(url: string, queryParameterNames: string[]) {
+    let redactedUrl = url;
+
+    for (const x of queryParameterNames) {
+        // The name is escaped because it can include regular expression special characters, such as "user[email]".
+        const escapedName = x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+        redactedUrl = redactedUrl.replace(new RegExp(`${escapedName}=([^&]*)`, "gi"), () => `${x}=**redacted**`);
+    }
+
+    return redactedUrl;
+}

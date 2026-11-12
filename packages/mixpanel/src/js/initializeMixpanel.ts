@@ -41,6 +41,11 @@ export interface InitializeMixpanelOptions {
      */
     trackingEndpoint?: string;
     /**
+     * Names of additional query parameters to redact from the URLs sent with every event.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    privateQueryParameterNames?: string[];
+    /**
      * Context including telemetry correlation ids.
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
@@ -65,7 +70,7 @@ export interface InitializeMixpanelOptions {
 
 export class MixpanelInitializer {
     initialize(envOrTrackingApiBaseUrl: MixpanelEnvironment | (string & {}), options: Omit<InitializeMixpanelOptions, "globalEventProperties"> = {}) {
-        const { productId, trackingEndpoint, telemetryContext, logRocketInstrumentationClient, verbose = false, loggers = [] } = options;
+        const { productId, trackingEndpoint, privateQueryParameterNames, telemetryContext, logRocketInstrumentationClient, verbose = false, loggers = [] } = options;
 
         const logger = createCompositeLogger(verbose, loggers);
         const endpoint = getTrackingEndpoint(envOrTrackingApiBaseUrl, trackingEndpoint);
@@ -73,7 +78,8 @@ export class MixpanelInitializer {
         logger.information("[mixpanel] Mixpanel is initialized.");
 
         const client = new MixpanelClientImpl(endpoint, logger, {
-            productId
+            productId,
+            privateQueryParameterNames
         });
 
         // Set the telemetry correlation ids on every Mixpanel event.
