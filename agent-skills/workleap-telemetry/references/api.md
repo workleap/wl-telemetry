@@ -27,7 +27,7 @@ const telemetryClient = initializeTelemetry(productFamily, {
     options?: {
       rootHostname?: string;          // Root hostname to track sessions across subdomains, defaults to "workleap.com"
       privateFieldNames?: string[];   // Additional fields removed from network requests/responses via fuzzy matching
-      privateQueryParameterNames?: string[];  // Additional query parameters removed from URLs via fuzzy matching
+      privateQueryParameterNames?: string[];  // Additional query parameters redacted from the URLs of the session replays ("token", "email" and "password" are redacted by default)
       transformers?: LogRocketSdkOptionsTransformer[];
     }
   },
@@ -57,6 +57,7 @@ const telemetryClient = initializeTelemetry(productFamily, {
       privateQueryParameterNames?: string[];  // Additional query parameters redacted from the page URL and referrer sent with every event ("token", "email" and "password" are redacted by default)
     }
   },
+  privateQueryParameterNames?: string[];  // Additional query parameters redacted from the URLs sent to every telemetry platform. Added to the defaults and to the names provided with the options of a platform
   verbose?: boolean;                  // Enable debug logging. If no `loggers` are configured, logs are automatically sent to the console
   loggers?: RootLogger[];             // Logger instances for diagnostics
 });
