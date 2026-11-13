@@ -13,7 +13,7 @@ Re-pull each skill listed in `skills-lock.json` whose upstream moved, but only w
 
 ## Cooldown
 
-Nothing is installed until it has sat unchanged upstream for 7 days: a skill's folder, and the `skills` CLI release that installs it. Step 2's listing applies the cooldown and offers what cleared it as `cli` and, per skill, `latest` — the only version and the only commit a command takes.
+Nothing is installed until it has sat unchanged upstream for 7 days: a skill's folder, the `skills` CLI release that installs it, and every package that release pulls in. Step 2's listing applies the first two and offers what cleared them as `cli` and, per skill, `latest` — the only version and the only commit a command takes. `--config.minimumReleaseAge=10080` (minutes) on each command applies the third: never drop it. [DESIGN.md](DESIGN.md) tells what the cooldown covers and what it doesn't.
 
 ## Skills
 
@@ -23,13 +23,13 @@ Skills that a dependency ships for pnpm (approved under `permissions` in `pnpm-w
 
 | Skill | Package gate (grep all `package.json`) | Update command |
 |---|---|---|
-| `accessibility` | — | `pnpm dlx skills@<cli> add https://github.com/addyosmani/web-quality-skills/tree/<latest>/skills/accessibility --skill accessibility -a claude-code --copy -y` |
-| `best-practices` | — | `pnpm dlx skills@<cli> add https://github.com/addyosmani/web-quality-skills/tree/<latest>/skills/best-practices --skill best-practices -a claude-code --copy -y` |
-| `git-commit` | — | `pnpm dlx skills@<cli> add https://github.com/github/awesome-copilot/tree/<latest>/skills/git-commit --skill git-commit -a claude-code --copy -y` |
-| `pnpm` | — | `pnpm dlx skills@<cli> add https://github.com/antfu/skills/tree/<latest>/skills/pnpm --skill pnpm -a claude-code --copy -y` |
-| `turborepo` | `turbo` | `pnpm dlx skills@<cli> add https://github.com/vercel/turborepo/tree/<latest>/skills/turborepo --skill turborepo -a claude-code --copy -y` |
-| `vitest` | `vitest` | `pnpm dlx skills@<cli> add https://github.com/antfu/skills/tree/<latest>/skills/vitest --skill vitest -a claude-code --copy -y` |
-| `workleap-react-best-practices` | — | `pnpm dlx skills@<cli> add https://github.com/workleap/wl-web-configs/tree/<latest>/agent-skills/workleap-react-best-practices --skill workleap-react-best-practices -a claude-code --copy --full-depth -y` |
+| `accessibility` | — | `pnpm --config.minimumReleaseAge=10080 dlx skills@<cli> add https://github.com/addyosmani/web-quality-skills/tree/<latest>/skills/accessibility --skill accessibility -a claude-code --copy -y` |
+| `best-practices` | — | `pnpm --config.minimumReleaseAge=10080 dlx skills@<cli> add https://github.com/addyosmani/web-quality-skills/tree/<latest>/skills/best-practices --skill best-practices -a claude-code --copy -y` |
+| `git-commit` | — | `pnpm --config.minimumReleaseAge=10080 dlx skills@<cli> add https://github.com/github/awesome-copilot/tree/<latest>/skills/git-commit --skill git-commit -a claude-code --copy -y` |
+| `pnpm` | — | `pnpm --config.minimumReleaseAge=10080 dlx skills@<cli> add https://github.com/antfu/skills/tree/<latest>/skills/pnpm --skill pnpm -a claude-code --copy -y` |
+| `turborepo` | `turbo` | `pnpm --config.minimumReleaseAge=10080 dlx skills@<cli> add https://github.com/vercel/turborepo/tree/<latest>/skills/turborepo --skill turborepo -a claude-code --copy -y` |
+| `vitest` | `vitest` | `pnpm --config.minimumReleaseAge=10080 dlx skills@<cli> add https://github.com/antfu/skills/tree/<latest>/skills/vitest --skill vitest -a claude-code --copy -y` |
+| `workleap-react-best-practices` | — | `pnpm --config.minimumReleaseAge=10080 dlx skills@<cli> add https://github.com/workleap/wl-web-configs/tree/<latest>/agent-skills/workleap-react-best-practices --skill workleap-react-best-practices -a claude-code --copy --full-depth -y` |
 
 ## Process
 
@@ -52,7 +52,7 @@ For each gated skill, grep every `package.json` under the repo (root, `packages/
 
 For each unique package: `pnpm view <package> version`. Parallelize.
 
-List `cli` and each skill's `pinned`, `latest` and `settled`:
+List `cli` and each skill's `pinned`, `latest`, `settled` and `problem`. It takes about a minute, longer when GitHub is slow — run it with a 10-minute timeout:
 
 ```
 node .claude/skills/_update-skills/scripts/listSkillPins.ts
@@ -64,7 +64,9 @@ A non-zero exit → **stop**. Print `listing stop:` followed by its message, wor
 
 For each gated package: extract `major.minor` from installed vs latest (ignore patch and prereleases) → `current` or `lagging`. A skill is eligible only if every mapped package is `current` **and** every pinned occurrence across the repo matches. Untied skills (`—` gate) are always eligible.
 
-An eligible skill then takes the listing's verdict:
+A skill the listing gives a `problem` is `BLOCKED`, whatever its gate says: the listing couldn't vouch for it, because its source or its folder is no longer what `skills-lock.json` and the listing's script record, or because GitHub couldn't be read. Never pull it, and never edit the lock, the table or the script to clear it — a human finds out why first.
+
+Any other eligible skill takes the listing's verdict:
 
 - `settled: false` → `WAIT`: still in cooldown, no `latest` yet.
 - `latest` equals `pinned` → `UNCHANGED`: no pull.
@@ -74,7 +76,7 @@ A gate excluded from `update-outdated-deps` (the `!…` filters in the root `pac
 
 ### 4. Print eligibility table
 
-Print before running anything. Use `UPDATE`, `UNCHANGED`, `WAIT` or `SKIP` (gated package lagging).
+Print before running anything. Use `UPDATE`, `UNCHANGED`, `WAIT`, `BLOCKED` (details: the listing's `problem`) or `SKIP` (gated package lagging).
 
 ```
 skill                          | status     | details
@@ -89,7 +91,12 @@ vitest                         | SKIP       | vitest lagging: 5.0.5 vs latest 5.
 
 Run the matching command from the table for each `UPDATE` row, `<cli>` and the full 40-character `<latest>` filled in, sequentially — the skill installer mutates `skills-lock.json` and a shared store. The CLI rewrites `skills-lock.json` (2-space indent); that's expected — the file is ignored by oxfmt.
 
-A pull is done when the skill's `skills-lock.json` entry carries `latest` as its `ref`, under the `skillPath` it had; any other outcome is a failed `skills add`. The CLI release changes from one run to the next, so the checks below are what catches a change to its install defaults.
+A pull is done when all of these hold; any other outcome is a failed `skills add`:
+
+- The skill's `skills-lock.json` entry carries `latest` as its `ref`, under the `skillPath` it had.
+- `node .claude/skills/_update-skills/scripts/listSkillPins.ts --verify <name>` prints `"verified": true`. The lock's `ref` is only what the CLI was asked for; this compares the files it installed with the source at that commit.
+
+The CLI release changes from one run to the next, so the checks below are what catches a change to its install defaults.
 
 A failed pull → restore that skill before the next one, so a rejected install never reaches the PR. Before each pull, Read `skills-lock.json` and keep its contents; on failure, Write that copy back — never `git checkout` it, which would also drop the lock entries of skills already updated in this run — then `git checkout -- .claude/skills/<name>` and `git clean -fd .claude/skills/<name>`.
 
@@ -103,6 +110,7 @@ Before each pull, capture `git status --porcelain` as a baseline — the tree ma
 - Skills updated (count + list, each with `<source>` and its pin move `<old commit> -> <new commit>`; note which ones actually changed on disk)
 - Skills unchanged
 - Skills in cooldown
+- Skills blocked (each with the listing's `problem`, word for word)
 - Skills skipped (with the lagging package: installed vs latest)
 - Skills whose pulled `SKILL.md` declares `model:` frontmatter
 - Unexpected paths touched by the installer
