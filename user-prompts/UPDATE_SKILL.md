@@ -2,6 +2,8 @@ Review the `workleap-telemetry` skill in the `./agent-skills/workleap-telemetry`
 
 Never update a versioned skill. You can identify a versioned skill with it's folder name pattern, e.g. `workleap-telemetry-v*`.
 
+The skill is published to npm with the `@workleap/telemetry` package. If you changed the skill, add a `.changeset/*.md` file with a `patch` bump for `@workleap/telemetry`, otherwise the change is never released.
+
 After making changes to the skill, spawn a review agent using the **opus** model to validate that the skill can still answer the following questions:
 
 - What is `@workleap/telemetry` and what problems does it solve?
