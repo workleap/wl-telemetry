@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847853270160">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847855541761">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.847853270160" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.847855541761" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847853270160" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847855541761" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847853270160" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847853270160" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847855541761" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847855541761" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -326,6 +326,7 @@
 <li><code translate="no" v-pre>apiKey</code>: Set an Honeycomb ingestion <a href="https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key" class="outbound" target="_blank">API key</a>. Either <code translate="no" v-pre>proxy</code> or <code translate="no" v-pre>apiKey</code> option must be provided.</li>
 <li><code translate="no" v-pre>instrumentations</code>: Append the provided <a href="https://opentelemetry.io/docs/languages/js/instrumentation/" class="outbound" target="_blank">instrumentation</a> instances to the configuration.</li>
 <li><code translate="no" v-pre>spanProcessors</code>: Append the provided <a href="https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#custom-span-processing" class="outbound" target="_blank">span processor</a> instances to the configuration.</li>
+<li><code translate="no" v-pre>privateQueryParameterNames</code>: Names of additional query parameters to redact from the URLs sent with the traces.</li>
 <li><code translate="no" v-pre>fetchInstrumentation</code>: Replace the default <a href="https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-fetch" class="outbound" target="_blank">@opentelemetry/instrumentation-fetch</a> options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.</li>
 <li><code translate="no" v-pre>documentLoadInstrumentation</code>: Replace the default <a href="https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-document-load#document-load-instrumentation-options" class="outbound" target="_blank">@opentelemetry/instrumentation-document-load</a> options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.</li>
 <li><code translate="no" v-pre>xmlHttpRequestInstrumentation</code>: By default, <a href="https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-xml-http-request" class="outbound" target="_blank">@opentelemetry/instrumentation-xml-http-request</a> is disabled. To enable this instrumentation, provide a function that returns an object literal with the desired options. This function will receive an object literal of default options, which you can extend or replace as needed.</li>
@@ -600,6 +601,23 @@ const client = initializeTelemetry(&quot;sg&quot;, {
     }
 });</code></pre>
 </doc-codeblock></div>
+<h3 id="redact-custom-query-parameters">Redact custom query parameters</h3>
+<p>By default, the value of the <code translate="no" v-pre>token</code>, <code translate="no" v-pre>email</code> and <code translate="no" v-pre>password</code> query parameters is redacted from the URLs sent with the traces, such as the <code translate="no" v-pre>url.full</code>, <code translate="no" v-pre>page.url</code> and <code translate="no" v-pre>entry_page.referrer</code> attributes. The fragment is removed from those URLs, and the <code translate="no" v-pre>page.hash</code> and <code translate="no" v-pre>entry_page.hash</code> attributes are not sent. A query parameter is redacted when its name ends with one of those values, regardless of the casing. To redact additional query parameters, use the <code translate="no" v-pre>privateQueryParameterNames</code> option:</p>
+<div id="redact-custom-query-parameters-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="10"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
+
+const client = initializeTelemetry(&quot;sg&quot;, {
+    honeycomb: {
+        namespace: &quot;sample&quot;,
+        serviceName: &quot;my-app-name&quot;,
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: &quot;https://sample-proxy&quot;,
+            privateQueryParameterNames: [&quot;a-custom-param&quot;]
+        }
+    }
+});</code></pre>
+</doc-codeblock></div>
 <h3 id="customize-fetchinstrumentation">Customize <code translate="no" v-pre>fetchInstrumentation</code></h3>
 <div id="customize-fetchinstrumentation-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="10-15"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
@@ -832,9 +850,9 @@ const client = initializeTelemetry(&quot;sg&quot;, {
     }
 });</code></pre>
 </doc-codeblock></div>
-<h3 id="redact-custom-query-parameters">Redact custom query parameters</h3>
+<h3 id="redact-custom-query-parameters-1">Redact custom query parameters</h3>
 <p>By default, the value of the <code translate="no" v-pre>token</code>, <code translate="no" v-pre>email</code> and <code translate="no" v-pre>password</code> query parameters is redacted from the <code translate="no" v-pre>$current_url</code> and <code translate="no" v-pre>$referrer</code> properties sent with every event, and the fragment is removed from <code translate="no" v-pre>$current_url</code>. A query parameter is redacted when its name ends with one of those values, regardless of the casing. To redact additional query parameters, use the <code translate="no" v-pre>privateQueryParameterNames</code> option:</p>
-<div id="redact-custom-query-parameters-code-1" class="codeblock-wrapper"><doc-codeblock>
+<div id="redact-custom-query-parameters-1-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="7"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
 
 const client = initializeTelemetry(&quot;wlp&quot;, {
