@@ -53,6 +53,7 @@ const telemetryClient = initializeTelemetry(productFamily, {
     options?: {
       productId?: string;             // Product identifier (e.g., "wlp")
       trackingEndpoint?: string;      // Custom tracking endpoint path, defaults to "tracking/track"
+      privateQueryParameterNames?: string[];  // Additional query parameters redacted from the page URL and referrer sent with every event ("token", "email" and "password" are redacted by default)
     }
   },
   verbose?: boolean;                  // Enable debug logging. If no `loggers` are configured, logs are automatically sent to the console
