@@ -1,5 +1,13 @@
 # @workleap/honeycomb
 
+## 8.3.1
+
+### Patch Changes
+
+- [#289](https://github.com/workleap/wl-telemetry/pull/289) [`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Use the function redacting the private query parameters of the `@workleap-telemetry/core` package. The behaviour is unchanged.
+- Updated dependencies [[`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3)]:
+  - @workleap-telemetry/core@2.1.0
+
 ## 8.3.0
 
 ### Minor Changes
