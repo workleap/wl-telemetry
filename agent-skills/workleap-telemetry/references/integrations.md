@@ -334,10 +334,15 @@ mixpanel: {
   envOrTrackingApiBaseUrl: "production",  // Required: Environment or base URL
   options: {
     productId: "wlp",                            // Optional: Product identifier
-    trackingEndpoint: "custom/tracking/track"    // Optional: Custom tracking endpoint path, defaults to "tracking/track"
+    trackingEndpoint: "custom/tracking/track",   // Optional: Custom tracking endpoint path, defaults to "tracking/track"
+    privateQueryParameterNames: ["a-custom-param"]  // Optional: Additional query parameters redacted from the page URL and referrer of every event
   }
 }
 ```
+
+### URL Privacy
+
+By default, the value of the `token`, `email` and `password` query parameters is redacted from the `$current_url` and `$referrer` properties sent with every event, and the fragment is removed from `$current_url`. A query parameter is redacted when its name ends with one of those values, regardless of the casing. Use the `privateQueryParameterNames` option to redact additional query parameters.
 
 **Environment Values:**
 - `"production"` - Production tracking API
