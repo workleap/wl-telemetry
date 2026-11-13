@@ -30,7 +30,7 @@ const client = registerLogRocketInstrumentation(appId, options?: {
 - `options`: An optional object literal of predefined options.
     - `rootHostname`: A [root hostname](https://docs.logrocket.com/reference/roothostname) to track sessions across subdomains.
     - `privateFieldNames`: Names of additional fields to exclude from session replays. These fields will be removed from network requests, responses using a fuzzy-matching algorithm.
-    - `privateQueryParameterNames`: Names of additional fields to exclude from session replays. These fields will be removed from query parameters using a fuzzy-matching algorithm.
+    - `privateQueryParameterNames`: Names of additional query parameters to redact from the URLs of the session replays.
     - `telemetryContext`: A `TelemetryContext` instance containing the telemetry correlation ids to attach to LogRocket session replays.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An array of logger instances that will output messages.

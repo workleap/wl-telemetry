@@ -7,7 +7,7 @@ import type { FetchInstrumentationConfig, FetchRequestHookFunction as OpenTeleme
 import type { UserInteractionInstrumentationConfig } from "@opentelemetry/instrumentation-user-interaction";
 import type { XMLHttpRequestInstrumentationConfig } from "@opentelemetry/instrumentation-xml-http-request";
 import type { SpanProcessor } from "@opentelemetry/sdk-trace";
-import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
+import { DefaultPrivateQueryParameterNames, HasExecutedGuard, redactQueryParameters, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 import { FetchRequestPipeline } from "./FetchRequestPipeline.ts";
@@ -16,6 +16,7 @@ import { type HoneycombInstrumentationClient, HoneycombInstrumentationClientImpl
 import type { HoneycombSdkInstrumentations, HoneycombSdkOptions, PropagateTraceHeaderCorsUrls } from "./honeycombTypes.ts";
 import { NormalizeAttributesSpanProcessor } from "./NormalizeAttributesSpanProcessor.ts";
 import { appendTracesPath, createProxyTraceExporter, resolveUrl } from "./ProxyTraceExporter.ts";
+import { RedactUrlAttributesSpanProcessor } from "./RedactUrlAttributesSpanProcessor.ts";
 
 export const ServiceNamespaceAttributeName = "service.namespace";
 export const TelemetryIdAttributeName = "app.telemetry_id";
@@ -81,6 +82,11 @@ export interface RegisterHoneycombInstrumentationOptions {
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
     spanProcessors?: SpanProcessor[];
+    /**
+     * Names of additional query parameters to redact from the URLs sent with the traces.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    privateQueryParameterNames?: string[];
     /**
      * Disable OTel fetch instrumentation or replace the default options.
      * @see {@link https://workleap.github.io/wl-telemetry}
@@ -187,6 +193,7 @@ export function getHoneycombSdkOptions(
         loggers = [],
         instrumentations = [],
         spanProcessors = [],
+        privateQueryParameterNames = [],
         fetchInstrumentation = defaultDefineFetchInstrumentationOptions,
         xmlHttpRequestInstrumentation = false,
         documentLoadInstrumentation = defaultDefineDocumentLoadInstrumentationOptions,
@@ -199,6 +206,7 @@ export function getHoneycombSdkOptions(
     }
 
     const logger = createCompositeLogger(verbose, loggers);
+    const mergedPrivateQueryParameterNames = DefaultPrivateQueryParameterNames.concat(privateQueryParameterNames);
 
     const instrumentationOptions = {
         ignoreNetworkEvents: true,
@@ -251,7 +259,17 @@ export function getHoneycombSdkOptions(
         // Watch out, getWebAutoInstrumentations enables by default all the supported instrumentations.
         // It's important to disabled those that we don't want.
         instrumentations: [...getWebAutoInstrumentations(autoInstrumentations), ...instrumentations],
-        spanProcessors: [globalAttributeSpanProcessor, new NormalizeAttributesSpanProcessor(), ...spanProcessors]
+        // The processor redacting the URLs is registered after the others so it also handles the attributes they set.
+        spanProcessors: [globalAttributeSpanProcessor, new NormalizeAttributesSpanProcessor(), ...spanProcessors, new RedactUrlAttributesSpanProcessor(mergedPrivateQueryParameterNames)],
+        // The hash and the referrer of the entry page are not sent as is because they can include sensitive values, such as an access token.
+        // The referrer is replaced by a redacted value.
+        entryPageAttributes: {
+            hash: false,
+            referrer: false
+        },
+        resourceAttributes: {
+            "entry_page.referrer": redactQueryParameters(globalThis.document?.referrer ?? "", mergedPrivateQueryParameterNames)
+        }
     } satisfies HoneycombSdkOptions;
 
     const transformedSdkOptions = applyTransformers(sdkOptions, transformers, {

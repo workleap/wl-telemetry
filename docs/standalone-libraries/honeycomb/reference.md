@@ -19,6 +19,7 @@ const client = registerHoneycombInstrumentation(namespace, serviceName, apiServi
     apiKey?,
     instrumentations?,
     spanProcessors?,
+    privateQueryParameterNames?,
     fetchInstrumentation?,
     documentLoadInstrumentation?,
     xmlHttpRequestInstrumentation?,
@@ -42,6 +43,7 @@ const client = registerHoneycombInstrumentation(namespace, serviceName, apiServi
     - `apiKey`: Set an Honeycomb ingestion [API key](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key). Either `proxy` or `apiKey` option must be provided.
     - `instrumentations`: Append the provided [instrumentation](https://opentelemetry.io/docs/languages/js/instrumentation/) instances to the configuration.
     - `spanProcessors`: Append the provided [span processor](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#custom-span-processing) instances to the configuration.
+    - `privateQueryParameterNames`: Names of additional query parameters to redact from the URLs sent with the traces.
     - `fetchInstrumentation`: Replace the default [@opentelemetry/instrumentation-fetch](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-fetch) options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.
     - `documentLoadInstrumentation`: Replace the default [@opentelemetry/instrumentation-document-load](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-document-load#document-load-instrumentation-options) options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.
     - `xmlHttpRequestInstrumentation`: By default, [@opentelemetry/instrumentation-xml-http-request](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-xml-http-request) is disabled. To enable this instrumentation, provide a function that returns an object literal with the desired options. This function will receive an object literal of default options, which you can extend or replace as needed.
@@ -158,6 +160,19 @@ const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
     spanProcessors: [
         new CustomSpanProcessor()
     ]
+});
+```
+
+### Redact custom query parameters
+
+By default, the value of the `token`, `email` and `password` query parameters is redacted from the URLs sent with the traces, such as the `url.full`, `page.url` and `entry_page.referrer` attributes. The fragment is removed from those URLs, and the `page.hash` and `entry_page.hash` attributes are not sent. A query parameter is redacted when its name ends with one of those values, regardless of the casing. To redact additional query parameters, use the `privateQueryParameterNames` option:
+
+```ts !#5
+import { registerHoneycombInstrumentation } from "@workleap/honeycomb/react";
+
+const client = registerHoneycombInstrumentation("sample", "my-app", [/.+/g,], {
+    proxy: "https://sample-proxy",
+    privateQueryParameterNames: ["a-custom-param"]
 });
 ```
 

@@ -70,6 +70,11 @@ export interface InitializeTelemetryOptions {
         options?: Omit<InitializeMixpanelOptions, "telemetryContext" | "logRocketInstrumentationClient" | "verbose" | "loggers">;
     };
     /**
+     * Names of additional query parameters to redact from the URLs sent to every telemetry platform.
+     * @see {@link https://workleap.github.io/wl-telemetry}
+     */
+    privateQueryParameterNames?: string[];
+    /**
      * Whether or not debug information should be logged to the console.
      * @see {@link https://workleap.github.io/wl-telemetry}
      */
@@ -89,7 +94,7 @@ export interface InitializeTelemetryOptions {
  * @see {@link https://workleap.github.io/wl-telemetry}
  */
 export function initializeTelemetry(productFamily: ProductFamily, options: InitializeTelemetryOptions = {}) {
-    const { logRocket, honeycomb, mixpanel, verbose, loggers } = options;
+    const { logRocket, honeycomb, mixpanel, privateQueryParameterNames = [], verbose, loggers } = options;
 
     const telemetryContext = createTelemetryContext(productFamily, {
         verbose,
@@ -103,6 +108,7 @@ export function initializeTelemetry(productFamily: ProductFamily, options: Initi
     if (logRocket) {
         logRocketClient = registerLogRocketInstrumentation(logRocket.appId, {
             ...logRocket.options,
+            privateQueryParameterNames: privateQueryParameterNames.concat(logRocket.options?.privateQueryParameterNames ?? []),
             telemetryContext,
             verbose,
             loggers
@@ -112,6 +118,7 @@ export function initializeTelemetry(productFamily: ProductFamily, options: Initi
     if (honeycomb) {
         honeycombClient = registerHoneycombInstrumentation(honeycomb.namespace, honeycomb.serviceName, honeycomb.apiServiceUrls, {
             ...honeycomb.options,
+            privateQueryParameterNames: privateQueryParameterNames.concat(honeycomb.options?.privateQueryParameterNames ?? []),
             logRocketInstrumentationClient: logRocketClient,
             telemetryContext,
             verbose,
@@ -122,6 +129,7 @@ export function initializeTelemetry(productFamily: ProductFamily, options: Initi
     if (mixpanel) {
         mixpanelClient = initializeMixpanel(mixpanel.envOrTrackingApiBaseUrl, {
             ...mixpanel.options,
+            privateQueryParameterNames: privateQueryParameterNames.concat(mixpanel.options?.privateQueryParameterNames ?? []),
             telemetryContext,
             logRocketInstrumentationClient: logRocketClient,
             verbose,
