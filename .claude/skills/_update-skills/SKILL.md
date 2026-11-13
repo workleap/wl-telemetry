@@ -91,6 +91,8 @@ Run the matching command from the table for each `UPDATE` row, `<cli>` and the f
 
 A pull is done when the skill's `skills-lock.json` entry carries `latest` as its `ref`, under the `skillPath` it had; any other outcome is a failed `skills add`. The CLI release changes from one run to the next, so the checks below are what catches a change to its install defaults.
 
+A failed pull → restore that skill before the next one, so a rejected install never reaches the PR. Before each pull, Read `skills-lock.json` and keep its contents; on failure, Write that copy back — never `git checkout` it, which would also drop the lock entries of skills already updated in this run — then `git checkout -- .claude/skills/<name>` and `git clean -fd .claude/skills/<name>`.
+
 Before each pull, capture `git status --porcelain` as a baseline — the tree may already hold dependency edits or earlier skill pulls. After each pull:
 
 - Diff `git status --porcelain` against that baseline; any path the pull introduced outside the skill's folders and `skills-lock.json` (e.g. a new `.agents/` folder) is unexpected — flag it in the report; never delete it yourself. Paths already in the baseline are never unexpected.
