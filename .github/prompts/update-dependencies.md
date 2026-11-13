@@ -112,7 +112,15 @@ Use the `Agent` tool to dispatch a subagent with this brief:
 
 Keep the skill's report for the PR body. A stop or a failed skill pull does NOT block the dependency PR — report it there instead. Skill files are documentation for agents and need no validation.
 
-If the report lists unexpected paths touched by the installer, discard them (`git checkout -- <path>` for tracked files, `git clean -fd -- <path>` for untracked ones) so they don't land in the PR; mention them in the PR body. Only discard paths under `.claude/` — never a `package.json`, `pnpm-lock.yaml`, or source file changed in Steps 1–2.
+A step 2 listing stop also opens an issue — a line in a dependency PR is easy to miss, and no PR is created when nothing else changed:
+
+```bash
+gh issue create \
+  --title "[agent] Cannot update agent skills" \
+  --body "<the message the listing printed, and a link to: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID>"
+```
+
+If the report lists unexpected paths touched by the installer, discard them (`git checkout -- <path>` for tracked files, `git clean -fd -- <path>` for untracked ones) so they don't land in the PR; mention them in the PR body. Only discard paths under `.claude/` or `.agents/` — never a `package.json`, `pnpm-lock.yaml`, or source file changed in Steps 1–2.
 
 Then check whether anything changed at all:
 
@@ -177,7 +185,7 @@ Before writing the summary, run `git diff main -- '**/package.json'` to see the 
 
 #### How to write the Agent skills section
 
-From the `_update-skills` report: list the updated skills, the skipped skills with their lagging package (installed vs latest), any skill whose pulled `SKILL.md` declares `model:` frontmatter, any unexpected path touched by the installer, and any stop or `skills add` failure (with its error). If no skill changed on disk, write "No agent skill updates." followed by any stop or failure.
+From the `_update-skills` report: list the updated skills with their pin moves, the skills in cooldown, the skipped skills with their lagging package (installed vs latest), any skill whose pulled `SKILL.md` declares `model:` frontmatter, any unexpected path touched by the installer, and any stop or `skills add` failure (with its error). If no skill changed on disk, write "No agent skill updates." followed by any stop or failure.
 
 #### PR body template
 
