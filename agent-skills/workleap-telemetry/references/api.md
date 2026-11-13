@@ -41,6 +41,7 @@ const telemetryClient = initializeTelemetry(productFamily, {
       apiKey?: string;                // Required if no proxy: Honeycomb API key
       instrumentations?: (Instrumentation | Instrumentation[])[];  // HoneycombSdkInstrumentations
       spanProcessors?: SpanProcessor[];
+      privateQueryParameterNames?: string[];  // Additional query parameters redacted from the URLs sent with the traces ("token", "email" and "password" are redacted by default)
       fetchInstrumentation?: false | ((defaults: FetchInstrumentationConfig) => FetchInstrumentationConfig);
       documentLoadInstrumentation?: false | ((defaults: DocumentLoadInstrumentationConfig) => DocumentLoadInstrumentationConfig);
       xmlHttpRequestInstrumentation?: false | ((defaults: XMLHttpRequestInstrumentationConfig) => XMLHttpRequestInstrumentationConfig);  // Disabled by default; provide a function to enable
