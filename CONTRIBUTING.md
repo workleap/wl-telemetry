@@ -228,13 +228,14 @@ If the workflow does not behave as expected, the simplest way to update an agent
 
 1. Start your preferred agent.
 2. Copy the content of [UPDATE_SKILL.md](./user-prompts/UPDATE_SKILL.md) into the agent prompt.
-3. Commit the changes and merge the pull request.
+3. Add a `patch` changeset for `@workleap/telemetry`.
+4. Commit the changes and merge the pull request.
 
-NOTE: Skills installed using [skills.sh](https://skills.sh/) are sourced directly from the repository files. Merging the pull request is therefore sufficient to update the installed skill.
+NOTE: Skills installed using [skills.sh](https://skills.sh/) are sourced directly from the repository files, so merging the pull request is sufficient to update them.
 
 NOTE: The `skills.sh` CLI finds the skills in `agent-skills/` through the paths declared in [marketplace.json](./.claude-plugin/marketplace.json). When adding a new skill to `agent-skills/`, also add it to that file, otherwise the CLI can fail to find it.
 
-NOTE: The skill is also copied into the `@workleap/telemetry` package at pack time (see [agent-skill.mjs](./packages/telemetry/scripts/agent-skill.mjs)) so pnpm can link it into consumer projects. Skills installed with pnpm are only updated when a new version of `@workleap/telemetry` is released.
+NOTE: The skill is also copied into the `@workleap/telemetry` package at pack time (see [agent-skill.mjs](./packages/telemetry/scripts/agent-skill.mjs)) so pnpm can link it into consumer projects. Skills installed with pnpm are only updated when a new version of `@workleap/telemetry` is released, which is why **every change to the `workleap-telemetry` skill requires a changeset**. The CI fails a pull request that changes the skill without adding one (see [check-agent-skill-changeset.sh](./.github/scripts/check-agent-skill-changeset.sh)). The versioned `workleap-telemetry-v2` skill is not shipped in a package and needs no changeset.
 
 ## Commands
 
