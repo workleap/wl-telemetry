@@ -7,6 +7,10 @@ exports[`when a proxy is provided 1`] = `
   "disableDefaultMetricExporter": true,
   "disableDefaultTraceExporter": true,
   "endpoint": "https://my-proxy.com",
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -82,12 +86,16 @@ exports[`when a proxy is provided 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
   "traceExporters": [
     "ProxyTraceExporter",
@@ -99,6 +107,10 @@ exports[`when document load instrumentation is a custom function 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -168,12 +180,16 @@ exports[`when document load instrumentation is a custom function 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -182,6 +198,10 @@ exports[`when document load instrumentation is false 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     FetchInstrumentation {
       "_config": {
@@ -220,12 +240,16 @@ exports[`when document load instrumentation is false 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -234,6 +258,10 @@ exports[`when fetch instrumentation is a custom function 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -302,12 +330,16 @@ exports[`when fetch instrumentation is a custom function 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -316,6 +348,10 @@ exports[`when fetch instrumentation is false 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -349,12 +385,16 @@ exports[`when fetch instrumentation is false 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -363,6 +403,10 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -467,12 +511,16 @@ exports[`when user interaction instrumentation is a custom function 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -481,6 +529,10 @@ exports[`when user interaction instrumentation is false 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -550,12 +602,16 @@ exports[`when user interaction instrumentation is false 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -564,6 +620,10 @@ exports[`when verbose is false 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -633,12 +693,16 @@ exports[`when verbose is false 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -647,6 +711,10 @@ exports[`when verbose is true 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -716,12 +784,16 @@ exports[`when verbose is true 1`] = `
     },
   ],
   "localVisualizations": true,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -730,6 +802,10 @@ exports[`when xml http instrumentation is a custom function 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -835,12 +911,16 @@ exports[`when xml http instrumentation is a custom function 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -849,6 +929,10 @@ exports[`when xml http instrumentation is false 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -918,12 +1002,16 @@ exports[`when xml http instrumentation is false 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -932,6 +1020,10 @@ exports[`with a single transformer 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -1001,12 +1093,16 @@ exports[`with a single transformer 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "toto",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -1015,6 +1111,10 @@ exports[`with custom instrumentations 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -1087,12 +1187,16 @@ exports[`with custom instrumentations 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -1101,6 +1205,10 @@ exports[`with custom span processors 1`] = `
 {
   "apiKey": "123",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -1170,6 +1278,9 @@ exports[`with custom span processors 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "foo",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
@@ -1177,6 +1288,7 @@ exports[`with custom span processors 1`] = `
     },
     NormalizeAttributesSpanProcessor {},
     DummySpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
@@ -1185,6 +1297,10 @@ exports[`with multiple transformers 1`] = `
 {
   "apiKey": "toto",
   "endpoint": undefined,
+  "entryPageAttributes": {
+    "hash": false,
+    "referrer": false,
+  },
   "instrumentations": [
     DocumentLoadInstrumentation {
       "_config": {
@@ -1254,12 +1370,16 @@ exports[`with multiple transformers 1`] = `
     },
   ],
   "localVisualizations": false,
+  "resourceAttributes": {
+    "entry_page.referrer": "",
+  },
   "serviceName": "toto",
   "spanProcessors": [
     GlobalAttributeSpanProcessor {
       "_attributes": {},
     },
     NormalizeAttributesSpanProcessor {},
+    RedactUrlAttributesSpanProcessor {},
   ],
 }
 `;
