@@ -1,47 +1,54 @@
 {
-  "version": 1,
+  "version": 2,
   "skills": {
     "accessibility": {
       "source": "addyosmani/web-quality-skills",
+      "ref": "c6b06ad1285cd6b129b58455b2eec96ab6b67fa7",
       "sourceType": "github",
       "skillPath": "skills/accessibility/SKILL.md",
-      "computedHash": "88c64dead9bb55925c7b983f5fd95cfecf30bd8c076fd384cdb17019d1becd87"
+      "computedHash": "c668809f5df57feb87cc06f1bc37fb340d1d92e26bacb6edbeab9258d22e76a5"
     },
     "best-practices": {
       "source": "addyosmani/web-quality-skills",
+      "ref": "c6b06ad1285cd6b129b58455b2eec96ab6b67fa7",
       "sourceType": "github",
       "skillPath": "skills/best-practices/SKILL.md",
-      "computedHash": "fc34a8d4aea22d0158e0560457c82432e9d2d0ac74cf3e9aaccb599905f3f711"
+      "computedHash": "071ad7608cf92ad980330a6b1646f6bc568f5651d615e4c4a9fde225ceb9360c"
     },
     "git-commit": {
       "source": "github/awesome-copilot",
+      "ref": "a8940549dcf7258a2cdaa0b7fc9a9ac7fceec466",
       "sourceType": "github",
       "skillPath": "skills/git-commit/SKILL.md",
-      "computedHash": "8f5a47c99951ec09853abf3231c76f48caac5d6b84ea912dd4997e6996885c0b"
+      "computedHash": "90716f49501831c6c0679509b295495021eae83923d6a39035ce7c2d9cd2e8f2"
     },
     "pnpm": {
       "source": "antfu/skills",
+      "ref": "a702c8d4f94ed44de3a9b148f2dd6019e1076dcb",
       "sourceType": "github",
       "skillPath": "skills/pnpm/SKILL.md",
-      "computedHash": "be0763bac8890e99e0eebbecedd90ebad6c3baf1ee5ab002f902da99834791c6"
+      "computedHash": "fb4c2b0f98b1e651fb217f2070e3782f2fa58fd7d9fb2745e9fefaf945b8c60e"
     },
     "turborepo": {
       "source": "vercel/turborepo",
+      "ref": "b19f6a59ccd89ef98cae5e4d8b30e89489fc00f1",
       "sourceType": "github",
       "skillPath": "skills/turborepo/SKILL.md",
-      "computedHash": "9681d8dfeb5e6cdff767f1bcaba5d7ac55732a9d6c02ee120f44229f8ec25e7e"
+      "computedHash": "49bb6427015253ce5d93f15dfa6c9ade3f8528f0fbe54769b6da1e1458f058d4"
     },
     "vitest": {
       "source": "antfu/skills",
+      "ref": "8886fe2d385d3644cbb47e46ae9cb1cf09307d3b",
       "sourceType": "github",
       "skillPath": "skills/vitest/SKILL.md",
-      "computedHash": "b26b7f8d10e860e944e0334c003207771707c4906514cb96c971faae13fba875"
+      "computedHash": "bd95e41d66d76da9008893c9bc48c30f0a68f352cd2b00017767f5e4c129501d"
     },
     "workleap-react-best-practices": {
       "source": "workleap/wl-web-configs",
+      "ref": "c3c3a6a05c026360565b11d82e48546dacbc61f4",
       "sourceType": "github",
       "skillPath": "agent-skills/workleap-react-best-practices/SKILL.md",
-      "computedHash": "9f42af7a0842f7174c9357e688b12fc02516bbd9f440f87496a195ab78cab536"
+      "computedHash": "bcd21a15425049a1dc97062f1828ef53cd89687dbcffbaebe570191f48415731"
     }
   }
 }
