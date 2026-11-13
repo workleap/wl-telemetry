@@ -15,6 +15,7 @@ Initialize [Mixpanel](https://mixpanel.com) with Workleap's default settings.
 ```ts
 const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { 
     trackingEndpoint?,
+    privateQueryParameterNames?,
     telemetryContext?,
     logRocketInstrumentationClient?,
     verbose?,
@@ -28,6 +29,7 @@ const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: 
 - `options`: An optional object literal of options:
     - `productId`: An optional product id.
     - `trackingEndpoint`: An optional tracking endpoint.
+    - `privateQueryParameterNames`: Names of additional query parameters to redact from the page URL and the referrer sent with every event.
     - `telemetryContext`: A `TelemetryContext` instance containing the telemetry correlation ids to attach to Honeycomb traces.
     - `logRocketInstrumentationClient`: A `LogRocketInstrumentationClient` instance to integrate Honeycomb traces with LogRocket session replays.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
@@ -82,6 +84,18 @@ import { initializeMixpanel } from "@workleap/mixpanel/react";
 
 const client = initializeMixpanel("development", {
     trackingEndpoint: "custom/tracking/track"
+});
+```
+
+### Redact custom query parameters
+
+By default, the value of the `token`, `email` and `password` query parameters is redacted from the `$current_url` and `$referrer` properties sent with every event, and the fragment is removed from `$current_url`. A query parameter is redacted when its name ends with one of those values, regardless of the casing. To redact additional query parameters, use the `privateQueryParameterNames` option:
+
+```ts !#4
+import { initializeMixpanel } from "@workleap/mixpanel/react";
+
+const client = initializeMixpanel("development", {
+    privateQueryParameterNames: ["a-custom-param"]
 });
 ```
 
