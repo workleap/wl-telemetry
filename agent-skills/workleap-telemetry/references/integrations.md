@@ -44,6 +44,8 @@ honeycomb: {
     instrumentations: [],             // Additional OpenTelemetry instrumentations
     spanProcessors: [],               // Custom span processors
 
+    privateQueryParameterNames: ["a-custom-param"],  // Additional query parameters redacted from the URLs sent with the traces
+
     // Use `false` to disable, or a function to customize the instrumentation.
     fetchInstrumentation: (config) => config,                // Customize fetch instrumentation
     documentLoadInstrumentation: (config) => config,         // Customize document load instrumentation
@@ -72,6 +74,10 @@ When the proxy is hosted on a different origin than the application, the browser
 Since the trace requests are sent with a `Content-Type: application/json` header, the proxy must also answer the CORS preflight (`OPTIONS`) requests.
 
 In proxy mode, only traces are sent to the proxy. The default metric and log exporters of the Honeycomb SDK are disabled. To send metrics or logs through a proxy, provide your own exporters with a transformer function.
+
+### URL Privacy
+
+By default, the value of the `token`, `email` and `password` query parameters is redacted from the URLs sent with the traces, such as the `url.full`, `page.url` and `entry_page.referrer` attributes. The fragment is removed from those URLs, and the `page.hash` and `entry_page.hash` attributes are not sent. A query parameter is redacted when its name ends with one of those values, regardless of the casing. Use the `privateQueryParameterNames` option to redact additional query parameters.
 
 ### Setting Custom Attributes
 
