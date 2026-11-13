@@ -395,7 +395,7 @@ pnpm update-outdated-deps
 
 ### GitHub Actions
 
-[Renovate](./renovate.json) updates the GitHub Actions used by the workflows on a schedule. To bump them on demand, run `/update-github-actions` with Claude Code (or select GitHub Actions in `/update-third-parties`).
+[Renovate](./renovate.json) updates the GitHub Actions used by the workflows on a schedule. To bump them on demand, run `/update-github-actions` with Claude Code.
 
 Renovate merges its updates into `main` without a pull request (`automerge` with `automergeType: "branch"`): it pushes the update to a `renovate/*` branch and, on a later run, fast-forwards `main` to it. Major updates are included on purpose, so the organization's `all-automerge.json` preset, which only covers minor and patch updates, is not used. This depends on two things:
 
