@@ -1,6 +1,6 @@
 {
     "name": "@workleap/telemetry",
-    "version": "4.1.4",
+    "version": "4.1.5",
     "description": "A telemetry library for Workleap's web applications.",
     "license": "Apache-2.0",
     "author": "Workleap",

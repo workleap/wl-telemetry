@@ -1,5 +1,13 @@
 # @workleap/telemetry
 
+## 4.1.5
+
+### Patch Changes
+
+- [#281](https://github.com/workleap/wl-telemetry/pull/281) [`7bc53df`](https://github.com/workleap/wl-telemetry/commit/7bc53df81efadfc0bd87f475995ee92916b5802e) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Redact the private query parameters from the `$current_url` and `$referrer` properties sent with every Mixpanel event, and remove the fragment from `$current_url`. The `token`, `email` and `password` query parameters are redacted by default, additional names can be provided with the new `privateQueryParameterNames` option. An application using hash routing will no longer get the route in `$current_url`.
+- Updated dependencies [[`7bc53df`](https://github.com/workleap/wl-telemetry/commit/7bc53df81efadfc0bd87f475995ee92916b5802e)]:
+  - @workleap/mixpanel@6.1.0
+
 ## 4.1.4
 
 ### Patch Changes
