@@ -26,6 +26,7 @@
 
 - [Mixpanel features](https://workleap.github.io/wl-telemetry/introduction/learn-mixpanel/features.md): If telemetry hasn't been set up for your project yet, please refer to the setup guide before continuing.
 - [Use correlation values](https://workleap.github.io/wl-telemetry/introduction/use-correlation-values.md): Every telemetry platform automatically receives the same two correlation id values, in its own platform-specific naming conventions:
+- [Privacy](https://workleap.github.io/wl-telemetry/introduction/privacy.md): The telemetry platforms receive URLs, such as the URL of the current page, the referrer and the URL of the network requests. A URL can include a sensitive value, such as a token or an email.
 - [Use with agents](https://workleap.github.io/wl-telemetry/introduction/use-with-agents.md): Information about the telemetry libraries can be shared with different agents using the workleap-telemetry agent skill.
 
 ## Guides

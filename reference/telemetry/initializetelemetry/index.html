@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847855968804">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847856583106">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.847855968804" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.847856583106" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847855968804" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847856583106" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847855968804" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847855968804" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847856583106" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847856583106" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -294,7 +294,7 @@
 <h1 id="initializetelemetry">initializeTelemetry</h1>
 <h2 id="reference">Reference</h2>
 <div id="reference-code-1" class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = initializeTelemetry(productFamily, options?: { logRocket?, honeycomb?, mixpanel?, verbose?, loggers? });</code></pre>
+<pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = initializeTelemetry(productFamily, options?: { logRocket?, honeycomb?, mixpanel?, privateQueryParameterNames?, verbose?, loggers? });</code></pre>
 </doc-codeblock></div>
 <h3 id="parameters">Parameters</h3>
 <ul>
@@ -308,7 +308,7 @@
 <ul>
 <li><code translate="no" v-pre>rootHostname</code>: A <a href="https://docs.logrocket.com/reference/roothostname" class="outbound" target="_blank">root hostname</a> to track sessions across subdomains.</li>
 <li><code translate="no" v-pre>privateFieldNames</code>: Names of additional fields to exclude from session replays. These fields will be removed from network requests, responses using a fuzzy-matching algorithm.</li>
-<li><code translate="no" v-pre>privateQueryParameterNames</code>: Names of additional fields to exclude from session replays. These fields will be removed from query parameters using a fuzzy-matching algorithm.</li>
+<li><code translate="no" v-pre>privateQueryParameterNames</code>: Names of additional query parameters to redact from the URLs of the session replays.</li>
 <li><code translate="no" v-pre>transformers</code>: An array of transformer functions to update the default LogRocket options.</li>
 </ul>
 </li>
@@ -348,6 +348,7 @@
 </li>
 </ul>
 </li>
+<li><code translate="no" v-pre>privateQueryParameterNames</code>: Names of additional query parameters to redact from the URLs sent to every telemetry platform.</li>
 <li><code translate="no" v-pre>verbose</code>: If no <code translate="no" v-pre>loggers</code> are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
 <li><code translate="no" v-pre>loggers</code>: An optional array of <code translate="no" v-pre>RootLogger</code> instances.</li>
 </ul>
@@ -864,6 +865,29 @@ const client = initializeTelemetry(&quot;wlp&quot;, {
     }
 });</code></pre>
 </doc-codeblock></div>
+<h2 id="redact-custom-query-parameters-for-every-platform">Redact custom query parameters for every platform</h2>
+<p>To redact additional query parameters from the URLs sent to every telemetry platform, use the <code translate="no" v-pre>privateQueryParameterNames</code> option. The names are added to the default private query parameters and to the names provided with the options of a telemetry platform. To learn more, refer to the <a href="../../../introduction/privacy/">Privacy</a> page.</p>
+<div id="redact-custom-query-parameters-for-every-platform-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="18"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
+
+const client = initializeTelemetry(&quot;wlp&quot;, {
+    logRocket: {
+        appId: &quot;my-app-id&quot;
+    },
+    honeycomb: {
+        namespace: &quot;sample&quot;,
+        serviceName: &quot;my-app-name&quot;,
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: &quot;https://sample-proxy&quot;
+        }
+    },
+    mixpanel: {
+        envOrTrackingApiBaseUrl: &quot;development&quot;
+    },
+    privateQueryParameterNames: [&quot;a-custom-param&quot;]
+});</code></pre>
+</doc-codeblock></div>
 <h2 id="verbose-mode">Verbose mode</h2>
 <div id="verbose-mode-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript" data-line="18"><code v-pre class="language-typescript">import { initializeTelemetry } from &quot;@workleap/telemetry/react&quot;;
@@ -949,6 +973,16 @@ const client = initializeTelemetry(&quot;sg&quot;, {
                 <span class="card-compact-title">Privacy</span>
             </div>
             <p class="card-compact-description">By default, this package instrumentation hides a wide range of Personally Identifiable Information (PII) from session replays to protect user privacy:</p>
+        </div>
+    </a>
+</div>
+<div class="card-compact-container">
+    <a href="/wl-telemetry/introduction/privacy/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-title">Privacy</span>
+            </div>
+            <p class="card-compact-description">The telemetry platforms receive URLs, such as the URL of the current page, the referrer and the URL of the network requests. A URL can include a sensitive value, such as a token or an email.</p>
         </div>
     </a>
 </div>
