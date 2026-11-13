@@ -1,5 +1,11 @@
 # @workleap-telemetry/core
 
+## 2.1.0
+
+### Minor Changes
+
+- [#289](https://github.com/workleap/wl-telemetry/pull/289) [`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Add the `redactQueryParameters` function and the `DefaultPrivateQueryParameterNames` constant, shared by the LogRocket, Honeycomb and Mixpanel libraries.
+
 ## 2.0.7
 
 ### Patch Changes

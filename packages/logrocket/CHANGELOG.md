@@ -1,5 +1,16 @@
 # @workleap/logrocket
 
+## 4.1.0
+
+### Minor Changes
+
+- [#289](https://github.com/workleap/wl-telemetry/pull/289) [`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3) Thanks [@patricklafrance](https://github.com/patricklafrance)! - A name provided with the `privateQueryParameterNames` option is now matched literally, and is also matched in its percent-encoded form. Previously, a name was used as a regular expression without being escaped: a name such as `user[email]` was not redacted, and a name that is not a valid regular expression made the sanitizer throw. A name that relied on the regular expression syntax, such as `(sid|key)`, no longer matches and must be replaced by the actual names.
+
+### Patch Changes
+
+- Updated dependencies [[`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3)]:
+  - @workleap-telemetry/core@2.1.0
+
 ## 4.0.7
 
 ### Patch Changes
