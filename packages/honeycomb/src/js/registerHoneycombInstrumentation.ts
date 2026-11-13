@@ -7,7 +7,7 @@ import type { FetchInstrumentationConfig, FetchRequestHookFunction as OpenTeleme
 import type { UserInteractionInstrumentationConfig } from "@opentelemetry/instrumentation-user-interaction";
 import type { XMLHttpRequestInstrumentationConfig } from "@opentelemetry/instrumentation-xml-http-request";
 import type { SpanProcessor } from "@opentelemetry/sdk-trace";
-import { HasExecutedGuard, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
+import { DefaultPrivateQueryParameterNames, HasExecutedGuard, redactQueryParameters, type LogRocketInstrumentationPartialClient, type TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import { applyTransformers, type HoneycombSdkOptionsTransformer } from "./applyTransformers.ts";
 import { FetchRequestPipeline } from "./FetchRequestPipeline.ts";
@@ -16,14 +16,11 @@ import { type HoneycombInstrumentationClient, HoneycombInstrumentationClientImpl
 import type { HoneycombSdkInstrumentations, HoneycombSdkOptions, PropagateTraceHeaderCorsUrls } from "./honeycombTypes.ts";
 import { NormalizeAttributesSpanProcessor } from "./NormalizeAttributesSpanProcessor.ts";
 import { appendTracesPath, createProxyTraceExporter, resolveUrl } from "./ProxyTraceExporter.ts";
-import { redactQueryParameters } from "./redactQueryParameters.ts";
 import { RedactUrlAttributesSpanProcessor } from "./RedactUrlAttributesSpanProcessor.ts";
 
 export const ServiceNamespaceAttributeName = "service.namespace";
 export const TelemetryIdAttributeName = "app.telemetry_id";
 export const DeviceIdAttributeName = "app.device_id";
-
-const DefaultPrivateQueryParameterNames = ["token", "email", "password"];
 
 ///////////////////////////
 

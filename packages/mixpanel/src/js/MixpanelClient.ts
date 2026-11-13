@@ -1,4 +1,4 @@
-import type { CreateMixpanelTrackingFunctionOptions, MixpanelTrackingFunction } from "@workleap-telemetry/core";
+import { DefaultPrivateQueryParameterNames, type CreateMixpanelTrackingFunctionOptions, type MixpanelTrackingFunction } from "@workleap-telemetry/core";
 import type { Logger } from "@workleap/logging";
 import { getBaseProperties } from "./properties.ts";
 
@@ -33,8 +33,6 @@ export interface MixpanelClientOptions {
      */
     privateQueryParameterNames?: string[];
 }
-
-const DefaultPrivateQueryParameterNames = ["token", "email", "password"];
 
 export class MixpanelClientImpl implements MixpanelClient {
     readonly #globalEventProperties = new Map<string, unknown>();

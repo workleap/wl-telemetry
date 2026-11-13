@@ -40,3 +40,11 @@ test.concurrent("when a query parameter name ends with the name of a sensitive q
     expect(result).not.toContain("ABCDEF");
     expect(result).not.toContain("GHIJKL");
 });
+
+test.concurrent("when a sensitive query parameter name includes regular expression special characters, the query parameter is sanitized", ({ expect }) => {
+    const urlSanitizer = createUrlSanitizer(["user[email]"]);
+    const result = urlSanitizer("https://officevibe.workleap.com/signup?user[email]=test@email.com");
+
+    expect(result).not.toContain("test@email.com");
+    expect(result).toContain("**redacted**");
+});
