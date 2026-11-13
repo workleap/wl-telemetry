@@ -112,7 +112,7 @@ Use the `Agent` tool to dispatch a subagent with this brief:
 
 Keep the skill's report for the PR body. A stop or a failed skill pull does NOT block the dependency PR — report it there instead. Skill files are documentation for agents and need no validation.
 
-A step 2 listing stop also opens an issue — a line in a dependency PR is easy to miss, and no PR is created when nothing else changed:
+A listing stop also opens an issue — a line in a dependency PR is easy to miss, and no PR is created when nothing else changed. It is the stop the report labels `listing stop:`, from `listSkillPins.ts` exiting non-zero in the `_update-skills` skill, not this prompt's Step 2:
 
 ```bash
 gh issue create \
