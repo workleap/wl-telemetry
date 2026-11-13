@@ -10,7 +10,7 @@ toc:
 ## Reference
 
 ```ts
-const client = initializeTelemetry(productFamily, options?: { logRocket?, honeycomb?, mixpanel?, verbose?, loggers? });
+const client = initializeTelemetry(productFamily, options?: { logRocket?, honeycomb?, mixpanel?, privateQueryParameterNames?, verbose?, loggers? });
 ```
 
 ### Parameters
@@ -22,7 +22,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
         - `options`: An optional object literal of options:
             - `rootHostname`: A [root hostname](https://docs.logrocket.com/reference/roothostname) to track sessions across subdomains.
             - `privateFieldNames`: Names of additional fields to exclude from session replays. These fields will be removed from network requests, responses using a fuzzy-matching algorithm.
-            - `privateQueryParameterNames`: Names of additional fields to exclude from session replays. These fields will be removed from query parameters using a fuzzy-matching algorithm.
+            - `privateQueryParameterNames`: Names of additional query parameters to redact from the URLs of the session replays.
             - `transformers`: An array of transformer functions to update the default LogRocket options.
     - `honeycomb`: An optional Honeycomb instrumentation registration options object. If provided, Honeycomb instrumentation is registered, if omitted, it is skipped.
         - `namespace`: The service namespace. Will be added to traces as a `service.namespace` custom attribute.
@@ -34,6 +34,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
             - `apiKey`: Set an Honeycomb ingestion [API key](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key). Either `proxy` or `apiKey` option must be provided.
             - `instrumentations`: Append the provided [instrumentation](https://opentelemetry.io/docs/languages/js/instrumentation/) instances to the configuration.
             - `spanProcessors`: Append the provided [span processor](https://docs.honeycomb.io/send-data/javascript-browser/honeycomb-distribution/#custom-span-processing) instances to the configuration.
+            - `privateQueryParameterNames`: Names of additional query parameters to redact from the URLs sent with the traces.
             - `fetchInstrumentation`: Replace the default [@opentelemetry/instrumentation-fetch](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-fetch) options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.
             - `documentLoadInstrumentation`: Replace the default [@opentelemetry/instrumentation-document-load](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/web/opentelemetry-instrumentation-document-load#document-load-instrumentation-options) options by providing a function that returns an object literal with the desired options. This function will receive an object literal containing the default options, which you can either extend or replace.
             - `xmlHttpRequestInstrumentation`: By default, [@opentelemetry/instrumentation-xml-http-request](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-xml-http-request) is disabled. To enable this instrumentation, provide a function that returns an object literal with the desired options. This function will receive an object literal of default options, which you can extend or replace as needed.
@@ -45,6 +46,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
             - `productId`: The product id.
             - `trackingEndpoint`: An optional tracking endpoint. The default value is `tracking/track`.
             - `privateQueryParameterNames`: Names of additional query parameters to redact from the page URL and the referrer sent with every event.
+    - `privateQueryParameterNames`: Names of additional query parameters to redact from the URLs sent to every telemetry platform.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.
 
@@ -297,6 +299,26 @@ const client = initializeTelemetry("sg", {
             spanProcessors: [
                 new CustomSpanProcessor()
             ]
+        }
+    }
+});
+```
+
+### Redact custom query parameters
+
+By default, the value of the `token`, `email` and `password` query parameters is redacted from the URLs sent with the traces, such as the `url.full`, `page.url` and `entry_page.referrer` attributes. The fragment is removed from those URLs, and the `page.hash` and `entry_page.hash` attributes are not sent. A query parameter is redacted when its name ends with one of those values, regardless of the casing. To redact additional query parameters, use the `privateQueryParameterNames` option:
+
+```ts !#10
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry("sg", {
+    honeycomb: {
+        namespace: "sample",
+        serviceName: "my-app-name",
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: "https://sample-proxy",
+            privateQueryParameterNames: ["a-custom-param"]
         }
     }
 });
@@ -578,6 +600,32 @@ const client = initializeTelemetry("wlp", {
             privateQueryParameterNames: ["a-custom-param"]
         }
     }
+});
+```
+
+## Redact custom query parameters for every platform
+
+To redact additional query parameters from the URLs sent to every telemetry platform, use the `privateQueryParameterNames` option. The names are added to the default private query parameters and to the names provided with the options of a telemetry platform. To learn more, refer to the [Privacy](../../introduction/privacy.md) page.
+
+```ts !#18
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry("wlp", {
+    logRocket: {
+        appId: "my-app-id"
+    },
+    honeycomb: {
+        namespace: "sample",
+        serviceName: "my-app-name",
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: "https://sample-proxy"
+        }
+    },
+    mixpanel: {
+        envOrTrackingApiBaseUrl: "development"
+    },
+    privateQueryParameterNames: ["a-custom-param"]
 });
 ```
 

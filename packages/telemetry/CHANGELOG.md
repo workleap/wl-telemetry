@@ -1,5 +1,27 @@
 # @workleap/telemetry
 
+## 4.2.0
+
+### Minor Changes
+
+- [#289](https://github.com/workleap/wl-telemetry/pull/289) [`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Add a `privateQueryParameterNames` option to `initializeTelemetry` to redact additional query parameters from the URLs sent to every telemetry platform. The names are added to the names provided with the `privateQueryParameterNames` option of a telemetry platform.
+
+### Patch Changes
+
+- Updated dependencies [[`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3), [`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3), [`a233944`](https://github.com/workleap/wl-telemetry/commit/a233944db31a52c20cfbe2d086dfa698e2a685b3)]:
+  - @workleap-telemetry/core@2.1.0
+  - @workleap/honeycomb@8.3.1
+  - @workleap/mixpanel@6.1.1
+  - @workleap/logrocket@4.1.0
+
+## 4.1.6
+
+### Patch Changes
+
+- [#284](https://github.com/workleap/wl-telemetry/pull/284) [`04ccb97`](https://github.com/workleap/wl-telemetry/commit/04ccb974f665cf69b12f85b56474fade3e925062) Thanks [@patricklafrance](https://github.com/patricklafrance)! - Redact the private query parameters from the URLs sent with the Honeycomb traces, such as the `url.full`, `page.url` and `entry_page.referrer` attributes, and remove the fragment from those URLs. The `page.hash` and `entry_page.hash` attributes are no longer sent. The `token`, `email` and `password` query parameters are redacted by default, additional names can be provided with the new `privateQueryParameterNames` option. An application using hash routing will no longer get the route in `page.url` and `page.hash`.
+- Updated dependencies [[`04ccb97`](https://github.com/workleap/wl-telemetry/commit/04ccb974f665cf69b12f85b56474fade3e925062)]:
+  - @workleap/honeycomb@8.3.0
+
 ## 4.1.5
 
 ### Patch Changes

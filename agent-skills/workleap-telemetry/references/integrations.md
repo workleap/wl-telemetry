@@ -6,6 +6,7 @@
 2. [LogRocket Integration](#logrocket-integration)
 3. [Mixpanel Integration](#mixpanel-integration)
 4. [Cross-Platform Correlation](#cross-platform-correlation)
+5. [Cross-Platform URL Privacy](#cross-platform-url-privacy)
 
 ---
 
@@ -44,6 +45,8 @@ honeycomb: {
     instrumentations: [],             // Additional OpenTelemetry instrumentations
     spanProcessors: [],               // Custom span processors
 
+    privateQueryParameterNames: ["a-custom-param"],  // Additional query parameters redacted from the URLs sent with the traces
+
     // Use `false` to disable, or a function to customize the instrumentation.
     fetchInstrumentation: (config) => config,                // Customize fetch instrumentation
     documentLoadInstrumentation: (config) => config,         // Customize document load instrumentation
@@ -72,6 +75,10 @@ When the proxy is hosted on a different origin than the application, the browser
 Since the trace requests are sent with a `Content-Type: application/json` header, the proxy must also answer the CORS preflight (`OPTIONS`) requests.
 
 In proxy mode, only traces are sent to the proxy. The default metric and log exporters of the Honeycomb SDK are disabled. To send metrics or logs through a proxy, provide your own exporters with a transformer function.
+
+### URL Privacy
+
+By default, the value of the `token`, `email` and `password` query parameters is redacted from the URLs sent with the traces, such as the `url.full`, `page.url` and `entry_page.referrer` attributes. The fragment is removed from those URLs, and the `page.hash` and `entry_page.hash` attributes are not sent. A query parameter is redacted when its name ends with one of those values, regardless of the casing. Use the `privateQueryParameterNames` option to redact additional query parameters.
 
 ### Setting Custom Attributes
 
@@ -180,7 +187,7 @@ logRocket: {
   options: {
     rootHostname: "workleap.com",            // Root hostname to track sessions across subdomains
     privateFieldNames: ["secret"],           // Additional fields removed from network requests/responses via fuzzy matching
-    privateQueryParameterNames: ["token"],   // Additional query parameters removed from URLs via fuzzy matching
+    privateQueryParameterNames: ["a-custom-param"],  // Additional query parameters redacted from the URLs of the session replays
     transformers: []                         // SDK-level configuration transformers
   }
 }
@@ -473,3 +480,47 @@ To verify correlation IDs are working:
 - **Honeycomb**: Look for `app.telemetry_id` and `app.device_id` attributes in traces
 - **LogRocket**: Check the "User Traits" filter for `Telemetry Id` and `Device Id`
 - **Mixpanel**: Look for `Telemetry Id` and `Device Id` properties in events
+
+---
+
+## Cross-Platform URL Privacy
+
+The telemetry platforms receive URLs (current page, referrer, network requests). By default, sensitive values are removed from the URLs before they are sent to a telemetry platform.
+
+The value of a private query parameter is replaced by `**redacted**`. By default, the private query parameters are `token`, `email` and `password`. A query parameter is redacted when its name ends with one of those values, regardless of the casing (e.g., `access_token` and `userEmail` are redacted as well).
+
+| | LogRocket | Honeycomb | Mixpanel |
+|---|---|---|---|
+| URLs | The URL of the pages and the network requests of a session replay | The URL attributes of a trace, such as `url.full`, `page.url` and `entry_page.referrer` | The `$current_url` and `$referrer` properties of an event |
+| Private query parameters | Redacted | Redacted | Redacted |
+| Fragment | Kept. A fragment that directly follows the value of a private query parameter is redacted with the value | Removed. The `page.hash` and `entry_page.hash` attributes are not sent | Removed from `$current_url` |
+
+**Warning:** The value of the other query parameters is sent as is. If an application adds a sensitive value to a query parameter that is not private by default, its name must be provided with the `privateQueryParameterNames` option.
+
+### Redact Custom Query Parameters for Every Platform
+
+Use the top-level `privateQueryParameterNames` option. The names are added to the default private query parameters and to the names provided with the options of a telemetry platform:
+
+```typescript
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry("wlp", {
+  logRocket: {
+    appId: "my-app-id"
+  },
+  honeycomb: {
+    namespace: "sample",
+    serviceName: "my-app-name",
+    apiServiceUrls: [/.+/g],
+    options: {
+      proxy: "https://sample-proxy"
+    }
+  },
+  mixpanel: {
+    envOrTrackingApiBaseUrl: "development"
+  },
+  privateQueryParameterNames: ["a-custom-param"]
+});
+```
+
+To redact a query parameter for a single telemetry platform, use the `privateQueryParameterNames` option of the platform options instead.

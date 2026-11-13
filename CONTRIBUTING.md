@@ -228,13 +228,14 @@ If the workflow does not behave as expected, the simplest way to update an agent
 
 1. Start your preferred agent.
 2. Copy the content of [UPDATE_SKILL.md](./user-prompts/UPDATE_SKILL.md) into the agent prompt.
-3. Commit the changes and merge the pull request.
+3. Add a `patch` changeset for `@workleap/telemetry`.
+4. Commit the changes and merge the pull request.
 
-NOTE: Skills installed using [skills.sh](https://skills.sh/) are sourced directly from the repository files. Merging the pull request is therefore sufficient to update the installed skill.
+NOTE: Skills installed using [skills.sh](https://skills.sh/) are sourced directly from the repository files, so merging the pull request is sufficient to update them.
 
 NOTE: The `skills.sh` CLI finds the skills in `agent-skills/` through the paths declared in [marketplace.json](./.claude-plugin/marketplace.json). When adding a new skill to `agent-skills/`, also add it to that file, otherwise the CLI can fail to find it.
 
-NOTE: The skill is also copied into the `@workleap/telemetry` package at pack time (see [agent-skill.mjs](./packages/telemetry/scripts/agent-skill.mjs)) so pnpm can link it into consumer projects. Skills installed with pnpm are only updated when a new version of `@workleap/telemetry` is released.
+NOTE: The skill is also copied into the `@workleap/telemetry` package at pack time (see [agent-skill.mjs](./packages/telemetry/scripts/agent-skill.mjs)) so pnpm can link it into consumer projects. Skills installed with pnpm are only updated when a new version of `@workleap/telemetry` is released, which is why **every change to the `workleap-telemetry` skill requires a changeset**. The CI fails a pull request that changes the skill without adding one (see [check-agent-skill-changeset.sh](./.github/scripts/check-agent-skill-changeset.sh)). The versioned `workleap-telemetry-v2` skill is not shipped in a package and needs no changeset.
 
 ## Commands
 
@@ -392,24 +393,47 @@ Updated outdated dependencies to their latest version. For more information, vie
 pnpm update-outdated-deps
 ```
 
+With Claude Code, run `/update-third-parties` instead to update the npm dependencies and the installed agent skills together (or either one).
+
 ### GitHub Actions
 
-[Renovate](./renovate.json) updates the GitHub Actions used by the workflows on a schedule. To bump them on demand, run `/update-github-actions` with Claude Code (or select GitHub Actions in `/update-third-parties`).
+[Renovate](./renovate.json) updates the GitHub Actions used by the workflows on a schedule and merges its updates into `main` without a pull request (`automerge` with `automergeType: "branch"`): it pushes the update to a `renovate/*` branch and, on a later run, fast-forwards `main` to it. Major updates are included on purpose, so the organization's `all-automerge.json` preset, which only covers minor and patch updates, is not used. This depends on two things:
+
+- The [CI](./.github/workflows/ci.yml) workflow runs on pushes to `renovate/**`. Renovate never merges a branch that has no passing check.
+- The `Workleap Renovate` GitHub App can push to `main`: it is a bypass actor of the organization rulesets, and `main` has no repository-level branch protection. Adding one that requires a pull request or an approval stops the auto-merge.
+
+A merge takes at least a day. Renovate runs once a day, merges one branch per run, and only merges a branch that is up to date with `main` and green. A commit on `main` between two runs costs another day.
+
+When a check fails on the branch, or stays pending for a day, Renovate opens a regular pull request instead. That pull request is never auto-merged: a maintainer fixes, approves and merges it.
+
+#### Action pins
+
+Every `uses:` is pinned to a commit hash, with the release it matches in a comment:
+
+```yaml
+uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+```
+
+Never reference an action by a tag (`@v7`, `@latest`) or a branch. A tag picks up a new release on the next workflow run, which skips the 7-day minimum release age of the organization preset. Keep the version comment: Renovate ignores a hash that has none. Renovate pins an action added with a tag on its next run (`helpers:pinGitHubActionDigestsToSemver`). To update an action by hand, change the hash and the version comment together in a regular pull request, to a release that is at least 7 days old.
+
+The CI on the `renovate/*` branch only exercises the actions `ci.yml` uses (checkout, pnpm setup, Node setup, cache). An update to `anthropics/claude-code-action`, `changesets/action` or the Retype actions reaches `main` without having run: the minimum release age is its only guard.
+
+`anthropics/claude-code-action` is released almost daily, so it has its own Renovate group. In the shared group, the other updates would wait behind its releases: Renovate does not merge a branch during the run that changed it. A `schedule` would not throttle it either: off schedule, Renovate keeps updating a branch that exists, so a schedule only delays the merges.
 
 ## Workflows
 
 The following workflows are available with GitHub:
 
-| Workflow            | File                                        | Trigger                | Purpose                                      |
-| ------------------- | ------------------------------------------- | ---------------------- | -------------------------------------------- |
-| CI                  | `.github/workflows/ci.yml`                  | Push to main, PRs      | Build, lint, typecheck, test                 |
-| Changeset           | `.github/workflows/changeset.yml`           | Push to main           | Version bumps and npm publish                |
-| PR packages         | `.github/workflows/pr-pkg.yml`              | PRs                    | Publish preview packages                     |
-| Update dependencies | `.github/workflows/update-dependencies.yml` | Weekly (Tue 14:00 UTC) | Automated dependency and agent skill updates |
-| Code review         | `.github/workflows/code-review.yml`         | PRs                    | Automated code review                        |
-| Claude              | `.github/workflows/claude.yml`              | @claude mentions       | Interactive AI assistance                    |
-| Sync agent skill    | `.github/workflows/sync-agent-skill.yml`    | Push to main (docs/)   | Sync telemetry skill with docs               |
-| Retype              | `.github/workflows/retype-action.yml`       | Push to main, PRs      | Build and deploy documentation site          |
+| Workflow            | File                                        | Trigger                             | Purpose                                      |
+| ------------------- | ------------------------------------------- | ----------------------------------- | -------------------------------------------- |
+| CI                  | `.github/workflows/ci.yml`                  | Push to main and `renovate/**`, PRs | Build, lint, typecheck, test                 |
+| Changeset           | `.github/workflows/changeset.yml`           | Push to main                        | Version bumps and npm publish                |
+| PR packages         | `.github/workflows/pr-pkg.yml`              | PRs                                 | Publish preview packages                     |
+| Update dependencies | `.github/workflows/update-dependencies.yml` | Weekly (Tue 14:00 UTC)              | Automated dependency and agent skill updates |
+| Code review         | `.github/workflows/code-review.yml`         | PRs                                 | Automated code review                        |
+| Claude              | `.github/workflows/claude.yml`              | @claude mentions                    | Interactive AI assistance                    |
+| Sync agent skill    | `.github/workflows/sync-agent-skill.yml`    | Push to main (docs/)                | Sync telemetry skill with docs               |
+| Retype              | `.github/workflows/retype-action.yml`       | Push to main, PRs                   | Build and deploy documentation site          |
 
 ## CI
 
@@ -425,7 +449,7 @@ This action runs on a push on the `main` branch. If there is a file present in t
 
 ### CI
 
-This action will trigger when a commit is done in a PR to `main` or after a push to `main`. The action will run `build`, `lint` and `test` commands on the source code.
+This action will trigger when a commit is done in a PR to `main`, or after a push to `main` or to a `renovate/**` branch (see [GitHub Actions](#github-actions)). The action will run `build`, `lint` and `test` commands on the source code.
 
 ### Retype
 
