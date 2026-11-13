@@ -37,6 +37,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
         - `options`: An optional object literal of options:
             - `productId`: The product id.
             - `trackingEndpoint`: An optional tracking endpoint. The default value is `tracking/track`.
+            - `privateQueryParameterNames`: Names of additional query parameters to redact from the page URL and the referrer sent with every event.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.
 
@@ -551,6 +552,23 @@ const client = initializeTelemetry("sg", {
         envOrTrackingApiBaseUrl: "development",
         options: {
             trackingEndpoint: "custom/tracking/track"
+        }
+    }
+});
+```
+
+### Redact custom query parameters
+
+By default, the value of the `token`, `email` and `password` query parameters is redacted from the `$current_url` and `$referrer` properties sent with every event, and the fragment is removed from `$current_url`. A query parameter is redacted when its name ends with one of those values, regardless of the casing. To redact additional query parameters, use the `privateQueryParameterNames` option:
+
+```ts !#7
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry("wlp", {
+    mixpanel: {
+        envOrTrackingApiBaseUrl: "development",
+        options: {
+            privateQueryParameterNames: ["a-custom-param"]
         }
     }
 });

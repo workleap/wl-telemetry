@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <meta name="turbo-root" content="/wl-telemetry">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847832758604">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.847843349812">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -39,12 +39,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../../static/favicon.png" />
-    <link href="../../../resources/css/retype.css?v=4.6.0.847832758604" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=4.6.0.847843349812" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847832758604" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=4.6.0.847843349812" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847832758604" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847832758604" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=4.6.0.847843349812" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=4.6.0.847843349812" defer></script>
 
     <link href="https://workleap.github.io/wl-idp-docs-hub/static/retype-customization.css" rel="stylesheet" />
 
@@ -297,6 +297,7 @@
 <div id="initializemixpanel-code-1" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-typescript"><code v-pre class="language-typescript">const client = initializeMixpanel(productId, envOrTrackingApiBaseUrl, options?: { 
     trackingEndpoint?,
+    privateQueryParameterNames?,
     telemetryContext?,
     logRocketInstrumentationClient?,
     verbose?,
@@ -310,6 +311,7 @@
 <ul>
 <li><code translate="no" v-pre>productId</code>: An optional product id.</li>
 <li><code translate="no" v-pre>trackingEndpoint</code>: An optional tracking endpoint.</li>
+<li><code translate="no" v-pre>privateQueryParameterNames</code>: Names of additional query parameters to redact from the page URL and the referrer sent with every event.</li>
 <li><code translate="no" v-pre>telemetryContext</code>: A <code translate="no" v-pre>TelemetryContext</code> instance containing the telemetry correlation ids to attach to Honeycomb traces.</li>
 <li><code translate="no" v-pre>logRocketInstrumentationClient</code>: A <code translate="no" v-pre>LogRocketInstrumentationClient</code> instance to integrate Honeycomb traces with LogRocket session replays.</li>
 <li><code translate="no" v-pre>verbose</code>: If no <code translate="no" v-pre>loggers</code> are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.</li>
@@ -355,6 +357,15 @@ const client = initializeMixpanel(&quot;development&quot;, {
 
 const client = initializeMixpanel(&quot;development&quot;, {
     trackingEndpoint: &quot;custom/tracking/track&quot;
+});</code></pre>
+</doc-codeblock></div>
+<h3 id="redact-custom-query-parameters">Redact custom query parameters</h3>
+<p>By default, the value of the <code translate="no" v-pre>token</code>, <code translate="no" v-pre>email</code> and <code translate="no" v-pre>password</code> query parameters is redacted from the <code translate="no" v-pre>$current_url</code> and <code translate="no" v-pre>$referrer</code> properties sent with every event, and the fragment is removed from <code translate="no" v-pre>$current_url</code>. A query parameter is redacted when its name ends with one of those values, regardless of the casing. To redact additional query parameters, use the <code translate="no" v-pre>privateQueryParameterNames</code> option:</p>
+<div id="redact-custom-query-parameters-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-typescript" data-line="4"><code v-pre class="language-typescript">import { initializeMixpanel } from &quot;@workleap/mixpanel/react&quot;;
+
+const client = initializeMixpanel(&quot;development&quot;, {
+    privateQueryParameterNames: [&quot;a-custom-param&quot;]
 });</code></pre>
 </doc-codeblock></div>
 <h3 id="initialize-with-a-telemetry-context">Initialize with a telemetry context</h3>
