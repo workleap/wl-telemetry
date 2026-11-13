@@ -1,3 +1,5 @@
+export const DefaultPrivateQueryParameterNames = ["token", "email", "password"];
+
 export function redactQueryParameters(url: string, queryParameterNames: string[]) {
     let redactedUrl = url;
 

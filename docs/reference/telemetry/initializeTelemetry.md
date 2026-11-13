@@ -10,7 +10,7 @@ toc:
 ## Reference
 
 ```ts
-const client = initializeTelemetry(productFamily, options?: { logRocket?, honeycomb?, mixpanel?, verbose?, loggers? });
+const client = initializeTelemetry(productFamily, options?: { logRocket?, honeycomb?, mixpanel?, privateQueryParameterNames?, verbose?, loggers? });
 ```
 
 ### Parameters
@@ -22,7 +22,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
         - `options`: An optional object literal of options:
             - `rootHostname`: A [root hostname](https://docs.logrocket.com/reference/roothostname) to track sessions across subdomains.
             - `privateFieldNames`: Names of additional fields to exclude from session replays. These fields will be removed from network requests, responses using a fuzzy-matching algorithm.
-            - `privateQueryParameterNames`: Names of additional fields to exclude from session replays. These fields will be removed from query parameters using a fuzzy-matching algorithm.
+            - `privateQueryParameterNames`: Names of additional query parameters to redact from the URLs of the session replays.
             - `transformers`: An array of transformer functions to update the default LogRocket options.
     - `honeycomb`: An optional Honeycomb instrumentation registration options object. If provided, Honeycomb instrumentation is registered, if omitted, it is skipped.
         - `namespace`: The service namespace. Will be added to traces as a `service.namespace` custom attribute.
@@ -46,6 +46,7 @@ const client = initializeTelemetry(productFamily, options?: { logRocket?, honeyc
             - `productId`: The product id.
             - `trackingEndpoint`: An optional tracking endpoint. The default value is `tracking/track`.
             - `privateQueryParameterNames`: Names of additional query parameters to redact from the page URL and the referrer sent with every event.
+    - `privateQueryParameterNames`: Names of additional query parameters to redact from the URLs sent to every telemetry platform.
     - `verbose`: If no `loggers` are configured, verbose mode will automatically send logs to the console. In some cases, enabling verbose mode also produces additional debug information.
     - `loggers`: An optional array of `RootLogger` instances.
 
@@ -599,6 +600,32 @@ const client = initializeTelemetry("wlp", {
             privateQueryParameterNames: ["a-custom-param"]
         }
     }
+});
+```
+
+## Redact custom query parameters for every platform
+
+To redact additional query parameters from the URLs sent to every telemetry platform, use the `privateQueryParameterNames` option. The names are added to the default private query parameters and to the names provided with the options of a telemetry platform. To learn more, refer to the [Privacy](../../introduction/privacy.md) page.
+
+```ts !#18
+import { initializeTelemetry } from "@workleap/telemetry/react";
+
+const client = initializeTelemetry("wlp", {
+    logRocket: {
+        appId: "my-app-id"
+    },
+    honeycomb: {
+        namespace: "sample",
+        serviceName: "my-app-name",
+        apiServiceUrls: [/.+/g],
+        options: {
+            proxy: "https://sample-proxy"
+        }
+    },
+    mixpanel: {
+        envOrTrackingApiBaseUrl: "development"
+    },
+    privateQueryParameterNames: ["a-custom-param"]
 });
 ```
 

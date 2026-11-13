@@ -1,4 +1,4 @@
-import { HasExecutedGuard, type TelemetryContext } from "@workleap-telemetry/core";
+import { DefaultPrivateQueryParameterNames, HasExecutedGuard, type TelemetryContext } from "@workleap-telemetry/core";
 import { createCompositeLogger, type RootLogger } from "@workleap/logging";
 import LogRocket from "logrocket";
 import LogrocketFuzzySanitizer from "logrocket-fuzzy-search-sanitizer";
@@ -10,8 +10,6 @@ import { DeviceIdTrait, type LogRocketInstrumentationClient, LogRocketInstrument
 import type { LogRocketSdkOptions } from "./logRocketTypes.ts";
 
 const DefaultPrivateFieldNames = ["email", "personalEmail", "phoneNumber", "password", "firstName", "lastName", "givenName", "fullName", "gender", "timeZone", "birthday"];
-
-const DefaultPrivateQueryParameterNames = ["token", "email", "password"];
 
 ///////////////////////////
 

@@ -1,5 +1,5 @@
 import type { ReadableSpan, SpanProcessor } from "@opentelemetry/sdk-trace";
-import { redactQueryParameters } from "./redactQueryParameters.ts";
+import { redactQueryParameters } from "@workleap-telemetry/core";
 
 const UrlAttributeNames = ["url.full", "url.query", "http.route", "page.url", "page.search", "cls.navigation_url", "lcp.navigation_url", "inp.navigation_url", "fcp.navigation_url", "ttfb.navigation_url", "lcp.url", "inp.timing.script.source_url"];
 
