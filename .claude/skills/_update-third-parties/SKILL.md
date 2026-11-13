@@ -38,7 +38,7 @@ One leaf per selected target. Sequential, in table order — deps before skills,
 - Never prompt; a stop per the skill's own rules -> report it.
 - Deps leaf: skip the skill's step-1 prompt entirely and run exactly the follow-ups checked here (pass them verbatim; none checked -> none). The validation step needs a prerequisite that's missing -> skip that part and say so, never ask.
 
-A blocked target never aborts the others — record, move on.
+A blocked target never aborts the other — record, move on.
 
 ## Report
 
