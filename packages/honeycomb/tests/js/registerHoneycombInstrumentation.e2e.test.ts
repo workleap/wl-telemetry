@@ -54,6 +54,7 @@ afterEach(async () => {
     logs.disable();
 
     vi.unstubAllGlobals();
+    vi.restoreAllMocks();
 });
 
 test("when a proxy is provided, the spans are sent to the proxy with the credentials", async ({ expect }) => {
@@ -139,4 +140,64 @@ test("when an api key is provided, the default trace exporter of the sdk is used
     expect(requests[0].url).toBe("https://api.honeycomb.io/v1/traces");
     expect(requests[0].init.credentials).toBeUndefined();
     expect(decodeBody(requests[0].init)).toContain("api-key-span");
+});
+
+test("the private query parameters and the fragments are removed from the urls sent with the spans", async ({ expect }) => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(null, { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    vi.spyOn(window, "location", "get").mockReturnValue(new URL("https://app/onboarding?token=ABCDEF&email=john.doe@workleap.com&foo=bar#access_token=GHIJKL") as unknown as Location);
+    vi.spyOn(document, "referrer", "get").mockReturnValue("https://app/login?token=MNOPQR&foo=bar");
+
+    register({
+        proxy: "https://my-proxy.com"
+    });
+
+    const span = trace.getTracer("e2e").startSpan("url-span");
+    span.setAttribute("url.full", "https://api/search?token=STUVWX&foo=bar#access_token=YZABCD");
+    span.end();
+
+    await sdk!.shutdown();
+
+    const requests = getRequests(fetchMock, "/v1/traces");
+
+    expect(requests).toHaveLength(1);
+
+    const body = decodeBody(requests[0].init);
+
+    expect(body).toContain("https://app/onboarding?token=**redacted**&email=**redacted**&foo=bar");
+    expect(body).toContain("https://app/login?token=**redacted**&foo=bar");
+    expect(body).toContain("https://api/search?token=**redacted**&foo=bar");
+
+    for (const x of ["ABCDEF", "john.doe@workleap.com", "GHIJKL", "MNOPQR", "STUVWX", "YZABCD"]) {
+        expect(body).not.toContain(x);
+    }
+});
+
+test("when custom private query parameter names are provided, they are removed from the urls sent with the spans", async ({ expect }) => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(null, { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    vi.spyOn(window, "location", "get").mockReturnValue(new URL("https://app/onboarding?token=ABCDEF&foo=GHIJKL") as unknown as Location);
+    vi.spyOn(document, "referrer", "get").mockReturnValue("https://app/login?foo=MNOPQR");
+
+    register({
+        proxy: "https://my-proxy.com",
+        privateQueryParameterNames: ["foo"]
+    });
+
+    await recordSpanAndFlush("url-span");
+
+    const requests = getRequests(fetchMock, "/v1/traces");
+
+    expect(requests).toHaveLength(1);
+
+    const body = decodeBody(requests[0].init);
+
+    expect(body).toContain("https://app/onboarding?token=**redacted**&foo=**redacted**");
+    expect(body).toContain("https://app/login?foo=**redacted**");
+
+    for (const x of ["ABCDEF", "GHIJKL", "MNOPQR"]) {
+        expect(body).not.toContain(x);
+    }
 });
