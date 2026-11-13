@@ -112,6 +112,20 @@ Use the `Agent` tool to dispatch a subagent with this brief:
 
 Keep the skill's report for the PR body. A stop or a failed skill pull does NOT block the dependency PR — report it there instead. Skill files are documentation for agents and need no validation.
 
+Once the subagent has returned, check what it left on disk, whatever its report says — it can end in the middle of a pull:
+
+```bash
+git status --short .claude/skills skills-lock.json
+```
+
+For every skill whose folder or `skills-lock.json` entry changed (`git diff skills-lock.json` shows the entries; leave the `_`-prefixed folders out), run:
+
+```bash
+node .claude/skills/_update-skills/scripts/listSkillPins.ts --verify <name>
+```
+
+Anything but `"verified": true`, a non-zero exit included, is a failed pull even when the report lists the skill as updated. Undo it: `git checkout -- .claude/skills/<name>`, `git clean -fd .claude/skills/<name>`, and put the skill's `skills-lock.json` entry back to its committed value with the Edit tool. Then report it as a failed pull below and in the PR body. If an `.agents/` folder appeared, remove it as well with `git clean -fd .agents`: skills install into `.claude/skills/` only.
+
 A stop, a blocked skill or a failed pull also gets an issue — a line in a dependency PR is easy to miss, and no PR is created when nothing else changed. That is any of: a drift stop (the skill's step 0), a listing stop (the one the report labels `listing stop:`, from `listSkillPins.ts` exiting non-zero in the `_update-skills` skill, not this prompt's Step 2), a skill the report lists as `BLOCKED`, a failed `skills add`. Any of them can last for weeks, so look for an open issue first:
 
 ```bash
