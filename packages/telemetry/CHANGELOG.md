@@ -1,5 +1,16 @@
 # @workleap/telemetry
 
+## 4.2.1
+
+### Patch Changes
+
+- [#295](https://github.com/workleap/wl-telemetry/pull/295) [`73cd5fa`](https://github.com/workleap/wl-telemetry/commit/73cd5fa8a85861cbe6db6bb0397f75cf734b1d7a) Thanks [@patricklafrance](https://github.com/patricklafrance)! - A private query parameter that is nested in a percent-encoded value, such as the `token` of `returnUrl=https%3A%2F%2Fapp%2Fcallback%3Ftoken%3DABCDEF`, is now redacted from the URLs. The percent-encoded value is redacted as a whole. A private name that is partially percent-encoded in a URL, such as `to%6Ben`, is now matched as well.
+- Updated dependencies [[`73cd5fa`](https://github.com/workleap/wl-telemetry/commit/73cd5fa8a85861cbe6db6bb0397f75cf734b1d7a)]:
+  - @workleap-telemetry/core@2.1.1
+  - @workleap/logrocket@4.1.1
+  - @workleap/honeycomb@8.3.2
+  - @workleap/mixpanel@6.1.2
+
 ## 4.2.0
 
 ### Minor Changes
