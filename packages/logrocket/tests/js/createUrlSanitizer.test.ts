@@ -48,3 +48,11 @@ test.concurrent("when a sensitive query parameter name includes regular expressi
     expect(result).not.toContain("test@email.com");
     expect(result).toContain("**redacted**");
 });
+
+test.concurrent("when a sensitive query parameter is nested in a percent-encoded return url, the return url is sanitized", ({ expect }) => {
+    const urlSanitizer = createUrlSanitizer(["token"]);
+    const result = urlSanitizer("https://officevibe.workleap.com/login?returnUrl=https%3A%2F%2Fofficevibe.workleap.com%2Fonboarding%3Ftoken%3DABCDEF");
+
+    expect(result).not.toContain("ABCDEF");
+    expect(result).toContain("**redacted**");
+});
