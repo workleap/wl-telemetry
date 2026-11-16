@@ -179,7 +179,7 @@ If build/lint/test/browser validation fails after the update:
 
 ## pnpm 12 release-age gate
 
-`pnpm-workspace.yaml` sets `minimumReleaseAge: 1440` (24 hours, in minutes), pnpm 12's release-age gate. It matches pnpm's default but is set explicitly. Do **not** change `minimumReleaseAge`.
+`pnpm-workspace.yaml` sets `minimumReleaseAge: 10080` (7 days, in minutes), pnpm 12's release-age gate. It is longer than pnpm's default (24 hours) on purpose. Do **not** change `minimumReleaseAge`.
 
 ## Report
 
