@@ -6,6 +6,8 @@ The telemetry platforms receive URLs, such as the URL of the current page, the r
 
 The value of a private query parameter is replaced by `**redacted**`. By default, the private query parameters are `token`, `email` and `password`. A query parameter is redacted when its name ends with one of those values, regardless of the casing. For example, the `access_token` and `userEmail` query parameters are redacted as well.
 
+A private query parameter can also be nested in a percent-encoded value, such as a return URL. In that case, the percent-encoded value is redacted as a whole. For example, `returnUrl=https%3A%2F%2Fapp%2Fcallback%3Ftoken%3DABCDEF` becomes `returnUrl=**redacted**`.
+
 | | LogRocket | Honeycomb | Mixpanel |
 | --- | --- | --- | --- |
 | URLs | The URL of the pages and the network requests of a session replay. | The URL attributes of a trace, such as `url.full`, `page.url` and `entry_page.referrer`. | The `$current_url` and `$referrer` properties of an event. |
