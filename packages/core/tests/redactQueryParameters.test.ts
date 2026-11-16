@@ -104,10 +104,16 @@ test.concurrent("when the value of a private query parameter with a percent-enco
     expect(result).toBe("https://app/login?pass%77ord=**redacted**&foo=bar");
 });
 
-test.concurrent("when a query is provided without its leading question mark, a value that includes a slash is redacted as a whole", ({ expect }) => {
-    const result = redactQueryParameters("to%6Ben=ABC/DEF&foo=bar", ["token"]);
+test.concurrent("when a query is provided without its leading question mark, a value that includes a slash and a question mark is redacted as a whole", ({ expect }) => {
+    const result = redactQueryParameters("to%6Ben=ABC/DEF?GHI&foo=bar", ["token"]);
 
     expect(result).toBe("to%6Ben=**redacted**&foo=bar");
+});
+
+test.concurrent("when a path segment includes an equals sign, a private query parameter nested in the query is redacted without altering the path", ({ expect }) => {
+    const result = redactQueryParameters("https://app/a=b/c?returnUrl=%2Fcallback%3Ftoken%3DABCDEF&foo=bar", ["token"]);
+
+    expect(result).toBe("https://app/a=b/c?returnUrl=**redacted**&foo=bar");
 });
 
 test.concurrent("when a query is provided without its leading question mark, a nested private query parameter is redacted", ({ expect }) => {

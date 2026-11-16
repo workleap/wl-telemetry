@@ -68,9 +68,10 @@ function redactPercentEncodedQueryParameters(url: string, queryParameterNames: s
         return includesPrivateQueryParameter(name) ? RedactedValue : `${name}=${RedactedValue}`;
     };
 
-    // The query starts at the first "?" or "#". A query can also be provided without its leading "?", in which case it starts at the segment that includes the first "=".
+    // The query starts at the first "?" or "#". A query can also be provided without its leading "?", such as the "url.query" attribute of a trace, in which case only a name precedes its first "=".
     const delimiterIndex = url.search(/[?#=]/);
-    const queryIndex = url[delimiterIndex] === "=" ? url.lastIndexOf("/", delimiterIndex) + 1 : delimiterIndex;
+    const isQueryOnly = url[delimiterIndex] === "=" && url.lastIndexOf("/", delimiterIndex) === -1;
+    const queryIndex = isQueryOnly ? 0 : url.search(/[?#]/);
     const path = queryIndex === -1 ? url : url.slice(0, queryIndex);
     const queryAndFragment = queryIndex === -1 ? "" : url.slice(queryIndex);
 
