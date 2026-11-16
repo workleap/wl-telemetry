@@ -62,6 +62,20 @@ test.concurrent("when the fragment of a url attribute doesn't include a private 
     });
 });
 
+test.concurrent("when a private query parameter is percent-encoded in a query attribute, the whole value is redacted", ({ expect }) => {
+    const span = createSpan({
+        "url.query": "to%6Ben=ABC/DEF&returnUrl=%2Fcallback%3Femail%3Djohn.doe%40workleap.com&foo=bar",
+        "page.search": "?to%6Ben=ABC/DEF&foo=bar"
+    });
+
+    new RedactUrlAttributesSpanProcessor(["token", "email"]).onEnd(span);
+
+    expect(span.attributes).toEqual({
+        "url.query": "to%6Ben=**redacted**&returnUrl=**redacted**&foo=bar",
+        "page.search": "?to%6Ben=**redacted**&foo=bar"
+    });
+});
+
 test.concurrent("an attribute that is not a url attribute is not altered", ({ expect }) => {
     const span = createSpan({
         "app.custom": "token=ABCDEF#fragment",

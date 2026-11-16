@@ -98,6 +98,24 @@ test.concurrent("when a private name is partially percent-encoded in the url, th
     expect(result).toBe("https://app/onboarding?to%6Ben=**redacted**&foo=bar");
 });
 
+test.concurrent("when the value of a private query parameter with a percent-encoded name includes a question mark and a slash, the whole value is redacted", ({ expect }) => {
+    const result = redactQueryParameters("https://app/login?pass%77ord=?ABC/DEF?GHI&foo=bar", ["password"]);
+
+    expect(result).toBe("https://app/login?pass%77ord=**redacted**&foo=bar");
+});
+
+test.concurrent("when a query is provided without its leading question mark, a value that includes a slash is redacted as a whole", ({ expect }) => {
+    const result = redactQueryParameters("to%6Ben=ABC/DEF&foo=bar", ["token"]);
+
+    expect(result).toBe("to%6Ben=**redacted**&foo=bar");
+});
+
+test.concurrent("when a query is provided without its leading question mark, a nested private query parameter is redacted", ({ expect }) => {
+    const result = redactQueryParameters("foo=bar&returnUrl=%2Fcallback%3Ftoken%3DABCDEF", ["token"]);
+
+    expect(result).toBe("foo=bar&returnUrl=**redacted**");
+});
+
 test.concurrent("when a nested private query parameter is followed by an escape that is not valid UTF-8, the percent-encoded value is redacted", ({ expect }) => {
     const result = redactQueryParameters("https://app/login?returnUrl=%2Fcallback%3Femail%3D%E9ric%40workleap.com", ["email"]);
 

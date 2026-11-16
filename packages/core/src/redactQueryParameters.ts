@@ -68,12 +68,15 @@ function redactPercentEncodedQueryParameters(url: string, queryParameterNames: s
         return includesPrivateQueryParameter(name) ? RedactedValue : `${name}=${RedactedValue}`;
     };
 
-    // The path is split by segment, so a private query parameter that is percent-encoded in a segment doesn't redact the whole path.
-    const queryIndex = url.search(/[?#]/);
+    // The query starts at the first "?" or "#". A query can also be provided without its leading "?", in which case it starts at the segment that includes the first "=".
+    const delimiterIndex = url.search(/[?#=]/);
+    const queryIndex = url[delimiterIndex] === "=" ? url.lastIndexOf("/", delimiterIndex) + 1 : delimiterIndex;
     const path = queryIndex === -1 ? url : url.slice(0, queryIndex);
     const queryAndFragment = queryIndex === -1 ? "" : url.slice(queryIndex);
 
-    return [...path.split(/(\/)/), ...queryAndFragment.split(/([?&#])/)].map(redactPart).join("");
+    // The path is split by segment, so a private query parameter that is percent-encoded in a segment doesn't redact the whole path.
+    // The query is only split on its leading "?", because a "?" or a "/" can be part of the value of a query parameter.
+    return [...path.split(/(\/)/), ...queryAndFragment.split(/(^\?|[&#])/)].map(redactPart).join("");
 }
 
 export function redactQueryParameters(url: string, queryParameterNames: string[]) {
