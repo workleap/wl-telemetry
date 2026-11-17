@@ -1,5 +1,11 @@
 # @workleap-telemetry/core
 
+## 2.1.2
+
+### Patch Changes
+
+- [#300](https://github.com/workleap/wl-telemetry/pull/300) [`83c80e1`](https://github.com/workleap/wl-telemetry/commit/83c80e1942246d14891f2b5c13c071339e307fcd) Thanks [@claude](https://github.com/apps/claude)! - Updated dependencies to their latest versions.
+
 ## 2.1.1
 
 ### Patch Changes
