@@ -1,5 +1,13 @@
 # @workleap/mixpanel
 
+## 6.1.4
+
+### Patch Changes
+
+- [#304](https://github.com/workleap/wl-telemetry/pull/304) [`65175a2`](https://github.com/workleap/wl-telemetry/commit/65175a2d3c651c2688578fe24f5c2cacfd8db912) Thanks [@patricklafrance](https://github.com/patricklafrance)! - The package is now published from the protected `npm-publish` GitHub environment with npm Trusted Publishing. The code of the package did not change.
+- Updated dependencies [[`65175a2`](https://github.com/workleap/wl-telemetry/commit/65175a2d3c651c2688578fe24f5c2cacfd8db912)]:
+  - @workleap-telemetry/core@2.1.3
+
 ## 6.1.3
 
 ### Patch Changes
