@@ -200,6 +200,23 @@ When you are ready to release the packages, you must follow the following steps:
 3. Find someone to review your PR.
 4. Merge the Pull request into `main`. A GitHub action will automatically trigger and update the version of the packages and publish them to [npm](https://www.npmjs.com/). A tag will also be created on GitHub tagging your PR merge commit.
 
+### The Changesets workflow
+
+The [Changesets](./.github/workflows/changeset.yml) workflow holds the npm publishing identity (npm Trusted Publishing, through `id-token: write`), so it is split in three jobs:
+
+- `version` creates or updates the release pull request while changesets are pending. It can write to the repository but cannot publish. It only installs the workspace root, for the Changesets CLI.
+- `build` only runs when no changeset is pending. It builds the packages with a read-only token and uploads their `dist` folders as an artifact. It only installs the dependencies of `packages/*` and of the workspace root.
+- `publish` downloads the artifact, publishes the packages that are not on npm yet, then creates the tags and the GitHub releases. It is the only job with `id-token: write`, it only installs the workspace root (for the Changesets CLI) and it never runs a build. It fails if the artifact changed anything else than the `dist` folders.
+
+Every job installs with `--frozen-lockfile --ignore-scripts` and restores no GitHub Actions cache (pnpm store or Turborepo). `PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN` is set to `false`: by default, pnpm reinstalls the whole workspace, with the lifecycle scripts, before a script that runs on an install it finds out of date.
+
+The `publish` job runs in the `npm-publish` GitHub environment, which only accepts the `main` branch and has no reviewer. The npm trusted publisher of each package requires that environment, so a workflow run from another branch cannot publish. This depends on two settings that are not in the repository:
+
+- The `npm-publish` environment exists in the repository settings, with `main` as its only deployment branch. GitHub creates a missing environment without any protection.
+- On [npm](https://www.npmjs.com/), the trusted publisher of every published package names the `changeset.yml` workflow and the `npm-publish` environment. Renaming the workflow file or the environment stops the publish until npm is updated.
+
+[changeset-workflow.test.ts](./.github/scripts/changeset-workflow.test.ts) fails the CI when a change breaks these rules. It cannot catch everything, so check them when you review a change to the workflow. Every action and command added to the `publish` job gets the publishing identity. For the same reason, a package must not define a new script pnpm runs on publish (`prepack`, `prepublishOnly`, ...) that runs a dependency, and a package that needs an install script to build must not get it by removing `--ignore-scripts`: run that script explicitly in the `build` job.
+
 ### Troubleshooting
 
 #### GitHub

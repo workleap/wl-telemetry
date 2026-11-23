@@ -1,18 +1,31 @@
 name: Changesets
 
+# The release pull request, the build and the publish each run in their own job, so that only the job
+# that publishes holds the npm publishing identity, and that job builds nothing.
+# Read "Release the packages" in CONTRIBUTING.md before changing this workflow.
+# .github/scripts/changeset-workflow.test.ts fails the CI when a change breaks these rules.
+
 on:
   push:
     branches: ["main"]
 env:
   CI: true
+  # pnpm otherwise reinstalls the whole workspace, with lifecycle scripts, when a script runs on an install it finds out of date.
+  PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN: "false"
+
+# A job only holds the permissions it declares.
+permissions: {}
 
 jobs:
+  # Creates or updates the release pull request while changesets are pending. It can write to the
+  # repository but cannot publish. It only installs the workspace root, for the Changesets CLI.
   version:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # OIDC for npm Trusted Publishing
       contents: write
       pull-requests: write
+    outputs:
+      has-changesets: ${{ steps.changesets.outputs.has-changesets }}
 
     steps:
       - name: Checkout
@@ -25,31 +38,119 @@ jobs:
         with:
           run_install: false
 
-      # This job holds the npm publishing identity, so everything it installs and builds comes from
-      # this commit and the lockfile: no pnpm store or Turborepo cache is restored, and no lifecycle
-      # script runs during the install. Another workflow could otherwise fill those caches.
       - name: Install Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ">=26.0.0"
           check-latest: true
 
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts --filter workspace-root
 
-      - name: Build packages
-        run: pnpm build-pkg
-
-      - name: Create release Pull Request or publish to NPM
+      - name: Create or update the release Pull Request
+        id: changesets
         # changesets/action v2 is required by @changesets/cli v3, which reports published
         # packages through a CHANGESETS_OUTPUT file instead of the stdout format v1 parsed.
-        # v2 also refuses to run against CLI v2, so this must land with the v3 bump (#221),
-        # never before it.
-        # Pinned to a commit hash rather than a tag because this step holds contents: write
-        # and the npm trusted publishing token.
+        # Pinned to a commit hash rather than a tag because this step holds contents: write.
+        # No publish-script: without one, the action never publishes.
         uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
           commit-message: "ci(changesets): version packages"
           pr-title: "Changeset: New Version"
-          # Packages are already built by the step above; publish-pkg only runs changeset publish.
+
+  # Runs the build tooling, so it gets a read-only token and no npm publishing identity.
+  # No pnpm store or Turborepo cache is restored: another workflow could have filled them.
+  # Only runs when no changeset is pending, which is when the publish job has something to publish.
+  build:
+    needs: version
+    if: needs.version.outputs.has-changesets == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ">=26.0.0"
+          check-latest: true
+
+      - name: Install dependencies
+        # Only the packages and the workspace root: the samples' dependencies are not needed to build a package.
+        run: pnpm install --frozen-lockfile --ignore-scripts --filter "{./packages/*}..." --filter workspace-root
+
+      - name: Build packages
+        # Only the packages: the samples are not installed. --force bypasses the Turborepo cache.
+        run: pnpm build-pkg --filter "{./packages/*}" --force
+
+      - name: Upload the built packages
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: packages-dist
+          path: packages/*/dist
+          if-no-files-found: error
+          retention-days: 7
+
+  # Holds the npm publishing identity, so it runs no build and no dependency lifecycle script.
+  # It only installs the workspace root, for the Changesets CLI.
+  # The npm-publish environment only accepts the main branch, and the npm trusted publisher of each
+  # package requires it: a workflow run from another branch cannot publish.
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    permissions:
+      id-token: write # OIDC for npm Trusted Publishing
+      contents: write # Git tags and GitHub releases
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ">=26.0.0"
+          check-latest: true
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts --filter workspace-root
+
+      - name: Download the built packages
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: packages-dist
+          path: packages
+
+      - name: Check that the artifact only added build outputs
+        # This job installs nothing in packages/, so the dist folders, which Git ignores, must be the only entries listed.
+        # --ignored also lists a file added under another ignored path, like node_modules. Any other entry is printed and fails the job.
+        run: |
+          changes=$(git status --porcelain --ignored -- packages)
+          ! grep -vE '^!! packages/[^/]+/dist/$' <<< "$changes"
+
+      - name: Publish to NPM
+        # Pinned to a commit hash rather than a tag because this step holds contents: write
+        # and the npm trusted publishing token.
+        # No changeset is pending when this job runs, so the action publishes, pushes the tags and creates the GitHub releases.
+        uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
+        with:
+          # Packages are built by the build job; publish-pkg only runs changeset publish.
           publish-script: pnpm publish-pkg

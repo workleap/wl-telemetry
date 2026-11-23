@@ -114,6 +114,10 @@ jobs:
       - name: Test agent tooling
         run: node --test .claude/skills/_update-skills/scripts/listSkillPins.test.ts
 
+      - name: Test the Changesets workflow
+        # Fails when a change gives the npm publishing identity to a job that installs or builds the packages.
+        run: node --test .github/scripts/changeset-workflow.test.ts
+
       - name: Test packages
         # For a PR, only test the projects that are diverging from the pull request original baseline.
         run: |
