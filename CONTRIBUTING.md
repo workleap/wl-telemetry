@@ -218,7 +218,7 @@ The `publish` job runs in the `npm-publish` GitHub environment, which only accep
 - The `npm-publish` environment exists in the repository settings, with `main` as its only deployment branch. GitHub creates a missing environment without any protection.
 - On [npm](https://www.npmjs.com/), the trusted publisher of every published package names the `changeset.yml` workflow and the `npm-publish` environment. Never rename the workflow file or the environment: the publish stops until npm is updated.
 
-[changeset-workflow.test.ts](./.github/scripts/changeset-workflow.test.ts) fails the CI when a change breaks this split. The `version`, `pack` and `publish` jobs only run on `main`, so a pull request cannot exercise them: after merging a change to this workflow, watch the next release end to end.
+Nothing checks this split automatically, and the `version`, `pack` and `publish` jobs only run on `main`, so a pull request cannot exercise them: review every change to this workflow against the table above. After merging a change to this workflow, watch the next release end to end.
 
 ### Troubleshooting
 

@@ -9,7 +9,6 @@ env:
 # Every job declares its own permissions. Only the publish job holds the npm publishing identity
 # (id-token: write), and it builds nothing: it uploads the tarballs made by the pack job.
 # See "The Changesets workflow" in CONTRIBUTING.md.
-# .github/scripts/changeset-workflow.test.ts fails the CI when a change breaks these rules.
 permissions: {}
 
 jobs:
