@@ -1,9 +1,9 @@
 // node --test .github/scripts/changeset-workflow.test.ts
 //
 // The Changesets workflow holds the npm publishing identity (npm Trusted Publishing, through id-token: write).
-// These tests fail when a change gives that identity to a job that installs or builds the packages, or takes
-// the publish job out of its protected environment.
-// Read "Release the packages" in CONTRIBUTING.md before changing the workflow or these tests.
+// These tests fail when a change gives that identity to a job that builds the packages, adds a step to the
+// publish job, or takes the publish job out of its protected environment.
+// Read "The Changesets workflow" in CONTRIBUTING.md before changing the workflow or these tests.
 import { deepStrictEqual, match, strictEqual } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -27,25 +27,32 @@ interface Workflow {
     jobs: Record<string, Job>;
 }
 
-const root = resolve(import.meta.dirname, "../..");
-const workflow = parse(readFileSync(resolve(root, ".github/workflows/changeset.yml"), "utf8")) as Workflow;
-const packageJson = JSON.parse(readFileSync(resolve(root, "package.json"), "utf8")) as { scripts: Record<string, string> };
+const workflow = parse(readFileSync(resolve(import.meta.dirname, "../workflows/changeset.yml"), "utf8")) as Workflow;
 
 const jobs = Object.entries(workflow.jobs);
 const steps = jobs.flatMap(([, job]) => job.steps);
 
 const BuildCommand = /\b(build|build-pkg|turbo|rslib)\b/;
-const InstallCommand = /\bpnpm (install|i|add|update|up|dlx)\b/;
+const InstallCommand = "pnpm install --frozen-lockfile --ignore-scripts";
 
 function jobNames(predicate: (job: Job) => boolean) {
     return jobs.filter(([, job]) => predicate(job)).map(([name]) => name);
 }
 
-function runs(job: Job, command: RegExp) {
-    return job.steps.flatMap(step => (step.run !== undefined && command.test(step.run) ? [step.run] : []));
+// "actions/checkout@<sha>" -> "actions/checkout"
+function actionName(step: Step) {
+    return step.uses?.split("@")[0];
 }
 
-const publishJobNames = jobNames(job => job.steps.some(step => step.with?.["publish-script"] !== undefined));
+function uses(job: Job, action: string) {
+    return job.steps.some(step => actionName(step) === action);
+}
+
+function builds(job: Job) {
+    return job.steps.some(step => step.run !== undefined && BuildCommand.test(step.run));
+}
+
+const publishJobNames = jobNames(job => uses(job, "changesets/action/publish") || uses(job, "changesets/action"));
 const publishJob = workflow.jobs[publishJobNames[0]];
 
 describe("changeset.yml", () => {
@@ -68,35 +75,46 @@ describe("changeset.yml", () => {
         strictEqual(publishJob.environment, "npm-publish");
     });
 
-    it("runs no build in the job that publishes", () => {
-        deepStrictEqual(runs(publishJob, BuildCommand), []);
+    it("only installs the Changesets CLI and publishes in the job that publishes", () => {
+        deepStrictEqual(
+            publishJob.steps.map(step => actionName(step) ?? step.run),
+            ["actions/checkout", "pnpm/action-setup", "actions/setup-node", InstallCommand, "changesets/action/publish"]
+        );
     });
 
-    it("only installs the workspace root in the job that publishes", () => {
-        deepStrictEqual(runs(publishJob, InstallCommand), ["pnpm install --frozen-lockfile --ignore-scripts --filter workspace-root"]);
+    it("publishes the tarballs of the pack job, not the output of a script", () => {
+        const publishStep = publishJob.steps.find(step => actionName(step) === "changesets/action/publish");
+
+        deepStrictEqual(Object.keys(publishStep?.with ?? {}), ["pack-dir-artifact-id"]);
     });
 
-    it("only runs changeset publish as the publish script", () => {
-        const publishScripts = publishJob.steps.map(step => step.with?.["publish-script"]).filter(script => script !== undefined);
+    it("gives a read-only token to the job that builds and packs", () => {
+        const buildJobNames = jobNames(builds);
 
-        deepStrictEqual(publishScripts, ["pnpm publish-pkg"]);
-        strictEqual(packageJson.scripts["publish-pkg"], "changeset publish");
-    });
-
-    it("gives a read-only token to a job that builds", () => {
-        const buildJobs = jobs.filter(([, job]) => runs(job, BuildCommand).length > 0);
-
-        strictEqual(buildJobs.length, 1);
-
-        for (const [, job] of buildJobs) {
-            deepStrictEqual(job.permissions, { contents: "read" });
-        }
+        deepStrictEqual(
+            buildJobNames,
+            jobNames(job => uses(job, "changesets/action/pack"))
+        );
+        strictEqual(buildJobNames.length, 1);
+        deepStrictEqual(workflow.jobs[buildJobNames[0]].permissions, { contents: "read" });
     });
 
     it("installs from the lockfile, without lifecycle scripts, in every job", () => {
-        for (const [, job] of jobs) {
-            for (const run of runs(job, InstallCommand)) {
-                match(run, /^pnpm install --frozen-lockfile --ignore-scripts( --filter \S+)+$/);
+        for (const step of steps) {
+            if (step.run?.includes("pnpm install")) {
+                strictEqual(step.run, InstallCommand);
+            }
+
+            if (actionName(step) === "pnpm/action-setup") {
+                strictEqual(step.with?.run_install, false);
+            }
+        }
+    });
+
+    it("leaves no credentials in the checkout of any job", () => {
+        for (const step of steps) {
+            if (actionName(step) === "actions/checkout") {
+                strictEqual(step.with?.["persist-credentials"], false);
             }
         }
     });
@@ -111,7 +129,7 @@ describe("changeset.yml", () => {
 
     it("restores no cache", () => {
         deepStrictEqual(
-            steps.filter(step => step.uses?.startsWith("actions/cache") || step.with?.cache !== undefined),
+            steps.filter(step => actionName(step)?.startsWith("actions/cache") || step.with?.cache !== undefined),
             []
         );
     });

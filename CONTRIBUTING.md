@@ -202,20 +202,23 @@ When you are ready to release the packages, you must follow the following steps:
 
 ### The Changesets workflow
 
-The [Changesets](./.github/workflows/changeset.yml) workflow holds the npm publishing identity (npm Trusted Publishing, through `id-token: write`), so it is split in three jobs:
+Every step of a job can use the permissions of that job, including the npm publishing token that `id-token: write` gives access to (npm Trusted Publishing). The [Changesets](./.github/workflows/changeset.yml) workflow is therefore split into four jobs with the `changesets/action` sub-actions, so the code that installs and builds the packages never runs in the job that can publish them:
 
-- `version` creates or updates the release pull request while changesets are pending. It can write to the repository but cannot publish. It only installs the workspace root, for the Changesets CLI.
-- `build` only runs when no changeset is pending. It builds the packages with a read-only token and uploads their `dist` folders as an artifact. It only installs the dependencies of `packages/*` and of the workspace root.
-- `publish` downloads the artifact, publishes the packages that are not on npm yet, then creates the tags and the GitHub releases. It is the only job with `id-token: write`, it only installs the workspace root (for the Changesets CLI) and it never runs a build. It fails if the artifact changed anything else than the `dist` folders.
+| Job           | Runs when         | Permissions                               | Purpose                                                                                                        |
+| ------------- | ----------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `select-mode` | Always            | `contents: read`                          | Decides between `version` (changesets are pending), `publish` (a package version is not on npm yet) and `none` |
+| `version`     | Mode is `version` | `contents: write`, `pull-requests: write` | Creates or updates the "Changeset: New Version" PR                                                             |
+| `pack`        | Mode is `publish` | `contents: read`                          | Builds the packages and packs them into tarballs, uploaded as an artifact                                      |
+| `publish`     | After `pack`      | `id-token: write`, `contents: write`      | Publishes the tarballs to npm, then creates the git tags and the GitHub releases                               |
 
-Every job installs with `--frozen-lockfile --ignore-scripts` and restores no GitHub Actions cache (pnpm store or Turborepo). `PNPM_CONFIG_VERIFY_DEPS_BEFORE_RUN` is set to `false`: by default, pnpm reinstalls the whole workspace, with the lifecycle scripts, before a script that runs on an install it finds out of date.
+Never add a step to the `publish` job, and never give `id-token: write` to another job. A build, a test or a script that has to run before a release goes in the `pack` job. The `prepack` and `postpack` scripts of a package also run in the `pack` job. The `publish` job still sets up pnpm and Node and installs the dependencies without lifecycle scripts, because the publish action requires `@changesets/cli` and publishes with `pnpm publish`. Never restore a cache in that job (`cache: pnpm` on `actions/setup-node`) and keep `run_install: false` on `pnpm/action-setup`: a pnpm store filled by another workflow would otherwise provide the CLI that runs with the npm publishing token.
 
 The `publish` job runs in the `npm-publish` GitHub environment, which only accepts the `main` branch and has no reviewer. The npm trusted publisher of each package requires that environment, so a workflow run from another branch cannot publish. This depends on two settings that are not in the repository:
 
 - The `npm-publish` environment exists in the repository settings, with `main` as its only deployment branch. GitHub creates a missing environment without any protection.
-- On [npm](https://www.npmjs.com/), the trusted publisher of every published package names the `changeset.yml` workflow and the `npm-publish` environment. Renaming the workflow file or the environment stops the publish until npm is updated.
+- On [npm](https://www.npmjs.com/), the trusted publisher of every published package names the `changeset.yml` workflow and the `npm-publish` environment. Never rename the workflow file or the environment: the publish stops until npm is updated.
 
-[changeset-workflow.test.ts](./.github/scripts/changeset-workflow.test.ts) fails the CI when a change breaks these rules. It cannot catch everything, so check them when you review a change to the workflow. Every action and command added to the `publish` job gets the publishing identity. For the same reason, a package must not define a new script pnpm runs on publish (`prepack`, `prepublishOnly`, ...) that runs a dependency, and a package that needs an install script to build must not get it by removing `--ignore-scripts`: run that script explicitly in the `build` job.
+[changeset-workflow.test.ts](./.github/scripts/changeset-workflow.test.ts) fails the CI when a change breaks this split. The `version`, `pack` and `publish` jobs only run on `main`, so a pull request cannot exercise them: after merging a change to this workflow, watch the next release end to end.
 
 ### Troubleshooting
 
