@@ -37,6 +37,7 @@
         "list-outdated-deps": "pnpm outdated -r --format list !logrocket-fuzzy-search-sanitizer !@opentelemetry/*",
         "update-outdated-deps": "pnpm run --sequential \"/^update-outdated-deps:.*/\"",
         "update-outdated-deps:update-version": "pnpm update -r --latest !logrocket-fuzzy-search-sanitizer !@opentelemetry/*",
+        "update-outdated-deps:pin-package-manager": "node .github/scripts/pinPackageManagerHash.ts",
         "update-outdated-deps:update-peers": "syncpack fix",
         "update-outdated-deps:fix-pkg-json": "oxfmt \"package.json\" \"packages/*/package.json\" \"samples/**/package.json\""
     },
@@ -59,5 +60,5 @@
         "node": ">=26.0.0",
         "pnpm": ">=12.18.0"
     },
-    "packageManager": "pnpm@12.21.0"
+    "packageManager": "pnpm@12.21.0+sha512.66fd8278ee28935ce951792d34367ff3af5c432a2756445823029533835b8da529bbe0be5130afd56ed0713fb8789e47bad82d93bd5ae2fe54b15562d6276ef0"
 }
