@@ -38,12 +38,19 @@ Report the outdated packages and any peer-version mismatches before changing any
 pnpm update-outdated-deps
 ```
 
-This runs three sub-steps in order: `pnpm update -r --latest` (respecting the `!logrocket-fuzzy-search-sanitizer !@opentelemetry/*` exclusions), `syncpack fix`, then `oxfmt` on the `package.json` files.
+This runs four sub-steps in order: `pnpm update -r --latest` (respecting the `!logrocket-fuzzy-search-sanitizer !@opentelemetry/*` exclusions), `pinPackageManagerHash.ts` (puts back the integrity hash that `pnpm update` drops from the `packageManager` field when it bumps pnpm), `syncpack fix`, then `oxfmt` on the `package.json` files. A sub-step that fails stops the ones after it.
 
 Check whether anything actually changed:
 
 ```bash
 git diff --name-only -- '**/package.json' package.json
+```
+
+If the hash sub-step (`update-outdated-deps:pin-package-manager`) failed, report the failure — the `packageManager` field is left without its hash — and complete the two sub-steps it skipped:
+
+```bash
+pnpm run update-outdated-deps:update-peers
+pnpm run update-outdated-deps:fix-pkg-json
 ```
 
 If the `oxfmt` sub-step (`update-outdated-deps:fix-pkg-json`) failed for any reason, complete it now — this formats the `package.json` files it skipped, so `pnpm lint` won't fail on formatting:
