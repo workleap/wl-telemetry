@@ -1,5 +1,13 @@
 # @workleap/logrocket
 
+## 4.1.4
+
+### Patch Changes
+
+- [#306](https://github.com/workleap/wl-telemetry/pull/306) [`d1974ac`](https://github.com/workleap/wl-telemetry/commit/d1974ac6b9028e9aea6fa1de51c5025c4e40a185) Thanks [@claude](https://github.com/apps/claude)! - Updated dependencies to their latest versions.
+- Updated dependencies [[`d1974ac`](https://github.com/workleap/wl-telemetry/commit/d1974ac6b9028e9aea6fa1de51c5025c4e40a185)]:
+  - @workleap-telemetry/core@2.1.4
+
 ## 4.1.3
 
 ### Patch Changes
