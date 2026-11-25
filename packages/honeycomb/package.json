@@ -53,13 +53,13 @@
         "@opentelemetry/otlp-transformer": "^0.223.0",
         "@opentelemetry/sdk-trace": "^2.12.0",
         "@workleap-telemetry/core": "workspace:^",
-        "@workleap/logging": "^2.1.1"
+        "@workleap/logging": "^2.1.2"
     },
     "devDependencies": {
         "@opentelemetry/api-logs": "0.223.0",
         "@opentelemetry/core": "2.12.0",
-        "@rsbuild/core": "2.3.2",
-        "@rslib/core": "1.0.6",
+        "@rsbuild/core": "2.3.3",
+        "@rslib/core": "1.0.7",
         "@types/node": "26.6.6",
         "@types/react": "19.3.0",
         "@workleap/rslib-configs": "2.1.2",

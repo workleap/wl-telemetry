@@ -45,19 +45,19 @@
         "@changesets/cli": "3.0.3",
         "@types/node": "26.6.6",
         "@workleap/typescript-configs": "5.2.1",
-        "agent-browser": "0.42.0",
-        "oxfmt": "0.78.0",
-        "oxlint": "1.93.0",
-        "oxlint-tsgolint": "7.0.2006",
-        "pkg-pr-new": "0.0.93",
+        "agent-browser": "0.43.0",
+        "oxfmt": "0.79.0",
+        "oxlint": "1.94.0",
+        "oxlint-tsgolint": "7.0.2007",
+        "pkg-pr-new": "0.0.94",
         "retypeapp": "4.6.0",
         "syncpack": "15.3.3",
-        "turbo": "2.11.10",
+        "turbo": "2.11.11",
         "typescript": "7.0.2"
     },
     "engines": {
         "node": ">=26.0.0",
         "pnpm": ">=12.18.0"
     },
-    "packageManager": "pnpm@12.19.0"
+    "packageManager": "pnpm@12.21.0"
 }

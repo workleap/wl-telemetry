@@ -46,13 +46,13 @@
     "dependencies": {
         "@workleap-telemetry/core": "workspace:^",
         "@workleap/honeycomb": "workspace:^",
-        "@workleap/logging": "^2.1.1",
+        "@workleap/logging": "^2.1.2",
         "@workleap/logrocket": "workspace:^",
         "@workleap/mixpanel": "workspace:^"
     },
     "devDependencies": {
-        "@rsbuild/core": "2.3.2",
-        "@rslib/core": "1.0.6",
+        "@rsbuild/core": "2.3.3",
+        "@rslib/core": "1.0.7",
         "@types/js-cookie": "3.0.6",
         "@types/node": "26.6.6",
         "@types/react": "19.3.0",
